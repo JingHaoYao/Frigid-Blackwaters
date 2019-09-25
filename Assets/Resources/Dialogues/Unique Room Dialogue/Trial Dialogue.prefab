@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5498654071879163042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5498654071879163036}
+  - component: {fileID: 5498654071879163043}
+  m_Layer: 0
+  m_Name: Trial Dialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5498654071879163036
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5498654071879163042}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.400097, y: 10.136794, z: -3201.0781}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5498654071879163043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5498654071879163042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueId: trial_dialogue
+  whatDialogueType: 8
+  checkPointDialogue: 0
+  dialogues:
+  - Rowan, do you know what that crystal formation means?
+  - No.
+  - Well, other adventurers have reported that touching it summons dungeon creatures
+    for us to fight.
+  - But if we defeat them, the crystals themselves form a treasure chest that we can
+    loot.
+  - So it's a trial then?
+  - Seems so. Apparently they get more difficult the farther adventurers go in the
+    labyrinth.
+  dialogueNames:
+  - Tabitha
+  - Rowan
+  - Tabitha
+  - Tabitha
+  - Rowan
+  - Tabitha
+  background: {fileID: 0}
+  character1Sprites: []
+  character2Sprites:
+  - {fileID: -2770177905118475799, guid: a185600ec972bb84bb026d3f00c54db8, type: 3}
+  - {fileID: -2770177905118475799, guid: a185600ec972bb84bb026d3f00c54db8, type: 3}
+  - {fileID: -2770177905118475799, guid: a185600ec972bb84bb026d3f00c54db8, type: 3}
+  - {fileID: -2770177905118475799, guid: a185600ec972bb84bb026d3f00c54db8, type: 3}
+  - {fileID: -2770177905118475799, guid: a185600ec972bb84bb026d3f00c54db8, type: 3}
+  - {fileID: -2770177905118475799, guid: a185600ec972bb84bb026d3f00c54db8, type: 3}
+  character3Sprites:
+  - {fileID: 1423390269769719171, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: 1423390269769719171, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: -6633466376003217947, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: 8096401433000480259, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: 1423390269769719171, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: -674398192908579941, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  character4Sprites: []
+  panelSprites: []
+  substituteMusic: 
+  originalMusic: 
+  addedItems: []

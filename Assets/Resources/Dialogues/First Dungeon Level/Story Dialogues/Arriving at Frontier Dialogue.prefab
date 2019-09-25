@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4957249939306726659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4957249939306726661}
+  - component: {fileID: 4957249939306726658}
+  m_Layer: 0
+  m_Name: Arriving at Frontier Dialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4957249939306726661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4957249939306726659}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -680.58264, y: 2.7015936, z: -1837.6007}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4957249939306726658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4957249939306726659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueId: arriving_at_frontier
+  whatDialogueType: 0
+  checkPointDialogue: 0
+  dialogues:
+  - And so we are back.
+  - Navigator, if you feel that we are unprepared to go forward and face sentinel,
+    you can turn backwards to return to the town.
+  - 'But when you are prepared, we will be too. '
+  - If that's the case, go forward into that gate.
+  dialogueNames:
+  - Geordi
+  - Tabitha
+  - Tabitha
+  - Tabitha
+  background: {fileID: 0}
+  character1Sprites:
+  - {fileID: 519850296740898061, guid: a185600ec972bb84bb026d3f00c54db8, type: 3}
+  - {fileID: 519850296740898061, guid: a185600ec972bb84bb026d3f00c54db8, type: 3}
+  - {fileID: 519850296740898061, guid: a185600ec972bb84bb026d3f00c54db8, type: 3}
+  - {fileID: 519850296740898061, guid: a185600ec972bb84bb026d3f00c54db8, type: 3}
+  character2Sprites:
+  - {fileID: 1250254451151411741, guid: 6513bc63ec8622646b1b4d95dc41e614, type: 3}
+  - {fileID: 1250254451151411741, guid: 6513bc63ec8622646b1b4d95dc41e614, type: 3}
+  - {fileID: 1374215199433276917, guid: 6513bc63ec8622646b1b4d95dc41e614, type: 3}
+  - {fileID: 1250254451151411741, guid: 6513bc63ec8622646b1b4d95dc41e614, type: 3}
+  character3Sprites:
+  - {fileID: -3496357958197151338, guid: 16238912860b16a4eb799d47b4e5b3ad, type: 3}
+  - {fileID: 7488070239667302152, guid: 16238912860b16a4eb799d47b4e5b3ad, type: 3}
+  - {fileID: 387058525151310395, guid: 16238912860b16a4eb799d47b4e5b3ad, type: 3}
+  - {fileID: 7488070239667302152, guid: 16238912860b16a4eb799d47b4e5b3ad, type: 3}
+  character4Sprites:
+  - {fileID: 1423390269769719171, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: -6633466376003217947, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: 8096401433000480259, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: -546449196522492469, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  panelSprites: []
+  substituteMusic: Frontier Music
+  originalMusic: Dungeon Ambiance
+  addedItems: []

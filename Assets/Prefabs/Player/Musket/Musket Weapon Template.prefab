@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1549755083995000}
+  m_IsPrefabAsset: 1
+--- !u!1 &1549755083995000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224671143518559032}
+  - component: {fileID: 114758829139023820}
+  - component: {fileID: 222550679066043452}
+  - component: {fileID: 114521401152540064}
+  - component: {fileID: 114265675310318646}
+  m_Layer: 0
+  m_Name: Musket Weapon Template
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &114265675310318646
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1549755083995000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c06e1a12f8562f74cb2c1faa800c96e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  precisionBlast1: {fileID: 1713635876788002, guid: 85c0770700f7c554faebdf1d4dedf11f,
+    type: 2}
+  precisionBlast2: {fileID: 1783212201330798, guid: 15496adba34b01e4f99a58329c8f7282,
+    type: 2}
+  regularMusketSmoke: {fileID: 1455210552513568, guid: 2ccf2e23b829a46489061d5177c8cc1d,
+    type: 2}
+  scatterBlast1: {fileID: 1653771086266760, guid: d44a5b96e9f9b1b449163ed92cb8d8ac,
+    type: 2}
+  scatterBlast2: {fileID: 1028599362859638, guid: 0a48eb2455b1fbe48b1cbc1b81463388,
+    type: 2}
+  regularMusketIcon: {fileID: 21300000, guid: bd71aa30b4654b44b89e57ae92ee0c0a, type: 3}
+  scatterShotIcon: {fileID: 21300014, guid: 3b0013ed66d471243a71e136680628e7, type: 3}
+  precisionShotIcon: {fileID: 21300006, guid: 3b0013ed66d471243a71e136680628e7, type: 3}
+--- !u!114 &114521401152540064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1549755083995000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Musket: Trusty and reliable, this
+
+    fast-moving projectile pierces through
+
+    enemies dealing 1 damage.'
+--- !u!114 &114758829139023820
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1549755083995000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2093946c6e21b9c43b76288f452bba8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: {fileID: 21300008, guid: d78795857e37c804587f22cb22f45c6d, type: 3}
+  upleft: {fileID: 21300006, guid: d78795857e37c804587f22cb22f45c6d, type: 3}
+  left: {fileID: 21300004, guid: d78795857e37c804587f22cb22f45c6d, type: 3}
+  downleft: {fileID: 21300002, guid: d78795857e37c804587f22cb22f45c6d, type: 3}
+  down: {fileID: 21300000, guid: d78795857e37c804587f22cb22f45c6d, type: 3}
+  weaponFlare: {fileID: 1455210552513568, guid: 2ccf2e23b829a46489061d5177c8cc1d,
+    type: 2}
+  coolDownIcon: {fileID: 21300000, guid: bd71aa30b4654b44b89e57ae92ee0c0a, type: 3}
+  coolDownTime: 1.5
+  shipWeaponEquipped: {fileID: 0}
+--- !u!222 &222550679066043452
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1549755083995000}
+  m_CullTransparentMesh: 0
+--- !u!224 &224671143518559032
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1549755083995000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -180.51793, y: -39.863632}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}

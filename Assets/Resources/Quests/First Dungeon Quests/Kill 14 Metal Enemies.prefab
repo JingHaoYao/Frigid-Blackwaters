@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3636333547727081024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8071807450476434376}
+  - component: {fileID: 2332138197206681808}
+  m_Layer: 0
+  m_Name: Kill 14 Metal Enemies
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8071807450476434376
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3636333547727081024}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.25566, y: -4.1414266, z: -5565.9404}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2332138197206681808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3636333547727081024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b63a7b0ddce154298b696b4a2f0933, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: The town would like some extra scrap metal. Kill 14 enemies that have
+    metal equipment.
+  requirementAmount: 14
+  currentAmount: 0
+  completed: 0
+  questID: kill_fourteen_metal_enemies
+  rewardGoldAmount: 450
+  rewardObjects: []
+  rewardSkillPoints: 0
+  enemyFilters:
+  - skeletal_shield
+  - skeletal_pirate
+  - skeletal_cannon
+  - skeletal_spear_man

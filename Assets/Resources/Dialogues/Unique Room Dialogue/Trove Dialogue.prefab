@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5639958566054529311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5639958566054529309}
+  - component: {fileID: 5639958566054529308}
+  m_Layer: 0
+  m_Name: Trove Dialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5639958566054529309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5639958566054529311}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.012583, y: 2.976298, z: -3199.375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5639958566054529308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5639958566054529311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueId: trove_dialogue
+  whatDialogueType: 8
+  checkPointDialogue: 0
+  dialogues:
+  - I think I've seen this crystal formation before, Navigator.
+  - Ah! It's in my notes here.
+  - Apparently these crystals house an artifact that we can extract.
+  - Adventurers also mention that they find larger crystal formations like this deeper
+    in the labyrinth with even stronger artifacts housed in them.
+  dialogueNames:
+  - Tabitha
+  - Tabitha
+  - Tabitha
+  - Tabitha
+  background: {fileID: 0}
+  character1Sprites: []
+  character2Sprites: []
+  character3Sprites:
+  - {fileID: -4098584453988571798, guid: 95bc82f5c99c3174fb0ef36871b1b5e4, type: 3}
+  - {fileID: -6357243656314090840, guid: 95bc82f5c99c3174fb0ef36871b1b5e4, type: 3}
+  - {fileID: -501597115713389476, guid: 95bc82f5c99c3174fb0ef36871b1b5e4, type: 3}
+  - {fileID: -4098584453988571798, guid: 95bc82f5c99c3174fb0ef36871b1b5e4, type: 3}
+  character4Sprites: []
+  panelSprites: []
+  substituteMusic: 
+  originalMusic: 
+  addedItems: []

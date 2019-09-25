@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4333865117079512574
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4333865117079512544}
+  - component: {fileID: 4333865117079512575}
+  m_Layer: 10
+  m_Name: Sentinel Defeated Dialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4333865117079512544
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333865117079512574}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -780.4, y: 12.24, z: 0}
+  m_LocalScale: {x: 15.5, y: 15.5, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4333865117079512575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333865117079512574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueId: sentinel_defeated
+  whatDialogueType: 0
+  checkPointDialogue: 0
+  dialogues:
+  - We did it!
+  - While Geordi is excited about defeating the Sentinel, Tabitha steps back and takes
+    a breath of relief while smiling.
+  - What is it Tabitha?
+  - Nothing, Geordi. I'm just... excited. I have a feeling that our world is going
+    to change.
+  - Let's head back to the town now, we deserve a break.
+  dialogueNames:
+  - Geordi
+  - 
+  - Geordi
+  - Tabitha
+  - Tabitha
+  background: {fileID: 0}
+  character1Sprites:
+  - {fileID: -2770177905118475799, guid: a185600ec972bb84bb026d3f00c54db8, type: 3}
+  - {fileID: -2770177905118475799, guid: a185600ec972bb84bb026d3f00c54db8, type: 3}
+  - {fileID: -2770177905118475799, guid: a185600ec972bb84bb026d3f00c54db8, type: 3}
+  - {fileID: -8205248367752487544, guid: a185600ec972bb84bb026d3f00c54db8, type: 3}
+  - {fileID: -8205248367752487544, guid: a185600ec972bb84bb026d3f00c54db8, type: 3}
+  character2Sprites:
+  - {fileID: 1374215199433276917, guid: 6513bc63ec8622646b1b4d95dc41e614, type: 3}
+  - {fileID: -6545412773280947928, guid: 6513bc63ec8622646b1b4d95dc41e614, type: 3}
+  - {fileID: 1250254451151411741, guid: 6513bc63ec8622646b1b4d95dc41e614, type: 3}
+  - {fileID: 1250254451151411741, guid: 6513bc63ec8622646b1b4d95dc41e614, type: 3}
+  - {fileID: 1374215199433276917, guid: 6513bc63ec8622646b1b4d95dc41e614, type: 3}
+  character3Sprites:
+  - {fileID: 387058525151310395, guid: 16238912860b16a4eb799d47b4e5b3ad, type: 3}
+  - {fileID: 387058525151310395, guid: 16238912860b16a4eb799d47b4e5b3ad, type: 3}
+  - {fileID: 1404524701102313020, guid: 460bf958690171c448a1682097973a96, type: 3}
+  - {fileID: 1404524701102313020, guid: 460bf958690171c448a1682097973a96, type: 3}
+  - {fileID: -7012975368879030556, guid: 460bf958690171c448a1682097973a96, type: 3}
+  character4Sprites:
+  - {fileID: -546449196522492469, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: -2383742517355516936, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: 1423390269769719171, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: -546449196522492469, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: -6633466376003217947, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  panelSprites: []
+  substituteMusic: 
+  originalMusic: 
+  addedItems: []

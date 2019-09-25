@@ -1,0 +1,142 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1907774946184224}
+  m_IsPrefabAsset: 1
+--- !u!1 &1907774946184224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224943362987693468}
+  - component: {fileID: 114067953771410082}
+  - component: {fileID: 222689898058514712}
+  - component: {fileID: 114485156599201628}
+  - component: {fileID: 114311011700040884}
+  m_Layer: 0
+  m_Name: Dragon Breath Weapon Template
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &114067953771410082
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907774946184224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2093946c6e21b9c43b76288f452bba8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: {fileID: 21300008, guid: e5f6b2b712e66b640b02617a61753017, type: 3}
+  upleft: {fileID: 21300006, guid: e5f6b2b712e66b640b02617a61753017, type: 3}
+  left: {fileID: 21300004, guid: e5f6b2b712e66b640b02617a61753017, type: 3}
+  downleft: {fileID: 21300002, guid: e5f6b2b712e66b640b02617a61753017, type: 3}
+  down: {fileID: 21300000, guid: e5f6b2b712e66b640b02617a61753017, type: 3}
+  weaponFlare: {fileID: 1603636038745924, guid: cb87fb9e52e985640b227360feb3f705,
+    type: 2}
+  coolDownIcon: {fileID: 21300000, guid: d2e6e4af77074dc4690300e35d070b1f, type: 3}
+  coolDownTime: 3
+  shipWeaponEquipped: {fileID: 0}
+--- !u!114 &114311011700040884
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907774946184224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b575a50fdf25b141a37c9272244bae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  longerFlames1: {fileID: 1218583382678650, guid: 0556bd1fededb4444a098dff10a71360,
+    type: 2}
+  longerFlames2: {fileID: 1996782882977912, guid: cd7c3fdc51fe36145a05d950c4052fe4,
+    type: 2}
+  longerFlames3: {fileID: 1581822357313558, guid: c0888429cfddae34881e8a2e293435cb,
+    type: 2}
+  blueFlames1: {fileID: 1549493817005854, guid: b537564268b505b47a7c3a681ab78312,
+    type: 2}
+  blueFlames2: {fileID: 1842709514263508, guid: 60090785a59880c4b9c9a7d4d4d957d4,
+    type: 2}
+  blueFlames3: {fileID: 1443908890708160, guid: a0e968852608d204c9b501d639f06dea,
+    type: 2}
+  blueFireIcon: {fileID: 21300006, guid: 19dc40debff37e04facc2e91c8a758f2, type: 3}
+  longerFlamesIcon: {fileID: 21300012, guid: 19dc40debff37e04facc2e91c8a758f2, type: 3}
+--- !u!114 &114485156599201628
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907774946184224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Dragon''s Breath: By funneling oil and
+
+    igniting it, this weapon sprays fire in an
+
+    are near the ship that deals 3 ticks of
+
+    1 damage.'
+--- !u!222 &222689898058514712
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907774946184224}
+  m_CullTransparentMesh: 0
+--- !u!224 &224943362987693468
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1907774946184224}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.10888399}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 5.0557175, y: -2.201981}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}

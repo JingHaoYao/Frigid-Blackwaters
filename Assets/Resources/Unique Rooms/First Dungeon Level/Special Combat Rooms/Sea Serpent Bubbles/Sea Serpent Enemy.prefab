@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1146799545189750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4502153913989292}
+  - component: {fileID: 114541449413884578}
+  m_Layer: 10
+  m_Name: Sea Serpent Enemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4502153913989292
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146799545189750}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.03954395}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114541449413884578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146799545189750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e485caaa51faf744a4aaf2077431796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameID: sea_serpent_enemy
+  health: 12
+  dangerValue: 5
+  killNumber: 5
+  bubbles: {fileID: 1702492636320968, guid: c19a08040dbc1924e9c37032d00d6ac9, type: 3}
+  emergeAttack: {fileID: 1522095377479958, guid: 4b808cf059c469f4b9e90bc6eeabbd2a,
+    type: 3}
+  initBubbles: {fileID: 0}
+  tail: {fileID: 1794513411129506, guid: 7637c1904c49c894785df9277956c46b, type: 3}
+  anti: {fileID: 0}
+  serpentChest: {fileID: 1882864398885920, guid: b24f7311c7ba6604488570bb058a5981,
+    type: 3}

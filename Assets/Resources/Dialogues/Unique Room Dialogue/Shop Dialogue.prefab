@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4287313740803706352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4287313740803706354}
+  - component: {fileID: 4287313740803706353}
+  m_Layer: 0
+  m_Name: Shop Dialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4287313740803706354
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287313740803706352}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.619267, y: 13.701851, z: -3204.375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4287313740803706353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4287313740803706352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueId: shop_dialogue
+  whatDialogueType: 8
+  checkPointDialogue: 0
+  dialogues:
+  - For some reason.. that feels alive.
+  - Well, you're partly right Geordi.
+  - Apparently these are automatons that like to collect gold. In fact, they're willing
+    to exchange gold for artifacts and items that happen to drift here.
+  - So even golems like money.
+  - Wait, so aren't these like a shop then?
+  - .. I suppose so?
+  - My notes read that they get larger the deeper we go, and we can also obtain more
+    valuable items from them.
+  dialogueNames:
+  - Geordi
+  - Tabitha
+  - Tabitha
+  - Geordi
+  - Geordi
+  - Tabitha
+  - Tabitha
+  background: {fileID: 0}
+  character1Sprites: []
+  character2Sprites:
+  - {fileID: -5080142142177445821, guid: 460bf958690171c448a1682097973a96, type: 3}
+  - {fileID: 1404524701102313020, guid: 460bf958690171c448a1682097973a96, type: 3}
+  - {fileID: 1404524701102313020, guid: 460bf958690171c448a1682097973a96, type: 3}
+  - {fileID: -7012975368879030556, guid: 460bf958690171c448a1682097973a96, type: 3}
+  - {fileID: 2134564351766655939, guid: 460bf958690171c448a1682097973a96, type: 3}
+  - {fileID: 2134564351766655939, guid: 460bf958690171c448a1682097973a96, type: 3}
+  - {fileID: 1404524701102313020, guid: 460bf958690171c448a1682097973a96, type: 3}
+  character3Sprites:
+  - {fileID: -4098584453988571798, guid: 95bc82f5c99c3174fb0ef36871b1b5e4, type: 3}
+  - {fileID: -501597115713389476, guid: 95bc82f5c99c3174fb0ef36871b1b5e4, type: 3}
+  - {fileID: -4098584453988571798, guid: 95bc82f5c99c3174fb0ef36871b1b5e4, type: 3}
+  - {fileID: -4098584453988571798, guid: 95bc82f5c99c3174fb0ef36871b1b5e4, type: 3}
+  - {fileID: -4098584453988571798, guid: 95bc82f5c99c3174fb0ef36871b1b5e4, type: 3}
+  - {fileID: -501597115713389476, guid: 95bc82f5c99c3174fb0ef36871b1b5e4, type: 3}
+  - {fileID: -4098584453988571798, guid: 95bc82f5c99c3174fb0ef36871b1b5e4, type: 3}
+  character4Sprites: []
+  panelSprites: []
+  substituteMusic: 
+  originalMusic: 
+  addedItems: []

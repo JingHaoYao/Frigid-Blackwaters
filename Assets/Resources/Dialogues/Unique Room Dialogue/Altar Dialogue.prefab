@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3098537739002297160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3098537739002297162}
+  - component: {fileID: 3098537739002297161}
+  m_Layer: 0
+  m_Name: Altar Dialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3098537739002297162
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3098537739002297160}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.400097, y: 10.136794, z: -3201.0781}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3098537739002297161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3098537739002297160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueId: altar_dialogue
+  whatDialogueType: 8
+  checkPointDialogue: 0
+  dialogues:
+  - Hey Tabitha, there's a crystal formation right there.
+  - Oh, we should be a little cautious with this one.
+  - See those stone claws around the crystal?
+  - That means it's an altar.
+  - We can acquire an artifact, but those crystals cause us to become more fatigued.
+  - I heard altars deeper in the labyrinth have larger crystals and offer better artifacts,
+    but drain more health from those who use them.
+  dialogueNames:
+  - Geordi
+  - Tabitha
+  - Tabitha
+  - Tabitha
+  - Tabitha
+  - Tabitha
+  background: {fileID: 0}
+  character1Sprites: []
+  character2Sprites:
+  - {fileID: -7012975368879030556, guid: 460bf958690171c448a1682097973a96, type: 3}
+  - {fileID: 1404524701102313020, guid: 460bf958690171c448a1682097973a96, type: 3}
+  - {fileID: -5080142142177445821, guid: 460bf958690171c448a1682097973a96, type: 3}
+  - {fileID: 1404524701102313020, guid: 460bf958690171c448a1682097973a96, type: 3}
+  - {fileID: -5080142142177445821, guid: 460bf958690171c448a1682097973a96, type: 3}
+  - {fileID: 2134564351766655939, guid: 460bf958690171c448a1682097973a96, type: 3}
+  character3Sprites:
+  - {fileID: 1423390269769719171, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: -6633466376003217947, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: 8096401433000480259, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: 1423390269769719171, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: -6633466376003217947, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: -674398192908579941, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  character4Sprites: []
+  panelSprites: []
+  substituteMusic: 
+  originalMusic: 
+  addedItems: []
