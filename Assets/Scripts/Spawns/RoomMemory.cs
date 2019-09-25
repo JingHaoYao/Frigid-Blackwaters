@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomMemory : MonoBehaviour
-{
-    public int[,] roomLayOut = new int[37,37];
+public class RoomMemory : MonoBehaviour{
+    public Vector2 playerRoom; //player position in terms of rooms (Based on adjusted)
+    public int[,] roomLayOut = new int[39,39]; //memory for walls and exits of rooms (NOT ADJUSTED, look in mapUI for adjusted)
+    public int[,] roomID = new int[19, 19]; //memory for content of rooms (Based on adjusted)
+    public GameObject[] foams;
+    public int roomLeft; //offset of most left room
+    public int roomDown; //offset of most down room
+    public int roomRight; //you get it by now *right*?
+    public int roomUp;
 
     //0 - no room
     //1 - top open room
@@ -22,16 +28,4 @@ public class RoomMemory : MonoBehaviour
     //13 - bottom, left, right open
     //14 - top, left, right open
     //15 - all open
-    //16 - spawn room
-
-    private void Start()
-    {
-        for(int i = 0; i < 37; i++)
-        {
-            for(int k = 0; k < 37; k++)
-            {
-                roomLayOut[i,k] = 0;
-            }
-        }
-    }
 }

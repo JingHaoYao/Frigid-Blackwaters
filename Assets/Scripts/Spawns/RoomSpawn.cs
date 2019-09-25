@@ -17,15 +17,15 @@ public class RoomSpawn : MonoBehaviour
     public float delayInvoke = 0.1f;
     public int collisionNumber = 0;
 
-    private void Start()
+    private void Awake()
     {
-        templates = GameObject.Find("RoomTemplates").GetComponent<RoomTemplates>();
+        templates = FindObjectOfType<RoomTemplates>();
         Invoke("Spawn", delayInvoke);
     }
 
     private void Update()
     {
-        if (templates.GetComponent<RoomTemplates>().spawnPeriod >= 6.5f)
+        if (templates.GetComponent<RoomTemplates>().spawnPeriod >= 6.2f)
         {
             if(collisionNumber > 1)
             {
@@ -42,24 +42,23 @@ public class RoomSpawn : MonoBehaviour
             if (spawned == false && dontSpawn == false)
             {
                 templates.roomCount++;
-                Debug.Log(templates.roomCount);
                 switch (openDirection)
                 {
                     case 1:
                         //spawn door with top open
-                        Instantiate(templates.topOpenRooms[Random.Range(0, 5)], transform.position, Quaternion.identity);
+                        spawnRoom(templates.topOpenRooms);
                         break;
                     case 2:
                         //spawn door with bottom open
-                        Instantiate(templates.bottomOpenRooms[Random.Range(0, 5)], transform.position, Quaternion.identity);
+                        spawnRoom(templates.bottomOpenRooms);
                         break;
                     case 3:
                         //spawn door with right open
-                        Instantiate(templates.rightOpenRooms[Random.Range(0, 5)], transform.position, Quaternion.identity);
+                        spawnRoom(templates.rightOpenRooms);
                         break;
                     case 4:
                         //spawn door with left open
-                        Instantiate(templates.leftOpenRooms[Random.Range(0, 5)], transform.position, Quaternion.identity);
+                        spawnRoom(templates.leftOpenRooms);
                         break;
                 }
                 spawned = true;
@@ -72,6 +71,44 @@ public class RoomSpawn : MonoBehaviour
                 spawnDoorBlock();
             }
         }
+    }
+
+    void spawnRoom(GameObject[] rooms)
+    {
+        GameObject selectedRoom = rooms[Random.Range(0, rooms.Length)];
+
+        if (templates.antiList.Count < 6)
+        {
+            while(selectedRoom.GetComponentsInChildren<RoomSpawn>().Length < 3)
+            {
+                selectedRoom = rooms[Random.Range(0, rooms.Length)];
+            }
+            Instantiate(selectedRoom, transform.position, Quaternion.identity);
+            return;
+        }
+        else if (templates.antiList.Count < 15)
+        {
+            while (selectedRoom.GetComponentsInChildren<RoomSpawn>().Length < 2 && selectedRoom.GetComponentsInChildren<RoomSpawn>().Length == 4)
+            {
+                selectedRoom = rooms[Random.Range(0, rooms.Length)];
+            }
+            Instantiate(selectedRoom, transform.position, Quaternion.identity);
+            return;
+        }
+        else if (templates.antiList.Count < 30)
+        {
+            while (selectedRoom.GetComponentsInChildren<RoomSpawn>().Length >= 3 && selectedRoom.GetComponentsInChildren<RoomSpawn>().Length <= 1)
+            {
+                selectedRoom = rooms[Random.Range(0, rooms.Length)];
+            }
+            Instantiate(selectedRoom, transform.position, Quaternion.identity);
+            return;
+        }
+        else
+        {
+            Instantiate(selectedRoom, transform.position, Quaternion.identity);
+        }
+        
     }
 
    
@@ -116,6 +153,11 @@ public class RoomSpawn : MonoBehaviour
             // this means that if it collides twice (from the two rooms overlapping, it'll have a collider number of 2)
             // if it collides none, then that means its a room on the end (reached 40 room limit) - a door block is spawned accordingly
         }
+        
+        if(collision.gameObject.GetComponent<AntiSpawnSpaceDetailer>() == null)
+        {
+            return;
+        }
 
         switch (openDirection)
         {
@@ -147,7 +189,7 @@ public class RoomSpawn : MonoBehaviour
         }
         dontSpawn = true;
 
-        if (templates.GetComponent<RoomTemplates>().spawnPeriod >= 6.5f)
+        if (templates.spawnPeriod >= 6.2f)
         {
             if (collision.gameObject.name != "AntiSpawnSpaceSpawner")
             {
