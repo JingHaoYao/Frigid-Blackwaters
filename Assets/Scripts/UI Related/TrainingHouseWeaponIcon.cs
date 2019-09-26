@@ -12,6 +12,13 @@ public class TrainingHouseWeaponIcon : MonoBehaviour, IPointerEnterHandler, IPoi
     public GameObject[] templates;
     int index = 0;
     public GameObject toolTip;
+    public GameObject weaponMenu;
+    public static int whichWeaponToEquip = 0;
+
+    void OnEnable()
+    {
+        weaponMenu.SetActive(false);
+    }
 
     Text pickText()
     {
@@ -45,7 +52,7 @@ public class TrainingHouseWeaponIcon : MonoBehaviour, IPointerEnterHandler, IPoi
         }
     }
 
-    public void nextTemplate()
+    /*public void nextTemplate()
     {
         index++;
         if (index >= PlayerUpgrades.unlockLevel)
@@ -99,6 +106,39 @@ public class TrainingHouseWeaponIcon : MonoBehaviour, IPointerEnterHandler, IPoi
         setPicture();
         FindObjectOfType<AudioManager>().PlaySound("Change Weapon");
         SaveSystem.SaveGame();
+    }*/
+
+    public void setTemplate(int whichTemplate)
+    {
+        if (whichWeaponToEquip == whichWeapon)
+        {
+            if (whichWeapon == 1)
+            {
+                frontWeapon.GetComponent<ShipWeaponScript>().swapTemplate(templates[whichTemplate].GetComponent<ShipWeaponTemplate>());
+                PlayerUpgrades.whichFrontWeaponEquipped = whichTemplate;
+            }
+            else if (whichWeapon == 2)
+            {
+                leftWeapon.GetComponent<ShipWeaponScript>().swapTemplate(templates[whichTemplate].GetComponent<ShipWeaponTemplate>());
+                PlayerUpgrades.whichLeftWeaponEquipped = whichTemplate;
+            }
+            else if (whichWeapon == 3)
+            {
+                rightWeapon.GetComponent<ShipWeaponScript>().swapTemplate(templates[whichTemplate].GetComponent<ShipWeaponTemplate>());
+                PlayerUpgrades.whichRightWeaponEquipped = whichTemplate;
+            }
+            setPicture();
+            FindObjectOfType<AudioManager>().PlaySound("Change Weapon");
+            SaveSystem.SaveGame();
+            weaponMenu.SetActive(false);
+        }
+    }
+
+    public void turnOnMenu()
+    {
+        whichWeaponToEquip = whichWeapon;
+        FindObjectOfType<AudioManager>().PlaySound("Generic Button Click");
+        weaponMenu.SetActive(true);
     }
 
 	void Start () {

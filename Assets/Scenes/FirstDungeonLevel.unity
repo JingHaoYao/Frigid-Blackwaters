@@ -4762,8 +4762,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 50}
+  m_AnchoredPosition: {x: 0.000013351, y: 0.0000021458}
+  m_SizeDelta: {x: 408.7, y: 68.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &258191840
 MonoBehaviour:
@@ -10507,6 +10507,7 @@ GameObject:
   - component: {fileID: 483986821}
   - component: {fileID: 483986820}
   - component: {fileID: 483986822}
+  - component: {fileID: 483986823}
   m_Layer: 5
   m_Name: Loading
   m_TagString: Untagged
@@ -10555,7 +10556,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
-    m_FontSize: 60
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -10566,7 +10567,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: LOADING
+  m_Text: 1 - 0 | 40 Rooms
 --- !u!222 &483986821
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10594,6 +10595,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &483986823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483986818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b12a52bfe6d073143bdb82412b8de993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &485429918
 PrefabInstance:
   m_ObjectHideFlags: 0

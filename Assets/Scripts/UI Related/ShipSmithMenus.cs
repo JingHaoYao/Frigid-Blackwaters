@@ -13,6 +13,7 @@ public class ShipSmithMenus : MonoBehaviour {
     public SpreadshotUpgradeTilesUI spreadShotUpgradesMenu;
     public CannonUpgradeTilesUI cannonUpgradesMenu;
     public HealthUpgradeTilesUI hullUpgradesMenu;
+    public GameObject weaponSelectorMenu, returnButton;
     int skillPointPrice = 0;
 
     public void purchaseSkillPoint()
@@ -89,7 +90,6 @@ public class ShipSmithMenus : MonoBehaviour {
         {
             menu.SetActive(false);
         }
-        menusList[currMenu].SetActive(true);
     }
 
     private void Update()
@@ -103,9 +103,35 @@ public class ShipSmithMenus : MonoBehaviour {
     private void Start()
     {
         checkWeaponsUnlocked();
+        weaponSelectorMenu.SetActive(true);
+        returnButton.SetActive(false);
     }
 
-    public void nextMenu()
+    private void OnEnable()
+    {
+        checkWeaponsUnlocked();
+        weaponSelectorMenu.SetActive(true);
+        returnButton.SetActive(false);
+    }
+
+    public void turnOnMenu(int whatMenu)
+    {
+        weaponSelectorMenu.SetActive(false);
+        menusList[whatMenu].SetActive(true);
+        returnButton.SetActive(true);
+        currMenu = whatMenu;
+        FindObjectOfType<AudioManager>().PlaySound("Generic Button Click");
+    }
+
+    public void returnToMenu()
+    {
+        menusList[currMenu].SetActive(false);
+        weaponSelectorMenu.SetActive(true);
+        returnButton.SetActive(false);
+        FindObjectOfType<AudioManager>().PlaySound("Generic Button Click");
+    }
+
+    /*public void nextMenu()
     {
         menusList[currMenu].SetActive(false);
         currMenu++;
@@ -127,7 +153,7 @@ public class ShipSmithMenus : MonoBehaviour {
         }
         menusList[currMenu].SetActive(true);
         FindObjectOfType<AudioManager>().PlaySound("Generic Button Click");
-    }
+    }*/
 
     public void resetUpgrades()
     {
@@ -141,8 +167,13 @@ public class ShipSmithMenus : MonoBehaviour {
         PlayerUpgrades.safeUpgrades.Clear();
         PlayerUpgrades.inventoryUpgrades.Clear();
         checkWeaponsUnlocked();
-        menusList[currMenu].SetActive(false);
-        menusList[currMenu].SetActive(true);
+
+        if(weaponSelectorMenu.activeSelf == false)
+        {
+            menusList[currMenu].SetActive(false);
+            menusList[currMenu].SetActive(true);
+        }
+
         PlayerUpgrades.numberSkillPoints = PlayerUpgrades.numberMaxSkillPoints;
         SaveSystem.SaveGame();
 

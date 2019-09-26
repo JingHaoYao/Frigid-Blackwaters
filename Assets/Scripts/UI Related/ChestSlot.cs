@@ -50,7 +50,7 @@ public class ChestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         for (int i = inventory.itemList.Count - 1; i >= 0; i--)
         {
-            if (inventory.itemList[i].GetComponent<DisplayItem>().goldValue < 1000)
+            if (inventory.itemList[i].GetComponent<DisplayItem>().goldValue < 1000 && inventory.itemList[i].GetComponent<DisplayItem>().goldValue > 0)
             {
                 if (inventory.itemList[i].GetComponent<DisplayItem>().goldValue + displayInfo.goldValue > 1000)
                 {

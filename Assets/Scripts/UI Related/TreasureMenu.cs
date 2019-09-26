@@ -52,7 +52,7 @@ public class TreasureMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         for (int i = inventory.itemList.Count - 1; i >= 0; i--)
         {
-            if (inventory.itemList[i].GetComponent<DisplayItem>().goldValue != 0 && inventory.itemList[i].GetComponent<DisplayItem>().goldValue < 1000)
+            if (inventory.itemList[i].GetComponent<DisplayItem>().goldValue > 0 && inventory.itemList[i].GetComponent<DisplayItem>().goldValue < 1000)
             {
                 if (inventory.itemList[i].GetComponent<DisplayItem>().goldValue + displayInfo.goldValue > 1000)
                 {
