@@ -272,7 +272,10 @@ public class SlowSeekerSkeleton : Enemy
                     pickSpritePeriod = 0;
                     spriteRenderer.sprite = viewSprites[whatView - 1];
                 }
-                StartCoroutine(summonSeeker(angleToShip));
+                if (stopAttacking == false)
+                {
+                    StartCoroutine(summonSeeker(angleToShip));
+                }
                 attackPeriod = 5;
             }
         }

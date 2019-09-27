@@ -183,7 +183,7 @@ public class SkeletalAxeman : Enemy
         }
         else
         {
-            if(attacking == false)
+            if(attacking == false && stopAttacking == false)
             {
                 StartCoroutine(axeSpin());
             }

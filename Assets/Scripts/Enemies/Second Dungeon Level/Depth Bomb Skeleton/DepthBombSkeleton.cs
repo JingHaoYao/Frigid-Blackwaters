@@ -291,7 +291,11 @@ public class DepthBombSkeleton : Enemy
                     pickSpritePeriod = 0;
                     spriteRenderer.sprite = viewSprites[whatView - 1];
                 }
-                StartCoroutine(summonBombs(angleToShip));
+
+                if (stopAttacking == false)
+                {
+                    StartCoroutine(summonBombs(angleToShip));
+                }
                 attackPeriod = 7;
             }
         }

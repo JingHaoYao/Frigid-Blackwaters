@@ -19,8 +19,8 @@ public class SetRoomDesign : MonoBehaviour {
     {
         int tempx = 0;
         int tempy = 0;
-        tempx = 10 + xPos;
-        tempy = 10 + yPos;
+        tempx = 15 + xPos;
+        tempy = 15 + yPos;
         roomMemory.roomID[tempx, tempy] = whatRoomType;
     }
 

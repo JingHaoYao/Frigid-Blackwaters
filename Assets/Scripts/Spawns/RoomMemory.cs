@@ -5,7 +5,7 @@ using UnityEngine;
 public class RoomMemory : MonoBehaviour{
     public Vector2 playerRoom; //player position in terms of rooms (Based on adjusted)
     public int[,] roomLayOut = new int[39,39]; //memory for walls and exits of rooms (NOT ADJUSTED, look in mapUI for adjusted)
-    public int[,] roomID = new int[19, 19]; //memory for content of rooms (Based on adjusted)
+    public int[,] roomID = new int[29, 29]; //memory for content of rooms (Based on adjusted)
     public GameObject[] foams;
     public int roomLeft; //offset of most left room
     public int roomDown; //offset of most down room

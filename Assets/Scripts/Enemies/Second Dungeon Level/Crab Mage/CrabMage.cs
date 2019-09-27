@@ -227,7 +227,7 @@ public class CrabMage : Enemy
             rigidBody2D.velocity = Vector3.zero;
         }
 
-        if (Vector2.Distance(transform.position, path[path.Count - 1].nodePosition) < 0.2f && isAttacking == false)
+        if (Vector2.Distance(transform.position, path[path.Count - 1].nodePosition) < 0.2f && isAttacking == false && stopAttacking == false)
         {
             isAttacking = true;
             StartCoroutine(attack());

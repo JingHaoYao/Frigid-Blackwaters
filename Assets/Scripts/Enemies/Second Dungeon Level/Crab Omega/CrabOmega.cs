@@ -172,7 +172,7 @@ public class CrabOmega : Enemy
         float angle = (Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg + 360f) % 360f;
         RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0) + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)), new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)), 20, mask);
 
-        if (Vector2.Distance(transform.position, playerShip.transform.position) < 3 && hit.transform.gameObject == playerShip && hit == isAttacking == false)
+        if (Vector2.Distance(transform.position, playerShip.transform.position) < 3 && hit.transform.gameObject == playerShip && hit == isAttacking == false && stopAttacking == false)
         {
             isAttacking = true;
             StartCoroutine(attack());

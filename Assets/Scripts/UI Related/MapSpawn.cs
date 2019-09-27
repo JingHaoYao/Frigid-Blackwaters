@@ -87,8 +87,8 @@ public class MapSpawn : MonoBehaviour{
                             mapExploration = border.GetComponent<MapExploration>();
                             mapExploration.xPos = i;
                             mapExploration.yPos = j;
-                            mapExploration.xID = i + (roomMemory.roomLeft + 10);
-                            mapExploration.yID = j + (roomMemory.roomDown + 10);
+                            mapExploration.xID = i + (roomMemory.roomLeft + 15);
+                            mapExploration.yID = j + (roomMemory.roomDown + 15);
                             mapExploration.explored = 1; //discovered
                             border.transform.SetParent(gameObject.transform);
                             border.transform.localScale = new Vector3(1, 1, 1);

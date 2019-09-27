@@ -195,7 +195,7 @@ public class ShooterCrab : Enemy
             invulnerableIcon.SetActive(false);
             invulnerableHitBox.SetActive(false);
             spriteRenderer.sprite = openSprites[whatView - 1];
-            if(hasAttacked == false)
+            if(hasAttacked == false && stopAttacking == false)
             {
                 StartCoroutine(shootBalls());
                 hasAttacked = true;
