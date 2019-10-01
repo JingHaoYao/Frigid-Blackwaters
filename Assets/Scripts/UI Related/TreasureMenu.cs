@@ -68,7 +68,14 @@ public class TreasureMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             }
         }
         //did nothing
-        return 2;
+        if (inventory.itemList.Count < PlayerItems.maxInventorySize)
+        {
+            return 0;
+        }
+        else
+        {
+            return 2;
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
