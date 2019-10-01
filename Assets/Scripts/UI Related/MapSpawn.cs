@@ -102,8 +102,8 @@ public class MapSpawn : MonoBehaviour{
                             mapExploration = border.GetComponent<MapExploration>();
                             mapExploration.xPos = i;
                             mapExploration.yPos = j;
-                            mapExploration.xID = i + (roomMemory.roomLeft + 10);
-                            mapExploration.yID = j + (roomMemory.roomDown + 10);
+                            mapExploration.xID = i + (roomMemory.roomLeft + 15);
+                            mapExploration.yID = j + (roomMemory.roomDown + 15);
                             addTiles(mapExploration);
                             //roomMemory.roomID[i, j] = 1; //undiscovered empty room
                             border.transform.SetParent(gameObject.transform);
