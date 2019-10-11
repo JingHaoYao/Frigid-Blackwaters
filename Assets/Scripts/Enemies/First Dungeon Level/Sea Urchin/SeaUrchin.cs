@@ -184,7 +184,7 @@ public class SeaUrchin : Enemy {
         rigidBody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        cornerList = new Vector3[] { Camera.main.transform.position + new Vector3(-8.4f, -8.4f), Camera.main.transform.position + new Vector3(8.4f, -8.4f), Camera.main.transform.position + new Vector3(8.4f, 8.4f), Camera.main.transform.position + new Vector3(-8.4f, 8.4f) };
+        cornerList = new Vector3[] { Camera.main.transform.position + new Vector3(-9f, -9f), Camera.main.transform.position + new Vector3(9f, -9f), Camera.main.transform.position + new Vector3(9f, 9f), Camera.main.transform.position + new Vector3(-9f, 9f) };
         setLocation();
         cw = Random.Range(0, 2);
     }
@@ -205,7 +205,7 @@ public class SeaUrchin : Enemy {
             attackPeriod = 2;
         }
 
-        if (Vector2.Distance(transform.position, Camera.main.transform.position) < 8 || Vector2.Distance(transform.position, Camera.main.transform.position) > 12.5f)
+        if (Vector2.Distance(transform.position, Camera.main.transform.position) < 8 || Vector2.Distance(transform.position, Camera.main.transform.position) > 13f)
         {
             GameObject deadPirate = Instantiate(deadStarFish, transform.position, Quaternion.identity);
             deadPirate.transform.rotation = transform.rotation;

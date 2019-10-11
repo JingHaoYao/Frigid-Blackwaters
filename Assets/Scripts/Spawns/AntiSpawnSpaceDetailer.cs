@@ -659,19 +659,19 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
     {
         if(leftOpening)
         {
-            doorSeals[0] = Instantiate(doorwaySeal, transform.parent.transform.position + new Vector3(-10f, 0, 0), Quaternion.identity);
+            doorSeals[0] = Instantiate(doorwaySeal, transform.parent.transform.position + new Vector3(-10.5f, 0, 0), Quaternion.identity);
         }
         if (rightOpening)
         {
-            doorSeals[1] = Instantiate(doorwaySeal, transform.parent.transform.position + new Vector3(10f, 0, 0), Quaternion.Euler(0, 0, 180));
+            doorSeals[1] = Instantiate(doorwaySeal, transform.parent.transform.position + new Vector3(10.5f, 0, 0), Quaternion.Euler(0, 0, 180));
         }
         if (topOpening)
         {
-            doorSeals[2] = Instantiate(doorwaySeal, transform.parent.transform.position + new Vector3(0, 10f, 0), Quaternion.Euler(0, 0, 270));
+            doorSeals[2] = Instantiate(doorwaySeal, transform.parent.transform.position + new Vector3(0, 10.5f, 0), Quaternion.Euler(0, 0, 270));
         }
         if (bottomOpening)
         {
-            doorSeals[3] = Instantiate(doorwaySeal, transform.parent.transform.position + new Vector3(0, -10f, 0), Quaternion.Euler(0, 0, 90));
+            doorSeals[3] = Instantiate(doorwaySeal, transform.parent.transform.position + new Vector3(0, -10.5f, 0), Quaternion.Euler(0, 0, 90));
         }
     }
 
@@ -699,6 +699,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
     {
         setRoomMemory();
         setRoomType();
+        adjustTo20();
         mainCamera = Camera.main;
         enemyRoomTemplates = FindObjectOfType<EnemyRoomTemplates>();
         dialogueManager = FindObjectOfType<DungeonEntryDialogueManager>();
@@ -712,6 +713,13 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
         Instantiate(waterTile, transform.position, Quaternion.identity);
         GameObject.Find("RoomTemplates").GetComponent<RoomTemplates>().antiList.Add(this);
         mapUI = playerShip.GetComponent<MapUI>();
+    }
+
+    void adjustTo20()
+    {
+        int xPos = Mathf.RoundToInt(transform.parent.position.x / 20f);
+        int yPos = Mathf.RoundToInt(transform.parent.position.y / 20f);
+        transform.parent.position = new Vector2(xPos * 20, yPos * 20);
     }
 
     //

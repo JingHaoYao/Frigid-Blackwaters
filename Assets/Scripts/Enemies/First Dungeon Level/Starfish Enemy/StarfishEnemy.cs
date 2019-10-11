@@ -160,7 +160,7 @@ public class StarfishEnemy : Enemy
         this.GetComponents<AudioSource>()[1].Play();
         if (whatStarfishType == 0)
         {
-            GameObject shot = Instantiate(starFishShot, transform.position + new Vector3(Mathf.Cos(whatSide * 90 * Mathf.Deg2Rad), Mathf.Sin(whatSide * 90 * Mathf.Deg2Rad)).normalized, Quaternion.identity);
+            GameObject shot = Instantiate(starFishShot, transform.position + new Vector3(Mathf.Cos(whatSide * 90 * Mathf.Deg2Rad), Mathf.Sin(whatSide * 90 * Mathf.Deg2Rad)).normalized * 1.2f, Quaternion.identity);
             shot.GetComponent<StarfishEnemyShot>().angleTravel = (whatSide * 90) * Mathf.Deg2Rad;
             shot.GetComponent<ProjectileParent>().instantiater = this.gameObject;
         }
@@ -168,7 +168,7 @@ public class StarfishEnemy : Enemy
         {
             for(int i = 0; i < 3; i++)
             {
-                GameObject shot = Instantiate(starFishShot, transform.position + new Vector3(Mathf.Cos(whatSide * 90 * Mathf.Deg2Rad), Mathf.Sin(whatSide * 90 * Mathf.Deg2Rad)).normalized, Quaternion.identity);
+                GameObject shot = Instantiate(starFishShot, transform.position + new Vector3(Mathf.Cos(whatSide * 90 * Mathf.Deg2Rad), Mathf.Sin(whatSide * 90 * Mathf.Deg2Rad)).normalized * 1.2f, Quaternion.identity);
                 shot.GetComponent<StarfishEnemyShot>().angleTravel = (whatSide * 90 + ( -45 + 45 * i)) * Mathf.Deg2Rad;
                 shot.GetComponent<ProjectileParent>().instantiater = this.gameObject;
             }
@@ -182,7 +182,7 @@ public class StarfishEnemy : Enemy
         rigidBody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        cornerList = new Vector3[] { Camera.main.transform.position + new Vector3(-8.4f, -8.4f), Camera.main.transform.position + new Vector3(8.4f, -8.4f), Camera.main.transform.position + new Vector3(8.4f, 8.4f), Camera.main.transform.position + new Vector3(-8.4f, 8.4f) };
+        cornerList = new Vector3[] { Camera.main.transform.position + new Vector3(-9f, -9f), Camera.main.transform.position + new Vector3(9f, -9f), Camera.main.transform.position + new Vector3(9f, 9f), Camera.main.transform.position + new Vector3(-9f, 9f) };
         setLocation();
         cw = Random.Range(0, 2);
     }
@@ -203,7 +203,7 @@ public class StarfishEnemy : Enemy
             attackPeriod = 2;
         }
 
-        if(Vector2.Distance(transform.position, Camera.main.transform.position) < 8 || Vector2.Distance(transform.position, Camera.main.transform.position) > 12.5f)
+        if(Vector2.Distance(transform.position, Camera.main.transform.position) < 8 || Vector2.Distance(transform.position, Camera.main.transform.position) > 13f)
         {
             GameObject deadPirate = Instantiate(deadStarFish, transform.position, Quaternion.identity);
             deadPirate.transform.rotation = transform.rotation;
