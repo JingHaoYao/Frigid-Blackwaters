@@ -206,7 +206,7 @@ public class SkeletalTridentWarrior : Enemy
         else
         {
             float angleToShip = (360 + Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
-            if (attacking == false)
+            if (attacking == false && stopAttacking == false)
             {
                 pickSprite(angleToShip);
                 StartCoroutine(poke(angleToShip));
