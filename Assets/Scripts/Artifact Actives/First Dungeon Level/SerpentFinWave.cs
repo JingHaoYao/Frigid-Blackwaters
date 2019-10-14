@@ -7,7 +7,7 @@ public class SerpentFinWave : MonoBehaviour {
     public GameObject water;
     float foamTimer = 0;
     public float angleTravel = 0;
-    float speed = 6;
+    public float speed = 6;
     bool collided = false;
     Vector3 startCamPos;
     public GameObject waterFoam;
