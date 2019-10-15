@@ -268,8 +268,7 @@ public class SkeletalFrostMage : Enemy {
     {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
-            int damageDealt = collision.gameObject.GetComponent<DamageAmount>().damage;
-            health -= damageDealt;
+            dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
             this.GetComponents<AudioSource>()[0].Play();
             if (health <= 0)
             {

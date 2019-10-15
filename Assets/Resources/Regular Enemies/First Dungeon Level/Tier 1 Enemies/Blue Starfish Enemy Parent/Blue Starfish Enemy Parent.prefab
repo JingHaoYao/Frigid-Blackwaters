@@ -47,9 +47,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameID: 
   health: 0
+  maxHealth: 0
   dangerValue: 1
   killNumber: 0
   stopAttacking: 0
+  percentSpawnChance: 33
 --- !u!1 &1422114787103057692
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,9 +218,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameID: blue_starfish_enemy
   health: 2
+  maxHealth: 2
   dangerValue: 1
   killNumber: 1
   stopAttacking: 0
+  percentSpawnChance: 33
   starFishShot: {fileID: 4591770671646077981, guid: a2a09c4541c7c98498609995b0a8f003,
     type: 3}
   deadStarFish: {fileID: 8337873833686778704, guid: bea2876e6a12f434c87579c56d7cb0ef,

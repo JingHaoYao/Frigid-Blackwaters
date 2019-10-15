@@ -307,8 +307,7 @@ public class FishManEnemy : Enemy {
     {
         if (collision.GetComponent<DamageAmount>())
         {
-            int damageDealt = collision.gameObject.GetComponent<DamageAmount>().damage;
-            health -= damageDealt;
+            dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
             Instantiate(bloodSplatter, collision.gameObject.transform.position, Quaternion.identity);
             this.GetComponents<AudioSource>()[0].Play();
             if (health <= 0)

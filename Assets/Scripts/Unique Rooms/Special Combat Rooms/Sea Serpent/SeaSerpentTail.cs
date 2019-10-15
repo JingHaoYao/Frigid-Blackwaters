@@ -239,10 +239,10 @@ public class SeaSerpentTail : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 16)
+        if (collision.gameObject.layer == 16 && collision.gameObject.GetComponent<DamageAmount>())
         {
             this.GetComponents<AudioSource>()[3].Play();
-            seaSerpentEnemy.health--;
+            seaSerpentEnemy.GetComponent<Enemy>().dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
             StartCoroutine(hitFrame());
         }
     }

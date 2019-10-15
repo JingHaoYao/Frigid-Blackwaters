@@ -290,8 +290,7 @@ public class ArmouredSkeleton : Enemy {
     {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
-            int damageDealt = collision.gameObject.GetComponent<DamageAmount>().damage;
-            health -= damageDealt;
+            dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
             if (health <= 0 && alreadySpawned == false)
             {
                 this.gameObject.GetComponent<BoxCollider2D>().enabled = false;

@@ -304,8 +304,7 @@ public class Eelman : Enemy {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
             this.GetComponent<AudioSource>().Play();
-            int damageDealt = collision.gameObject.GetComponent<DamageAmount>().damage;
-            health -= damageDealt;
+            dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
             if (health <= 0)
             {
                 Instantiate(bloodSplatter, collision.gameObject.transform.position, Quaternion.identity);

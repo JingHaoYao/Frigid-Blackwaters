@@ -432,8 +432,7 @@ public class GuardianGolem : Enemy {
     {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
-            int damageDealt = collision.gameObject.GetComponent<DamageAmount>().damage;
-            health -= damageDealt;
+            dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
             if (health <= 0)
             {
                 GameObject deadSkeletonCannon = Instantiate(deadGolem, transform.position, Quaternion.identity);

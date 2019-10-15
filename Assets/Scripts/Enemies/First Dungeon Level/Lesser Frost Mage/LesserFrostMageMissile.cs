@@ -43,7 +43,7 @@ public class LesserFrostMageMissile : MonoBehaviour
     
     void Update()
     {
-        if(attackPeriod < 4.5f)
+        if(attackPeriod < 7.5f)
         {
             if (collided == false)
             {
@@ -70,7 +70,7 @@ public class LesserFrostMageMissile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collided == false)
+        if (collided == false && collision.gameObject.layer == 9)
         {
             this.GetComponent<AudioSource>().Play();
             if (collision.gameObject.tag == "playerHitBox")

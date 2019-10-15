@@ -18,7 +18,7 @@ public class SkeletalShieldHitBox : MonoBehaviour {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
             int damageDealt = collision.gameObject.GetComponent<DamageAmount>().damage;
-            transform.parent.gameObject.GetComponent<SkeletalShield>().health -= damageDealt;
+            transform.parent.gameObject.GetComponent<Enemy>().dealDamage(damageDealt);
             transform.parent.gameObject.GetComponent<SkeletalShield>().actualHit = true;
         }
     }

@@ -285,8 +285,7 @@ public class SkeletalHeavyBlademan : Enemy
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
             this.GetComponents<AudioSource>()[0].Play();
-            int damageDealt = collision.gameObject.GetComponent<DamageAmount>().damage;
-            health -= damageDealt;
+            dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
             if (health <= 0)
             {
                 GameObject deadPirate = Instantiate(deadSpearman, transform.position, Quaternion.identity);

@@ -612,9 +612,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameID: skeletal_spear_man
   health: 2
+  maxHealth: 2
   dangerValue: 1
   killNumber: 1
   stopAttacking: 0
+  percentSpawnChance: 33
   facingLeft: {fileID: 21300000, guid: 0940590f44366194db323a5691c61aec, type: 3}
   facingUp: {fileID: 21300000, guid: cfcdb661b3d87794cbbd0a0d7ecb4df7, type: 3}
   facingDown: {fileID: 21300000, guid: f04c0cb7237e3a447893c8d1f77e08a1, type: 3}
@@ -628,6 +630,8 @@ MonoBehaviour:
   deadSpearman: {fileID: 1144597153117298, guid: 0a5c4c524b13e5546949de3e9c6bd865,
     type: 3}
   waterFoam: {fileID: 1301071832081938, guid: 215faf9227c195148b54dc93c20709cb, type: 3}
+  withinRangeRadius: 1.9
+  relativeScale: 0.2
 --- !u!114 &114565979219828662
 MonoBehaviour:
   m_ObjectHideFlags: 0

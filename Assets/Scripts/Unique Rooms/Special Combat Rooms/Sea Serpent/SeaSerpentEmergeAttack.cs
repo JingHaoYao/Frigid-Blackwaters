@@ -51,7 +51,7 @@ public class SeaSerpentEmergeAttack : MonoBehaviour {
         if (collision.gameObject.layer == 16)
         {
             this.GetComponents<AudioSource>()[2].Play();
-            seaSerpentEnemy.health--;
+            seaSerpentEnemy.GetComponent<Enemy>().dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
             StartCoroutine(hitFrame());
         }
     }

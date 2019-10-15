@@ -325,8 +325,7 @@ public class SkeletalScatterMage : Enemy
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
             this.GetComponents<AudioSource>()[0].Play();
-            int damageDealt = collision.gameObject.GetComponent<DamageAmount>().damage;
-            health -= damageDealt;
+            dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
             randPos = pickRandPos();
             if (health <= 0)
             {

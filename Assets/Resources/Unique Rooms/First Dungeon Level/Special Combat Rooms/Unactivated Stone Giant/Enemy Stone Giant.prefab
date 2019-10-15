@@ -114,8 +114,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameID: stone_giant
   health: 12
+  maxHealth: 12
   dangerValue: 5
   killNumber: 5
+  stopAttacking: 0
+  percentSpawnChance: 33
   anti: {fileID: 0}
   fistAttack: {fileID: 1430999738576796, guid: 8d25fbebf8178eb448ef704f3adbf737, type: 3}
   slamAttack: {fileID: 1773716096733554, guid: 34aa43137a6e94241b8f7432c5187457, type: 3}
@@ -315,6 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 0
+  rendLayerOffset: 0
 --- !u!95 &95810995636521196
 Animator:
   serializedVersion: 3

@@ -129,8 +129,7 @@ public class StoneGiant : Enemy {
     {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
-            int damageDealt = collision.gameObject.GetComponent<DamageAmount>().damage;
-            health -= damageDealt;
+            dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
             if (health <= 0)
             {
                 GameObject spawnedDeadGiant = Instantiate(deadGiant, transform.position, Quaternion.identity);
