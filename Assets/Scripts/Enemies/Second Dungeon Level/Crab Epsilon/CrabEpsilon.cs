@@ -145,7 +145,7 @@ public class CrabEpsilon : Enemy
         }
 
         pickTravelDuration -= Time.deltaTime;
-        if (pickTravelDuration <= 0)
+        if (pickTravelDuration <= 0 /* || (Mathf.Abs(transform.position.x - Camera.main.transform.position.x) > 8.5f || Mathf.Abs(transform.position.y - Camera.main.transform.position.y) > 8.5f) */)
         {
             pickTravelDuration = 2;
             pickNewTravelDirection();

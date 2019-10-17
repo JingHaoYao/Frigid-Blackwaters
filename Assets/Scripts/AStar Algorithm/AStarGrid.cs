@@ -56,7 +56,7 @@ public class AStarGrid : MonoBehaviour {
             for (int y = 0; y < gridSizeY; y++)
             {
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.up * (y * nodeDiameter + nodeRadius);
-                bool walkable = !(Physics2D.OverlapCircle(worldPoint, nodeRadius, unWalkableMask));
+                bool walkable = !(Physics2D.OverlapCircle(worldPoint, nodeRadius + 0.2f, unWalkableMask));
                 grid[x, y] = new AStarNode(walkable, worldPoint, x, y);
             }
         }
@@ -91,10 +91,10 @@ public class AStarGrid : MonoBehaviour {
                         Gizmos.color = Color.blue;
                     }
 
-                    if (path.Contains(node))
+                    /*if (path.Contains(node))
                     {
                         Gizmos.color = Color.black;
-                    }
+                    }*/
                     Gizmos.DrawCube(node.nodePosition, Vector3.one * (nodeDiameter - .1f));
                 }
             }

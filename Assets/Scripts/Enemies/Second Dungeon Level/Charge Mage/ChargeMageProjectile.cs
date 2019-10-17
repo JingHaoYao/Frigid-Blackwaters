@@ -26,23 +26,7 @@ public class ChargeMageProjectile : MonoBehaviour
 
     void Update()
     {
-
-        if(animator.GetCurrentAnimatorStateInfo(0).IsName("Skeletal Charge Idle"))
-        {
-            if (this.GetComponent<CircleCollider2D>().enabled == false)
-            {
-                this.GetComponent<CircleCollider2D>().enabled = true;
-            }
-        }
-
-        if(collided == false)
-        {
-            initialAngle += Time.deltaTime * (speed / (2 * Mathf.PI * radius));
-
-            transform.position = target.transform.position + new Vector3(Mathf.Cos(initialAngle), Mathf.Sin(initialAngle)) * radius;
-        }
-
-        if (timer > 8)
+        if (timer > 8 || target == null)
         {
             if (collided == false)
             {
@@ -56,6 +40,21 @@ public class ChargeMageProjectile : MonoBehaviour
         else
         {
             timer += Time.deltaTime;
+        }
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Skeletal Charge Idle"))
+        {
+            if (this.GetComponent<CircleCollider2D>().enabled == false)
+            {
+                this.GetComponent<CircleCollider2D>().enabled = true;
+            }
+        }
+
+        if(collided == false)
+        {
+            initialAngle += Time.deltaTime * (speed / (2 * Mathf.PI * radius));
+
+            transform.position = target.transform.position + new Vector3(Mathf.Cos(initialAngle), Mathf.Sin(initialAngle)) * radius;
         }
     }
 

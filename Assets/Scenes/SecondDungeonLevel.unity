@@ -4726,106 +4726,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 245948800}
   m_CullTransparentMesh: 0
---- !u!1 &254323329
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 254323332}
-  - component: {fileID: 254323331}
-  - component: {fileID: 254323330}
-  m_Layer: 0
-  m_Name: Skeletal Warlord Death_0
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!95 &254323330
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254323329}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f6f91fabcd2dd524e8b1286969e02fc8, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!212 &254323331
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254323329}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -7252050181646293732, guid: e5dc552bc0b269442bb19b535f2340c5,
-    type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1.5, y: 1.5}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!4 &254323332
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254323329}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.47, y: -3.61, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 31
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &258191838
 GameObject:
   m_ObjectHideFlags: 0
@@ -16638,7 +16538,7 @@ MonoBehaviour:
   - {fileID: 649699613}
   - {fileID: 2047894855}
   bossCheckpoint: {fileID: 2071091931}
-  whatDungeonLevel: 1
+  whatDungeonLevel: 2
   mapSymbol: {fileID: 1066683583}
   infoPointer: {fileID: 216131157}
 --- !u!4 &710626558
@@ -23613,7 +23513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4833799309101850, guid: ef3331502189efa4cbd0770f38403d74, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4833799309101850, guid: ef3331502189efa4cbd0770f38403d74, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -35820,446 +35720,418 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tier1EnemyTemplates:
   - potentialEnemyNames:
-    - Blue Anemone Enemy
+    - Crab Minor Dark Blue
+    - Crab Minor Light Blue
+    - Crab Minor Mid Blue
   - potentialEnemyNames:
-    - Green Anemone Enemy
+    - Crab Minor Dark Blue
+    - Crab Minor Light Blue
+    - Crab Minor Mid Blue
+    - Shooter Crab 1
+    - Shooter Crab 2
+    - Shooter Crab 3
   - potentialEnemyNames:
-    - Purple Anemone Enemy
+    - Crab Minor Dark Blue
+    - Crab Minor Light Blue
+    - Crab Minor Mid Blue
+    - Crab Epsilon
+    - Crab Epsilon
+    - Crab Epsilon
   - potentialEnemyNames:
-    - Purple Anemone Enemy
-    - Green Anemone Enemy
+    - Shooter Crab 3
+    - Shooter Crab 2
+    - Shooter Crab 1
+    - Crab Epsilon
+    - Crab Epsilon
+    - Crab Epsilon
   - potentialEnemyNames:
-    - Purple Anemone Enemy
-    - Green Anemone Enemy
-    - Blue Anemone Enemy
+    - Shooter Crab 3
   - potentialEnemyNames:
-    - 2 - SkeletalPirate
-    - 3 - SkeletalPirate
-    - SkeletalPirate
-    - 3 - SkeletalSpearman
-    - 2 - SkeletalSpearman
-    - 1 - SkeletalSpearman
+    - Shooter Crab 2
   - potentialEnemyNames:
-    - 2 - SkeletalPirate
-    - 3 - SkeletalPirate
-    - SkeletalPirate
-    - 3 - SkeletalSpearman
-    - 2 - SkeletalSpearman
-    - 1 - SkeletalSpearman
-    - 2 - SkeletalMusketeer
-    - 1 - SkeletalMusketeer
-    - 3 - SkeletalMusketeer
+    - Shooter Crab 1
   - potentialEnemyNames:
-    - 2 - SkeletalMusketeer
-    - 1 - SkeletalMusketeer
-    - 3 - SkeletalMusketeer
+    - Crab Epsilon
+    - Crab Delta
   - potentialEnemyNames:
-    - ArmouredSkeleton
+    - Crab Delta
   - potentialEnemyNames:
-    - ArmouredSkeleton
-    - 1 - SkeletalMusketeer
-    - 2 - SkeletalMusketeer
-    - 3 - SkeletalMusketeer
-    - ArmouredSkeleton
+    - Crab Epsilon
   - potentialEnemyNames:
-    - Starfish Enemy Parent
+    - Floater Skull
   - potentialEnemyNames:
-    - Starfish Enemy Parent
-    - Blue Anemone Enemy
-    - Green Anemone Enemy
-    - Purple Anemone Enemy
-    - Blue Starfish Enemy Parent
+    - Floater Skull
+    - Slow Seeker Skeleton
+    - Skeletal Spearman
   - potentialEnemyNames:
-    - Starfish Enemy Parent
+    - Floater Skull
+    - Skeletal Bolt Mage 1
+    - Skeletal Bolt Mage 2
   - potentialEnemyNames:
-    - Blue Starfish Enemy Parent
+    - Skeletal Bolt Mage 1
+    - Skeletal Bolt Mage 2
   - potentialEnemyNames:
-    - Blue Starfish Enemy Parent
-    - Starfish Enemy Parent
+    - Skeletal Spearman
+    - Skeletal Spearman
   - potentialEnemyNames:
-    - Sea Urchin Blue Enemy Parent
-    - Sea Urchin Enemy Parent
+    - Slow Seeker Skeleton
   - potentialEnemyNames:
-    - Sea Urchin Blue Enemy Parent
-    - Sea Urchin Enemy Parent
-    - Blue Starfish Enemy Parent
-    - Starfish Enemy Parent
+    - Skeletal Spearman
+    - Slow Seeker Skeleton
   - potentialEnemyNames:
-    - Sea Urchin Blue Enemy Parent
-    - Sea Urchin Enemy Parent
-    - Blue Anemone Enemy
-    - Green Anemone Enemy
-    - Purple Anemone Enemy
+    - Skeletal Bolt Mage 1
+    - Skeletal Bolt Mage 2
+    - Slow Seeker Skeleton
+    - Slow Seeker Skeleton
   - potentialEnemyNames:
-    - Fishman Slapper
-    - Urchin Fishman
+    - Skeletal Bolt Mage 1
+    - Skeletal Bolt Mage 2
+    - Slow Seeker Skeleton
+    - Slow Seeker Skeleton
+    - Depth Bomb Skeleton
+    - Depth Bomb Skeleton
   - potentialEnemyNames:
-    - Fishman Slapper
+    - Depth Bomb Skeleton
+    - Depth Bomb Skeleton
   - potentialEnemyNames:
-    - Urchin Fishman
+    - Depth Bomb Skeleton
+    - Skeletal Spearman
   - potentialEnemyNames:
-    - Urchin Fishman
-    - Sea Urchin Blue Enemy Parent
-    - Sea Urchin Enemy Parent
+    - Crab Minor Light Blue
   - potentialEnemyNames:
-    - Urchin Fishman
-    - Starfish Enemy Parent
-    - Blue Starfish Enemy Parent
+    - Crab Minor Dark Blue
   - potentialEnemyNames:
-    - Fishman Slapper
-    - 3 - SkeletalPirate
-    - SkeletalPirate
-    - 2 - SkeletalPirate
-    - Fishman Slapper
+    - Crab Minor Mid Blue
   - potentialEnemyNames:
-    - Fishman Slapper
-    - 1 - SkeletalMusketeer
-    - 3 - SkeletalMusketeer
-    - 2 - SkeletalMusketeer
-    - Fishman Slapper
-    - Fishman Slapper
+    - Depth Bomb Skeleton
+    - Slow Seeker Skeleton
   - potentialEnemyNames:
-    - Fishman Slapper
-    - Blue Anemone Enemy
-    - Green Anemone Enemy
-    - Purple Anemone Enemy
-    - Fishman Slapper
+    - Skeletal Bolt Mage 1
+    - Skeletal Bolt Mage 2
+    - Skeletal Spearman
+    - Skeletal Spearman
   - potentialEnemyNames:
-    - Urchin Fishman
-    - 1 - SkeletalMusketeer
-    - 2 - SkeletalMusketeer
-    - 3 - SkeletalMusketeer
-    - Urchin Fishman
-  - potentialEnemyNames:
-    - Sea Urchin Blue Enemy Parent
-  - potentialEnemyNames:
-    - Sea Urchin Enemy Parent
+    - Crab Epsilon
+    - Crab Delta
+    - Shooter Crab 1
+    - Shooter Crab 2
+    - Shooter Crab 3
   tier2EnemyTemplates:
   - potentialEnemyNames:
-    - Sharkman
+    - Crab Beta
+    - Crab Omega
   - potentialEnemyNames:
-    - Sharkman
-    - Eelman
+    - Crab Beta
+    - Octocrab
   - potentialEnemyNames:
-    - Eelman
+    - Crab Beta
+    - Crab Epsilon
+    - Crab Delta
   - potentialEnemyNames:
-    - Sticky Bomb Skeleton Type 2
-    - Sticky Bomb Skeleton
+    - Crab Beta
+    - Crab Minor Dark Blue
+    - Crab Minor Light Blue
+    - Crab Minor Mid Blue
+    - Crab Beta
   - potentialEnemyNames:
-    - Eelman
-    - Sharkman
-    - 1 - SkeletalMusketeer
-    - 2 - SkeletalMusketeer
-    - 3 - SkeletalMusketeer
-    - 2 - SkeletalPirate
-    - 3 - SkeletalPirate
-    - SkeletalPirate
-    - 1 - SkeletalSpearman
-    - 2 - SkeletalSpearman
-    - 3 - SkeletalSpearman
+    - Crab Beta
+    - Shooter Crab 1
+    - Shooter Crab 2
+    - Shooter Crab 3
+    - Crab Beta
   - potentialEnemyNames:
-    - SkeletalCannon
-    - 1 - SkeletalMusketeer
-    - 2 - SkeletalMusketeer
-    - 3 - SkeletalMusketeer
+    - Crab Hybrid 2
+    - Shooter Crab 1
+    - Shooter Crab 2
+    - Shooter Crab 3
   - potentialEnemyNames:
-    - SkeletalCannon
-    - SkeletalCannon
-    - SkeletalCannon
-    - 1 - SkeletalMusketeer
-    - 2 - SkeletalMusketeer
-    - 3 - SkeletalMusketeer
-    - 1 - SkeletalSpearman
-    - 2 - SkeletalSpearman
-    - 3 - SkeletalSpearman
-    - 2 - SkeletalPirate
-    - 3 - SkeletalPirate
-    - SkeletalPirate
+    - Crab Hybrid 2
+    - Crab Beta
+    - Crab Omega
   - potentialEnemyNames:
-    - SkeletalCannon
+    - Crab Hybrid 2
+    - Floater Skull
+    - Floater Skull
   - potentialEnemyNames:
-    - Sticky Bomb Skeleton Type 2
-    - Sticky Bomb Skeleton Type 2
-    - Purple Anemone Enemy
-    - Purple Anemone Enemy
-    - Purple Anemone Enemy
+    - Crab Hybrid 2
+    - Depth Bomb Skeleton
   - potentialEnemyNames:
-    - Sticky Bomb Skeleton
-    - Sticky Bomb Skeleton
-    - Green Anemone Enemy
-    - Green Anemone Enemy
-    - Green Anemone Enemy
+    - Crab Hybrid 2
+    - Slow Seeker Skeleton
   - potentialEnemyNames:
-    - Sharkman
-    - Sharkman
-    - Blue Anemone Enemy
-    - Blue Anemone Enemy
-    - Starfish Enemy Parent
+    - Crab Omega
+    - Shooter Crab 1
+    - Shooter Crab 2
+    - Shooter Crab 3
   - potentialEnemyNames:
-    - Eelman
-    - Eelman
-    - Blue Anemone Enemy
-    - Blue Anemone Enemy
-    - Starfish Enemy Parent
+    - Crab Omega
+    - Crab Delta
+    - Crab Epsilon
   - potentialEnemyNames:
-    - Sticky Bomb Skeleton
-    - Sticky Bomb Skeleton Type 2
-    - ArmouredSkeleton
-    - ArmouredSkeleton
+    - Crab Omega
+    - Crab Minor Mid Blue
+    - Crab Minor Dark Blue
+    - Crab Minor Light Blue
   - potentialEnemyNames:
-    - Blue Starfish Enemy Parent
-    - SkeletalCannon
-    - 1 - SkeletalMusketeer
-    - 2 - SkeletalSpearman
-    - 2 - SkeletalPirate
-    - Starfish Enemy Parent
+    - Crab Omega
+    - Crab Hybrid 2
   - potentialEnemyNames:
-    - Roll Bomb Skeleton
+    - Crab Omega
+    - Skull Tower
   - potentialEnemyNames:
-    - Roll Bomb Skeleton
-    - Sticky Bomb Skeleton
-    - Sticky Bomb Skeleton Type 2
+    - Octocrab
+    - Skeletal Spearman
+    - Skeletal Bolt Mage 2
+    - Skeletal Bolt Mage 1
   - potentialEnemyNames:
-    - Roll Bomb Skeleton
-    - Blue Starfish Enemy Parent
-    - Starfish Enemy Parent
+    - Octocrab
+    - Slow Seeker Skeleton
   - potentialEnemyNames:
-    - Roll Bomb Skeleton
-    - 2 - SkeletalPirate
-    - 3 - SkeletalPirate
-    - SkeletalPirate
-    - 1 - SkeletalSpearman
-    - 2 - SkeletalSpearman
-    - 3 - SkeletalSpearman
-    - Roll Bomb Skeleton
-    - Roll Bomb Skeleton
+    - Octocrab
+    - Crab Delta
+    - Crab Delta
   - potentialEnemyNames:
-    - Heavy Spear Fishman
-    - Heavy Spear Fishman
-    - Urchin Fishman
-    - Urchin Fishman
-    - Fishman Slapper
-    - Fishman Slapper
+    - Octocrab
+    - Shooter Crab 1
+    - Shooter Crab 2
+    - Shooter Crab 3
+    - Octocrab
   - potentialEnemyNames:
-    - Heavy Spear Fishman
-    - Blue Anemone Enemy
-    - Green Anemone Enemy
-    - Purple Anemone Enemy
-    - Heavy Spear Fishman
+    - Octocrab
+    - Crab Hybrid 2
+    - Crab Beta
+    - Crab Omega
   - potentialEnemyNames:
-    - Heavy Spear Fishman
-    - Urchin Fishman
+    - Skeletal Axeman
+    - Skeletal Charge Mage
   - potentialEnemyNames:
-    - Heavy Spear Fishman
-    - Fishman Slapper
-    - Fishman Slapper
+    - Skeletal Axeman
+    - Skeletal Spearman
   - potentialEnemyNames:
-    - Heavy Spear Fishman
-    - Heavy Spear Fishman
-    - 1 - SkeletalSpearman
-    - 2 - SkeletalSpearman
-    - 3 - SkeletalSpearman
+    - Skeletal Axeman
+    - Skeletal Spearman
+    - Skeletal Bolt Mage 1
+    - Skeletal Bolt Mage 2
+    - Slow Seeker Skeleton
+    - Depth Bomb Skeleton
+    - Skeletal Axeman
+    - Skeletal Axeman
   - potentialEnemyNames:
-    - Sharkman
-    - Eelman
-    - Urchin Fishman
-    - Fishman Slapper
+    - Skeletal Axeman
+    - Skeletal Charge Mage
+    - Skeletal Bolt Mage 1
+    - Skeletal Bolt Mage 2
+    - Slow Seeker Skeleton
+    - Depth Bomb Skeleton
+    - Skeletal Charge Mage
+    - Skeletal Axeman
   - potentialEnemyNames:
-    - Heavy Spear Fishman
-    - Heavy Spear Fishman
-    - 2 - SkeletalPirate
-    - 3 - SkeletalPirate
-    - SkeletalPirate
+    - Skeletal Axeman
+    - Floater Skull
+    - Floater Skull
+    - Skeletal Axeman
+  - potentialEnemyNames:
+    - Skeletal Charge Mage
+    - Slow Seeker Skeleton
+  - potentialEnemyNames:
+    - Skeletal Charge Mage
+    - Skeletal Bolt Mage 1
+    - Skeletal Bolt Mage 2
+  - potentialEnemyNames:
+    - Skeletal Charge Mage
+    - Skeletal Bolt Mage 1
+    - Skeletal Bolt Mage 2
+    - Slow Seeker Skeleton
+    - Skeletal Charge Mage
+  - potentialEnemyNames:
+    - Skeletal Charge Mage
+    - Floater Skull
+    - Shooter Crab 1
+    - Shooter Crab 2
+    - Shooter Crab 3
+    - Skeletal Charge Mage
+  - potentialEnemyNames:
+    - Skeletal Charge Mage
+    - Depth Bomb Skeleton
+  - potentialEnemyNames:
+    - Skull Tower
+    - Floater Skull
+  - potentialEnemyNames:
+    - Skull Tower
+    - Skeletal Hybrid 2
+  - potentialEnemyNames:
+    - Skull Tower
+    - Skeletal Hybrid 2
+    - Floater Skull
+  - potentialEnemyNames:
+    - Skull Tower
+    - Crab Beta
+    - Crab Omega
+  - potentialEnemyNames:
+    - Skull Tower
+    - Skeletal Spearman
+    - Skeletal Axeman
+  - potentialEnemyNames:
+    - Skull Tower
+    - Slow Seeker Skeleton
+    - Slow Seeker Skeleton
   tier3EnemyTemplates:
   - potentialEnemyNames:
-    - FishmanShaman
-    - FishmanShaman
-    - 2 - SkeletalPirate
-    - SkeletalPirate
-    - 3 - SkeletalPirate
-    - 1 - SkeletalSpearman
-    - 2 - SkeletalSpearman
-    - 3 - SkeletalSpearman
-    - FishmanShaman
-    - FishmanShaman
+    - Crab Hybrid 1
   - potentialEnemyNames:
-    - FishmanShaman
-    - FishmanShaman
-    - Eelman
-    - Sharkman
+    - Crab Hybrid 1
+    - Crab Hybrid 2
   - potentialEnemyNames:
-    - FishmanShaman
-    - FishmanShaman
-    - Starfish Enemy Parent
-    - Blue Starfish Enemy Parent
+    - Crab Hybrid 1
+    - Skull Tower
+    - Floater Skull
+    - Crab Hybrid 1
   - potentialEnemyNames:
-    - Lesser Frost Mage
+    - Crab Hybrid 1
+    - Crab Beta
+    - Crab Omega
+    - Crab Hybrid 2
+    - Crab Hybrid 1
   - potentialEnemyNames:
-    - Lesser Frost Mage Type 2
+    - Crab Hybrid 1
+    - Crab Delta
+    - Shooter Crab 1
+    - Shooter Crab 2
+    - Crab Hybrid 1
   - potentialEnemyNames:
-    - Lesser Frost Mage Type 2
-    - Lesser Frost Mage
-    - Sticky Bomb Skeleton
-    - Sticky Bomb Skeleton Type 2
+    - Crab Mage
+    - Octocrab
+    - Octocrab
+    - Crab Mage
   - potentialEnemyNames:
-    - Lesser Frost Mage Type 2
-    - Lesser Frost Mage
-    - Blue Anemone Enemy
-    - Purple Anemone Enemy
-    - Green Anemone Enemy
+    - Crab Mage
   - potentialEnemyNames:
-    - Lesser Frost Mage Type 2
-    - Lesser Frost Mage
+    - Crab Mage
+    - Slow Seeker Skeleton
   - potentialEnemyNames:
-    - Lesser Frost Mage Type 2
-    - Lesser Frost Mage
-    - 1 - SkeletalMusketeer
-    - 3 - SkeletalPirate
-    - 1 - SkeletalSpearman
-    - 2 - SkeletalSpearman
-    - 3 - SkeletalSpearman
-    - 2 - SkeletalPirate
-    - SkeletalPirate
-    - 2 - SkeletalMusketeer
-    - 3 - SkeletalMusketeer
-    - Lesser Frost Mage
-    - Lesser Frost Mage Type 2
-    - Lesser Frost Mage
-    - Lesser Frost Mage Type 2
+    - Crab Mage
+    - Depth Bomb Skeleton
+    - Skeletal Charge Mage
   - potentialEnemyNames:
-    - Lesser Frost Mage Type 2
-    - Lesser Frost Mage
-    - Roll Bomb Skeleton
-    - Roll Bomb Skeleton
+    - Crab Mage
+    - Octocrab
+    - Skeletal Charge Mage
   - potentialEnemyNames:
-    - Cold Wave Skeleton
-    - Blue Anemone Enemy
-    - Green Anemone Enemy
-    - Purple Anemone Enemy
+    - Crab Mage
+    - Octocrab
+    - Crab Spitter
+    - Crab Spitter
   - potentialEnemyNames:
-    - Cold Wave Skeleton
-    - 1 - SkeletalMusketeer
-    - 2 - SkeletalPirate
-    - 3 - SkeletalPirate
-    - SkeletalPirate
-    - 2 - SkeletalMusketeer
-    - 3 - SkeletalMusketeer
-    - 1 - SkeletalSpearman
-    - 2 - SkeletalSpearman
-    - 3 - SkeletalSpearman
-    - Cold Wave Skeleton
-    - Cold Wave Skeleton
-    - Cold Wave Skeleton
+    - Crab Spitter
+    - Shooter Crab 1
+    - Shooter Crab 2
+    - Shooter Crab 3
   - potentialEnemyNames:
-    - Cold Wave Skeleton
-    - Sticky Bomb Skeleton
-    - Sticky Bomb Skeleton Type 2
+    - Crab Spitter
   - potentialEnemyNames:
-    - Angler Fish
-    - Blue Starfish Enemy Parent
-    - Starfish Enemy Parent
+    - Crab Spitter
+    - Octocrab
   - potentialEnemyNames:
-    - Angler Fish
-    - Eelman
-    - Sharkman
+    - Crab Spitter
+    - Skull Tower
+    - Floater Skull
   - potentialEnemyNames:
-    - Angler Fish
-    - Urchin Fishman
-    - Urchin Fishman
+    - Skeletal Heavy Blademan
   - potentialEnemyNames:
-    - Angler Fish
-    - Blue Anemone Enemy
-    - Green Anemone Enemy
-    - Purple Anemone Enemy
-    - Angler Fish
+    - Skeletal Heavy Blademan
+    - Skeletal Trident Warrior
+    - Skeletal Scatter Mage
   - potentialEnemyNames:
-    - Angler Fish
-    - Heavy Spear Fishman
-    - Heavy Spear Fishman
-    - Heavy Spear Fishman
-    - Angler Fish
+    - Skeletal Heavy Blademan
+    - Skeletal Axeman
+    - Skeletal Spearman
   - potentialEnemyNames:
-    - FishmanShaman
-    - Urchin Fishman
-    - Fishman Slapper
+    - Skeletal Heavy Blademan
+    - Crab Omega
   - potentialEnemyNames:
-    - FishmanShaman
-    - Fishman Slapper
+    - Skeletal Heavy Blademan
+    - Slow Seeker Skeleton
+    - Skeletal Heavy Blademan
+    - Skeletal Bolt Mage 1
+    - Skeletal Bolt Mage 2
   - potentialEnemyNames:
-    - Fishman Tentacle Summoner
-    - Fishman Slapper
+    - Skeletal Scatter Mage
+    - Skeletal Bolt Mage 1
+    - Skeletal Bolt Mage 2
+    - Skeletal Scatter Mage
   - potentialEnemyNames:
-    - Fishman Tentacle Summoner
-    - Fishman Slapper
-    - Urchin Fishman
+    - Skeletal Scatter Mage
+    - Slow Seeker Skeleton
+    - Slow Seeker Skeleton
+    - Skeletal Scatter Mage
   - potentialEnemyNames:
-    - Fishman Tentacle Summoner
-    - Fishman Tentacle Summoner
-    - Heavy Spear Fishman
-    - Heavy Spear Fishman
+    - Skeletal Scatter Mage
+    - Skeletal Charge Mage
   - potentialEnemyNames:
-    - 1 - SkeletalMusketeer
-    - 2 - SkeletalMusketeer
-    - 3 - SkeletalMusketeer
-    - Fishman Tentacle Summoner
-    - Fishman Tentacle Summoner
+    - Skeletal Scatter Mage
+    - Depth Bomb Skeleton
   - potentialEnemyNames:
-    - 2 - SkeletalPirate
-    - 3 - SkeletalPirate
-    - SkeletalPirate
-    - Fishman Tentacle Summoner
-    - Fishman Tentacle Summoner
-    - 1 - SkeletalSpearman
-    - 2 - SkeletalSpearman
-    - 3 - SkeletalSpearman
-    - Fishman Tentacle Summoner
-    - Fishman Tentacle Summoner
+    - Skeletal Scatter Mage
+    - Skeletal Axeman
+    - Skeletal Charge Mage
+  - potentialEnemyNames:
+    - Skeletal Trident Warrior
+  - potentialEnemyNames:
+    - Skeletal Trident Warrior
+    - Crab Omega
+  - potentialEnemyNames:
+    - Skeletal Trident Warrior
+    - Skeletal Charge Mage
+  - potentialEnemyNames:
+    - Skeletal Trident Warrior
+    - Skeletal Charge Mage
+    - Slow Seeker Skeleton
+  - potentialEnemyNames:
+    - Skeletal Trident Warrior
+    - Skeletal Charge Mage
+    - Skeletal Heavy Blademan
+    - Skeletal Charge Mage
   tier4EnemyTemplates:
   - potentialEnemyNames:
-    - SkeletalNecromancer
+    - Crab Alpha
   - potentialEnemyNames:
-    - SkeletalFrostMage
+    - Crab Alpha
+    - Crab Omega
   - potentialEnemyNames:
-    - SkeletalFrostMage
-    - FishmanShaman
-    - Sharkman
-    - Eelman
+    - Crab Alpha
+    - Crab Delta
+    - Crab Epsilon
   - potentialEnemyNames:
-    - SkeletalFrostMage
-    - Blue Anemone Enemy
-    - Green Anemone Enemy
-    - Purple Anemone Enemy
-    - SkeletalFrostMage
+    - Crab Alpha
+    - Crab Beta
   - potentialEnemyNames:
-    - 2 - SkeletalPirate
-    - SkeletalFrostMage
-    - 3 - SkeletalPirate
-    - SkeletalPirate
-    - 1 - SkeletalMusketeer
-    - 2 - SkeletalMusketeer
-    - 3 - SkeletalMusketeer
-    - 1 - SkeletalSpearman
-    - 2 - SkeletalSpearman
-    - 3 - SkeletalSpearman
-    - ArmouredSkeleton
-    - ArmouredSkeleton
-    - ArmouredSkeleton
+    - Crab Alpha
+    - Crab Hybrid 1
+    - Crab Hybrid 2
   - potentialEnemyNames:
-    - SkeletalFrostMage
-    - Lesser Frost Mage
-    - Lesser Frost Mage Type 2
+    - Skeletal Warlord
+    - Skeletal Axeman
+    - Skeletal Spearman
   - potentialEnemyNames:
-    - SkeletalNecromancer
-    - Roll Bomb Skeleton
-    - Cold Wave Skeleton
+    - Skeletal Warlord
+    - Skeletal Heavy Blademan
   - potentialEnemyNames:
-    - SkeletalFrostMage
-    - Roll Bomb Skeleton
-    - Cold Wave Skeleton
-  emptyRoomEnemyNames:
-  - FishManIsland
+    - Skeletal Warlord
+    - Skeletal Trident Warrior
+  - potentialEnemyNames:
+    - Skeletal Warlord
+    - Skeletal Scatter Mage
+  - potentialEnemyNames:
+    - Skeletal Warlord
+    - Slow Seeker Skeleton
+    - Skeletal Bolt Mage 1
+    - Skeletal Bolt Mage 2
+    - Depth Bomb Skeleton
+    - Skeletal Warlord
+    - Skeletal Warlord
+  emptyRoomEnemyNames: []
   nonRoomTemplateEnemyNames:
-  - 1 - SkeletalShield
+  - Skeletal Armorer
 --- !u!1001 &1530929644
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50985,67 +50857,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951563125}
   m_CullTransparentMesh: 0
---- !u!1001 &1955857240
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1798180902350546, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
-      propertyPath: m_Name
-      value: AStarGrid
-      objectReference: {fileID: 0}
-    - target: {fileID: 1798180902350546, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
 --- !u!1 &1964403647
 GameObject:
   m_ObjectHideFlags: 0
@@ -54320,6 +54131,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2113407613}
   m_CullTransparentMesh: 0
+--- !u!1001 &2113593087
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1798180902350546, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
+      propertyPath: m_Name
+      value: AStarGrid
+      objectReference: {fileID: 0}
+    - target: {fileID: 1798180902350546, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4962850321491218, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc3e809957f3d5b47a371ec6eff8e87c, type: 3}
 --- !u!1 &2113757547
 GameObject:
   m_ObjectHideFlags: 0
