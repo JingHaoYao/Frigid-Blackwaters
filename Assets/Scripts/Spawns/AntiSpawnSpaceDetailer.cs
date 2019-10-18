@@ -1007,7 +1007,6 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     {
 
                         setDangerValueCap();
-                        Debug.Log(dangerValueCap);
                         playerShip.GetComponent<PlayerScript>().numRoomsSinceLastArtifact++;
                         playerShip.GetComponent<PlayerScript>().numRoomsVisited++;
                         Instantiate(roomReveal, transform.position, Quaternion.identity);
