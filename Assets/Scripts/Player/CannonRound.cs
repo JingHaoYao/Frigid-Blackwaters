@@ -12,6 +12,7 @@ public class CannonRound : PlayerProjectile
     Vector3 initCameraPos;
     public bool isRedHot = false;
     public GameObject burn;
+    public GameObject bulletImpact;
 
     public float pickDirectionTravel()
     {
@@ -104,6 +105,10 @@ public class CannonRound : PlayerProjectile
                 Instantiate(secondImpactEffect, transform.position, Quaternion.Euler(0, 0, (angleTravel * Mathf.Rad2Deg) + 90));
             }
             Destroy(this.gameObject);
+        }
+        else
+        {
+            Instantiate(bulletImpact, transform.position, Quaternion.Euler(0, 0, angleTravel + 90));
         }
 
         if (isRedHot == true)

@@ -28,6 +28,8 @@ public class CrabMage : Enemy
 
     Vector3 targetPosition;
 
+    public GameObject invulnerableIcon;
+
     float cardinalizeDirections(float angle)
     {
         if (angle > 22.5f && angle <= 67.5f)
@@ -84,31 +86,37 @@ public class CrabMage : Enemy
         {
             whatView = 2;
             mirror = 1;
+            invulnerableIcon.GetComponent<DirectionalInvulnerableEffect>().whichDirectionToAvoid = 1;
         }
         else if (angle > 285 && angle <= 360)
         {
             whatView = 1;
             mirror = 1;
+            invulnerableIcon.GetComponent<DirectionalInvulnerableEffect>().whichDirectionToAvoid = 2;
         }
         else if (angle > 180 && angle <= 255)
         {
             whatView = 1;
             mirror = -1;
+            invulnerableIcon.GetComponent<DirectionalInvulnerableEffect>().whichDirectionToAvoid = 0;
         }
         else if (angle > 75 && angle <= 105)
         {
             whatView = 4;
             mirror = -1;
+            invulnerableIcon.GetComponent<DirectionalInvulnerableEffect>().whichDirectionToAvoid = 3;
         }
         else if (angle >= 0 && angle <= 75)
         {
             whatView = 3;
             mirror = -1;
+            invulnerableIcon.GetComponent<DirectionalInvulnerableEffect>().whichDirectionToAvoid = 2;
         }
         else
         {
             whatView = 3;
             mirror = 1;
+            invulnerableIcon.GetComponent<DirectionalInvulnerableEffect>().whichDirectionToAvoid = 0;
         }
     }
 
@@ -152,8 +160,6 @@ public class CrabMage : Enemy
         }
 
         float angleBullet = (Mathf.Atan2(pos.y - transform.position.y, pos.x - transform.position.x) * Mathf.Rad2Deg + 360) % 360;
-
-        Debug.Log(pos);
 
         if (determineAngle - 45 < angleBullet && angleBullet < determineAngle + 45)
         {
@@ -213,7 +219,7 @@ public class CrabMage : Enemy
     {
         path = GetComponent<AStarPathfinding>().seekPath;
         this.GetComponent<AStarPathfinding>().target = targetPosition;
-        AStarNode pathNode = path[0];
+        AStarNode pathNode = path[1];
         Vector3 targetPos = pathNode.nodePosition;
         travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
 
@@ -227,7 +233,7 @@ public class CrabMage : Enemy
             rigidBody2D.velocity = Vector3.zero;
         }
 
-        if (Vector2.Distance(transform.position, path[path.Count - 1].nodePosition) < 0.2f && isAttacking == false && stopAttacking == false)
+        if (Vector2.Distance(transform.position, targetPosition) < 1.5f && isAttacking == false && stopAttacking == false)
         {
             isAttacking = true;
             StartCoroutine(attack());
@@ -236,7 +242,7 @@ public class CrabMage : Enemy
         transform.localScale = new Vector3(4f * mirror, 4f);
         pickSpritePeriod += Time.deltaTime;
 
-        if (pickSpritePeriod >= 0.2f)
+        if (pickSpritePeriod >= 0.4f)
         {
             if (isAttacking == false)
             {

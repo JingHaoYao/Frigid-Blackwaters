@@ -10,6 +10,7 @@ public class MusketRound : PlayerProjectile
     public GameObject bulletTrail;
     GameObject playerShip;
     Vector3 initCameraPos;
+    public GameObject impactEffect;
 
     float pickDirectionTravel()
     {
@@ -44,6 +45,10 @@ public class MusketRound : PlayerProjectile
                 Instantiate(secondImpactEffect, transform.position, Quaternion.Euler(0, 0, (angleTravel * Mathf.Rad2Deg) + 90));
             }
             Destroy(this.gameObject);
+        }
+        else
+        {
+            Instantiate(impactEffect, transform.position, Quaternion.Euler(0, 0, angleTravel + 90));
         }
     }
 }

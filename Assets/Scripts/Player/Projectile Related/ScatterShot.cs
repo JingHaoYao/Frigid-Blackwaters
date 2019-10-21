@@ -12,6 +12,7 @@ public class ScatterShot : PlayerProjectile {
     public bool fourScatters = false;
     public GameObject scatter;
     GameObject enemyHit;
+    public GameObject impactEffect;
 
     float pickDirectionTravel()
     {
@@ -73,6 +74,7 @@ public class ScatterShot : PlayerProjectile {
         else
         {
             enemyHit = collision.gameObject;
+            Instantiate(impactEffect, transform.position, Quaternion.Euler(0, 0, angleTravel + 90));
         }
         summonScatters();
         Destroy(this.gameObject);

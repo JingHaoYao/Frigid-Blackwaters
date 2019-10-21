@@ -8,6 +8,7 @@ public class ScatteredRound : MonoBehaviour {
     public float angleTravel;
     public GameObject bulletTrail;
     Vector3 initCameraPos;
+    public GameObject impactEffect;
 
     void Start () {
         initCameraPos = Camera.main.transform.position;
@@ -33,6 +34,10 @@ public class ScatteredRound : MonoBehaviour {
                 Instantiate(secondImpactEffect, transform.position, Quaternion.Euler(0, 0, (angleTravel * Mathf.Rad2Deg) + 90));
             }
             Destroy(this.gameObject);
+        }
+        else
+        {
+            Instantiate(impactEffect, transform.position, Quaternion.Euler(0, 0, angleTravel + 90));
         }
     }
 }

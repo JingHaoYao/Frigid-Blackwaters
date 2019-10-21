@@ -31,6 +31,7 @@ public class CrabDelta : Enemy
     public GameObject shieldColObject;
     public GameObject damageBox;
     public LayerMask directionPickFilter;
+    public GameObject invulnerableIcon;
 
     void spawnFoam()
     {
@@ -112,31 +113,37 @@ public class CrabDelta : Enemy
         {
             whatView = 2;
             mirror = 1;
+            invulnerableIcon.GetComponent<DirectionalInvulnerableEffect>().whichDirectionToAvoid = 1;
         }
         else if (angle > 285 && angle <= 360)
         {
             whatView = 1;
             mirror = 1;
+            invulnerableIcon.GetComponent<DirectionalInvulnerableEffect>().whichDirectionToAvoid = 2;
         }
         else if (angle > 180 && angle <= 255)
         {
             whatView = 1;
             mirror = -1;
+            invulnerableIcon.GetComponent<DirectionalInvulnerableEffect>().whichDirectionToAvoid = 0;
         }
         else if (angle > 75 && angle <= 105)
         {
             whatView = 4;
             mirror = -1;
+            invulnerableIcon.GetComponent<DirectionalInvulnerableEffect>().whichDirectionToAvoid = 3;
         }
         else if (angle >= 0 && angle <= 75)
         {
             whatView = 3;
             mirror = -1;
+            invulnerableIcon.GetComponent<DirectionalInvulnerableEffect>().whichDirectionToAvoid = 2;
         }
         else
         {
             whatView = 3;
             mirror = 1;
+            invulnerableIcon.GetComponent<DirectionalInvulnerableEffect>().whichDirectionToAvoid = 0;
         }
     }
 

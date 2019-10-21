@@ -42,6 +42,7 @@ public class PlayerScript : MonoBehaviour {
     public bool activeEnabled = false;
     public int angleEffect = 0;
     public GameObject damagingObject;
+    Vector3 damageColLocation;
     public int numberHits = 0;
 
     //some toggles for certain mechanics
@@ -465,6 +466,9 @@ public class PlayerScript : MonoBehaviour {
 
         artifacts.UpdateUI();
         artifacts.artifactsUI.SetActive(false);
+
+
+        healthBarFill.transform.parent.GetComponentInChildren<Text>().GetComponentsInChildren<Text>()[1].text = (shipHealthMAX - trueDamage).ToString() + "/" + shipHealthMAX.ToString();
     }
 	
 	void Update () {
@@ -520,6 +524,7 @@ public class PlayerScript : MonoBehaviour {
             shipHealthMAX = 1000 + healthBonus + upgradeHealthBonus;
             pickRendererLayer();
             defenseModifier = 1 - defenseBonus - conDefenseBonus - upgradeDefenseBonus;
+            FindObjectOfType<PlayerArmorEffect>().updateShieldEffect();
             if (defenseModifier <= 0)
             {
                 defenseModifier = 0;
@@ -542,9 +547,21 @@ public class PlayerScript : MonoBehaviour {
                     trueDamage = 0;
                 }
 
+                float angle = Mathf.Atan2(damagingObject.transform.position.y - transform.position.y, damagingObject.transform.position.x - transform.position.x);
+                if(Vector2.Distance(transform.position, damagingObject.transform.position) < 1f)
+                {
+                    FindObjectOfType<DamageNumbers>().showDamage((int)(amountDamage * defenseModifier), shipHealthMAX, damagingObject.transform.position);
+                }
+                else
+                {
+                    FindObjectOfType<DamageNumbers>().showDamage((int)(amountDamage * defenseModifier), shipHealthMAX, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)));
+                }
+                //FindObjectOfType<DamageNumbers>().showDamage((int)(amountDamage * defenseModifier), shipHealthMAX, transform.position);
+                FindObjectOfType<CameraShake>().shakeCamFunction(0.1f, 0.3f * ((amountDamage * defenseModifier) / shipHealthMAX));
                 amountDamage = 0;
                 StartCoroutine(bufferHit(0.5f));
                 PlayerItems.playerDamage = trueDamage;
+                healthBarFill.transform.parent.GetComponentInChildren<Text>().GetComponentsInChildren<Text>()[1].text = (shipHealthMAX - trueDamage).ToString() + "/" + shipHealthMAX.ToString();
             }
 
             if(trueDamage < 0)
@@ -640,6 +657,7 @@ public class PlayerScript : MonoBehaviour {
         {
             StartCoroutine(hitFrame(spriteRenderer));
             damagingObject = collision.gameObject;
+            damageColLocation = collision.transform.position;
             numberHits++;
 
             if (hullUpgradeManager.spikesEnabled)

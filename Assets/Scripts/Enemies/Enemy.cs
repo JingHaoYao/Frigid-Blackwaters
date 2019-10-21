@@ -21,7 +21,7 @@ public class Enemy: MonoBehaviour
 
     public void heal(int healAmount)
     {
-        if(health + healAmount > maxHealth)
+        if (health + healAmount > maxHealth)
         {
             health = maxHealth;
         }
@@ -38,6 +38,8 @@ public class Enemy: MonoBehaviour
         {
             damageDealt = 1;
         }
+        FindObjectOfType<EnemyDamageNumbersUI>().addEnemyDamageUI(damageDealt, this.gameObject);
         health -= damageDealt;
+        FindObjectOfType<CameraShake>().shakeCamFunction(0.1f, 0.3f * ((float)damageDealt / maxHealth));
     }
 }

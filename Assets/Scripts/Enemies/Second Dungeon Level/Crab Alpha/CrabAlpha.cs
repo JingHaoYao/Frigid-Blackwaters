@@ -26,6 +26,7 @@ public class CrabAlpha : Enemy
     public GameObject waterFoamBurst;
     float dashPeriod = 3;
     int mirror = 1;
+    public GameObject invulnerableIcon;
 
     void spawnFoam()
     {
@@ -169,31 +170,37 @@ public class CrabAlpha : Enemy
         {
             whatView = 2;
             mirror = 1;
+            invulnerableIcon.GetComponent<DirectionalInvulnerableEffect>().whichDirectionToAvoid = 1;
         }
         else if (angle > 285 && angle <= 360)
         {
             whatView = 1;
-            mirror = -1;
+            mirror = 1;
+            invulnerableIcon.GetComponent<DirectionalInvulnerableEffect>().whichDirectionToAvoid = 2;
         }
         else if (angle > 180 && angle <= 255)
         {
             whatView = 1;
-            mirror = 1;
+            mirror = -1;
+            invulnerableIcon.GetComponent<DirectionalInvulnerableEffect>().whichDirectionToAvoid = 0;
         }
         else if (angle > 75 && angle <= 105)
         {
             whatView = 4;
             mirror = -1;
+            invulnerableIcon.GetComponent<DirectionalInvulnerableEffect>().whichDirectionToAvoid = 3;
         }
         else if (angle >= 0 && angle <= 75)
         {
             whatView = 3;
-            mirror = 1;
+            mirror = -1;
+            invulnerableIcon.GetComponent<DirectionalInvulnerableEffect>().whichDirectionToAvoid = 2;
         }
         else
         {
             whatView = 3;
-            mirror = -1;
+            mirror = 1;
+            invulnerableIcon.GetComponent<DirectionalInvulnerableEffect>().whichDirectionToAvoid = 0;
         }
         spriteRenderer.sprite = spriteList[whatView - 1];
         transform.localScale = new Vector3(mirror * relativeScale, relativeScale);

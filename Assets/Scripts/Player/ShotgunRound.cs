@@ -10,6 +10,7 @@ public class ShotgunRound : MonoBehaviour {
     GameObject playerShip;
     Vector3 initCameraPos;
     public bool piercing = false;
+    public GameObject bulletImpact;
 
 
     void Start () {
@@ -42,6 +43,10 @@ public class ShotgunRound : MonoBehaviour {
                 Instantiate(secondImpactEffect, transform.position, Quaternion.Euler(0, 0, (angleTravel * Mathf.Rad2Deg) + 90));
             }
             Destroy(this.gameObject);
+        }
+        else
+        {
+            Instantiate(bulletImpact, transform.position, Quaternion.Euler(0, 0, angleTravel + 90));
         }
 
         if (piercing == false)
