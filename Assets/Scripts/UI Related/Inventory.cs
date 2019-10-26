@@ -48,7 +48,7 @@ public class Inventory : MonoBehaviour {
         }
 	}
 
-    int tallyGold()
+    public int tallyGold()
     {
         int totalGold = 0;
         if (itemList.Count > 0)
@@ -103,6 +103,13 @@ public class Inventory : MonoBehaviour {
         {
             GameObject.Find("QuestManager").GetComponent<QuestManager>().addItemCollect(itemList);
         }
+
+        foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+        {
+            if (slot.displayInfo != null)
+                slot.displayInfo.GetComponent<ArtifactBonus>().updatedInventory = true;
+        }
+
         SaveSystem.SaveGame();
     }
 }

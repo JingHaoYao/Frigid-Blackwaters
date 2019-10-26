@@ -259,6 +259,12 @@ public class ShipWeaponScript : MonoBehaviour {
                     instant.GetComponent<PlayerProjectile>().whichWeaponFrom = 1;
                     instant.GetComponent<PlayerProjectile>().forceShot = false;
                 }
+
+                foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+                {
+                    if (slot.displayInfo != null)
+                        slot.displayInfo.GetComponent<ArtifactBonus>().firedFrontWeapon = true;
+                }
             }
             else if (whichSide == 2)
             {
@@ -307,6 +313,12 @@ public class ShipWeaponScript : MonoBehaviour {
                     instant.GetComponent<PlayerProjectile>().whichWeaponFrom = 2;
                     instant.GetComponent<PlayerProjectile>().forceShot = false;
                 }
+
+                foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+                {
+                    if (slot.displayInfo != null)
+                        slot.displayInfo.GetComponent<ArtifactBonus>().firedLeftWeapon = true;
+                }
             }
             else if (whichSide == 3)
             {
@@ -354,6 +366,12 @@ public class ShipWeaponScript : MonoBehaviour {
                 {
                     instant.GetComponent<PlayerProjectile>().whichWeaponFrom = 3;
                     instant.GetComponent<PlayerProjectile>().forceShot = false;
+                }
+
+                foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+                {
+                    if (slot.displayInfo != null)
+                        slot.displayInfo.GetComponent<ArtifactBonus>().firedRightWeapon = true;
                 }
             }
         }

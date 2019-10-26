@@ -466,9 +466,6 @@ public class PlayerScript : MonoBehaviour {
 
         artifacts.UpdateUI();
         artifacts.artifactsUI.SetActive(false);
-
-
-        healthBarFill.transform.parent.GetComponentInChildren<Text>().GetComponentsInChildren<Text>()[1].text = (shipHealthMAX - trueDamage).ToString() + "/" + shipHealthMAX.ToString();
     }
 	
 	void Update () {
@@ -536,10 +533,15 @@ public class PlayerScript : MonoBehaviour {
                 {
                     trueDamage += (int)(amountDamage * defenseModifier);
                 }
+                else
+                {
+                    amountDamage = 0;
+                }
 
                 if (damageAbsorb == true)
                 {
                     trueDamage -= (int)(amountDamage * defenseModifier);
+                    amountDamage = 0;
                 }
 
                 if (trueDamage < 0)
@@ -556,15 +558,23 @@ public class PlayerScript : MonoBehaviour {
                 {
                     FindObjectOfType<DamageNumbers>().showDamage((int)(amountDamage * defenseModifier), shipHealthMAX, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)));
                 }
-                //FindObjectOfType<DamageNumbers>().showDamage((int)(amountDamage * defenseModifier), shipHealthMAX, transform.position);
+
                 FindObjectOfType<CameraShake>().shakeCamFunction(0.1f, 0.3f * ((amountDamage * defenseModifier) / shipHealthMAX));
+
+                foreach(GameObject artifact in artifacts.activeArtifacts)
+                {
+                    if (artifact != null)
+                    {
+                        artifact.GetComponent<ArtifactBonus>().tookDamage = true;
+                    }
+                }
+
                 amountDamage = 0;
                 StartCoroutine(bufferHit(0.5f));
                 PlayerItems.playerDamage = trueDamage;
-                healthBarFill.transform.parent.GetComponentInChildren<Text>().GetComponentsInChildren<Text>()[1].text = (shipHealthMAX - trueDamage).ToString() + "/" + shipHealthMAX.ToString();
             }
 
-            if(trueDamage < 0)
+            if (trueDamage < 0)
             {
                 trueDamage = 0;
             }
@@ -639,6 +649,7 @@ public class PlayerScript : MonoBehaviour {
             healthBarFill.fillAmount = (float)shipHealth / shipHealthMAX;
         }
 
+        healthBarFill.transform.parent.GetComponentInChildren<Text>().GetComponentsInChildren<Text>()[1].text = (shipHealthMAX - trueDamage).ToString() + "/" + shipHealthMAX.ToString();
         oldShipHealthMAX = shipHealthMAX;
     }
 

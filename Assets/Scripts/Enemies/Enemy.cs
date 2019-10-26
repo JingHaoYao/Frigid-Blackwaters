@@ -17,6 +17,11 @@ public class Enemy: MonoBehaviour
     {
         GameObject.Find("PlayerShip").GetComponent<Artifacts>().numKills += killNumber;
         GameObject.Find("QuestManager").GetComponent<QuestManager>().addKill(nameID);
+        foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+        {
+            if(slot.displayInfo != null)
+                slot.displayInfo.GetComponent<ArtifactBonus>().addedKill = true;
+        }
     }
 
     public void heal(int healAmount)

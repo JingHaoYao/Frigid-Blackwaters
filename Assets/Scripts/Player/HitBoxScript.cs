@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HitBoxScript : MonoBehaviour {
+    public static bool playerShielded = false;
     PlayerScript playerScript;
     SpriteRenderer playerShipSR;
     PolygonCollider2D polygonCollider;
 
     void pickHitBox()
     {
-        if(this.gameObject.name == "DiagonalDownHitBox")
+        if (this.gameObject.name == "DiagonalDownHitBox")
         {
-            if((playerScript.angleOrientation > 195 && playerScript.angleOrientation <= 255) || (playerScript.angleOrientation > 285 && playerScript.angleOrientation <= 345))
+            if ((playerScript.angleOrientation > 195 && playerScript.angleOrientation <= 255) || (playerScript.angleOrientation > 285 && playerScript.angleOrientation <= 345))
             {
                 polygonCollider.enabled = true;
             }
@@ -20,9 +21,9 @@ public class HitBoxScript : MonoBehaviour {
                 polygonCollider.enabled = false;
             }
         }
-        else if(this.gameObject.name == "LeftHitBox")
+        else if (this.gameObject.name == "LeftHitBox")
         {
-            if((playerScript.angleOrientation > 165 && playerScript.angleOrientation <= 195) || (playerScript.angleOrientation > 345) || (playerScript.angleOrientation <= 15))
+            if ((playerScript.angleOrientation > 165 && playerScript.angleOrientation <= 195) || (playerScript.angleOrientation > 345) || (playerScript.angleOrientation <= 15))
             {
                 polygonCollider.enabled = true;
             }
@@ -31,7 +32,7 @@ public class HitBoxScript : MonoBehaviour {
                 polygonCollider.enabled = false;
             }
         }
-        else if(this.gameObject.name == "DiagonalUpHitBox")
+        else if (this.gameObject.name == "DiagonalUpHitBox")
         {
             if ((playerScript.angleOrientation > 15 && playerScript.angleOrientation <= 75) || (playerScript.angleOrientation > 105 && playerScript.angleOrientation <= 165))
             {
@@ -42,9 +43,9 @@ public class HitBoxScript : MonoBehaviour {
                 polygonCollider.enabled = false;
             }
         }
-        else if(this.gameObject.name == "UpHitBox")
+        else if (this.gameObject.name == "UpHitBox")
         {
-            if(playerScript.angleOrientation > 75 && playerScript.angleOrientation <= 105)
+            if (playerScript.angleOrientation > 75 && playerScript.angleOrientation <= 105)
             {
                 polygonCollider.enabled = true;
             }
@@ -55,7 +56,7 @@ public class HitBoxScript : MonoBehaviour {
         }
         else
         {
-            if(playerScript.angleOrientation > 255 && playerScript.angleOrientation <= 285)
+            if (playerScript.angleOrientation > 255 && playerScript.angleOrientation <= 285)
             {
                 polygonCollider.enabled = true;
             }
