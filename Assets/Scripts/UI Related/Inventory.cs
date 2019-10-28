@@ -106,10 +106,9 @@ public class Inventory : MonoBehaviour {
 
         foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
         {
-            if (slot.displayInfo != null)
-                slot.displayInfo.GetComponent<ArtifactBonus>().updatedInventory = true;
+            if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                slot.displayInfo.GetComponent<ArtifactEffect>().updatedInventory();
         }
-
         SaveSystem.SaveGame();
     }
 }

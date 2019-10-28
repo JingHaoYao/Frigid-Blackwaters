@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7165131381443186542}
   - component: {fileID: 7165131381443186545}
   - component: {fileID: 7165131381443186541}
+  - component: {fileID: -928114055054364475}
   m_Layer: 0
   m_Name: Malicious Flesh Hook
   m_TagString: Untagged
@@ -127,6 +128,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd210519ab5c4b74da1e7c64bbc81448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-928114055054364475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7165131381443186544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   whatDungeonArtifact: 2
   speedBonus: 0
   defenseBonus: 0.1
@@ -136,10 +149,3 @@ MonoBehaviour:
   artifactChanceBonus: 0
   goldBonus: 0
   killRequirement: 0
-  addedKill: 0
-  tookDamage: 0
-  firedLeftWeapon: 0
-  firedFrontWeapon: 0
-  firedRightWeapon: 0
-  exploredNewRoom: 0
-  updatedInventory: 0

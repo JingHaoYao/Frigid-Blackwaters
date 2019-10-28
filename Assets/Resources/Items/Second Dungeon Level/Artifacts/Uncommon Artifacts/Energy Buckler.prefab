@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8999791295103278090}
   - component: {fileID: 8999791295103278085}
   - component: {fileID: 8999791295103278094}
+  - component: {fileID: -8351195137456043932}
   m_Layer: 0
   m_Name: Energy Buckler
   m_TagString: Untagged
@@ -117,6 +118,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64efd0df586a3eb4ca950c9d267a744d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  energyShield: {fileID: 7369148277447394750, guid: 016e7cf53fc642c4f982cd0508671402,
+    type: 3}
+--- !u!114 &-8351195137456043932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8999791295103278084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   whatDungeonArtifact: 2
   speedBonus: 0
   defenseBonus: 0
@@ -126,12 +141,3 @@ MonoBehaviour:
   artifactChanceBonus: 0
   goldBonus: 0
   killRequirement: 0
-  addedKill: 0
-  tookDamage: 0
-  firedLeftWeapon: 0
-  firedFrontWeapon: 0
-  firedRightWeapon: 0
-  exploredNewRoom: 0
-  updatedInventory: 0
-  energyShield: {fileID: 7369148277447394750, guid: 016e7cf53fc642c4f982cd0508671402,
-    type: 3}

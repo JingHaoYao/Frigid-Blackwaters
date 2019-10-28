@@ -329,11 +329,7 @@ public class PlayerScript : MonoBehaviour {
 
     public void periodicHeal()
     {
-        trueDamage -= periodicHealing;
-        if(trueDamage < 0)
-        {
-            trueDamage = 0;
-        }
+        healPlayer(periodicHealing);
         healthBarFill.fillAmount = (float)shipHealth / shipHealthMAX;
     }
 
@@ -467,6 +463,15 @@ public class PlayerScript : MonoBehaviour {
         artifacts.UpdateUI();
         artifacts.artifactsUI.SetActive(false);
     }
+
+    public void healPlayer(int amountHealing)
+    {
+        if (amountHealing > 0)
+        {
+            FindObjectOfType<PlayerHealNumbers>().showHealing(amountHealing, shipHealthMAX);
+            trueDamage -= amountHealing;
+        }
+    }
 	
 	void Update () {
         if (playerDead == false)
@@ -500,7 +505,7 @@ public class PlayerScript : MonoBehaviour {
             {
                 if (shipRooted == false)
                 {
-                    rigidBody2D.velocity = directionMove * (boatSpeed + speedBonus + conSpeedBonus + upgradeSpeedBonus + enemySpeedModifier) + momentumVector + enemyMomentumVector; //speed bonus
+                    rigidBody2D.velocity = directionMove * Mathf.Clamp((boatSpeed + speedBonus + conSpeedBonus + upgradeSpeedBonus + enemySpeedModifier), 0, int.MaxValue) + momentumVector + enemyMomentumVector; //speed bonus
                 }
                 else
                 {
@@ -540,7 +545,7 @@ public class PlayerScript : MonoBehaviour {
 
                 if (damageAbsorb == true)
                 {
-                    trueDamage -= (int)(amountDamage * defenseModifier);
+                    healPlayer(Mathf.RoundToInt(amountDamage * defenseModifier));
                     amountDamage = 0;
                 }
 
@@ -561,11 +566,22 @@ public class PlayerScript : MonoBehaviour {
 
                 FindObjectOfType<CameraShake>().shakeCamFunction(0.1f, 0.3f * ((amountDamage * defenseModifier) / shipHealthMAX));
 
-                foreach(GameObject artifact in artifacts.activeArtifacts)
+                foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
                 {
-                    if (artifact != null)
+                    if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
                     {
-                        artifact.GetComponent<ArtifactBonus>().tookDamage = true;
+                        if (damagingObject.GetComponent<ProjectileParent>())
+                        {
+                            slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.GetComponent<ProjectileParent>().instantiater.GetComponent<Enemy>());
+                        }
+                        else if (damagingObject.transform.parent != null)
+                        {
+                            slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.transform.parent.GetComponent<Enemy>());
+                        }
+                        else
+                        {
+                            slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.GetComponent<Enemy>());
+                        }
                     }
                 }
 

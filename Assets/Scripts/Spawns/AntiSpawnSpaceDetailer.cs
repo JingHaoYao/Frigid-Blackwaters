@@ -1019,8 +1019,8 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
 
                         foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
                         {
-                            if (slot.displayInfo != null)
-                                slot.displayInfo.GetComponent<ArtifactBonus>().exploredNewRoom = true;
+                            if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                                slot.displayInfo.GetComponent<ArtifactEffect>().exploredNewRoom(whatRoomType);
                         }
 
                         GameObject.Find("QuestManager").GetComponent<QuestManager>().addExplore(playerShip.GetComponent<PlayerScript>().numRoomsSinceLastArtifact);

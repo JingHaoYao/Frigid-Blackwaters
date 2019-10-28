@@ -27,6 +27,7 @@ public class ShotgunPlume : PlayerProjectile {
 
     void summonBullets(int numberBullets)
     {
+        GameObject[] bulletList = new GameObject[numberBullets];
         if (concentrated == false)
         {
             int start = (numberBullets / 2) * 10;
@@ -35,14 +36,41 @@ public class ShotgunPlume : PlayerProjectile {
 
                 GameObject instant = Instantiate(bullet, transform.position, Quaternion.identity);
                 instant.GetComponent<ShotgunRound>().angleTravel = baseAngle - start + 10 * i;
+                bulletList[i] = instant;
             }
         }
         else
         {
-            for(int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 GameObject instant = Instantiate(bullet, transform.position, Quaternion.identity);
                 instant.GetComponent<ShotgunRound>().angleTravel = baseAngle - 2 + 2 * i;
+                bulletList[i] = instant;
+            }
+        }
+
+        if (whichWeaponFrom == 1)
+        {
+            foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+            {
+                if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedFrontWeapon(bulletList);
+            }
+        }
+        else if (whichWeaponFrom == 2)
+        {
+            foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+            {
+                if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedLeftWeapon(bulletList);
+            }
+        }
+        else
+        {
+            foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+            {
+                if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedRightWeapon(bulletList);
             }
         }
     }

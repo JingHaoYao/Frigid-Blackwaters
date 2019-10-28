@@ -20,7 +20,7 @@ public class ConsumableBonus : MonoBehaviour {
 
     public void consumeItem()
     {
-        playerScript.trueDamage -= restoredHealth;
+        playerScript.healPlayer(restoredHealth);
         if(playerScript.trueDamage <= 0)
         {
             playerScript.trueDamage = 0;

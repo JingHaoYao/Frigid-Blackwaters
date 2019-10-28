@@ -44,6 +44,31 @@ public class WeaponFireScript : MonoBehaviour {
         {
             instant.GetComponent<CannonRound>().forceShot = forceFired;
         }
+
+        if (whichWeapon == 1)
+        {
+            foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+            {
+                if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedFrontWeapon(new GameObject[1] { instant });
+            }
+        }
+        else if (whichWeapon == 2)
+        {
+            foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+            {
+                if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedLeftWeapon(new GameObject[1] { instant });
+            }
+        }
+        else
+        {
+            foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+            {
+                if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedRightWeapon(new GameObject[1] { instant });
+            }
+        }
     }
 
 	void Update () {

@@ -25,7 +25,7 @@ public class ArtifactActiveStatBoost : MonoBehaviour
         {
             instant = Instantiate(spawnObject, playerScript.gameObject.transform.position, Quaternion.identity);
         }
-        playerScript.trueDamage -= healAmount;
+        playerScript.healPlayer(healAmount);
         playerScript.conAttackBonus += attackAmount;
         playerScript.conDefenseBonus += defenseAmount;
         playerScript.conSpeedBonus += speedAmount;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FairyInABottle : ArtifactBonus
+public class FairyInABottle : ArtifactEffect
 {
     DisplayItem displayItem;
     Artifacts artifacts;
@@ -17,23 +17,40 @@ public class FairyInABottle : ArtifactBonus
         playerScript = GameObject.Find("PlayerShip").GetComponent<PlayerScript>();
     }
 
-    void Update()
+
+    public override void addedKill(string tag)
     {
-        if (displayItem.isEquipped == true && tookDamage == true && playerScript.shipHealth > 0)
+    }
+    // Whenever the player takes damage
+    public override void tookDamage(int amountDamage, Enemy enemy)
+    {
+        if ((float)playerScript.shipHealth / playerScript.shipHealthMAX < 0.2f && numberUsesLeft > 0)
         {
-            tookDamage = false;
-            if((float)playerScript.shipHealth / playerScript.shipHealthMAX < 0.2f && numberUsesLeft > 0)
+            playerScript.healPlayer(500);
+            numberUsesLeft--;
+            if (playerScript.trueDamage < 0)
             {
-                playerScript.trueDamage -= 500;
-                numberUsesLeft--;
-                if(playerScript.trueDamage < 0)
-                {
-                    playerScript.trueDamage = 0;
-                }
-                GameObject particles = Instantiate(healParticles, playerScript.transform.position, Quaternion.identity);
-                particles.GetComponent<FollowObject>().objectToFollow = playerScript.gameObject;
-                this.GetComponent<AudioSource>().Play();
+                playerScript.trueDamage = 0;
             }
+            GameObject particles = Instantiate(healParticles, playerScript.transform.position, Quaternion.identity);
+            particles.GetComponent<FollowObject>().objectToFollow = playerScript.gameObject;
+            this.GetComponent<AudioSource>().Play();
         }
+    }
+    // Whenever the player fires the left weapon, and so on
+    public override void firedLeftWeapon(GameObject[] bullet) { }
+    public override void firedFrontWeapon(GameObject[] bullet) { }
+    public override void firedRightWeapon(GameObject[] bullet) { }
+    // Whenever the player enters a previously unentered room
+    public override void exploredNewRoom(int whatRoomType) { }
+    // Whenever the player picks up an item (updates the inventory)
+    public override void updatedInventory()
+    {
+    }
+    // whenever the player dashes
+    public override void playerDashed() { }
+
+    public override void dealtDamage(int damageDealt)
+    {
     }
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7091995428188759715}
   - component: {fileID: 7091995428188759719}
   - component: {fileID: 7091995428188759718}
+  - component: {fileID: 8393691160019292962}
   m_Layer: 0
   m_Name: Fairy in a Bottle
   m_TagString: Untagged
@@ -126,22 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0417c3e12e236d747a3809b39192239a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whatDungeonArtifact: 2
-  speedBonus: 0
-  defenseBonus: 0
-  attackBonus: 0
-  healthBonus: 0
-  periodicHealing: 0
-  artifactChanceBonus: 0
-  goldBonus: 0
-  killRequirement: 0
-  addedKill: 0
-  tookDamage: 0
-  firedLeftWeapon: 0
-  firedFrontWeapon: 0
-  firedRightWeapon: 0
-  exploredNewRoom: 0
-  updatedInventory: 0
   healParticles: {fileID: 8150025517113239527, guid: 849fd8195592ed04b89c8dedd7693074,
     type: 3}
 --- !u!82 &7091995428188759718
@@ -241,3 +226,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8393691160019292962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7091995428188759709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatDungeonArtifact: 2
+  speedBonus: 0
+  defenseBonus: 0
+  attackBonus: 0
+  healthBonus: 0
+  periodicHealing: 0
+  artifactChanceBonus: 0
+  goldBonus: 0
+  killRequirement: 0

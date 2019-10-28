@@ -19,8 +19,8 @@ public class Enemy: MonoBehaviour
         GameObject.Find("QuestManager").GetComponent<QuestManager>().addKill(nameID);
         foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
         {
-            if(slot.displayInfo != null)
-                slot.displayInfo.GetComponent<ArtifactBonus>().addedKill = true;
+            if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                slot.displayInfo.GetComponent<ArtifactEffect>().addedKill(this.gameObject.tag);
         }
     }
 
@@ -46,5 +46,11 @@ public class Enemy: MonoBehaviour
         FindObjectOfType<EnemyDamageNumbersUI>().addEnemyDamageUI(damageDealt, this.gameObject);
         health -= damageDealt;
         FindObjectOfType<CameraShake>().shakeCamFunction(0.1f, 0.3f * ((float)damageDealt / maxHealth));
+
+        foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+        {
+            if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                slot.displayInfo.GetComponent<ArtifactEffect>().dealtDamage(damageDealt);
+        }
     }
 }

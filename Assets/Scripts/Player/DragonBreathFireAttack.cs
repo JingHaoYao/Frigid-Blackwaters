@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DragonBreathFireAttack : MonoBehaviour {
+public class DragonBreathFireAttack : PlayerProjectile {
     PolygonCollider2D polyCol;
     Vector3 initPos, initShipPos;
     PlayerScript playerScript;
@@ -46,6 +46,31 @@ public class DragonBreathFireAttack : MonoBehaviour {
         else if(playerScript.stopRotatePeriod < stopRotatePeriod)
         {
             playerScript.stopRotatePeriod = stopRotatePeriod;
+        }
+
+        if (whichWeaponFrom == 1)
+        {
+            foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+            {
+                if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedFrontWeapon(new GameObject[1] { this.gameObject });
+            }
+        }
+        else if (whichWeaponFrom == 2)
+        {
+            foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+            {
+                if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedLeftWeapon(new GameObject[1] { this.gameObject });
+            }
+        }
+        else
+        {
+            foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+            {
+                if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedRightWeapon(new GameObject[1] { this.gameObject });
+            }
         }
     }
 

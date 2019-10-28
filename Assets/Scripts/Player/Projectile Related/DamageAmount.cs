@@ -13,7 +13,7 @@ public class DamageAmount : MonoBehaviour {
         playerScript = GameObject.Find("PlayerShip").GetComponent<PlayerScript>();
         if (addBonuses == true)
         {
-            damage += originDamage + playerScript.attackBonus + playerScript.conAttackBonus;
+            damage += Mathf.Clamp(originDamage + playerScript.attackBonus + playerScript.conAttackBonus, 1, int.MaxValue);
         }
         else
         {

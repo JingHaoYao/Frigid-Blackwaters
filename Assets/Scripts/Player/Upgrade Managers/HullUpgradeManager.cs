@@ -203,6 +203,12 @@ public class HullUpgradeManager : MonoBehaviour {
                 if (Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.dash)) && playerScript.shipRooted == false && playerScript.playerDead == false)
                 {
                     dashCooldownPeriod = dashCooldown;
+                    foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+                    {
+                        if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                            //Debug.Log(slot.displayInfo.gameObject.name);
+                            slot.displayInfo.GetComponent<ArtifactEffect>().playerDashed();
+                    }
                     Vector3 momentumVector = new Vector3(Mathf.Cos(playerScript.angleOrientation * Mathf.Deg2Rad), Mathf.Sin(playerScript.angleOrientation * Mathf.Deg2Rad), 0) * dashMomentum;
                     playerScript.momentumVector = momentumVector;
                     playerScript.momentumMagnitude = dashMomentum;

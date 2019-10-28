@@ -113,8 +113,8 @@ public class Artifacts : MonoBehaviour {
         PlayerScript playerScript = this.gameObject.GetComponent<PlayerScript>();
         playerScript.healthBonus = healthBonus;
         playerScript.defenseBonus = defenseBonus;
-        playerScript.attackBonus = Mathf.Clamp(attackBonus, 0, int.MaxValue);
-        playerScript.speedBonus = Mathf.Clamp(speedBonus, 0, int.MaxValue);
+        playerScript.attackBonus = attackBonus;
+        playerScript.speedBonus = speedBonus;
         playerScript.periodicHealing = periodicHealing;
         Chest.bonusArtifactChance = bonusArtifactChance;
         Chest.bonusGold = bonusGold;

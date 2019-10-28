@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5201507230805221360}
   - component: {fileID: 5201507230805221367}
   - component: {fileID: 5201507230805221362}
+  - component: {fileID: 8447629932544176593}
   m_Layer: 0
   m_Name: Crystal Scale
   m_TagString: Untagged
@@ -117,6 +118,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 635d2193da21b1b47a9ef4814719d746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8447629932544176593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5201507230805221365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   whatDungeonArtifact: 2
   speedBonus: 0
   defenseBonus: 0
@@ -126,10 +139,3 @@ MonoBehaviour:
   artifactChanceBonus: 0
   goldBonus: 0
   killRequirement: 0
-  addedKill: 0
-  tookDamage: 0
-  firedLeftWeapon: 0
-  firedFrontWeapon: 0
-  firedRightWeapon: 0
-  exploredNewRoom: 0
-  updatedInventory: 0

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1737539262801700717}
   - component: {fileID: 1737539262801700718}
   - component: {fileID: 1737539262801700714}
+  - component: {fileID: 8657465701646895481}
   m_Layer: 0
   m_Name: Wind Demon Jade
   m_TagString: Untagged
@@ -125,6 +126,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0f35266760e5d3498cc866aaab17147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8657465701646895481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737539262801700719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   whatDungeonArtifact: 2
   speedBonus: 0
   defenseBonus: 0
@@ -134,9 +147,3 @@ MonoBehaviour:
   artifactChanceBonus: 0
   goldBonus: 0
   killRequirement: 0
-  addedKill: 0
-  tookDamage: 0
-  firedLeftWeapon: 0
-  firedFrontWeapon: 0
-  firedRightWeapon: 0
-  exploredNewRoom: 0

@@ -12,7 +12,7 @@ public class HealingJadePulse : MonoBehaviour
         yield return new WaitForSeconds(2f / 12f);
         if (Vector2.Distance(transform.position, GameObject.Find("PlayerShip").transform.position) <= 2)
         {
-            FindObjectOfType<PlayerScript>().trueDamage -= 100;
+            FindObjectOfType<PlayerScript>().healPlayer(100);
         }
     }
 
