@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DummyEnemy : MonoBehaviour {
+public class DummyEnemy : Enemy {
     SpriteRenderer spriteRenderer;
-    public int health = 15;
     public bool outputHealth = false;
 
     private void Start()
@@ -24,7 +23,7 @@ public class DummyEnemy : MonoBehaviour {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
             int damageDealt = collision.gameObject.GetComponent<DamageAmount>().damage;
-            health -= damageDealt;
+            dealDamage(damageDealt);
             if (health <= 0)
             {
                 this.gameObject.GetComponent<BoxCollider2D>().enabled = false;

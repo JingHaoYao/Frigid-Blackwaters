@@ -15,7 +15,7 @@ public class MaliciousFleshHook : ArtifactEffect
         playerScript = GameObject.Find("PlayerShip").GetComponent<PlayerScript>();
     }
 
-    public override void addedKill(string tag)
+    public override void addedKill(string tag, Vector3 deathPos)
     {
     }
     // Whenever the player takes damage

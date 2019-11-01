@@ -18,7 +18,7 @@ public class VampiricFang : ArtifactEffect
         artifactBonus = GetComponent<ArtifactBonus>();
     }
 
-    public override void addedKill(string tag)
+    public override void addedKill(string tag, Vector3 deathPos)
     {
     }
     // Whenever the player takes damage

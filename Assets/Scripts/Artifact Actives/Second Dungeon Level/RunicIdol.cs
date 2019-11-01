@@ -15,7 +15,7 @@ public class RunicIdol : ArtifactEffect
         playerScript = GameObject.Find("PlayerShip").GetComponent<PlayerScript>();
     }
 
-    public override void addedKill(string tag)
+    public override void addedKill(string tag, Vector3 deathPos)
     {
         GetComponent<ArtifactBonus>().healthBonus += 25;
         artifacts.UpdateUI();

@@ -18,14 +18,21 @@ public class DualityPendant : ArtifactEffect
         artifactBonus = GetComponent<ArtifactBonus>();
     }
 
-    public override void addedKill(string tag)
+    public override void addedKill(string tag, Vector3 deathPos)
     {
     }
     // Whenever the player takes damage
     public override void tookDamage(int amountDamage, Enemy enemy)
     {
         int damageReflected = Mathf.FloorToInt(amountDamage / 100f);
-        enemy.dealDamage(damageReflected);
+        if(enemy.health > damageReflected)
+        {
+            enemy.dealDamage(damageReflected);
+        }
+        else
+        {
+            enemy.dealDamage(enemy.health - 1);
+        }
     }
     // Whenever the player fires the left weapon, and so on
     public override void firedLeftWeapon(GameObject[] bullet)
@@ -50,6 +57,13 @@ public class DualityPendant : ArtifactEffect
 
     public override void dealtDamage(int damageDealt)
     {
-        playerScript.amountDamage += damageDealt * 50;
+        if (playerScript.shipHealth > 50)
+        {
+            playerScript.amountDamage += damageDealt * 50;
+        }
+        else
+        {
+            playerScript.amountDamage += (playerScript.shipHealth - 1);
+        }
     }
 }

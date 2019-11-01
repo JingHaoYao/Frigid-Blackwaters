@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 774092809771381066}
   - component: {fileID: 774092809771381076}
   - component: {fileID: 774092809771381077}
+  - component: {fileID: 3656562804946045765}
   m_Layer: 5
   m_Name: Duration UI Fill
   m_TagString: Untagged
@@ -74,6 +75,21 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &3656562804946045765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774092809771381067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.47058824}
+  m_EffectDistance: {x: 0.5, y: -0.5}
+  m_UseGraphicAlpha: 1
 --- !u!1 &774092811035063614
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,5 +179,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDuration: 0
-  currDuration: 0
   itemIcon: {fileID: 0}

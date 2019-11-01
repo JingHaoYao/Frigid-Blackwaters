@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class ArtifactEffect : MonoBehaviour
 {
-    public abstract void addedKill(string tag);
+    public abstract void addedKill(string tag, Vector3 deathPos);
     // Whenever the player takes damage
     public abstract void tookDamage(int amountDamage, Enemy enemy);
     // Whenever the player fires the left weapon, and so on

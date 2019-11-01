@@ -20,7 +20,7 @@ public class Enemy: MonoBehaviour
         foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
         {
             if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                slot.displayInfo.GetComponent<ArtifactEffect>().addedKill(this.gameObject.tag);
+                slot.displayInfo.GetComponent<ArtifactEffect>().addedKill(this.gameObject.tag, transform.position);
         }
     }
 

@@ -35,14 +35,17 @@ public class EnergyBuckler : ArtifactEffect
         }
     }
 
-    public override void addedKill(string tag)
+    public override void addedKill(string tag, Vector3 deathPos)
     {
     }
     // Whenever the player takes damage
     public override void tookDamage(int amountDamage, Enemy enemy)
     {
         if (energyShieldInstant.GetComponent<EnergyBucklerShield>().respawnPeriod <= 0)
+        {
             energyShieldInstant.GetComponent<EnergyBucklerShield>().respawnPeriod = 20;
+            FindObjectOfType<DurationUI>().addTile(this.GetComponent<DisplayItem>().displayIcon, 20);
+        }   
     }
     // Whenever the player fires the left weapon, and so on
     public override void firedLeftWeapon(GameObject[] bullet) { }

@@ -554,33 +554,47 @@ public class PlayerScript : MonoBehaviour {
                     trueDamage = 0;
                 }
 
-                float angle = Mathf.Atan2(damagingObject.transform.position.y - transform.position.y, damagingObject.transform.position.x - transform.position.x);
-                if(Vector2.Distance(transform.position, damagingObject.transform.position) < 1f)
+                if (damagingObject != null)
                 {
-                    FindObjectOfType<DamageNumbers>().showDamage((int)(amountDamage * defenseModifier), shipHealthMAX, damagingObject.transform.position);
+                    float angle = Mathf.Atan2(damagingObject.transform.position.y - transform.position.y, damagingObject.transform.position.x - transform.position.x);
+                    if (Vector2.Distance(transform.position, damagingObject.transform.position) < 1f)
+                    {
+                        FindObjectOfType<DamageNumbers>().showDamage((int)(amountDamage * defenseModifier), shipHealthMAX, damagingObject.transform.position);
+                    }
+                    else
+                    {
+                        FindObjectOfType<DamageNumbers>().showDamage((int)(amountDamage * defenseModifier), shipHealthMAX, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)));
+                    }
                 }
                 else
                 {
-                    FindObjectOfType<DamageNumbers>().showDamage((int)(amountDamage * defenseModifier), shipHealthMAX, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)));
+                    FindObjectOfType<DamageNumbers>().showDamage((int)(amountDamage * defenseModifier), shipHealthMAX, transform.position + new Vector3(0, 1.5f, 0));
                 }
 
                 FindObjectOfType<CameraShake>().shakeCamFunction(0.1f, 0.3f * ((amountDamage * defenseModifier) / shipHealthMAX));
 
-                foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+                if (damagingObject == null)
                 {
-                    if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+
+                }
+                else
+                {
+                    foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
                     {
-                        if (damagingObject.GetComponent<ProjectileParent>())
+                        if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
                         {
-                            slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.GetComponent<ProjectileParent>().instantiater.GetComponent<Enemy>());
-                        }
-                        else if (damagingObject.transform.parent != null)
-                        {
-                            slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.transform.parent.GetComponent<Enemy>());
-                        }
-                        else
-                        {
-                            slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.GetComponent<Enemy>());
+                            if (damagingObject.GetComponent<ProjectileParent>())
+                            {
+                                slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.GetComponent<ProjectileParent>().instantiater.GetComponent<Enemy>());
+                            }
+                            else if (damagingObject.transform.parent != null)
+                            {
+                                slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.transform.parent.GetComponent<Enemy>());
+                            }
+                            else
+                            {
+                                slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.GetComponent<Enemy>());
+                            }
                         }
                     }
                 }
@@ -588,6 +602,7 @@ public class PlayerScript : MonoBehaviour {
                 amountDamage = 0;
                 StartCoroutine(bufferHit(0.5f));
                 PlayerItems.playerDamage = trueDamage;
+                damagingObject = null;
             }
 
             if (trueDamage < 0)
@@ -595,7 +610,7 @@ public class PlayerScript : MonoBehaviour {
                 trueDamage = 0;
             }
 
-            shipHealth = (int)(shipHealthMAX - trueDamage);
+            shipHealth = Mathf.RoundToInt(shipHealthMAX - trueDamage);
 
             if(shipHealth <= 0 && playerDead == false)
             {
