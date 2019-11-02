@@ -60,7 +60,7 @@ public class EnergyBuckler : ArtifactEffect
     // whenever the player dashes
     public override void playerDashed() { }
 
-    public override void dealtDamage(int damageDealt)
+    public override void dealtDamage(int damageDealt, Enemy enemy)
     {
     }
 }

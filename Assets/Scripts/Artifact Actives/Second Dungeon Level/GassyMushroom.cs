@@ -40,7 +40,7 @@ public class GassyMushroom : ArtifactEffect
         GameObject gas = Instantiate(gasCloud, playerScript.transform.position, Quaternion.Euler(0, 0, playerScript.angleEffect + 90));
     }
 
-    public override void dealtDamage(int damageDealt)
+    public override void dealtDamage(int damageDealt, Enemy enemy)
     {
     }
 }

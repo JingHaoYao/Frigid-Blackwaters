@@ -125,7 +125,7 @@ public class SpiritHowlBell : ArtifactEffect {
     {
     }
 
-    public override void dealtDamage(int damageDealt)
+    public override void dealtDamage(int damageDealt, Enemy enemy)
     {
     }
 }

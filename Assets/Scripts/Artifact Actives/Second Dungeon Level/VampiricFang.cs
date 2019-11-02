@@ -46,7 +46,7 @@ public class VampiricFang : ArtifactEffect
     {
     }
 
-    public override void dealtDamage(int damageDealt)
+    public override void dealtDamage(int damageDealt, Enemy enemy)
     {
         playerScript.healPlayer(damageDealt * 50);
     }

@@ -18,5 +18,5 @@ public abstract class ArtifactEffect : MonoBehaviour
     // whenever the player dashes
     public abstract void playerDashed();
 
-    public abstract void dealtDamage(int damageDealt);
+    public abstract void dealtDamage(int damageDealt, Enemy enemy);
 }

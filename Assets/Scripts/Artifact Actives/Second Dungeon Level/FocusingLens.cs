@@ -100,7 +100,7 @@ public class FocusingLens : ArtifactEffect
     {
     }
 
-    public override void dealtDamage(int damageDealt)
+    public override void dealtDamage(int damageDealt, Enemy enemy)
     {
     }
 }

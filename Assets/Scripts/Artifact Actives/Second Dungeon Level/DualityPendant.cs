@@ -55,7 +55,7 @@ public class DualityPendant : ArtifactEffect
     {
     }
 
-    public override void dealtDamage(int damageDealt)
+    public override void dealtDamage(int damageDealt, Enemy enemy)
     {
         if (playerScript.shipHealth > 50)
         {

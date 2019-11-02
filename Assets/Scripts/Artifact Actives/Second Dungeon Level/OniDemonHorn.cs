@@ -34,47 +34,95 @@ public class OniDemonHorn : ArtifactEffect
 
     private void Update()
     {
-        if (displayItem.isEquipped == true && coolDownPeriod <= 0)
+        if (displayItem.isEquipped == true)
         {
-            if (displayItem.whichSlot == 0)
-            {
-                if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.firstArtifact)))
+            if (coolDownPeriod <= 0) {
+                if (displayItem.whichSlot == 0)
                 {
-                    if(activated == false)
+                    if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.firstArtifact)))
                     {
-                        activated = true;
-                        GetComponents<AudioSource>()[0].Play();
-                        artifactBonus.attackBonus = 3;
-                        artifactBonus.speedBonus = 2;
-                        oniAuraInstant.SetActive(true);
-                        oniAuraInstant.GetComponent<Animator>().SetTrigger("Form");
-                        artifacts.UpdateUI();
+                        if (activated == false)
+                        {
+                            activated = true;
+                            GetComponents<AudioSource>()[0].Play();
+                            artifactBonus.attackBonus = 3;
+                            artifactBonus.speedBonus = 2;
+                            oniAuraInstant.SetActive(true);
+                            oniAuraInstant.GetComponent<Animator>().SetTrigger("Form");
+                            artifacts.UpdateUI();
+                        }
+                        else
+                        {
+                            StartCoroutine(turnOffAura());
+                            activated = false;
+                            artifactBonus.attackBonus = 0;
+                            artifactBonus.speedBonus = 0;
+                            artifacts.UpdateUI();
+                            coolDownPeriod = 2;
+                            FindObjectOfType<DurationUI>().addTile(displayItem.displayIcon, 2);
+                        }
                     }
-                    else
+                }
+                else if (displayItem.whichSlot == 1)
+                {
+                    if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.secondArtifact)))
                     {
-                        StartCoroutine(turnOffAura());
-                        activated = false;
-                        artifactBonus.attackBonus = 0;
-                        artifactBonus.speedBonus = 0;
-                        artifacts.UpdateUI();
-                        coolDownPeriod = 2;
-                        FindObjectOfType<DurationUI>().addTile(displayItem.displayIcon, 2);
+                        if (activated == false)
+                        {
+                            activated = true;
+                            GetComponents<AudioSource>()[0].Play();
+                            artifactBonus.attackBonus = 3;
+                            artifactBonus.speedBonus = 2;
+                            oniAuraInstant.SetActive(true);
+                            oniAuraInstant.GetComponent<Animator>().SetTrigger("Form");
+                            artifacts.UpdateUI();
+                        }
+                        else
+                        {
+                            StartCoroutine(turnOffAura());
+                            activated = false;
+                            artifactBonus.attackBonus = 0;
+                            artifactBonus.speedBonus = 0;
+                            artifacts.UpdateUI();
+                            coolDownPeriod = 2;
+                            FindObjectOfType<DurationUI>().addTile(displayItem.displayIcon, 2);
+                        }
+                    }
+                }
+                else
+                {
+                    if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.thirdArtifact)))
+                    {
+                        if (activated == false)
+                        {
+                            activated = true;
+                            GetComponents<AudioSource>()[0].Play();
+                            artifactBonus.attackBonus = 3;
+                            artifactBonus.speedBonus = 2;
+                            oniAuraInstant.SetActive(true);
+                            oniAuraInstant.GetComponent<Animator>().SetTrigger("Form");
+                            artifacts.UpdateUI();
+                        }
+                        else
+                        {
+                            StartCoroutine(turnOffAura());
+                            activated = false;
+                            artifactBonus.attackBonus = 0;
+                            artifactBonus.speedBonus = 0;
+                            artifacts.UpdateUI();
+                            coolDownPeriod = 2;
+                            FindObjectOfType<DurationUI>().addTile(displayItem.displayIcon, 2);
+                        }
                     }
                 }
             }
-            else if (displayItem.whichSlot == 1)
+        }
+        else
+        {
+            if(oniAuraInstant.activeSelf == true && activated == true)
             {
-                if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.secondArtifact)))
-                {
-
-                }
-            }
-            else
-            {
-                if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.thirdArtifact)))
-                {
-
-                }
+                activated = false;
+                StartCoroutine(turnOffAura());
             }
         }
 
@@ -126,7 +174,7 @@ public class OniDemonHorn : ArtifactEffect
     {
     }
 
-    public override void dealtDamage(int damageDealt)
+    public override void dealtDamage(int damageDealt, Enemy enemy)
     {
     }
 }

@@ -53,7 +53,7 @@ public class WindDemonJade : ArtifactEffect
     {
     }
 
-    public override void dealtDamage(int damageDealt)
+    public override void dealtDamage(int damageDealt, Enemy enemy)
     {
     }
 }
