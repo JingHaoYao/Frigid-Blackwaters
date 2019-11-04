@@ -18,47 +18,13 @@ public class ItemTemplates : MonoBehaviour {
     public string[] uniqueConsumables;
     public string[] uniqueArtifacts;
 
+    public string[] secondLevelTier1Artifacts;
+    public string[] secondLevelTier2Artifacts;
+    public string[] secondLevelTier3Artifacts;
+    public string[] secondLevelTier4Artifacts;
+    public string[] secondLevelConsumables;
+
     public Dictionary<string, string> itemDB = new Dictionary<string, string>();
-
-    /*private void Start()
-    {
-        tier1Artifacts = new string[tier1ArtifactList.Length];
-        tier2Artifacts = new string[tier2ArtifactList.Length];
-        tier3Artifacts = new string[tier3ArtifactList.Length];
-        tier4Artifacts = new string[tier4ArtifactList.Length];
-        consumables = new string[consumableList.Length];
-        darkMagics = new string[darkMagicItems.Length];
-
-        for (int i = 0; i < tier1ArtifactList.Length; i++)
-        {
-            tier1Artifacts[i] = tier1ArtifactList[i].name;
-        }
-
-        for (int i = 0; i < tier2ArtifactList.Length; i++)
-        {
-            tier2Artifacts[i] = tier2ArtifactList[i].name;
-        }
-
-        for (int i = 0; i < tier3ArtifactList.Length; i++)
-        {
-            tier3Artifacts[i] = tier3ArtifactList[i].name;
-        }
-
-        for (int i = 0; i < tier4ArtifactList.Length; i++)
-        {
-            tier4Artifacts[i] = tier4ArtifactList[i].name;
-        }
-
-        for (int i = 0; i < consumableList.Length; i++)
-        {
-            consumables[i] = consumableList[i].name;
-        }
-
-        for(int i = 0; i < darkMagicItems.Length; i++)
-        {
-            darkMagics[i] = darkMagicItems[i].name;
-        }
-    }*/
 
     private void Awake()
     {
@@ -104,6 +70,32 @@ public class ItemTemplates : MonoBehaviour {
         {
             itemDB.Add(uniqueConsumables[i], "Items/First Dungeon Stage/Consumables/Unique Consumables/");
         }
+
+        foreach(string id in secondLevelTier1Artifacts)
+        {
+            itemDB.Add(id, "Items/Second Dungeon Level/Artifacts/Common Artifacts/");
+        }
+
+        foreach (string id in secondLevelTier2Artifacts)
+        {
+            itemDB.Add(id, "Items/Second Dungeon Level/Artifacts/Uncommon Artifacts/");
+        }
+
+        foreach (string id in secondLevelTier3Artifacts)
+        {
+            itemDB.Add(id, "Items/Second Dungeon Level/Artifacts/Rare Artifacts/");
+        }
+
+        foreach (string id in secondLevelTier4Artifacts)
+        {
+            itemDB.Add(id, "Items/Second Dungeon Level/Artifacts/Legendary Artifacts/");
+        }
+
+        foreach (string id in secondLevelConsumables)
+        {
+            itemDB.Add(id, "Items/Second Dungeon Level/Consumables/Regular Consumables/");
+        }
+
     }
 
     public bool dbContainsID(string item_id)
@@ -157,6 +149,29 @@ public class ItemTemplates : MonoBehaviour {
                     break;
                 case 6:
                     spawnedItem = Resources.Load<GameObject>("Items/First Dungeon Stage/Consumables/Dark Magic Consumables/" + darkMagics[Random.Range(0, darkMagics.Length)]);
+                    break;
+            }
+            return Instantiate(spawnedItem);
+        }
+        else if(FindObjectOfType<DungeonEntryDialogueManager>().whatDungeonLevel == 2)
+        {
+            GameObject spawnedItem = null;
+            switch (whatTier)
+            {
+                case 1:
+                    spawnedItem = Resources.Load<GameObject>("Items/Second Dungeon Level/Artifacts/Common Artifacts/" + secondLevelTier1Artifacts[Random.Range(0, secondLevelTier1Artifacts.Length)]);
+                    break;
+                case 2:
+                    spawnedItem = Resources.Load<GameObject>("Items/Second Dungeon Level/Artifacts/Uncommon Artifacts/" + secondLevelTier2Artifacts[Random.Range(0, secondLevelTier2Artifacts.Length)]);
+                    break;
+                case 3:
+                    spawnedItem = Resources.Load<GameObject>("Items/Second Dungeon Level/Artifacts/Rare Artifacts/" + secondLevelTier3Artifacts[Random.Range(0, secondLevelTier3Artifacts.Length)]);
+                    break;
+                case 4:
+                    spawnedItem = Resources.Load<GameObject>("Items/Second Dungeon Level/Artifacts/Legendary Artifacts/" + secondLevelTier4Artifacts[Random.Range(0, secondLevelTier4Artifacts.Length)]);
+                    break;
+                case 5:
+                    spawnedItem = Resources.Load<GameObject>("Items/Second Dungeon Level/Consumables/Regular Consumables/" + secondLevelConsumables[Random.Range(0, secondLevelConsumables.Length)]);
                     break;
             }
             return Instantiate(spawnedItem);

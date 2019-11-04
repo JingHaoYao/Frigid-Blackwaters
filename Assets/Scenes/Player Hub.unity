@@ -954,7 +954,31 @@ MonoBehaviour:
   - Replenishing Gourd
   - Luxurious Tea Bags
   secondLevelConsumables: []
-  secondLevelArtifacts: []
+  secondLevelArtifacts:
+  - Durable Cloak
+  - Fairy in a Bottle
+  - Greedy Idol
+  - Ornamental Whale
+  - Stalwart Talisman
+  - Crystal Scale
+  - Crimson Anklet
+  - Blue Steel Axe
+  - Blue Steel Spears
+  - Soothing Candles
+  - Regenerative Bandage
+  - Jeweled Pendant
+  - Blue Steel Chestplate
+  - Dualitt Pendant
+  - Energy Buckler
+  - Healing Aloe
+  - Miracle Vines
+  - Gassy Mushroom
+  - Hard Carapace
+  - Glass of Zunis
+  - Ice Gem
+  - Focusing Lens
+  - Everlasting Gunpowder
+  - Thorned Medallion
   shopDialogues: []
 --- !u!4 &15957211
 Transform:
@@ -39241,7 +39265,6 @@ GameObject:
   - component: {fileID: 901534867}
   - component: {fileID: 901534871}
   - component: {fileID: 901534870}
-  - component: {fileID: 901534869}
   - component: {fileID: 901534868}
   - component: {fileID: 901534872}
   m_Layer: 0
@@ -39282,20 +39305,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc42203a7b936d41b93892bffda304e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &901534869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 901534866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea7191ca7c1392d48b7c677cf5279772, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followObject: {fileID: 0}
-  offset: {x: 0, y: 1.5, z: 0}
 --- !u!114 &901534870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59014,6 +59023,11 @@ MonoBehaviour:
   - Stone Giant's Eye
   - Stone Giant's Heart
   - Undead Mariner's Anchor
+  secondLevelTier1Artifacts: []
+  secondLevelTier2Artifacts: []
+  secondLevelTier3Artifacts: []
+  secondLevelTier4Artifacts: []
+  secondLevelConsumables: []
 --- !u!4 &1500339919
 Transform:
   m_ObjectHideFlags: 0

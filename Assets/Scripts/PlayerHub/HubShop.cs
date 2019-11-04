@@ -47,38 +47,47 @@ public class HubShop : MonoBehaviour {
     {
         sellingItemsList.Clear();
         AvailableShopItems shopItems = FindObjectOfType<AvailableShopItems>();
-        if(MiscData.dungeonLevelUnlocked == 1)
+        numberItems = Random.Range(startingChance, endingChance);
+
+        if (MiscData.dungeonLevelUnlocked == 2)
         {
-            if (artifactShop == true)
+            for (int i = 0; i < numberItems; i++)
             {
-                foreach (string item in shopItems.firstLevelArtifacts)
+                if (artifactShop == true)
                 {
-                    sellingItemsList.Add(itemTemplates.loadItem(item));
+                    if (Random.Range(0, 10) < 7)
+                    {
+                        sellingItemsList.Add(itemTemplates.loadItem(shopItems.firstLevelArtifacts[Random.Range(0, shopItems.secondLevelArtifacts.Length)]));
+                    }
+                    else
+                    {
+                        sellingItemsList.Add(itemTemplates.loadItem(shopItems.firstLevelArtifacts[Random.Range(0, shopItems.firstLevelArtifacts.Length)]));
+                    }
                 }
-            }
-            else
-            {
-                foreach (string item in shopItems.firstLevelConsumables)
+                else
                 {
-                    sellingItemsList.Add(itemTemplates.loadItem(item));
+                    if (Random.Range(0, 10) < 7)
+                    {
+                        sellingItemsList.Add(itemTemplates.loadItem(shopItems.firstLevelArtifacts[Random.Range(0, shopItems.secondLevelConsumables.Length)]));
+                    }
+                    else
+                    {
+                        sellingItemsList.Add(itemTemplates.loadItem(shopItems.firstLevelArtifacts[Random.Range(0, shopItems.firstLevelConsumables.Length)]));
+                    }
                 }
             }
         }
-        
-        if(MiscData.dungeonLevelUnlocked == 2)
+        else if (MiscData.dungeonLevelUnlocked == 1)
         {
-            if (artifactShop == true)
+            for (int i = 0; i < numberItems; i++)
             {
-                foreach (string item in shopItems.secondLevelArtifacts)
+                if (artifactShop == true)
                 {
-                    sellingItemsList.Add(itemTemplates.loadItem(item));
+                    sellingItemsList.Add(itemTemplates.loadItem(shopItems.firstLevelArtifacts[Random.Range(0, shopItems.firstLevelArtifacts.Length)]));
                 }
-            }
-            else
-            {
-                foreach (string item in shopItems.secondLevelConsumables)
+                else
                 {
-                    sellingItemsList.Add(itemTemplates.loadItem(item));
+                    sellingItemsList.Add(itemTemplates.loadItem(shopItems.firstLevelArtifacts[Random.Range(0, shopItems.firstLevelConsumables.Length)]));
                 }
             }
         }
@@ -86,10 +95,9 @@ public class HubShop : MonoBehaviour {
 
     void spawnSellingItems()
     {
-        numberItems = Random.Range(startingChance, endingChance);
-        for (int i = 0; i < numberItems; i++)
+        foreach(GameObject item in sellingItemsList)
         {
-            GameObject newItem = Instantiate(sellingItemsList[Random.Range(0, sellingItemsList.Count)]);
+            GameObject newItem = Instantiate(item);
             newItem.transform.parent = GameObject.Find("PresentItems").transform;
             sellingItems.Add(newItem);
             if (priceMultiplier == 0)
