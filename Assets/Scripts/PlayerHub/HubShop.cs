@@ -57,7 +57,7 @@ public class HubShop : MonoBehaviour {
                 {
                     if (Random.Range(0, 10) < 7)
                     {
-                        sellingItemsList.Add(itemTemplates.loadItem(shopItems.firstLevelArtifacts[Random.Range(0, shopItems.secondLevelArtifacts.Length)]));
+                        sellingItemsList.Add(itemTemplates.loadItem(shopItems.secondLevelArtifacts[Random.Range(0, shopItems.secondLevelArtifacts.Length)]));
                     }
                     else
                     {
@@ -68,11 +68,11 @@ public class HubShop : MonoBehaviour {
                 {
                     if (Random.Range(0, 10) < 7)
                     {
-                        sellingItemsList.Add(itemTemplates.loadItem(shopItems.firstLevelArtifacts[Random.Range(0, shopItems.secondLevelConsumables.Length)]));
+                        sellingItemsList.Add(itemTemplates.loadItem(shopItems.secondLevelConsumables[Random.Range(0, shopItems.secondLevelConsumables.Length)]));
                     }
                     else
                     {
-                        sellingItemsList.Add(itemTemplates.loadItem(shopItems.firstLevelArtifacts[Random.Range(0, shopItems.firstLevelConsumables.Length)]));
+                        sellingItemsList.Add(itemTemplates.loadItem(shopItems.firstLevelConsumables[Random.Range(0, shopItems.firstLevelConsumables.Length)]));
                     }
                 }
             }
@@ -87,7 +87,7 @@ public class HubShop : MonoBehaviour {
                 }
                 else
                 {
-                    sellingItemsList.Add(itemTemplates.loadItem(shopItems.firstLevelArtifacts[Random.Range(0, shopItems.firstLevelConsumables.Length)]));
+                    sellingItemsList.Add(itemTemplates.loadItem(shopItems.firstLevelConsumables[Random.Range(0, shopItems.firstLevelConsumables.Length)]));
                 }
             }
         }
