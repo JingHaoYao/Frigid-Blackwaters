@@ -5,7 +5,7 @@ using UnityEngine;
 public class SkeletalMusketeer : Enemy {
     public Sprite facingLeft, facingDownLeft, facingDown, facingUpRight, facingUp;
     Rigidbody2D rigidBody2D;
-    public GameObject musketSmoke, musketRound, deadSkeleMusketeer;
+    public GameObject weaponPlume, musketRound, deadSkeleMusketeer;
     SpriteRenderer spriteRenderer;
     public float travelSpeed = 2;
     GameObject playerShip;
@@ -86,7 +86,7 @@ public class SkeletalMusketeer : Enemy {
         this.GetComponents<AudioSource>()[1].Play();
         if (angleOrientation > 15 && angleOrientation <= 75)
         {
-            GameObject muskFlash = Instantiate(musketSmoke, transform.position + new Vector3(.65f, 0.55f, 0), Quaternion.Euler(0, 0, 40)); //done
+            GameObject muskFlash = Instantiate(weaponPlume, transform.position + new Vector3(.65f, 0.55f, 0), Quaternion.Euler(0, 0, 40)); //done
             yield return new WaitForSeconds(4f / 36f);
             GameObject instantiatedRound = Instantiate(musketRound, muskFlash.transform.position, Quaternion.identity);
             instantiatedRound.GetComponent<SkeletalMusketRound>().angleTravel = angleFire;
@@ -94,7 +94,7 @@ public class SkeletalMusketeer : Enemy {
         }
         else if (angleOrientation > 75 && angleOrientation <= 105)
         {
-            GameObject muskFlash = Instantiate(musketSmoke, transform.position + new Vector3(0, 1f, 0), Quaternion.Euler(0, 0, 90)); //done
+            GameObject muskFlash = Instantiate(weaponPlume, transform.position + new Vector3(0, 1f, 0), Quaternion.Euler(0, 0, 90)); //done
             yield return new WaitForSeconds(4f / 36f);
             GameObject instantiatedRound = Instantiate(musketRound, muskFlash.transform.position, Quaternion.identity);
             instantiatedRound.GetComponent<SkeletalMusketRound>().angleTravel = angleFire;
@@ -102,7 +102,7 @@ public class SkeletalMusketeer : Enemy {
         }
         else if (angleOrientation > 105 && angleOrientation <= 165)
         {
-            GameObject muskFlash = Instantiate(musketSmoke, transform.position + new Vector3(-.65f, 0.55f, 0), Quaternion.Euler(0, 0, 140)); //done
+            GameObject muskFlash = Instantiate(weaponPlume, transform.position + new Vector3(-.65f, 0.55f, 0), Quaternion.Euler(0, 0, 140)); //done
             yield return new WaitForSeconds(4f / 36f);
             GameObject instantiatedRound = Instantiate(musketRound, muskFlash.transform.position, Quaternion.identity);
             instantiatedRound.GetComponent<SkeletalMusketRound>().angleTravel = angleFire;
@@ -110,7 +110,7 @@ public class SkeletalMusketeer : Enemy {
         }
         else if (angleOrientation > 165 && angleOrientation <= 195)
         {
-            GameObject muskFlash = Instantiate(musketSmoke, transform.position + new Vector3(-0.9f, 0.25f, 0), Quaternion.Euler(0, 0, 180)); //done
+            GameObject muskFlash = Instantiate(weaponPlume, transform.position + new Vector3(-0.9f, 0.25f, 0), Quaternion.Euler(0, 0, 180)); //done
             yield return new WaitForSeconds(4f / 36f);
             GameObject instantiatedRound = Instantiate(musketRound, muskFlash.transform.position, Quaternion.identity);
             instantiatedRound.GetComponent<SkeletalMusketRound>().angleTravel = angleFire;
@@ -118,7 +118,7 @@ public class SkeletalMusketeer : Enemy {
         }
         else if (angleOrientation > 195 && angleOrientation <= 255)
         {
-            GameObject muskFlash = Instantiate(musketSmoke, transform.position + new Vector3(-0.7f, -0.15f, 0), Quaternion.Euler(0, 0, 220)); //done
+            GameObject muskFlash = Instantiate(weaponPlume, transform.position + new Vector3(-0.7f, -0.15f, 0), Quaternion.Euler(0, 0, 220)); //done
             yield return new WaitForSeconds(4f / 36f);
             GameObject instantiatedRound = Instantiate(musketRound, muskFlash.transform.position, Quaternion.identity);
             instantiatedRound.GetComponent<SkeletalMusketRound>().angleTravel = angleFire;
@@ -126,7 +126,7 @@ public class SkeletalMusketeer : Enemy {
         }
         else if (angleOrientation > 255 && angleOrientation <= 285)
         {
-            GameObject muskFlash = Instantiate(musketSmoke, transform.position + new Vector3(0, -0.3f, 0), Quaternion.Euler(0, 0, 270)); //done
+            GameObject muskFlash = Instantiate(weaponPlume, transform.position + new Vector3(0, -0.3f, 0), Quaternion.Euler(0, 0, 270)); //done
             yield return new WaitForSeconds(4f / 36f);
             GameObject instantiatedRound = Instantiate(musketRound, muskFlash.transform.position, Quaternion.identity);
             instantiatedRound.GetComponent<SkeletalMusketRound>().angleTravel = angleFire;
@@ -134,7 +134,7 @@ public class SkeletalMusketeer : Enemy {
         }
         else if (angleOrientation > 285 && angleOrientation <= 345)
         {
-            GameObject muskFlash = Instantiate(musketSmoke, transform.position + new Vector3(0.7f, -0.15f, 0), Quaternion.Euler(0, 0, 320)); //done
+            GameObject muskFlash = Instantiate(weaponPlume, transform.position + new Vector3(0.7f, -0.15f, 0), Quaternion.Euler(0, 0, 320)); //done
             yield return new WaitForSeconds(4f / 36f);
             GameObject instantiatedRound = Instantiate(musketRound, muskFlash.transform.position, Quaternion.identity);
             instantiatedRound.GetComponent<SkeletalMusketRound>().angleTravel = angleFire;
@@ -142,7 +142,7 @@ public class SkeletalMusketeer : Enemy {
         }
         else
         {
-            GameObject muskFlash = Instantiate(musketSmoke, transform.position + new Vector3(0.9f, 0.25f, 0), Quaternion.Euler(0, 0, 0)); //done
+            GameObject muskFlash = Instantiate(weaponPlume, transform.position + new Vector3(0.9f, 0.25f, 0), Quaternion.Euler(0, 0, 0)); //done
             yield return new WaitForSeconds(4f / 36f);
             GameObject instantiatedRound = Instantiate(musketRound, muskFlash.transform.position, Quaternion.identity);
             instantiatedRound.GetComponent<SkeletalMusketRound>().angleTravel = angleFire;

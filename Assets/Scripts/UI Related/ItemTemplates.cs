@@ -173,6 +173,9 @@ public class ItemTemplates : MonoBehaviour {
                 case 5:
                     spawnedItem = Resources.Load<GameObject>("Items/Second Dungeon Level/Consumables/Regular Consumables/" + secondLevelConsumables[Random.Range(0, secondLevelConsumables.Length)]);
                     break;
+                case 6:
+                    spawnedItem = Resources.Load<GameObject>("Items/Second Dungeon Level/Consumables/Regular Consumables/" + secondLevelConsumables[Random.Range(0, secondLevelConsumables.Length)]);
+                    break;
             }
             return Instantiate(spawnedItem);
         }

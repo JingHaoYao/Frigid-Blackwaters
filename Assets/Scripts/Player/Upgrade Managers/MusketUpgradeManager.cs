@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusketUpgradeManager : MonoBehaviour {
+public class MusketUpgradeManager : WeaponFireTemplate {
     ShipWeaponScript weaponScript;
     ShipWeaponTemplate weaponTemplate;
     int prevNumberUpgrades;
     bool precisionShot = false, scatterShot = false;
-    public GameObject precisionBlast1, precisionBlast2, regularMusketSmoke, scatterBlast1, scatterBlast2;
+    public GameObject precisionBlast1, precisionBlast2, regularweaponPlume, scatterBlast1, scatterBlast2;
     GameObject empoweredWeaponFlare;
     int numberShotsThreshold = 4;
     float origCoolDownTime;
@@ -96,7 +96,7 @@ public class MusketUpgradeManager : MonoBehaviour {
         {
             if (weaponScript.numberShots == numberShotsThreshold - 1)
             {
-                weaponScript.musketSmoke = empoweredWeaponFlare;
+                weaponScript.weaponPlume = empoweredWeaponFlare;
                 if (scatterShot)
                 {
                     weaponScript.weaponIcon.sprite = scatterShotIcon;
@@ -110,9 +110,121 @@ public class MusketUpgradeManager : MonoBehaviour {
             if (weaponScript.numberShots >= numberShotsThreshold)
             {
                 weaponScript.numberShots = 0;
-                weaponScript.musketSmoke = regularMusketSmoke;
+                weaponScript.weaponPlume = regularweaponPlume;
                 weaponScript.weaponIcon.sprite = regularMusketIcon;
             }
         }
+    }
+
+    public override GameObject fireWeapon(int whichSide, float angleOrientation, GameObject weaponPlume)
+    {
+        GameObject instant;
+        if (whichSide == 1)
+        {
+            if (angleOrientation > 15 && angleOrientation <= 75)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(0.339f, 0.24f, 0), Quaternion.Euler(0, 0, 225));
+            }
+            else if (angleOrientation > 75 && angleOrientation <= 105)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(0, 0.42f, 0), Quaternion.Euler(0, 0, 270));
+            }
+            else if (angleOrientation > 105 && angleOrientation <= 165)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(-0.339f, 0.24f, 0), Quaternion.Euler(0, 0, 315));
+            }
+            else if (angleOrientation > 165 && angleOrientation <= 195)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(-0.55f, -.05f, 0), Quaternion.Euler(0, 0, 0));
+            }
+            else if (angleOrientation > 195 && angleOrientation <= 255)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(-0.379f, -0.34f, 0), Quaternion.Euler(0, 0, 45));
+            }
+            else if (angleOrientation > 255 && angleOrientation <= 285)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(0, -0.55f, 0), Quaternion.Euler(0, 0, 90));
+            }
+            else if (angleOrientation > 285 && angleOrientation <= 345)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(0.379f, -0.34f, 0), Quaternion.Euler(0, 0, 135));
+            }
+            else
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(0.55f, -.05f, 0), Quaternion.Euler(0, 0, 180));
+            }
+        }
+        else if (whichSide == 2)
+        {
+            if (angleOrientation > 15 && angleOrientation <= 75)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(0.196f, -0.21f, 0), Quaternion.Euler(0, 0, 135));
+            }
+            else if (angleOrientation > 75 && angleOrientation <= 105)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(0.55f, -.05f, 0), Quaternion.Euler(0, 0, 180));
+            }
+            else if (angleOrientation > 105 && angleOrientation <= 165)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(0.619f, 0.24f, 0), Quaternion.Euler(0, 0, 200));
+            }
+            else if (angleOrientation > 165 && angleOrientation <= 195)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(0, 0.42f, 0), Quaternion.Euler(0, 0, 270));
+            }
+            else if (angleOrientation > 195 && angleOrientation <= 255)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(-0.339f, 0.24f, 0), Quaternion.Euler(0, 0, 315));
+            }
+            else if (angleOrientation > 255 && angleOrientation <= 285)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(-0.55f, -.05f, 0), Quaternion.Euler(0, 0, 0));
+            }
+            else if (angleOrientation > 285 && angleOrientation <= 345)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(-0.379f, -0.34f, 0), Quaternion.Euler(0, 0, 45));
+            }
+            else
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(0, -0.55f, 0), Quaternion.Euler(0, 0, 90));
+            }
+        }
+        else
+        {
+            if (angleOrientation > 15 && angleOrientation <= 75)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(-0.639f, 0.24f, 0), Quaternion.Euler(0, 0, 340));
+            }
+            else if (angleOrientation > 75 && angleOrientation <= 105)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(-0.55f, -.05f, 0), Quaternion.Euler(0, 0, 0));
+            }
+            else if (angleOrientation > 105 && angleOrientation <= 165)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(-0.189f, -0.15f, 0), Quaternion.Euler(0, 0, 45));
+            }
+            else if (angleOrientation > 165 && angleOrientation <= 195)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(0, -0.55f, 0), Quaternion.Euler(0, 0, 90));
+            }
+            else if (angleOrientation > 195 && angleOrientation <= 255)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(0.379f, -0.34f, 0), Quaternion.Euler(0, 0, 135));
+            }
+            else if (angleOrientation > 255 && angleOrientation <= 285)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(0.55f, -.05f, 0), Quaternion.Euler(0, 0, 180));
+            }
+            else if (angleOrientation > 285 && angleOrientation <= 345)
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(0.339f, 0.24f, 0), Quaternion.Euler(0, 0, 225));
+            }
+            else
+            {
+                instant = Instantiate(weaponPlume, weaponScript.transform.position + new Vector3(0, 0.42f, 0), Quaternion.Euler(0, 0, 270));
+            }
+        }
+
+        return instant;
     }
 }

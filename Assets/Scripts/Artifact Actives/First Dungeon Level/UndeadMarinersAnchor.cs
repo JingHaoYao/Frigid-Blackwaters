@@ -61,24 +61,24 @@ public class UndeadMarinersAnchor : MonoBehaviour
         {
             if (playerScript.activeEnabled == false)
             {
-                leftFire = leftWeapon.GetComponent<ShipWeaponScript>().musketSmoke;
-                rightFire = rightWeapon.GetComponent<ShipWeaponScript>().musketSmoke;
-                frontFire = frontWeapon.GetComponent<ShipWeaponScript>().musketSmoke;
+                leftFire = leftWeapon.GetComponent<ShipWeaponScript>().weaponPlume;
+                rightFire = rightWeapon.GetComponent<ShipWeaponScript>().weaponPlume;
+                frontFire = frontWeapon.GetComponent<ShipWeaponScript>().weaponPlume;
                 playerScript.activeEnabled = true;
                 lightningEff = Instantiate(lightningEffect, playerScript.gameObject.transform.position, Quaternion.identity);
             }
 
-            leftWeapon.GetComponent<ShipWeaponScript>().musketSmoke = leviathanBlast;
-            rightWeapon.GetComponent<ShipWeaponScript>().musketSmoke = leviathanBlast;
-            frontWeapon.GetComponent<ShipWeaponScript>().musketSmoke = leviathanBlast;
+            leftWeapon.GetComponent<ShipWeaponScript>().weaponPlume = leviathanBlast;
+            rightWeapon.GetComponent<ShipWeaponScript>().weaponPlume = leviathanBlast;
+            frontWeapon.GetComponent<ShipWeaponScript>().weaponPlume = leviathanBlast;
             if (Input.GetMouseButtonDown(0) && GameObject.Find("Anchor Blast(Clone)"))
             {
                 leviathanLoaded = false;
                 playerScript.activeEnabled = false;
                 Destroy(lightningEff);
-                leftWeapon.GetComponent<ShipWeaponScript>().musketSmoke = leftFire;
-                rightWeapon.GetComponent<ShipWeaponScript>().musketSmoke = rightFire;
-                frontWeapon.GetComponent<ShipWeaponScript>().musketSmoke = frontFire;
+                leftWeapon.GetComponent<ShipWeaponScript>().weaponPlume = leftFire;
+                rightWeapon.GetComponent<ShipWeaponScript>().weaponPlume = rightFire;
+                frontWeapon.GetComponent<ShipWeaponScript>().weaponPlume = frontFire;
             }
         }
     }

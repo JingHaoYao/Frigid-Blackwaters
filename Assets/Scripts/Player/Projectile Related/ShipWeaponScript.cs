@@ -10,7 +10,7 @@ public class ShipWeaponScript : MonoBehaviour {
     PlayerScript playerScript;
     SpriteRenderer spriteRenderer;
     float angleOrientation;
-    public GameObject musketSmoke;
+    public GameObject weaponPlume;
     public float coolDownPeriod = 0;
     public float coolDownThreshold = 5;
     public bool onCooldown = false;
@@ -42,7 +42,7 @@ public class ShipWeaponScript : MonoBehaviour {
         downleft = trueTemplate.downleft;
         down = trueTemplate.down;
         coolDownThreshold = trueTemplate.coolDownTime;
-        musketSmoke = trueTemplate.weaponFlare;
+        weaponPlume = trueTemplate.weaponFlare;
         weaponIcon.sprite = trueTemplate.coolDownIcon;
     }
 
@@ -214,38 +214,7 @@ public class ShipWeaponScript : MonoBehaviour {
         {
             if (whichSide == 1)
             {
-                if (angleOrientation > 15 && angleOrientation <= 75)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(0.339f, 0.24f, 0), Quaternion.Euler(0, 0, 225));
-                }
-                else if (angleOrientation > 75 && angleOrientation <= 105)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(0, 0.42f, 0), Quaternion.Euler(0, 0, 270));
-                }
-                else if (angleOrientation > 105 && angleOrientation <= 165)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(-0.339f, 0.24f, 0), Quaternion.Euler(0, 0, 315));
-                }
-                else if (angleOrientation > 165 && angleOrientation <= 195)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(-0.55f, -.05f, 0), Quaternion.Euler(0, 0, 0));
-                }
-                else if (angleOrientation > 195 && angleOrientation <= 255)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(-0.379f, -0.34f, 0), Quaternion.Euler(0, 0, 45));
-                }
-                else if (angleOrientation > 255 && angleOrientation <= 285)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(0, -0.55f, 0), Quaternion.Euler(0, 0, 90));
-                }
-                else if (angleOrientation > 285 && angleOrientation <= 345)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(0.379f, -0.34f, 0), Quaternion.Euler(0, 0, 135));
-                }
-                else
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(0.55f, -.05f, 0), Quaternion.Euler(0, 0, 180));
-                }
+                instant = weaponTemplate.GetComponent<WeaponFireTemplate>().fireWeapon(whichSide, angleOrientation, weaponPlume);
                 coolDownPeriod = coolDownThreshold;
                 onCooldown = true;
                 numberShots += 1;
@@ -262,38 +231,7 @@ public class ShipWeaponScript : MonoBehaviour {
             }
             else if (whichSide == 2)
             {
-                if (angleOrientation > 15 && angleOrientation <= 75)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(0.196f, -0.21f, 0), Quaternion.Euler(0, 0, 135));
-                }
-                else if (angleOrientation > 75 && angleOrientation <= 105)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(0.55f, -.05f, 0), Quaternion.Euler(0, 0, 180));
-                }
-                else if (angleOrientation > 105 && angleOrientation <= 165)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(0.619f, 0.24f, 0), Quaternion.Euler(0, 0, 200));
-                }
-                else if (angleOrientation > 165 && angleOrientation <= 195)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(0, 0.42f, 0), Quaternion.Euler(0, 0, 270));
-                }
-                else if (angleOrientation > 195 && angleOrientation <= 255)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(-0.339f, 0.24f, 0), Quaternion.Euler(0, 0, 315));
-                }
-                else if (angleOrientation > 255 && angleOrientation <= 285)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(-0.55f, -.05f, 0), Quaternion.Euler(0, 0, 0));
-                }
-                else if (angleOrientation > 285 && angleOrientation <= 345)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(-0.379f, -0.34f, 0), Quaternion.Euler(0, 0, 45));
-                }
-                else
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(0, -0.55f, 0), Quaternion.Euler(0, 0, 90));
-                }
+                instant = weaponTemplate.GetComponent<WeaponFireTemplate>().fireWeapon(whichSide, angleOrientation, weaponPlume);
                 coolDownPeriod = coolDownThreshold;
                 onCooldown = true;
                 numberShots += 1;
@@ -310,38 +248,7 @@ public class ShipWeaponScript : MonoBehaviour {
             }
             else if (whichSide == 3)
             {
-                if (angleOrientation > 15 && angleOrientation <= 75)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(-0.639f, 0.24f, 0), Quaternion.Euler(0, 0, 340));
-                }
-                else if (angleOrientation > 75 && angleOrientation <= 105)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(-0.55f, -.05f, 0), Quaternion.Euler(0, 0, 0));
-                }
-                else if (angleOrientation > 105 && angleOrientation <= 165)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(-0.189f, -0.15f, 0), Quaternion.Euler(0, 0, 45));
-                }
-                else if (angleOrientation > 165 && angleOrientation <= 195)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(0, -0.55f, 0), Quaternion.Euler(0, 0, 90));
-                }
-                else if (angleOrientation > 195 && angleOrientation <= 255)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(0.379f, -0.34f, 0), Quaternion.Euler(0, 0, 135));
-                }
-                else if (angleOrientation > 255 && angleOrientation <= 285)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(0.55f, -.05f, 0), Quaternion.Euler(0, 0, 180));
-                }
-                else if (angleOrientation > 285 && angleOrientation <= 345)
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(0.339f, 0.24f, 0), Quaternion.Euler(0, 0, 225));
-                }
-                else
-                {
-                    instant = Instantiate(musketSmoke, transform.position + new Vector3(0, 0.42f, 0), Quaternion.Euler(0, 0, 270));
-                }
+                instant = weaponTemplate.GetComponent<WeaponFireTemplate>().fireWeapon(whichSide, angleOrientation, weaponPlume);
                 coolDownPeriod = coolDownThreshold;
                 onCooldown = true;
                 numberShots += 1;
@@ -364,38 +271,7 @@ public class ShipWeaponScript : MonoBehaviour {
         GameObject instant;
         if (whichSide == 1)
         {
-            if (angleOrientation > 15 && angleOrientation <= 75)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(0.339f, 0.24f, 0), Quaternion.Euler(0, 0, 225));
-            }
-            else if (angleOrientation > 75 && angleOrientation <= 105)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(0, 0.42f, 0), Quaternion.Euler(0, 0, 270));
-            }
-            else if (angleOrientation > 105 && angleOrientation <= 165)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(-0.339f, 0.24f, 0), Quaternion.Euler(0, 0, 315));
-            }
-            else if (angleOrientation > 165 && angleOrientation <= 195)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(-0.55f, -.05f, 0), Quaternion.Euler(0, 0, 0));
-            }
-            else if (angleOrientation > 195 && angleOrientation <= 255)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(-0.379f, -0.34f, 0), Quaternion.Euler(0, 0, 45));
-            }
-            else if (angleOrientation > 255 && angleOrientation <= 285)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(0, -0.55f, 0), Quaternion.Euler(0, 0, 90));
-            }
-            else if (angleOrientation > 285 && angleOrientation <= 345)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(0.379f, -0.34f, 0), Quaternion.Euler(0, 0, 135));
-            }
-            else
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(0.55f, -.05f, 0), Quaternion.Euler(0, 0, 180));
-            }
+            instant = weaponTemplate.GetComponent<WeaponFireTemplate>().fireWeapon(whichSide, angleOrientation, weaponPlume);
             coolDownPeriod = coolDownThreshold;
             onCooldown = true;
             numberShots += 1;
@@ -412,38 +288,7 @@ public class ShipWeaponScript : MonoBehaviour {
         }
         else if (whichSide == 2)
         {
-            if (angleOrientation > 15 && angleOrientation <= 75)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(0.196f, -0.21f, 0), Quaternion.Euler(0, 0, 135));
-            }
-            else if (angleOrientation > 75 && angleOrientation <= 105)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(0.55f, -.05f, 0), Quaternion.Euler(0, 0, 180));
-            }
-            else if (angleOrientation > 105 && angleOrientation <= 165)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(0.619f, 0.24f, 0), Quaternion.Euler(0, 0, 200));
-            }
-            else if (angleOrientation > 165 && angleOrientation <= 195)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(0, 0.42f, 0), Quaternion.Euler(0, 0, 270));
-            }
-            else if (angleOrientation > 195 && angleOrientation <= 255)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(-0.339f, 0.24f, 0), Quaternion.Euler(0, 0, 315));
-            }
-            else if (angleOrientation > 255 && angleOrientation <= 285)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(-0.55f, -.05f, 0), Quaternion.Euler(0, 0, 0));
-            }
-            else if (angleOrientation > 285 && angleOrientation <= 345)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(-0.379f, -0.34f, 0), Quaternion.Euler(0, 0, 45));
-            }
-            else
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(0, -0.55f, 0), Quaternion.Euler(0, 0, 90));
-            }
+            instant = weaponTemplate.GetComponent<WeaponFireTemplate>().fireWeapon(whichSide, angleOrientation, weaponPlume);
             coolDownPeriod = coolDownThreshold;
             onCooldown = true;
             numberShots += 1;
@@ -460,38 +305,7 @@ public class ShipWeaponScript : MonoBehaviour {
         }
         else if (whichSide == 3)
         {
-            if (angleOrientation > 15 && angleOrientation <= 75)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(-0.639f, 0.24f, 0), Quaternion.Euler(0, 0, 340));
-            }
-            else if (angleOrientation > 75 && angleOrientation <= 105)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(-0.55f, -.05f, 0), Quaternion.Euler(0, 0, 0));
-            }
-            else if (angleOrientation > 105 && angleOrientation <= 165)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(-0.189f, -0.15f, 0), Quaternion.Euler(0, 0, 45));
-            }
-            else if (angleOrientation > 165 && angleOrientation <= 195)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(0, -0.55f, 0), Quaternion.Euler(0, 0, 90));
-            }
-            else if (angleOrientation > 195 && angleOrientation <= 255)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(0.379f, -0.34f, 0), Quaternion.Euler(0, 0, 135));
-            }
-            else if (angleOrientation > 255 && angleOrientation <= 285)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(0.55f, -.05f, 0), Quaternion.Euler(0, 0, 180));
-            }
-            else if (angleOrientation > 285 && angleOrientation <= 345)
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(0.339f, 0.24f, 0), Quaternion.Euler(0, 0, 225));
-            }
-            else
-            {
-                instant = Instantiate(musketSmoke, transform.position + new Vector3(0, 0.42f, 0), Quaternion.Euler(0, 0, 270));
-            }
+            instant = weaponTemplate.GetComponent<WeaponFireTemplate>().fireWeapon(whichSide, angleOrientation, weaponPlume);
             coolDownPeriod = coolDownThreshold;
             onCooldown = true;
             numberShots += 1;

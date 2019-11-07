@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LoadWeaponChoices : MonoBehaviour {
-    public GameObject[] weaponTemplates;
+    // Names of all weapon templates to load in
+    string[] weaponTemplateNames = new string[5] { "Musket Weapon Template", "Cannon Weapon Template", "Shotgun Weapon Template", "Firework Weapon Template", "Dragon Breath Weapon Template"};
     public GameObject leftWeapon, rightWeapon, frontWeapon;
 
     void loadWeapon()
     {
-        leftWeapon.GetComponent<ShipWeaponScript>().swapTemplate(weaponTemplates[PlayerUpgrades.whichLeftWeaponEquipped].GetComponent<ShipWeaponTemplate>());
-        rightWeapon.GetComponent<ShipWeaponScript>().swapTemplate(weaponTemplates[PlayerUpgrades.whichRightWeaponEquipped].GetComponent<ShipWeaponTemplate>());
-        frontWeapon.GetComponent<ShipWeaponScript>().swapTemplate(weaponTemplates[PlayerUpgrades.whichFrontWeaponEquipped].GetComponent<ShipWeaponTemplate>());
+        leftWeapon.GetComponent<ShipWeaponScript>().swapTemplate(Resources.Load<ShipWeaponTemplate>("Player/Weapon Templates/" + weaponTemplateNames[PlayerUpgrades.whichLeftWeaponEquipped]).GetComponent<ShipWeaponTemplate>());
+        rightWeapon.GetComponent<ShipWeaponScript>().swapTemplate(Resources.Load<ShipWeaponTemplate>("Player/Weapon Templates/" + weaponTemplateNames[PlayerUpgrades.whichRightWeaponEquipped]).GetComponent<ShipWeaponTemplate>());
+        frontWeapon.GetComponent<ShipWeaponScript>().swapTemplate(Resources.Load<ShipWeaponTemplate>("Player/Weapon Templates/" + weaponTemplateNames[PlayerUpgrades.whichFrontWeaponEquipped]).GetComponent<ShipWeaponTemplate>());
     }
 
 	void Start () {

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class WeaponFireScript : MonoBehaviour {
     public GameObject bullet;
-    Animator animator;
+    public Animator animator;
     public AnimationClip weaponFire;
-    float animLength = 0;
-    Vector3 initShipPos, initFirePos;
-    SpriteRenderer spriteRenderer;
+    public float animLength = 0;
+    public Vector3 initShipPos, initFirePos;
+    public SpriteRenderer spriteRenderer;
     PlayerScript playerScript;
     public bool forceFired = false;
     public int whichWeapon;
@@ -18,12 +18,20 @@ public class WeaponFireScript : MonoBehaviour {
         spriteRenderer.sortingOrder = 200 - (int)(transform.position.y * 10) + 4;
     }
 
+    IEnumerator waitForAudio()
+    {
+        yield return new WaitForSeconds(animLength / 3f);
+        spriteRenderer.enabled = false;
+        yield return new WaitForSeconds(2f);
+        Destroy(this.gameObject);
+    }
+
     void Start () {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         playerScript = GameObject.Find("PlayerShip").GetComponent<PlayerScript>();
         animLength = weaponFire.length;
-        Destroy(this.gameObject, animLength/3f);
+        StartCoroutine(waitForAudio());
         if (playerScript.stopRotatePeriod == 0)
         {
             playerScript.stopRotatePeriod += animLength / 3f;

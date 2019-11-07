@@ -60,39 +60,39 @@ public class EnergyGolemHead : MonoBehaviour {
         {
             if (playerScript.activeEnabled == false)
             {
-                leftFire = leftWeapon.GetComponent<ShipWeaponScript>().musketSmoke;
-                rightFire = rightWeapon.GetComponent<ShipWeaponScript>().musketSmoke;
-                frontFire = frontWeapon.GetComponent<ShipWeaponScript>().musketSmoke;
+                leftFire = leftWeapon.GetComponent<ShipWeaponScript>().weaponPlume;
+                rightFire = rightWeapon.GetComponent<ShipWeaponScript>().weaponPlume;
+                frontFire = frontWeapon.GetComponent<ShipWeaponScript>().weaponPlume;
                 playerScript.activeEnabled = true;
                 instant = Instantiate(energyGolemPulse, GameObject.Find("PlayerShip").transform.position, Quaternion.identity);
             }
 
             /*if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.frontWeapon)))
             {
-                frontWeapon.GetComponent<ShipWeaponScript>().musketSmoke = leviathanBlast;
+                frontWeapon.GetComponent<ShipWeaponScript>().weaponPlume = leviathanBlast;
                 leviathanLoaded = false;
             }
             if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.leftWeapon)))
             {
-                leftWeapon.GetComponent<ShipWeaponScript>().musketSmoke = leviathanBlast;
+                leftWeapon.GetComponent<ShipWeaponScript>().weaponPlume = leviathanBlast;
                 leviathanLoaded = false;
             }
             if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.rightWeapon)))
             {
-                rightWeapon.GetComponent<ShipWeaponScript>().musketSmoke = leviathanBlast;
+                rightWeapon.GetComponent<ShipWeaponScript>().weaponPlume = leviathanBlast;
                 leviathanLoaded = false;
             }*/
 
-            leftWeapon.GetComponent<ShipWeaponScript>().musketSmoke = leviathanBlast;
-            rightWeapon.GetComponent<ShipWeaponScript>().musketSmoke = leviathanBlast;
-            frontWeapon.GetComponent<ShipWeaponScript>().musketSmoke = leviathanBlast;
+            leftWeapon.GetComponent<ShipWeaponScript>().weaponPlume = leviathanBlast;
+            rightWeapon.GetComponent<ShipWeaponScript>().weaponPlume = leviathanBlast;
+            frontWeapon.GetComponent<ShipWeaponScript>().weaponPlume = leviathanBlast;
             if (Input.GetMouseButtonDown(0) && GameObject.Find("Golem Head Laser Circle(Clone)"))
             {
                 leviathanLoaded = false;
                 playerScript.activeEnabled = false;
-                leftWeapon.GetComponent<ShipWeaponScript>().musketSmoke = leftFire;
-                rightWeapon.GetComponent<ShipWeaponScript>().musketSmoke = rightFire;
-                frontWeapon.GetComponent<ShipWeaponScript>().musketSmoke = frontFire;
+                leftWeapon.GetComponent<ShipWeaponScript>().weaponPlume = leftFire;
+                rightWeapon.GetComponent<ShipWeaponScript>().weaponPlume = rightFire;
+                frontWeapon.GetComponent<ShipWeaponScript>().weaponPlume = frontFire;
                 Destroy(instant);
             }
         }
