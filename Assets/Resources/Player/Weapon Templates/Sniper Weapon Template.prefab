@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1670707479623966645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1670707479623966665}
+  - component: {fileID: 1670707479623966667}
+  - component: {fileID: 1670707479623966666}
+  - component: {fileID: 1670707479623966644}
+  - component: {fileID: 1670707479623966664}
+  m_Layer: 0
+  m_Name: Sniper Weapon Template
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1670707479623966665
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670707479623966645}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1537.6875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 2.1961894, y: -3.9672215}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1670707479623966667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670707479623966645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2093946c6e21b9c43b76288f452bba8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: {fileID: -5020112029643298722, guid: aa4c4cd8ec44ca64593b1f67704a5095, type: 3}
+  upleft: {fileID: -2030343284000184767, guid: aa4c4cd8ec44ca64593b1f67704a5095, type: 3}
+  left: {fileID: 801990180911389885, guid: aa4c4cd8ec44ca64593b1f67704a5095, type: 3}
+  downleft: {fileID: 6971728058621933591, guid: aa4c4cd8ec44ca64593b1f67704a5095,
+    type: 3}
+  down: {fileID: -7033772847730070205, guid: aa4c4cd8ec44ca64593b1f67704a5095, type: 3}
+  weaponFlare: {fileID: 5611054167554942484, guid: adfa32ec977e70045ac21a8327732d1f,
+    type: 3}
+  coolDownIcon: {fileID: 334534829266231040, guid: a1e27431524fe6643a2e5be09ae3e232,
+    type: 3}
+  coolDownTime: 4.5
+  shipWeaponEquipped: {fileID: 0}
+--- !u!222 &1670707479623966666
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670707479623966645}
+  m_CullTransparentMesh: 0
+--- !u!114 &1670707479623966644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670707479623966645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Sniper Rifle: With an almost instant
+
+    travel time, this powerful rifle deals 5
+
+    damage to a single target.'
+--- !u!114 &1670707479623966664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670707479623966645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21c25972173ac04439dfd5bfba19efef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highVelocityBullet1: {fileID: 2669035740446430475, guid: 19f49dbfaaa064b48af01b7af40dd531,
+    type: 3}
+  highVelocityBullet2: {fileID: 5488046506963278548, guid: 8e7369105cdc7f643911ac2ea17f005f,
+    type: 3}
+  highVelocityBullet3: {fileID: 5488046506963278548, guid: 8e7369105cdc7f643911ac2ea17f005f,
+    type: 3}
+  regularPlume: {fileID: 5611054167554942484, guid: adfa32ec977e70045ac21a8327732d1f,
+    type: 3}
+  extremeFocusShot1: {fileID: 4369537164937550627, guid: b4da9a0fc43fde64d8cd09947aaa0995,
+    type: 3}
+  extremeFocusShot2: {fileID: 6035555495663804832, guid: 422a482ac7dda3343aaddd4c19e0dcda,
+    type: 3}
+  extremeFocusIcon1: {fileID: 3510843934617215290, guid: 76f02a77e8ee36c4b94a4be84d4039b0,
+    type: 3}
+  extremeFocusIcon2: {fileID: -8167376197524087616, guid: 76f02a77e8ee36c4b94a4be84d4039b0,
+    type: 3}
+  regularSniperIcon: {fileID: 334534829266231040, guid: a1e27431524fe6643a2e5be09ae3e232,
+    type: 3}

@@ -117,6 +117,12 @@ public static class SaveSystem
         {
             PlayerUpgrades.safeUpgrades.Add(id);
         }
+        PlayerUpgrades.sniperUpgrades.Clear();
+        foreach(string id in data.sniperUpgrades)
+        {
+            PlayerUpgrades.sniperUpgrades.Add(id);
+        }
+
         PlayerUpgrades.numberSkillPoints = data.numberSkillPoints;
         PlayerUpgrades.numberMaxSkillPoints = data.numberMaxSkillPoints;
         PlayerUpgrades.whichFrontWeaponEquipped = data.whichFrontWeaponEquipped;

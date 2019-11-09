@@ -16,6 +16,7 @@ public class SaveData
     public string[] spreadShotUpgrades;
     public string[] fireworkUpgrades;
     public string[] dragonsBreathUpgrades;
+    public string[] sniperUpgrades;
     public string[] hullUpgrades;
     public string[] inventoryUpgrades;
     public string[] safeUpgrades;
@@ -113,6 +114,12 @@ public class SaveData
         {
             dragonsBreathUpgrades[i] = PlayerUpgrades.dragonBreathUpgrades[i];
         }
+        sniperUpgrades = new string[PlayerUpgrades.sniperUpgrades.Count];
+        for(int i = 0; i < sniperUpgrades.Length; i++)
+        {
+            sniperUpgrades[i] = PlayerUpgrades.sniperUpgrades[i];
+        }
+
         hullUpgrades = new string[PlayerUpgrades.hullUpgrades.Count];
         for (int i = 0; i < hullUpgrades.Length; i++)
         {

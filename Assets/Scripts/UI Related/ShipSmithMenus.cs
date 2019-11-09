@@ -13,6 +13,7 @@ public class ShipSmithMenus : MonoBehaviour {
     public SpreadshotUpgradeTilesUI spreadShotUpgradesMenu;
     public CannonUpgradeTilesUI cannonUpgradesMenu;
     public HealthUpgradeTilesUI hullUpgradesMenu;
+    public SniperUpgradeTilesUI sniperUpgradesMenu;
     public GameObject weaponSelectorMenu, returnButton;
     int skillPointPrice = 0;
 
@@ -84,6 +85,16 @@ public class ShipSmithMenus : MonoBehaviour {
         else
         {
             menusList[4].GetComponentInChildren<DragonsBreathUpgradeTilesUI>().DragonsBreathUpgradeTiles[0].noLongerUnlockable = true;
+        }
+
+        if (PlayerUpgrades.sniperUnlocked)
+        {
+            if (!PlayerUpgrades.dragonBreathUpgrades.Contains("unlock_sniper"))
+                PlayerUpgrades.dragonBreathUpgrades.Add("unlock_sniper");
+        }
+        else
+        {
+            menusList[7].GetComponentInChildren<SniperUpgradeTilesUI>().SniperUpgradeTiles[0].noLongerUnlockable = true;
         }
 
         foreach (GameObject menu in menusList)
@@ -168,12 +179,6 @@ public class ShipSmithMenus : MonoBehaviour {
         PlayerUpgrades.inventoryUpgrades.Clear();
         checkWeaponsUnlocked();
 
-        if(weaponSelectorMenu.activeSelf == false)
-        {
-            menusList[currMenu].SetActive(false);
-            menusList[currMenu].SetActive(true);
-        }
-
         PlayerUpgrades.numberSkillPoints = PlayerUpgrades.numberMaxSkillPoints;
         SaveSystem.SaveGame();
 
@@ -205,6 +210,19 @@ public class ShipSmithMenus : MonoBehaviour {
         foreach (HullUpgradeTile tile in hullUpgradesMenu.HullUpgradeTiles)
         {
             tile.noLongerUnlockable = false;
+        }
+
+        foreach(SniperUpgradeTile tile in sniperUpgradesMenu.SniperUpgradeTiles)
+        {
+            tile.noLongerUnlockable = false;
+        }
+
+        checkWeaponsUnlocked();
+
+        if (weaponSelectorMenu.activeSelf == false)
+        {
+            menusList[currMenu].SetActive(false);
+            menusList[currMenu].SetActive(true);
         }
     }
 }
