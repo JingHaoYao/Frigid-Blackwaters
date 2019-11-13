@@ -35,6 +35,10 @@ public class SpecialObstacleTemplates : MonoBehaviour {
                 return Resources.Load<GameObject>("Unique Obstacles/First Dungeon Level/" + theme2SpecialObstacleNames[Random.Range(0, theme2SpecialObstacleNames.Length)]);
             }
         }
+        else if(whatDungeonLevel == 2)
+        {
+            return Resources.Load<GameObject>("Unique Obstacles/Second Dungeon Level/" + theme1SpecialObstacleNames[Random.Range(0, theme1SpecialObstacleNames.Length)]);
+        }
         else
         {
             return null;
