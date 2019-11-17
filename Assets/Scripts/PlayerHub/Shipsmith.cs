@@ -7,6 +7,7 @@ public class Shipsmith : MonoBehaviour {
     public GameObject examineIndicator, shipSmithDisplay;
     public string buildingID;
     public GameObject icon;
+    public bool ignoreUnlockLevel = false;
 
     private void Start()
     {
@@ -14,7 +15,7 @@ public class Shipsmith : MonoBehaviour {
     }
 
     void LateUpdate () {
-        if (Vector2.Distance(playerShip.transform.position, transform.position) < 5f && MiscData.unlockedBuildings.Contains(buildingID))
+        if (Vector2.Distance(playerShip.transform.position, transform.position) < 5f && (MiscData.unlockedBuildings.Contains(buildingID) || ignoreUnlockLevel))
         {
             if (shipSmithDisplay.activeSelf == false)
             {

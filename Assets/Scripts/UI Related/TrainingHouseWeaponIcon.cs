@@ -110,7 +110,7 @@ public class TrainingHouseWeaponIcon : MonoBehaviour, IPointerEnterHandler, IPoi
 
     public void setTemplate(int whichTemplate)
     {
-        if (whichWeaponToEquip == whichWeapon)
+        if (whichWeaponToEquip == whichWeapon && PlayerUpgrades.unlockLevel - 1 >= whichTemplate)
         {
             if (whichWeapon == 1)
             {
