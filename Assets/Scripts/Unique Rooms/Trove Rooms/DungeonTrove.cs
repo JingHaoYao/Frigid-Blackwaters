@@ -13,6 +13,7 @@ public class DungeonTrove : MonoBehaviour
     public GameObject targetArtifact;
     public Sprite unActive;
     SpriteRenderer spriteRenderer;
+    public GameObject customArtifact;
 
     void Start()
     {
@@ -31,52 +32,60 @@ public class DungeonTrove : MonoBehaviour
     void setItem()
     {
         GameObject newItem;
-        if (whatTier == 1)
+        if (customArtifact == null)
         {
-            int percentItem = Random.Range(1, 101);
-            if (percentItem <= 75)
+            if (whatTier == 1)
             {
-                newItem = itemTemplates.loadRandomItem(1);
-                newItem.transform.parent = GameObject.Find("PresentItems").transform;
+                int percentItem = Random.Range(1, 101);
+                if (percentItem <= 75)
+                {
+                    newItem = itemTemplates.loadRandomItem(1);
+                    newItem.transform.parent = GameObject.Find("PresentItems").transform;
+                }
+                else
+                {
+                    newItem = itemTemplates.loadRandomItem(2);
+                    newItem.transform.parent = GameObject.Find("PresentItems").transform;
+                }
+            }
+            else if (whatTier == 2)
+            {
+                int percentItem = Random.Range(1, 101);
+                if (percentItem <= 80)
+                {
+                    newItem = itemTemplates.loadRandomItem(2);
+                    newItem.transform.parent = GameObject.Find("PresentItems").transform;
+                }
+                else
+                {
+                    newItem = itemTemplates.loadRandomItem(3);
+                    newItem.transform.parent = GameObject.Find("PresentItems").transform;
+                }
             }
             else
             {
-                newItem = itemTemplates.loadRandomItem(2);
-                newItem.transform.parent = GameObject.Find("PresentItems").transform;
-            }
-        }
-        else if (whatTier == 2)
-        {
-            int percentItem = Random.Range(1, 101);
-            if (percentItem <= 80)
-            {
-                newItem = itemTemplates.loadRandomItem(2);
-                newItem.transform.parent = GameObject.Find("PresentItems").transform;
-            }
-            else
-            {
-                newItem = itemTemplates.loadRandomItem(3);
-                newItem.transform.parent = GameObject.Find("PresentItems").transform;
+                int percentItem = Random.Range(1, 101);
+                if (percentItem <= 50)
+                {
+                    newItem = itemTemplates.loadRandomItem(2);
+                    newItem.transform.parent = GameObject.Find("PresentItems").transform;
+                }
+                else if (percentItem > 50 && percentItem <= 95)
+                {
+                    newItem = itemTemplates.loadRandomItem(3);
+                    newItem.transform.parent = GameObject.Find("PresentItems").transform;
+                }
+                else
+                {
+                    newItem = itemTemplates.loadRandomItem(4);
+                    newItem.transform.parent = GameObject.Find("PresentItems").transform;
+                }
             }
         }
         else
         {
-            int percentItem = Random.Range(1, 101);
-            if (percentItem <= 50)
-            {
-                newItem = itemTemplates.loadRandomItem(2);
-                newItem.transform.parent = GameObject.Find("PresentItems").transform;
-            }
-            else if (percentItem > 50 && percentItem <= 95)
-            {
-                newItem = itemTemplates.loadRandomItem(3);
-                newItem.transform.parent = GameObject.Find("PresentItems").transform;
-            }
-            else
-            {
-                newItem = itemTemplates.loadRandomItem(4);
-                newItem.transform.parent = GameObject.Find("PresentItems").transform;
-            }
+            newItem = Instantiate(customArtifact);
+            newItem.transform.parent = GameObject.Find("PresentItems").transform;
         }
         targetArtifact = newItem;
     }

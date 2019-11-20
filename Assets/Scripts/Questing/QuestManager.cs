@@ -62,12 +62,12 @@ public class QuestManager : MonoBehaviour
         for (int i = 0; i < questIDList.Length; i++)
         {
             questDB.Add(questIDList[i], questNames[i]);
-        }
-
-        foreach (GameObject quest in allQuests)
-        {
-            questDataBase.Add(quest.GetComponent<QuestType>().questID, quest);
         }*/
+
+        for(int i = 0; i < questIDList.Length; i++)
+        {
+            questDB.Add(questIDList[i], questNames[i]);
+        }
 
         loadQuest(loadQuestResource(FindObjectOfType<DungeonEntryDialogueManager>().whatDungeonLevel, MiscData.currentQuestID).gameObject);
         MiscData.availableQuests = new string[3] { "empty_quest", "empty_quest", "empty_quest" };

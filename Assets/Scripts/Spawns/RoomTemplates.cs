@@ -28,8 +28,13 @@ public class RoomTemplates : MonoBehaviour {
 
     void setMaxRoomCount()
     {
-        //maxRoomCount = (MiscData.completedCheckPoints.Count - ((dialogueManager.whatDungeonLevel - 1) * 3)) * 10 + 20;
-        maxRoomCount = 20;
+        maxRoomCount = (MiscData.completedCheckPoints.Count - ((dialogueManager.whatDungeonLevel - 1) * 3)) * 10 + 20;
+
+        // ONLY FOR CURRENT WORK ON SECOND LEVEL
+        if(dialogueManager.whatDungeonLevel == 2)
+        {
+            maxRoomCount = 20;
+        }
     }
 
     private void Update()
@@ -47,8 +52,8 @@ public class RoomTemplates : MonoBehaviour {
             {
                 index = index - 1;
             }
-            //antiList[index - dialogueManager.storyCheckPoints[MiscData.completedCheckPoints.Count - ((dialogueManager.whatDungeonLevel - 1) * 3)].numberFromLastRoom].checkPointRoom = true;
-            antiList[index - dialogueManager.storyCheckPoints[0].numberFromLastRoom].checkPointRoom = true;
+            antiList[index - dialogueManager.storyCheckPoints[MiscData.completedCheckPoints.Count - ((dialogueManager.whatDungeonLevel - 1) * 3)].numberFromLastRoom].checkPointRoom = true;
+            //antiList[index - dialogueManager.storyCheckPoints[0].numberFromLastRoom].checkPointRoom = true;
             antiList[index].setRoomType();
         }
     }

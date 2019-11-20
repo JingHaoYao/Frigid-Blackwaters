@@ -15,7 +15,7 @@ public class QuietAllNoises : MonoBehaviour
 
     IEnumerator FadeOut(AudioSource source, float speed)
     {
-        while (source.volume > 0)
+        while (source != null && source.volume > 0)
         {
             source.volume -= speed;
             if (source.volume < 0)

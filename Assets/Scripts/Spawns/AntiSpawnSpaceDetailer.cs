@@ -1107,13 +1107,11 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                 }
             }
 
-            GameObject[] ActiveRangedEnemies = GameObject.FindGameObjectsWithTag("RangedEnemy");
-            GameObject[] ActiveMeleeEnemies = GameObject.FindGameObjectsWithTag("MeleeEnemy");
-            GameObject[] ActiveShieldEnemies = GameObject.FindGameObjectsWithTag("EnemyShield");
+            Enemy[] activeEnemies = FindObjectsOfType<Enemy>();
 
             if (specialRoom == false)
             {
-                if (spawningComplete == true && roomDone == false && ActiveRangedEnemies.Length == 0 && ActiveMeleeEnemies.Length == 0 && ActiveShieldEnemies.Length == 0)
+                if (spawningComplete == true && roomDone == false && activeEnemies.Length <= 0)
                 {
                     openDoorSeals();
                     roomDone = true;

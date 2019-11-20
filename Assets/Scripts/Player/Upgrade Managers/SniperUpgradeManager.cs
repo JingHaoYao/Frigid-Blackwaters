@@ -84,13 +84,6 @@ public class SniperUpgradeManager : WeaponFireTemplate
 
     void Start()
     {
-        PlayerUpgrades.sniperUpgrades.Add(" ");
-        PlayerUpgrades.sniperUpgrades.Add(" ");
-        PlayerUpgrades.sniperUpgrades.Add(" ");
-        PlayerUpgrades.sniperUpgrades.Add("unlock_high_velocity_bullets");
-        PlayerUpgrades.sniperUpgrades.Add(" ");
-        PlayerUpgrades.sniperUpgrades.Add("target_weaknesses_unlocked");
-
         prevNumberUpgrades = PlayerUpgrades.sniperUpgrades.Count;
         weaponScript = this.GetComponent<ShipWeaponTemplate>().shipWeaponEquipped.GetComponent<ShipWeaponScript>();
         weaponTemplate = GetComponent<ShipWeaponTemplate>();

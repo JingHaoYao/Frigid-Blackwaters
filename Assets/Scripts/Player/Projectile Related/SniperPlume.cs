@@ -25,7 +25,7 @@ public class SniperPlume : WeaponFireScript {
 
         if (extremeFocus == false)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector3(Mathf.Cos(baseAngle * Mathf.Deg2Rad), Mathf.Sin(baseAngle * Mathf.Deg2Rad)).normalized, 20, bulletImpactLayerMask);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector3(Mathf.Cos(baseAngle * Mathf.Deg2Rad), Mathf.Sin(baseAngle * Mathf.Deg2Rad)).normalized, 60, bulletImpactLayerMask);
             GameObject bulletInstant = null;
 
             if (hit.collider != null)

@@ -17,7 +17,6 @@ public class Artifacts : MonoBehaviour {
         playerScript = GetComponent<PlayerScript>();
         activeSlots = activeSlotsParent.GetComponentsInChildren<ActiveSlot>();
         artifactSlots = artifactSlotsParent.GetComponentsInChildren<ArtifactSlot>();
-        numKills = 0;
 	}
 	
 	void LateUpdate () {

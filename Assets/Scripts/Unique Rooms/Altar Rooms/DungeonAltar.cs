@@ -13,6 +13,8 @@ public class DungeonAltar : MonoBehaviour
     public GameObject altarArtifact;
     public Sprite unActive;
     SpriteRenderer spriteRenderer;
+    public GameObject customArtifact;
+    public int customHealthSacrifice;
 
     void Start()
     {
@@ -31,65 +33,74 @@ public class DungeonAltar : MonoBehaviour
     void setItem()
     {
         GameObject newItem;
-        if(whatTier == 1)
+        if (customArtifact == null)
         {
-            int percentItem = Random.Range(1, 101);
-            if(percentItem <= 50)
+            if (whatTier == 1)
             {
-                newItem = itemTemplates.loadRandomItem(1);
-                newItem.transform.parent = GameObject.Find("PresentItems").transform;
-                healthSacrifice = 200 + Random.Range(1, 5) * 25;
+                int percentItem = Random.Range(1, 101);
+                if (percentItem <= 50)
+                {
+                    newItem = itemTemplates.loadRandomItem(1);
+                    newItem.transform.parent = GameObject.Find("PresentItems").transform;
+                    healthSacrifice = 200 + Random.Range(1, 5) * 25;
+                }
+                else
+                {
+                    newItem = itemTemplates.loadRandomItem(2);
+                    newItem.transform.parent = GameObject.Find("PresentItems").transform;
+                    healthSacrifice = 350 + Random.Range(1, 4) * 25;
+                }
+            }
+            else if (whatTier == 2)
+            {
+                int percentItem = Random.Range(1, 101);
+                if (percentItem <= 25)
+                {
+                    newItem = itemTemplates.loadRandomItem(1);
+                    newItem.transform.parent = GameObject.Find("PresentItems").transform;
+                    healthSacrifice = 125 + Random.Range(1, 5) * 25;
+                }
+                else if (percentItem > 25 && percentItem <= 75)
+                {
+                    newItem = itemTemplates.loadRandomItem(2);
+                    newItem.transform.parent = GameObject.Find("PresentItems").transform;
+                    healthSacrifice = 250 + Random.Range(1, 4) * 25;
+                }
+                else
+                {
+                    newItem = itemTemplates.loadRandomItem(3);
+                    newItem.transform.parent = GameObject.Find("PresentItems").transform;
+                    healthSacrifice = 500 + Random.Range(1, 4) * 50;
+                }
             }
             else
             {
-                newItem = itemTemplates.loadRandomItem(2);
-                newItem.transform.parent = GameObject.Find("PresentItems").transform;
-                healthSacrifice = 350 + Random.Range(1, 4) * 25;
-            }
-        }
-        else if(whatTier == 2)
-        {
-            int percentItem = Random.Range(1, 101);
-            if (percentItem <= 25)
-            {
-                newItem = itemTemplates.loadRandomItem(1);
-                newItem.transform.parent = GameObject.Find("PresentItems").transform;
-                healthSacrifice = 125 + Random.Range(1, 5) * 25;
-            }
-            else if(percentItem > 25 && percentItem <= 75)
-            {
-                newItem = itemTemplates.loadRandomItem(2);
-                newItem.transform.parent = GameObject.Find("PresentItems").transform;
-                healthSacrifice = 250 + Random.Range(1, 4) * 25;
-            }
-            else
-            {
-                newItem = itemTemplates.loadRandomItem(3);
-                newItem.transform.parent = GameObject.Find("PresentItems").transform;
-                healthSacrifice = 500 + Random.Range(1, 4) * 50;
+                int percentItem = Random.Range(1, 101);
+                if (percentItem <= 25)
+                {
+                    newItem = itemTemplates.loadRandomItem(1);
+                    newItem.transform.parent = GameObject.Find("PresentItems").transform;
+                    healthSacrifice = 200 + Random.Range(1, 4) * 25;
+                }
+                else if (percentItem > 25 && percentItem <= 80)
+                {
+                    newItem = itemTemplates.loadRandomItem(2);
+                    newItem.transform.parent = GameObject.Find("PresentItems").transform;
+                    healthSacrifice = 400 + Random.Range(1, 4) * 25;
+                }
+                else
+                {
+                    newItem = itemTemplates.loadRandomItem(3);
+                    newItem.transform.parent = GameObject.Find("PresentItems").transform;
+                    healthSacrifice = 650 + Random.Range(1, 4) * 50;
+                }
             }
         }
         else
         {
-            int percentItem = Random.Range(1, 101);
-            if (percentItem <= 25)
-            {
-                newItem = itemTemplates.loadRandomItem(1);
-                newItem.transform.parent = GameObject.Find("PresentItems").transform;
-                healthSacrifice = 200 + Random.Range(1, 4) * 25;
-            }
-            else if (percentItem > 25 && percentItem <= 80)
-            {
-                newItem = itemTemplates.loadRandomItem(2);
-                newItem.transform.parent = GameObject.Find("PresentItems").transform;
-                healthSacrifice = 400 + Random.Range(1, 4) * 25;
-            }
-            else
-            {
-                newItem = itemTemplates.loadRandomItem(3);
-                newItem.transform.parent = GameObject.Find("PresentItems").transform;
-                healthSacrifice = 650 + Random.Range(1, 4) * 50;
-            }
+            newItem = Instantiate(customArtifact);
+            newItem.transform.parent = GameObject.Find("PresentItems").transform;
+            healthSacrifice = customHealthSacrifice;
         }
         altarArtifact = newItem;
     }

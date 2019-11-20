@@ -450,7 +450,7 @@ public class PlayerScript : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         hullUpgradeManager = GetComponent<HullUpgradeManager>();
 
-        if (SceneManager.GetActiveScene().name != "Tutorial")
+        if (SceneManager.GetActiveScene().name != "Tutorial" && SceneManager.GetActiveScene().name != "Demo Level")
         {
             loadPrevItems();
         }
@@ -526,7 +526,7 @@ public class PlayerScript : MonoBehaviour {
             shipHealthMAX = 1000 + healthBonus + upgradeHealthBonus;
             pickRendererLayer();
             defenseModifier = 1 - defenseBonus - conDefenseBonus - upgradeDefenseBonus;
-            FindObjectOfType<PlayerArmorEffect>().updateShieldEffect();
+
             if (defenseModifier <= 0)
             {
                 defenseModifier = 0;
@@ -643,6 +643,7 @@ public class PlayerScript : MonoBehaviour {
             }
         }
         updateHealthBar();
+        FindObjectOfType<PlayerArmorEffect>().updateShieldEffect();
     }
 
     IEnumerator respawnShip()

@@ -15,7 +15,7 @@ public class Shipsmith : MonoBehaviour {
     }
 
     void LateUpdate () {
-        if (Vector2.Distance(playerShip.transform.position, transform.position) < 5f && (MiscData.unlockedBuildings.Contains(buildingID) || ignoreUnlockLevel))
+        if (Vector2.Distance(playerShip.transform.position, transform.position) < 5f && (MiscData.unlockedBuildings.Contains(buildingID) || ignoreUnlockLevel) && playerShip.GetComponent<PlayerScript>().enemiesDefeated == true)
         {
             if (shipSmithDisplay.activeSelf == false)
             {
@@ -59,13 +59,13 @@ public class Shipsmith : MonoBehaviour {
             }
         }
 
-        if (!MiscData.unlockedBuildings.Contains(buildingID))
+        if ((MiscData.unlockedBuildings.Contains(buildingID) || ignoreUnlockLevel) && playerShip.GetComponent<PlayerScript>().enemiesDefeated == true)
         {
-            icon.SetActive(false);
+            icon.SetActive(true);
         }
         else
         {
-            icon.SetActive(true);
+            icon.SetActive(false);
         }
     }
 }

@@ -45,7 +45,7 @@ public class Enemy: MonoBehaviour
         }
         FindObjectOfType<EnemyDamageNumbersUI>().addEnemyDamageUI(damageDealt, this.gameObject);
         health -= damageDealt;
-        FindObjectOfType<CameraShake>().shakeCamFunction(0.1f, 0.3f * ((float)damageDealt / maxHealth));
+        FindObjectOfType<CameraShake>().shakeCamFunction(0.1f, 0.3f * Mathf.Clamp(((float)damageDealt / maxHealth), 0, 5));
 
         foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
         {
