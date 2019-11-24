@@ -20,7 +20,7 @@ public class ReturnNotifications : MonoBehaviour
     void Awake()
     {
         playerScript = FindObjectOfType<PlayerScript>();
-        if (MiscData.finishedTutorial == false)
+        if (MiscData.finishedTutorial == false || MiscData.missionID == null)
         {
             foreach (Transform child in transform)
             {

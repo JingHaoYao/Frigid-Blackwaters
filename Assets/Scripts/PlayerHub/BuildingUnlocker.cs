@@ -34,9 +34,8 @@ public class BuildingUnlocker : MonoBehaviour
             appliedUnlocks = true;
             if (MiscData.numberDungeonRuns >= 1 && !MiscData.unlockedBuildings.Contains("provisions"))
             {
-                notifications.dialoguesToDisplay.Add(loadDialogue("Quest and Provisions Unlocked"));
+                notifications.dialoguesToDisplay.Add(loadDialogue("Provisions Unlocked"));
                 MiscData.unlockedBuildings.Add("provisions");
-                MiscData.unlockedBuildings.Add("quest_ship");
                 MiscData.unlockedBuildings.Add("boss_quest_center");
             }
 

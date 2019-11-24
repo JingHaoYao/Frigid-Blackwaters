@@ -32,13 +32,10 @@ public class DeadSentinel : MonoBehaviour
 
     IEnumerator dieDown()
     {
-        FindObjectOfType<BlackOverlay>().transition();
+        GameObject.Find("Sentinel Boss Manager").GetComponent<BossManager>().bossBeaten("sentinel_boss", 0);
         yield return new WaitForSeconds(1f);
         Camera.main.orthographicSize = 10;
         Camera.main.GetComponent<MoveCameraNextRoom>().trackPlayer = false;
-        Camera.main.transform.position = returnFrontier.cameraPosition;
-        FindObjectOfType<PlayerScript>().gameObject.transform.position = returnFrontier.playerShipPosition;
-        returnFrontier.startUpDialogue();
         yield return new WaitForSeconds(1f);
     }
 

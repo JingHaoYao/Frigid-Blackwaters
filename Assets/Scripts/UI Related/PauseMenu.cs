@@ -78,14 +78,6 @@ public class PauseMenu : MonoBehaviour
         FindObjectOfType<AudioManager>().PlaySound("Pause Menu Button");
     }
 
-    public void openQuestMenu()
-    {
-        mainPauseMenu.SetActive(false);
-        questDisplay.transform.GetChild(0).gameObject.SetActive(true);
-        questDisplay.GetComponent<CurrentQuestMenu>().UpdateUI();
-        FindObjectOfType<AudioManager>().PlaySound("Pause Menu Button");
-    }
-
     public void openInventory()
     {
         mainPauseMenu.SetActive(false);

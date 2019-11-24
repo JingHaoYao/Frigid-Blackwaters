@@ -2,22 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElderFrostMageBossManager : MonoBehaviour
+public class ElderFrostMageBossManager : BossManager
 {
-    public GameObject doorSeal, roomReveal;
+    public GameObject doorSeal;
     public GameObject elderFrostMage;
-    QuestManager questManager;
     bool roomInit = false;
-
-    void Start()
-    {
-        questManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
-        if (questManager.currentQuest.GetComponent<QuestType>().questID == "defeat_the_elder_frost_mage")
-        {
-            Camera.main.transform.position = new Vector3(1300, 20, 0);
-            GameObject.Find("PlayerShip").transform.position = new Vector3(1300, 24, 0);
-        }
-    }
 
     void Update()
     {
@@ -25,7 +14,7 @@ public class ElderFrostMageBossManager : MonoBehaviour
         {
             GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated = false;
             StartCoroutine(adjustPlayer());
-            Instantiate(doorSeal, Camera.main.transform.position + new Vector3(0, 10.4f, 0), Quaternion.Euler(0, 0, 270));
+            Instantiate(doorSeal, Camera.main.transform.position + new Vector3(Mathf.Cos((transform.parent.rotation.eulerAngles.z - 90) * Mathf.Deg2Rad), Mathf.Sin((transform.parent.rotation.eulerAngles.z - 90) * Mathf.Deg2Rad)) * 10.4f, Quaternion.Euler(0, 0, transform.parent.rotation.eulerAngles.z + 90));
             Instantiate(roomReveal, transform.position, Quaternion.identity);
             elderFrostMage.SetActive(true);
             roomInit = true;

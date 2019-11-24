@@ -6,6 +6,7 @@ public class FishManIsland : Enemy {
     public int whatCornerSpawned = 0;
     public GameObject fishMan;
     public int numFishMan = 3;
+    List<GameObject> spawnedFishmen = new List<GameObject>();
 
     void spawnFishMen()
     {
@@ -16,6 +17,7 @@ public class FishManIsland : Enemy {
             {
                 spawnedFishMan = Instantiate(fishMan, transform.position + new Vector3(Mathf.Cos((0 - 45*i)*Mathf.Deg2Rad), Mathf.Sin((0 - 45 * i) * Mathf.Deg2Rad), 0) * 3, Quaternion.identity);
                 spawnedFishMan.GetComponent<FishManEnemy>().fishManIsland = this.gameObject;
+                spawnedFishmen.Add(spawnedFishMan);
             }
         }
         else if(whatCornerSpawned == 2)
@@ -24,6 +26,7 @@ public class FishManIsland : Enemy {
             {
                 spawnedFishMan = Instantiate(fishMan, transform.position + new Vector3(Mathf.Cos((0 + 45 * i) * Mathf.Deg2Rad), Mathf.Sin((0 + 45 * i) * Mathf.Deg2Rad), 0) * 3, Quaternion.identity);
                 spawnedFishMan.GetComponent<FishManEnemy>().fishManIsland = this.gameObject;
+                spawnedFishmen.Add(spawnedFishMan);
             }
         }
         else if(whatCornerSpawned == 3)
@@ -32,6 +35,7 @@ public class FishManIsland : Enemy {
             {
                 spawnedFishMan = Instantiate(fishMan, transform.position + new Vector3(Mathf.Cos((180 + 45 * i) * Mathf.Deg2Rad), Mathf.Sin((180 + 45 * i) * Mathf.Deg2Rad), 0) * 3, Quaternion.identity);
                 spawnedFishMan.GetComponent<FishManEnemy>().fishManIsland = this.gameObject;
+                spawnedFishmen.Add(spawnedFishMan);
             }
         }
         else
@@ -40,6 +44,7 @@ public class FishManIsland : Enemy {
             {
                 spawnedFishMan = Instantiate(fishMan, transform.position + new Vector3(Mathf.Cos((90 + 45 * i) * Mathf.Deg2Rad), Mathf.Sin((90 + 45 * i) * Mathf.Deg2Rad), 0) * 3, Quaternion.identity);
                 spawnedFishMan.GetComponent<FishManEnemy>().fishManIsland = this.gameObject;
+                spawnedFishmen.Add(spawnedFishMan);
             }
         }
     }
@@ -72,6 +77,21 @@ public class FishManIsland : Enemy {
 	}
 
 	void Update () {
-		
+	    if(checkfishMan() == false)
+        {
+            Destroy(this);
+        }
 	}
+
+    bool checkfishMan()
+    {
+        foreach(GameObject fishman in spawnedFishmen)
+        {
+            if(fishman != null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

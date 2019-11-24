@@ -118,7 +118,7 @@ public class MapSpawn : MonoBehaviour{
                         }
                     }
                 }
-                revealTiles();
+                //revealTiles();
             }
         }
     }

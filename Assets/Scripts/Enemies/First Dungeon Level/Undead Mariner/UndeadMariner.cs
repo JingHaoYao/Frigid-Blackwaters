@@ -28,6 +28,8 @@ public class UndeadMariner : Enemy
 
     Rigidbody2D rigidBody2D;
 
+    public BossManager bossManager;
+
     public GameObject waterSplash;
     public GameObject waterFoam;
     float foamTimer = 0;
@@ -269,6 +271,8 @@ public class UndeadMariner : Enemy
         playerShip = GameObject.Find("PlayerShip");
         playerScript = playerShip.GetComponent<PlayerScript>();
         targetTravel = Camera.main.transform.position + new Vector3(Camera.main.transform.position.x - playerShip.transform.position.x, Camera.main.transform.position.y - playerShip.transform.position.y).normalized * 4.5f;
+        FindObjectOfType<BossHealthBar>().targetEnemy = GetComponent<Enemy>();
+        FindObjectOfType<BossHealthBar>().bossStartUp("Undead Mariner");
     }
 
     void Update()
@@ -361,8 +365,9 @@ public class UndeadMariner : Enemy
             {
                 rigidBody2D.velocity = Vector3.zero;
                 this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                bossManager.bossBeaten(nameID, 0.8f);
                 addKills();
-                MiscData.bossesDefeated.Add(nameID);
+                FindObjectOfType<BossHealthBar>().bossEnd();
                 animator.SetTrigger("Death");
                 this.GetComponents<AudioSource>()[1].Play();
                 Destroy(this.gameObject, 0.75f);

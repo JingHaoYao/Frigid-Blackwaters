@@ -2,30 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UndeadMarinerBossManager : MonoBehaviour
+public class UndeadMarinerBossManager : BossManager
 {
-    public GameObject doorSeal, roomReveal;
+    public GameObject doorSeal;
     public GameObject undeadMariner;
-    QuestManager questManager;
     bool roomInit = false;
 
-    void Start()
-    {
-        questManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
-        if(questManager.currentQuest.GetComponent<QuestType>().questID == "defeat_the_undead_mariner")
-        {
-            Camera.main.transform.position = new Vector3(1200, 0, 0);
-            GameObject.Find("PlayerShip").transform.position = new Vector3(1200, -3, 0);
-        }
-    }
     
     void Update()
     {
-        if(Vector2.Distance(transform.position, Camera.main.transform.position) < 0.2f && roomInit == false)
+        if (Vector2.Distance(transform.position, Camera.main.transform.position) < 0.2f && roomInit == false)
         {
             GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated = false;
             StartCoroutine(adjustPlayer());
-            Instantiate(doorSeal, Camera.main.transform.position + new Vector3(0, -10.4f, 0), Quaternion.Euler(0, 0, 90));
+            Instantiate(doorSeal, Camera.main.transform.position + new Vector3(Mathf.Cos((transform.parent.rotation.eulerAngles.z - 90)* Mathf.Deg2Rad), Mathf.Sin((transform.parent.rotation.eulerAngles.z - 90) * Mathf.Deg2Rad)) * 10.4f, Quaternion.Euler(0, 0, transform.parent.rotation.eulerAngles.z + 90));
             Instantiate(roomReveal, transform.position, Quaternion.identity);
             undeadMariner.SetActive(true);
             roomInit = true;

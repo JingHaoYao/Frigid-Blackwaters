@@ -80,6 +80,11 @@ public class SaveData
 
     public bool skillPointsNotification;
 
+    public string missionID;
+    public bool missionFinished;
+
+    public string[] completedMissions;
+
     public SaveData()
     {
         storedVaultItems = new string[HubProperties.vaultItems.Count];
@@ -157,10 +162,6 @@ public class SaveData
         maxInventorySize = PlayerItems.maxInventorySize;
 
         finishedTutorial = MiscData.finishedTutorial;
-        currentQuestID = MiscData.currentQuestID;
-        finishedQuest = MiscData.finishedQuest;
-        availableQuests = MiscData.availableQuests;
-        availableBossQuest = MiscData.availableBossQuest;
         numberQuestsCompleted = MiscData.numberQuestsCompleted;
 
         completedBosses = new string[MiscData.bossesDefeated.Count];
@@ -235,5 +236,14 @@ public class SaveData
 
         questSymbolShown = MiscData.questSymbolShown;
         dungeonMapSymbolShown = MiscData.dungeonMapSymbolShown;
+
+        missionID = MiscData.missionID;
+        missionFinished = MiscData.finishedMission;
+
+        completedMissions = new string[MiscData.completedMissions.Count];
+        for(int i = 0; i < completedMissions.Length; i++)
+        {
+            completedMissions[i] = MiscData.completedMissions[i];
+        }
     }
 }

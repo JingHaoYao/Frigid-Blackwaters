@@ -174,6 +174,9 @@
     <Compile Include="Assets\Scripts\Data Storage\SavedKeyBindings.cs" />
     <Compile Include="Assets\Scripts\Data Storage\SaveOptions.cs" />
     <Compile Include="Assets\Scripts\Data Storage\SaveSystem.cs" />
+    <Compile Include="Assets\Scripts\Demo Related\DemoBoss.cs" />
+    <Compile Include="Assets\Scripts\Demo Related\DemoBossCrystal.cs" />
+    <Compile Include="Assets\Scripts\Demo Related\DemoBossHead.cs" />
     <Compile Include="Assets\Scripts\Demo Related\DemoTips.cs" />
     <Compile Include="Assets\Scripts\Demo Related\FirstRoomDoorBlock.cs" />
     <Compile Include="Assets\Scripts\Demo Related\FirstRoomSwitch.cs" />
@@ -376,22 +379,13 @@
     <Compile Include="Assets\Scripts\PlayerHub\Shipsmith.cs" />
     <Compile Include="Assets\Scripts\PlayerHub\SpawnRoom.cs" />
     <Compile Include="Assets\Scripts\PlayerHub\Tavern.cs" />
-    <Compile Include="Assets\Scripts\Questing\BossQuestBoard.cs" />
-    <Compile Include="Assets\Scripts\Questing\BossQuestGenerator.cs" />
-    <Compile Include="Assets\Scripts\Questing\ExamineQuest.cs" />
-    <Compile Include="Assets\Scripts\Questing\ExploreQuest.cs" />
-    <Compile Include="Assets\Scripts\Questing\GatherQuest.cs" />
-    <Compile Include="Assets\Scripts\Questing\KillQuest.cs" />
-    <Compile Include="Assets\Scripts\Questing\QuestManager.cs" />
-    <Compile Include="Assets\Scripts\Questing\QuestRewarder.cs" />
-    <Compile Include="Assets\Scripts\Questing\QuestRewards.cs" />
-    <Compile Include="Assets\Scripts\Questing\QuestTemplates.cs" />
-    <Compile Include="Assets\Scripts\Questing\QuestType.cs" />
     <Compile Include="Assets\Scripts\Spawns\AntiSpawnSpaceDetailer.cs" />
+    <Compile Include="Assets\Scripts\Spawns\BossManager.cs" />
     <Compile Include="Assets\Scripts\Spawns\CustomRoomManager.cs" />
     <Compile Include="Assets\Scripts\Spawns\DoorSeal.cs" />
     <Compile Include="Assets\Scripts\Spawns\EnemyRoomTemplate.cs" />
     <Compile Include="Assets\Scripts\Spawns\EnemyRoomTemplates.cs" />
+    <Compile Include="Assets\Scripts\Spawns\MissionManager.cs" />
     <Compile Include="Assets\Scripts\Spawns\ObstacleLayoutTemplates.cs" />
     <Compile Include="Assets\Scripts\Spawns\RoomLayout.cs" />
     <Compile Include="Assets\Scripts\Spawns\RoomMemory.cs" />
@@ -404,6 +398,7 @@
     <Compile Include="Assets\Scripts\Spawns\SpecialRoomTemplates.cs" />
     <Compile Include="Assets\Scripts\Spawns\StoryCheckpoint.cs" />
     <Compile Include="Assets\Scripts\Spawns\WaterTile.cs" />
+    <Compile Include="Assets\Scripts\Story Missions\StoryMission.cs" />
     <Compile Include="Assets\Scripts\Tutorial Scripts\BlockingIceberg.cs" />
     <Compile Include="Assets\Scripts\Tutorial Scripts\HubLoader.cs" />
     <Compile Include="Assets\Scripts\Tutorial Scripts\MapSymbol.cs" />
@@ -425,7 +420,6 @@
     <Compile Include="Assets\Scripts\UI Related\ChestIndicator.cs" />
     <Compile Include="Assets\Scripts\UI Related\ChestSlot.cs" />
     <Compile Include="Assets\Scripts\UI Related\CooldownFill.cs" />
-    <Compile Include="Assets\Scripts\UI Related\CurrentQuestMenu.cs" />
     <Compile Include="Assets\Scripts\UI Related\CursorTarget.cs" />
     <Compile Include="Assets\Scripts\UI Related\DamageNumbers.cs" />
     <Compile Include="Assets\Scripts\UI Related\DisplayItem.cs" />
@@ -470,8 +464,6 @@
     <Compile Include="Assets\Scripts\UI Related\PendantDisplay.cs" />
     <Compile Include="Assets\Scripts\UI Related\PlayerHealNumbers.cs" />
     <Compile Include="Assets\Scripts\UI Related\PlayerHubMap.cs" />
-    <Compile Include="Assets\Scripts\UI Related\QuestBoard.cs" />
-    <Compile Include="Assets\Scripts\UI Related\QuestSlot.cs" />
     <Compile Include="Assets\Scripts\UI Related\QuietAllNoises.cs" />
     <Compile Include="Assets\Scripts\UI Related\ReturnNotifications.cs" />
     <Compile Include="Assets\Scripts\UI Related\SerenityFirstBossDialogue.cs" />
@@ -542,6 +534,9 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/GitHub/Frigid Blackwaters/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.PixelPerfect.Editor">
+      <HintPath>D:/GitHub/Frigid Blackwaters/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/GitHub/Frigid Blackwaters/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -557,6 +552,9 @@
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
       <HintPath>D:/GitHub/Frigid Blackwaters/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.PixelPerfect">
+      <HintPath>D:/GitHub/Frigid Blackwaters/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.SpatialTracking">
       <HintPath>D:/GitHub/Frigid Blackwaters/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
     </Reference>
@@ -571,12 +569,6 @@
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
       <HintPath>D:/GitHub/Frigid Blackwaters/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.PixelPerfect.Editor">
-      <HintPath>D:/GitHub/Frigid Blackwaters/Library/ScriptAssemblies/Unity.2D.PixelPerfect.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.PixelPerfect">
-      <HintPath>D:/GitHub/Frigid Blackwaters/Library/ScriptAssemblies/Unity.2D.PixelPerfect.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

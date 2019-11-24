@@ -5,10 +5,6 @@ using UnityEngine;
 public static class MiscData
 {
     public static bool readFirstBossDialogue = false;
-    public static string currentQuestID = "empty_quest";
-    public static string availableBossQuest = "empty_quest";
-    public static bool finishedQuest = false;
-    public static string[] availableQuests = new string[3] { "empty_quest", "empty_quest", "empty_quest" };
     public static int numberQuestsCompleted = 0;
     public static List<string> bossesDefeated = new List<string>();
     public static float masterVolume = 0;
@@ -46,4 +42,9 @@ public static class MiscData
 
     //what dungeon stages unlocked
     public static int dungeonLevelUnlocked = 1;
+
+    // Story Mission Related Parameters
+    public static string missionID = "defeat_undead_mariner";
+    public static bool finishedMission;
+    public static List<string> completedMissions = new List<string>();
 }

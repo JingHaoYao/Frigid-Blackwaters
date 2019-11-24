@@ -195,6 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 0
+  rendLayerOffset: 0
 --- !u!114 &114685004019344030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,9 +210,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameID: fish_man_island
   health: 0
+  maxHealth: 0
   dangerValue: 3
   killNumber: 3
   stopAttacking: 0
+  percentSpawnChance: 33
+  armorMitigation: 0
   whatCornerSpawned: 4
   fishMan: {fileID: 1080337000211128, guid: bec628e8519f50448bcaed98cb58b60b, type: 3}
   numFishMan: 3

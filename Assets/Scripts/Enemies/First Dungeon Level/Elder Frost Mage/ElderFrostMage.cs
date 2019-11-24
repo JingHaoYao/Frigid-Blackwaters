@@ -27,6 +27,8 @@ public class ElderFrostMage : Enemy
     public GameObject waterFoam;
     float foamTimer = 0;
 
+    public BossManager bossManager;
+
     Vector3 targetTravel;
 
     void spawnFoam()
@@ -166,6 +168,8 @@ public class ElderFrostMage : Enemy
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerShip = GameObject.Find("PlayerShip");
         initPlayerPos = playerShip.transform.position;
+        FindObjectOfType<BossHealthBar>().targetEnemy = GetComponent<Enemy>();
+        FindObjectOfType<BossHealthBar>().bossStartUp("Elder Frost Mage");
     }
 
     void Update()
@@ -238,9 +242,10 @@ public class ElderFrostMage : Enemy
             {
                 rigidBody2D.velocity = Vector3.zero;
                 addKills();
-                MiscData.bossesDefeated.Add(nameID);
+                bossManager.bossBeaten(nameID, 0.8f);
                 animator.enabled = true;
                 animator.SetTrigger("Death");
+                FindObjectOfType<BossHealthBar>().bossEnd();
                 this.GetComponents<AudioSource>()[1].Play();
             }
             else

@@ -25,6 +25,8 @@ public class SentinelBoss : Enemy
 
     public GameObject scatterRock;
 
+    BossManager bossManager;
+
     void pickView(float direction)
     {
         if (direction > 75 && direction < 105)
@@ -224,14 +226,13 @@ public class SentinelBoss : Enemy
         if (health <= 0)
         {
             Instantiate(deadBoss, transform.position, Quaternion.identity);
-            MiscData.bossesDefeated.Add("sentinel");
             MiscData.dungeonLevelUnlocked = 2;
             FindObjectOfType<BossHealthBar>().bossEnd();
-            MiscData.skillPointsNotification = true;
             SaveSystem.SaveGame();
             FindObjectOfType<AudioManager>().FadeOut("First Boss Background Music", 0.2f);
             FindObjectOfType<AudioManager>().PlaySound("First Boss Defeated Music");
             FindObjectOfType<AudioManager>().FadeIn("First Boss Defeated Music", 0.2f, 1f);
+
             foreach(SentinelRotateRock rock in FindObjectsOfType<SentinelRotateRock>())
             {
                 rock.GetComponent<Animator>().SetTrigger("Fall");

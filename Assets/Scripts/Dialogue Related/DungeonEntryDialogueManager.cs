@@ -8,38 +8,46 @@ public class DungeonEntryDialogueManager : MonoBehaviour
     public string[] randomEntryDialogues;
     public DialogueUI dialogueUI;
     public GameObject dialogueBlackOverlay;
-    public StoryCheckpoint[] storyCheckPoints;
-    public StoryCheckpoint bossCheckpoint;
     public int whatDungeonLevel = 1;
     bool loadedDialogue = false;
     public GameObject mapSymbol, infoPointer;
+    Dictionary<string, string> entryDialogueDict = new Dictionary<string, string>();
+    MissionManager missionManager;
 
-    /*private void Start()
+    private void Awake()
     {
-        storyEntryDialogues = new string[storyDungeonEntryDialogues.Length];
-        randomEntryDialogues = new string[randomDungeonEntryDialogues.Length];
-
-        for(int i = 0; i < storyEntryDialogues.Length; i++)
+        missionManager = FindObjectOfType<MissionManager>();
+        for(int i = 0; i < missionManager.missionIDs.Count; i++)
         {
-            storyEntryDialogues[i] = storyDungeonEntryDialogues[i].gameObject.name;
+            entryDialogueDict.Add(missionManager.missionIDs[i], storyEntryDialogues[i]);
         }
-        
-        for(int i = 0; i < randomEntryDialogues.Length; i++)
-        {
-            randomEntryDialogues[i] = randomDungeonEntryDialogues[i].gameObject.name;
-        }
-    }*/
+    }
 
     public DialogueSet loadDialogue(string name, bool storyDialogue = false)
     {
-        if(storyDialogue == true)
+        if (whatDungeonLevel == 1)
         {
-            return Resources.Load<DialogueSet>("Dialogues/First Dungeon Level/Story Dialogues/" + name);
+            if (storyDialogue == true)
+            {
+                return Resources.Load<DialogueSet>("Dialogues/First Dungeon Level/Story Dialogues/" + name);
+            }
+            else
+            {
+                return Resources.Load<DialogueSet>("Dialogues/First Dungeon Level/Random Entry Dungeon Dialogue/" + name);
+            }
         }
-        else
+        else if (whatDungeonLevel == 2)
         {
-            return Resources.Load<DialogueSet>("Dialogues/First Dungeon Level/Random Entry Dungeon Dialogue/" + name);
+            if (storyDialogue == true)
+            {
+                return Resources.Load<DialogueSet>("Dialogues/Second Dungeon Level/Story Dialogues/" + name);
+            }
+            else
+            {
+                return Resources.Load<DialogueSet>("Dialogues/Second Dungeon Level/Random Entry Dungeon Dialogue/" + name);
+            }
         }
+        return null;
     }
 
     void Update()
@@ -64,27 +72,9 @@ public class DungeonEntryDialogueManager : MonoBehaviour
     {
         if (whatDungeonLevel == 1)
         {
-            if ((MiscData.completedEntryDungeonDialogues.Count - (whatDungeonLevel - 1) * 3) == 0)
+            if (!MiscData.completedEntryDungeonDialogues.Contains(entryDialogueDict[MiscData.missionID]))
             {
-                dialogueUI.targetDialogue = loadDialogue(storyEntryDialogues[0], true);
-                dialogueUI.gameObject.SetActive(true);
-                dialogueBlackOverlay.SetActive(true);
-            }
-            else if ((MiscData.completedEntryDungeonDialogues.Count - (whatDungeonLevel - 1) * 3) == 1 && MiscData.completedCheckPoints.Count == 1)
-            {
-                dialogueUI.targetDialogue = loadDialogue(storyEntryDialogues[1], true);
-                dialogueUI.gameObject.SetActive(true);
-                dialogueBlackOverlay.SetActive(true);
-            }
-            else if ((MiscData.completedEntryDungeonDialogues.Count - (whatDungeonLevel - 1) * 3) == 2 && MiscData.completedCheckPoints.Count == 2)
-            {
-                dialogueUI.targetDialogue = loadDialogue(storyEntryDialogues[2], true);
-                dialogueUI.gameObject.SetActive(true);
-                dialogueBlackOverlay.SetActive(true);
-            }
-            else if ((MiscData.completedEntryDungeonDialogues.Count - (whatDungeonLevel - 1) * 3) == 3 && MiscData.completedCheckPoints.Count == 3)
-            {
-                dialogueUI.targetDialogue = loadDialogue(storyEntryDialogues[3], true);
+                dialogueUI.targetDialogue = loadDialogue(entryDialogueDict[MiscData.missionID], true);
                 dialogueUI.gameObject.SetActive(true);
                 dialogueBlackOverlay.SetActive(true);
             }

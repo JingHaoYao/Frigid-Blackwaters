@@ -56,13 +56,6 @@ public class DungeonSelectorButton : MonoBehaviour {
         levelDescriptor.SetActive(false);
         yield return new WaitForSeconds(1f);
         levelDescriptor.SetActive(true);
-        if (FindObjectOfType<QuestRewarder>())
-        {
-            if (FindObjectOfType<QuestRewarder>().questDatabase[MiscData.currentQuestID].GetComponent<QuestType>().whatDungeonLevel == whatDungeonLevel)
-            {
-                questIcon.SetActive(true);
-            }
-        }
     }
 
     public void loadScene()

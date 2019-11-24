@@ -8,6 +8,7 @@ public class MoveCameraNextRoom : MonoBehaviour {
     public RoomMemory roomMemory;
     public MapSpawn mapSpawn;
     public MapExploration mapExploration;
+    MissionManager missionManager;
 
     //used for camera to track the player
     public Vector2 topRightBoundary, bottomLeftBoundary;
@@ -36,42 +37,54 @@ public class MoveCameraNextRoom : MonoBehaviour {
 
     void hasPlayerMovedRooms()
     {
-            if (playerShip.transform.position.y < transform.position.y - 10)
+        if (playerShip.transform.position.y < transform.position.y - 10)
+        {
+            moveCamera(4);
+            if (roomMemory != null)
             {
-                moveCamera(4);
-                if (roomMemory != null)
+                roomMemory.playerRoom = roomMemory.playerRoom + new Vector2(0, -1);
+                if (missionManager.bossInitiated == false)
                 {
-                    roomMemory.playerRoom = roomMemory.playerRoom + new Vector2(0, -1);
                     updateTile();
                 }
             }
-            else if (playerShip.transform.position.y > transform.position.y + 10)
+        }
+        else if (playerShip.transform.position.y > transform.position.y + 10)
+        {
+            moveCamera(3);
+            if (roomMemory != null)
             {
-                moveCamera(3);
-                if (roomMemory != null)
+                roomMemory.playerRoom = roomMemory.playerRoom + new Vector2(0, 1);
+                if (missionManager.bossInitiated == false)
                 {
-                    roomMemory.playerRoom = roomMemory.playerRoom + new Vector2(0, 1);
                     updateTile();
                 }
             }
-            else if (playerShip.transform.position.x < transform.position.x - 10)
+        }
+        else if (playerShip.transform.position.x < transform.position.x - 10)
+        {
+            moveCamera(1);
+            if (roomMemory != null)
             {
-                moveCamera(1);
-                if (roomMemory != null)
+                roomMemory.playerRoom = roomMemory.playerRoom + new Vector2(-1, 0);
+                if (missionManager.bossInitiated == false)
                 {
-                    roomMemory.playerRoom = roomMemory.playerRoom + new Vector2(-1, 0);
                     updateTile();
                 }
             }
-            else if (playerShip.transform.position.x > transform.position.x + 10)
+        }
+        else if (playerShip.transform.position.x > transform.position.x + 10)
+        {
+            moveCamera(2);
+            if (roomMemory != null)
             {
-                moveCamera(2);
-                if (roomMemory != null)
+                roomMemory.playerRoom = roomMemory.playerRoom + new Vector2(1, 0);
+                if (missionManager.bossInitiated == false)
                 {
-                    roomMemory.playerRoom = roomMemory.playerRoom + new Vector2(1, 0);
                     updateTile();
                 }
             }
+        }
     }
 
     void updateTile(){
@@ -84,6 +97,7 @@ public class MoveCameraNextRoom : MonoBehaviour {
     void Start () {
         playerShip = GameObject.Find("PlayerShip");
         mapUI = GameObject.Find("PlayerShip").GetComponent<MapUI>();
+        missionManager = FindObjectOfType<MissionManager>();
         if (FindObjectOfType<RoomMemory>())
         {
             roomMemory = GameObject.Find("RoomMemory").GetComponent<RoomMemory>();

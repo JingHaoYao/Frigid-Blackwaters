@@ -102,7 +102,6 @@ public class PlayerScript : MonoBehaviour {
 
     public void applyInventoryLoss()
     {
-        MiscData.finishedQuest = false;
         float goldLoss = 0.25f;
         int numArtifactsSave = 0;
         if (PlayerUpgrades.safeUpgrades.Count == 1)

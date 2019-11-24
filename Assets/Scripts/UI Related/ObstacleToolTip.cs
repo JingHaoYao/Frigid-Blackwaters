@@ -47,10 +47,6 @@ public class ObstacleToolTip : MonoBehaviour {
                     dialogueUI.targetDialogue = examineDialogue;
                     dialogueUI.gameObject.SetActive(true);
                     dialogueBlackOverlay.SetActive(true);
-                    if (GameObject.Find("QuestManager"))
-                    {
-                        GameObject.Find("QuestManager").GetComponent<QuestManager>().addExamine(this.gameObject);
-                    }
                 }
                 else
                 {
@@ -63,10 +59,6 @@ public class ObstacleToolTip : MonoBehaviour {
                     else
                     {
                         toolTipActive = true;
-                        if (GameObject.Find("QuestManager"))
-                        {
-                            GameObject.Find("QuestManager").GetComponent<QuestManager>().addExamine(this.gameObject);
-                        }
                         obstacleToolTip.GetComponentInChildren<Text>().text = text.text;
                         obstacleToolTip.SetActive(true);
                         GameObject.Find("PlayerShip").GetComponent<PlayerScript>().shipRooted = true;

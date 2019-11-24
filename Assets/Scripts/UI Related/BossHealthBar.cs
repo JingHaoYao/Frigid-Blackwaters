@@ -8,15 +8,17 @@ public class BossHealthBar : MonoBehaviour
     Image bossHealthImage;
     public Enemy targetEnemy;
     public int enemyMaxHealth;
+    Text text;
 
     void Start()
     {
         bossHealthImage = this.GetComponent<Image>();
-        
+        text = GetComponentInChildren<Text>();
     }
 
-    public void bossStartUp()
+    public void bossStartUp(string bossName)
     {
+        text.text = bossName;
         foreach (Animator animator in GetComponentsInChildren<Animator>())
         {
             animator.SetTrigger("FadeOut");
@@ -36,7 +38,7 @@ public class BossHealthBar : MonoBehaviour
     {
         if(targetEnemy != null)
         {
-            bossHealthImage.fillAmount = (float)targetEnemy.health/ enemyMaxHealth;
+            bossHealthImage.fillAmount = (float)targetEnemy.health / targetEnemy.maxHealth;
         }
     }
 }

@@ -47,31 +47,27 @@ public class PlayerHubMap : MonoBehaviour
     {
         if (Vector2.Distance(Camera.main.transform.position, new Vector3(0, 0)) < 0.2f)
         {
-            return 4;
+            return 3;
         }
         else if (Vector2.Distance(Camera.main.transform.position, new Vector3(0, -20)) < 0.2f)
         {
-            return 3;
+            return 2;
         }
         else if (Vector2.Distance(Camera.main.transform.position, new Vector3(20, 0)) < 0.2f)
         {
-            return 1;
+            return 0;
         }
         else if (Vector2.Distance(Camera.main.transform.position, new Vector3(-20, 0)) < 0.2f)
         {
-            return 6;
+            return 5;
         }
         else if (Vector2.Distance(Camera.main.transform.position, new Vector3(-20, -20)) < 0.2f)
         {
-            return 5;
-        }
-        else if(Vector2.Distance(Camera.main.transform.position, new Vector3(20, 20)) < 0.2f)
-        {
-            return 0;
+            return 4;
         }
         else
         {
-            return 2;
+            return 1;
         }
     }
 

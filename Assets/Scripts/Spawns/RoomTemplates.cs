@@ -18,17 +18,18 @@ public class RoomTemplates : MonoBehaviour {
     public float waitTime = 6.3f;
     public float spawnPeriod = 0;
 
+    public int numberBranchRooms = 0;
+
     bool spawned = false;
 
     public void Awake()
     {
         dialogueManager = FindObjectOfType<DungeonEntryDialogueManager>();
-        setMaxRoomCount();
     }
 
-    void setMaxRoomCount()
+    public void setMaxRoomCount()
     {
-        maxRoomCount = (MiscData.completedCheckPoints.Count - ((dialogueManager.whatDungeonLevel - 1) * 3)) * 10 + 20;
+        maxRoomCount = FindObjectOfType<MissionManager>().currMission.numberDungeonRooms;
 
         // ONLY FOR CURRENT WORK ON SECOND LEVEL
         if(dialogueManager.whatDungeonLevel == 2)
@@ -52,8 +53,7 @@ public class RoomTemplates : MonoBehaviour {
             {
                 index = index - 1;
             }
-            antiList[index - dialogueManager.storyCheckPoints[MiscData.completedCheckPoints.Count - ((dialogueManager.whatDungeonLevel - 1) * 3)].numberFromLastRoom].checkPointRoom = true;
-            //antiList[index - dialogueManager.storyCheckPoints[0].numberFromLastRoom].checkPointRoom = true;
+            antiList[index].checkPointRoom = true;
             antiList[index].setRoomType();
         }
     }

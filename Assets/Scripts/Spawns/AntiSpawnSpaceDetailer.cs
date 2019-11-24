@@ -904,15 +904,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
             }
             else
             {
-                if (MiscData.completedCheckPoints.Count - (dialogueManager.whatDungeonLevel - 1) * 3 < dialogueManager.storyCheckPoints.Length)
-                {
-                    whatRoomType = 7;
-                }
-                else
-                {
-                    whatRoomType = 12;
-                }
-
+                whatRoomType = 7;
             }
         }
         else
@@ -1022,8 +1014,6 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                             if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
                                 slot.displayInfo.GetComponent<ArtifactEffect>().exploredNewRoom(whatRoomType);
                         }
-
-                        GameObject.Find("QuestManager").GetComponent<QuestManager>().addExplore(playerShip.GetComponent<PlayerScript>().numRoomsSinceLastArtifact);
 
                         if (whatRoomType == 2)
                         {
@@ -1137,7 +1127,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     roomInit = true;
 
 
-                    if (MiscData.completedCheckPoints.Count - (dialogueManager.whatDungeonLevel - 1) * 3 < dialogueManager.storyCheckPoints.Length)
+                    /*if (MiscData.completedCheckPoints.Count - (dialogueManager.whatDungeonLevel - 1) * 3 < dialogueManager.storyCheckPoints.Length)
                     {
                         Camera.main.transform.position = dialogueManager.storyCheckPoints[MiscData.completedCheckPoints.Count - ((dialogueManager.whatDungeonLevel - 1) * 3)].cameraPosition;
                         playerShip.transform.position = dialogueManager.storyCheckPoints[MiscData.completedCheckPoints.Count - ((dialogueManager.whatDungeonLevel - 1) * 3)].playerShipPosition;
@@ -1148,8 +1138,28 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                         Camera.main.transform.position = dialogueManager.bossCheckpoint.cameraPosition;
                         playerShip.transform.position = dialogueManager.bossCheckpoint.playerShipPosition;
                         dialogueManager.bossCheckpoint.startUpDialogue();
+                    }*/
+
+                    int whichSide = 0;
+
+                    if (bottomOpening)
+                    {
+                        whichSide = 4;
+                    }
+                    else if (topOpening)
+                    {
+                        whichSide = 2;
+                    }
+                    else if (rightOpening)
+                    {
+                        whichSide = 1;
+                    }
+                    else
+                    {
+                        whichSide = 3;
                     }
 
+                    FindObjectOfType<MissionManager>().activateBossManager(whichSide);
                     playerShip.GetComponent<PlayerScript>().periodicHeal();
                     playerShip.GetComponent<PlayerScript>().numRoomsSinceLastArtifact++;
                     playerShip.GetComponent<PlayerScript>().numRoomsVisited++;

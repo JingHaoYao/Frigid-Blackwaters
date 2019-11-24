@@ -77,7 +77,25 @@ public class RoomSpawn : MonoBehaviour
     {
         GameObject selectedRoom = rooms[Random.Range(0, rooms.Length)];
 
-        if (templates.antiList.Count < 6)
+
+        if (templates.antiList.Count < FindObjectOfType<RoomTemplates>().maxRoomCount - 4)
+        {
+            while (selectedRoom.GetComponentsInChildren<RoomSpawn>().Length == 1)
+            {
+                selectedRoom = rooms[Random.Range(0, rooms.Length)];
+            }
+        }
+        else
+        {
+            while (selectedRoom.GetComponentsInChildren<RoomSpawn>().Length != 1)
+            {
+                selectedRoom = rooms[Random.Range(0, rooms.Length)];
+            }
+        }
+
+        Instantiate(selectedRoom, transform.position, Quaternion.identity);
+
+        /*if (templates.antiList.Count < 6)
         {
             while(selectedRoom.GetComponentsInChildren<RoomSpawn>().Length < 3)
             {
@@ -107,8 +125,7 @@ public class RoomSpawn : MonoBehaviour
         else
         {
             Instantiate(selectedRoom, transform.position, Quaternion.identity);
-        }
-        
+        }*/
     }
 
    

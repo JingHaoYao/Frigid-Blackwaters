@@ -99,10 +99,6 @@ public class Inventory : MonoBehaviour {
                 inventorySlots[i].lockSlot();
             }
         }
-        if (GameObject.Find("QuestManager"))
-        {
-            GameObject.Find("QuestManager").GetComponent<QuestManager>().addItemCollect(itemList);
-        }
 
         foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
         {

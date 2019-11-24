@@ -16,7 +16,6 @@ public class Enemy: MonoBehaviour
     public void addKills()
     {
         GameObject.Find("PlayerShip").GetComponent<Artifacts>().numKills += killNumber;
-        GameObject.Find("QuestManager").GetComponent<QuestManager>().addKill(nameID);
         foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
         {
             if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
@@ -45,7 +44,7 @@ public class Enemy: MonoBehaviour
         }
         FindObjectOfType<EnemyDamageNumbersUI>().addEnemyDamageUI(damageDealt, this.gameObject);
         health -= damageDealt;
-        FindObjectOfType<CameraShake>().shakeCamFunction(0.1f, 0.3f * Mathf.Clamp(((float)damageDealt / maxHealth), 0, 5));
+        FindObjectOfType<CameraShake>().shakeCamFunction(0.1f, 0.3f * Mathf.Clamp(((float)damageDealt / maxHealth), 0.1f, 5f));
 
         foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
         {

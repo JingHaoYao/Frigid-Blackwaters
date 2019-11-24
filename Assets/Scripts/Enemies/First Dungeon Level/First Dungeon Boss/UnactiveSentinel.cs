@@ -67,7 +67,8 @@ public class UnactiveSentinel : MonoBehaviour
                 Camera.main.transform.position = playerLocation;
                 Camera.main.GetComponent<MoveCameraNextRoom>().freeCam = false;
                 //summonBoss;
-                FindObjectOfType<BossHealthBar>().bossStartUp();
+                FindObjectOfType<BossHealthBar>().targetEnemy = sentinelBoss.GetComponent<Enemy>();
+                FindObjectOfType<BossHealthBar>().bossStartUp("Sentinel");
                 sentinelBoss.SetActive(true);
                 Destroy(this.gameObject);
             }

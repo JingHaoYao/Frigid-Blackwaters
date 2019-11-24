@@ -159,10 +159,6 @@ public static class SaveSystem
 
         MiscData.finishedTutorial = data.finishedTutorial;
 
-        MiscData.currentQuestID = data.currentQuestID;
-        MiscData.finishedQuest = data.finishedQuest;
-        MiscData.availableQuests = data.availableQuests;
-        MiscData.availableBossQuest = data.availableBossQuest;
         MiscData.numberQuestsCompleted = data.numberQuestsCompleted;
         MiscData.bossesDefeated.Clear();
         foreach (string id in data.completedBosses)
@@ -231,6 +227,14 @@ public static class SaveSystem
         MiscData.questSymbolShown = data.questSymbolShown;
 
         MiscData.dungeonMapSymbolShown = data.dungeonMapSymbolShown;
+
+        MiscData.finishedMission = data.missionFinished;
+        MiscData.missionID = data.missionID;
+
+        foreach(string id in data.completedMissions)
+        {
+            MiscData.completedMissions.Add(id);
+        }
     }
 
     public static void LoadOptions(SaveOptions saveOptions)
