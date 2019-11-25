@@ -35,10 +35,7 @@ public class MissionManager : MonoBehaviour
 
     public void finishedMission()
     {
-        if (MiscData.completedMissions.Contains(MiscData.missionID)) {
-            MiscData.finishedMission = true;
-            MiscData.completedMissions.Add(MiscData.missionID);
-        }
+        MiscData.finishedMission = true;
         SaveSystem.SaveGame();
     }
 

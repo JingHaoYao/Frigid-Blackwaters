@@ -17,6 +17,41 @@ public class ReturnNotifications : MonoBehaviour
 
     public GameObject mapSymbol;
 
+    public Text missionAlreadyCompleted, missionFailed;
+    public GameObject rewards;
+    public GameObject itemRewardsUI;
+
+    public void updateRewards(int goldAmount, int skillPointAmount, GameObject[] itemRewards, bool failedMission = false, bool missionIsCompleted = false)
+    {
+        if(failedMission == true)
+        {
+            rewards.SetActive(false);
+            missionFailed.gameObject.SetActive(true);
+            return;
+        }
+        else if(missionIsCompleted == true)
+        {
+            rewards.SetActive(false);
+            missionAlreadyCompleted.gameObject.SetActive(true);
+            return;
+        }
+        else
+        {
+            rewards.GetComponentsInChildren<Image>()[0].GetComponentInChildren<Text>().text = goldAmount.ToString();
+            rewards.GetComponentsInChildren<Image>()[1].GetComponentInChildren<Text>().text = skillPointAmount.ToString();
+            for (int i = 0; i < 3; i++) {
+                if (i < itemRewards.Length)
+                {
+                    itemRewardsUI.GetComponentsInChildren<Image>()[i].GetComponentsInChildren<Image>()[1].sprite = itemRewards[i].GetComponent<DisplayItem>().displayIcon;
+                }
+                else
+                {
+                    itemRewardsUI.GetComponentsInChildren<Image>()[2 * i].GetComponentsInChildren<Image>()[1].enabled = false;
+                }
+            }
+        }
+    }
+
     void Awake()
     {
         playerScript = FindObjectOfType<PlayerScript>();
@@ -32,6 +67,8 @@ public class ReturnNotifications : MonoBehaviour
         {
             playerScript.windowAlreadyOpen = true;
             playerScript.playerDead = true;
+            MiscData.finishedMission = false;
+            MiscData.missionID = null;
         }
     }
 

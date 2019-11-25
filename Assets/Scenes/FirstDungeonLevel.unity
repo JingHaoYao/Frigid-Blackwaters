@@ -16135,87 +16135,12 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &732839026
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 732839027}
-  - component: {fileID: 732839028}
-  m_Layer: 0
-  m_Name: Mission Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &732839027
+--- !u!4 &732839027 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 5537025959286181678, guid: 2980bef477ed8864a9adf7f4c9668adc,
+    type: 3}
+  m_PrefabInstance: {fileID: 5537025959916516189}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 732839026}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1651838024}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &732839028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 732839026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de83ae9882f278c46b7b5a372a9fbf6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  missionIDs:
-  - defeat_undead_mariner
-  - defeat_kraken
-  - defeat_elder_frost_mage
-  missions:
-  - missionIcon: {fileID: 0}
-    itemRewards: []
-    goldReward: 1200
-    skillPointReward: 0
-    missionID: defeat_undead_mariner
-    bossName: Undead Mariner
-    numberDungeonRooms: 10
-  - missionIcon: {fileID: 0}
-    itemRewards: []
-    goldReward: 0
-    skillPointReward: 0
-    missionID: 
-    bossName: 
-    numberDungeonRooms: 0
-  - missionIcon: {fileID: 0}
-    itemRewards: []
-    goldReward: 0
-    skillPointReward: 0
-    missionID: 
-    bossName: 
-    numberDungeonRooms: 0
-  bossManagers:
-  - {fileID: 1586023822}
-  - {fileID: 0}
-  - {fileID: 0}
-  currMission:
-    missionIcon: {fileID: 0}
-    itemRewards: []
-    goldReward: 0
-    skillPointReward: 0
-    missionID: 
-    bossName: 
-    numberDungeonRooms: 0
 --- !u!1 &737616337
 GameObject:
   m_ObjectHideFlags: 0
@@ -53992,3 +53917,77 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144321467}
   m_CullTransparentMesh: 0
+--- !u!1001 &5537025959916516189
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1651838024}
+    m_Modifications:
+    - target: {fileID: 5537025959286181679, guid: 2980bef477ed8864a9adf7f4c9668adc,
+        type: 3}
+      propertyPath: m_Name
+      value: Mission Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537025959286181678, guid: 2980bef477ed8864a9adf7f4c9668adc,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537025959286181678, guid: 2980bef477ed8864a9adf7f4c9668adc,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537025959286181678, guid: 2980bef477ed8864a9adf7f4c9668adc,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537025959286181678, guid: 2980bef477ed8864a9adf7f4c9668adc,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537025959286181678, guid: 2980bef477ed8864a9adf7f4c9668adc,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537025959286181678, guid: 2980bef477ed8864a9adf7f4c9668adc,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537025959286181678, guid: 2980bef477ed8864a9adf7f4c9668adc,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537025959286181678, guid: 2980bef477ed8864a9adf7f4c9668adc,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537025959286181678, guid: 2980bef477ed8864a9adf7f4c9668adc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537025959286181678, guid: 2980bef477ed8864a9adf7f4c9668adc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537025959286181678, guid: 2980bef477ed8864a9adf7f4c9668adc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5537025959286181673, guid: 2980bef477ed8864a9adf7f4c9668adc,
+        type: 3}
+      propertyPath: bossManagers.Array.data[0]
+      value: 
+      objectReference: {fileID: 1586023822}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2980bef477ed8864a9adf7f4c9668adc, type: 3}

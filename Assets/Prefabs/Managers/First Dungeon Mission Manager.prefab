@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5537025959286181679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5537025959286181678}
+  - component: {fileID: 5537025959286181673}
+  m_Layer: 0
+  m_Name: First Dungeon Mission Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5537025959286181678
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5537025959286181679}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5537025959286181673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5537025959286181679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de83ae9882f278c46b7b5a372a9fbf6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  missionIDs:
+  - defeat_undead_mariner
+  - defeat_kraken
+  - defeat_elder_frost_mage
+  missions:
+  - missionIcon: {fileID: 0}
+    itemRewards:
+    - {fileID: 6356437401692792686, guid: 2ee19dd57dff4d645a26a77bcdff102f, type: 3}
+    goldReward: 1200
+    skillPointReward: 0
+    missionID: defeat_undead_mariner
+    bossName: Undead Mariner
+    numberDungeonRooms: 10
+  - missionIcon: {fileID: 0}
+    itemRewards: []
+    goldReward: 0
+    skillPointReward: 0
+    missionID: 
+    bossName: 
+    numberDungeonRooms: 0
+  - missionIcon: {fileID: 0}
+    itemRewards: []
+    goldReward: 0
+    skillPointReward: 0
+    missionID: 
+    bossName: 
+    numberDungeonRooms: 0
+  bossManagers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  currMission:
+    missionIcon: {fileID: 0}
+    itemRewards: []
+    goldReward: 0
+    skillPointReward: 0
+    missionID: 
+    bossName: 
+    numberDungeonRooms: 0
+  bossInitiated: 0

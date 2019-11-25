@@ -84,12 +84,15 @@ public class BossManager : MonoBehaviour
         FindObjectOfType<PlayerScript>().shipRooted = false;
     }
 
-    public void bossBeaten(string nameID, float delay)
+    public void bossBeaten(string nameID, float delay, bool saveBossID = true)
     {
-        FindObjectOfType<MissionManager>().finishedMission();
-        if (!MiscData.bossesDefeated.Contains(nameID))
+        if (saveBossID == true)
         {
-            MiscData.bossesDefeated.Add(nameID);
+            FindObjectOfType<MissionManager>().finishedMission();
+            if (!MiscData.bossesDefeated.Contains(nameID))
+            {
+                MiscData.bossesDefeated.Add(nameID);
+            }
         }
 
         StartCoroutine(delayCheckPoint(delay));
@@ -98,7 +101,7 @@ public class BossManager : MonoBehaviour
     IEnumerator delayCheckPoint(float duration)
     {
         yield return new WaitForSeconds(duration);
-        if (!MiscData.completedStoryDialogues.Contains(finishedBossCheckPoint.dialogueName))
+        if (finishedBossCheckPoint != null && !MiscData.completedStoryDialogues.Contains(finishedBossCheckPoint.dialogueName))
         {
             StartCoroutine(goToCheckPoint());
         }

@@ -44,7 +44,7 @@ public static class MiscData
     public static int dungeonLevelUnlocked = 1;
 
     // Story Mission Related Parameters
-    public static string missionID = "defeat_undead_mariner";
+    public static string missionID;
     public static bool finishedMission;
     public static List<string> completedMissions = new List<string>();
 }
