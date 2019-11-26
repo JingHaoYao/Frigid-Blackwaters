@@ -12,4 +12,5 @@ public class StoryMission
     public string missionID;
     public string bossName;
     public int numberDungeonRooms;
+    public int difficulty;
 }

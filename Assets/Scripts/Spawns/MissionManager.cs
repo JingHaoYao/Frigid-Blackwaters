@@ -18,7 +18,7 @@ public class MissionManager : MonoBehaviour
     {
         for(int i = 0; i < missionIDs.Count; i++)
         {
-            if (bossManagers[i] != null)
+            if (i < bossManagers.Count && bossManagers[i] != null)
             {
                 bossDict.Add(missionIDs[i], bossManagers[i]);
             }

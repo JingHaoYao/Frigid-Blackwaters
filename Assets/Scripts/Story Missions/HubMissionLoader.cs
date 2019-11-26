@@ -8,6 +8,9 @@ public class HubMissionLoader : MonoBehaviour
     Dictionary<string, StoryMission> storyMissionDatabase = new Dictionary<string, StoryMission>();
     ReturnNotifications returnNotifications;
 
+    // Array of how many bosses are in each dungeon level, used by other scripts to filter the ordered mission list
+    public int[] dungeonLevelThresholds;
+
     private void Awake()
     {
         returnNotifications = FindObjectOfType<ReturnNotifications>();

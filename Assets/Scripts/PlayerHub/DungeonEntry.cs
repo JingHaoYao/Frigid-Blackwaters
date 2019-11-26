@@ -16,15 +16,12 @@ public class DungeonEntry : MonoBehaviour {
     {
         if (collision.gameObject.tag == "playerHitBox" || collision.gameObject.name == "PlayerShip")
         {
-            if (MiscData.completedTavernDialogues.Count >= 1)
-            {
-                MiscData.numberDungeonRuns++;
-                playerScript.shipRooted = true;
-                dungeonSelector.SetActive(true);
-                playerScript.windowAlreadyOpen = true;
-                FindObjectOfType<AudioManager>().FadeOut("Background Music", 0.2f);
-                FindObjectOfType<AudioManager>().FadeOut("Background Waves", 0.2f);
-            }
+            MiscData.numberDungeonRuns++;
+            playerScript.shipRooted = true;
+            dungeonSelector.SetActive(true);
+            playerScript.windowAlreadyOpen = true;
+            FindObjectOfType<AudioManager>().FadeOut("Background Music", 0.2f);
+            FindObjectOfType<AudioManager>().FadeOut("Background Waves", 0.2f);
         }
     }
 }

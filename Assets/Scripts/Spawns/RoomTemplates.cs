@@ -32,6 +32,11 @@ public class RoomTemplates : MonoBehaviour {
         maxRoomCount = FindObjectOfType<MissionManager>().currMission.numberDungeonRooms;
 
         // ONLY FOR CURRENT WORK ON SECOND LEVEL
+        if(dialogueManager == null)
+        {
+            dialogueManager = FindObjectOfType<DungeonEntryDialogueManager>();
+        }
+
         if(dialogueManager.whatDungeonLevel == 2)
         {
             maxRoomCount = 20;

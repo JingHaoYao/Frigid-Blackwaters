@@ -47,8 +47,10 @@ MonoBehaviour:
   - defeat_undead_mariner
   - defeat_kraken
   - defeat_elder_frost_mage
+  - defeat_sentinel
   missions:
-  - missionIcon: {fileID: 0}
+  - missionIcon: {fileID: 2319194040546241938, guid: 93ce58112c9b2a44cbae32cc4ef78d02,
+      type: 3}
     itemRewards:
     - {fileID: 6356437401692792686, guid: 2ee19dd57dff4d645a26a77bcdff102f, type: 3}
     goldReward: 1200
@@ -56,20 +58,35 @@ MonoBehaviour:
     missionID: defeat_undead_mariner
     bossName: Undead Mariner
     numberDungeonRooms: 10
-  - missionIcon: {fileID: 0}
+    difficulty: 1
+  - missionIcon: {fileID: -677603626295210812, guid: 93ce58112c9b2a44cbae32cc4ef78d02,
+      type: 3}
     itemRewards: []
     goldReward: 0
-    skillPointReward: 0
-    missionID: 
-    bossName: 
-    numberDungeonRooms: 0
-  - missionIcon: {fileID: 0}
-    itemRewards: []
+    skillPointReward: 1
+    missionID: defeat_sea_terror
+    bossName: Sea Terror
+    numberDungeonRooms: 15
+    difficulty: 1
+  - missionIcon: {fileID: -8079510570135772684, guid: 93ce58112c9b2a44cbae32cc4ef78d02,
+      type: 3}
+    itemRewards:
+    - {fileID: 1232390303438870990, guid: e8dfe698953f74d47b3948746d2eae43, type: 3}
     goldReward: 0
     skillPointReward: 0
-    missionID: 
-    bossName: 
-    numberDungeonRooms: 0
+    missionID: defeat_elder_frost_mage
+    bossName: Elder Frost Mage
+    numberDungeonRooms: 15
+    difficulty: 2
+  - missionIcon: {fileID: 2310453522643915396, guid: 93ce58112c9b2a44cbae32cc4ef78d02,
+      type: 3}
+    itemRewards: []
+    goldReward: 0
+    skillPointReward: 1
+    missionID: defeat_sentinel
+    bossName: Sentinel
+    numberDungeonRooms: 25
+    difficulty: 3
   bossManagers:
   - {fileID: 0}
   - {fileID: 0}
@@ -82,4 +99,5 @@ MonoBehaviour:
     missionID: 
     bossName: 
     numberDungeonRooms: 0
+    difficulty: 0
   bossInitiated: 0
