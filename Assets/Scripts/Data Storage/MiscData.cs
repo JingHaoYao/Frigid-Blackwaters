@@ -33,7 +33,7 @@ public static class MiscData
     public static List<string> unlockedBuildings = new List<string>();
 
     //tutorial related
-    public static bool finishedTutorial = false;
+    public static bool finishedTutorial = true;
     public static bool questSymbolShown = false;
     public static bool dungeonMapSymbolShown = false;
 

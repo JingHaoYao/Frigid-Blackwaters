@@ -14,6 +14,8 @@ public class BossSelectMenu : MonoBehaviour
     bool isLoadingLevel = false;
     bool loadedBackToMenu = false;
 
+    public BossHUDToolTip toolTip;
+
     //these need to be set when loading the menu
     string sceneToLoad;
     int whatLevel;
@@ -129,6 +131,21 @@ public class BossSelectMenu : MonoBehaviour
             StartCoroutine(transitionMenus());
             loadedBackToMenu = true;
         }
+    }
+
+    public void turnOnToolTip(int whatButton, Vector3 position)
+    {
+        toolTip.gameObject.SetActive(true);
+        toolTip.GetComponent<RectTransform>().localPosition = position;
+        StoryMission mission = missionManager.allStoryMissions[missionManager.dungeonLevelThresholds[whatLevel - 1] - 4 + whatButton];
+
+
+        toolTip.updateRewards(mission.goldReward, mission.skillPointReward, mission.itemRewards, mission.bossInfo, MiscData.completedMissions.Contains(mission.missionID));
+    }
+
+    public void turnOffToolTip()
+    {
+        toolTip.gameObject.SetActive(false);
     }
 
     IEnumerator transitionMenus()

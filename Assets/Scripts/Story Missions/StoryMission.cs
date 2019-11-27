@@ -13,4 +13,5 @@ public class StoryMission
     public string bossName;
     public int numberDungeonRooms;
     public int difficulty;
+    public string bossInfo;
 }
