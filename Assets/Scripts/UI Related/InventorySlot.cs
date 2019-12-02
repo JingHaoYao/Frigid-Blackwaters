@@ -65,7 +65,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void deleteItem()
     {
-        if (displayInfo != null && Input.GetKey(KeyCode.LeftShift) && SceneManager.GetActiveScene().name != "Tutorial")
+        if (displayInfo != null && Input.GetKey(KeyCode.LeftShift) && SceneManager.GetActiveScene().name != "Tutorial" && FindObjectOfType<ConsumableConfirm>() == null)
         {
             FindObjectOfType<AudioManager>().PlaySound("Destroy Item");
             inventory.itemList.Remove(displayInfo.gameObject);
@@ -76,11 +76,40 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void consumeItem()
     {
-        if(!Input.GetKeyDown(KeyCode.LeftShift) && displayInfo != null && displayInfo.isConsumable == true)
+        if(!Input.GetKeyDown(KeyCode.LeftShift) && displayInfo != null && displayInfo.isConsumable == true && FindObjectOfType<ConsumableConfirm>() == null)
         {
             if (goldenVaultDisplay != null)
             {
                 if (goldenVaultDisplay.activeSelf != true)
+                {
+                    if (FindObjectOfType<PlayerScript>().trueDamage - displayInfo.GetComponent<ConsumableBonus>().restoredHealth < 0)
+                    {
+                        inventory.consumableConfirmationWindow.gameObject.SetActive(true);
+                        inventory.consumableConfirmationWindow.objectInQuestion = displayInfo.gameObject;
+                    }
+                    else
+                    {
+                        if (displayInfo.gameObject.GetComponent<ConsumableBonus>().restoredHealth > 0)
+                        {
+                            FindObjectOfType<AudioManager>().PlaySound("Consume Heal Item");
+                        }
+                        else
+                        {
+                            FindObjectOfType<AudioManager>().PlaySound("Consume Non Heal Item");
+                        }
+                        displayInfo.gameObject.GetComponent<ConsumableBonus>().consumeItem();
+                        inventory.itemList.Remove(displayInfo.gameObject);
+                    }
+                }
+            }
+            else
+            {
+                if (FindObjectOfType<PlayerScript>().trueDamage - displayInfo.GetComponent<ConsumableBonus>().restoredHealth < 0)
+                {
+                    inventory.consumableConfirmationWindow.gameObject.SetActive(true);
+                    inventory.consumableConfirmationWindow.objectInQuestion = displayInfo.gameObject;
+                }
+                else
                 {
                     if (displayInfo.gameObject.GetComponent<ConsumableBonus>().restoredHealth > 0)
                     {
@@ -93,19 +122,6 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                     displayInfo.gameObject.GetComponent<ConsumableBonus>().consumeItem();
                     inventory.itemList.Remove(displayInfo.gameObject);
                 }
-            }
-            else
-            {
-                if(displayInfo.gameObject.GetComponent<ConsumableBonus>().restoredHealth > 0)
-                {
-                    FindObjectOfType<AudioManager>().PlaySound("Consume Heal Item");
-                }
-                else
-                {
-                    FindObjectOfType<AudioManager>().PlaySound("Consume Non Heal Item");
-                }
-                displayInfo.gameObject.GetComponent<ConsumableBonus>().consumeItem();
-                inventory.itemList.Remove(displayInfo.gameObject);
             }
         }
     }
@@ -133,7 +149,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void transferArtifact()
     {
-        if(!Input.GetKeyDown(KeyCode.LeftShift) && displayInfo != null && displayInfo.isArtifact == true && artifacts.artifactsUI.activeSelf == true && GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated == true)
+        if(!Input.GetKeyDown(KeyCode.LeftShift) && displayInfo != null && displayInfo.isArtifact == true && artifacts.artifactsUI.activeSelf == true && GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated == true && FindObjectOfType<ConsumableConfirm>() == null)
         {
             if (artifacts.activeArtifacts.Count < 3)
             {

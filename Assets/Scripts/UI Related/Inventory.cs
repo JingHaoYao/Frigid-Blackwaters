@@ -12,6 +12,7 @@ public class Inventory : MonoBehaviour {
     public GameObject toolTip;
     public GameObject shopDisplay;
     public GameObject vaultDisplay;
+    public ConsumableConfirm consumableConfirmationWindow;
 
 	void Awake () {
         inventorySlots = itemSlotParent.GetComponentsInChildren<InventorySlot>();

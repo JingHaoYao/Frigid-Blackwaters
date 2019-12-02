@@ -9,6 +9,11 @@ public class LoadGameFromTitleScreen : MonoBehaviour {
     public GameObject blackWindow;
     public GameObject objectToOpen;
 
+    private void Start()
+    {
+        Cursor.visible = true;
+    }
+
     public void open()
     {
         objectToOpen.SetActive(true);
@@ -19,13 +24,13 @@ public class LoadGameFromTitleScreen : MonoBehaviour {
     {
         if (clicked == false)
         {
+            // This line only for the demo - just to clear any artifacts that the player has left over
+            PlayerItems.inventoryItemsIDs.Clear();
+
             StartCoroutine(fadeLoadScene());
             //loading save upon player clicking play
             SaveData data = SaveSystem.GetSave();
-            if (data != null)
-            {
-                SaveSystem.loadData(data);
-            }
+            SaveSystem.loadData(data);
 
             FindObjectOfType<AudioManager>().PlaySound("Play Button");
 

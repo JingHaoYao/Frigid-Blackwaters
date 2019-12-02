@@ -134,6 +134,7 @@ public class DialogueUI : MonoBehaviour
         blackOverlayAnimator.enabled = true;
         blackOverlayAnimator.SetTrigger("FadeIn");
         yield return new WaitForSeconds(1f);
+        FindObjectOfType<AudioManager>().PlaySound(targetDialogue.substituteMusic);
         FindObjectOfType<AudioManager>().FadeIn(targetDialogue.substituteMusic, 0.2f, 0.6f);
         waitReveal = 0;
         blackOverlayAnimator.enabled = false;

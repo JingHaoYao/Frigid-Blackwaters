@@ -116,6 +116,21 @@ public class DemoBoss : Enemy
         }
     }
 
+    IEnumerator bossDefeated()
+    {
+        bodySpriteRenderer.GetComponent<Animator>().SetTrigger("Explode");
+        headSpriteRenderer.GetComponent<Animator>().enabled = true;
+        headSpriteRenderer.GetComponent<Animator>().SetTrigger("Explode");
+        foreach(DemoBossCrystal crystal in demoCrystals)
+        {
+            crystal.destroyCrystal();
+        }
+        GetComponents<AudioSource>()[1].Play();
+        yield return new WaitForSeconds(0.75f);
+        FindObjectOfType<DemoBossManager>().loadTitleScreen();
+        Destroy(this.gameObject);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<DamageAmount>())
@@ -128,7 +143,8 @@ public class DemoBoss : Enemy
                 this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 addKills();
                 FindObjectOfType<BossHealthBar>().bossEnd();
-                Destroy(this.gameObject, 0.75f);
+                FindObjectOfType<PlayerScript>().playerDead = true;
+                StartCoroutine(bossDefeated());
             }
             else
             {
@@ -145,5 +161,4 @@ public class DemoBoss : Enemy
         bodySpriteRenderer.color = Color.white;
         headSpriteRenderer.color = Color.white;
     }
-
 }

@@ -17,11 +17,11 @@ public class BossHUDToolTip : MonoBehaviour
 
         if (bossAlreadyDefeated == false)
         {
-            goldReward.enabled = true;
-            skillPointReward.enabled = true;
+            goldReward.gameObject.SetActive(true);
+            skillPointReward.gameObject.SetActive(true);
             foreach(Image slot in itemRewards)
             {
-                slot.enabled = true;
+                slot.gameObject.SetActive(true);
             }
             bossDefeatedAlreadyText.enabled = false;
 
@@ -43,11 +43,11 @@ public class BossHUDToolTip : MonoBehaviour
         }
         else
         {
-            goldReward.enabled = false;
-            skillPointReward.enabled = false;
+            goldReward.gameObject.SetActive(false);
+            skillPointReward.gameObject.SetActive(false);
             foreach (Image slot in itemRewards)
             {
-                slot.enabled = false;
+                slot.gameObject.SetActive(false);
             }
             bossDefeatedAlreadyText.enabled = true;
         }

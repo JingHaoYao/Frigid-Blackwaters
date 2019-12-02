@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missionIDs:
   - defeat_undead_mariner
-  - defeat_kraken
+  - defeat_sea_terror
   - defeat_elder_frost_mage
   - defeat_sentinel
   missions:
@@ -59,6 +59,7 @@ MonoBehaviour:
     bossName: Undead Mariner
     numberDungeonRooms: 10
     difficulty: 1
+    bossInfo: 
   - missionIcon: {fileID: -677603626295210812, guid: 93ce58112c9b2a44cbae32cc4ef78d02,
       type: 3}
     itemRewards: []
@@ -68,6 +69,7 @@ MonoBehaviour:
     bossName: Sea Terror
     numberDungeonRooms: 15
     difficulty: 1
+    bossInfo: 
   - missionIcon: {fileID: -8079510570135772684, guid: 93ce58112c9b2a44cbae32cc4ef78d02,
       type: 3}
     itemRewards:
@@ -78,6 +80,7 @@ MonoBehaviour:
     bossName: Elder Frost Mage
     numberDungeonRooms: 15
     difficulty: 2
+    bossInfo: 
   - missionIcon: {fileID: 2310453522643915396, guid: 93ce58112c9b2a44cbae32cc4ef78d02,
       type: 3}
     itemRewards: []
@@ -87,7 +90,9 @@ MonoBehaviour:
     bossName: Sentinel
     numberDungeonRooms: 25
     difficulty: 3
+    bossInfo: 
   bossManagers:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -100,4 +105,5 @@ MonoBehaviour:
     bossName: 
     numberDungeonRooms: 0
     difficulty: 0
+    bossInfo: 
   bossInitiated: 0

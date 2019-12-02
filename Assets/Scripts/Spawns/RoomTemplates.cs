@@ -50,7 +50,7 @@ public class RoomTemplates : MonoBehaviour {
             spawnPeriod += Time.deltaTime;
         }
 
-        if (spawnPeriod >= 6.4f && MiscData.bossesDefeated.Count < 1 && spawned == false)
+        if (spawnPeriod >= 6.4f && spawned == false)
         {
             spawned = true;
             int index = antiList.Count - 1;

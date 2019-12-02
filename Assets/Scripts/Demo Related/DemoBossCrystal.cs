@@ -19,6 +19,18 @@ public class DemoBossCrystal : MonoBehaviour
         StartCoroutine(launchAttack(whichAttack));
     }
 
+    public void destroyCrystal()
+    {
+        StartCoroutine(explode());
+    }
+
+    IEnumerator explode()
+    {
+        animator.SetTrigger("Explode");
+        yield return new WaitForSeconds(0.5f);
+        Destroy(this.gameObject);
+    }
+
     IEnumerator launchAttack(int whichAttack)
     {
         animator.SetTrigger("Shine");

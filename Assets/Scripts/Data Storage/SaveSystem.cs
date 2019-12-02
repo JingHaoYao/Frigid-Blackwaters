@@ -31,6 +31,7 @@ public static class SaveSystem
     public static SaveData GetSave()
     {
         string path = Application.persistentDataPath + "/save_data.save";
+
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -42,7 +43,6 @@ public static class SaveSystem
         }
         else
         {
-            Debug.LogError("Save file not found in " + path);
             return null;
         }
     }
@@ -77,163 +77,166 @@ public static class SaveSystem
 
     public static void loadData(SaveData data)
     {
-        HubProperties.vaultItems.Clear();
-        foreach (string id in data.storedVaultItems)
+        if (data != null)
         {
-            HubProperties.vaultItems.Add(id);
-        }
-        HubProperties.storeGold = data.storedVaultGold;
-
-        PlayerUpgrades.musketUpgrades.Clear();
-        foreach (string id in data.musketUpgrades)
-        {
-            PlayerUpgrades.musketUpgrades.Add(id);
-        }
-        PlayerUpgrades.spreadshotUpgrades.Clear();
-        foreach (string id in data.spreadShotUpgrades)
-        {
-            PlayerUpgrades.spreadshotUpgrades.Add(id);
-        }
-        PlayerUpgrades.fireworkUpgrades.Clear();
-        foreach (string id in data.fireworkUpgrades)
-        {
-            PlayerUpgrades.fireworkUpgrades.Add(id);
-        }
-        PlayerUpgrades.dragonBreathUpgrades.Clear();
-        foreach (string id in data.dragonsBreathUpgrades)
-        {
-            PlayerUpgrades.dragonBreathUpgrades.Add(id);
-        }
-        PlayerUpgrades.hullUpgrades.Clear();
-        foreach (string id in data.hullUpgrades)
-        {
-            PlayerUpgrades.hullUpgrades.Add(id);
-        }
-        PlayerUpgrades.inventoryUpgrades.Clear();
-        foreach (string id in data.inventoryUpgrades)
-        {
-            PlayerUpgrades.inventoryUpgrades.Add(id);
-        }
-        PlayerUpgrades.safeUpgrades.Clear();
-        foreach (string id in data.safeUpgrades)
-        {
-            PlayerUpgrades.safeUpgrades.Add(id);
-        }
-        PlayerUpgrades.sniperUpgrades.Clear();
-        foreach(string id in data.sniperUpgrades)
-        {
-            PlayerUpgrades.sniperUpgrades.Add(id);
-        }
-
-        PlayerUpgrades.numberSkillPoints = data.numberSkillPoints;
-        PlayerUpgrades.numberMaxSkillPoints = data.numberMaxSkillPoints;
-        PlayerUpgrades.whichFrontWeaponEquipped = data.whichFrontWeaponEquipped;
-        PlayerUpgrades.whichLeftWeaponEquipped = data.whichLeftWeaponEquipped;
-        PlayerUpgrades.whichRightWeaponEquipped = data.whichRightWeaponEquipped;
-        PlayerUpgrades.musketUnlocked = data.musketUnlocked;
-        PlayerUpgrades.cannonUnlocked = data.cannonUnlocked;
-        PlayerUpgrades.spreadShotUnlocked = data.spreadShotUnlocked;
-        PlayerUpgrades.fireworkUnlocked = data.fireworkUnlocked;
-        PlayerUpgrades.dragonsBreathUnlocked = data.dragonsBreathUnlocked;
-        PlayerUpgrades.unlockLevel = data.unlockLevel;
-
-        PlayerItems.inventoryItemsIDs.Clear();
-        foreach (string id in data.inventoryItemIds)
-        {
-            PlayerItems.inventoryItemsIDs.Add(id);
-        }
-
-        for (int i = 0; i < 3; i++)
-        {
-            if (data.equippedArtifactIds[i] != null)
+            HubProperties.vaultItems.Clear();
+            foreach (string id in data.storedVaultItems)
             {
-                PlayerItems.activeArtifactsIDs[i] = data.equippedArtifactIds[i];
+                HubProperties.vaultItems.Add(id);
             }
-            else
+            HubProperties.storeGold = data.storedVaultGold;
+
+            PlayerUpgrades.musketUpgrades.Clear();
+            foreach (string id in data.musketUpgrades)
             {
-                PlayerItems.activeArtifactsIDs[i] = null;
+                PlayerUpgrades.musketUpgrades.Add(id);
             }
-        }
-        PlayerItems.maxInventorySize = data.maxInventorySize;
-        PlayerItems.totalGoldAmount = data.totalGoldAmount;
+            PlayerUpgrades.spreadshotUpgrades.Clear();
+            foreach (string id in data.spreadShotUpgrades)
+            {
+                PlayerUpgrades.spreadshotUpgrades.Add(id);
+            }
+            PlayerUpgrades.fireworkUpgrades.Clear();
+            foreach (string id in data.fireworkUpgrades)
+            {
+                PlayerUpgrades.fireworkUpgrades.Add(id);
+            }
+            PlayerUpgrades.dragonBreathUpgrades.Clear();
+            foreach (string id in data.dragonsBreathUpgrades)
+            {
+                PlayerUpgrades.dragonBreathUpgrades.Add(id);
+            }
+            PlayerUpgrades.hullUpgrades.Clear();
+            foreach (string id in data.hullUpgrades)
+            {
+                PlayerUpgrades.hullUpgrades.Add(id);
+            }
+            PlayerUpgrades.inventoryUpgrades.Clear();
+            foreach (string id in data.inventoryUpgrades)
+            {
+                PlayerUpgrades.inventoryUpgrades.Add(id);
+            }
+            PlayerUpgrades.safeUpgrades.Clear();
+            foreach (string id in data.safeUpgrades)
+            {
+                PlayerUpgrades.safeUpgrades.Add(id);
+            }
+            PlayerUpgrades.sniperUpgrades.Clear();
+            foreach (string id in data.sniperUpgrades)
+            {
+                PlayerUpgrades.sniperUpgrades.Add(id);
+            }
 
-        MiscData.finishedTutorial = data.finishedTutorial;
+            PlayerUpgrades.numberSkillPoints = data.numberSkillPoints;
+            PlayerUpgrades.numberMaxSkillPoints = data.numberMaxSkillPoints;
+            PlayerUpgrades.whichFrontWeaponEquipped = data.whichFrontWeaponEquipped;
+            PlayerUpgrades.whichLeftWeaponEquipped = data.whichLeftWeaponEquipped;
+            PlayerUpgrades.whichRightWeaponEquipped = data.whichRightWeaponEquipped;
+            PlayerUpgrades.musketUnlocked = data.musketUnlocked;
+            PlayerUpgrades.cannonUnlocked = data.cannonUnlocked;
+            PlayerUpgrades.spreadShotUnlocked = data.spreadShotUnlocked;
+            PlayerUpgrades.fireworkUnlocked = data.fireworkUnlocked;
+            PlayerUpgrades.dragonsBreathUnlocked = data.dragonsBreathUnlocked;
+            PlayerUpgrades.unlockLevel = data.unlockLevel;
 
-        MiscData.numberQuestsCompleted = data.numberQuestsCompleted;
-        MiscData.bossesDefeated.Clear();
-        foreach (string id in data.completedBosses)
-        {
-            MiscData.bossesDefeated.Add(id);
-        }
+            PlayerItems.inventoryItemsIDs.Clear();
+            foreach (string id in data.inventoryItemIds)
+            {
+                PlayerItems.inventoryItemsIDs.Add(id);
+            }
 
-        SavedKeyBindings.moveUp = data.upBinding;
-        SavedKeyBindings.moveLeft = data.leftBinding;
-        SavedKeyBindings.moveRight = data.rightBinding;
-        SavedKeyBindings.moveDown = data.downBinding;
-        SavedKeyBindings.dash = data.dashBinding;
-        SavedKeyBindings.firstArtifact = data.artActive1;
-        SavedKeyBindings.secondArtifact = data.artActive2;
-        SavedKeyBindings.thirdArtifact = data.artActive3;
-        SavedKeyBindings.targetConesEnabled = data.targetConesEnabled;
+            for (int i = 0; i < 3; i++)
+            {
+                if (data.equippedArtifactIds[i] != null)
+                {
+                    PlayerItems.activeArtifactsIDs[i] = data.equippedArtifactIds[i];
+                }
+                else
+                {
+                    PlayerItems.activeArtifactsIDs[i] = null;
+                }
+            }
+            PlayerItems.maxInventorySize = data.maxInventorySize;
+            PlayerItems.totalGoldAmount = data.totalGoldAmount;
 
-        foreach (string id in data.completedTavernDialogues)
-        {
-            MiscData.completedTavernDialogues.Add(id);
-        }
+            MiscData.finishedTutorial = data.finishedTutorial;
 
-        foreach (string id in data.completedDungeonEntryDialogues)
-        {
-            MiscData.completedEntryDungeonDialogues.Add(id);
-        }
+            MiscData.numberQuestsCompleted = data.numberQuestsCompleted;
+            MiscData.bossesDefeated.Clear();
+            foreach (string id in data.completedBosses)
+            {
+                MiscData.bossesDefeated.Add(id);
+            }
 
-        foreach (string id in data.completedExamineDialogues)
-        {
-            MiscData.completedExamineDialogues.Add(id);
-        }
+            SavedKeyBindings.moveUp = data.upBinding;
+            SavedKeyBindings.moveLeft = data.leftBinding;
+            SavedKeyBindings.moveRight = data.rightBinding;
+            SavedKeyBindings.moveDown = data.downBinding;
+            SavedKeyBindings.dash = data.dashBinding;
+            SavedKeyBindings.firstArtifact = data.artActive1;
+            SavedKeyBindings.secondArtifact = data.artActive2;
+            SavedKeyBindings.thirdArtifact = data.artActive3;
+            SavedKeyBindings.targetConesEnabled = data.targetConesEnabled;
 
-        foreach (string id in data.completedShopDialogues)
-        {
-            MiscData.completedShopDialogues.Add(id);
-        }
+            foreach (string id in data.completedTavernDialogues)
+            {
+                MiscData.completedTavernDialogues.Add(id);
+            }
 
-        foreach (string id in data.completedStoryDialogues)
-        {
-            MiscData.completedStoryDialogues.Add(id);
-        }
+            foreach (string id in data.completedDungeonEntryDialogues)
+            {
+                MiscData.completedEntryDungeonDialogues.Add(id);
+            }
 
-        foreach (string checkpoint in data.completedCheckPoints)
-        {
-            MiscData.completedCheckPoints.Add(checkpoint);
-        }
+            foreach (string id in data.completedExamineDialogues)
+            {
+                MiscData.completedExamineDialogues.Add(id);
+            }
 
-        foreach (string building in data.unlockedBuildings)
-        {
-            MiscData.unlockedBuildings.Add(building);
-        }
+            foreach (string id in data.completedShopDialogues)
+            {
+                MiscData.completedShopDialogues.Add(id);
+            }
 
-        foreach(string uniqueRoom in data.completedUniqueRoomDialogues)
-        {
-            MiscData.completedUniqueRoomsDialogues.Add(uniqueRoom);
-        }
+            foreach (string id in data.completedStoryDialogues)
+            {
+                MiscData.completedStoryDialogues.Add(id);
+            }
 
-        MiscData.playerDied = data.playerDied;
-        MiscData.numberDungeonRuns = data.numberDungeonRuns;
+            foreach (string checkpoint in data.completedCheckPoints)
+            {
+                MiscData.completedCheckPoints.Add(checkpoint);
+            }
 
-        MiscData.enoughRoomsTraversed = data.enoughRoomsTraversed;
-        MiscData.dungeonLevelUnlocked = data.dungeonLevelUnlocked;
+            foreach (string building in data.unlockedBuildings)
+            {
+                MiscData.unlockedBuildings.Add(building);
+            }
 
-        MiscData.skillPointsNotification = data.skillPointsNotification;
+            foreach (string uniqueRoom in data.completedUniqueRoomDialogues)
+            {
+                MiscData.completedUniqueRoomsDialogues.Add(uniqueRoom);
+            }
 
-        MiscData.questSymbolShown = data.questSymbolShown;
+            MiscData.playerDied = data.playerDied;
+            MiscData.numberDungeonRuns = data.numberDungeonRuns;
 
-        MiscData.dungeonMapSymbolShown = data.dungeonMapSymbolShown;
+            MiscData.enoughRoomsTraversed = data.enoughRoomsTraversed;
+            MiscData.dungeonLevelUnlocked = data.dungeonLevelUnlocked;
 
-        MiscData.finishedMission = data.missionFinished;
-        MiscData.missionID = data.missionID;
+            MiscData.skillPointsNotification = data.skillPointsNotification;
 
-        foreach(string id in data.completedMissions)
-        {
-            MiscData.completedMissions.Add(id);
+            MiscData.questSymbolShown = data.questSymbolShown;
+
+            MiscData.dungeonMapSymbolShown = data.dungeonMapSymbolShown;
+
+            MiscData.finishedMission = data.missionFinished;
+            MiscData.missionID = data.missionID;
+
+            foreach (string id in data.completedMissions)
+            {
+                MiscData.completedMissions.Add(id);
+            }
         }
     }
 

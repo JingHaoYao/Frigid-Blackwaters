@@ -35,7 +35,7 @@ public class ArtifactSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void removeArtifact()
     {
-        if (displayInfo != null && inventory.itemList.Count < inventory.inventorySlots.Length && GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated == true)
+        if (displayInfo != null && inventory.itemList.Count < inventory.inventorySlots.Length && GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated == true && FindObjectOfType<ConsumableConfirm>() == null)
         {
             if (inventory.itemList.Count < inventory.inventorySize)
             {
