@@ -17,7 +17,6 @@ public static class PlayerUpgrades {
     public static List<string> safeUpgrades = new List<string>();
     public static int numberSkillPoints = 0;
     public static int numberMaxSkillPoints = 0;
-    public static int numberBossSkillPoints = 0;
 
     // Each weapon is represented by a number - order they're placed in player scripts
     public static int whichFrontWeaponEquipped = 0;
@@ -26,5 +25,7 @@ public static class PlayerUpgrades {
     
     public static bool musketUnlocked = true, cannonUnlocked = true, spreadShotUnlocked = true,
                        fireworkUnlocked = true, dragonsBreathUnlocked = true, sniperUnlocked = false;
+
+    // How many weapons they've unlocked
     public static int unlockLevel = 5;
 }

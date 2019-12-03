@@ -14,7 +14,7 @@ public class HubMissionLoader : MonoBehaviour
     private void Awake()
     {
         returnNotifications = FindObjectOfType<ReturnNotifications>();
-        foreach(StoryMission mission in allStoryMissions)
+        foreach (StoryMission mission in allStoryMissions)
         {
             storyMissionDatabase.Add(mission.missionID, mission);
         }

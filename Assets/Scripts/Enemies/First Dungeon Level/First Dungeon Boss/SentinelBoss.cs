@@ -227,6 +227,9 @@ public class SentinelBoss : Enemy
         {
             Instantiate(deadBoss, transform.position, Quaternion.identity);
             MiscData.dungeonLevelUnlocked = 2;
+
+            //Also need to update player weapon unlock level
+
             FindObjectOfType<BossHealthBar>().bossEnd();
             SaveSystem.SaveGame();
             FindObjectOfType<AudioManager>().FadeOut("First Boss Background Music", 0.2f);
