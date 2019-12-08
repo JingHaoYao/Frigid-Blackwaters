@@ -237,6 +237,11 @@ public static class SaveSystem
             {
                 MiscData.completedMissions.Add(id);
             }
+
+            foreach(string id in data.completedHubReturnDialogues)
+            {
+                MiscData.completedHubReturnDialogues.Add(id);
+            }
         }
     }
 

@@ -18,6 +18,7 @@ public class DungeonChallenge : MonoBehaviour
     GameObject spawnedGrid;
     public GameObject chestParticles, summonEffect;
     public Sprite regularCrystal;
+    DungeonEntryDialogueManager manager;
 
     EnemyRoomTemplates enemyTemplates;
 
@@ -35,6 +36,7 @@ public class DungeonChallenge : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.enabled = false;
         anti = this.transform.parent.GetComponent<WhichRoomManager>().antiSpawnSpaceDetailer;
+        manager = FindObjectOfType<DungeonEntryDialogueManager>();
     }
 
     IEnumerator pulse()
@@ -49,45 +51,91 @@ public class DungeonChallenge : MonoBehaviour
 
     GameObject[] spawnEnemy(int tier, EnemyRoomTemplate template)
     {
-        if (tier == 1)
+        if (manager.whatDungeonLevel == 1)
         {
-            List<GameObject> enemyList = new List<GameObject>();
-            foreach (string name in template.potentialEnemyNames)
+            if (tier == 1)
             {
-                GameObject enemy = Resources.Load<GameObject>("Regular Enemies/First Dungeon Level/Tier 1 Enemies/" + name + "/" + name);
-                enemyList.Add(enemy);
+                List<GameObject> enemyList = new List<GameObject>();
+                foreach (string name in template.potentialEnemyNames)
+                {
+                    GameObject enemy = Resources.Load<GameObject>("Regular Enemies/First Dungeon Level/Tier 1 Enemies/" + name + "/" + name);
+                    enemyList.Add(enemy);
+                }
+                return enemyList.ToArray();
             }
-            return enemyList.ToArray();
+            else if (tier == 2)
+            {
+                List<GameObject> enemyList = new List<GameObject>();
+                foreach (string name in template.potentialEnemyNames)
+                {
+                    GameObject enemy = Resources.Load<GameObject>("Regular Enemies/First Dungeon Level/Tier 2 Enemies/" + name + "/" + name);
+                    enemyList.Add(enemy);
+                }
+                return enemyList.ToArray();
+            }
+            else if (tier == 3)
+            {
+                List<GameObject> enemyList = new List<GameObject>();
+                foreach (string name in template.potentialEnemyNames)
+                {
+                    GameObject enemy = Resources.Load<GameObject>("Regular Enemies/First Dungeon Level/Tier 3 Enemies/" + name + "/" + name);
+                    enemyList.Add(enemy);
+                }
+                return enemyList.ToArray();
+            }
+            else
+            {
+                List<GameObject> enemyList = new List<GameObject>();
+                foreach (string name in template.potentialEnemyNames)
+                {
+                    GameObject enemy = Resources.Load<GameObject>("Regular Enemies/First Dungeon Level/Tier 4 Enemies/" + name + "/" + name);
+                    enemyList.Add(enemy);
+                }
+                return enemyList.ToArray();
+            }
         }
-        else if (tier == 2)
+        else if(manager.whatDungeonLevel == 2)
         {
-            List<GameObject> enemyList = new List<GameObject>();
-            foreach (string name in template.potentialEnemyNames)
+            if (tier == 1)
             {
-                GameObject enemy = Resources.Load<GameObject>("Regular Enemies/First Dungeon Level/Tier 2 Enemies/" + name + "/" + name);
-                enemyList.Add(enemy);
+                List<GameObject> enemyList = new List<GameObject>();
+                foreach (string name in template.potentialEnemyNames)
+                {
+                    GameObject enemy = Resources.Load<GameObject>("Regular Enemies/Second Dungeon Level/Tier 1 Enemies/" + name + "/" + name);
+                    enemyList.Add(enemy);
+                }
+                return enemyList.ToArray();
             }
-            return enemyList.ToArray();
-        }
-        else if (tier == 3)
-        {
-            List<GameObject> enemyList = new List<GameObject>();
-            foreach (string name in template.potentialEnemyNames)
+            else if (tier == 2)
             {
-                GameObject enemy = Resources.Load<GameObject>("Regular Enemies/First Dungeon Level/Tier 3 Enemies/" + name + "/" + name);
-                enemyList.Add(enemy);
+                List<GameObject> enemyList = new List<GameObject>();
+                foreach (string name in template.potentialEnemyNames)
+                {
+                    GameObject enemy = Resources.Load<GameObject>("Regular Enemies/Second Dungeon Level/Tier 2 Enemies/" + name + "/" + name);
+                    enemyList.Add(enemy);
+                }
+                return enemyList.ToArray();
             }
-            return enemyList.ToArray();
-        }
-        else if (tier == 4)
-        {
-            List<GameObject> enemyList = new List<GameObject>();
-            foreach (string name in template.potentialEnemyNames)
+            else if (tier == 3)
             {
-                GameObject enemy = Resources.Load<GameObject>("Regular Enemies/First Dungeon Level/Tier 4 Enemies/" + name + "/" + name);
-                enemyList.Add(enemy);
+                List<GameObject> enemyList = new List<GameObject>();
+                foreach (string name in template.potentialEnemyNames)
+                {
+                    GameObject enemy = Resources.Load<GameObject>("Regular Enemies/Second Dungeon Level/Tier 3 Enemies/" + name + "/" + name);
+                    enemyList.Add(enemy);
+                }
+                return enemyList.ToArray();
             }
-            return enemyList.ToArray();
+            else
+            {
+                List<GameObject> enemyList = new List<GameObject>();
+                foreach (string name in template.potentialEnemyNames)
+                {
+                    GameObject enemy = Resources.Load<GameObject>("Regular Enemies/Second Dungeon Level/Tier 4 Enemies/" + name + "/" + name);
+                    enemyList.Add(enemy);
+                }
+                return enemyList.ToArray();
+            }
         }
         else
         {

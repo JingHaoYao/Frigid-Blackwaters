@@ -265,6 +265,10 @@ public class DialogueUI : MonoBehaviour
         {
             MiscData.completedUniqueRoomsDialogues.Add(set.gameObject.name);
         }
+        else if(set.whatDialogueType == 6)
+        {
+            MiscData.completedHubReturnDialogues.Add(set.gameObject.name);
+        }
     }
 
     IEnumerator turnOffDialoguer()

@@ -43,19 +43,12 @@ public class DungeonSelectorButton : MonoBehaviour {
         {
             float progress = Mathf.Clamp01(openScene.progress / 0.9f);
             loadingCircle.fillAmount = progress;
-            if(openScene.progress >= 0.9f)
+            if (openScene.progress >= 0.9f)
             {
                 openScene.allowSceneActivation = true;
             }
             yield return null;
         }
-    }
-
-    IEnumerator showText()
-    {
-        levelDescriptor.SetActive(false);
-        yield return new WaitForSeconds(1f);
-        levelDescriptor.SetActive(true);
     }
 
     public void loadScene()
@@ -84,7 +77,5 @@ public class DungeonSelectorButton : MonoBehaviour {
         {
             unlockButton();
         }
-
-        StartCoroutine(showText()); 
     }
 }

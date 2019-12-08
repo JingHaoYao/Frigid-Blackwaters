@@ -11,8 +11,7 @@ public class DialogueSet : MonoBehaviour
     // 3 - boss dialogues (No longer included)
     // 4 - examine dialogues
     // 5 - shop dialogues
-    // 6 - unique dialogues that include other things, such as first
-    //     time dungeon entrance. (No longer included)
+    // 6 - returning from hub dialogues
     // 7 - story dialogues
     // 8 - unique room dialogues
     public string[] dialogues;

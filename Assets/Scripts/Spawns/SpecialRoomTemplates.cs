@@ -35,6 +35,29 @@ public class SpecialRoomTemplates : MonoBehaviour {
                     return null;
             }
         }
+        else if(FindObjectOfType<DungeonEntryDialogueManager>().whatDungeonLevel == 2)
+        {
+            switch (whichUnique)
+            {
+                case 1:
+                    return Resources.Load<GameObject>("Unique Rooms/Second Dungeon Level/Shop Rooms/Second Dungeon Shop Tier " + whatTier.ToString());
+                case 2:
+                    return Resources.Load<GameObject>("Unique Rooms/Second Dungeon Level/Gamble Rooms/Second Dungeon Gamble Tier " + whatTier.ToString());
+                case 3:
+                    return Resources.Load<GameObject>("Unique Rooms/Second Dungeon Level/Challenge Rooms/Second Dungeon Challenge Room Tier " + whatTier.ToString());
+                case 4:
+                    string whichCombat = miniBosses[Random.Range(0, miniBosses.Length)];
+                    return Resources.Load<GameObject>("Unique Rooms/Second Dungeon Level/Special Combat Rooms/" + whichCombat + "/" + whichCombat);
+                case 5:
+                    return Resources.Load<GameObject>("Unique Rooms/Second Dungeon Level/Trove Rooms/Second Dungeon Trove Tier " + whatTier.ToString());
+                case 6:
+                    return Resources.Load<GameObject>("Unique Rooms/Second Dungeon Level/Treasure Rooms/Second Dungeon Level Treasure Room Tier " + whatTier.ToString());
+                case 7:
+                    return Resources.Load<GameObject>("Unique Rooms/Second Dungeon Level/Altar Rooms/Second Dungeon Tier " + whatTier.ToString() + " Altar");
+                default:
+                    return null;
+            }
+        }
         else
         {
             return null;

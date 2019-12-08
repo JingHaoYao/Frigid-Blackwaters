@@ -21,13 +21,13 @@ public static class MiscData
     public static List<string> completedExamineDialogues = new List<string>();
     public static List<string> completedShopDialogues = new List<string>();
     public static List<string> completedStoryDialogues = new List<string>();
+    public static List<string> completedHubReturnDialogues = new List<string>();
 
     //tutorial dialogues
     public static List<string> completedUniqueRoomsDialogues = new List<string>();
 
     //check points in the game that have been completed
     public static List<string> completedCheckPoints = new List<string>();
-
 
     //which buildings have been unlocked
     public static List<string> unlockedBuildings = new List<string>();

@@ -22,9 +22,20 @@ public class BuildingUnlocker : MonoBehaviour
         }
     }
 
+    //Dialogues that play after defeating bosses
+
+    //A dialogue to inform the player of the weapons they've unlocked
+    void loadWeaponDialogue()
+    {
+        if(MiscData.bossesDefeated.Contains("sentinel") && !MiscData.completedHubReturnDialogues.Contains("Second Level Weapon Unlocked Dialogue"))
+        {
+            notifications.dialoguesToDisplay.Add(loadDialogue("Second Level Weapon Unlocked Dialogue"));
+        }
+    }
+
     DialogueSet loadDialogue(string dialogueName)
     {
-        return Resources.Load<DialogueSet>("Dialogues/Building Unlock Dialogues/" + dialogueName);
+        return Resources.Load<DialogueSet>("Dialogues/Hub Return Dialogues/" + dialogueName);
     }
 
     private void LateUpdate()
@@ -71,6 +82,8 @@ public class BuildingUnlocker : MonoBehaviour
                 notifications.dialoguesToDisplay.Add(loadDialogue("Artifact Shop Unlocked"));
                 MiscData.unlockedBuildings.Add("artifact_shop");
             }
+
+            loadWeaponDialogue();
 
             this.gameObject.SetActive(false);
         }

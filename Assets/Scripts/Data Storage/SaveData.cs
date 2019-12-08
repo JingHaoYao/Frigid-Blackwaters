@@ -63,6 +63,7 @@ public class SaveData
     public string[] completedStoryDialogues;
     public string[] unlockedBuildings;
     public string[] completedUniqueRoomDialogues;
+    public string[] completedHubReturnDialogues;
 
     public string[] completedCheckPoints;
 
@@ -244,6 +245,12 @@ public class SaveData
         for(int i = 0; i < completedMissions.Length; i++)
         {
             completedMissions[i] = MiscData.completedMissions[i];
+        }
+
+        completedHubReturnDialogues = new string[MiscData.completedHubReturnDialogues.Count];
+        for(int i = 0; i < completedHubReturnDialogues.Length; i++)
+        {
+            completedHubReturnDialogues[i] = MiscData.completedHubReturnDialogues[i];
         }
     }
 }
