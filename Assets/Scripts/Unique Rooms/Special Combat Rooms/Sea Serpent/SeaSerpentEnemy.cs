@@ -33,6 +33,8 @@ public class SeaSerpentEnemy : Enemy {
 	void Start () {
         playerShip = GameObject.Find("PlayerShip");
         GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated = false;
+        FindObjectOfType<BossHealthBar>().bossStartUp("Serpent Colossus");
+        FindObjectOfType<BossHealthBar>().targetEnemy = this;
     }
 
     void pickEmergeAttack()
@@ -99,6 +101,7 @@ public class SeaSerpentEnemy : Enemy {
                 Instantiate(serpentChest, transform.position, Quaternion.identity);
                 anti.trialDefeated = true;
                 addKills();
+                FindObjectOfType<BossHealthBar>().bossEnd();
                 Destroy(this.gameObject);
             }
             else if(spawnedTail != null && spawnedTail.GetComponent<SeaSerpentTail>().animationCompleted == true)

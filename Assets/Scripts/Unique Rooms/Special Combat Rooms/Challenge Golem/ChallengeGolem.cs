@@ -289,7 +289,9 @@ public class ChallengeGolem : Enemy {
         hitBoxList = new GameObject[5] { hitBox1, hitBox2, hitBox3, hitBox4, hitBox5 };
         rigidBody2D = GetComponent<Rigidbody2D>();
         playerShip = GameObject.Find("PlayerShip");
-	}
+        FindObjectOfType<BossHealthBar>().bossStartUp("Surge Golem");
+        FindObjectOfType<BossHealthBar>().targetEnemy = this;
+    }
 
 	void Update () {
         angleToShip = (360 + Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
@@ -315,6 +317,7 @@ public class ChallengeGolem : Enemy {
                 deadMusketeer.GetComponent<SpriteRenderer>().sortingOrder = spriteRenderer.sortingOrder;
                 this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                 anti.trialDefeated = true;
+                FindObjectOfType<BossHealthBar>().bossEnd();
                 GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated = true;
                 Destroy(this.gameObject);
                 addKills();

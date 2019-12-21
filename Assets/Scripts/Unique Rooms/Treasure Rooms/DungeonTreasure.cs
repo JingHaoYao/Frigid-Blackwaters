@@ -12,6 +12,7 @@ public class DungeonTreasure : MonoBehaviour
     public GameObject targetArtifact;
     public Sprite unActive;
     SpriteRenderer spriteRenderer;
+    DungeonEntryDialogueManager dungeonDialogueManager;
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class DungeonTreasure : MonoBehaviour
         itemTemplates = FindObjectOfType<ItemTemplates>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         treasureDisplay = GameObject.Find("Treasure Menu Parent").transform.GetChild(0).gameObject;
+        dungeonDialogueManager = FindObjectOfType<DungeonEntryDialogueManager>();
         setItem();
     }
 
@@ -33,19 +35,19 @@ public class DungeonTreasure : MonoBehaviour
         if (whatTier == 1)
         {
             newItem = Instantiate(itemTemplates.gold);
-            newItem.GetComponent<DisplayItem>().goldValue = 200 + 50 * Random.Range(1, 4) + 25 * Random.Range(1, 5);
+            newItem.GetComponent<DisplayItem>().goldValue = 200 + 50 * Random.Range(1, 4) + 25 * Random.Range(1, 5) + dungeonDialogueManager.whatDungeonLevel * 200;
             newItem.transform.parent = GameObject.Find("PresentItems").transform;
         }
         else if (whatTier == 2)
         {
             newItem = Instantiate(itemTemplates.gold);
-            newItem.GetComponent<DisplayItem>().goldValue = 400 + 50 * Random.Range(1, 4) + 25 * Random.Range(1, 5);
+            newItem.GetComponent<DisplayItem>().goldValue = 400 + 50 * Random.Range(1, 4) + 25 * Random.Range(1, 5) + dungeonDialogueManager.whatDungeonLevel * 225;
             newItem.transform.parent = GameObject.Find("PresentItems").transform;
         }
         else
         {
             newItem = Instantiate(itemTemplates.gold);
-            newItem.GetComponent<DisplayItem>().goldValue = 600 + 75 * Random.Range(1, 4) + 25 * Random.Range(1, 5);
+            newItem.GetComponent<DisplayItem>().goldValue = 600 + 75 * Random.Range(1, 4) + 25 * Random.Range(1, 5) + dungeonDialogueManager.whatDungeonLevel * 250;
             newItem.transform.parent = GameObject.Find("PresentItems").transform;
         }
         targetArtifact = newItem;

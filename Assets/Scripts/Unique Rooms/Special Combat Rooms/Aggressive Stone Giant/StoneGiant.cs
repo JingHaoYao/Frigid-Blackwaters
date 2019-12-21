@@ -78,7 +78,9 @@ public class StoneGiant : Enemy {
     void Start () {
         spriteRenderer = GetComponentsInChildren<SpriteRenderer>()[0];
         playerShip = GameObject.Find("PlayerShip");
-	}
+        FindObjectOfType<BossHealthBar>().bossStartUp("Awakened Stone Giant");
+        FindObjectOfType<BossHealthBar>().targetEnemy = this;
+    }
 
     void pickAttack()
     {
@@ -134,6 +136,7 @@ public class StoneGiant : Enemy {
             {
                 GameObject spawnedDeadGiant = Instantiate(deadGiant, transform.position, Quaternion.identity);
                 SpriteRenderer[] deadRends = spawnedDeadGiant.GetComponentsInChildren<SpriteRenderer>();
+                FindObjectOfType<BossHealthBar>().bossEnd();
                 foreach(SpriteRenderer element in deadRends)
                 {
                     element.sortingOrder = spriteRenderer.sortingOrder;
