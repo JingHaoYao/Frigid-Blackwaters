@@ -533,7 +533,7 @@ public class PlayerScript : MonoBehaviour {
 
             if (amountDamage > 0)
             {
-                if (damageImmunity == false && hitBufferPeriod == false)
+                if (damageImmunity == false)
                 {
                     trueDamage += (int)(amountDamage * defenseModifier);
                 }
@@ -553,30 +553,33 @@ public class PlayerScript : MonoBehaviour {
                     trueDamage = 0;
                 }
 
-                if (damagingObject != null)
+                if (hitBufferPeriod == false)
                 {
-                    float angle = Mathf.Atan2(damagingObject.transform.position.y - transform.position.y, damagingObject.transform.position.x - transform.position.x);
-                    if (Vector2.Distance(transform.position, damagingObject.transform.position) < 1f)
+                    if (damagingObject != null)
                     {
-                        FindObjectOfType<DamageNumbers>().showDamage((int)(amountDamage * defenseModifier), shipHealthMAX, damagingObject.transform.position);
+                        float angle = Mathf.Atan2(damagingObject.transform.position.y - transform.position.y, damagingObject.transform.position.x - transform.position.x);
+                        if (Vector2.Distance(transform.position, damagingObject.transform.position) < 1f)
+                        {
+                            FindObjectOfType<DamageNumbers>().showDamage((int)(amountDamage * defenseModifier), shipHealthMAX, damagingObject.transform.position);
+                        }
+                        else
+                        {
+                            FindObjectOfType<DamageNumbers>().showDamage((int)(amountDamage * defenseModifier), shipHealthMAX, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)));
+                        }
                     }
                     else
                     {
-                        FindObjectOfType<DamageNumbers>().showDamage((int)(amountDamage * defenseModifier), shipHealthMAX, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)));
+                        FindObjectOfType<DamageNumbers>().showDamage((int)(amountDamage * defenseModifier), shipHealthMAX, transform.position + new Vector3(0, 1.5f, 0));
                     }
+
+                    FindObjectOfType<CameraShake>().shakeCamFunction(0.1f, 0.3f * ((amountDamage * defenseModifier) / shipHealthMAX));
                 }
                 else
                 {
-                    FindObjectOfType<DamageNumbers>().showDamage((int)(amountDamage * defenseModifier), shipHealthMAX, transform.position + new Vector3(0, 1.5f, 0));
+                    amountDamage = 0;
                 }
 
-                FindObjectOfType<CameraShake>().shakeCamFunction(0.1f, 0.3f * ((amountDamage * defenseModifier) / shipHealthMAX));
-
-                if (damagingObject == null)
-                {
-
-                }
-                else
+                if(damagingObject != null)
                 {
                     foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
                     {

@@ -162,24 +162,47 @@ public class LancerGolemMinion : MonoBehaviour
         {
             if (duration < 20)
             {
-                this.GetComponent<AStarPathfinding>().target = targetEnemy.transform.position;
-                path = GetComponent<AStarPathfinding>().seekPath;
-                AStarNode pathNode = path[0];
-                Vector3 targetPos = pathNode.nodePosition;
-
-                float angleToShip = (360 + Mathf.Atan2(targetPos.y - transform.position.y, targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360;
-                pickView(angleToShip);
-                if (Vector2.Distance(targetEnemy.transform.position, transform.position) < 1.7f && attacking == false)
+                if (GetComponent<AStarPathfinding>().grid != null)
                 {
-                    StartCoroutine(attack());
+                    this.GetComponent<AStarPathfinding>().target = targetEnemy.transform.position;
+                    path = GetComponent<AStarPathfinding>().seekPath;
+                    AStarNode pathNode = path[0];
+                    Vector3 targetPos = pathNode.nodePosition;
+
+                    float angleToShip = (360 + Mathf.Atan2(targetPos.y - transform.position.y, targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360;
+                    pickView(angleToShip);
+                    if (Vector2.Distance(targetEnemy.transform.position, transform.position) < 1.7f && attacking == false)
+                    {
+                        StartCoroutine(attack());
+                    }
+                    else
+                    {
+                        if (attacking == false)
+                        {
+
+                            pickIdleAnimation();
+                            float targetAngle = (360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.5f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360;
+                            rigidBody2D.velocity = new Vector2(Mathf.Cos(cardinalizeDirections(targetAngle) * Mathf.Deg2Rad), Mathf.Sin(cardinalizeDirections(targetAngle) * Mathf.Deg2Rad)) * speed;
+                        }
+                    }
                 }
                 else
                 {
-                    if (attacking == false)
+
+                    float angleToShip = (360 + Mathf.Atan2(targetEnemy.transform.position.y - transform.position.y, targetEnemy.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
+                    pickView(angleToShip);
+                    if (Vector2.Distance(targetEnemy.transform.position, transform.position) < 1.7f && attacking == false)
                     {
-                        pickIdleAnimation();
-                        float targetAngle = (360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.5f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360;
-                        rigidBody2D.velocity = new Vector2(Mathf.Cos(cardinalizeDirections(targetAngle) * Mathf.Deg2Rad), Mathf.Sin(cardinalizeDirections(targetAngle) * Mathf.Deg2Rad)) * speed;
+                        StartCoroutine(attack());
+                    }
+                    else
+                    {
+                        if (attacking == false)
+                        {
+
+                            pickIdleAnimation();
+                            rigidBody2D.velocity = (targetEnemy.transform.position - transform.position).normalized * speed;
+                        }
                     }
                 }
 

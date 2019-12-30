@@ -10,6 +10,8 @@ public class EnemyInvulnerableEffect : MonoBehaviour
 
     public Sprite[] views;
     public float trackingAngle = 0;
+    public bool changeSize = true;
+    public float radius = 0.5f;
 
     int pickView(float angle)
     {
@@ -41,9 +43,12 @@ public class EnemyInvulnerableEffect : MonoBehaviour
 
     private void Start()
     {
-        foreach(GameObject shield in shieldIcons)
+        if (changeSize == true)
         {
-            shield.transform.localScale = new Vector3((1 / trackObject.transform.localScale.x) * 1.7f, (1 / trackObject.transform.localScale.y) * 1.7f);
+            foreach (GameObject shield in shieldIcons)
+            {
+                shield.transform.localScale = new Vector3((1 / trackObject.transform.localScale.x) * 1.7f, (1 / trackObject.transform.localScale.y) * 1.7f);
+            }
         }
     }
 
@@ -64,7 +69,7 @@ public class EnemyInvulnerableEffect : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            shieldIcons[i].transform.position = trackObject.transform.position + new Vector3(Mathf.Cos(trackingAngle + ((Mathf.PI * 2) / 3) * i), Mathf.Sin(trackingAngle + ((Mathf.PI * 2) / 3) * i) + 0.4f) * 0.5f;
+            shieldIcons[i].transform.position = trackObject.transform.position + new Vector3(Mathf.Cos(trackingAngle + ((Mathf.PI * 2) / 3) * i), Mathf.Sin(trackingAngle + ((Mathf.PI * 2) / 3) * i) + 0.4f) * radius;
             shieldIcons[i].GetComponent<SpriteRenderer>().sprite = views[pickView(((trackingAngle + ((Mathf.PI * 2) / 3) * i) * Mathf.Rad2Deg + 360) % 360) - 1];
         }
     }

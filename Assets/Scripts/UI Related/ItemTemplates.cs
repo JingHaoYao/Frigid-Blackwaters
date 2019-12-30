@@ -23,6 +23,7 @@ public class ItemTemplates : MonoBehaviour {
     public string[] secondLevelTier3Artifacts;
     public string[] secondLevelTier4Artifacts;
     public string[] secondLevelConsumables;
+    public string[] secondLevelUniqueArtifacts;
 
     public Dictionary<string, string> itemDB = new Dictionary<string, string>();
 
@@ -96,6 +97,10 @@ public class ItemTemplates : MonoBehaviour {
             itemDB.Add(id, "Items/Second Dungeon Level/Consumables/Regular Consumables/");
         }
 
+        foreach(string id in secondLevelUniqueArtifacts)
+        {
+            itemDB.Add(id, "Items/Second Dungeon Level/Consumables/Unique Artifacts/");
+        }
     }
 
     public bool dbContainsID(string item_id)

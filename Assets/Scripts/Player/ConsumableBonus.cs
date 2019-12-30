@@ -11,6 +11,8 @@ public class ConsumableBonus : MonoBehaviour {
     public int priceBase;
     public bool consumableActivated = false;
 
+    public bool destroyConsumable = true;
+
     PlayerScript playerScript;
 
     private void Start()
@@ -42,6 +44,10 @@ public class ConsumableBonus : MonoBehaviour {
         playerScript.conAttackBonus -= attackBonus;
         playerScript.conDefenseBonus -= defenseBonus;
         playerScript.conSpeedBonus -= speedBonus;
-        Destroy(this.gameObject);
+
+        if (destroyConsumable)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
