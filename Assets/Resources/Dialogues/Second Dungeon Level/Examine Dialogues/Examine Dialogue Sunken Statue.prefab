@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6552674653024784810
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6552674653024784811}
+  - component: {fileID: 6552674653024784812}
+  m_Layer: 0
+  m_Name: Examine Dialogue Sunken Statue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6552674653024784811
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6552674653024784810}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 83.41627, y: 8.554683, z: -513.7722}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6552674653024784812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6552674653024784810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatDialogueType: 4
+  checkPointDialogue: 0
+  dialogues:
+  - Elora, right now there's a big statue of a  great warrior that has sank into the
+    ocean.
+  - ..weren't you a great warrior?
+  - ..That's right, Elora. I was.
+  - .. you're amazing, Rowan.
+  - '...'
+  dialogueNames:
+  - Rowan
+  - Elora
+  - Rowan
+  - Elora
+  - Rowan
+  background: {fileID: 0}
+  character1Sprites: []
+  character2Sprites:
+  - {fileID: 1655401893320086419, guid: 01fa49b69f815294db95cf8ce2df4889, type: 3}
+  - {fileID: 1655401893320086419, guid: 01fa49b69f815294db95cf8ce2df4889, type: 3}
+  - {fileID: -7768055454331034095, guid: 01fa49b69f815294db95cf8ce2df4889, type: 3}
+  - {fileID: 5026146275097310640, guid: 01fa49b69f815294db95cf8ce2df4889, type: 3}
+  - {fileID: 2506274605230927260, guid: 01fa49b69f815294db95cf8ce2df4889, type: 3}
+  character3Sprites:
+  - {fileID: 3149587610089149507, guid: 3f4738101fd09664dbdfa2b8b1758df6, type: 3}
+  - {fileID: -448182295430421911, guid: 3f4738101fd09664dbdfa2b8b1758df6, type: 3}
+  - {fileID: -448182295430421911, guid: 3f4738101fd09664dbdfa2b8b1758df6, type: 3}
+  - {fileID: 1663497490847419842, guid: 3f4738101fd09664dbdfa2b8b1758df6, type: 3}
+  - {fileID: -448182295430421911, guid: 3f4738101fd09664dbdfa2b8b1758df6, type: 3}
+  character4Sprites: []
+  panelSprites: []
+  substituteMusic: 
+  originalMusic: 
+  addedItems: []

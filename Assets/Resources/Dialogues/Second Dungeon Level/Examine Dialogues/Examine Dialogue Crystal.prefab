@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2413743741134379129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2413743741134379126}
+  - component: {fileID: 2413743741134379127}
+  m_Layer: 0
+  m_Name: Examine Dialogue Crystal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2413743741134379126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2413743741134379129}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.341986, y: 4.98012, z: -477.9453}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2413743741134379127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2413743741134379129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatDialogueType: 4
+  checkPointDialogue: 0
+  dialogues:
+  - Hey Tabitha, aren't these the blue crystals from the first level?
+  - I think so? These do look the same as the ones in the first level.
+  - Does that mean these crystals aren't geological then? I thought they were only
+    native to the first level because of the environment.
+  - But if they can grow anywhere, then there must be something else at play that
+    leads to their growth.
+  dialogueNames:
+  - Malfar
+  - Tabitha
+  - Malfar
+  - Malfar
+  background: {fileID: 0}
+  character1Sprites: []
+  character2Sprites:
+  - {fileID: 3747486039391000710, guid: 80b47b0e7385ea741919cd96f04e4907, type: 3}
+  - {fileID: -3985215202865390325, guid: 80b47b0e7385ea741919cd96f04e4907, type: 3}
+  - {fileID: 3747486039391000710, guid: 80b47b0e7385ea741919cd96f04e4907, type: 3}
+  - {fileID: -3985215202865390325, guid: 80b47b0e7385ea741919cd96f04e4907, type: 3}
+  character3Sprites:
+  - {fileID: 1423390269769719171, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: -674398192908579941, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: 1423390269769719171, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: 1423390269769719171, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  character4Sprites: []
+  panelSprites: []
+  substituteMusic: 
+  originalMusic: 
+  addedItems: []

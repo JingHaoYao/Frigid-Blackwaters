@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8568886362272975337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8568886362272975342}
+  - component: {fileID: 8568886362272975343}
+  m_Layer: 0
+  m_Name: Random Dungeon Dialogue Fairy in a Bottle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8568886362272975342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8568886362272975337}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.254274, y: 1.1577477, z: -780.9219}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8568886362272975343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8568886362272975337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatDialogueType: 0
+  checkPointDialogue: 0
+  dialogues:
+  - Take a look at this, Navigator.
+  - I was told this was a fairy. Apparently they bless humans with a prolonged life.
+  - Hopefully we can find some use for it.
+  dialogueNames:
+  - Tabitha
+  - Tabitha
+  - Tabitha
+  background: {fileID: 0}
+  character1Sprites: []
+  character2Sprites: []
+  character3Sprites:
+  - {fileID: -6469619063686927284, guid: d1f0a8955bfaac242869e4d640b80806, type: 3}
+  - {fileID: -6469619063686927284, guid: d1f0a8955bfaac242869e4d640b80806, type: 3}
+  - {fileID: -6469619063686927284, guid: d1f0a8955bfaac242869e4d640b80806, type: 3}
+  character4Sprites: []
+  panelSprites: []
+  substituteMusic: 
+  originalMusic: 
+  addedItems:
+  - {fileID: 7091995428188759709, guid: aa3e15329c95e444f9b97964fa8b07cc, type: 3}

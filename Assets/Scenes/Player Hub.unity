@@ -13637,104 +13637,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346517729}
   m_CullTransparentMesh: 0
---- !u!1 &352050767
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 352050768}
-  - component: {fileID: 352050769}
-  m_Layer: 0
-  m_Name: Mission Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &352050768
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 352050767}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.589735, y: -2.65844, z: 2.8436713}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &352050769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 352050767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39eafc2dbdde69042b85c0a81df71f0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allStoryMissions:
-  - missionIcon: {fileID: 2319194040546241938, guid: 93ce58112c9b2a44cbae32cc4ef78d02,
-      type: 3}
-    itemRewards:
-    - {fileID: 6356437401692792686, guid: 2ee19dd57dff4d645a26a77bcdff102f, type: 3}
-    goldReward: 1200
-    skillPointReward: 0
-    missionID: defeat_undead_mariner
-    bossName: Undead Mariner
-    numberDungeonRooms: 10
-    difficulty: 1
-    bossInfo: The greatest captain that has ever sailed into the labyrinth was a man
-      that towered over all others. But death comes to all, and his corpse has risen
-      to become a powerful monster brandishing a giant anchor. Reclaim the ruins of
-      his ship and put his soul to rest.
-  - missionIcon: {fileID: -677603626295210812, guid: 93ce58112c9b2a44cbae32cc4ef78d02,
-      type: 3}
-    itemRewards: []
-    goldReward: 1500
-    skillPointReward: 1
-    missionID: defeat_sea_terror
-    bossName: Sea Terror
-    numberDungeonRooms: 10
-    difficulty: 1
-    bossInfo: Adventurers have reported a beautiful garden filled with dazzling blue
-      crystals. Their glow seems to entrance those who look at them, but beware, for
-      a great sea creature inhabits the depths of that cursed garden.
-  - missionIcon: {fileID: -8079510570135772684, guid: 93ce58112c9b2a44cbae32cc4ef78d02,
-      type: 3}
-    itemRewards:
-    - {fileID: 1232390303438870990, guid: e8dfe698953f74d47b3948746d2eae43, type: 3}
-    goldReward: 1800
-    skillPointReward: 0
-    missionID: defeat_elder_frost_mage
-    bossName: Elder Frost Mage
-    numberDungeonRooms: 15
-    difficulty: 2
-    bossInfo: "Near the entrance to the second level of the dungeon, a shrill but
-      familiar cold sweeps passing ships, only to be followed by a fierce ice storm.
-      Tread carefully, for a great but terrifying magic wielder haunts the innermost
-      rooms of the labyrinth\u2019s first level. "
-  - missionIcon: {fileID: 2310453522643915396, guid: 93ce58112c9b2a44cbae32cc4ef78d02,
-      type: 3}
-    itemRewards: []
-    goldReward: 2500
-    skillPointReward: 1
-    missionID: defeat_sentinel
-    bossName: Sentinel
-    numberDungeonRooms: 25
-    difficulty: 3
-    bossInfo: "At the deepest point of the first level, a towering gate awaits those
-      that wish to challenge the labyrinth\u2019s depths. Shrouding itself in a fierce
-      storm of rocks, an ancient but powerful automaton guards the labyrinth\u2019s
-      second level from those who wish to press forward. "
-  dungeonLevelThresholds: 04000000
 --- !u!1001 &358253273
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83546,3 +83448,72 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &6247857929635450856
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6247857929315979687, guid: bab3fa1f18c2e4b42a99b81a7488a9ab,
+        type: 3}
+      propertyPath: m_Name
+      value: Mission Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247857929315979704, guid: bab3fa1f18c2e4b42a99b81a7488a9ab,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19.589735
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247857929315979704, guid: bab3fa1f18c2e4b42a99b81a7488a9ab,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.65844
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247857929315979704, guid: bab3fa1f18c2e4b42a99b81a7488a9ab,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.8436713
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247857929315979704, guid: bab3fa1f18c2e4b42a99b81a7488a9ab,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247857929315979704, guid: bab3fa1f18c2e4b42a99b81a7488a9ab,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247857929315979704, guid: bab3fa1f18c2e4b42a99b81a7488a9ab,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247857929315979704, guid: bab3fa1f18c2e4b42a99b81a7488a9ab,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247857929315979704, guid: bab3fa1f18c2e4b42a99b81a7488a9ab,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247857929315979704, guid: bab3fa1f18c2e4b42a99b81a7488a9ab,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247857929315979704, guid: bab3fa1f18c2e4b42a99b81a7488a9ab,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247857929315979704, guid: bab3fa1f18c2e4b42a99b81a7488a9ab,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bab3fa1f18c2e4b42a99b81a7488a9ab, type: 3}

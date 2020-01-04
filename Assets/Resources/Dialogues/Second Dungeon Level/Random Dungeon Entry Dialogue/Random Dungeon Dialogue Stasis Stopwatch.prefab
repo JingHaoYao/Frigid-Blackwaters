@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5592337408094767533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5592337408094767534}
+  - component: {fileID: 5592337408094767535}
+  m_Layer: 0
+  m_Name: Random Dungeon Dialogue Stasis Stopwatch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5592337408094767534
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5592337408094767533}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.254274, y: 1.1577477, z: -780.9219}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5592337408094767535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5592337408094767533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatDialogueType: 0
+  checkPointDialogue: 0
+  dialogues:
+  - Hey navigator! I'm not sure if you've seen these around.
+  - Apparently adventurers find a lot of these little trinkets around the dungeon
+    and they have the mindbending power to warp time.
+  - I think you'll make some use of it.
+  dialogueNames:
+  - Tabitha
+  - Tabitha
+  - Tabitha
+  background: {fileID: 0}
+  character1Sprites: []
+  character2Sprites: []
+  character3Sprites:
+  - {fileID: -7248168429861028513, guid: d1f0a8955bfaac242869e4d640b80806, type: 3}
+  - {fileID: -7248168429861028513, guid: d1f0a8955bfaac242869e4d640b80806, type: 3}
+  - {fileID: -6025122158516051314, guid: d1f0a8955bfaac242869e4d640b80806, type: 3}
+  character4Sprites: []
+  panelSprites: []
+  substituteMusic: 
+  originalMusic: 
+  addedItems:
+  - {fileID: 1416873235034993657, guid: 89e8b425b7457d649a428f3fe72c2250, type: 3}

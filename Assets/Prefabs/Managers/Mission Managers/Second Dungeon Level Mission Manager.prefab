@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7721319312896837501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7721319312896837500}
+  - component: {fileID: 7721319312896837499}
+  m_Layer: 0
+  m_Name: Second Dungeon Level Mission Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7721319312896837500
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7721319312896837501}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7721319312896837499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7721319312896837501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de83ae9882f278c46b7b5a372a9fbf6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  missionIDs:
+  - defeat_the_flail_golem
+  missions:
+  - missionIcon: {fileID: 9181987325541664247, guid: 438b5cd27b668d744b5088a54869b573,
+      type: 3}
+    itemRewards:
+    - {fileID: 3099512498930660360, guid: ba562a6fecc49284ea19c936a959361f, type: 3}
+    goldReward: 1850
+    skillPointReward: 0
+    missionID: defeat_the_flail_golem
+    bossName: Tome Guardian
+    numberDungeonRooms: 15
+    difficulty: 2
+    bossInfo: 
+  bossManagers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  currMission:
+    missionIcon: {fileID: 0}
+    itemRewards: []
+    goldReward: 0
+    skillPointReward: 0
+    missionID: 
+    bossName: 
+    numberDungeonRooms: 0
+    difficulty: 0
+    bossInfo: 
+  bossInitiated: 0

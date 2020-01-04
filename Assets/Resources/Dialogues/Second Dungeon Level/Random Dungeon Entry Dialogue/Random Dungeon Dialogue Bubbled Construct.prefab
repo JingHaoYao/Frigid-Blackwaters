@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3112076781670088796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3112076781670088797}
+  - component: {fileID: 3112076781670088786}
+  m_Layer: 0
+  m_Name: Random Dungeon Dialogue Bubbled Construct
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3112076781670088797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3112076781670088796}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.748794, y: 3.0108976, z: -760.36566}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3112076781670088786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3112076781670088796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatDialogueType: 0
+  checkPointDialogue: 0
+  dialogues:
+  - Elora seems to be holding something.
+  - It looks like a bubble, but there seems to be something inside.
+  - She gives it to you.
+  dialogueNames:
+  - 
+  - 
+  - 
+  background: {fileID: 0}
+  character1Sprites: []
+  character2Sprites:
+  - {fileID: 21300000, guid: 6a9b3e2b26723244aba881cebd5eddde, type: 3}
+  - {fileID: 21300000, guid: c620b8415edc85842a5c3d8a2cefe119, type: 3}
+  - {fileID: 5147458750827167992, guid: c27d716d3c74f734990fb07631394e67, type: 3}
+  character3Sprites: []
+  character4Sprites: []
+  panelSprites: []
+  substituteMusic: 
+  originalMusic: 
+  addedItems:
+  - {fileID: 3822119084915345685, guid: 9a66de15ba17d494ebb139fc359ed458, type: 3}

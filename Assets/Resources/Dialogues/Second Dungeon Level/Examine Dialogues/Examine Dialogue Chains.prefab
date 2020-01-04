@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4054180093156975774
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4054180093156975775}
+  - component: {fileID: 4054180093156975768}
+  m_Layer: 0
+  m_Name: Examine Dialogue Chains
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4054180093156975775
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4054180093156975774}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.250036, y: 2.2016933, z: -485.93817}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4054180093156975768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4054180093156975774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatDialogueType: 4
+  checkPointDialogue: 0
+  dialogues:
+  - Large chains.
+  - But what would they be used for? There are a lot of large sea monsters. Maybe
+    they used them to restrain them.
+  - Geordi, even for sea monsters these are big. We should approach this level with
+    caution.
+  - .. You're right.
+  dialogueNames:
+  - Rowan
+  - Geordi
+  - Rowan
+  - Geordi
+  background: {fileID: 0}
+  character1Sprites: []
+  character2Sprites:
+  - {fileID: 1655401893320086419, guid: 01fa49b69f815294db95cf8ce2df4889, type: 3}
+  - {fileID: 1655401893320086419, guid: 01fa49b69f815294db95cf8ce2df4889, type: 3}
+  - {fileID: -7768055454331034095, guid: 01fa49b69f815294db95cf8ce2df4889, type: 3}
+  - {fileID: 1655401893320086419, guid: 01fa49b69f815294db95cf8ce2df4889, type: 3}
+  character3Sprites:
+  - {fileID: -3496357958197151338, guid: 16238912860b16a4eb799d47b4e5b3ad, type: 3}
+  - {fileID: 4725384957697610282, guid: 16238912860b16a4eb799d47b4e5b3ad, type: 3}
+  - {fileID: 1308253903413466330, guid: 16238912860b16a4eb799d47b4e5b3ad, type: 3}
+  - {fileID: -1297176371338781238, guid: 16238912860b16a4eb799d47b4e5b3ad, type: 3}
+  character4Sprites: []
+  panelSprites: []
+  substituteMusic: 
+  originalMusic: 
+  addedItems: []

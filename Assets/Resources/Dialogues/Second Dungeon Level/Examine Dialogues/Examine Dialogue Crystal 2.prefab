@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4155188529219556896
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4155188529219556897}
+  - component: {fileID: 4155188529219556898}
+  m_Layer: 0
+  m_Name: Examine Dialogue Crystal 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4155188529219556897
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4155188529219556896}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.8586, y: 6.456529, z: -479.02344}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4155188529219556898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4155188529219556896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatDialogueType: 4
+  checkPointDialogue: 0
+  dialogues:
+  - Remember those samples we took in the first level, Tabitha?
+  - Yeah I do, what happened to them?
+  - I sent them back to Zunis for some further investigation and they don't seem to
+    have any special properties.
+  - But we do see undead and large sea monsters gravitate towards these crystals.
+  - Maybe there's something that we're doing that's not triggering something special.
+  dialogueNames:
+  - Malfar
+  - Tabitha
+  - Malfar
+  - Malfar
+  - Tabitha
+  background: {fileID: 0}
+  character1Sprites:
+  - {fileID: 3747486039391000710, guid: 80b47b0e7385ea741919cd96f04e4907, type: 3}
+  - {fileID: -3985215202865390325, guid: 80b47b0e7385ea741919cd96f04e4907, type: 3}
+  - {fileID: 3747486039391000710, guid: 80b47b0e7385ea741919cd96f04e4907, type: 3}
+  - {fileID: 3747486039391000710, guid: 80b47b0e7385ea741919cd96f04e4907, type: 3}
+  - {fileID: -3985215202865390325, guid: 80b47b0e7385ea741919cd96f04e4907, type: 3}
+  character2Sprites:
+  - {fileID: 1423390269769719171, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: -674398192908579941, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: 1423390269769719171, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: 1423390269769719171, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: -589896756908973102, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  character3Sprites: []
+  character4Sprites: []
+  panelSprites: []
+  substituteMusic: 
+  originalMusic: 
+  addedItems: []

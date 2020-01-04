@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5961945633616241067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5961945633616241066}
+  - component: {fileID: 5961945633616241065}
+  m_Layer: 0
+  m_Name: Random Dungeon Dialogue Extra Fabric
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5961945633616241066
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5961945633616241067}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 41.850178, y: 21.747646, z: -866.9375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5961945633616241065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5961945633616241067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatDialogueType: 0
+  checkPointDialogue: 0
+  dialogues:
+  - Heyo! I salvaged some extra fabric from a recent delivery to the town.
+  - We can use this to repair our sails if they get damaged.
+  dialogueNames:
+  - Tabitha
+  - Tabitha
+  background: {fileID: 0}
+  character1Sprites: []
+  character2Sprites: []
+  character3Sprites:
+  - {fileID: 21300000, guid: cccbeb6ea123e0d44b0e89034a2e5992, type: 3}
+  - {fileID: 21300000, guid: cccbeb6ea123e0d44b0e89034a2e5992, type: 3}
+  character4Sprites: []
+  panelSprites: []
+  substituteMusic: 
+  originalMusic: 
+  addedItems:
+  - {fileID: 1182440628992640, guid: c2bac2733261cc748874e46efe6cc650, type: 3}
+  - {fileID: 1800517110516486, guid: dc2a3920e4224c942b6d01e966f2797e, type: 3}
