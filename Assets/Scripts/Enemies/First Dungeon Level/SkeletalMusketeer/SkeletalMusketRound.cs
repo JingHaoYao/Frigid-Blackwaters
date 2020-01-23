@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SkeletalMusketRound : MonoBehaviour {
     public float speed = 50;
+    public int damage = 100;
     public GameObject bulletSparks;
     public float angleTravel;
     public GameObject bulletTrail;
@@ -24,7 +25,7 @@ public class SkeletalMusketRound : MonoBehaviour {
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            playerShip.GetComponent<PlayerScript>().amountDamage += 100;
+            playerShip.GetComponent<PlayerScript>().amountDamage += damage;
         }
 
         if (collision.gameObject.tag == "RoomHitbox" || collision.gameObject.tag == "RoomWall")

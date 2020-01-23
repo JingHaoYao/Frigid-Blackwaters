@@ -170,6 +170,8 @@ public class FlailGolem : Enemy
             {
                 rigidBody2D.velocity = Vector3.zero;
                 this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                playerScript.enemiesDefeated = true;
+                SaveSystem.SaveGame();
                 bossManager.bossBeaten(nameID, 1.083f);
                 addKills();
                 Instantiate(deadFlailGolem, transform.position, Quaternion.identity);

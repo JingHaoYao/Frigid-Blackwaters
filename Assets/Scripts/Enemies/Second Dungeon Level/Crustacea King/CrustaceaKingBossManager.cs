@@ -20,12 +20,6 @@ public class CrustaceaKingBossManager : BossManager
             crustaceaKing.SetActive(true);
             roomInit = true;
         }
-
-        if (crustaceaKing == null)
-        {
-            GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated = true;
-            SaveSystem.SaveGame();
-        }
     }
 
     IEnumerator adjustPlayer()

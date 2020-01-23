@@ -114,8 +114,13 @@ public class MoveCameraNextRoom : MonoBehaviour {
             }
             else
             {
-                Camera.main.transform.position = new Vector3(Mathf.Clamp(playerShip.transform.position.x, bottomLeftBoundary.x, topRightBoundary.x), Mathf.Clamp(playerShip.transform.position.y, bottomLeftBoundary.y, topRightBoundary.y));
+                transform.position = returnTrackCamPosition();
             }
         }
 	}
+
+    public Vector3 returnTrackCamPosition()
+    {
+        return new Vector3(Mathf.Clamp(playerShip.transform.position.x, bottomLeftBoundary.x, topRightBoundary.x), Mathf.Clamp(playerShip.transform.position.y, bottomLeftBoundary.y, topRightBoundary.y));
+    }
 }

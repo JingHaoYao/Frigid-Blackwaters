@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FirstBossSwordSlash : MonoBehaviour {
-    Animator animator;
-    BoxCollider2D boxCol;
-    SpriteRenderer spriteRenderer;
+    [SerializeField] Animator animator;
+    [SerializeField] BoxCollider2D boxCol;
+    [SerializeField] SpriteRenderer spriteRenderer;
     public float angleAttack;
 
     IEnumerator enableHitBox()
@@ -21,22 +21,18 @@ public class FirstBossSwordSlash : MonoBehaviour {
 
     void Start()
     {
-        animator = GetComponent<Animator>();
-        boxCol = GetComponent<BoxCollider2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         transform.rotation = Quaternion.Euler(0, 0, angleAttack);
         spriteRenderer.enabled = false;
         boxCol.enabled = false;
-        Destroy(transform.parent.gameObject, 1.167f);
+        Destroy(this.gameObject, 1.167f);
         StartCoroutine(enableHitBox());
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            GameObject.Find("PlayerShip").GetComponent<PlayerScript>().amountDamage += 400;
+            GameObject.Find("PlayerShip").GetComponent<PlayerScript>().amountDamage += 750;
         }
     }
 }

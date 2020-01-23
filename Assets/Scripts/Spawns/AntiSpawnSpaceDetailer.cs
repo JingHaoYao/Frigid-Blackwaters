@@ -29,6 +29,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
     public MapUI mapUI;
     EnemyRoomTemplates enemyRoomTemplates;
     DungeonEntryDialogueManager dialogueManager;
+    PlayerScript playerScript;
+
+    public List<Enemy> spawnedEnemies = new List<Enemy>();
 
     //
     // What room type (used for mapping)
@@ -48,7 +51,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
 
     void setDangerValueCap()
     {
-        dangerValueCap = Mathf.RoundToInt((Vector3.Magnitude(transform.parent.transform.position) / 20)) + Mathf.RoundToInt(playerShip.GetComponent<PlayerScript>().numRoomsVisited / 3f);
+        dangerValueCap = Mathf.RoundToInt((Vector3.Magnitude(transform.parent.transform.position) / 20)) + Mathf.RoundToInt(playerScript.numRoomsVisited / 3f);
     }
 
     bool isPositionPicked(List<Vector3> posArray, Vector3 pos)
@@ -216,7 +219,6 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
         return test;
     }
 
-
     int spawnEnemy(int tier, EnemyRoomTemplate template, Vector3 spawnPos)
     {
         if (dialogueManager.whatDungeonLevel == 1)
@@ -234,7 +236,10 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     }
                 }
                 GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                return spawnedEnemy.GetComponent<Enemy>().dangerValue;
+                Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                enemyClass.spawner = this;
+                spawnedEnemies.Add(enemyClass);
+                return enemyClass.dangerValue;
             }
             else if (tier == 2)
             {
@@ -253,7 +258,10 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     Debug.LogError(enemy + " " + template.potentialEnemyNames[index]);
                 }
                 GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                return spawnedEnemy.GetComponent<Enemy>().dangerValue;
+                Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                enemyClass.spawner = this;
+                spawnedEnemies.Add(enemyClass);
+                return enemyClass.dangerValue;
             }
             else if (tier == 3)
             {
@@ -268,7 +276,10 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     }
                 }
                 GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                return spawnedEnemy.GetComponent<Enemy>().dangerValue;
+                Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                enemyClass.spawner = this;
+                spawnedEnemies.Add(enemyClass);
+                return enemyClass.dangerValue;
             }
             else if (tier == 4)
             {
@@ -283,7 +294,10 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     }
                 }
                 GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                return spawnedEnemy.GetComponent<Enemy>().dangerValue;
+                Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                enemyClass.spawner = this;
+                spawnedEnemies.Add(enemyClass);
+                return enemyClass.dangerValue;
             }
             else
             {
@@ -305,7 +319,10 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     }
                 }
                 GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                return spawnedEnemy.GetComponent<Enemy>().dangerValue;
+                Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                enemyClass.spawner = this;
+                spawnedEnemies.Add(enemyClass);
+                return enemyClass.dangerValue;
             }
             else if (tier == 2)
             {
@@ -324,7 +341,10 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     Debug.LogError(enemy + " " + template.potentialEnemyNames[index]);
                 }
                 GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                return spawnedEnemy.GetComponent<Enemy>().dangerValue;
+                Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                enemyClass.spawner = this;
+                spawnedEnemies.Add(enemyClass);
+                return enemyClass.dangerValue;
             }
             else if (tier == 3)
             {
@@ -339,7 +359,10 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     }
                 }
                 GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                return spawnedEnemy.GetComponent<Enemy>().dangerValue;
+                Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                enemyClass.spawner = this;
+                spawnedEnemies.Add(enemyClass);
+                return enemyClass.dangerValue;
             }
             else if (tier == 4)
             {
@@ -354,7 +377,10 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     }
                 }
                 GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                return spawnedEnemy.GetComponent<Enemy>().dangerValue;
+                Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                enemyClass.spawner = this;
+                spawnedEnemies.Add(enemyClass);
+                return enemyClass.dangerValue;
             }
             else
             {
@@ -511,7 +537,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
 
                         numberEnemiesSummoned++;
                         spawnedEnemy = Instantiate(pickedEnemy, spawnPosition, Quaternion.identity);
-                        dangerValueSum += spawnedEnemy.GetComponent<Enemy>().dangerValue;
+                        Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                        dangerValueSum += enemyClass.dangerValue;
+                        spawnedEnemies.Add(enemyClass);
                         posArray.Add(spawnPosition);
                     }
                 }
@@ -582,7 +610,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
 
                         numberEnemiesSummoned++;
                         spawnedEnemy = Instantiate(pickedEnemy, spawnPosition, Quaternion.identity);
-                        dangerValueSum += spawnedEnemy.GetComponent<Enemy>().dangerValue;
+                        Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                        dangerValueSum += enemyClass.dangerValue;
+                        spawnedEnemies.Add(enemyClass);
                         posArray.Add(spawnPosition);
                     }
 
@@ -655,7 +685,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
 
                         numberEnemiesSummoned++;
                         spawnedEnemy = Instantiate(pickedEnemy, spawnPosition, Quaternion.identity);
-                        dangerValueSum += spawnedEnemy.GetComponent<Enemy>().dangerValue;
+                        Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                        dangerValueSum += enemyClass.dangerValue;
+                        spawnedEnemies.Add(enemyClass);
                         posArray.Add(spawnPosition);
                     }
                 }
@@ -723,7 +755,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
 
                     numberEnemiesSummoned++;
                     spawnedEnemy = Instantiate(pickedEnemy, spawnPosition, Quaternion.identity);
-                    dangerValueSum += spawnedEnemy.GetComponent<Enemy>().dangerValue;
+                    Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                    dangerValueSum += enemyClass.dangerValue;
+                    spawnedEnemies.Add(enemyClass);
                     posArray.Add(spawnPosition);
                 }
             }
@@ -753,9 +787,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
         {
             playerShip.transform.position += new Vector3(0, 2f, 0);
         }
-        playerShip.GetComponent<PlayerScript>().shipRooted = true;
+        playerScript.shipRooted = true;
         yield return new WaitForSeconds(0.2f);
-        playerShip.GetComponent<PlayerScript>().shipRooted = false;
+        playerScript.shipRooted = false;
     }
 
     void openDoorSeals()
@@ -827,6 +861,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
         specialObstacleTemplates = GameObject.Find("SpecialObstacleTemplates").GetComponent<SpecialObstacleTemplates>();
         specialRoomTemplates = GameObject.Find("SpecialRoomTemplates").GetComponent<SpecialRoomTemplates>();
         playerShip = GameObject.Find("PlayerShip");
+        playerScript = playerShip.GetComponent<PlayerScript>();
         doorSeals = new GameObject[4];
         Instantiate(waterTile, transform.position, Quaternion.identity);
         GameObject.Find("RoomTemplates").GetComponent<RoomTemplates>().antiList.Add(this);
@@ -999,11 +1034,11 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     {
 
                         setDangerValueCap();
-                        playerShip.GetComponent<PlayerScript>().numRoomsSinceLastArtifact++;
-                        playerShip.GetComponent<PlayerScript>().numRoomsVisited++;
+                        playerScript.numRoomsSinceLastArtifact++;
+                        playerScript.numRoomsVisited++;
                         Instantiate(roomReveal, transform.position, Quaternion.identity);
 
-                        if (playerShip.GetComponent<PlayerScript>().numRoomsVisited == 5)
+                        if (playerScript.numRoomsVisited == 5)
                         {
                             MiscData.enoughRoomsTraversed = true;
                             SaveSystem.SaveGame();
@@ -1017,10 +1052,10 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
 
                         if (whatRoomType == 2)
                         {
-                            Invoke("spawnDoorSeals", 0.5f);
-                            Invoke("spawnObstacles", 0.15f);
-                            Invoke("spawnEnemies", 0.18f);
-                            playerShip.GetComponent<PlayerScript>().enemiesDefeated = false;
+                            spawnDoorSeals();
+                            spawnObstacles();
+                            spawnEnemies();
+                            playerScript.enemiesDefeated = false;
                         }
                         else if (whatRoomType == 3)
                         {
@@ -1092,20 +1127,19 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                         triggerDialogue(whatRoomType);
                         StartCoroutine(adjustPlayer());
                         roomInit = true;
-                        playerShip.GetComponent<PlayerScript>().periodicHeal();
+                        playerScript.periodicHeal();
                     }
                 }
             }
 
-            Enemy[] activeEnemies = FindObjectsOfType<Enemy>();
 
             if (specialRoom == false)
             {
-                if (spawningComplete == true && roomDone == false && activeEnemies.Length <= 0)
+                if (spawningComplete == true && roomDone == false && spawnedEnemies.Count <= 0)
                 {
                     openDoorSeals();
                     roomDone = true;
-                    playerShip.GetComponent<PlayerScript>().enemiesDefeated = true;
+                    playerScript.enemiesDefeated = true;
                 }
             }
             else
@@ -1114,7 +1148,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                 {
                     openDoorSeals();
                     roomDone = true;
-                    playerShip.GetComponent<PlayerScript>().enemiesDefeated = true;
+                    playerScript.enemiesDefeated = true;
                 }
             }
         }
@@ -1125,20 +1159,6 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                 if (roomInit == false)
                 {
                     roomInit = true;
-
-
-                    /*if (MiscData.completedCheckPoints.Count - (dialogueManager.whatDungeonLevel - 1) * 3 < dialogueManager.storyCheckPoints.Length)
-                    {
-                        Camera.main.transform.position = dialogueManager.storyCheckPoints[MiscData.completedCheckPoints.Count - ((dialogueManager.whatDungeonLevel - 1) * 3)].cameraPosition;
-                        playerShip.transform.position = dialogueManager.storyCheckPoints[MiscData.completedCheckPoints.Count - ((dialogueManager.whatDungeonLevel - 1) * 3)].playerShipPosition;
-                        dialogueManager.storyCheckPoints[MiscData.completedCheckPoints.Count - ((dialogueManager.whatDungeonLevel - 1) * 3)].startUpDialogue();
-                    }
-                    else
-                    {
-                        Camera.main.transform.position = dialogueManager.bossCheckpoint.cameraPosition;
-                        playerShip.transform.position = dialogueManager.bossCheckpoint.playerShipPosition;
-                        dialogueManager.bossCheckpoint.startUpDialogue();
-                    }*/
 
                     int whichSide = 0;
 
@@ -1160,9 +1180,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     }
 
                     FindObjectOfType<MissionManager>().activateBossManager(whichSide);
-                    playerShip.GetComponent<PlayerScript>().periodicHeal();
-                    playerShip.GetComponent<PlayerScript>().numRoomsSinceLastArtifact++;
-                    playerShip.GetComponent<PlayerScript>().numRoomsVisited++;
+                    playerScript.periodicHeal();
+                    playerScript.numRoomsSinceLastArtifact++;
+                    playerScript.numRoomsVisited++;
                 }
             }
         }

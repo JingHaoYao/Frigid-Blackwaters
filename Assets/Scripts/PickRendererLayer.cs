@@ -6,6 +6,7 @@ public class PickRendererLayer : MonoBehaviour {
     SpriteRenderer rend;
     public float offset = 0;
     public int rendLayerOffset = 0;
+    public bool updateOnce = false;
 
     void pickRendererLayer()
     {
@@ -15,9 +16,18 @@ public class PickRendererLayer : MonoBehaviour {
     void Start () {
         rend = GetComponent<SpriteRenderer>();
         pickRendererLayer();
+        if(updateOnce == false)
+        {
+            StartCoroutine(updateConstantly());
+        }
     }
 
-	void Update () {
-        pickRendererLayer();
-	}
+    IEnumerator updateConstantly()
+    {
+        while (true)
+        {
+            pickRendererLayer();
+            yield return null;
+        }
+    }
 }

@@ -10,6 +10,7 @@ public class CrustaceaKing : Enemy
     Rigidbody2D rigidBody2D;
     public GameObject invulnerableHitBox;
     BoxCollider2D damageHitBox;
+    public BossManager bossManager;
 
     public GameObject deadCrab;
     public GameObject damageBox;
@@ -248,8 +249,12 @@ public class CrustaceaKing : Enemy
             dealDamage(4);
             if (health <= 0)
             {
+
                 Instantiate(deadCrab, transform.position, Quaternion.identity);
                 FindObjectOfType<BossHealthBar>().bossEnd();
+                bossManager.bossBeaten("crustacea_king", 0.9f);
+                playerScript.enemiesDefeated = true;
+                SaveSystem.SaveGame();
                 addKills();
                 Destroy(this.gameObject);
             }
@@ -270,6 +275,9 @@ public class CrustaceaKing : Enemy
             {
                 Instantiate(deadCrab, transform.position, Quaternion.identity);
                 FindObjectOfType<BossHealthBar>().bossEnd();
+                bossManager.bossBeaten("crustacea_king", 0.9f);
+                playerScript.enemiesDefeated = true;
+                SaveSystem.SaveGame();
                 addKills();
                 Destroy(this.gameObject);
             }

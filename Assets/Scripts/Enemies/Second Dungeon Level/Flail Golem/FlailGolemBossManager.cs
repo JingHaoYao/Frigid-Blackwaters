@@ -21,11 +21,6 @@ public class FlailGolemBossManager : BossManager
             roomInit = true;
         }
 
-        if (flailGolem == null)
-        {
-            GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated = true;
-            SaveSystem.SaveGame();
-        }
     }
 
     IEnumerator adjustPlayer()

@@ -23,6 +23,7 @@ public class DungeonSoundMonitor : MonoBehaviour
         {
             if (playerScript.playerDead == false)
             {
+                //Debug.Log("audio");
                 audioManager.FadeIn("Dungeon Ambiance", 0.1f, .5f);
                 audioManager.FadeOut("Battle Drums", 0.1f);
             }

@@ -12,6 +12,8 @@ public class Enemy: MonoBehaviour
     public bool stopAttacking = false;
     public int percentSpawnChance = 33;
     public int armorMitigation;
+
+    public AntiSpawnSpaceDetailer spawner;
     
     public void addKills()
     {
@@ -46,10 +48,22 @@ public class Enemy: MonoBehaviour
         health -= damageDealt;
         FindObjectOfType<CameraShake>().shakeCamFunction(0.1f, 0.3f * Mathf.Clamp(((float)damageDealt / maxHealth), 0.1f, 5f));
 
-        foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+        Artifacts artifacts = FindObjectOfType<Artifacts>();
+
+        foreach (ArtifactSlot slot in artifacts.artifactSlots)
         {
             if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+            {
                 slot.displayInfo.GetComponent<ArtifactEffect>().dealtDamage(damageDealt, this);
+            }
+        }
+
+        if (health <= 0)
+        {
+            if (spawner != null)
+            {
+                spawner.spawnedEnemies.Remove(this);
+            }
         }
     }
 }

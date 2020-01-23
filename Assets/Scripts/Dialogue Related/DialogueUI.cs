@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class DialogueUI : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class DialogueUI : MonoBehaviour
     public Animator blackOverlayAnimator;
     public Image panelImageBack, panelImageFront;
     public float waitReveal = 0;
+    private UnityAction endAction;
 
     PlayerScript playerScript;
 
@@ -27,6 +29,11 @@ public class DialogueUI : MonoBehaviour
         {
             whichCharacter.enabled = false;
         }
+    }
+
+    public void setEndAction(UnityAction action)
+    {
+        endAction = action;
     }
 
     void loadDialoguePanel(Image backPanel, Image frontPanel, Sprite prevPanel, Sprite newPanel)
@@ -289,6 +296,7 @@ public class DialogueUI : MonoBehaviour
         this.gameObject.SetActive(false);
         playerScript.playerDead = false;
         targetDialogue = null;
+        endAction?.Invoke();
     }
 
     private void OnEnable()

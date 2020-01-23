@@ -62,6 +62,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\LeanTween\Framework\LeanAudio.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LeanSmooth.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LeanTest.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LeanTween.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LeanTweenExt.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LTDescr.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LTDescrOptional.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LTSeq.cs" />
+    <Compile Include="Assets\Scripts\AdjustAudio.cs" />
     <Compile Include="Assets\Scripts\Artifact Actives\ArtifactEffect.cs" />
     <Compile Include="Assets\Scripts\Artifact Actives\First Dungeon Level\AnchorShot.cs" />
     <Compile Include="Assets\Scripts\Artifact Actives\First Dungeon Level\AnnihilationFigure.cs" />
@@ -321,6 +330,16 @@
     <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Crustacea King\CrustaceaKingCrystal.cs" />
     <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Depth Bomb Skeleton\DepthBomb.cs" />
     <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Depth Bomb Skeleton\DepthBombSkeleton.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Final Boss\SecondDungeonFinalBoss.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Final Boss\SecondDungeonFinalBossEntrance.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Final Boss\SecondDungeonFinalBossIcePrison.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Final Boss\SecondDungeonFinalBossLightningLanceImpact.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Final Boss\SecondDungeonFinalBossManager.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Final Boss\SecondDungeonFinalBossPortal.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Final Boss\SecondDungeonFinalBossShadow.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Final Boss\SecondDungeonFinalBossSnowShroud.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Final Boss\YlvaCompanion.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Final Boss\YlvasFireBall.cs" />
     <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Flail Golem\FlailGolem.cs" />
     <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Flail Golem\FlailGolemBossManager.cs" />
     <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Floating Skull\FloaterSkull.cs" />
@@ -346,6 +365,9 @@
     <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Skull Tower\SkullTower.cs" />
     <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Slow Seeker Skeleton\SlowSeeker.cs" />
     <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Slow Seeker Skeleton\SlowSeekerSkeleton.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Spectral Helmsman\SpectralHelmsman.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Spectral Helmsman\SpectralHelmsmanBossManager.cs" />
+    <Compile Include="Assets\Scripts\Enemies\Second Dungeon Level\Spectral Helmsman\SpectralHelmsmanGhostShip.cs" />
     <Compile Include="Assets\Scripts\Enemies\WaterFoamSpawn.cs" />
     <Compile Include="Assets\Scripts\Enemies\WaterSplash.cs" />
     <Compile Include="Assets\Scripts\Enemies\WhichRoomManager.cs" />
@@ -397,6 +419,7 @@
     <Compile Include="Assets\Scripts\PlayerHub\Shipsmith.cs" />
     <Compile Include="Assets\Scripts\PlayerHub\SpawnRoom.cs" />
     <Compile Include="Assets\Scripts\PlayerHub\Tavern.cs" />
+    <Compile Include="Assets\Scripts\SetObjectUnActiveInTime.cs" />
     <Compile Include="Assets\Scripts\Spawns\AntiSpawnSpaceDetailer.cs" />
     <Compile Include="Assets\Scripts\Spawns\BossManager.cs" />
     <Compile Include="Assets\Scripts\Spawns\CustomRoomManager.cs" />
@@ -562,6 +585,8 @@
     <Compile Include="Assets\Scripts\Unique Rooms\Special Combat Rooms\Sea Serpent\SeaSerpentWave.cs" />
     <Compile Include="Assets\Scripts\Unique Rooms\Treasure Rooms\DungeonTreasure.cs" />
     <Compile Include="Assets\Scripts\Unique Rooms\Trove Rooms\DungeonTrove.cs" />
+    <None Include="Assets\LeanTween\ReadMe.txt" />
+    <None Include="Assets\LeanTween\License.txt" />
     <None Include="Assets\Font\Pixel Font - Tripfive\_README.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/GitHub/Frigid Blackwaters/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
