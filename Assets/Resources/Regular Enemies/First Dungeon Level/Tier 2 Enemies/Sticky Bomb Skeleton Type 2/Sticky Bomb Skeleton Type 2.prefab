@@ -188,6 +188,11 @@ MonoBehaviour:
   killNumber: 1
   stopAttacking: 0
   percentSpawnChance: 33
+  armorMitigation: 0
+  speed: 2
+  slowAmount: 0
+  spawner: {fileID: 0}
+  statuses: []
   deadSkele: {fileID: 1430037316614558284, guid: 534971d21360a35478247aad5092b9b6,
     type: 3}
   stickyBomb: {fileID: 8907966481786452536, guid: dd349878e28d92940871550eab8ed6a1,
@@ -197,7 +202,6 @@ MonoBehaviour:
   - {fileID: -5803193055276545614, guid: b445025f98dacd1439e9616dd7bfd9e8, type: 3}
   - {fileID: 4608199985704966885, guid: d10697f764188224eb4e62f614c6a823, type: 3}
   - {fileID: -8831631405657472179, guid: f87fe3cee46e7fe498eda29151529daa, type: 3}
-  travelSpeed: 2
   whatType: 2
   waterFoam: {fileID: 1301071832081938, guid: 215faf9227c195148b54dc93c20709cb, type: 3}
 --- !u!95 &872583109749194311
@@ -233,6 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!61 &872583109749194306
 BoxCollider2D:
   m_ObjectHideFlags: 0

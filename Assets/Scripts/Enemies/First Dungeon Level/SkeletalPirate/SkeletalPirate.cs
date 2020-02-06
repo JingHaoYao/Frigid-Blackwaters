@@ -119,7 +119,7 @@ public class SkeletalPirate : Enemy
 
     void moveTowards(float direction)
     {
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * travelSpeed;
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * speed;
     }
 
     IEnumerator slash()
@@ -181,6 +181,7 @@ public class SkeletalPirate : Enemy
         rigidBody2D = GetComponent<Rigidbody2D>();
         animator.enabled = false;
         playerShip = GameObject.Find("PlayerShip");
+        updateSpeed(travelSpeed);
     }
 
     void Update()
@@ -228,23 +229,24 @@ public class SkeletalPirate : Enemy
 
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
-            this.GetComponents<AudioSource>()[0].Play();
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            if (health <= 0)
-            {
-                GameObject deadPirate = Instantiate(deadSkeletalPirate, transform.position, Quaternion.identity);
-                deadPirate.GetComponent<DeadSkeletalPirate>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
-                deadPirate.GetComponent<DeadSkeletalPirate>().whatView = whatView();
-                deadPirate.transform.localScale = transform.localScale;
-                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                addKills();
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
         }
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject deadPirate = Instantiate(deadSkeletalPirate, transform.position, Quaternion.identity);
+        deadPirate.GetComponent<DeadSkeletalPirate>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
+        deadPirate.GetComponent<DeadSkeletalPirate>().whatView = whatView();
+        deadPirate.transform.localScale = transform.localScale;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 
     private void OnTriggerExit2D(Collider2D collision)

@@ -188,7 +188,7 @@ public class ElderFrostMage : Enemy
                     if (Vector2.Distance(initPlayerPos, playerShip.transform.position) > 4 || Vector2.Distance(targetTravel, transform.position) > 0.2f)
                     {
                         targetTravel = Camera.main.transform.position + new Vector3(Camera.main.transform.position.x - playerShip.transform.position.x, Camera.main.transform.position.y - playerShip.transform.position.y).normalized * 6f;
-                        rigidBody2D.velocity = new Vector3(targetTravel.x - transform.position.x, targetTravel.y - transform.position.y).normalized * 2.5f;
+                        rigidBody2D.velocity = new Vector3(targetTravel.x - transform.position.x, targetTravel.y - transform.position.y).normalized * speed;
                         initPlayerPos = playerShip.transform.position;
                     }
                     else
@@ -237,21 +237,6 @@ public class ElderFrostMage : Enemy
         if (collision.gameObject.GetComponent<DamageAmount>() && health > 0)
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            this.GetComponents<AudioSource>()[0].Play();
-            if (health <= 0)
-            {
-                rigidBody2D.velocity = Vector3.zero;
-                addKills();
-                bossManager.bossBeaten(nameID, 0.8f);
-                animator.enabled = true;
-                animator.SetTrigger("Death");
-                FindObjectOfType<BossHealthBar>().bossEnd();
-                this.GetComponents<AudioSource>()[1].Play();
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
         }
     }
 
@@ -260,5 +245,21 @@ public class ElderFrostMage : Enemy
         spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(.1f);
         spriteRenderer.color = Color.white;
+    }
+
+    public override void deathProcedure()
+    {
+        rigidBody2D.velocity = Vector3.zero;
+        bossManager.bossBeaten(nameID, 0.8f);
+        animator.enabled = true;
+        animator.SetTrigger("Death");
+        FindObjectOfType<BossHealthBar>().bossEnd();
+        this.GetComponents<AudioSource>()[1].Play();
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 }

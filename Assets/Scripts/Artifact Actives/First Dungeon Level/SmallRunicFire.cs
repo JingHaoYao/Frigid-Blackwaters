@@ -2,45 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmallRunicFire : MonoBehaviour {
-    CircleCollider2D circCol;
-    public GameObject targetObject;
-    Animator animator;
-    bool setDisappear = false;
+public class SmallRunicFire : EnemyStatusEffect {
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    SpriteRenderer enemySpriteRenderer;
 
     IEnumerator tickDamage()
     {
-        yield return new WaitForSeconds(2);
-        if (targetObject != null)
-        {
-            circCol.enabled = true;
-            animator.SetTrigger("FadeOut");
-            setDisappear = true;
-            Destroy(this.gameObject, 0.417f);
-        }
+        yield return new WaitForSeconds(1f);
+        targetEnemy.dealDamage(1);
+        durationFinishedProcedure();
     }
 
-	void Start () {
-        circCol = GetComponent<CircleCollider2D>();
-        circCol.enabled = false;
-        animator = GetComponent<Animator>();
-        StartCoroutine(tickDamage());
-	}
+    public override void durationFinishedProcedure()
+    {
+        StopAllCoroutines();
+        LeanTween.alpha(this.gameObject, 0, 0.5f).setOnComplete(() => { Destroy(this.gameObject); });
+    }
 
-	void Update () {
-		if(targetObject != null)
+    void Start()
+    {
+        StartCoroutine(tickDamage());
+        enemySpriteRenderer = targetEnemy.GetComponent<SpriteRenderer>();
+        StartCoroutine(spriteRenderAdjustment());
+    }
+
+    IEnumerator spriteRenderAdjustment()
+    {
+        while (true)
         {
-            transform.position = targetObject.transform.position + new Vector3(0, 0.3f, 0);
-            this.GetComponent<SpriteRenderer>().sortingOrder = targetObject.GetComponent<SpriteRenderer>().sortingOrder + 1;
+            transform.position = targetEnemy.transform.position + Vector3.up * 0.4f;
+            spriteRenderer.sortingOrder = enemySpriteRenderer.sortingOrder;
+            yield return null;
         }
-        else
-        {
-            if(setDisappear == false)
-            {
-                setDisappear = true;
-                animator.SetTrigger("FadeOut");
-                Destroy(this.gameObject, 0.417f);
-            }
-        }
-	}
+    }
 }

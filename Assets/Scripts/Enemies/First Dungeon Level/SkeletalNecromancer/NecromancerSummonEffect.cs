@@ -24,7 +24,10 @@ public class NecromancerSummonEffect : MonoBehaviour {
     IEnumerator spawnSkele()
     {
         yield return new WaitForSeconds(9 / 12f);
-        Instantiate(skelePirateList[Random.Range(0, 3)], transform.position + new Vector3(0, -0.5f, 0), Quaternion.identity);
+        GameObject enemyInstant = Instantiate(skelePirateList[Random.Range(0, 3)], transform.position + new Vector3(0, -0.5f, 0), Quaternion.identity);
+        if (enemyInstant.GetComponent<Enemy>()) {
+            EnemyPool.addEnemy(enemyInstant.GetComponent<Enemy>());
+        }
     }
 
 	void Start () {

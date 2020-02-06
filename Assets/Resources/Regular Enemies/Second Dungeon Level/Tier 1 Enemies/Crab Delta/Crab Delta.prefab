@@ -513,6 +513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!95 &1529882681433870830
 Animator:
   serializedVersion: 3
@@ -649,10 +650,13 @@ MonoBehaviour:
   stopAttacking: 0
   percentSpawnChance: 33
   armorMitigation: 0
+  speed: 4
+  slowAmount: 0
+  spawner: {fileID: 0}
+  statuses: []
   deadCrab: {fileID: 9046940545977242156, guid: b81010bc3e3754f40b07c09a6f7b0ef5,
     type: 3}
   travelAngle: 0
-  travelSpeed: 4
   waterFoam: {fileID: 1105302273420430, guid: fdc8b3ce0fabb4742ad1a9051be902bf, type: 3}
   cardinalAngles: 000000005a000000b40000000e010000
   shieldColliders: []

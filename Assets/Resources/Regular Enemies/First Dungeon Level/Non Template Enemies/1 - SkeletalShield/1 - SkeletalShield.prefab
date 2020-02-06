@@ -70,6 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839a00fac956ca041812a5cd7cfc79d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shieldEnemy: {fileID: 114099556001763008}
 --- !u!1 &1327679478285804
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839a00fac956ca041812a5cd7cfc79d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shieldEnemy: {fileID: 114099556001763008}
 --- !u!1 &1488273449487932
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839a00fac956ca041812a5cd7cfc79d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shieldEnemy: {fileID: 114099556001763008}
 --- !u!60 &60515486287620796
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -366,6 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 839a00fac956ca041812a5cd7cfc79d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shieldEnemy: {fileID: 114099556001763008}
 --- !u!1 &1699064781025972
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,9 +746,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameID: skeletal_shield
   health: 2
+  maxHealth: 2
   dangerValue: 1
   killNumber: 1
   stopAttacking: 0
+  percentSpawnChance: 33
+  armorMitigation: 0
+  speed: 2
+  slowAmount: 0
+  statuses: []
   facingUp: {fileID: 21300006, guid: 63770fd2e82fafc4c8aa739b6d29977e, type: 3}
   facingDown: {fileID: 21300002, guid: 63770fd2e82fafc4c8aa739b6d29977e, type: 3}
   facingLeft: {fileID: 21300000, guid: 63770fd2e82fafc4c8aa739b6d29977e, type: 3}
@@ -757,7 +767,6 @@ MonoBehaviour:
   downDamageHitBox: {fileID: 1488273449487932}
   leftDamageHitBox: {fileID: 1014282056374394}
   rightDamageHitBox: {fileID: 1652975846113386}
-  travelSpeed: 2
   waterFoam: {fileID: 1301071832081938, guid: 215faf9227c195148b54dc93c20709cb, type: 3}
   protectedEnemy: {fileID: 0}
   deadShield: {fileID: 1515802097540380, guid: 8bbab48d8902af3418a7c819fda7509b, type: 3}

@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!95 &4697648492420496597
 Animator:
   serializedVersion: 3
@@ -205,6 +206,10 @@ MonoBehaviour:
   stopAttacking: 0
   percentSpawnChance: 33
   armorMitigation: 0
+  speed: 3.2
+  slowAmount: 0
+  spawner: {fileID: 0}
+  statuses: []
   lanceHitBox: {fileID: 4697648492474300765}
   deadGolem: {fileID: 2622069253960536388, guid: 49b42158023ebf045817a788e6cd67c7,
     type: 3}

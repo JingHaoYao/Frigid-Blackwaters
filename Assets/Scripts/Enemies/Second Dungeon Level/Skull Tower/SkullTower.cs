@@ -138,18 +138,20 @@ public class SkullTower : Enemy
         if (collision.gameObject.GetComponent<DamageAmount>() && health > 0 && invulnerable == false)
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            this.GetComponents<AudioSource>()[0].Play();
-            if (health <= 0)
-            {
-                GameObject dead = Instantiate(deadTower, transform.position, Quaternion.identity);
-                addKills();
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
+
         }
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject dead = Instantiate(deadTower, transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 
     IEnumerator hitFrame()

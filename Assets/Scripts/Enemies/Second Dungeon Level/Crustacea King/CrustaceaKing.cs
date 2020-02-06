@@ -174,8 +174,8 @@ public class CrustaceaKing : Enemy
 
         Instantiate(waterFoamBurst, transform.position, Quaternion.Euler(0, 0, angleToAttack + 90));
         float attackPeriod = 0;
-        rigidBody2D.velocity = new Vector2(Mathf.Cos(angleToAttack * Mathf.Deg2Rad), Mathf.Sin(angleToAttack * Mathf.Deg2Rad)) * 15;
-        float speedMagnitude = 16;
+        rigidBody2D.velocity = new Vector2(Mathf.Cos(angleToAttack * Mathf.Deg2Rad), Mathf.Sin(angleToAttack * Mathf.Deg2Rad)) * (speed + 7);
+        float speedMagnitude = speed + 8;
         while (attackPeriod <= 1f)
         {
             attackPeriod += Time.deltaTime;
@@ -245,23 +245,7 @@ public class CrustaceaKing : Enemy
     {
         if (playerScript.playerDead == false)
         {
-            this.GetComponents<AudioSource>()[0].Play();
             dealDamage(4);
-            if (health <= 0)
-            {
-
-                Instantiate(deadCrab, transform.position, Quaternion.identity);
-                FindObjectOfType<BossHealthBar>().bossEnd();
-                bossManager.bossBeaten("crustacea_king", 0.9f);
-                playerScript.enemiesDefeated = true;
-                SaveSystem.SaveGame();
-                addKills();
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
         }
     }
 
@@ -269,22 +253,23 @@ public class CrustaceaKing : Enemy
     {
         if (collision.gameObject.GetComponent<DamageAmount>() && invulnerableHitBox.activeSelf == false)
         {
-            this.GetComponents<AudioSource>()[0].Play();
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            if (health <= 0)
-            {
-                Instantiate(deadCrab, transform.position, Quaternion.identity);
-                FindObjectOfType<BossHealthBar>().bossEnd();
-                bossManager.bossBeaten("crustacea_king", 0.9f);
-                playerScript.enemiesDefeated = true;
-                SaveSystem.SaveGame();
-                addKills();
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
         }
+    }
+
+    public override void deathProcedure()
+    {
+        Instantiate(deadCrab, transform.position, Quaternion.identity);
+        FindObjectOfType<BossHealthBar>().bossEnd();
+        bossManager.bossBeaten("crustacea_king", 0.9f);
+        playerScript.enemiesDefeated = true;
+        SaveSystem.SaveGame();
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 }

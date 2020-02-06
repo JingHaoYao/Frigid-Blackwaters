@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1422114786286674310}
-  - component: {fileID: 2561570274371970197}
+  - component: {fileID: 2135302883875707996}
   m_Layer: 0
   m_Name: Blue Starfish Enemy Parent
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2561570274371970197
+--- !u!114 &2135302883875707996
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,16 +42,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1422114786286674311}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 880e09f38eb533842ad578628934d5d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8947bc990593871458974c575e69eef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nameID: 
   health: 0
   maxHealth: 0
-  dangerValue: 1
+  dangerValue: 0
   killNumber: 0
   stopAttacking: 0
   percentSpawnChance: 33
+  armorMitigation: 0
+  speed: 0
+  slowAmount: 0
+  statuses: []
+  enemy: {fileID: 1422114787103057670}
 --- !u!1 &1422114787103057692
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,11 +228,14 @@ MonoBehaviour:
   killNumber: 1
   stopAttacking: 0
   percentSpawnChance: 33
+  armorMitigation: 0
+  speed: 0
+  slowAmount: 0
+  statuses: []
   starFishShot: {fileID: 4591770671646077981, guid: a2a09c4541c7c98498609995b0a8f003,
     type: 3}
   deadStarFish: {fileID: 8337873833686778704, guid: bea2876e6a12f434c87579c56d7cb0ef,
     type: 3}
-  travelSpeed: 3.5
   enemyMarker: {fileID: 1422114787955804630}
   whatStarfishType: 1
 --- !u!82 &1422114787103057669

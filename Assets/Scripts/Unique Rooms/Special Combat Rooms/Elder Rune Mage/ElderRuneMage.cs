@@ -94,10 +94,10 @@ public class ElderRuneMage : Enemy
         {
             newPos = Random.Range(0, 5);
         }
-        float speed = 0;
+        updateSpeed(0);
         while (speed < 12)
         {
-            speed += 1;
+            updateSpeed(speed + 1);
             rigidBody2D.velocity = (newPosition - transform.position).normalized * speed;
             yield return new WaitForSeconds(0.05f);
         }
@@ -109,7 +109,7 @@ public class ElderRuneMage : Enemy
 
         while (speed > 0)
         {
-            speed -= 2;
+            updateSpeed(speed - 2);
             rigidBody2D.velocity = (newPosition - transform.position).normalized * speed;
             yield return new WaitForSeconds(0.05f);
         }
@@ -214,7 +214,7 @@ public class ElderRuneMage : Enemy
                 transform.localScale = new Vector3(5f * mirror, 5f);
             }
 
-            if(animator.enabled == false && movePeriod > 0)
+            if(animator.enabled == false && movePeriod > 0 && Mathf.Abs(rigidBody2D.velocity.magnitude) < 0.001f)
             {
                 attackPeriod -= Time.deltaTime;
                 movePeriod -= Time.deltaTime;
@@ -265,34 +265,35 @@ public class ElderRuneMage : Enemy
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Elder Rune Mage Rise") && health > 0)
             {
                 dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-                GetComponents<AudioSource>()[0].Play();
-                if (health <= 0)
-                {
-                    rigidBody2D.velocity = Vector3.zero;
-                    StopAllCoroutines();
-                    whichRoomManager.antiSpawnSpaceDetailer.trialDefeated = true;
-                    playerScript.enemiesDefeated = true;
-                    GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated = true;
 
-                    StartCoroutine(deathRoutine());
-                    FindObjectOfType<BossHealthBar>().bossEnd();
-
-                    if (transform.position.y < Camera.main.transform.position.y)
-                    {
-                        Instantiate(mageChest, Camera.main.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(mageChest, Camera.main.transform.position + new Vector3(0, -2, 0), Quaternion.identity);
-                    }
-
-                    addKills();
-                }
-                else
-                {
-                    StartCoroutine(hitFrame());
-                }
             }
         }
+    }
+
+    public override void deathProcedure()
+    {
+        rigidBody2D.velocity = Vector3.zero;
+        StopAllCoroutines();
+        whichRoomManager.antiSpawnSpaceDetailer.trialDefeated = true;
+        playerScript.enemiesDefeated = true;
+        GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated = true;
+
+        StartCoroutine(deathRoutine());
+        FindObjectOfType<BossHealthBar>().bossEnd();
+
+        if (transform.position.y < Camera.main.transform.position.y)
+        {
+            Instantiate(mageChest, Camera.main.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(mageChest, Camera.main.transform.position + new Vector3(0, -2, 0), Quaternion.identity);
+        }
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 }

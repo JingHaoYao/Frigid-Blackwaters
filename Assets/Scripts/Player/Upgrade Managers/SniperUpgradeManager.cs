@@ -79,6 +79,7 @@ public class SniperUpgradeManager : WeaponFireTemplate
             highVelocityBullets = false;
             extremeFocus = false;
             weaponScript.weaponPlume = regularPlume;
+            weaponScript.weaponIcon.sprite = regularSniperIcon;
         }
     }
 

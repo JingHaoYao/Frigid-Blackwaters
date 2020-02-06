@@ -11,7 +11,6 @@ public class SkeletalCannon : Enemy {
     private float coolDownPeriod = 5, coolDownThreshold = 8;
     private float moveAngle = 0;
     GameObject playerShip;
-    public float travelSpeed = 1.5f;
     public GameObject cannonPlume, cannonRound;
     private float blastPeriod = 0;
     private float spriteFireAngle;
@@ -28,7 +27,7 @@ public class SkeletalCannon : Enemy {
         {
             float whatAngle = Mathf.Atan2(rigidBody2D.velocity.y, rigidBody2D.velocity.x) * Mathf.Rad2Deg;
             foamTimer += Time.deltaTime;
-            if (foamTimer >= 0.05f * travelSpeed / 3f)
+            if (foamTimer >= 0.05f * speed / 3f)
             {
                 foamTimer = 0;
                 GameObject foam = Instantiate(waterFoam, transform.position, Quaternion.Euler(0, 0, whatAngle + 90));
@@ -40,21 +39,25 @@ public class SkeletalCannon : Enemy {
     {
         if (blastPeriod < 1f / 3f)
         {
-            rigidBody2D.velocity = 8 * new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0);
+            updateSpeed(8);
+            rigidBody2D.velocity = speed * new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0);
             blastPeriod += Time.deltaTime;
         }
         else if(blastPeriod >= 1f/3f && blastPeriod < 1f)
         {
-            rigidBody2D.velocity = (8 - 4 * (3 * (blastPeriod - 1f/3f))) * new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0);
+            updateSpeed((8 - 4 * (3 * (blastPeriod - 1f / 3f))));
+            rigidBody2D.velocity = speed * new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0);
             blastPeriod += Time.deltaTime;
         }
         else if(blastPeriod >= 1f && blastPeriod <= 1.2f)
         {
+            updateSpeed(0);
             rigidBody2D.velocity = Vector3.zero;
             blastPeriod += Time.deltaTime;
         }
         else
         {
+            updateSpeed(2.5f);
             isShooting = false;
             blastPeriod = 0;
         }
@@ -180,7 +183,7 @@ public class SkeletalCannon : Enemy {
 
     void moveTowards(float direction)
     {
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * travelSpeed;
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * speed;
     }
 
     void pickRendererLayer()
@@ -293,22 +296,23 @@ public class SkeletalCannon : Enemy {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            this.GetComponents<AudioSource>()[0].Play();
-            if (health <= 0)
-            {
-                GameObject deadSkeletonCannon = Instantiate(deadSkeleCannon, transform.position, Quaternion.identity);
-                deadSkeletonCannon.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
-                deadSkeletonCannon.GetComponent<DeadEnemyScript>().whatView = whatView();
-                deadSkeletonCannon.transform.localScale = transform.localScale;
-                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                addKills();
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
         }
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject deadSkeletonCannon = Instantiate(deadSkeleCannon, transform.position, Quaternion.identity);
+        deadSkeletonCannon.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
+        deadSkeletonCannon.GetComponent<DeadEnemyScript>().whatView = whatView();
+        deadSkeletonCannon.transform.localScale = transform.localScale;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 
     IEnumerator hitFrame()

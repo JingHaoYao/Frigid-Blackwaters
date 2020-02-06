@@ -134,17 +134,6 @@ public class AnemoneEnemy : Enemy
         if (collision.gameObject.GetComponent<DamageAmount>() && health > 0)
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            this.GetComponents<AudioSource>()[0].Play();
-            if (health <= 0)
-            {
-                Instantiate(deadAnemone, transform.position, Quaternion.identity);
-                addKills();
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
         }
     }
 
@@ -153,5 +142,17 @@ public class AnemoneEnemy : Enemy
         spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(.1f);
         spriteRenderer.color = Color.white;
+    }
+
+    public override void deathProcedure()
+    {
+        Instantiate(deadAnemone, transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 }

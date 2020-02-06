@@ -167,24 +167,25 @@ public class SpectralHelmsman : Enemy
     {
         if (collision.gameObject.GetComponent<DamageAmount>() && health > 0)
         {
-            audioSources[0].Play();
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            if (health <= 0)
-            {
-                StopAllCoroutines();
-                animator.SetTrigger("Death");
-                audioSources[4].Play();
-                bossHealthBar.bossEnd();
-                bossManager.bossBeaten(nameID, 11f / 12f);
-                playerScript.enemiesDefeated = true;
-                SaveSystem.SaveGame();
-                addKills();
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
         }
+    }
+
+    public override void deathProcedure()
+    {
+        StopAllCoroutines();
+        animator.SetTrigger("Death");
+        audioSources[4].Play();
+        bossHealthBar.bossEnd();
+        bossManager.bossBeaten(nameID, 11f / 12f);
+        playerScript.enemiesDefeated = true;
+        SaveSystem.SaveGame();
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        StartCoroutine(hitFrame());
+        audioSources[0].Play();
     }
 }

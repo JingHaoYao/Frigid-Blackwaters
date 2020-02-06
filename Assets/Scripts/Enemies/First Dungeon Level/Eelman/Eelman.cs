@@ -10,7 +10,6 @@ public class Eelman : Enemy {
     List<AStarNode> path;
     GameObject playerShip;
     Rigidbody2D rigidBody2D;
-    public float travelSpeed = 4;
     private bool isAttacking = false, isSubmerged = false;
     public GameObject waterSplash;
     float angleToShip = 0, moveAngle = 0;
@@ -223,7 +222,7 @@ public class Eelman : Enemy {
 
     void moveTowards(float direction)
     {
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * travelSpeed;
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * speed;
     }
 
     float cardinalizeDirections(float angle)
@@ -303,28 +302,30 @@ public class Eelman : Enemy {
     {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
-            this.GetComponent<AudioSource>().Play();
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            if (health <= 0)
-            {
-                Instantiate(bloodSplatter, collision.gameObject.transform.position, Quaternion.identity);
-                GameObject deadPirate = Instantiate(deadEelMan, transform.position, Quaternion.identity);
-                deadPirate.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
-                deadPirate.GetComponent<DeadEnemyScript>().whatView = view;
-                deadPirate.transform.localScale = transform.localScale;
-                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                Destroy(this.gameObject);
-                addKills();
-                if(spawnedElectricPulse != null)
-                {
-                    Destroy(spawnedElectricPulse);
-                }
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
+            Instantiate(bloodSplatter, collision.gameObject.transform.position, Quaternion.identity);
+            StartCoroutine(hitFrame());
         }
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject deadPirate = Instantiate(deadEelMan, transform.position, Quaternion.identity);
+        deadPirate.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
+        deadPirate.GetComponent<DeadEnemyScript>().whatView = view;
+        deadPirate.transform.localScale = transform.localScale;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        Destroy(this.gameObject);
+        if (spawnedElectricPulse != null)
+        {
+            Destroy(spawnedElectricPulse);
+        }
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponent<AudioSource>().Play();
+        StartCoroutine(hitFrame());
     }
 
     IEnumerator hitFrame()

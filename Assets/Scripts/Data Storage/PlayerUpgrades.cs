@@ -11,7 +11,9 @@ public static class PlayerUpgrades {
     public static List<string> fireworkUpgrades = new List<string>();
     public static List<string> dragonBreathUpgrades = new List<string>();
     public static List<string> sniperUpgrades = new List<string>();
-
+    public static List<string> chemicalSprayerUpgrades = new List<string>();
+    public static List<string> glaiveLauncherUpgrades = new List<string>();
+        
     public static List<string> hullUpgrades = new List<string>();
     public static List<string> inventoryUpgrades = new List<string>();
     public static List<string> safeUpgrades = new List<string>();
@@ -22,10 +24,4 @@ public static class PlayerUpgrades {
     public static int whichFrontWeaponEquipped = 0;
     public static int whichLeftWeaponEquipped = 0;
     public static int whichRightWeaponEquipped = 0;
-    
-    public static bool musketUnlocked = true, cannonUnlocked = true, spreadShotUnlocked = true,
-                       fireworkUnlocked = true, dragonsBreathUnlocked = true, sniperUnlocked = false;
-
-    // How many weapons they've unlocked
-    public static int unlockLevel = 5;
 }

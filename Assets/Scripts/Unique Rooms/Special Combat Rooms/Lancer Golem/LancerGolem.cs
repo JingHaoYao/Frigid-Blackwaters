@@ -13,7 +13,6 @@ public class LancerGolem : Enemy
     int whatView = 1;
     int prevView = 1;
     bool attacking = false;
-    float speed = 3f;
     public GameObject deadGolem;
     public SwordFist[] swordFists;
     float dashPeriod = 0;
@@ -149,40 +148,41 @@ public class LancerGolem : Enemy
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Lancer Golem Rise") && health > 0)
             {
                 dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-                GetComponents<AudioSource>()[2].Play();
-                if (health <= 0)
-                {
-                    StopAllCoroutines();
-                    Destroy(gridInstant);
-                    this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                    whichRoomManager.antiSpawnSpaceDetailer.trialDefeated = true;
-                    playerScript.enemiesDefeated = true;
-                    GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated = true;
-                    animator.SetTrigger("Death");
-                    FindObjectOfType<BossHealthBar>().bossEnd();
-                    Invoke("spawnDeadGolem", 0.917f);
-                    GetComponents<AudioSource>()[3].Play();
-                    foreach (PolygonCollider2D col in lanceHitBox.GetComponents<PolygonCollider2D>())
-                    {
-                        col.enabled = false;
-                    }
 
-                    if(transform.position.y < Camera.main.transform.position.y)
-                    {
-                        Instantiate(golemChest, Camera.main.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(golemChest, Camera.main.transform.position + new Vector3(0, -2, 0), Quaternion.identity);
-                    }
-
-                    addKills();
-                }
-                else
-                {
-                    StartCoroutine(hitFrame());
-                }
             }
         }
+    }
+
+    public override void deathProcedure()
+    {
+        StopAllCoroutines();
+        Destroy(gridInstant);
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        whichRoomManager.antiSpawnSpaceDetailer.trialDefeated = true;
+        playerScript.enemiesDefeated = true;
+        GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated = true;
+        animator.SetTrigger("Death");
+        FindObjectOfType<BossHealthBar>().bossEnd();
+        Invoke("spawnDeadGolem", 0.917f);
+        GetComponents<AudioSource>()[3].Play();
+        foreach (PolygonCollider2D col in lanceHitBox.GetComponents<PolygonCollider2D>())
+        {
+            col.enabled = false;
+        }
+
+        if (transform.position.y < Camera.main.transform.position.y)
+        {
+            Instantiate(golemChest, Camera.main.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(golemChest, Camera.main.transform.position + new Vector3(0, -2, 0), Quaternion.identity);
+        }
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        GetComponents<AudioSource>()[2].Play();
+        StartCoroutine(hitFrame());
     }
 }

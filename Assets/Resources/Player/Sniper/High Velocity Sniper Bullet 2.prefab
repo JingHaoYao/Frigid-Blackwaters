@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4517015829882111838}
   - component: {fileID: 4517015829882111839}
   m_Layer: 0
-  m_Name: Sniper Rifle Bullet 2
+  m_Name: High Velocity Sniper Bullet 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -244,8 +244,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f222891b8f0fe47439b5394ee8e66a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whichWeaponFrom: 0
+  forceShot: 0
+  weaponElements: 0000000001000000
   bulletImpact: {fileID: 2574544088488225208, guid: c669a13782c7b154285a484763bb888f,
     type: 3}
   angleTravel: 0
   highVelocity: 1
   stunDuration: 3
+  stunStatus: {fileID: 6034991497703669822, guid: cb0ee180d1f95ce4382f214471d4545f,
+    type: 3}

@@ -9,7 +9,6 @@ public class ArmouredSkeleton : Enemy {
     Rigidbody2D rigidBody2D;
     Animator animator;
     private bool withinRange = false, touchingShip = false;
-    public float travelSpeed = 2;
     private float travelAngle;
     GameObject playerShip;
     private float pokePeriod = 1.5f;
@@ -45,6 +44,7 @@ public class ArmouredSkeleton : Enemy {
         yield return new WaitForSeconds(6f / 12f);
         Destroy(this.gameObject);
         GameObject spawnedSpearMan = Instantiate(unarmouredSpearman, transform.position, Quaternion.identity);
+        EnemyPool.addEnemy(spawnedSpearMan.GetComponent<Enemy>());
         this.GetComponent<Collider2D>().enabled = false;
         spawnedSpearMan.GetComponent<SkeletalSpearman>().health = 1;
         spawnedSpearMan.GetComponent<SkeletalSpearman>().travelAngle = travelAngle;
@@ -57,7 +57,7 @@ public class ArmouredSkeleton : Enemy {
         {
             float whatAngle = Mathf.Atan2(rigidBody2D.velocity.y, rigidBody2D.velocity.x) * Mathf.Rad2Deg;
             foamTimer += Time.deltaTime;
-            if (foamTimer >= 0.05f * travelSpeed / 3f)
+            if (foamTimer >= 0.05f * speed / 3f)
             {
                 foamTimer = 0;
                 GameObject foam = Instantiate(waterFoam, transform.position, Quaternion.Euler(0, 0, whatAngle + 90));
@@ -72,7 +72,7 @@ public class ArmouredSkeleton : Enemy {
 
     void moveTowards(float direction)
     {
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * travelSpeed;
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * speed;
     }
 
     IEnumerator poke()
@@ -291,13 +291,22 @@ public class ArmouredSkeleton : Enemy {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            if (health <= 0 && alreadySpawned == false)
-            {
-                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                StartCoroutine(spawnUnArmoured());
-                alreadySpawned = true;
-            }
         }
+    }
+
+    public override void deathProcedure()
+    {
+        if (alreadySpawned == false)
+        {
+            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            StartCoroutine(spawnUnArmoured());
+            alreadySpawned = true;
+        }
+    }
+
+    public override void damageProcedure(int damage)
+    {
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -266,6 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!50 &9181383862398765576
 Rigidbody2D:
   serializedVersion: 4
@@ -515,6 +516,11 @@ MonoBehaviour:
   killNumber: 1
   stopAttacking: 0
   percentSpawnChance: 33
+  armorMitigation: 0
+  speed: 2
+  slowAmount: 0
+  spawner: {fileID: 0}
+  statuses: []
   deadSkele: {fileID: 6811678383787080141, guid: 7fa813d05366bde40b7b9ac1d06e66e6,
     type: 3}
   bolt: {fileID: 5709278179664312093, guid: 15e2cc8fac520bf4fb82c157f3651fd6, type: 3}

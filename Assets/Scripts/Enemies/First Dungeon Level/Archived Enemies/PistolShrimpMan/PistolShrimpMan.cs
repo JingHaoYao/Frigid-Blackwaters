@@ -234,7 +234,7 @@ public class PistolShrimpMan : Enemy {
 
     void moveTowards(float direction)
     {
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * travelSpeed;
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * speed;
     }
 
     void Start()
@@ -244,6 +244,7 @@ public class PistolShrimpMan : Enemy {
         playerShip = GameObject.Find("PlayerShip");
         animator = GetComponent<Animator>();
         animator.enabled = false;
+        updateSpeed(travelSpeed);
     }
 
     void Update()
@@ -308,21 +309,23 @@ public class PistolShrimpMan : Enemy {
             this.GetComponents<AudioSource>()[0].Play();
             int damageDealt = collision.gameObject.GetComponent<DamageAmount>().damage;
             health -= damageDealt;
-            if (health <= 0)
-            {
-                GameObject dead = Instantiate(deadShrimp, transform.position, Quaternion.identity);
-                dead.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
-                dead.GetComponent<DeadEnemyScript>().whatView = whatView();
-                dead.transform.localScale = transform.localScale;
-                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                addKills();
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
+            StartCoroutine(hitFrame());
             Instantiate(bloodSplatter, collision.transform.position, Quaternion.identity);
         }
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject dead = Instantiate(deadShrimp, transform.position, Quaternion.identity);
+        dead.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
+        dead.GetComponent<DeadEnemyScript>().whatView = whatView();
+        dead.transform.localScale = transform.localScale;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+
     }
 }

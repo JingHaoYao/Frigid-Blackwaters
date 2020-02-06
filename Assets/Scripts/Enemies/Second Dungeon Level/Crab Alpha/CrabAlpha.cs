@@ -11,7 +11,6 @@ public class CrabAlpha : Enemy
     Rigidbody2D rigidBody2D;
     Animator animator;
     private bool withinRange = false;
-    public float travelSpeed = 2;
     public float travelAngle;
     GameObject playerShip;
     public GameObject deadSpearman;
@@ -34,7 +33,7 @@ public class CrabAlpha : Enemy
         {
             float whatAngle = Mathf.Atan2(rigidBody2D.velocity.y, rigidBody2D.velocity.x) * Mathf.Rad2Deg;
             foamTimer += Time.deltaTime;
-            if (foamTimer >= 0.05f * travelSpeed / 3f)
+            if (foamTimer >= 0.05f * speed / 3f)
             {
                 foamTimer = 0;
                 GameObject foam = Instantiate(waterFoam, transform.position, Quaternion.Euler(0, 0, whatAngle + 90));
@@ -87,7 +86,7 @@ public class CrabAlpha : Enemy
 
     void moveTowards(float direction)
     {
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * travelSpeed;
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * speed;
     }
 
     float cardinalizeDirections(float angle)
@@ -303,19 +302,20 @@ public class CrabAlpha : Enemy
         {
             if (determineHit(collision.gameObject.transform.position))
             {
-                this.GetComponents<AudioSource>()[0].Play();
                 dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-                if (health <= 0)
-                {
-                    GameObject deadPirate = Instantiate(deadSpearman, transform.position, Quaternion.identity);
-                    addKills();
-                    Destroy(this.gameObject);
-                }
-                else
-                {
-                    StartCoroutine(hitFrame());
-                }
             }
         }
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject deadPirate = Instantiate(deadSpearman, transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        StartCoroutine(hitFrame());
+        this.GetComponents<AudioSource>()[0].Play();
     }
 }

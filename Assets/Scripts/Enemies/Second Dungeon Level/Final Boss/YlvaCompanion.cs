@@ -13,6 +13,7 @@ public class YlvaCompanion : MonoBehaviour
     private bool attacking = false;
     private int numberFireCharges = 0;
     [SerializeField] private GameObject[] fireCharges;
+    [SerializeField] private GameObject fireChargeParent;
     private float chargeTimer;
 
     private void Start()
@@ -70,10 +71,12 @@ public class YlvaCompanion : MonoBehaviour
     {
         if(cursorTarget.transform.position.x < transform.position.x)
         {
+            fireChargeParent.transform.localScale = new Vector3(-1, 1);
             transform.localScale = new Vector3(-2.5f, 2.5f);
         }
         else
         {
+            fireChargeParent.transform.localScale = new Vector3(1, 1);
             transform.localScale = new Vector3(2.5f, 2.5f);
         }
     }

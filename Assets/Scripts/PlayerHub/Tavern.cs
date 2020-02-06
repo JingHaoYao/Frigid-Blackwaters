@@ -38,7 +38,7 @@ public class Tavern : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    StartCoroutine(turnOnTavernUI());
+                    turnOnDialogueUI();
                 }
             }
         }
@@ -53,16 +53,8 @@ public class Tavern : MonoBehaviour
 
     public void turnOnDialogueUI()
     {
-        StartCoroutine(turnOnTavernUI());
-    }
-
-    IEnumerator turnOnTavernUI()
-    {
         dialogueBlackOverlay.SetActive(true);
-        playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
         dialogueUI.GetComponent<DialogueUI>().targetDialogue = tavernDialogue;
-        dialogueBlackOverlay.GetComponent<Animator>().SetTrigger("FadeOut");
-        yield return new WaitForSeconds(1f);
         dialogueUI.SetActive(true);
         Destroy(spawnedIndicator);
         tavernIcon.SetActive(false);

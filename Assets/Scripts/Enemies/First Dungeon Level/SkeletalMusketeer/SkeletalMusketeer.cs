@@ -7,7 +7,6 @@ public class SkeletalMusketeer : Enemy {
     Rigidbody2D rigidBody2D;
     public GameObject weaponPlume, musketRound, deadSkeleMusketeer;
     SpriteRenderer spriteRenderer;
-    public float travelSpeed = 2;
     GameObject playerShip;
     private bool isShooting;
     private float coolDownPeriod = 5;
@@ -25,7 +24,7 @@ public class SkeletalMusketeer : Enemy {
         {
             float whatAngle = Mathf.Atan2(rigidBody2D.velocity.y, rigidBody2D.velocity.x) * Mathf.Rad2Deg;
             foamTimer += Time.deltaTime;
-            if (foamTimer >= 0.05f * travelSpeed / 3f)
+            if (foamTimer >= 0.05f * speed / 3f)
             {
                 foamTimer = 0;
                 GameObject foam = Instantiate(waterFoam, transform.position, Quaternion.Euler(0, 0, whatAngle + 90));
@@ -223,34 +222,6 @@ public class SkeletalMusketeer : Enemy {
                 coolDownPeriod = coolDownThreshold;
             }
         }
-
-        /*if (Vector2.Distance(playerShip.transform.position, transform.position) > 6)
-        {
-            if (isShooting == false)
-            {
-                moveAngle = (360 + Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
-                moveTowards(moveAngle);
-            }
-        }
-        else if (Vector2.Distance(playerShip.transform.position, transform.position) < 4)
-        {
-            if (isShooting == false)
-            {
-                moveAngle = (180 + Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
-                moveTowards(moveAngle);
-            }
-        }
-        else
-        {
-            moveAngle = (360 + Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
-            rigidBody2D.velocity = Vector3.zero;
-            if (coolDownPeriod <= 0)
-            {
-                isShooting = true;
-                StartCoroutine(fireMusket(moveAngle));
-                coolDownPeriod = coolDownThreshold;
-            }
-        }*/
     }
 
     void pickRendererLayer()
@@ -260,7 +231,7 @@ public class SkeletalMusketeer : Enemy {
 
     void moveTowards(float direction)
     {
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * travelSpeed;
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * speed;
     }
 
     void Start () {
@@ -324,21 +295,22 @@ public class SkeletalMusketeer : Enemy {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            this.GetComponents<AudioSource>()[0].Play();
-            if (health <= 0)
-            {
-                GameObject deadMusketeer = Instantiate(deadSkeleMusketeer, transform.position, Quaternion.identity);
-                deadMusketeer.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
-                deadMusketeer.GetComponent<DeadEnemyScript>().whatView = whatView();
-                deadMusketeer.transform.localScale = transform.localScale;
-                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                addKills();
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
         }
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject deadMusketeer = Instantiate(deadSkeleMusketeer, transform.position, Quaternion.identity);
+        deadMusketeer.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
+        deadMusketeer.GetComponent<DeadEnemyScript>().whatView = whatView();
+        deadMusketeer.transform.localScale = transform.localScale;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 }

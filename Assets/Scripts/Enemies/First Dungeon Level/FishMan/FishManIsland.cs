@@ -18,6 +18,7 @@ public class FishManIsland : Enemy {
                 spawnedFishMan = Instantiate(fishMan, transform.position + new Vector3(Mathf.Cos((0 - 45*i)*Mathf.Deg2Rad), Mathf.Sin((0 - 45 * i) * Mathf.Deg2Rad), 0) * 3, Quaternion.identity);
                 spawnedFishMan.GetComponent<FishManEnemy>().fishManIsland = this.gameObject;
                 spawnedFishmen.Add(spawnedFishMan);
+                EnemyPool.addEnemy(spawnedFishMan.GetComponent<Enemy>());
             }
         }
         else if(whatCornerSpawned == 2)
@@ -27,6 +28,7 @@ public class FishManIsland : Enemy {
                 spawnedFishMan = Instantiate(fishMan, transform.position + new Vector3(Mathf.Cos((0 + 45 * i) * Mathf.Deg2Rad), Mathf.Sin((0 + 45 * i) * Mathf.Deg2Rad), 0) * 3, Quaternion.identity);
                 spawnedFishMan.GetComponent<FishManEnemy>().fishManIsland = this.gameObject;
                 spawnedFishmen.Add(spawnedFishMan);
+                EnemyPool.addEnemy(spawnedFishMan.GetComponent<Enemy>());
             }
         }
         else if(whatCornerSpawned == 3)
@@ -36,6 +38,7 @@ public class FishManIsland : Enemy {
                 spawnedFishMan = Instantiate(fishMan, transform.position + new Vector3(Mathf.Cos((180 + 45 * i) * Mathf.Deg2Rad), Mathf.Sin((180 + 45 * i) * Mathf.Deg2Rad), 0) * 3, Quaternion.identity);
                 spawnedFishMan.GetComponent<FishManEnemy>().fishManIsland = this.gameObject;
                 spawnedFishmen.Add(spawnedFishMan);
+                EnemyPool.addEnemy(spawnedFishMan.GetComponent<Enemy>());
             }
         }
         else
@@ -44,12 +47,14 @@ public class FishManIsland : Enemy {
             {
                 spawnedFishMan = Instantiate(fishMan, transform.position + new Vector3(Mathf.Cos((90 + 45 * i) * Mathf.Deg2Rad), Mathf.Sin((90 + 45 * i) * Mathf.Deg2Rad), 0) * 3, Quaternion.identity);
                 spawnedFishMan.GetComponent<FishManEnemy>().fishManIsland = this.gameObject;
+                EnemyPool.addEnemy(spawnedFishMan.GetComponent<Enemy>());
                 spawnedFishmen.Add(spawnedFishMan);
             }
         }
     }
 
 	void Start () {
+        EnemyPool.removeEnemy(this);
         int whichCorner = Random.Range(1, 5);
         Vector3 spawnLocation;
 
@@ -93,5 +98,15 @@ public class FishManIsland : Enemy {
             }
         }
         return false;
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void deathProcedure()
+    {
+        throw new System.NotImplementedException();
     }
 }

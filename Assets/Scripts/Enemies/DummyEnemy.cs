@@ -5,10 +5,15 @@ using UnityEngine;
 public class DummyEnemy : Enemy {
     SpriteRenderer spriteRenderer;
     public bool outputHealth = false;
+    public bool addToPool = false;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        if (addToPool)
+        {
+            EnemyPool.addEnemy(this);
+        }
     }
 
     IEnumerator hitFrame()
@@ -24,17 +29,22 @@ public class DummyEnemy : Enemy {
         {
             int damageDealt = collision.gameObject.GetComponent<DamageAmount>().damage;
             dealDamage(damageDealt);
-            if (health <= 0)
-            {
-                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                if(outputHealth == true)
-                    Debug.Log(health);
-                StartCoroutine(hitFrame());
-            }
         }
+    }
+
+    public override void deathProcedure()
+    {
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        if (outputHealth == true)
+        {
+            Debug.Log("Health" + health);
+            Debug.Log("Damage:" + damage);
+        }
+        StartCoroutine(hitFrame());
     }
 }

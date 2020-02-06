@@ -126,18 +126,20 @@ public static class SaveSystem
             {
                 PlayerUpgrades.sniperUpgrades.Add(id);
             }
+            foreach(string id in data.chemicalSprayerUpgrades)
+            {
+                PlayerUpgrades.chemicalSprayerUpgrades.Add(id);
+            }
+            foreach(string id in data.glaiveLauncherUpgrades)
+            {
+                PlayerUpgrades.glaiveLauncherUpgrades.Add(id);
+            }
 
             PlayerUpgrades.numberSkillPoints = data.numberSkillPoints;
             PlayerUpgrades.numberMaxSkillPoints = data.numberMaxSkillPoints;
             PlayerUpgrades.whichFrontWeaponEquipped = data.whichFrontWeaponEquipped;
             PlayerUpgrades.whichLeftWeaponEquipped = data.whichLeftWeaponEquipped;
             PlayerUpgrades.whichRightWeaponEquipped = data.whichRightWeaponEquipped;
-            PlayerUpgrades.musketUnlocked = data.musketUnlocked;
-            PlayerUpgrades.cannonUnlocked = data.cannonUnlocked;
-            PlayerUpgrades.spreadShotUnlocked = data.spreadShotUnlocked;
-            PlayerUpgrades.fireworkUnlocked = data.fireworkUnlocked;
-            PlayerUpgrades.dragonsBreathUnlocked = data.dragonsBreathUnlocked;
-            PlayerUpgrades.unlockLevel = data.unlockLevel;
 
             PlayerItems.inventoryItemsIDs.Clear();
             foreach (string id in data.inventoryItemIds)

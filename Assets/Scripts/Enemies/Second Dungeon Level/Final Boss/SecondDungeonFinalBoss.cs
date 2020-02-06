@@ -20,6 +20,7 @@ public class SecondDungeonFinalBoss : Enemy
     public SecondDungeonFinalBossManager bossManager;
     public BossHealthBar bossHealthBar;
     public GameObject lightningStormAttack;
+    public GameObject warningCircle;
 
     private bool idleFlag = true;
     private int whatView = 0;
@@ -29,13 +30,13 @@ public class SecondDungeonFinalBoss : Enemy
     public GameObject icePrison;
     public GameObject lightningLance;
     public LayerMask lightningLayerMask;
+    SecondDungeonFinalBossIcePrison icePrisonRef;
 
     public GameObject lightningParticles;
 
     private int numberLightningLances = 0;
     private float delayBetweenAttacks = 2;
     private float shroudCoolDownTimer = 10;
-    private float speed = 0;
 
     private bool secondPhaseActive = false;
 
@@ -46,7 +47,7 @@ public class SecondDungeonFinalBoss : Enemy
         shadow.fadeShadowIn();
         LeanTween.move(this.gameObject, new Vector3(1600, 0.5f), 1f).setEaseInCubic().setOnComplete(() => {
             Instantiate(waterSplash, transform.position - Vector3.up, Quaternion.identity);
-            audioManager.FadeOut("Dungeon Ambiance", 0.2f);
+            audioManager.MuteSound("Dungeon Ambiance");
             audioManager.PlaySound("Second Dungeon Final Boss Fight");
             audioManager.FadeIn("Second Dungeon Final Boss Fight", 0.2f, 0.8f);
         });
@@ -146,15 +147,22 @@ public class SecondDungeonFinalBoss : Enemy
         delayBetweenAttacks = 4;
         idleFlag = false;
         animator.SetTrigger("Ice Prison");
+        if(icePrisonRef != null)
+        {
+            Destroy(icePrisonRef);
+        }
+
         summonIcePrison.Play();
         yield return new WaitForSeconds(7f / 12f);
         Vector3 target = new Vector3(Mathf.Clamp(playerScript.transform.position.x, 1572, 1628), Mathf.Clamp(playerScript.transform.position.y, -7, 3));
-        yield return new WaitForSeconds(4 / 12f);
+        Instantiate(warningCircle, target, Quaternion.identity);
+        yield return new WaitForSeconds(6 / 12f);
         cameraShake.shakeCamFunction(0.4f, 0.2f);
         GameObject icePrisonInstant = Instantiate(icePrison, target, Quaternion.identity);
         icePrisonInstant.GetComponent<ProjectileParent>().instantiater = this.gameObject;
         icePrisonInstant.GetComponent<SecondDungeonFinalBossIcePrison>().ylvaCompanion = bossManager.ylva;
-        yield return new WaitForSeconds(10f / 12f);
+        icePrisonRef = icePrisonInstant.GetComponent<SecondDungeonFinalBossIcePrison>();
+        yield return new WaitForSeconds(8f / 12f);
         forceIdleAnimation(angleToShip);
         idleFlag = true;
     }
@@ -298,7 +306,7 @@ public class SecondDungeonFinalBoss : Enemy
 
     private void rampSpeed()
     {
-        LeanTween.value(0, 2, 2).setEaseInOutElastic().setOnUpdate((float val) => { speed = val; });
+        LeanTween.value(0, 2, 2).setEaseInOutElastic().setOnUpdate((float val) => { updateSpeed(val); });
     }
 
     IEnumerator transitionToSecondPhase()
@@ -322,58 +330,62 @@ public class SecondDungeonFinalBoss : Enemy
         spriteRenderer.color = Color.white;
     }
 
-    private void dealDamageToBoss(int damage)
-    {
-        dealDamage(damage);
-        damageAudio.Play();
-        if (health <= 0)
-        {
-            finishedSecondLevelProcedure();
-            playerScript.enemiesDefeated = true;
-            SaveSystem.SaveGame();
-            addKills();
-        }
-        else
-        {
-            StartCoroutine(hitFrame());
-        }
-    }
-
-    void finishedSecondLevelProcedure()
+    private void finishedSecondLevelProcedure()
     {
         bossHealthBar.bossEnd();
+        LeanTween.moveLocalX(cameraShake.gameObject, this.transform.position.x, 1f).setEaseInOutCubic();
         audioManager.FadeOut("Second Dungeon Final Boss Fight", 0.2f);
-        //play defeated music
+        StopAllCoroutines();
         animator.SetTrigger("Death");
         death.Play();
-        MiscData.dungeonLevelUnlocked = 2;
-        // Temporary commented for testing purposes
-        // bossManager.bossBeaten("arcane_adventurer", 2f); 
-        //Also need to update player weapon unlock level
+        playerScript.playerDead = true;
+        MiscData.dungeonLevelUnlocked = 3;
+        playerScript.playerDead = true;
+        bossManager.cameraScript.freeCam = true;
+        bossManager.cameraScript.trackPlayer = false;
+        bossManager.startUpAhalfarDialogue();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<DamageAmount>())
+        if (health > 0 && playerScript.playerDead == false)
         {
-            if (!shroud.IsActive())
+            if (collision.gameObject.GetComponent<DamageAmount>())
             {
-                dealDamageToBoss(collision.gameObject.GetComponent<DamageAmount>().damage);
+                if (!shroud.IsActive())
+                {
+                    dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
+                }
+                bossManager.ylva.triggerFireball(this.transform.position);
             }
-            bossManager.ylva.triggerFireball(this.transform.position);
+            else if (collision.gameObject.name == "Ylva's Fireball(Clone)")
+            {
+                if (shroud.IsActive())
+                {
+                    rigidBody2D.velocity = Vector3.zero;
+                    shroud.fadeOut();
+                    shroudCoolDownTimer = 15;
+                }
+                else
+                {
+                    dealDamage(8);
+                }
+            }
         }
-        else if (collision.gameObject.name == "Ylva's Fireball(Clone)")
-        {
-            if (shroud.IsActive())
-            {
-                rigidBody2D.velocity = Vector3.zero;
-                shroud.fadeOut();
-                shroudCoolDownTimer = 15;
-            }
-            else
-            {
-                dealDamageToBoss(8);
-            }
-        }
+    }
+
+    public override void deathProcedure()
+    {
+        finishedSecondLevelProcedure();
+        playerScript.enemiesDefeated = true;
+        icePrisonRef?.forceShatter();
+        SaveSystem.SaveGame();
+        addKills();
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        StartCoroutine(hitFrame());
+        damageAudio.Play();
     }
 }

@@ -62,14 +62,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\LeanTween\Framework\LeanAudio.cs" />
-    <Compile Include="Assets\LeanTween\Framework\LeanSmooth.cs" />
-    <Compile Include="Assets\LeanTween\Framework\LeanTest.cs" />
-    <Compile Include="Assets\LeanTween\Framework\LeanTween.cs" />
-    <Compile Include="Assets\LeanTween\Framework\LeanTweenExt.cs" />
-    <Compile Include="Assets\LeanTween\Framework\LTDescr.cs" />
-    <Compile Include="Assets\LeanTween\Framework\LTDescrOptional.cs" />
-    <Compile Include="Assets\LeanTween\Framework\LTSeq.cs" />
     <Compile Include="Assets\Scripts\AdjustAudio.cs" />
     <Compile Include="Assets\Scripts\Artifact Actives\ArtifactEffect.cs" />
     <Compile Include="Assets\Scripts\Artifact Actives\First Dungeon Level\AnchorShot.cs" />
@@ -169,6 +161,7 @@
     <Compile Include="Assets\Scripts\Camera Utility\CameraShake.cs" />
     <Compile Include="Assets\Scripts\Camera Utility\MoveCameraNextRoom.cs" />
     <Compile Include="Assets\Scripts\Camera Utility\PixelBoy.cs" />
+    <Compile Include="Assets\Scripts\ConsoleCommands.cs" />
     <Compile Include="Assets\Scripts\Consumable Related\First Dungeon Level\DeathlyAuraBall.cs" />
     <Compile Include="Assets\Scripts\Consumable Related\First Dungeon Level\DeathlyAuraParticles.cs" />
     <Compile Include="Assets\Scripts\Consumable Related\First Dungeon Level\DeathlyAuraTalisman.cs" />
@@ -210,12 +203,14 @@
     <Compile Include="Assets\Scripts\Enemies\DamageHitBox.cs" />
     <Compile Include="Assets\Scripts\Enemies\DeadEnemyScript.cs" />
     <Compile Include="Assets\Scripts\Enemies\DirectionalInvulnerableEffect.cs" />
+    <Compile Include="Assets\Scripts\Enemies\DullEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\DummyEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyDamageHitBox.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyDangerValue.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyInvulnerableEffect.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyShieldEffect.cs" />
+    <Compile Include="Assets\Scripts\Enemies\EnemyStatusEffect.cs" />
     <Compile Include="Assets\Scripts\Enemies\First Dungeon Level\Anemone Enemy\AnemoneEnemy.cs" />
     <Compile Include="Assets\Scripts\Enemies\First Dungeon Level\Anemone Enemy\AnemoneShot.cs" />
     <Compile Include="Assets\Scripts\Enemies\First Dungeon Level\Angler Fish\AnglerFish.cs" />
@@ -382,10 +377,13 @@
     <Compile Include="Assets\Scripts\Player\PlayerArmorEffect.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerScript.cs" />
     <Compile Include="Assets\Scripts\Player\Projectile Related\CannonRound.cs" />
+    <Compile Include="Assets\Scripts\Player\Projectile Related\CorrosiveBlast.cs" />
+    <Compile Include="Assets\Scripts\Player\Projectile Related\CorrosiveEffect.cs" />
     <Compile Include="Assets\Scripts\Player\Projectile Related\DragonBreathFireAttack.cs" />
     <Compile Include="Assets\Scripts\Player\Projectile Related\DragonsBreathApplyBurn.cs" />
     <Compile Include="Assets\Scripts\Player\Projectile Related\FireworkExplosion.cs" />
     <Compile Include="Assets\Scripts\Player\Projectile Related\FireworkRocket.cs" />
+    <Compile Include="Assets\Scripts\Player\Projectile Related\GlaiveProjectile.cs" />
     <Compile Include="Assets\Scripts\Player\Projectile Related\MomentumBlast.cs" />
     <Compile Include="Assets\Scripts\Player\Projectile Related\MusketRound.cs" />
     <Compile Include="Assets\Scripts\Player\Projectile Related\PlayerProjectile.cs" />
@@ -398,11 +396,15 @@
     <Compile Include="Assets\Scripts\Player\Projectile Related\ShotgunRound.cs" />
     <Compile Include="Assets\Scripts\Player\Projectile Related\SniperBullet.cs" />
     <Compile Include="Assets\Scripts\Player\Projectile Related\SniperPlume.cs" />
+    <Compile Include="Assets\Scripts\Player\Projectile Related\SniperStunEffect.cs" />
+    <Compile Include="Assets\Scripts\Player\Projectile Related\SplitGlaive.cs" />
     <Compile Include="Assets\Scripts\Player\Projectile Related\WeaponFireScript.cs" />
     <Compile Include="Assets\Scripts\Player\Projectile Related\WeaponFireTemplate.cs" />
     <Compile Include="Assets\Scripts\Player\Upgrade Managers\CannonUpgradeManager.cs" />
+    <Compile Include="Assets\Scripts\Player\Upgrade Managers\ChemicalSprayerUpgradeManager.cs" />
     <Compile Include="Assets\Scripts\Player\Upgrade Managers\DragonsBreathUpgradeManager.cs" />
     <Compile Include="Assets\Scripts\Player\Upgrade Managers\FireworkUpgradeManager.cs" />
+    <Compile Include="Assets\Scripts\Player\Upgrade Managers\GlaiveLauncherUpgradeManager.cs" />
     <Compile Include="Assets\Scripts\Player\Upgrade Managers\HullUpgradeManager.cs" />
     <Compile Include="Assets\Scripts\Player\Upgrade Managers\InventorySafeUpgradeManager.cs" />
     <Compile Include="Assets\Scripts\Player\Upgrade Managers\MusketUpgradeManager.cs" />
@@ -419,11 +421,14 @@
     <Compile Include="Assets\Scripts\PlayerHub\Shipsmith.cs" />
     <Compile Include="Assets\Scripts\PlayerHub\SpawnRoom.cs" />
     <Compile Include="Assets\Scripts\PlayerHub\Tavern.cs" />
+    <Compile Include="Assets\Scripts\Properties\PlayerProperties.cs" />
+    <Compile Include="Assets\Scripts\Properties\WeaponProperties.cs" />
     <Compile Include="Assets\Scripts\SetObjectUnActiveInTime.cs" />
     <Compile Include="Assets\Scripts\Spawns\AntiSpawnSpaceDetailer.cs" />
     <Compile Include="Assets\Scripts\Spawns\BossManager.cs" />
     <Compile Include="Assets\Scripts\Spawns\CustomRoomManager.cs" />
     <Compile Include="Assets\Scripts\Spawns\DoorSeal.cs" />
+    <Compile Include="Assets\Scripts\Spawns\EnemyPool.cs" />
     <Compile Include="Assets\Scripts\Spawns\EnemyRoomTemplate.cs" />
     <Compile Include="Assets\Scripts\Spawns\EnemyRoomTemplates.cs" />
     <Compile Include="Assets\Scripts\Spawns\MissionManager.cs" />
@@ -461,6 +466,8 @@
     <Compile Include="Assets\Scripts\UI Related\CannonUpgradeTile.cs" />
     <Compile Include="Assets\Scripts\UI Related\CannonUpgradeTilesUI.cs" />
     <Compile Include="Assets\Scripts\UI Related\CharacterDialogue.cs" />
+    <Compile Include="Assets\Scripts\UI Related\ChemicalSprayerUpgradeTile.cs" />
+    <Compile Include="Assets\Scripts\UI Related\ChemicalSprayerUpgradeTilesUI.cs" />
     <Compile Include="Assets\Scripts\UI Related\Chest.cs" />
     <Compile Include="Assets\Scripts\UI Related\ChestIndicator.cs" />
     <Compile Include="Assets\Scripts\UI Related\ChestSlot.cs" />
@@ -482,6 +489,8 @@
     <Compile Include="Assets\Scripts\UI Related\FireworkUpgradeTilesUI.cs" />
     <Compile Include="Assets\Scripts\UI Related\GambleMenuArtifactSlot.cs" />
     <Compile Include="Assets\Scripts\UI Related\GambleMenuGoldSlot.cs" />
+    <Compile Include="Assets\Scripts\UI Related\GlaiveLauncherUpgradeTile.cs" />
+    <Compile Include="Assets\Scripts\UI Related\GlaiveLauncherUpgradeTileUI.cs" />
     <Compile Include="Assets\Scripts\UI Related\GoldenVaultTile.cs" />
     <Compile Include="Assets\Scripts\UI Related\HealthUpgradeTilesUI.cs" />
     <Compile Include="Assets\Scripts\UI Related\HoverToolTip.cs" />
@@ -585,8 +594,6 @@
     <Compile Include="Assets\Scripts\Unique Rooms\Special Combat Rooms\Sea Serpent\SeaSerpentWave.cs" />
     <Compile Include="Assets\Scripts\Unique Rooms\Treasure Rooms\DungeonTreasure.cs" />
     <Compile Include="Assets\Scripts\Unique Rooms\Trove Rooms\DungeonTrove.cs" />
-    <None Include="Assets\LeanTween\ReadMe.txt" />
-    <None Include="Assets\LeanTween\License.txt" />
     <None Include="Assets\Font\Pixel Font - Tripfive\_README.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/GitHub/Frigid Blackwaters/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
@@ -809,6 +816,18 @@
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.5f1/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Opencoding.CommandHandlers">
+      <HintPath>D:/GitHub/Frigid Blackwaters/Assets/Plugins/Opencoding/Console/DLLs/Opencoding.CommandHandlers.dll</HintPath>
+    </Reference>
+    <Reference Include="Opencoding.Console">
+      <HintPath>D:/GitHub/Frigid Blackwaters/Assets/Plugins/Opencoding/Console/DLLs/Opencoding.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="Opencoding.LogHistory">
+      <HintPath>D:/GitHub/Frigid Blackwaters/Assets/Plugins/Opencoding/Console/DLLs/Opencoding.LogHistory.dll</HintPath>
+    </Reference>
+    <Reference Include="Opencoding.Shared">
+      <HintPath>D:/GitHub/Frigid Blackwaters/Assets/Plugins/Opencoding/Console/DLLs/Opencoding.Shared.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>D:/GitHub/Frigid Blackwaters/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
@@ -1164,6 +1183,12 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.5f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{B0DEB88C-525E-BE07-8CB9-2D38817B3174}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

@@ -10,10 +10,10 @@ public class SeaUrchin : Enemy {
     int whatSide = 0;
     Vector3[] cornerList;
     int cw = 0;
-    public float travelSpeed = 4;
     public GameObject enemyMarker;
     SpriteRenderer spriteRenderer;
     public int whatUrchinType = 1;
+    Camera mainCamera;
 
     float attackPeriod = 3;
 
@@ -44,7 +44,7 @@ public class SeaUrchin : Enemy {
         {
             if (whatSide == 0)
             {
-                rigidBody2D.velocity = Vector3.down * travelSpeed;
+                rigidBody2D.velocity = Vector3.down * speed;
                 if (Vector2.Distance(transform.position, cornerList[whatSide]) < 0.5f)
                 {
                     transform.position = cornerList[whatSide];
@@ -57,7 +57,7 @@ public class SeaUrchin : Enemy {
             }
             else if (whatSide == 1)
             {
-                rigidBody2D.velocity = Vector3.right * travelSpeed;
+                rigidBody2D.velocity = Vector3.right * speed;
                 if (Vector2.Distance(transform.position, cornerList[whatSide]) < 0.5f)
                 {
                     transform.position = cornerList[whatSide];
@@ -70,7 +70,7 @@ public class SeaUrchin : Enemy {
             }
             else if (whatSide == 2)
             {
-                rigidBody2D.velocity = Vector3.up * travelSpeed;
+                rigidBody2D.velocity = Vector3.up * speed;
                 if (Vector2.Distance(transform.position, cornerList[whatSide]) < 0.5f)
                 {
                     transform.position = cornerList[whatSide];
@@ -83,7 +83,7 @@ public class SeaUrchin : Enemy {
             }
             else
             {
-                rigidBody2D.velocity = Vector3.left * travelSpeed;
+                rigidBody2D.velocity = Vector3.left * speed;
                 if (Vector2.Distance(transform.position, cornerList[whatSide]) < 0.5f)
                 {
                     transform.position = cornerList[whatSide];
@@ -99,7 +99,7 @@ public class SeaUrchin : Enemy {
         {
             if (whatSide == 0)
             {
-                rigidBody2D.velocity = Vector3.up * travelSpeed;
+                rigidBody2D.velocity = Vector3.up * speed;
                 if (Vector2.Distance(transform.position, cornerList[3]) < 0.5f)
                 {
                     transform.position = cornerList[3];
@@ -112,7 +112,7 @@ public class SeaUrchin : Enemy {
             }
             else if (whatSide == 1)
             {
-                rigidBody2D.velocity = Vector3.left * travelSpeed;
+                rigidBody2D.velocity = Vector3.left * speed;
                 if (Vector2.Distance(transform.position, cornerList[0]) < 0.5f)
                 {
                     transform.position = cornerList[0];
@@ -125,7 +125,7 @@ public class SeaUrchin : Enemy {
             }
             else if (whatSide == 2)
             {
-                rigidBody2D.velocity = Vector3.down * travelSpeed;
+                rigidBody2D.velocity = Vector3.down * speed;
                 if (Vector2.Distance(transform.position, cornerList[1]) < 0.5f)
                 {
                     transform.position = cornerList[1];
@@ -138,7 +138,7 @@ public class SeaUrchin : Enemy {
             }
             else
             {
-                rigidBody2D.velocity = Vector3.right * travelSpeed;
+                rigidBody2D.velocity = Vector3.right * speed;
                 if (Vector2.Distance(transform.position, cornerList[2]) < 0.5f)
                 {
                     transform.position = cornerList[2];
@@ -181,12 +181,14 @@ public class SeaUrchin : Enemy {
 
     void Start()
     {
+        mainCamera = Camera.main;
         rigidBody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        cornerList = new Vector3[] { Camera.main.transform.position + new Vector3(-9f, -9f), Camera.main.transform.position + new Vector3(9f, -9f), Camera.main.transform.position + new Vector3(9f, 9f), Camera.main.transform.position + new Vector3(-9f, 9f) };
+        cornerList = new Vector3[] { mainCamera.transform.position + new Vector3(-9f, -9f), mainCamera.transform.position + new Vector3(9f, -9f), mainCamera.transform.position + new Vector3(9f, 9f), mainCamera.transform.position + new Vector3(-9f, 9f) };
         setLocation();
         cw = Random.Range(0, 2);
+        updateSpeed(4);
     }
 
     void Update()
@@ -205,16 +207,12 @@ public class SeaUrchin : Enemy {
             attackPeriod = 2;
         }
 
-        if (Vector2.Distance(transform.position, Camera.main.transform.position) < 8 || Vector2.Distance(transform.position, Camera.main.transform.position) > 13f)
+        if (Vector2.Distance(transform.position, mainCamera.transform.position) < 8 || Vector2.Distance(transform.position, mainCamera.transform.position) > 14.5f)
         {
-            GameObject deadPirate = Instantiate(deadStarFish, transform.position, Quaternion.identity);
-            deadPirate.transform.rotation = transform.rotation;
-            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            addKills();
-            Destroy(transform.parent.gameObject);
+            destroyProcedure();
         }
 
-        travelSpeed = (Mathf.Sin(Time.time * 3) + 1) * 3;
+        updateSpeed((Mathf.Sin(Time.time * 3) + 1) * 3);
     }
 
     IEnumerator hitFrame()
@@ -229,19 +227,20 @@ public class SeaUrchin : Enemy {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            this.GetComponents<AudioSource>()[0].Play();
-            if (health <= 0)
-            {
-                GameObject deadPirate = Instantiate(deadStarFish, transform.position, Quaternion.identity);
-                deadPirate.transform.rotation = transform.rotation;
-                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                addKills();
-                Destroy(transform.parent.gameObject);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
         }
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject deadPirate = Instantiate(deadStarFish, transform.position, Quaternion.identity);
+        deadPirate.transform.rotation = transform.rotation;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        Destroy(transform.parent.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 }

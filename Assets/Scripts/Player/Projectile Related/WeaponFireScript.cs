@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WeaponFireScript : MonoBehaviour {
     public GameObject bullet;
@@ -12,6 +13,8 @@ public class WeaponFireScript : MonoBehaviour {
     PlayerScript playerScript;
     public bool forceFired = false;
     public int whichWeapon;
+
+    public UnityAction fireAction;
 
     void pickRendererLayer()
     {
@@ -42,7 +45,9 @@ public class WeaponFireScript : MonoBehaviour {
         }
         initShipPos = GameObject.Find("PlayerShip").transform.position;
         initFirePos = transform.position;
+
         GameObject instant = Instantiate(bullet, transform.position, Quaternion.identity);
+
         if (instant.GetComponent<PlayerProjectile>())
         {
             instant.GetComponent<PlayerProjectile>().whichWeaponFrom = whichWeapon;
@@ -53,12 +58,17 @@ public class WeaponFireScript : MonoBehaviour {
             instant.GetComponent<CannonRound>().forceShot = forceFired;
         }
 
+        triggerWeaponFireFlag(new GameObject[1] { instant });
+    }
+
+    public void triggerWeaponFireFlag(GameObject[] instants)
+    {
         if (whichWeapon == 1)
         {
             foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
             {
                 if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                    slot.displayInfo.GetComponent<ArtifactEffect>().firedFrontWeapon(new GameObject[1] { instant });
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedFrontWeapon(instants);
             }
         }
         else if (whichWeapon == 2)
@@ -66,7 +76,7 @@ public class WeaponFireScript : MonoBehaviour {
             foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
             {
                 if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                    slot.displayInfo.GetComponent<ArtifactEffect>().firedLeftWeapon(new GameObject[1] { instant });
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedLeftWeapon(instants);
             }
         }
         else
@@ -74,7 +84,7 @@ public class WeaponFireScript : MonoBehaviour {
             foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
             {
                 if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                    slot.displayInfo.GetComponent<ArtifactEffect>().firedRightWeapon(new GameObject[1] { instant });
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedRightWeapon(instants);
             }
         }
     }

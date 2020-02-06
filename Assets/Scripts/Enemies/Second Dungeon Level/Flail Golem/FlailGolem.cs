@@ -147,7 +147,7 @@ public class FlailGolem : Enemy
 
                     if (Vector2.Distance(transform.position, targetTravel) > 0.2f)
                     {
-                        rigidBody2D.velocity = new Vector3(targetTravel.x - transform.position.x, targetTravel.y - transform.position.y).normalized * 2.5f;
+                        rigidBody2D.velocity = new Vector3(targetTravel.x - transform.position.x, targetTravel.y - transform.position.y).normalized * speed;
                     }
                     else
                     {
@@ -165,27 +165,6 @@ public class FlailGolem : Enemy
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            this.GetComponents<AudioSource>()[0].Play();
-            if (health <= 0)
-            {
-                rigidBody2D.velocity = Vector3.zero;
-                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                playerScript.enemiesDefeated = true;
-                SaveSystem.SaveGame();
-                bossManager.bossBeaten(nameID, 1.083f);
-                addKills();
-                Instantiate(deadFlailGolem, transform.position, Quaternion.identity);
-                flail.GetComponent<Animator>().enabled = true;
-                flail.GetComponent<CircleCollider2D>().enabled = false;
-                StopAllCoroutines();
-                flail.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                Destroy(this.gameObject);
-                FindObjectOfType<BossHealthBar>().bossEnd();
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
         }
     }
 
@@ -194,5 +173,27 @@ public class FlailGolem : Enemy
         spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(.1f);
         spriteRenderer.color = Color.white;
+    }
+
+    public override void deathProcedure()
+    {
+        rigidBody2D.velocity = Vector3.zero;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        playerScript.enemiesDefeated = true;
+        SaveSystem.SaveGame();
+        bossManager.bossBeaten(nameID, 1.083f);
+        Instantiate(deadFlailGolem, transform.position, Quaternion.identity);
+        flail.GetComponent<Animator>().enabled = true;
+        flail.GetComponent<CircleCollider2D>().enabled = false;
+        StopAllCoroutines();
+        flail.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        Destroy(this.gameObject);
+        FindObjectOfType<BossHealthBar>().bossEnd();
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 }

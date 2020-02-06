@@ -20,7 +20,8 @@ public class SkeletalWarlordSummonEffect : MonoBehaviour
         yield return new WaitForSeconds(9 / 12f);
         GameObject spawnedEnemy = Instantiate(skeletonList[Random.Range(0, skeletonList.Length)], transform.position + new Vector3(0, -0.5f, 0), Quaternion.identity);
         spawnedEnemy.GetComponent<Enemy>().armorMitigation = 1;
-        for(int i = 0; i < skeletalWarlordScript.spawnedEnemies.Length; i++)
+        EnemyPool.addEnemy(spawnedEnemy.GetComponent<Enemy>());
+        for (int i = 0; i < skeletalWarlordScript.spawnedEnemies.Length; i++)
         {
             if(skeletalWarlordScript.spawnedEnemies[i] == null)
             {

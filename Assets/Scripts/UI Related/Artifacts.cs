@@ -22,14 +22,17 @@ public class Artifacts : MonoBehaviour {
 	void LateUpdate () {
         if (chestUI.activeSelf == false && shopUI.activeSelf == false)
         {
-            if (artifactsUI.activeSelf == false && GetComponent<PlayerScript>().playerDead == false)
+            if (artifactsUI.activeSelf == false)
             {
-                if (Input.GetKeyDown(KeyCode.I) && playerScript.windowAlreadyOpen == false)
+                if (GetComponent<PlayerScript>().playerDead == false)
                 {
-                    playerScript.windowAlreadyOpen = true;
-                    UpdateUI();
-                    artifactsUI.SetActive(true);
-                    Time.timeScale = 0;
+                    if (Input.GetKeyDown(KeyCode.I) && playerScript.windowAlreadyOpen == false)
+                    {
+                        playerScript.windowAlreadyOpen = true;
+                        UpdateUI();
+                        artifactsUI.SetActive(true);
+                        Time.timeScale = 0;
+                    }
                 }
             }
             else

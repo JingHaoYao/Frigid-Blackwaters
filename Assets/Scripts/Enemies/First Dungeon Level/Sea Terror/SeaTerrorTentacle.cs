@@ -39,6 +39,7 @@ public class SeaTerrorTentacle : Enemy
         playerScript = FindObjectOfType<PlayerScript>();
         rigidBody2D = GetComponent<Rigidbody2D>();
         seaTerror = FindObjectOfType<SeaTerror>();
+        updateSpeed(2);
     }
 
     void Update()
@@ -53,7 +54,7 @@ public class SeaTerrorTentacle : Enemy
                 {
                     if (Vector2.Distance(playerScript.transform.position, transform.position) > 0.8f)
                     {
-                        rigidBody2D.velocity = (playerScript.transform.position - transform.position).normalized * 2;
+                        rigidBody2D.velocity = (playerScript.transform.position - transform.position).normalized * speed;
                         spawnFoam(rigidBody2D.velocity);
                     }
 
@@ -134,19 +135,21 @@ public class SeaTerrorTentacle : Enemy
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
             this.GetComponents<AudioSource>()[0].Play();
-            if (health <= 0)
-            {
-                StopAllCoroutines();
-                slamHitBox.SetActive(false);
-                swingHitBox.SetActive(false);
-                sinkTentacle();
-                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                addKills();
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
+            StartCoroutine(hitFrame());
         }
+    }
+
+    public override void deathProcedure()
+    {
+        StopAllCoroutines();
+        slamHitBox.SetActive(false);
+        swingHitBox.SetActive(false);
+        sinkTentacle();
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    public override void damageProcedure(int damage)
+    {
+
     }
 }

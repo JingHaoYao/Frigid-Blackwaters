@@ -172,7 +172,7 @@ public class ClamEnemy : Enemy
 
     void moveTowards(float direction)
     {
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * travelSpeed;
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * speed;
     }
 
     void rotateView()
@@ -255,6 +255,7 @@ public class ClamEnemy : Enemy
         }
         angleIndex = Random.Range(0, viableAngles.Length);
         currentAngleOrientation = viableAngles[angleIndex];
+        updateSpeed(travelSpeed);
     }
 
     void Update()
@@ -274,16 +275,7 @@ public class ClamEnemy : Enemy
             int damageDealt = collision.gameObject.GetComponent<DamageAmount>().damage;
             health -= damageDealt;
             this.GetComponents<AudioSource>()[0].Play();
-            if (health <= 0)
-            {
-                Instantiate(deadClam, transform.position, Quaternion.identity);
-                addKills();
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
+            StartCoroutine(hitFrame());
         }
     }
 
@@ -292,5 +284,16 @@ public class ClamEnemy : Enemy
         spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(.1f);
         spriteRenderer.color = Color.white;
+    }
+
+    public override void deathProcedure()
+    {
+        Instantiate(deadClam, transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+
     }
 }

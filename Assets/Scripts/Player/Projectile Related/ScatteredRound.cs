@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScatteredRound : MonoBehaviour {
+public class ScatteredRound : PlayerProjectile {
     public float speed = 50;
     public GameObject bulletSparks, secondImpactEffect;
     public float angleTravel;

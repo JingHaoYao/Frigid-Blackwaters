@@ -15,7 +15,6 @@ public class RollBombSkeleton : Enemy
     //used for movement
     Vector3 randomPos;
     float travelAngle;
-    public float travelSpeed;
 
     //attacking
     float attackPeriod = 2;
@@ -37,7 +36,7 @@ public class RollBombSkeleton : Enemy
         {
             float whatAngle = Mathf.Atan2(rigidBody2D.velocity.y, rigidBody2D.velocity.x) * Mathf.Rad2Deg;
             foamTimer += Time.deltaTime;
-            if (foamTimer >= 0.05f * travelSpeed / 3f)
+            if (foamTimer >= 0.05f * speed / 3f)
             {
                 foamTimer = 0;
                 Instantiate(waterFoam, transform.position, Quaternion.Euler(0, 0, whatAngle + 90));
@@ -83,7 +82,7 @@ public class RollBombSkeleton : Enemy
 
     void moveTowards(float direction)
     {
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * travelSpeed;
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * speed;
     }
 
     void travelLocation()
@@ -272,18 +271,6 @@ public class RollBombSkeleton : Enemy
         if (collision.gameObject.GetComponent<DamageAmount>() && health > 0)
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            this.GetComponents<AudioSource>()[0].Play();
-            if (health <= 0)
-            {
-                GameObject dead = Instantiate(deadSkele, transform.position, Quaternion.identity);
-                dead.GetComponent<DeadEnemyScript>().whatView = whatView;
-                addKills();
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
         }
     }
 
@@ -292,5 +279,18 @@ public class RollBombSkeleton : Enemy
         spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(.1f);
         spriteRenderer.color = Color.white;
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject dead = Instantiate(deadSkele, transform.position, Quaternion.identity);
+        dead.GetComponent<DeadEnemyScript>().whatView = whatView;
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 }

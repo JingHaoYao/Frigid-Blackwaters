@@ -161,6 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!82 &3275587687733708880
 AudioSource:
   m_ObjectHideFlags: 0
@@ -375,6 +376,10 @@ MonoBehaviour:
   stopAttacking: 0
   percentSpawnChance: 33
   armorMitigation: 0
+  speed: 2
+  slowAmount: 0
+  spawner: {fileID: 0}
+  statuses: []
   spriteList:
   - {fileID: 164863397080517206, guid: e5e7116803ee94b48ac247bb6a77c5a1, type: 3}
   - {fileID: -5508759907980981229, guid: 70d19d052a1c29c4bb4250ec7f52f3ad, type: 3}

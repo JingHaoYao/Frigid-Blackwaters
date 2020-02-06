@@ -111,4 +111,14 @@ public class SeaSerpentEnemy : Enemy {
             }
         }
 	}
+
+    public override void deathProcedure()
+    {
+
+    }
+
+    public override void damageProcedure(int damage)
+    {
+
+    }
 }

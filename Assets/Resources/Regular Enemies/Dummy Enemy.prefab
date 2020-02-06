@@ -230,7 +230,11 @@ MonoBehaviour:
   stopAttacking: 0
   percentSpawnChance: 33
   armorMitigation: 0
-  outputHealth: 1
+  speed: 0
+  slowAmount: 0
+  statuses: []
+  outputHealth: 0
+  addToPool: 1
 --- !u!114 &1009862875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,3 +249,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0

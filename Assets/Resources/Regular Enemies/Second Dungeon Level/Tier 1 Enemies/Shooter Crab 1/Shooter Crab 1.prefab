@@ -538,6 +538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!114 &5258246920440258919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,6 +559,10 @@ MonoBehaviour:
   stopAttacking: 0
   percentSpawnChance: 33
   armorMitigation: 0
+  speed: 4
+  slowAmount: 0
+  spawner: {fileID: 0}
+  statuses: []
   deadCrab: {fileID: 1243350087834692301, guid: ca136a3a24018c44db3f4b1af2821c8c,
     type: 3}
   travelAngle: 0

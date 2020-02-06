@@ -8,7 +8,6 @@ public class SkeletalShield : Enemy {
     public GameObject upDamageHitBox, downDamageHitBox, leftDamageHitBox, rightDamageHitBox;
     SpriteRenderer spriteRenderer;
     Rigidbody2D rigidBody2D;
-    public float travelSpeed = 1;
     private float foamTimer = 0;
     public GameObject waterFoam;
     public GameObject protectedEnemy;
@@ -120,7 +119,7 @@ public class SkeletalShield : Enemy {
 
     void moveTowards(float direction)
     {
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * travelSpeed;
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * speed;
     }
 
     void pickShield()
@@ -226,25 +225,21 @@ public class SkeletalShield : Enemy {
         {
             rigidBody2D.velocity = Vector3.zero;
         }
+    }
 
-        if (actualHit == true)
-        {
-            if (health <= 0)
-            {
-                GameObject deadPirate = Instantiate(deadShield, transform.position, Quaternion.identity);
-                deadPirate.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
-                deadPirate.GetComponent<DeadEnemyScript>().whatView = whatView();
-                deadPirate.transform.localScale = transform.localScale;
-                addKills();
-                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
-            actualHit = false;
-        }
+    public override void deathProcedure()
+    {
+        GameObject deadPirate = Instantiate(deadShield, transform.position, Quaternion.identity);
+        deadPirate.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
+        deadPirate.GetComponent<DeadEnemyScript>().whatView = whatView();
+        deadPirate.transform.localScale = transform.localScale;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        StartCoroutine(hitFrame());
     }
 
     int whatView()

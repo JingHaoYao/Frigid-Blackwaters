@@ -189,7 +189,7 @@ public class HullUpgradeManager : MonoBehaviour {
             float threshold;
             if (playerScript.enemiesDefeated == true)
             {
-                threshold = dashCooldown - 1;
+                threshold = dashCooldown - 1; 
             }
             else
             {
@@ -206,7 +206,6 @@ public class HullUpgradeManager : MonoBehaviour {
                     foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
                     {
                         if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                            //Debug.Log(slot.displayInfo.gameObject.name);
                             slot.displayInfo.GetComponent<ArtifactEffect>().playerDashed();
                     }
                     Vector3 momentumVector = new Vector3(Mathf.Cos(playerScript.angleOrientation * Mathf.Deg2Rad), Mathf.Sin(playerScript.angleOrientation * Mathf.Deg2Rad), 0) * dashMomentum;
@@ -221,7 +220,7 @@ public class HullUpgradeManager : MonoBehaviour {
             {
                 dashIcon.GetComponent<Image>().color = new Color(1, 1, 1, 0.63f);
                 dashCooldownPeriod -= Time.deltaTime;
-            }
+            }                                         
         }
         else
         {

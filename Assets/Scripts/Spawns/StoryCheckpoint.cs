@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StoryCheckpoint : MonoBehaviour
 {
@@ -17,12 +18,13 @@ public class StoryCheckpoint : MonoBehaviour
 
     //checkpoint id is taken in by the dialogue id of the checkpoint dialogue.
 
-    public void startUpDialogue()
+    public void startUpDialogue(float waitReveal = 2)
     {
         dialogueUI.targetDialogue = FindObjectOfType<DungeonEntryDialogueManager>().loadDialogue(dialogueName, true);
-        dialogueUI.waitReveal = 2;
+        dialogueUI.waitReveal = waitReveal;
         dialogueUI.gameObject.SetActive(true);
         dialogueBlackOverlay.SetActive(true);
+        dialogueBlackOverlay.GetComponent<Image>().color = new Color(0, 0, 0, 1);
     }
 
     public void Update()

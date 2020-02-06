@@ -18,7 +18,6 @@ public class HybridCrab2 : Enemy
     float pickSpritePeriod = 0;
     int whatView = 0;
     int mirror = 1;
-    public float travelSpeed = 1;
     bool isAttacking = false;
     float angleToShip = 0;
     float initialAttackPeriod = 5;
@@ -112,7 +111,7 @@ public class HybridCrab2 : Enemy
 
     void moveTowards(float direction)
     {
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * travelSpeed;
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * speed;
     }
 
     IEnumerator attack()
@@ -198,18 +197,21 @@ public class HybridCrab2 : Enemy
         if (collision.gameObject.GetComponent<DamageAmount>() && health > 0)
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            this.GetComponents<AudioSource>()[0].Play();
-            if (health <= 0)
-            {
-                GameObject dead = Instantiate(deadCrab, transform.position, Quaternion.identity);
-                addKills();
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
+
         }
+    }
+
+
+    public override void deathProcedure()
+    {
+        GameObject dead = Instantiate(deadCrab, transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 
     IEnumerator hitFrame()

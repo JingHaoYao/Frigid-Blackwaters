@@ -281,6 +281,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!95 &1943235012434513962
 Animator:
   serializedVersion: 3
@@ -611,6 +612,10 @@ MonoBehaviour:
   stopAttacking: 0
   percentSpawnChance: 33
   armorMitigation: 0
+  speed: 4
+  slowAmount: 0
+  spawner: {fileID: 0}
+  statuses: []
   oysterChest: {fileID: 4694976189463542148, guid: b1ecde88ccc317b429d39a99cdb7e0aa,
     type: 3}
   spine: {fileID: 1319165940191261776, guid: 6e33ac321c8b2bf4891c1a08b1d2fd90, type: 3}
@@ -621,7 +626,6 @@ MonoBehaviour:
   invulnerableIcon: {fileID: 5517529848112007750}
   travelAngle: 0
   pickTravelDuration: 0
-  travelSpeed: 6
   cardinalAngles: 000000005a000000b40000000e010000
   shieldedSprites:
   - {fileID: -6556611588091541670, guid: dca877d57ef2be441af34b17b7abbd4b, type: 3}
@@ -808,17 +812,17 @@ PrefabInstance:
       propertyPath: radius
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6225652380872605236, guid: af453617e8de020488f098902573caf4,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6225652382150293629, guid: af453617e8de020488f098902573caf4,
         type: 3}
       propertyPath: m_SortingOrder
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6225652382265931759, guid: af453617e8de020488f098902573caf4,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6225652380872605236, guid: af453617e8de020488f098902573caf4,
         type: 3}
       propertyPath: m_SortingOrder
       value: 2

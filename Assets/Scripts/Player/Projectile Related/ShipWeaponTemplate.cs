@@ -9,4 +9,5 @@ public class ShipWeaponTemplate : MonoBehaviour
     public Sprite coolDownIcon;
     public float coolDownTime;
     public GameObject shipWeaponEquipped;
+    public int whichLevelUnlock = 1;
 }

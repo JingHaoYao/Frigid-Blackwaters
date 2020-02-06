@@ -21,7 +21,6 @@ public class OysterBoss : Enemy
     public GameObject invulnerableIcon;
     public float travelAngle;
     public float pickTravelDuration = 0;
-    public float travelSpeed = 4;
 
     public int[] cardinalAngles = new int[4] { 0, 90, 180, 270 };
 
@@ -69,7 +68,7 @@ public class OysterBoss : Enemy
 
     void moveTowards(float direction)
     {
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * travelSpeed;
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * speed;
     }
 
     void pickView(float angle)
@@ -232,35 +231,6 @@ public class OysterBoss : Enemy
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Oyster Boss Rise") && health > 0 && invulnerableHitBox.activeSelf == false)
             {
                 dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-                GetComponents<AudioSource>()[1].Play();
-                if (health <= 0)
-                {
-                    rigidBody2D.velocity = Vector3.zero;
-                    StopAllCoroutines();
-                    this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                    whichRoomManager.antiSpawnSpaceDetailer.trialDefeated = true;
-                    playerScript.enemiesDefeated = true;
-                    GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated = true;
-                    animator.enabled = true;
-                    animator.SetTrigger("Death");
-                    Invoke("spawnDormant", 0.917f);
-                    FindObjectOfType<BossHealthBar>().bossEnd();
-
-                    if (transform.position.y < Camera.main.transform.position.y)
-                    {
-                        Instantiate(oysterChest, Camera.main.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
-                    }
-                    else
-                    {
-                        Instantiate(oysterChest, Camera.main.transform.position + new Vector3(0, -2, 0), Quaternion.identity);
-                    }
-
-                    addKills();
-                }
-                else
-                {
-                    StartCoroutine(hitFrame());
-                }
             }
         }
         else if (collision.tag != "EnemyShield")
@@ -268,5 +238,34 @@ public class OysterBoss : Enemy
             pickTravelDuration = 2;
             pickNewTravelDirection();
         }
+    }
+
+    public override void deathProcedure()
+    {
+        rigidBody2D.velocity = Vector3.zero;
+        StopAllCoroutines();
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        whichRoomManager.antiSpawnSpaceDetailer.trialDefeated = true;
+        playerScript.enemiesDefeated = true;
+        GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated = true;
+        animator.enabled = true;
+        animator.SetTrigger("Death");
+        Invoke("spawnDormant", 0.917f);
+        FindObjectOfType<BossHealthBar>().bossEnd();
+
+        if (transform.position.y < Camera.main.transform.position.y)
+        {
+            Instantiate(oysterChest, Camera.main.transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(oysterChest, Camera.main.transform.position + new Vector3(0, -2, 0), Quaternion.identity);
+        }
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        GetComponents<AudioSource>()[1].Play();
+        StartCoroutine(hitFrame());
     }
 }

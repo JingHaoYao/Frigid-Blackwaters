@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!95 &2240405740183760181
 Animator:
   serializedVersion: 3
@@ -207,6 +208,10 @@ MonoBehaviour:
   stopAttacking: 0
   percentSpawnChance: 33
   armorMitigation: 0
+  speed: 2
+  slowAmount: 0
+  spawner: {fileID: 0}
+  statuses: []
   closedViews:
   - {fileID: 7464834022902600150, guid: a14697b2ab684b547820a1631fef1bbd, type: 3}
   - {fileID: 2756553620974681266, guid: a14697b2ab684b547820a1631fef1bbd, type: 3}

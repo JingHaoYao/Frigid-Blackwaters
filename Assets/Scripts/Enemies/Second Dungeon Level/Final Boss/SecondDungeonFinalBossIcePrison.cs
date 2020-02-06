@@ -73,6 +73,11 @@ public class SecondDungeonFinalBossIcePrison : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    public void forceShatter()
+    {
+        StartCoroutine(shatter(false));
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<DamageAmount>())

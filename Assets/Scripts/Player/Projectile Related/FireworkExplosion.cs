@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireworkExplosion : MonoBehaviour {
+public class FireworkExplosion : PlayerProjectile {
     Animator animator;
     CircleCollider2D circCol;
 

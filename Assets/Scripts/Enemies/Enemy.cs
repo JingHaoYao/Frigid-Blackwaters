@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy: MonoBehaviour
+public abstract class Enemy: MonoBehaviour
 {
     public string nameID;
     public int health;
@@ -12,8 +12,13 @@ public class Enemy: MonoBehaviour
     public bool stopAttacking = false;
     public int percentSpawnChance = 33;
     public int armorMitigation;
+    public float speed;
+    public float slowAmount;
 
-    public AntiSpawnSpaceDetailer spawner;
+    private float currentStunDuration = 0;
+
+    public List<EnemyStatusEffect> statuses;
+
     
     public void addKills()
     {
@@ -37,33 +42,112 @@ public class Enemy: MonoBehaviour
         }
     }
 
+    public void addStatus(EnemyStatusEffect status, float duration = 0)
+    {
+        statuses.Add(status);
+        status.duration = duration;
+        status.targetEnemy = this;
+    }
+
     public void dealDamage(int damageAmount)
     {
-        int damageDealt = damageAmount - armorMitigation;
-        if(damageDealt < 1)
+        if (health > 0)
         {
-            damageDealt = 1;
-        }
-        FindObjectOfType<EnemyDamageNumbersUI>().addEnemyDamageUI(damageDealt, this.gameObject);
-        health -= damageDealt;
-        FindObjectOfType<CameraShake>().shakeCamFunction(0.1f, 0.3f * Mathf.Clamp(((float)damageDealt / maxHealth), 0.1f, 5f));
-
-        Artifacts artifacts = FindObjectOfType<Artifacts>();
-
-        foreach (ArtifactSlot slot in artifacts.artifactSlots)
-        {
-            if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+            int damageDealt = damageAmount - armorMitigation;
+            if (damageDealt < 1)
             {
-                slot.displayInfo.GetComponent<ArtifactEffect>().dealtDamage(damageDealt, this);
+                damageDealt = 1;
+            }
+            EnemyPool.showDamageNumbers(damageAmount, this);
+            health -= damageDealt;
+            FindObjectOfType<CameraShake>().shakeCamFunction(0.1f, 0.3f * Mathf.Clamp(((float)damageDealt / maxHealth), 0.1f, 5f));
+
+            damageProcedure(damageDealt);
+
+            Artifacts artifacts = FindObjectOfType<Artifacts>();
+
+            foreach (ArtifactSlot slot in artifacts.artifactSlots)
+            {
+                if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                {
+                    slot.displayInfo.GetComponent<ArtifactEffect>().dealtDamage(damageDealt, this);
+                }
+            }
+
+            if (health <= 0)
+            {
+                destroyProcedure();
             }
         }
+    }
 
-        if (health <= 0)
+    public void destroyProcedure()
+    {
+        if (GetComponent<SpriteRenderer>())
         {
-            if (spawner != null)
+            GetComponent<SpriteRenderer>().color = Color.white;
+        }
+        EnemyPool.removeEnemy(this);
+        addKills();
+        deathProcedure();
+        removeAllStatuses();
+    }
+
+    void removeAllStatuses()
+    {
+        foreach(EnemyStatusEffect statusEffect in statuses.ToArray())
+        {
+            if (statusEffect != null)
             {
-                spawner.spawnedEnemies.Remove(this);
+                statusEffect.durationFinishedProcedure();
+                statuses.Remove(statusEffect);
             }
         }
+    }
+
+    public void stunEnemy(float duration)
+    {
+        if(currentStunDuration < duration)
+        {
+            currentStunDuration = duration;
+        }
+
+        if(currentStunDuration <= 0)
+        {
+            StartCoroutine(stunEnemy());
+        }
+        
+    }
+
+    IEnumerator stunEnemy()
+    {
+        float stunTimer = 0;
+        stopAttacking = true;
+        Rigidbody2D rigidbody2D = GetComponent<Rigidbody2D>();
+        rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
+
+        while(currentStunDuration > 0)
+        {
+            currentStunDuration -= Time.deltaTime;
+            yield return null;
+        }
+
+        currentStunDuration = 0;
+        rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+        stopAttacking = false;
+    }
+
+    public abstract void deathProcedure();
+
+    public abstract void damageProcedure(int damage);
+
+    public void updateSpeed(float speedUpdate)
+    {
+        this.speed = Mathf.Clamp(speedUpdate - slowAmount, 0, int.MaxValue);
+    }
+
+    public float originalSpeed()
+    {
+        return speed + slowAmount;
     }
 }

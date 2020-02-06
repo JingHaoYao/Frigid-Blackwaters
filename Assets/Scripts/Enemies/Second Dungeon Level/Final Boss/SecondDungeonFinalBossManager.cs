@@ -41,20 +41,35 @@ public class SecondDungeonFinalBossManager : BossManager
         StartCoroutine(movePlayerToBossArea());
     }
 
+    public void startUpAhalfarDialogue()
+    {
+        StartCoroutine(delayUntilDialogue());
+    }
+
+    IEnumerator delayUntilDialogue()
+    {
+        yield return new WaitForSeconds(2f);
+        dialogueUI.targetDialogue = dialogueManager.loadDialogue("Ahalfar's Speech", true);
+        dialogueUI.gameObject.SetActive(true);
+        dialogueUI.setEndAction(() => { bossBeaten("ahalfar", 1f); });
+        dialogueBlackOverlay.SetActive(true);
+    }
+
     IEnumerator openingAnimation()
     {
         cameraScript.freeCam = true;
         boss.playOpeningAnimation();
         yield return new WaitForSeconds(3f);
-        InitializeBossFight();
-        /*dialogueUI.targetDialogue = dialogueManager.loadDialogue(dialogueString, true);
+        dialogueUI.targetDialogue = dialogueManager.loadDialogue(dialogueString, true);
         dialogueUI.gameObject.SetActive(true);
         dialogueUI.setEndAction(() => { InitializeBossFight(); });
-        dialogueBlackOverlay.SetActive(true);*/
+        dialogueBlackOverlay.SetActive(true);
     }
 
     public void playOpeningAnim()
     {
         StartCoroutine(openingAnimation());
     }
+
+
 }

@@ -302,6 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!82 &4212869029801028041
 AudioSource:
   m_ObjectHideFlags: 0
@@ -535,6 +536,10 @@ MonoBehaviour:
   stopAttacking: 0
   percentSpawnChance: 33
   armorMitigation: 0
+  speed: 2
+  slowAmount: 0
+  spawner: {fileID: 0}
+  statuses: []
   facingLeft: {fileID: 7957538937845511856, guid: 4772b8bdbd874f44ba34b69c5f130cbd,
     type: 3}
   facingUp: {fileID: -5555083260028256561, guid: 3034680bf5404604a9d9c5afdabb3192,

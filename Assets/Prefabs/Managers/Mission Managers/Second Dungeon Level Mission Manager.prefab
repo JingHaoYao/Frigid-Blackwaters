@@ -45,6 +45,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missionIDs:
   - defeat_the_flail_golem
+  - defeat_the_crustacea_king
+  - defeat_the_spectral_helmsman
+  - defeat_ahalfar
   missions:
   - missionIcon: {fileID: 9181987325541664247, guid: 438b5cd27b668d744b5088a54869b573,
       type: 3}
@@ -68,7 +71,28 @@ MonoBehaviour:
     numberDungeonRooms: 15
     difficulty: 2
     bossInfo: 
+  - missionIcon: {fileID: -3980299977779513767, guid: 22f1623dc4f894f48808ecbb0275bd85,
+      type: 3}
+    itemRewards: []
+    goldReward: 2400
+    skillPointReward: 1
+    missionID: defeat_the_spectral_helmsman
+    bossName: Spectral Helmsman
+    numberDungeonRooms: 20
+    difficulty: 3
+    bossInfo: 
+  - missionIcon: {fileID: -5248907622186596087, guid: 0c2ecfaa4feecd64fa2123376c246be3,
+      type: 3}
+    itemRewards: []
+    goldReward: 3600
+    skillPointReward: 1
+    missionID: defeat_ahalfar
+    bossName: Ahalfar
+    numberDungeonRooms: 25
+    difficulty: 4
+    bossInfo: 
   bossManagers:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

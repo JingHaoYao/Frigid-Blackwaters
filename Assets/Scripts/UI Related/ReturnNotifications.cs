@@ -62,6 +62,7 @@ public class ReturnNotifications : MonoBehaviour
                 child.gameObject.SetActive(false);
             }
             this.GetComponent<Image>().enabled = false;
+            notificationsClosed = true;
         }
         else
         {
@@ -74,7 +75,7 @@ public class ReturnNotifications : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space) && this.GetComponent<Image>().enabled == true)
+        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Space)) && notificationsClosed == false)
         {
             foreach (Transform child in transform)
             {

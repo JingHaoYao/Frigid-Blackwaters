@@ -2,50 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RedHotCannonBallBurn : MonoBehaviour {
-    CircleCollider2D circCol;
-    public GameObject targetObject;
-    Animator animator;
+public class RedHotCannonBallBurn : EnemyStatusEffect {
     public int amountTickDamage;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    SpriteRenderer enemySpriteRenderer;
 
     IEnumerator tickDamage()
     {
         for(int i = 0; i < amountTickDamage; i++)
         {
-            yield return new WaitForSeconds(0.3f);
-            circCol.enabled = true;
-            if (targetObject == null)
-            {
-                Destroy(this.gameObject);
-            }
-            yield return new WaitForSeconds(0.3f);
-            circCol.enabled = false;
-            if (targetObject == null)
-            {
-                Destroy(this.gameObject);
-            }
+            yield return new WaitForSeconds(0.6f);
+            targetEnemy.dealDamage(1);
         }
-        Destroy(this.gameObject);
+        durationFinishedProcedure();
+    }
+
+    public override void durationFinishedProcedure()
+    {
+        StopAllCoroutines();
+        LeanTween.alpha(this.gameObject, 0, 0.5f).setOnComplete(()=> { Destroy(this.gameObject); });
     }
 
     void Start()
     {
-        circCol = GetComponent<CircleCollider2D>();
-        circCol.enabled = false;
-        animator = GetComponent<Animator>();
         StartCoroutine(tickDamage());
+        enemySpriteRenderer = targetEnemy.GetComponent<SpriteRenderer>();
+        StartCoroutine(spriteRenderAdjustment());
     }
 
-    void Update()
+    IEnumerator spriteRenderAdjustment()
     {
-        if (targetObject != null)
+        while (true)
         {
-            transform.position = targetObject.transform.position + new Vector3(0, 0.3f, 0);
-            this.GetComponent<SpriteRenderer>().sortingOrder = targetObject.GetComponent<SpriteRenderer>().sortingOrder + 1;
-        }
-        else
-        {
-            Destroy(this.gameObject);
+            spriteRenderer.sortingOrder = enemySpriteRenderer.sortingOrder;
+            transform.position = targetEnemy.transform.position + Vector3.up * 0.4f;
+            yield return null;
         }
     }
 }

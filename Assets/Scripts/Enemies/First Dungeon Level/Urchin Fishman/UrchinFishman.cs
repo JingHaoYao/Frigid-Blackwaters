@@ -9,7 +9,7 @@ public class UrchinFishman : Enemy
     Animator animator;
     public Sprite facingLeft, facingDown, facingRight, facingUp;
     public GameObject urchinMine;
-    private float moveTimer = 0, periodBetweenMoves = 0, travelAngle = 0, travelSpeed = 0;
+    private float moveTimer = 0, periodBetweenMoves = 0, travelAngle = 0;
     private float attackTimer = 0;
     private bool strideEnded = false, pickedAngle = false, crossedLocation = false, firingAnimation = false;
     GameObject playerShip;
@@ -25,7 +25,7 @@ public class UrchinFishman : Enemy
         {
             float whatAngle = Mathf.Atan2(rigidBody2D.velocity.y, rigidBody2D.velocity.x) * Mathf.Rad2Deg;
             foamTimer += Time.deltaTime;
-            if (foamTimer >= 0.05f * travelSpeed / 3f)
+            if (foamTimer >= 0.05f * speed / 3f)
             {
                 foamTimer = 0;
                 GameObject foam = Instantiate(waterFoam, transform.position, Quaternion.Euler(0, 0, whatAngle + 90));
@@ -206,22 +206,22 @@ public class UrchinFishman : Enemy
                 moveTimer += Time.deltaTime;
                 if (moveTimer < 0.2f)
                 {
-                    travelSpeed = 4;
+                    updateSpeed(4);
                 }
                 else if (moveTimer <= 0.5f && moveTimer >= 0.2f)
                 {
-                    travelSpeed = 4 - 4 * (3 * (moveTimer - 0.2f));
+                    updateSpeed(4 - 4 * (3 * (moveTimer - 0.2f)));
                 }
                 else
                 {
                     pickedAngle = false;
                     strideEnded = true;
-                    travelSpeed = 0;
+                    updateSpeed(0);
                     periodBetweenMoves = 0;
                     moveTimer = 0;
                 }
             }
-            moveDirection(travelAngle, travelSpeed);
+            moveDirection(travelAngle, speed);
 
             if (Vector2.Distance(transform.position, path[path.Count - 1].nodePosition) < 1f)
             {
@@ -291,26 +291,26 @@ public class UrchinFishman : Enemy
         }
 
         dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
+        Instantiate(bloodSplatter, collision.gameObject.transform.position, Quaternion.identity);
+        strideEnded = false;
+        crossedLocation = false;
+        periodBetweenMoves = 0.6f;
+        targetPosition = pickRandPos();
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject deadPirate = Instantiate(deadShaman, transform.position, Quaternion.identity);
+        deadPirate.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
+        deadPirate.GetComponent<DeadEnemyScript>().whatView = whatView();
+        deadPirate.transform.localScale = transform.localScale;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
         this.GetComponents<AudioSource>()[0].Play();
-        if (health <= 0)
-        {
-            Instantiate(bloodSplatter, collision.gameObject.transform.position, Quaternion.identity);
-            GameObject deadPirate = Instantiate(deadShaman, transform.position, Quaternion.identity);
-            deadPirate.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
-            deadPirate.GetComponent<DeadEnemyScript>().whatView = whatView();
-            deadPirate.transform.localScale = transform.localScale;
-            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            addKills();
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            Instantiate(bloodSplatter, collision.gameObject.transform.position, Quaternion.identity);
-            StartCoroutine(hitFrame());
-            strideEnded = false;
-            crossedLocation = false;
-            periodBetweenMoves = 0.6f;
-            targetPosition = pickRandPos();
-        }
+        StartCoroutine(hitFrame());
     }
 }

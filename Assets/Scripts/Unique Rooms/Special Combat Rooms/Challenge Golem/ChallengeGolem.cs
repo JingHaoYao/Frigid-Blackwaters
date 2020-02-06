@@ -6,7 +6,6 @@ public class ChallengeGolem : Enemy {
     Animator animator;
     SpriteRenderer spriteRenderer;
     Rigidbody2D rigidBody2D;
-    public float movementSpeed = 3.5f;
     public GameObject hitBox1, hitBox2, hitBox3, hitBox4, hitBox5;
     GameObject[] hitBoxList;
     public float angleToShip;
@@ -227,7 +226,7 @@ public class ChallengeGolem : Enemy {
 
     void moveTowards(float direction)
     {
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * movementSpeed;
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * speed;
     }
 
     void pickRendererLayer()
@@ -291,6 +290,7 @@ public class ChallengeGolem : Enemy {
         playerShip = GameObject.Find("PlayerShip");
         FindObjectOfType<BossHealthBar>().bossStartUp("Surge Golem");
         FindObjectOfType<BossHealthBar>().targetEnemy = this;
+        updateSpeed(3.5f);
     }
 
 	void Update () {
@@ -311,21 +311,22 @@ public class ChallengeGolem : Enemy {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            if (health <= 0)
-            {
-                GameObject deadMusketeer = Instantiate(deadGolem, transform.position, Quaternion.identity);
-                deadMusketeer.GetComponent<SpriteRenderer>().sortingOrder = spriteRenderer.sortingOrder;
-                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                anti.trialDefeated = true;
-                FindObjectOfType<BossHealthBar>().bossEnd();
-                GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated = true;
-                Destroy(this.gameObject);
-                addKills();
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
         }
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject deadMusketeer = Instantiate(deadGolem, transform.position, Quaternion.identity);
+        deadMusketeer.GetComponent<SpriteRenderer>().sortingOrder = spriteRenderer.sortingOrder;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        anti.trialDefeated = true;
+        FindObjectOfType<BossHealthBar>().bossEnd();
+        GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated = true;
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        StartCoroutine(hitFrame());
     }
 }

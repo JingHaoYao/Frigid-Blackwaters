@@ -17,6 +17,8 @@ public class SaveData
     public string[] fireworkUpgrades;
     public string[] dragonsBreathUpgrades;
     public string[] sniperUpgrades;
+    public string[] chemicalSprayerUpgrades;
+    public string[] glaiveLauncherUpgrades;
     public string[] hullUpgrades;
     public string[] inventoryUpgrades;
     public string[] safeUpgrades;
@@ -125,6 +127,16 @@ public class SaveData
         {
             sniperUpgrades[i] = PlayerUpgrades.sniperUpgrades[i];
         }
+        chemicalSprayerUpgrades = new string[PlayerUpgrades.chemicalSprayerUpgrades.Count];
+        for(int i = 0; i < chemicalSprayerUpgrades.Length; i++)
+        {
+            chemicalSprayerUpgrades[i] = PlayerUpgrades.chemicalSprayerUpgrades[i];
+        }
+        glaiveLauncherUpgrades = new string[PlayerUpgrades.glaiveLauncherUpgrades.Count];
+        for(int i = 0; i < glaiveLauncherUpgrades.Length; i++)
+        {
+            glaiveLauncherUpgrades[i] = PlayerUpgrades.glaiveLauncherUpgrades[i];
+        }
 
         hullUpgrades = new string[PlayerUpgrades.hullUpgrades.Count];
         for (int i = 0; i < hullUpgrades.Length; i++)
@@ -146,12 +158,6 @@ public class SaveData
         whichFrontWeaponEquipped = PlayerUpgrades.whichFrontWeaponEquipped;
         whichLeftWeaponEquipped = PlayerUpgrades.whichLeftWeaponEquipped;
         whichRightWeaponEquipped = PlayerUpgrades.whichRightWeaponEquipped;
-        musketUnlocked = PlayerUpgrades.musketUnlocked;
-        spreadShotUnlocked = PlayerUpgrades.spreadShotUnlocked;
-        cannonUnlocked = PlayerUpgrades.cannonUnlocked;
-        fireworkUnlocked = PlayerUpgrades.fireworkUnlocked;
-        dragonsBreathUnlocked = PlayerUpgrades.dragonsBreathUnlocked;
-        unlockLevel = PlayerUpgrades.unlockLevel;
 
         inventoryItemIds = new string[PlayerItems.inventoryItemsIDs.Count];
         for(int i = 0; i < inventoryItemIds.Length; i++)

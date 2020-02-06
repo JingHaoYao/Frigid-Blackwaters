@@ -120,8 +120,9 @@ public class CannonRound : PlayerProjectile
                 || collision.gameObject.tag == "StrongEnemy"
                 )
             {
-                GameObject instant = Instantiate(burn, collision.gameObject.transform.position, Quaternion.identity);
-                instant.GetComponent<RedHotCannonBallBurn>().targetObject = collision.gameObject;
+                GameObject spawnedFlame = Instantiate(burn, collision.gameObject.transform.position, Quaternion.identity);
+                Enemy targetEnemy = collision.gameObject.GetComponent<Enemy>();
+                targetEnemy.addStatus(spawnedFlame.GetComponent<EnemyStatusEffect>());
             }
         }
     }

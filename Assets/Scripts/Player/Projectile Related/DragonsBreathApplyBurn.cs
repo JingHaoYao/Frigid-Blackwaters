@@ -10,7 +10,9 @@ public class DragonsBreathApplyBurn : MonoBehaviour {
         if (collision.gameObject.layer == 14 || collision.gameObject.layer == 10)
         {
             GameObject spawnedFlame = Instantiate(fireBurn, collision.gameObject.transform.position + new Vector3(0, 0.4f, 0), Quaternion.identity);
-            spawnedFlame.GetComponent<RedHotCannonBallBurn>().targetObject = collision.gameObject;
+            Enemy targetEnemy = collision.gameObject.GetComponent<Enemy>();
+            spawnedFlame.GetComponent<EnemyStatusEffect>().targetEnemy = targetEnemy;
+            targetEnemy.addStatus(spawnedFlame.GetComponent<EnemyStatusEffect>());
         }
     }
 }

@@ -449,6 +449,11 @@ public class PlayerScript : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         hullUpgradeManager = GetComponent<HullUpgradeManager>();
 
+        PlayerProperties.playerScript = this;
+        PlayerProperties.playerShip = this.gameObject;
+        PlayerProperties.playerArtifacts = artifacts;
+        PlayerProperties.playerInventory = inventory;
+
         if (SceneManager.GetActiveScene().name != "Tutorial" && SceneManager.GetActiveScene().name != "Demo Level")
         {
             loadPrevItems();
@@ -475,6 +480,8 @@ public class PlayerScript : MonoBehaviour {
 	void Update () {
         if (playerDead == false)
         {
+            PlayerProperties.playerShipPosition = transform.position;
+
             applyMomentum();
             applyEnemyMomentum();
             foamTimer += Time.deltaTime;
@@ -644,8 +651,14 @@ public class PlayerScript : MonoBehaviour {
                 }
             }
         }
+        else
+        {
+            momentumVector = Vector3.zero;
+            enemyMomentumVector = Vector3.zero;
+        }
+        
         updateHealthBar();
-        FindObjectOfType<PlayerArmorEffect>().updateShieldEffect();
+        PlayerProperties.armorIndicator.updateShieldEffect();
     }
 
     IEnumerator respawnShip()

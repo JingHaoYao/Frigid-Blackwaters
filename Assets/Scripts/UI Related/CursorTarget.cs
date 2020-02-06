@@ -9,18 +9,21 @@ public class CursorTarget : MonoBehaviour
     public ShipWeaponScript weapon1, weapon2, weapon3;
     public Color frontColor, leftColor, rightColor;
     public Image circleFill;
+    Camera mainCamera;
 
     void Start()
     {
         playerScript = FindObjectOfType<PlayerScript>();
+        mainCamera = Camera.main;
     }
 
     void Update()
     {
-        float mouseX = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
-        float mouseY = Camera.main.ScreenToWorldPoint(Input.mousePosition).y;
-        transform.position = new Vector2(Mathf.Clamp(mouseX, Camera.main.transform.position.x - Camera.main.orthographicSize, Camera.main.transform.position.x + Camera.main.orthographicSize), Mathf.Clamp(mouseY, Camera.main.transform.position.y - Camera.main.orthographicSize, Camera.main.transform.position.y + Camera.main.orthographicSize));
-        circleFill.gameObject.transform.position = Camera.main.WorldToScreenPoint(transform.position);
+        float mouseX = mainCamera.ScreenToWorldPoint(Input.mousePosition).x;
+        float mouseY = mainCamera.ScreenToWorldPoint(Input.mousePosition).y;
+        PlayerProperties.cursorPosition = this.transform.position;
+        transform.position = new Vector2(Mathf.Clamp(mouseX, mainCamera.transform.position.x - mainCamera.orthographicSize, mainCamera.transform.position.x + mainCamera.orthographicSize), Mathf.Clamp(mouseY, mainCamera.transform.position.y - mainCamera.orthographicSize, mainCamera.transform.position.y + mainCamera.orthographicSize));
+        circleFill.gameObject.transform.position = mainCamera.WorldToScreenPoint(transform.position);
         setHovering(playerScript.angleOrientation + 360);
     }
 
@@ -86,7 +89,7 @@ public class CursorTarget : MonoBehaviour
             circleFill.enabled = false;
         }
 
-        if (playerScript.windowAlreadyOpen == true || Mathf.Abs(Camera.main.transform.position.x - Camera.main.ScreenToWorldPoint(Input.mousePosition).x) > 10)
+        if (playerScript.windowAlreadyOpen == true || Mathf.Abs(mainCamera.transform.position.x - mainCamera.ScreenToWorldPoint(Input.mousePosition).x) > 10)
         {
             circleFill.gameObject.SetActive(false);
             Cursor.visible = true;

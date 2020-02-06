@@ -37,11 +37,5 @@ public class FirstBossEntrance : MonoBehaviour
         dialogueBlackOverlay = dialogueUI.blackOverlayAnimator.gameObject;
         Instantiate(firstBossStatue, transform.position + new Vector3(0.4f, -2, 0), Quaternion.identity);
         adjustRotation();
-        /*if (!MiscData.completedBossDialogues.Contains(firstBossDialogue.dialogueId))
-        {
-            dialogueUI.targetDialogue = firstBossDialogue;
-            dialogueUI.gameObject.SetActive(true);
-            dialogueBlackOverlay.SetActive(true);
-        }*/
     }
 }

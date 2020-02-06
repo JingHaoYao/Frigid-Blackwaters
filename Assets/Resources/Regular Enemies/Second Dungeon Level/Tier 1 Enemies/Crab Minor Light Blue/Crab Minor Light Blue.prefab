@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!95 &6796171091002874972
 Animator:
   serializedVersion: 3
@@ -207,6 +208,10 @@ MonoBehaviour:
   stopAttacking: 0
   percentSpawnChance: 33
   armorMitigation: 0
+  speed: 2
+  slowAmount: 0
+  spawner: {fileID: 0}
+  statuses: []
   closedViews:
   - {fileID: 1124480560080324858, guid: 4650da1ee9f06844290ac68a226f740d, type: 3}
   - {fileID: 56623645177019207, guid: 4650da1ee9f06844290ac68a226f740d, type: 3}
@@ -222,7 +227,6 @@ MonoBehaviour:
   damageSplash: {fileID: 7452417838162229298, guid: 09a99f35c01c9a5458da438056d8b2ae,
     type: 3}
   waterFoam: {fileID: 1105302273420430, guid: fdc8b3ce0fabb4742ad1a9051be902bf, type: 3}
-  travelSpeed: 2
   attackRadius: 2
   invulnerableHitBox: {fileID: 6796171092312099915}
   invulnerabilityIcon: {fileID: 5222393854653362655}

@@ -9,7 +9,6 @@ public class SentinelBoss : Enemy
     GameObject playerShip;
     Rigidbody2D rigidBody2D;
     public Sprite[] armLessSprites;
-    public int travelSpeed = 4;
     int mirror = 0;
     int prevView = 0;
     int whatView = 1;
@@ -79,7 +78,7 @@ public class SentinelBoss : Enemy
     {
         if (Camera.main.GetComponent<MoveCameraNextRoom>().freeCam == false)
         {
-            rigidBody2D.velocity = new Vector3(Mathf.Cos(angleToShip * Mathf.Deg2Rad), Mathf.Sin(angleToShip * Mathf.Deg2Rad), 0) * travelSpeed;
+            rigidBody2D.velocity = new Vector3(Mathf.Cos(angleToShip * Mathf.Deg2Rad), Mathf.Sin(angleToShip * Mathf.Deg2Rad), 0) * speed;
         }
         angleToShip = (360 + Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
         pickView(angleToShip);
@@ -222,36 +221,36 @@ public class SentinelBoss : Enemy
         }
 
         dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
+
+    }
+
+    public override void deathProcedure()
+    {
+        Instantiate(deadBoss, transform.position, Quaternion.identity);
+        MiscData.dungeonLevelUnlocked = 2;
+
+        FindObjectOfType<BossHealthBar>().bossEnd();
+        SaveSystem.SaveGame();
+        FindObjectOfType<AudioManager>().FadeOut("First Boss Background Music", 0.2f);
+        FindObjectOfType<AudioManager>().PlaySound("First Boss Defeated Music");
+        FindObjectOfType<AudioManager>().FadeIn("First Boss Defeated Music", 0.2f, 1f);
+
+        foreach (SentinelRotateRock rock in FindObjectsOfType<SentinelRotateRock>())
+        {
+            rock.GetComponent<Animator>().SetTrigger("Fall");
+            rock.GetComponent<Collider2D>().enabled = false;
+        }
+
+        foreach (SentinelScatterRockProjectile projectile in FindObjectsOfType<SentinelScatterRockProjectile>())
+        {
+            projectile.breakRock();
+        }
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
         this.GetComponents<AudioSource>()[0].Play();
-        if (health <= 0)
-        {
-            Instantiate(deadBoss, transform.position, Quaternion.identity);
-            MiscData.dungeonLevelUnlocked = 2;
-
-            //Also need to update player weapon unlock level
-
-            FindObjectOfType<BossHealthBar>().bossEnd();
-            SaveSystem.SaveGame();
-            FindObjectOfType<AudioManager>().FadeOut("First Boss Background Music", 0.2f);
-            FindObjectOfType<AudioManager>().PlaySound("First Boss Defeated Music");
-            FindObjectOfType<AudioManager>().FadeIn("First Boss Defeated Music", 0.2f, 1f);
-
-            foreach(SentinelRotateRock rock in FindObjectsOfType<SentinelRotateRock>())
-            {
-                rock.GetComponent<Animator>().SetTrigger("Fall");
-                rock.GetComponent<Collider2D>().enabled = false;
-            }
-
-            foreach(SentinelScatterRockProjectile projectile in FindObjectsOfType<SentinelScatterRockProjectile>())
-            {
-                projectile.breakRock();
-            }
-            addKills();
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            StartCoroutine(hitFrame());
-        }
+        StartCoroutine(hitFrame());
     }
 }

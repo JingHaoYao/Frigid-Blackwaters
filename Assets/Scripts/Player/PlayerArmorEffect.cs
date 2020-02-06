@@ -12,6 +12,11 @@ public class PlayerArmorEffect : MonoBehaviour
     public Sprite[] brokenViews;
     public float trackingAngle = 0;
 
+    private void Awake()
+    {
+        PlayerProperties.armorIndicator = this;
+    }
+
     int pickView(float angle)
     {
         if (angle > 255 && angle <= 285)
@@ -88,11 +93,6 @@ public class PlayerArmorEffect : MonoBehaviour
 
     void Update()
     {
-        if (trackObject == null)
-        {
-            Destroy(this.gameObject);
-        }
-
         trackingAngle += Time.deltaTime * 1.5f;
         if (trackingAngle >= Mathf.PI * 2)
         {

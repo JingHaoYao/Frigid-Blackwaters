@@ -45,6 +45,12 @@ public class TutorialManager : MonoBehaviour
         tabithaDialogue = tabitha.GetComponent<CharacterDialogue>();
     }
 
+    IEnumerator turnPlayerDeadOffAtEndOfFrame()
+    {
+        yield return new WaitForSeconds(0.1f);
+        playerScript.playerDead = false;
+    }
+
     void Update()
     {
         if (spaceDelay < 0.3f)
@@ -125,7 +131,7 @@ public class TutorialManager : MonoBehaviour
                         inGameIndex++;
                         if (inGameIndex == firstTutorialDialogue.Length)
                         {
-                            playerScript.playerDead = false;
+                            StartCoroutine(turnPlayerDeadOffAtEndOfFrame());
                             tabithaDialogue.toggleLeft = false;
                             tabithaDialogue.toggleRight = true;
                             dialogueText.transform.parent.gameObject.SetActive(false);
@@ -153,7 +159,7 @@ public class TutorialManager : MonoBehaviour
                         inGameIndex++;
                         if (inGameIndex == secondTutorialDialogue.Length)
                         {
-                            playerScript.playerDead = false;
+                            StartCoroutine(turnPlayerDeadOffAtEndOfFrame());
                             tabithaDialogue.toggleLeft = false;
                             tabithaDialogue.toggleRight = true;
                             dialogueText.transform.parent.gameObject.SetActive(false);
@@ -179,7 +185,7 @@ public class TutorialManager : MonoBehaviour
                         inGameIndex++;
                         if (inGameIndex == thirdTutorialDialogue.Length)
                         {
-                            playerScript.playerDead = false;
+                            StartCoroutine(turnPlayerDeadOffAtEndOfFrame());
                             tabithaDialogue.toggleLeft = false;
                             tabithaDialogue.toggleRight = true;
                             dialogueText.transform.parent.gameObject.SetActive(false);
@@ -227,7 +233,7 @@ public class TutorialManager : MonoBehaviour
                         inGameIndex++;
                         if (inGameIndex == fourthTutorialDialogue.Length)
                         {
-                            playerScript.playerDead = false;
+                            StartCoroutine(turnPlayerDeadOffAtEndOfFrame());
                             tabithaDialogue.toggleLeft = false;
                             tabithaDialogue.toggleRight = true;
                             dialogueText.transform.parent.gameObject.SetActive(false);

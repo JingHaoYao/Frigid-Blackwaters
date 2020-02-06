@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CameraShake : MonoBehaviour {
     private MoveCameraNextRoom cameraScript;
@@ -10,12 +11,12 @@ public class CameraShake : MonoBehaviour {
         cameraScript = GetComponent<MoveCameraNextRoom>();
     }
 
-    public void shakeCamFunction(float duration, float magnitude)
+    public void shakeCamFunction(float duration, float magnitude, UnityAction endAction = null)
     {
-        StartCoroutine(shakeCam(duration, magnitude));
+        StartCoroutine(shakeCam(duration, magnitude, endAction));
     }
 
-    IEnumerator shakeCam(float duration, float magnitude)
+    IEnumerator shakeCam(float duration, float magnitude, UnityAction endAction = null)
     {
         Vector3 origPosition;
         if (cameraScript.trackPlayer == false)
@@ -53,5 +54,7 @@ public class CameraShake : MonoBehaviour {
         {
             transform.localPosition = cameraScript.returnTrackCamPosition();
         }
+
+        endAction?.Invoke();
     }
 }

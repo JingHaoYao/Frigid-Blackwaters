@@ -412,6 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!82 &7712140115293246122
 AudioSource:
   m_ObjectHideFlags: 0
@@ -555,10 +556,13 @@ MonoBehaviour:
   stopAttacking: 0
   percentSpawnChance: 33
   armorMitigation: 0
+  speed: 4
+  slowAmount: 0
+  spawner: {fileID: 0}
+  statuses: []
   deadCrab: {fileID: 1318561926848984105, guid: 1745574fc099baf4aa8990221b1e7890,
     type: 3}
   travelAngle: 0
-  travelSpeed: 4
   closedSprites:
   - {fileID: 9011077499222502530, guid: d3168bcef63fee44a907aa98f46fa330, type: 3}
   - {fileID: -7677919475196083321, guid: d3168bcef63fee44a907aa98f46fa330, type: 3}

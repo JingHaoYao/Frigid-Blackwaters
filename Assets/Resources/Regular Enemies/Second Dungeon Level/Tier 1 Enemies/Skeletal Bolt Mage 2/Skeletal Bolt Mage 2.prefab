@@ -266,6 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!50 &8151409430375406846
 Rigidbody2D:
   serializedVersion: 4
@@ -515,6 +516,11 @@ MonoBehaviour:
   killNumber: 1
   stopAttacking: 0
   percentSpawnChance: 33
+  armorMitigation: 0
+  speed: 2
+  slowAmount: 0
+  spawner: {fileID: 0}
+  statuses: []
   deadSkele: {fileID: 6811678383787080141, guid: 7fa813d05366bde40b7b9ac1d06e66e6,
     type: 3}
   bolt: {fileID: 5709278179664312093, guid: 15e2cc8fac520bf4fb82c157f3651fd6, type: 3}
@@ -523,7 +529,6 @@ MonoBehaviour:
   - {fileID: -810803233827034513, guid: 396a677648830854caad7c50119b2fcd, type: 3}
   - {fileID: -4892647315643846, guid: b0021369b691bae4a95d906c14592492, type: 3}
   - {fileID: 6846300577573257753, guid: 37db2f36dd665cb4db537c7377d5582b, type: 3}
-  travelSpeed: 2
   waterFoam: {fileID: 1301071832081938, guid: 215faf9227c195148b54dc93c20709cb, type: 3}
   boltOffset: 45
 --- !u!95 &8151409430375406838

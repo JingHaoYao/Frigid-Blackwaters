@@ -6,6 +6,11 @@ public class EnemyDamageNumbersUI : MonoBehaviour
 {
     public GameObject enemyDamageUIs;
 
+    public void Awake()
+    {
+        EnemyPool.enemyDamageNumbers = this;
+    }
+
     public void addEnemyDamageUI(int damageAmount, GameObject enemy)
     {
         GameObject instant = Instantiate(enemyDamageUIs, Camera.main.WorldToScreenPoint(enemy.transform.position + new Vector3(0, 1.5f, 0)), Quaternion.identity);

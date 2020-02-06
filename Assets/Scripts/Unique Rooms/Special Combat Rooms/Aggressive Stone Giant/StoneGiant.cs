@@ -132,25 +132,26 @@ public class StoneGiant : Enemy {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            if (health <= 0)
-            {
-                GameObject spawnedDeadGiant = Instantiate(deadGiant, transform.position, Quaternion.identity);
-                SpriteRenderer[] deadRends = spawnedDeadGiant.GetComponentsInChildren<SpriteRenderer>();
-                FindObjectOfType<BossHealthBar>().bossEnd();
-                foreach(SpriteRenderer element in deadRends)
-                {
-                    element.sortingOrder = spriteRenderer.sortingOrder;
-                }
-                anti.trialDefeated = true;
-                addKills();
-                Destroy(this.gameObject);
-                GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated = true;
-                Instantiate(giantChest, transform.position + new Vector3(0, -3, 0), Quaternion.identity);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
         }
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject spawnedDeadGiant = Instantiate(deadGiant, transform.position, Quaternion.identity);
+        SpriteRenderer[] deadRends = spawnedDeadGiant.GetComponentsInChildren<SpriteRenderer>();
+        FindObjectOfType<BossHealthBar>().bossEnd();
+        foreach (SpriteRenderer element in deadRends)
+        {
+            element.sortingOrder = spriteRenderer.sortingOrder;
+        }
+        anti.trialDefeated = true;
+        Destroy(this.gameObject);
+        GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated = true;
+        Instantiate(giantChest, transform.position + new Vector3(0, -3, 0), Quaternion.identity);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        StartCoroutine(hitFrame());
     }
 }

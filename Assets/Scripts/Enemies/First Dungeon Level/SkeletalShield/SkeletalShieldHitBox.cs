@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SkeletalShieldHitBox : MonoBehaviour {
     BoxCollider2D shieldBoxCol;
+    public Enemy shieldEnemy;
 
 	void Start () {
         shieldBoxCol = transform.parent.gameObject.GetComponent<BoxCollider2D>();
@@ -18,8 +19,7 @@ public class SkeletalShieldHitBox : MonoBehaviour {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
             int damageDealt = collision.gameObject.GetComponent<DamageAmount>().damage;
-            transform.parent.gameObject.GetComponent<Enemy>().dealDamage(damageDealt);
-            transform.parent.gameObject.GetComponent<SkeletalShield>().actualHit = true;
+            shieldEnemy.dealDamage(damageDealt);
         }
     }
 }

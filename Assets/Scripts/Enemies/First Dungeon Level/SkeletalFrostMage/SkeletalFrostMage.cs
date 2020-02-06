@@ -7,7 +7,6 @@ public class SkeletalFrostMage : Enemy {
     SpriteRenderer spriteRenderer;
     Rigidbody2D rigidBody2D;
     Animator animator;
-    public float travelSpeed = 3;
     GameObject playerShip;
     Vector3 selectPos = new Vector3(0, 0, 0);
     private float travelAngle = 0;
@@ -184,7 +183,7 @@ public class SkeletalFrostMage : Enemy {
 
     void moveTowards(float direction)
     {
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * travelSpeed;
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * speed;
     }
 
     void pickSprite(float direction)
@@ -269,21 +268,22 @@ public class SkeletalFrostMage : Enemy {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            this.GetComponents<AudioSource>()[0].Play();
-            if (health <= 0)
-            {
-                GameObject deadPirate = Instantiate(deadSkeletalMage, transform.position, Quaternion.identity);
-                deadPirate.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
-                deadPirate.GetComponent<DeadEnemyScript>().whatView = whatView();
-                deadPirate.transform.localScale = transform.localScale;
-                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                addKills();
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
         }
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject deadPirate = Instantiate(deadSkeletalMage, transform.position, Quaternion.identity);
+        deadPirate.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
+        deadPirate.GetComponent<DeadEnemyScript>().whatView = whatView();
+        deadPirate.transform.localScale = transform.localScale;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 }

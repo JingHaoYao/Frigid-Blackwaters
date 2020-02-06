@@ -23,7 +23,7 @@ public class HubMissionLoader : MonoBehaviour
 
     void addRewards()
     {
-        if (MiscData.missionID != null)
+        if (MiscData.missionID != null) 
         {
             if (MiscData.finishedMission == false)
             {

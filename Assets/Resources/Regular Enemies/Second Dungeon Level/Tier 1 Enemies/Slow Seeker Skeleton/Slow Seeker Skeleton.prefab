@@ -223,6 +223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!95 &3177029885674738272
 Animator:
   serializedVersion: 3
@@ -455,6 +456,11 @@ MonoBehaviour:
   killNumber: 1
   stopAttacking: 0
   percentSpawnChance: 33
+  armorMitigation: 0
+  speed: 2
+  slowAmount: 0
+  spawner: {fileID: 0}
+  statuses: []
   deadSkele: {fileID: 1178630885728407076, guid: 06f19a8fce6c34b4cb097702413a4c23,
     type: 3}
   seeker: {fileID: 1453816272683785192, guid: c57126f40b63a72469b3f5daa4fef504, type: 3}

@@ -33,7 +33,7 @@ public class SecondLifeArtifact : MonoBehaviour
             }
             set2 = false;
 
-            if(playerScript.playerDead == true && hasUsedSecondLife == false)
+            if(playerScript.playerDead == true && playerScript.shipHealth == 0 && hasUsedSecondLife == false)
             {
                 if (playerScript.numberLives == numberLifeAdded - 1)
                 {

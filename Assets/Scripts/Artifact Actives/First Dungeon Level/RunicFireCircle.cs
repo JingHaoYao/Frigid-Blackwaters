@@ -26,10 +26,10 @@ public class RunicFireCircle : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((collision.gameObject.layer == 15 || collision.gameObject.tag == "MeleeEnemy" || collision.gameObject.tag == "RangedEnemy" || collision.gameObject.tag == "EnemyShield"))
+        if (collision.gameObject.layer == 14 || collision.gameObject.layer == 10)
         {
             GameObject spawnedFlame = Instantiate(smallRunicFire, collision.gameObject.transform.position + new Vector3(0, 0.4f, 0), Quaternion.identity);
-            spawnedFlame.GetComponent<SmallRunicFire>().targetObject = collision.gameObject;
+            collision.gameObject.GetComponent<Enemy>().addStatus(spawnedFlame.GetComponent<EnemyStatusEffect>());
         }
     }
 }

@@ -10,7 +10,6 @@ public class FishManEnemy : Enemy {
     public Sprite facingUpUnarmed, facingDownUnarmed, facingLeftUnarmed, facingRightUnarmed;
     private float periodBetweenMoves = 0, moveTimer = 0;
     private float travelAngle = 0;
-    public float travelSpeed = 0;
     private bool pickedAngle = false;
     private bool throwSpear = false;
     public bool spearEquipped = true;
@@ -32,7 +31,7 @@ public class FishManEnemy : Enemy {
         {
             float whatAngle = Mathf.Atan2(rigidBody2D.velocity.y, rigidBody2D.velocity.x) * Mathf.Rad2Deg;
             foamTimer += Time.deltaTime;
-            if (foamTimer >= 0.05f * travelSpeed / 3f)
+            if (foamTimer >= 0.05f * speed / 3f)
             {
                 foamTimer = 0;
                 GameObject foam = Instantiate(waterFoam, transform.position, Quaternion.Euler(0, 0, whatAngle + 90));
@@ -232,15 +231,15 @@ public class FishManEnemy : Enemy {
                 moveTimer += Time.deltaTime;
                 if (moveTimer < 0.3f)
                 {
-                    travelSpeed = 4;
+                    updateSpeed(4);
                 }
                 else if (moveTimer <= 0.8f && moveTimer >= 0.3f)
                 {
-                    travelSpeed = 4f - 2 * (3 * (moveTimer - 0.3f));
+                    updateSpeed(4f - 2 * (3 * (moveTimer - 0.3f)));
                 }
                 else
                 {
-                    travelSpeed = 0;
+                    updateSpeed(0);
                     periodBetweenMoves = 0;
                     pickedAngle = false;
                     strideEnded = true;
@@ -283,7 +282,7 @@ public class FishManEnemy : Enemy {
             this.gameObject.layer = 10;
         }
 
-        moveDirection(travelAngle, travelSpeed);
+        moveDirection(travelAngle, speed);
         spawnFoam();
         pickRendererLayer();
 	}
@@ -309,23 +308,24 @@ public class FishManEnemy : Enemy {
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
             Instantiate(bloodSplatter, collision.gameObject.transform.position, Quaternion.identity);
-            this.GetComponents<AudioSource>()[0].Play();
-            if (health <= 0)
-            {
-                rigidBody2D.velocity = Vector3.zero;
-                GameObject deadFishMan = Instantiate(deadFishman, transform.position, Quaternion.identity);
-                deadFishMan.GetComponent<DeadFishMan>().spriteRenderer.sortingOrder = rend.sortingOrder;
-                deadFishMan.GetComponent<DeadFishMan>().whatView = whatView();
-                deadFishMan.transform.localScale = transform.localScale;
-                boxCol.enabled = false;
-                addKills();
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
         }
+    }
+
+    public override void deathProcedure()
+    {
+        rigidBody2D.velocity = Vector3.zero;
+        GameObject deadFishMan = Instantiate(deadFishman, transform.position, Quaternion.identity);
+        deadFishMan.GetComponent<DeadFishMan>().spriteRenderer.sortingOrder = rend.sortingOrder;
+        deadFishMan.GetComponent<DeadFishMan>().whatView = whatView();
+        deadFishMan.transform.localScale = transform.localScale;
+        boxCol.enabled = false;
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 
     int whatView()

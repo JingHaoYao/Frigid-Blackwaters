@@ -55,6 +55,8 @@ public class PauseMenu : MonoBehaviour
         }
         else
         {
+            Time.timeScale = 0;
+            playerScript.windowAlreadyOpen = true;
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 playerScript.windowAlreadyOpen = false;

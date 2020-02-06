@@ -137,19 +137,7 @@ public class DemoBoss : Enemy
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
             GetComponents<AudioSource>()[0].Play();
-            if (health <= 0)
-            {
-                rigidBody2D.velocity = Vector3.zero;
-                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                addKills();
-                FindObjectOfType<BossHealthBar>().bossEnd();
-                FindObjectOfType<PlayerScript>().playerDead = true;
-                StartCoroutine(bossDefeated());
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
+            StartCoroutine(hitFrame());
         }
     }
 
@@ -161,4 +149,15 @@ public class DemoBoss : Enemy
         bodySpriteRenderer.color = Color.white;
         headSpriteRenderer.color = Color.white;
     }
+
+    public override void deathProcedure()
+    {
+        rigidBody2D.velocity = Vector3.zero;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        FindObjectOfType<BossHealthBar>().bossEnd();
+        FindObjectOfType<PlayerScript>().playerDead = true;
+        StartCoroutine(bossDefeated());
+    }
+
+    public override void damageProcedure(int damage) { }
 }

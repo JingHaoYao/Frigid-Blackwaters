@@ -309,7 +309,7 @@ public class UndeadMariner : Enemy
                             attackingPeriod -= Time.deltaTime;
                             if (Vector2.Distance(transform.position, targetTravel) > 0.2f)
                             {
-                                rigidBody2D.velocity = new Vector3(targetTravel.x - transform.position.x, targetTravel.y - transform.position.y).normalized * 3;
+                                rigidBody2D.velocity = new Vector3(targetTravel.x - transform.position.x, targetTravel.y - transform.position.y).normalized * speed;
                             }
                             else
                             {
@@ -360,24 +360,26 @@ public class UndeadMariner : Enemy
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            this.GetComponents<AudioSource>()[4].Play();
-            if (health <= 0)
-            {
-                rigidBody2D.velocity = Vector3.zero;
-                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                bossManager.bossBeaten(nameID, 0.8f);
-                addKills();
-                FindObjectOfType<BossHealthBar>().bossEnd();
-                animator.SetTrigger("Death");
-                this.GetComponents<AudioSource>()[1].Play();
-                Destroy(this.gameObject, 0.75f);
-                StartCoroutine(spawnWaterSplash());
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
+
         }
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[4].Play();
+        StartCoroutine(hitFrame());
+    }
+
+    public override void deathProcedure()
+    {
+        rigidBody2D.velocity = Vector3.zero;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        bossManager.bossBeaten(nameID, 0.8f);
+        FindObjectOfType<BossHealthBar>().bossEnd();
+        animator.SetTrigger("Death");
+        this.GetComponents<AudioSource>()[1].Play();
+        Destroy(this.gameObject, 0.75f);
+        StartCoroutine(spawnWaterSplash());
     }
 
     IEnumerator hitFrame()

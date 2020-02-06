@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SniperBullet : MonoBehaviour
+public class SniperBullet : PlayerProjectile
 {
     public GameObject bulletImpact;
     public float angleTravel;
     SpriteRenderer spriteRenderer;
     public bool highVelocity = false;
     public float stunDuration = 2;
+    public GameObject stunStatus;
 
     void pickRendererLayer()
     {
@@ -39,28 +40,6 @@ public class SniperBullet : MonoBehaviour
         spriteRenderer.enabled = false;
     }
 
-    IEnumerator stunEnemy(GameObject target)
-    {
-        float duration = 0;
-        while(duration < stunDuration && target != null)
-        {
-            target.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            target.GetComponent<Enemy>().stopAttacking = true;
-            duration += Time.deltaTime;
-            yield return null;
-        }
-
-        if (target == null)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            target.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
-            target.GetComponent<Enemy>().stopAttacking = false;
-        }
-    }
-
     void Update()
     {
         pickRendererLayer();
@@ -78,7 +57,11 @@ public class SniperBullet : MonoBehaviour
             Instantiate(bulletImpact, transform.position, Quaternion.Euler(0, 0, angleTravel + 90));
             if (collision.gameObject.GetComponent<Enemy>() && highVelocity == true)
             {
-                StartCoroutine(stunEnemy(collision.gameObject));
+                Enemy targetEnemy = collision.gameObject.GetComponent<Enemy>();
+                GameObject statusInstant = Instantiate(stunStatus, targetEnemy.transform.position + Vector3.up * 2, Quaternion.identity);
+                targetEnemy.stunEnemy(stunDuration);
+                targetEnemy.addStatus(statusInstant.GetComponent<EnemyStatusEffect>(), stunDuration);
+                
             }
             GetComponent<Collider2D>().enabled = false;
         }

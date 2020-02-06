@@ -262,6 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!114 &6279861642565269669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,6 +511,10 @@ MonoBehaviour:
   stopAttacking: 0
   percentSpawnChance: 33
   armorMitigation: 0
+  speed: 2.5
+  slowAmount: 0
+  spawner: {fileID: 0}
+  statuses: []
   closedViews:
   - {fileID: -9066263724148785522, guid: 20383babcaa376647be51d9439bb4593, type: 3}
   - {fileID: 482796334633203371, guid: 27c56ff6667e48c4d9fd3397ea4dc465, type: 3}
@@ -520,7 +525,6 @@ MonoBehaviour:
   deadCrab: {fileID: 5551568470164927761, guid: c0920aafe8fcb7b47a6a8a8003da8ae2,
     type: 3}
   waterFoam: {fileID: 1105302273420430, guid: fdc8b3ce0fabb4742ad1a9051be902bf, type: 3}
-  travelSpeed: 2.5
   invulnerableIcon: {fileID: 8825624449241246862}
 --- !u!1 &6279861642848973174
 GameObject:

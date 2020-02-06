@@ -107,6 +107,10 @@ MonoBehaviour:
   stopAttacking: 0
   percentSpawnChance: 33
   armorMitigation: 0
+  speed: 2
+  slowAmount: 0
+  spawner: {fileID: 0}
+  statuses: []
   facingLeft: {fileID: 21300000, guid: 9c790932e4c4d0244a7856acfa02839b, type: 3}
   facingDownLeft: {fileID: 21300002, guid: 9c790932e4c4d0244a7856acfa02839b, type: 3}
   facingDown: {fileID: 21300004, guid: 9c790932e4c4d0244a7856acfa02839b, type: 3}
@@ -118,7 +122,6 @@ MonoBehaviour:
     type: 3}
   deadSkeleMusketeer: {fileID: 1225406937749806, guid: 5a60f56bfdedf5f4690c377705a3d702,
     type: 3}
-  travelSpeed: 2
   waterFoam: {fileID: 1301071832081938, guid: 215faf9227c195148b54dc93c20709cb, type: 3}
 --- !u!50 &50151615404014844
 Rigidbody2D:

@@ -52,79 +52,24 @@ public class TrainingHouseWeaponIcon : MonoBehaviour, IPointerEnterHandler, IPoi
         }
     }
 
-    /*public void nextTemplate()
-    {
-        index++;
-        if (index >= PlayerUpgrades.unlockLevel)
-        {
-            index = 0;
-        }
-
-        if (whichWeapon == 1)
-        {
-            frontWeapon.GetComponent<ShipWeaponScript>().swapTemplate(templates[index].GetComponent<ShipWeaponTemplate>());
-            PlayerUpgrades.whichFrontWeaponEquipped = index;
-        }
-        else if (whichWeapon == 2)
-        {
-            leftWeapon.GetComponent<ShipWeaponScript>().swapTemplate(templates[index].GetComponent<ShipWeaponTemplate>());
-            PlayerUpgrades.whichLeftWeaponEquipped = index;
-        }
-        else if (whichWeapon == 3)
-        {
-            rightWeapon.GetComponent<ShipWeaponScript>().swapTemplate(templates[index].GetComponent<ShipWeaponTemplate>());
-            PlayerUpgrades.whichRightWeaponEquipped = index;
-        }
-        setPicture();
-        FindObjectOfType<AudioManager>().PlaySound("Change Weapon");
-        SaveSystem.SaveGame();
-    }
-
-    public void prevTemplate()
-    {
-        index--;
-        if (index < 0)
-        {
-            index = PlayerUpgrades.unlockLevel - 1;
-        }
-
-        if (whichWeapon == 1)
-        {
-            frontWeapon.GetComponent<ShipWeaponScript>().swapTemplate(templates[index].GetComponent<ShipWeaponTemplate>());
-            PlayerUpgrades.whichFrontWeaponEquipped = index;
-        }
-        else if (whichWeapon == 2)
-        {
-            leftWeapon.GetComponent<ShipWeaponScript>().swapTemplate(templates[index].GetComponent<ShipWeaponTemplate>());
-            PlayerUpgrades.whichLeftWeaponEquipped = index;
-        }
-        else if (whichWeapon == 3)
-        {
-            rightWeapon.GetComponent<ShipWeaponScript>().swapTemplate(templates[index].GetComponent<ShipWeaponTemplate>());
-            PlayerUpgrades.whichRightWeaponEquipped = index;
-        }
-        setPicture();
-        FindObjectOfType<AudioManager>().PlaySound("Change Weapon");
-        SaveSystem.SaveGame();
-    }*/
-
     public void setTemplate(int whichTemplate)
     {
-        if (whichWeaponToEquip == whichWeapon && PlayerUpgrades.unlockLevel - 1 >= whichTemplate)
+        ShipWeaponTemplate template = templates[whichTemplate].GetComponent<ShipWeaponTemplate>();
+        if (whichWeaponToEquip == whichWeapon && MiscData.dungeonLevelUnlocked <= template.whichLevelUnlock)
         {
             if (whichWeapon == 1)
             {
-                frontWeapon.GetComponent<ShipWeaponScript>().swapTemplate(templates[whichTemplate].GetComponent<ShipWeaponTemplate>());
+                frontWeapon.GetComponent<ShipWeaponScript>().swapTemplate(template);
                 PlayerUpgrades.whichFrontWeaponEquipped = whichTemplate;
             }
             else if (whichWeapon == 2)
             {
-                leftWeapon.GetComponent<ShipWeaponScript>().swapTemplate(templates[whichTemplate].GetComponent<ShipWeaponTemplate>());
+                leftWeapon.GetComponent<ShipWeaponScript>().swapTemplate(template);
                 PlayerUpgrades.whichLeftWeaponEquipped = whichTemplate;
             }
             else if (whichWeapon == 3)
             {
-                rightWeapon.GetComponent<ShipWeaponScript>().swapTemplate(templates[whichTemplate].GetComponent<ShipWeaponTemplate>());
+                rightWeapon.GetComponent<ShipWeaponScript>().swapTemplate(template);
                 PlayerUpgrades.whichRightWeaponEquipped = whichTemplate;
             }
             setPicture();

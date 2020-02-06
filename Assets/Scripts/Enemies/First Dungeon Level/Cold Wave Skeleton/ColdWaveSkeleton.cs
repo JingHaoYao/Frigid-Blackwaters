@@ -104,19 +104,20 @@ public class ColdWaveSkeleton : Enemy
         if (collision.gameObject.GetComponent<DamageAmount>() && health > 0)
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            this.GetComponents<AudioSource>()[0].Play();
-            if (health <= 0)
-            {
-                GameObject dead = Instantiate(deadSkele, transform.position, Quaternion.identity);
-                dead.GetComponent<DeadEnemyScript>().whatView = whatView;
-                addKills();
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
         }
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject dead = Instantiate(deadSkele, transform.position, Quaternion.identity);
+        dead.GetComponent<DeadEnemyScript>().whatView = whatView;
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 
     IEnumerator hitFrame()

@@ -165,24 +165,7 @@ public class SeaTerror : Enemy
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            this.GetComponents<AudioSource>()[0].Play();
-            if (health <= 0)
-            {
-                rigidBody2D.velocity = Vector3.zero;
-                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                bossManager.bossBeaten(nameID, 1.167f);
-                addKills();
-                Invoke("spawnWaterSplash", 1.05f);
 
-                FindObjectOfType<BossHealthBar>().bossEnd();
-                animator.enabled = true;
-                animator.SetTrigger("Death");
-                Destroy(this.gameObject, 1.167f);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
         }
     }
 
@@ -191,5 +174,24 @@ public class SeaTerror : Enemy
         spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(.1f);
         spriteRenderer.color = Color.white;
+    }
+
+    public override void deathProcedure()
+    {
+        rigidBody2D.velocity = Vector3.zero;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        bossManager.bossBeaten(nameID, 1.167f);
+        Invoke("spawnWaterSplash", 1.05f);
+
+        FindObjectOfType<BossHealthBar>().bossEnd();
+        animator.enabled = true;
+        animator.SetTrigger("Death");
+        Destroy(this.gameObject, 1.167f);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 }

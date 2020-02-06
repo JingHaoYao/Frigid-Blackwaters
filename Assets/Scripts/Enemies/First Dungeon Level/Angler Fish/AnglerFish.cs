@@ -11,7 +11,6 @@ public class AnglerFish : Enemy
     List<AStarNode> path;
     GameObject playerShip;
     Rigidbody2D rigidBody2D;
-    public float travelSpeed = 4;
     private bool isSubmerged = false;
     public GameObject waterSplash;
     float angleToShip = 0, moveAngle = 0;
@@ -262,7 +261,7 @@ public class AnglerFish : Enemy
 
     void moveTowards(float direction)
     {
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * travelSpeed;
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * speed;
     }
 
     float cardinalizeDirections(float angle)
@@ -344,25 +343,10 @@ public class AnglerFish : Enemy
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<DamageAmount>())
+        if (collision.gameObject.GetComponent<DamageAmount>() && health > 0)
         {
-            this.GetComponents<AudioSource>()[1].Play();
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            if (health <= 0)
-            {
-                Instantiate(bloodSplatter, collision.gameObject.transform.position, Quaternion.identity);
-                GameObject deadPirate = Instantiate(deadEelMan, transform.position, Quaternion.identity);
-                deadPirate.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
-                deadPirate.GetComponent<DeadEnemyScript>().whatView = whatView();
-                deadPirate.transform.localScale = transform.localScale;
-                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                Destroy(this.gameObject);
-                addKills();
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
+            Instantiate(bloodSplatter, collision.gameObject.transform.position, Quaternion.identity);
         }
     }
 
@@ -371,5 +355,21 @@ public class AnglerFish : Enemy
         spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(.1f);
         spriteRenderer.color = Color.white;
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject deadPirate = Instantiate(deadEelMan, transform.position, Quaternion.identity);
+        deadPirate.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
+        deadPirate.GetComponent<DeadEnemyScript>().whatView = whatView();
+        deadPirate.transform.localScale = transform.localScale;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[1].Play();
+        StartCoroutine(hitFrame());
     }
 }

@@ -6,15 +6,17 @@ using UnityEngine.UI;
 public class ShipSmithMenus : MonoBehaviour {
     public GameObject[] menusList;
     int currMenu = 0;
-    public Text skillPointsText, storeGold, skillPointsPrice;
-    public FireworkUpgradeTilesUI fireworkUpgradesMenu;
-    public DragonsBreathUpgradeTilesUI dragonsBreathUpgradesMenu;
-    public MusketUpgradeTilesUI musketUpgradesMenu;
-    public SpreadshotUpgradeTilesUI spreadShotUpgradesMenu;
-    public CannonUpgradeTilesUI cannonUpgradesMenu;
-    public HealthUpgradeTilesUI hullUpgradesMenu;
-    public SniperUpgradeTilesUI sniperUpgradesMenu;
-    public GameObject weaponSelectorMenu, returnButton;
+    [SerializeField] private Text skillPointsText, storeGold, skillPointsPrice;
+    [SerializeField] private FireworkUpgradeTilesUI fireworkUpgradesMenu;
+    [SerializeField] private DragonsBreathUpgradeTilesUI dragonsBreathUpgradesMenu;
+    [SerializeField] private MusketUpgradeTilesUI musketUpgradesMenu;
+    [SerializeField] private SpreadshotUpgradeTilesUI spreadShotUpgradesMenu;
+    [SerializeField] private CannonUpgradeTilesUI cannonUpgradesMenu;
+    [SerializeField] private HealthUpgradeTilesUI hullUpgradesMenu;
+    [SerializeField] private SniperUpgradeTilesUI sniperUpgradesMenu;
+    [SerializeField] private ChemicalSprayerUpgradeTilesUI chemicalSprayerUpgradesMenu;
+    [SerializeField] private GlaiveLauncherUpgradeTileUI glaiveLauncherUpgradesMenu;
+    [SerializeField] private GameObject weaponSelectorMenu, returnButton;
     int skillPointPrice = 0;
 
     public void purchaseSkillPoint()
@@ -35,66 +37,45 @@ public class ShipSmithMenus : MonoBehaviour {
             menu.SetActive(true);
         }
 
-        if(PlayerUpgrades.musketUnlocked)
+        if(MiscData.dungeonLevelUnlocked >= 1)
         {
             if (!PlayerUpgrades.musketUpgrades.Contains("musket_weapon_unlocked"))
-            {
                 PlayerUpgrades.musketUpgrades.Add("musket_weapon_unlocked");
+
+            if (!PlayerUpgrades.cannonUpgrades.Contains("cannon_unlocked"))
+                PlayerUpgrades.cannonUpgrades.Add("cannon_unlocked");
+
+            if (!PlayerUpgrades.spreadshotUpgrades.Contains("spreadshot_weapon_unlocked"))
+                PlayerUpgrades.spreadshotUpgrades.Add("spreadshot_weapon_unlocked");
+
+            if (!PlayerUpgrades.fireworkUpgrades.Contains("firework_weapon_unlocked"))
+                PlayerUpgrades.fireworkUpgrades.Add("firework_weapon_unlocked");
+
+            if (!PlayerUpgrades.dragonBreathUpgrades.Contains("dragon_breath_weapon_unlocked"))
+                PlayerUpgrades.dragonBreathUpgrades.Add("dragon_breath_weapon_unlocked");
+
+            if (!PlayerUpgrades.dragonBreathUpgrades.Contains("unlock_sniper"))
+                PlayerUpgrades.dragonBreathUpgrades.Add("unlock_sniper");
+        }
+
+        if (MiscData.dungeonLevelUnlocked >= 2)
+        {
+            if (!PlayerUpgrades.sniperUpgrades.Contains("unlock_sniper"))
+                PlayerUpgrades.sniperUpgrades.Add("unlock_sniper");
+
+            if (!PlayerUpgrades.chemicalSprayerUpgrades.Contains("unlock_chemical_sprayer"))
+                PlayerUpgrades.chemicalSprayerUpgrades.Add("unlock_chemical_sprayer");
+
+            if (!PlayerUpgrades.glaiveLauncherUpgrades.Contains("unlock_glaive_launcher"))
+            {
+                PlayerUpgrades.glaiveLauncherUpgrades.Add("unlock_glaive_launcher");
             }
         }
         else
         {
-            menusList[0].GetComponentInChildren<MusketUpgradeTilesUI>().musketUpgradeTiles[0].noLongerUnlockable = true;
-        }
-
-        if(PlayerUpgrades.cannonUnlocked)
-        {
-            if(!PlayerUpgrades.cannonUpgrades.Contains("cannon_unlocked"))
-                PlayerUpgrades.cannonUpgrades.Add("cannon_unlocked");
-        }
-        else
-        {
-            menusList[1].GetComponentInChildren<CannonUpgradeTilesUI>().CannonUpgradeTiles[0].noLongerUnlockable = true;
-        }
-
-        if (PlayerUpgrades.spreadShotUnlocked)
-        {
-            if (!PlayerUpgrades.spreadshotUpgrades.Contains("spreadshot_weapon_unlocked"))
-                PlayerUpgrades.spreadshotUpgrades.Add("spreadshot_weapon_unlocked");
-        }
-        else
-        {
-            menusList[2].GetComponentInChildren<SpreadshotUpgradeTilesUI>().SpreadshotUpgradeTiles[0].noLongerUnlockable = true;
-        }
-
-        if (PlayerUpgrades.fireworkUnlocked)
-        {
-            if (!PlayerUpgrades.fireworkUpgrades.Contains("firework_weapon_unlocked"))
-                PlayerUpgrades.fireworkUpgrades.Add("firework_weapon_unlocked");
-        }
-        else
-        {
-            menusList[3].GetComponentInChildren<FireworkUpgradeTilesUI>().FireworkUpgradeTiles[0].noLongerUnlockable = true;
-        }
-
-        if (PlayerUpgrades.dragonsBreathUnlocked)
-        {
-            if (!PlayerUpgrades.dragonBreathUpgrades.Contains("dragon_breath_weapon_unlocked"))
-                PlayerUpgrades.dragonBreathUpgrades.Add("dragon_breath_weapon_unlocked");
-        }
-        else
-        {
-            menusList[4].GetComponentInChildren<DragonsBreathUpgradeTilesUI>().DragonsBreathUpgradeTiles[0].noLongerUnlockable = true;
-        }
-
-        if (PlayerUpgrades.sniperUnlocked)
-        {
-            if (!PlayerUpgrades.dragonBreathUpgrades.Contains("unlock_sniper"))
-                PlayerUpgrades.dragonBreathUpgrades.Add("unlock_sniper");
-        }
-        else
-        {
-            menusList[7].GetComponentInChildren<SniperUpgradeTilesUI>().SniperUpgradeTiles[0].noLongerUnlockable = true;
+            sniperUpgradesMenu.SniperUpgradeTiles[0].noLongerUnlockable = true;
+            chemicalSprayerUpgradesMenu.ChemicalSprayerUpgradeTiles[0].noLongerUnlockable = true;
+            glaiveLauncherUpgradesMenu.GlaiveLauncherUpgradeTiles[0].noLongerUnlockable = true;
         }
 
         foreach (GameObject menu in menusList)
@@ -142,30 +123,6 @@ public class ShipSmithMenus : MonoBehaviour {
         FindObjectOfType<AudioManager>().PlaySound("Generic Button Click");
     }
 
-    /*public void nextMenu()
-    {
-        menusList[currMenu].SetActive(false);
-        currMenu++;
-        if(currMenu >= menusList.Length)
-        {
-            currMenu = 0;
-        }
-        menusList[currMenu].SetActive(true);
-        FindObjectOfType<AudioManager>().PlaySound("Generic Button Click");
-    }
-
-    public void prevMenu()
-    {
-        menusList[currMenu].SetActive(false);
-        currMenu--;
-        if(currMenu < 0)
-        {
-            currMenu = menusList.Length - 1;
-        }
-        menusList[currMenu].SetActive(true);
-        FindObjectOfType<AudioManager>().PlaySound("Generic Button Click");
-    }*/
-
     public void resetUpgrades()
     {
         FindObjectOfType<AudioManager>().PlaySound("Generic Button Click");
@@ -174,6 +131,10 @@ public class ShipSmithMenus : MonoBehaviour {
         PlayerUpgrades.spreadshotUpgrades.Clear();
         PlayerUpgrades.fireworkUpgrades.Clear();
         PlayerUpgrades.dragonBreathUpgrades.Clear();
+        PlayerUpgrades.sniperUpgrades.Clear();
+        PlayerUpgrades.dragonBreathUpgrades.Clear();
+        PlayerUpgrades.chemicalSprayerUpgrades.Clear();
+        PlayerUpgrades.glaiveLauncherUpgrades.Clear();
         PlayerUpgrades.hullUpgrades.Clear();
         PlayerUpgrades.safeUpgrades.Clear();
         PlayerUpgrades.inventoryUpgrades.Clear();
@@ -213,6 +174,16 @@ public class ShipSmithMenus : MonoBehaviour {
         }
 
         foreach(SniperUpgradeTile tile in sniperUpgradesMenu.SniperUpgradeTiles)
+        {
+            tile.noLongerUnlockable = false;
+        }
+
+        foreach(ChemicalSprayerUpgradeTile tile in chemicalSprayerUpgradesMenu.ChemicalSprayerUpgradeTiles)
+        {
+            tile.noLongerUnlockable = false;
+        }
+
+        foreach(GlaiveLauncherUpgradeTile tile in glaiveLauncherUpgradesMenu.GlaiveLauncherUpgradeTiles)
         {
             tile.noLongerUnlockable = false;
         }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1100357936229484925}
-  - component: {fileID: 1100357936229484924}
+  - component: {fileID: 8699106032274525936}
   m_Layer: 0
   m_Name: Sea Urchin Enemy Parent
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1100357936229484924
+--- !u!114 &8699106032274525936
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,16 +42,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1100357936229484927}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 880e09f38eb533842ad578628934d5d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8947bc990593871458974c575e69eef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nameID: 
   health: 0
   maxHealth: 0
-  dangerValue: 1
+  dangerValue: 0
   killNumber: 0
   stopAttacking: 0
   percentSpawnChance: 33
+  armorMitigation: 0
+  speed: 0
+  slowAmount: 0
+  statuses: []
+  enemy: {fileID: 1100357937616153158}
 --- !u!1 &1100357937616153182
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,11 +422,14 @@ MonoBehaviour:
   killNumber: 1
   stopAttacking: 0
   percentSpawnChance: 33
+  armorMitigation: 0
+  speed: 0
+  slowAmount: 0
+  statuses: []
   urchinShot: {fileID: 5558724642822303448, guid: 97ede4d4919c1874f88db12fa01971a1,
     type: 3}
   deadStarFish: {fileID: 3597845375153196886, guid: 89e6d7efb7b30eb4e9576eafdb22cc7a,
     type: 3}
-  travelSpeed: 3.5
   enemyMarker: {fileID: 1100357938042324984}
   whatUrchinType: 1
 --- !u!1 &1100357938042324984

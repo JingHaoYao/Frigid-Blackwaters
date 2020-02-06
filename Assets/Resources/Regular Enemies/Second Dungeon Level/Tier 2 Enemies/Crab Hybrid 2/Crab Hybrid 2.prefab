@@ -170,6 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!82 &5428752857479814317
 AudioSource:
   m_ObjectHideFlags: 0
@@ -382,6 +383,11 @@ MonoBehaviour:
   killNumber: 1
   stopAttacking: 0
   percentSpawnChance: 33
+  armorMitigation: 0
+  speed: 1.5
+  slowAmount: 0
+  spawner: {fileID: 0}
+  statuses: []
   viewSprites:
   - {fileID: -2385409556134695154, guid: bf2083e8ac127c249b50b5acdcb01fbf, type: 3}
   - {fileID: 7046748735910679919, guid: e201165481ea16e4b99d65dc4b6d0797, type: 3}

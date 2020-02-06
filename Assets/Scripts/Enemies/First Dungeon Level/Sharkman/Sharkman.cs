@@ -9,7 +9,6 @@ public class Sharkman : Enemy {
     Rigidbody2D rigidBody2D;
     Animator animator;
     BoxCollider2D boxCol;
-    float travelSpeed = 4;
     GameObject playerShip;
     private float attackPeriod = 0;
     private float idlePeriod = 0;
@@ -207,7 +206,7 @@ public class Sharkman : Enemy {
 
     void moveTowards(float direction)
     {
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * travelSpeed;
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * speed;
     }
 
     void circleShip(bool clockWise)
@@ -223,7 +222,7 @@ public class Sharkman : Enemy {
             circleAngle = (450 + Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
         }
         angleToShip = (360 + Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(circleAngle * Mathf.Deg2Rad) + Mathf.Cos(angleToShip * Mathf.Deg2Rad), Mathf.Sin(circleAngle * Mathf.Deg2Rad) + Mathf.Sin(angleToShip * Mathf.Deg2Rad), 0) * travelSpeed;
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(circleAngle * Mathf.Deg2Rad) + Mathf.Cos(angleToShip * Mathf.Deg2Rad), Mathf.Sin(circleAngle * Mathf.Deg2Rad) + Mathf.Sin(angleToShip * Mathf.Deg2Rad), 0) * speed;
         tempTravelVector = rigidBody2D.velocity;
     }
 
@@ -314,25 +313,25 @@ public class Sharkman : Enemy {
         {
             if (collision.gameObject.GetComponent<DamageAmount>())
             {
-                this.GetComponents<AudioSource>()[0].Play();
                 dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-                if (health <= 0)
-                {
-                    Instantiate(bloodSplatter, collision.gameObject.transform.position, Quaternion.identity);
-                    GameObject deadPirate = Instantiate(deadSharkMan, transform.position, Quaternion.identity);
-                    deadPirate.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
-                    deadPirate.GetComponent<DeadEnemyScript>().whatView = whatView();
-                    deadPirate.transform.localScale = transform.localScale;
-                    this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                    addKills();
-                    Destroy(this.gameObject);
-                }
-                else
-                {
-                    StartCoroutine(hitFrame());
-                }
             }
         }
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject deadPirate = Instantiate(deadSharkMan, transform.position, Quaternion.identity);
+        deadPirate.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
+        deadPirate.GetComponent<DeadEnemyScript>().whatView = whatView();
+        deadPirate.transform.localScale = transform.localScale;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 
     int whatView()

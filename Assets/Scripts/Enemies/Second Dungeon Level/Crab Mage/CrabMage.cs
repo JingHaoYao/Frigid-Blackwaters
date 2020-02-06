@@ -19,7 +19,6 @@ public class CrabMage : Enemy
     float pickSpritePeriod = 0;
     int whatView = 0;
     int mirror = 1;
-    public float travelSpeed = 1;
     float attackPeriod = 0;
     bool isAttacking = false;
 
@@ -122,7 +121,7 @@ public class CrabMage : Enemy
 
     void moveTowards(float direction)
     {
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * travelSpeed;
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * speed;
     }
 
     bool determineHit(Vector3 pos)
@@ -278,17 +277,6 @@ public class CrabMage : Enemy
             if (determineHit(collision.gameObject.transform.position))
             {
                 dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-                this.GetComponents<AudioSource>()[0].Play();
-                if (health <= 0)
-                {
-                    GameObject dead = Instantiate(deadCrab, transform.position, Quaternion.identity);
-                    addKills();
-                    Destroy(this.gameObject);
-                }
-                else
-                {
-                    StartCoroutine(hitFrame());
-                }
             }
         }
     }
@@ -298,5 +286,17 @@ public class CrabMage : Enemy
         spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(.1f);
         spriteRenderer.color = Color.white;
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject dead = Instantiate(deadCrab, transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 }

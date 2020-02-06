@@ -43,30 +43,7 @@ public class SniperPlume : WeaponFireScript {
                 }
             }
 
-            if (whichWeapon == 1)
-            {
-                foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
-                {
-                    if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                        slot.displayInfo.GetComponent<ArtifactEffect>().firedFrontWeapon(new GameObject[1] { bulletInstant });
-                }
-            }
-            else if (whichWeapon == 2)
-            {
-                foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
-                {
-                    if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                        slot.displayInfo.GetComponent<ArtifactEffect>().firedLeftWeapon(new GameObject[1] { bulletInstant });
-                }
-            }
-            else
-            {
-                foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
-                {
-                    if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                        slot.displayInfo.GetComponent<ArtifactEffect>().firedRightWeapon(new GameObject[1] { bulletInstant });
-                }
-            }
+            triggerWeaponFireFlag(new GameObject[1] { bulletInstant });
         }
         else
         {
@@ -101,31 +78,7 @@ public class SniperPlume : WeaponFireScript {
                     GameObject bulletInstant = Instantiate(bullet, targetEnemy.transform.position + new Vector3(0, 0.4f, 0), Quaternion.Euler(0, 0, baseAngle + 180));
                     firedBullets.Add(bulletInstant);
                     closestDistance = int.MaxValue;
-                }
-
-                if (whichWeapon == 1)
-                {
-                    foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
-                    {
-                        if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                            slot.displayInfo.GetComponent<ArtifactEffect>().firedFrontWeapon(firedBullets.ToArray());
-                    }
-                }
-                else if (whichWeapon == 2)
-                {
-                    foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
-                    {
-                        if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                            slot.displayInfo.GetComponent<ArtifactEffect>().firedLeftWeapon(firedBullets.ToArray());
-                    }
-                }
-                else
-                {
-                    foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
-                    {
-                        if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                            slot.displayInfo.GetComponent<ArtifactEffect>().firedRightWeapon(firedBullets.ToArray());
-                    }
+                    triggerWeaponFireFlag(firedBullets.ToArray());
                 }
             }
         }

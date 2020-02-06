@@ -12,7 +12,6 @@ public class GuardianGolem : Enemy {
     float angleToShip = 0;
     GameObject playerShip;
     public int positionAlongRoom = 0;
-    public float speed = 6;
     public GameObject deadGolem;
     public Vector3 targetPos;
     public bool isMoving = false;
@@ -433,19 +432,6 @@ public class GuardianGolem : Enemy {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            if (health <= 0)
-            {
-                GameObject deadSkeletonCannon = Instantiate(deadGolem, transform.position, Quaternion.identity);
-                deadSkeletonCannon.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
-                deadSkeletonCannon.GetComponent<DeadEnemyScript>().whatView = whatView();
-                deadSkeletonCannon.transform.localScale = transform.localScale;
-                addKills();
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
         }
     }
 
@@ -454,5 +440,19 @@ public class GuardianGolem : Enemy {
         spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(.1f);
         spriteRenderer.color = Color.white;
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject deadSkeletonCannon = Instantiate(deadGolem, transform.position, Quaternion.identity);
+        deadSkeletonCannon.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
+        deadSkeletonCannon.GetComponent<DeadEnemyScript>().whatView = whatView();
+        deadSkeletonCannon.transform.localScale = transform.localScale;
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        StartCoroutine(hitFrame());
     }
 }

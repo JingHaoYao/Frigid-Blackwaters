@@ -296,6 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!61 &2074526279051904348
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -556,6 +557,11 @@ MonoBehaviour:
   killNumber: 1
   stopAttacking: 0
   percentSpawnChance: 33
+  armorMitigation: 0
+  speed: 1.3
+  slowAmount: 0
+  spawner: {fileID: 0}
+  statuses: []
   facingLeft: {fileID: -1393570106266058589, guid: c93f2e781dfb25946818b5fb528bd5c1,
     type: 3}
   facingUp: {fileID: 5066721052776152992, guid: 87981fa751f9af546b29b12fc2f46f25,

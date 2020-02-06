@@ -259,6 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!114 &6346519054000469725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,6 +536,10 @@ MonoBehaviour:
   stopAttacking: 0
   percentSpawnChance: 33
   armorMitigation: 0
+  speed: 1.7
+  slowAmount: 0
+  spawner: {fileID: 0}
+  statuses: []
   facingLeft: {fileID: 7235984087765218910, guid: d64869264d39fa04c9d187fbb08502d1,
     type: 3}
   facingUp: {fileID: -3415074245826381401, guid: cfa552ca52ac8124bb5079383270e847,
@@ -543,7 +548,7 @@ MonoBehaviour:
     type: 3}
   facingRight: {fileID: -3036541399078954249, guid: 4fe61ba83f226e54392cf216c3b59b59,
     type: 3}
-  travelSpeed: 1.7
+  travelSpeed: 0
   travelAngle: 0
   deadSpearman: {fileID: 5814618644211797820, guid: 2849ac9e3525ce5449bea20ed3075df3,
     type: 3}

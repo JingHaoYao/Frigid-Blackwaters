@@ -19,7 +19,6 @@ public class CrabOmega : Enemy
     float pickSpritePeriod = 0;
     int whatView = 0;
     int mirror = 1;
-    public float travelSpeed = 1;
     bool isAttacking = false;
 
     public GameObject invulnerableHitBox;
@@ -124,7 +123,7 @@ public class CrabOmega : Enemy
 
     void moveTowards(float direction)
     {
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * travelSpeed;
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * speed;
     }
 
     IEnumerator attack()
@@ -139,7 +138,7 @@ public class CrabOmega : Enemy
         animator.enabled = true;
         this.GetComponents<AudioSource>()[1].Play();
         animator.SetTrigger("Attack" + whatView);
-        for(int i = 0; i < 15; i++)
+        for (int i = 0; i < 15; i++)
         {
             rigidBody2D.velocity = new Vector3(Mathf.Cos(angleShip * Mathf.Deg2Rad), Mathf.Sin(angleShip * Mathf.Deg2Rad)) * (16 - i);
             yield return new WaitForSeconds((4f / 12f) / 15f);
@@ -159,7 +158,7 @@ public class CrabOmega : Enemy
         Vector3 targetPos = pathNode.nodePosition;
         travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
 
-        if(bufferPeriod > 0)
+        if (bufferPeriod > 0)
         {
             bufferPeriod -= Time.deltaTime;
         }
@@ -229,7 +228,7 @@ public class CrabOmega : Enemy
         travelLocation();
         if (spawnedDash)
         {
-            spawnedDash.transform.position = transform.position + new Vector3(0, 0.5f,0);
+            spawnedDash.transform.position = transform.position + new Vector3(0, 0.5f, 0);
             spawnedDash.GetComponent<SpriteRenderer>().sortingOrder = spriteRenderer.sortingOrder + 3;
         }
 
@@ -244,17 +243,7 @@ public class CrabOmega : Enemy
         if (collision.gameObject.GetComponent<DamageAmount>() && health > 0 && invulnerable == false)
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-            this.GetComponents<AudioSource>()[0].Play();
-            if (health <= 0)
-            {
-                GameObject dead = Instantiate(deadCrab, transform.position, Quaternion.identity);
-                addKills();
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                StartCoroutine(hitFrame());
-            }
+
         }
     }
 
@@ -263,5 +252,17 @@ public class CrabOmega : Enemy
         spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(.1f);
         spriteRenderer.color = Color.white;
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject dead = Instantiate(deadCrab, transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 }

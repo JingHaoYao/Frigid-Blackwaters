@@ -7,7 +7,6 @@ public class OctoMage : Enemy {
     Rigidbody2D rigidBody2D;
     Animator animator;
     public Sprite facingLeft, facingDown, facingRight, facingUp;
-    public float travelSpeed = 2;
     private float moveTimer = 0, periodBetweenMoves = 0, travelAngle = 0;
     private float attackTimer = 0;
     private bool strideEnded = false, pickedAngle = false, crossedLocation = false, firingAnimation = false;
@@ -61,7 +60,7 @@ public class OctoMage : Enemy {
         {
             float whatAngle = Mathf.Atan2(rigidBody2D.velocity.y, rigidBody2D.velocity.x) * Mathf.Rad2Deg;
             foamTimer += Time.deltaTime;
-            if (foamTimer >= 0.05f * travelSpeed / 3f)
+            if (foamTimer >= 0.05f * speed / 3f)
             {
                 foamTimer = 0;
                 GameObject foam = Instantiate(waterFoam, transform.position, Quaternion.Euler(0, 0, whatAngle + 90));
@@ -201,22 +200,22 @@ public class OctoMage : Enemy {
                 moveTimer += Time.deltaTime;
                 if (moveTimer < 0.2f)
                 {
-                    travelSpeed = 3;
+                    updateSpeed(3);
                 }
                 else if (moveTimer <= 0.5f && moveTimer >= 0.2f)
                 {
-                    travelSpeed = 3 - 3 * (3 * (moveTimer - 0.2f));
+                    updateSpeed(3 - 3 * (3 * (moveTimer - 0.2f)));
                 }
                 else
                 {
                     pickedAngle = false;
                     strideEnded = true;
-                    travelSpeed = 0;
+                    updateSpeed(0);
                     periodBetweenMoves = 0;
                     moveTimer = 0;
                 }
             }
-            moveDirection(travelAngle, travelSpeed);
+            moveDirection(travelAngle, speed);
 
             if(Vector2.Distance(transform.position, randPos) < 1.5f)
             {
@@ -285,26 +284,27 @@ public class OctoMage : Enemy {
             int damageDealt = collision.gameObject.GetComponent<DamageAmount>().damage;
             health -= damageDealt;
             this.GetComponents<AudioSource>()[0].Play();
-            if (health <= 0)
-            {
-                Instantiate(bloodSplatter, collision.gameObject.transform.position, Quaternion.identity);
-                GameObject deadPirate = Instantiate(deadOcto, transform.position, Quaternion.identity);
-                deadPirate.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
-                deadPirate.GetComponent<DeadEnemyScript>().whatView = whatView();
-                deadPirate.transform.localScale = transform.localScale;
-                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                addKills();
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                Instantiate(bloodSplatter, collision.gameObject.transform.position, Quaternion.identity);
-                strideEnded = false;
-                crossedLocation = false;
-                randPos = pickRandPos();
-                periodBetweenMoves = 0.6f;
-                StartCoroutine(hitFrame());
-            }
+            Instantiate(bloodSplatter, collision.gameObject.transform.position, Quaternion.identity);
+            strideEnded = false;
+            crossedLocation = false;
+            randPos = pickRandPos();
+            periodBetweenMoves = 0.6f;
+            StartCoroutine(hitFrame());
         }
+    }
+
+    public override void deathProcedure()
+    {
+        GameObject deadPirate = Instantiate(deadOcto, transform.position, Quaternion.identity);
+        deadPirate.GetComponent<DeadEnemyScript>().spriteRenderer.sortingOrder = spriteRenderer.sortingOrder;
+        deadPirate.GetComponent<DeadEnemyScript>().whatView = whatView();
+        deadPirate.transform.localScale = transform.localScale;
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        Destroy(this.gameObject);
+    }
+
+    public override void damageProcedure(int damage)
+    {
+
     }
 }

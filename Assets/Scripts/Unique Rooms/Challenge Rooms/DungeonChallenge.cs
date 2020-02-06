@@ -222,10 +222,7 @@ public class DungeonChallenge : MonoBehaviour
 
         if (activated == true && anti.trialDefeated == false && summoningEnemies == false)
         {
-            GameObject[] ActiveRangedEnemies = GameObject.FindGameObjectsWithTag("RangedEnemy");
-            GameObject[] ActiveMeleeEnemies = GameObject.FindGameObjectsWithTag("MeleeEnemy");
-            GameObject[] ActiveShieldEnemies = GameObject.FindGameObjectsWithTag("EnemyShield");
-            if (ActiveRangedEnemies.Length == 0 && ActiveMeleeEnemies.Length == 0 && ActiveShieldEnemies.Length == 0)
+            if (EnemyPool.isPoolEmpty())
             {
                 if (currRound < numberWaves)
                 {

@@ -32,6 +32,7 @@ public class ShotgunPlume : WeaponFireScript {
                 instant.GetComponent<ShotgunRound>().angleTravel = baseAngle - start + 10 * i;
                 bulletList[i] = instant;
             }
+            triggerWeaponFireFlag(bulletList);
         }
         else
         {
@@ -41,31 +42,7 @@ public class ShotgunPlume : WeaponFireScript {
                 instant.GetComponent<ShotgunRound>().angleTravel = baseAngle - 2 + 2 * i;
                 bulletList[i] = instant;
             }
-        }
-
-        if (whichWeapon == 1)
-        {
-            foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
-            {
-                if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                    slot.displayInfo.GetComponent<ArtifactEffect>().firedFrontWeapon(bulletList);
-            }
-        }
-        else if (whichWeapon == 2)
-        {
-            foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
-            {
-                if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                    slot.displayInfo.GetComponent<ArtifactEffect>().firedLeftWeapon(bulletList);
-            }
-        }
-        else
-        {
-            foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
-            {
-                if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                    slot.displayInfo.GetComponent<ArtifactEffect>().firedRightWeapon(bulletList);
-            }
+            triggerWeaponFireFlag(bulletList);
         }
     }
 

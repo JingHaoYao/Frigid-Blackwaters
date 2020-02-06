@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 4091286847410624}
   - component: {fileID: 212028480795262372}
   - component: {fileID: 95692049378493086}
-  - component: {fileID: 58210604971090094}
-  - component: {fileID: 114764104026386216}
   - component: {fileID: 114989548126223526}
   - component: {fileID: -7508022305678946408}
   m_Layer: 0
@@ -103,37 +101,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!58 &58210604971090094
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1901260458335020}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0073421, y: -0.9387207}
-  serializedVersion: 2
-  m_Radius: 0.28376698
---- !u!114 &114764104026386216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1901260458335020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb74ea7ee3659244a83c97a8cb0d04f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
-  originDamage: 1
-  addBonuses: 1
 --- !u!114 &114989548126223526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,7 +113,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21feaef8fbde0a54e98dc800fcbc5ac6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObject: {fileID: 0}
+  duration: 0
+  targetEnemy: {fileID: 0}
+  animator: {fileID: 95692049378493086}
+  amountTickDamage: 0
+  spriteRenderer: {fileID: 212028480795262372}
 --- !u!114 &-7508022305678946408
 MonoBehaviour:
   m_ObjectHideFlags: 0

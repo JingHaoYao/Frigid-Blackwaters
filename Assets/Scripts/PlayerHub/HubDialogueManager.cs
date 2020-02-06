@@ -46,6 +46,7 @@ public class HubDialogueManager : MonoBehaviour
                 tabithaDialogue.toggleRight = true;
                 tabithaDialogue.toggleLeft = false;
             }
+
         }
     }
 

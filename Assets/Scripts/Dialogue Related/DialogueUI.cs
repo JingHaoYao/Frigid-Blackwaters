@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
@@ -15,6 +14,7 @@ public class DialogueUI : MonoBehaviour
     public Image panelImageBack, panelImageFront;
     public float waitReveal = 0;
     private UnityAction endAction;
+    bool loaded = false;
 
     PlayerScript playerScript;
 
@@ -70,7 +70,7 @@ public class DialogueUI : MonoBehaviour
     
     IEnumerator loadDialogue(float waitDuration)
     {
-        blackOverlayAnimator.gameObject.GetComponent<Image>().color = new Color(0, 0, 0, 1);
+        transform.GetChild(0).gameObject.SetActive(false);
         blackOverlayAnimator.enabled = false;
         if (targetDialogue.originalMusic == "Dungeon Ambiance")
         {
@@ -83,7 +83,45 @@ public class DialogueUI : MonoBehaviour
             FindObjectOfType<AudioManager>().PlaySound(targetDialogue.originalMusic);
             FindObjectOfType<AudioManager>().FadeOut(targetDialogue.originalMusic, 0.2f);
         }
+
+        panelImageBack.enabled = false;
+        panelImageFront.enabled = false;
+        dialogueBackground.enabled = false;
+
+        blackOverlayAnimator.enabled = true;
+        character1.enabled = false;
+        character2.enabled = false;
+        character3.enabled = false;
+        character4.enabled = false;
+
+        dialogueText.transform.parent.gameObject.SetActive(false);
+
+        if (waitDuration != 0)
+        {
+            blackOverlayAnimator.gameObject.GetComponent<Image>().color = new Color(0, 0, 0, 1);
+            yield return new WaitForSeconds(waitDuration);
+        }
+        else
+        {
+            blackOverlayAnimator.gameObject.GetComponent<Image>().color = new Color(0, 0, 0, 0);
+            blackOverlayAnimator.SetTrigger("FadeOut");
+            yield return new WaitForSeconds(1f);
+        }
+        transform.GetChild(0).gameObject.SetActive(true);
+        dialogueText.transform.parent.gameObject.SetActive(true);
+
         dialogueIndex = 0;
+        dialogueText.text = targetDialogue.dialogues[0];
+        dialogueText.color = targetDialogue.textColor;
+        dialogueName.color = targetDialogue.textColor;
+        dialogueName.text = targetDialogue.dialogueNames[0];
+        playerScript.playerDead = true;
+
+        if (dialogueIndex < targetDialogue.panelSprites.Length)
+        {
+            loadDialoguePanel(panelImageBack, panelImageFront, null, targetDialogue.panelSprites[0]);
+        }
+
         if (targetDialogue.background != null)
         {
             dialogueBackground.enabled = true;
@@ -130,21 +168,13 @@ public class DialogueUI : MonoBehaviour
             character4.enabled = false;
         }
 
-        if (dialogueIndex < targetDialogue.panelSprites.Length)
-        {
-            loadDialoguePanel(panelImageBack, panelImageFront, null, targetDialogue.panelSprites[0]);
-        }
-        dialogueText.text = targetDialogue.dialogues[0];
-        dialogueName.text = targetDialogue.dialogueNames[0];
-        playerScript.playerDead = true;
-        yield return new WaitForSeconds(waitDuration);
-        blackOverlayAnimator.enabled = true;
         blackOverlayAnimator.SetTrigger("FadeIn");
         yield return new WaitForSeconds(1f);
         FindObjectOfType<AudioManager>().PlaySound(targetDialogue.substituteMusic);
         FindObjectOfType<AudioManager>().FadeIn(targetDialogue.substituteMusic, 0.2f, 0.6f);
         waitReveal = 0;
         blackOverlayAnimator.enabled = false;
+        loaded = true;
     }
 
     void progressDialogue(int index)
@@ -204,35 +234,25 @@ public class DialogueUI : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && dialogueIndex < targetDialogue.dialogues.Length)
+        if (dialogueIndex < targetDialogue.dialogues.Length && loaded == true)
         {
-            dialogueIndex++;
-            if (dialogueIndex >= targetDialogue.dialogues.Length)
+
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (targetDialogue.addedItems != null)
+                dialogueIndex++;
+                if (dialogueIndex >= targetDialogue.dialogues.Length)
                 {
-                    foreach (GameObject item in targetDialogue.addedItems)
-                    {
-                        if (GameObject.Find("PlayerShip").GetComponent<Inventory>().itemList.Count < PlayerItems.maxInventorySize)
-                        {
-                            if (GameObject.Find("PresentItems"))
-                            {
-                                GameObject instant = Instantiate(item);
-                                instant.transform.SetParent(GameObject.Find("PresentItems").transform);
-                                GameObject.Find("PlayerShip").GetComponent<Inventory>().itemList.Add(item);
-                                PlayerItems.inventoryItemsIDs.Add(item.name);
-                            }
-                        }
-                    }
+                    endDialogueProcedure();
                 }
-                addDialogueID(targetDialogue);
-                SaveSystem.SaveGame();
-                GameObject.Find("PlayerShip").GetComponent<PlayerScript>().windowAlreadyOpen = false;
-                StartCoroutine(turnOffDialoguer());
+                else
+                {
+                    progressDialogue(dialogueIndex);
+                }
             }
-            else
+            else if (Input.GetKeyDown(KeyCode.Escape))
             {
-                progressDialogue(dialogueIndex);
+                dialogueIndex = targetDialogue.dialogues.Length;
+                endDialogueProcedure();
             }
         }
 
@@ -240,6 +260,29 @@ public class DialogueUI : MonoBehaviour
         {
             playerScript.playerDead = true;
         }
+    }
+
+    void endDialogueProcedure()
+    {
+        if (targetDialogue.addedItems != null)
+        {
+            foreach (GameObject item in targetDialogue.addedItems)
+            {
+                if (GameObject.Find("PlayerShip").GetComponent<Inventory>().itemList.Count < PlayerItems.maxInventorySize)
+                {
+                    if (GameObject.Find("PresentItems"))
+                    {
+                        GameObject instant = Instantiate(item);
+                        instant.transform.SetParent(GameObject.Find("PresentItems").transform);
+                        GameObject.Find("PlayerShip").GetComponent<Inventory>().itemList.Add(item);
+                        PlayerItems.inventoryItemsIDs.Add(item.name);
+                    }
+                }
+            }
+        }
+        addDialogueID(targetDialogue);
+        SaveSystem.SaveGame();
+        StartCoroutine(turnOffDialoguer());
     }
 
     public void addDialogueID(DialogueSet set)
@@ -294,15 +337,20 @@ public class DialogueUI : MonoBehaviour
             FindObjectOfType<AudioManager>().FadeIn(targetDialogue.originalMusic, 0.2f, .5f);
         }
         this.gameObject.SetActive(false);
-        playerScript.playerDead = false;
         targetDialogue = null;
         endAction?.Invoke();
+        endAction = null;
+        playerScript.playerDead = false;
+        playerScript.windowAlreadyOpen = false;
+        loaded = false;
     }
 
     private void OnEnable()
     {
-        if(playerScript == null)
+        if (playerScript == null)
             playerScript = GameObject.Find("PlayerShip").GetComponent<PlayerScript>();
+
+        playerScript.windowAlreadyOpen = true;
         StartCoroutine(loadDialogue(waitReveal));
     }
 
