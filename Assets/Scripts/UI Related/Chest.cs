@@ -26,6 +26,7 @@ public class Chest : MonoBehaviour {
     public int customGoldBase = 0;
     public int customGoldMultiplier = 0;
     GameObject toolTip;
+    DungeonEntryDialogueManager dungeonDialogueManager;
 
     void selectAnim(int typeChest)
     {
@@ -179,7 +180,7 @@ public class Chest : MonoBehaviour {
                 else
                 {
                     newItem = Instantiate(itemTemplates.gold);
-                    newItem.GetComponent<DisplayItem>().goldValue = dangerValue * 75 + Random.Range(0, 4) * 50 + 75 * typeChest + bonusGold;
+                    newItem.GetComponent<DisplayItem>().goldValue = dangerValue * 75 + Random.Range(0, 4) * 50 + 75 * typeChest + bonusGold + dungeonDialogueManager.whatDungeonLevel * 250;
                 }
                 newItem.transform.SetParent(presentItems.transform);
                 items[i] = newItem;
@@ -193,7 +194,7 @@ public class Chest : MonoBehaviour {
                 newItem = Instantiate(uniqueItems[Random.Range(0, uniqueItems.Length)]);
                 if(newItem.GetComponent<DisplayItem>().goldValue > 0)
                 {
-                    newItem.GetComponent<DisplayItem>().goldValue = customGoldBase + Random.Range(0, 4) * customGoldMultiplier;
+                    newItem.GetComponent<DisplayItem>().goldValue = customGoldBase + Random.Range(0, 4) * customGoldMultiplier ;
                 }
                 newItem.transform.parent = presentItems.transform;
                 items[i] = newItem;
@@ -217,6 +218,7 @@ public class Chest : MonoBehaviour {
         chestDisplay.SetActive(false);
         chestSlots = chestDisplay.GetComponentsInChildren<ChestSlot>();
         presentItems = GameObject.Find("PresentItems");
+        dungeonDialogueManager = FindObjectOfType<DungeonEntryDialogueManager>();
         generateItems(chestItems);
     }
 

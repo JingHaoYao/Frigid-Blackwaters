@@ -30,6 +30,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
     EnemyRoomTemplates enemyRoomTemplates;
     DungeonEntryDialogueManager dialogueManager;
     PlayerScript playerScript;
+    [SerializeField] private RoomInteraction uniqueInteraction;
 
     //
     // What room type (used for mapping)
@@ -114,6 +115,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                         localScale.x *= -1;
                         spawnedObstacle.transform.localScale = localScale;
                     }
+                    uniqueInteraction?.AddObstacle(spawnedObstacle);
                 }
             }
 
@@ -136,6 +138,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                         localScale.x *= -1;
                         spawnedObstacle.transform.localScale = localScale;
                     }
+                    uniqueInteraction?.AddObstacle(spawnedObstacle);
                 }
             }
 
@@ -150,6 +153,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                         localScale.x *= -1;
                         spawnedObstacle.transform.localScale = localScale;
                     }
+                    uniqueInteraction?.AddObstacle(spawnedObstacle);
                 }
             }
 
@@ -164,6 +168,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                         localScale.x *= -1;
                         spawnedObstacle.transform.localScale = localScale;
                     }
+                    uniqueInteraction?.AddObstacle(spawnedObstacle);
                 }
             }
 
@@ -200,7 +205,8 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
         {
             whatTheme = 2;
         }
-        Instantiate(specialObstacleTemplates.loadRandomSpecialObstacle(dialogueManager.whatDungeonLevel, whatTheme), transform.position, Quaternion.identity);
+        GameObject specialObstacle = Instantiate(specialObstacleTemplates.loadRandomSpecialObstacle(dialogueManager.whatDungeonLevel, whatTheme), transform.position, Quaternion.identity);
+        uniqueInteraction?.AddObstacle(specialObstacle);
     }
 
     Vector3 pickRandEnemySpawn()
@@ -996,6 +1002,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
         if (targetDialogue != null)
         {
             dialogueUI.targetDialogue = targetDialogue;
+            dialogueUI.waitReveal = 0.1f;
             dialogueUI.gameObject.SetActive(true);
             dialogueBlackOverlay.SetActive(true);
             playerScript.playerDead = true;
@@ -1028,6 +1035,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                             openDoorSeals();
                             roomDone = true;
                             playerScript.enemiesDefeated = true;
+                            uniqueInteraction?.RoomFinished();
                         }
                     }
                     else
@@ -1037,12 +1045,12 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                             openDoorSeals();
                             roomDone = true;
                             playerScript.enemiesDefeated = true;
+                            uniqueInteraction?.RoomFinished();
                         }
                     }
 
                     if (roomInit == false)
                     {
-
                         setDangerValueCap();
                         playerScript.numRoomsSinceLastArtifact++;
                         playerScript.numRoomsVisited++;
@@ -1138,6 +1146,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                         StartCoroutine(adjustPlayer());
                         roomInit = true;
                         playerScript.periodicHeal();
+                        uniqueInteraction?.RoomInitialized(dangerValueCap);
                     }
                 }
             }

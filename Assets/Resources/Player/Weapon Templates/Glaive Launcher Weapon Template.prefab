@@ -1,0 +1,137 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &72334319206920585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 72334319206920693}
+  - component: {fileID: 72334319206920587}
+  - component: {fileID: 72334319206920692}
+  - component: {fileID: 72334319206920586}
+  - component: {fileID: 72334319206920694}
+  m_Layer: 0
+  m_Name: Glaive Launcher Weapon Template
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &72334319206920693
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72334319206920585}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -50.765625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 10.748535, y: 1.9933197}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &72334319206920587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72334319206920585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2093946c6e21b9c43b76288f452bba8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: {fileID: -5842042572231392955, guid: 3632355f0a19ee9469d15ac677642bde, type: 3}
+  upleft: {fileID: -6314558489356916884, guid: 3632355f0a19ee9469d15ac677642bde, type: 3}
+  left: {fileID: -5407505023868542666, guid: 3632355f0a19ee9469d15ac677642bde, type: 3}
+  downleft: {fileID: 3420661629364639439, guid: 3632355f0a19ee9469d15ac677642bde,
+    type: 3}
+  down: {fileID: -5774187870077248494, guid: 3632355f0a19ee9469d15ac677642bde, type: 3}
+  weaponFlare: {fileID: 0}
+  coolDownIcon: {fileID: 8413849063708421178, guid: 09d82cb33447ada4eae8573ff268e2dd,
+    type: 3}
+  coolDownTime: 4
+  shipWeaponEquipped: {fileID: 0}
+  whichLevelUnlock: 2
+--- !u!222 &72334319206920692
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72334319206920585}
+  m_CullTransparentMesh: 0
+--- !u!114 &72334319206920586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72334319206920585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Glaive Launcher: Using a spring lock
+
+    mechanism, this launcher fires a glaive that
+
+    will consistently shred enemies for 1 damage.'
+--- !u!114 &72334319206920694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72334319206920585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76356cb008796834fa36d2eb70362874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bouncingGlaives1: {fileID: 4202005228175062298, guid: a2b1b06b10822b645bd57c79e2c34515,
+    type: 3}
+  bouncingGlaives2: {fileID: 3027454600291748608, guid: 98269cb2c979ded4fadb65c32781c682,
+    type: 3}
+  bouncingGlaives3: {fileID: 7806825877499734764, guid: 3e84ebf0967275f42ac60a738b3cbbf9,
+    type: 3}
+  regularGlaive: {fileID: 4500553590726883223, guid: a14e2b9a247c09940866aaa841e67a76,
+    type: 3}
+  splittingGlaivesShot1: {fileID: 7735976121807943024, guid: d8beee5e2b8f35545a92650aef1a015a,
+    type: 3}
+  splittingGlaivesShot2: {fileID: 4104704507113175499, guid: f3e2d9ec6cbd7c8438fe7d03694d7d93,
+    type: 3}
+  splittingGlaivesShot3: {fileID: 5614027661688484779, guid: f9c0514cafcb32a47a70fb95e870bff9,
+    type: 3}

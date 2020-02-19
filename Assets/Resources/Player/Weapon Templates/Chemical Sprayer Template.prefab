@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8170825473930096151
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8170825473930096171}
+  - component: {fileID: 8170825473930096149}
+  - component: {fileID: 8170825473930096148}
+  - component: {fileID: 8170825473930096150}
+  - component: {fileID: -2808853089109616498}
+  m_Layer: 0
+  m_Name: Chemical Sprayer Template
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8170825473930096171
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8170825473930096151}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -80.11719}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 8.120657, y: -6.674952}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8170825473930096149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8170825473930096151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2093946c6e21b9c43b76288f452bba8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: {fileID: 4841984133235420469, guid: 238620d4747efb949a24bac1a2cda712, type: 3}
+  upleft: {fileID: 1680007676676302641, guid: 238620d4747efb949a24bac1a2cda712, type: 3}
+  left: {fileID: 3876396050533457416, guid: 238620d4747efb949a24bac1a2cda712, type: 3}
+  downleft: {fileID: -3975055940860682416, guid: 238620d4747efb949a24bac1a2cda712,
+    type: 3}
+  down: {fileID: -5584618515334727904, guid: 238620d4747efb949a24bac1a2cda712, type: 3}
+  weaponFlare: {fileID: 5041136482366554980, guid: dd0d1c1e1e1629747b8ade8bdbb4c121,
+    type: 3}
+  coolDownIcon: {fileID: 7461358993126569222, guid: 97b09063217c572448bff3b4bda0bdba,
+    type: 3}
+  coolDownTime: 3.5
+  shipWeaponEquipped: {fileID: 0}
+  whichLevelUnlock: 2
+--- !u!222 &8170825473930096148
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8170825473930096151}
+  m_CullTransparentMesh: 0
+--- !u!114 &8170825473930096150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8170825473930096151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Chemical Sprayer: Carrying a deadly
+
+    corrosive chemical, this weapon fires a
+
+    cloud of deadly gas to melt enemies for
+
+    3 damage over time.'
+--- !u!114 &-2808853089109616498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8170825473930096151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c1a30c63a328c24f9658a7f956627ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosiveBlast1: {fileID: 5086567341681264720, guid: 0fdd2e73e016bac4cae2123b91d0830b,
+    type: 3}
+  explosiveBlast2: {fileID: 7184981781062995899, guid: 0aa899887e49e1d4fb7dc25f3aa51664,
+    type: 3}
+  explosiveBlast3: {fileID: 6276918155886833860, guid: 5fd99feff384db6479f3fbbeadd79f73,
+    type: 3}
+  regularPlume: {fileID: 5041136482366554980, guid: dd0d1c1e1e1629747b8ade8bdbb4c121,
+    type: 3}
+  meltingShot1: {fileID: 195385910897853858, guid: 4c6f7c741d2baca47bca9299076bdc67,
+    type: 3}
+  meltingShot2: {fileID: 1740259839526060636, guid: 8c1e9a55e636fd048bfd6b63f5c2665d,
+    type: 3}
+  meltingShot3: {fileID: 3504210600067536664, guid: 851fd3abd2ccb8840a6740b77a955389,
+    type: 3}
+  meltingIcon1: {fileID: -6363620398871787661, guid: 97b09063217c572448bff3b4bda0bdba,
+    type: 3}
+  meltingIcon2: {fileID: -7073154424707666459, guid: 97b09063217c572448bff3b4bda0bdba,
+    type: 3}
+  regularCorrosiveIcon: {fileID: 7461358993126569222, guid: 97b09063217c572448bff3b4bda0bdba,
+    type: 3}

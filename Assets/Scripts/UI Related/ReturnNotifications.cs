@@ -92,8 +92,9 @@ public class ReturnNotifications : MonoBehaviour
             if(dialogueUI.gameObject.activeSelf == false)
             {
                 dialogueUI.targetDialogue = dialoguesToDisplay[0];
-                dialoguesToDisplay.Remove(dialoguesToDisplay[0]);
+                dialogueUI.waitReveal = 0.001f;
                 dialogueUI.gameObject.SetActive(true);
+                dialoguesToDisplay.Remove(dialoguesToDisplay[0]);
                 blackOverlay.SetActive(true);
                 buildingUnlocked = true;
             }

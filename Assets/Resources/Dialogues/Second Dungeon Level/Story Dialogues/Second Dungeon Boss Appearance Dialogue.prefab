@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5606991738479164310
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5606991738479164305}
+  - component: {fileID: 5606991738479164304}
+  m_Layer: 0
+  m_Name: Second Dungeon Boss Appearance Dialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5606991738479164305
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5606991738479164310}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.5165434, y: -1.4105197, z: -7.46875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5606991738479164304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5606991738479164310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatDialogueType: 0
+  checkPointDialogue: 0
+  dialogues:
+  - What is that?
+  - The silent shroud, and the crown of frost.
+  - And Mjolnir? Why does he have Magni's artifact?
+  - Those garments.. Ahalfar? He's alive?
+  - Ahalfar the snowstorm? He can't be alive. He last sailed into the labyrinth with
+    Magni over two hundred years ago.
+  - I'm sure of it Ylva. Those robes, they're iconic.
+  - All of a sudden, you hear Elora starting to cough violently. You chase after Rowan,
+    Geordi, and Tabitha down below deck to check what is going on.
+  - Shockingly, you find Elora lying in bed, wheezing.
+  - Several blue crystals are growing out of her left leg.
+  - Elora.. what's happened to you?
+  - Crystals.. out of her leg?
+  - Your attention quickly turns to Malfar who hurried down the deck.
+  - Navigator, we need you right now. Hurry!
+  - You find yourself back on deck, with Ylva hovering in the air.
+  - Naivgator, it seems we're going to need to fight. Ahalfar doesn't seem to be the
+    legendary adventurer he once was anymore.
+  - Navigator. I've seen those artifacts in books before.
+  - The silent shroud summons a snow storm around him which will block your attacks,
+    while the crown of frost will trap you in a wall of ice.
+  - Navigator, I can harness up to three fireballs, but it will take me some time
+    to channel them. I think I can vaporize either the snow storm or the ice prison
+    instantly.
+  - Hit any target, and I will throw a fireball at it if I have one channeled.
+  - If we defeat him, we can reclaim the legendary artifacts he holds.
+  - Let's do this.
+  dialogueNames:
+  - Ylva
+  - Malfar
+  - Malfar
+  - Malfar
+  - Ylva
+  - Malfar
+  - 
+  - 
+  - 
+  - Rowan
+  - Tabitha
+  - 
+  - Malfar
+  - 
+  - Ylva
+  - Malfar
+  - Malfar
+  - Ylva
+  - Ylva
+  - Ylva
+  - Malfar
+  background: {fileID: 0}
+  character1Sprites:
+  - {fileID: 8681744607634991550, guid: 4e576a99fe8e8d64dbca6a47c71d06c7, type: 3}
+  - {fileID: 7404841174222594229, guid: 4e576a99fe8e8d64dbca6a47c71d06c7, type: 3}
+  - {fileID: 1563586416495488238, guid: 4e576a99fe8e8d64dbca6a47c71d06c7, type: 3}
+  - {fileID: 8216687748215405874, guid: 4e576a99fe8e8d64dbca6a47c71d06c7, type: 3}
+  - {fileID: 8681744607634991550, guid: 4e576a99fe8e8d64dbca6a47c71d06c7, type: 3}
+  - {fileID: 7404841174222594229, guid: 4e576a99fe8e8d64dbca6a47c71d06c7, type: 3}
+  character2Sprites:
+  - {fileID: 4800494004806166373, guid: 8a6a388773687454292feabd5275d298, type: 3}
+  - {fileID: 4800494004806166373, guid: 8a6a388773687454292feabd5275d298, type: 3}
+  - {fileID: 3799500659356747657, guid: 8a6a388773687454292feabd5275d298, type: 3}
+  - {fileID: 3799500659356747657, guid: 8a6a388773687454292feabd5275d298, type: 3}
+  - {fileID: 3799500659356747657, guid: 8a6a388773687454292feabd5275d298, type: 3}
+  - {fileID: 4800494004806166373, guid: 8a6a388773687454292feabd5275d298, type: 3}
+  character3Sprites:
+  - {fileID: 21300000, guid: 194df07c04c86ba4aba6d978e2c5dab8, type: 3}
+  - {fileID: 21300000, guid: 194df07c04c86ba4aba6d978e2c5dab8, type: 3}
+  - {fileID: 21300000, guid: 194df07c04c86ba4aba6d978e2c5dab8, type: 3}
+  - {fileID: 21300000, guid: 194df07c04c86ba4aba6d978e2c5dab8, type: 3}
+  - {fileID: 21300000, guid: 194df07c04c86ba4aba6d978e2c5dab8, type: 3}
+  - {fileID: 21300000, guid: 194df07c04c86ba4aba6d978e2c5dab8, type: 3}
+  character4Sprites:
+  - {fileID: 4725384957697610282, guid: 16238912860b16a4eb799d47b4e5b3ad, type: 3}
+  - {fileID: -1297176371338781238, guid: 16238912860b16a4eb799d47b4e5b3ad, type: 3}
+  - {fileID: -1297176371338781238, guid: 16238912860b16a4eb799d47b4e5b3ad, type: 3}
+  - {fileID: 4725384957697610282, guid: 16238912860b16a4eb799d47b4e5b3ad, type: 3}
+  - {fileID: -1297176371338781238, guid: 16238912860b16a4eb799d47b4e5b3ad, type: 3}
+  - {fileID: -1297176371338781238, guid: 16238912860b16a4eb799d47b4e5b3ad, type: 3}
+  panelSprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 4363254133812751241, guid: 58247cd1475134d4cafdbf5ef6fab705, type: 3}
+  - {fileID: 4363254133812751241, guid: 58247cd1475134d4cafdbf5ef6fab705, type: 3}
+  - {fileID: 4363254133812751241, guid: 58247cd1475134d4cafdbf5ef6fab705, type: 3}
+  - {fileID: 4363254133812751241, guid: 58247cd1475134d4cafdbf5ef6fab705, type: 3}
+  - {fileID: 4363254133812751241, guid: 58247cd1475134d4cafdbf5ef6fab705, type: 3}
+  - {fileID: 4363254133812751241, guid: 58247cd1475134d4cafdbf5ef6fab705, type: 3}
+  - {fileID: 6317736384229580829, guid: 58247cd1475134d4cafdbf5ef6fab705, type: 3}
+  - {fileID: 6317736384229580829, guid: 58247cd1475134d4cafdbf5ef6fab705, type: 3}
+  - {fileID: 6317736384229580829, guid: 58247cd1475134d4cafdbf5ef6fab705, type: 3}
+  - {fileID: 6317736384229580829, guid: 58247cd1475134d4cafdbf5ef6fab705, type: 3}
+  - {fileID: 6317736384229580829, guid: 58247cd1475134d4cafdbf5ef6fab705, type: 3}
+  - {fileID: 6317736384229580829, guid: 58247cd1475134d4cafdbf5ef6fab705, type: 3}
+  - {fileID: 6317736384229580829, guid: 58247cd1475134d4cafdbf5ef6fab705, type: 3}
+  - {fileID: 6317736384229580829, guid: 58247cd1475134d4cafdbf5ef6fab705, type: 3}
+  substituteMusic: 
+  originalMusic: 
+  addedItems: []

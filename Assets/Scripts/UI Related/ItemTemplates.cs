@@ -99,7 +99,7 @@ public class ItemTemplates : MonoBehaviour {
 
         foreach(string id in secondLevelUniqueArtifacts)
         {
-            itemDB.Add(id, "Items/Second Dungeon Level/Consumables/Unique Artifacts/");
+            itemDB.Add(id, "Items/Second Dungeon Level/Artifacts/Unique Artifacts/");
         }
     }
 

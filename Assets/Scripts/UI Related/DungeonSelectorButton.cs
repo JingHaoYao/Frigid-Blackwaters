@@ -38,6 +38,7 @@ public class DungeonSelectorButton : MonoBehaviour {
         loadingCircle.gameObject.SetActive(true);
         loadingCircle.fillAmount = 0;
         openScene.allowSceneActivation = false;
+        loadingCircle.transform.position = new Vector3(Screen.width - 50, 50);
 
         while (!openScene.isDone)
         {

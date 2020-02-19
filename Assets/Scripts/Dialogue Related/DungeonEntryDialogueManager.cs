@@ -52,7 +52,7 @@ public class DungeonEntryDialogueManager : MonoBehaviour
 
     void Update()
     {
-        if(GameObject.Find("RoomTemplates").GetComponent<RoomTemplates>().spawnPeriod >= 6.4f && loadedDialogue == false)
+        if(GameObject.Find("RoomTemplates").GetComponent<RoomTemplates>().spawnPeriod >= 5.4f && loadedDialogue == false)
         {
             loadDungeonDialogue();
             loadedDialogue = true;

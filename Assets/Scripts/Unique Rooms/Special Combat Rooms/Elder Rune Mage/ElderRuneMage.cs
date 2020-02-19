@@ -85,39 +85,26 @@ public class ElderRuneMage : Enemy
         animator.enabled = false;
     }
 
-    IEnumerator moveToNewPosition()
+    void moveToNewPosition()
     {
         int newPos = Random.Range(0, 5);
-        Vector3 newPosition = Camera.main.transform.position + magePositions[newPos];
 
         while(newPos == currentPosition)
         {
             newPos = Random.Range(0, 5);
         }
-        updateSpeed(0);
-        while (speed < 12)
-        {
-            updateSpeed(speed + 1);
-            rigidBody2D.velocity = (newPosition - transform.position).normalized * speed;
-            yield return new WaitForSeconds(0.05f);
-        }
 
-        while(Vector2.Distance(transform.position, magePositions[newPos]) > 2)
-        {
-            yield return null;
-        }
+        Vector3 newPosition = Camera.main.transform.position + magePositions[newPos];
 
-        while (speed > 0)
-        {
-            updateSpeed(speed - 2);
-            rigidBody2D.velocity = (newPosition - transform.position).normalized * speed;
-            yield return new WaitForSeconds(0.05f);
-        }
 
-        transform.position = newPosition;
-        rigidBody2D.velocity = Vector3.zero;
-        currentPosition = newPos;
-        movePeriod = 8;
+        LeanTween.move(this.gameObject, newPosition, Vector2.Distance(newPosition, transform.position) / speed).setEaseOutCirc()
+            .setOnComplete(() =>
+            {
+                transform.position = newPosition;
+                rigidBody2D.velocity = Vector3.zero;
+                currentPosition = newPos;
+                movePeriod = 8;
+            });
     }
 
     IEnumerator summonDepthBombs(float angle, Vector3 startPos)
@@ -234,7 +221,7 @@ public class ElderRuneMage : Enemy
 
                 if(attackPeriod > 0 && movePeriod <= 0)
                 {
-                    StartCoroutine(moveToNewPosition());
+                    moveToNewPosition();
                 }
             }
         }

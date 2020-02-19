@@ -6,6 +6,7 @@ public class RapidGrowthMoss : MonoBehaviour
 {
     ConsumableBonus consumableBonus;
     PlayerScript playerScript;
+    [SerializeField] DisplayItem displayItem;
     bool activated = false;
 
     void Start()
@@ -16,6 +17,7 @@ public class RapidGrowthMoss : MonoBehaviour
 
     IEnumerator heal()
     {
+        PlayerProperties.durationUI.addTile(displayItem.displayIcon, 11);
         for(int i = 0; i < 11; i++)
         {
             yield return new WaitForSeconds(1f);

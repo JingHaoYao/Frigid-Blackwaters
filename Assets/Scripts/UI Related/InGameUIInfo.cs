@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class InGameUIInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public GameObject[] allHovers;
+    public GameObject infoPointer;
     public void OnPointerExit(PointerEventData eventData)
     {
         foreach(GameObject hover in allHovers)
@@ -17,6 +18,11 @@ public class InGameUIInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if(infoPointer != null && infoPointer.activeSelf == true)
+        {
+            infoPointer.SetActive(false);
+        }
+
         foreach (GameObject hover in allHovers)
         {
             hover.SetActive(true);

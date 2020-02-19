@@ -47,6 +47,12 @@ public abstract class Enemy: MonoBehaviour
         statuses.Add(status);
         status.duration = duration;
         status.targetEnemy = this;
+        statusUpdated(status);
+    }
+
+    public virtual void statusUpdated(EnemyStatusEffect newStatus)
+    {
+
     }
 
     public void dealDamage(int damageAmount)

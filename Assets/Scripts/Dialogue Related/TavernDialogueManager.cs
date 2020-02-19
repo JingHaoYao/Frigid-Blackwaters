@@ -14,14 +14,6 @@ public class TavernDialogueManager : MonoBehaviour
     void Awake()
     {
         notifications = GameObject.Find("Dialogue Notifications").GetComponent<NotificationBell>();
-
-        /*tavernDialogueNames = new string[tavernDialogues.Length];
-
-        for(int i = 0; i < tavernDialogueNames.Length; i++)
-        {
-            tavernDialogueNames[i] = tavernDialogues[i].name;
-        }*/
-
         loadTavernDialogue();
     }
 
@@ -38,21 +30,44 @@ public class TavernDialogueManager : MonoBehaviour
             {
                 openScript.tavernDialogue = loadDialogue(tavernDialogueNames[0]);
             }
-            else if (MiscData.completedTavernDialogues.Count == 1 && MiscData.completedCheckPoints.Count >= 1)
+            else if (MiscData.completedTavernDialogues.Count == 1 && MiscData.completedMissions.Count >= 1)
             {
                 openScript.tavernDialogue = loadDialogue(tavernDialogueNames[1]);
                 notifications.dialoguesAvailable.Add("Tavern");
             }
-            else if (MiscData.completedTavernDialogues.Count == 2 && MiscData.completedCheckPoints.Count >= 2)
+            else if (MiscData.completedTavernDialogues.Count == 2 && MiscData.completedMissions.Count >= 2)
             {
                 openScript.tavernDialogue = loadDialogue(tavernDialogueNames[2]);
                 notifications.dialoguesAvailable.Add("Tavern");
             }
-            else if(MiscData.completedTavernDialogues.Count == 3 && MiscData.completedCheckPoints.Count >= 3)
+            else if(MiscData.completedTavernDialogues.Count == 3 && MiscData.completedMissions.Count >= 3)
             {
                 openScript.tavernDialogue = loadDialogue(tavernDialogueNames[3]);
                 notifications.dialoguesAvailable.Add("Tavern");
             } 
+            else
+            {
+                openScript.enabled = false;
+                tavernIcon.SetActive(false);
+            }
+        }
+        else if(MiscData.dungeonLevelUnlocked == 2)
+        {
+            if(MiscData.completedTavernDialogues.Count == 4 && MiscData.completedMissions.Count >= 5)
+            {
+                openScript.tavernDialogue = loadDialogue(tavernDialogueNames[4]);
+                notifications.dialoguesAvailable.Add("Tavern");
+            }
+            else if(MiscData.completedTavernDialogues.Count == 5 && MiscData.completedMissions.Count >= 6)
+            {
+                openScript.tavernDialogue = loadDialogue(tavernDialogueNames[5]);
+                notifications.dialoguesAvailable.Add("Tavern");
+            }
+            else if(MiscData.completedTavernDialogues.Count == 6 && MiscData.completedMissions.Count >= 7)
+            {
+                openScript.tavernDialogue = loadDialogue(tavernDialogueNames[6]);
+                notifications.dialoguesAvailable.Add("Tavern");
+            }
             else
             {
                 openScript.enabled = false;

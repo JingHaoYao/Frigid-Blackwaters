@@ -12821,6 +12821,7 @@ GameObject:
   - component: {fileID: 454143565}
   - component: {fileID: 454143564}
   - component: {fileID: 454143566}
+  - component: {fileID: 454143567}
   m_Layer: 0
   m_Name: Hub Dialogue Manager
   m_TagString: Untagged
@@ -12905,6 +12906,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueUI: {fileID: 1124545210}
   dialogueBlackOverlay: {fileID: 55456068}
+--- !u!114 &454143567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454143563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37bd3c7897335264b9741bda20b7306e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponUnlockDialogues:
+  - UnlockSecondLevelWeapons
+  returnNotifications: {fileID: 1511688423}
 --- !u!1 &456800065
 GameObject:
   m_ObjectHideFlags: 0
@@ -13681,6 +13697,9 @@ MonoBehaviour:
   - Tavern Dialogue 2
   - Tavern Dialogue 3
   - Tavern Dialogue 4
+  - Tavern Dialogue 5
+  - Tavern Dialogue 6
+  - Tavern Dialogue 7
   dialogueUI: {fileID: 1124545210}
   tavernIcon: {fileID: 1847294318}
   openScript: {fileID: 474388902}
@@ -54505,6 +54524,18 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 738398126237925002, guid: 7cfdc0eb13e3c9546a05e3828b1e55e4,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bb77c5638c8710e4794133fb36052bcb,
+        type: 3}
+    - target: {fileID: 738398127705775548, guid: 7cfdc0eb13e3c9546a05e3828b1e55e4,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bb77c5638c8710e4794133fb36052bcb,
+        type: 3}
     m_RemovedComponents:
     - {fileID: 3961890691492926284, guid: 7cfdc0eb13e3c9546a05e3828b1e55e4, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7cfdc0eb13e3c9546a05e3828b1e55e4, type: 3}

@@ -25,7 +25,6 @@ public class IntroCutscene : MonoBehaviour
         {
             if(i == 0)
             {
-                Debug.Log("fired");
                 LeanTween.alpha(runeImages[0].GetComponent<RectTransform>(), 1, 1f).setEaseOutCirc();
                 yield return new WaitForSeconds(2f);
             }

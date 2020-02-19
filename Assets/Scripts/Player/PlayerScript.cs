@@ -441,6 +441,23 @@ public class PlayerScript : MonoBehaviour {
         }
     }
 
+    private void loadDebugConsoleIfNotInstantiated()
+    {
+        if(Debug.isDebugBuild == true)
+        {
+            if (FindObjectOfType<ConsoleCommands>() == null)
+            {
+                GameObject debugConsole = Resources.Load<GameObject>("DebugConsole");
+                Instantiate(debugConsole);
+            }
+        }
+    }
+
+    private void Awake()
+    {
+        loadDebugConsoleIfNotInstantiated();
+    }
+
     void Start () {
         itemTemplates = FindObjectOfType<ItemTemplates>();
         inventory = GetComponent<Inventory>();
@@ -453,6 +470,7 @@ public class PlayerScript : MonoBehaviour {
         PlayerProperties.playerShip = this.gameObject;
         PlayerProperties.playerArtifacts = artifacts;
         PlayerProperties.playerInventory = inventory;
+        PlayerProperties.spriteRenderer = this.spriteRenderer;
 
         if (SceneManager.GetActiveScene().name != "Tutorial" && SceneManager.GetActiveScene().name != "Demo Level")
         {

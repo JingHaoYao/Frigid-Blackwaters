@@ -17,7 +17,7 @@ public class BasicProjectile : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        playerShip = FindObjectOfType<PlayerScript>().gameObject;
+        playerShip = PlayerProperties.playerShip;
     }
 
     void Update()
