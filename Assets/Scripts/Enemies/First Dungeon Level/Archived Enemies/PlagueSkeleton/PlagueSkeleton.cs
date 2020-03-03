@@ -9,7 +9,6 @@ public class PlagueSkeleton : Enemy {
     public Sprite facingLeft, facingUp, facingDown, facingRight;
     private float foamTimer = 0;
     public GameObject waterFoam, plaguePuddle;
-    public float travelSpeed = 1;
     private bool spawningPuddle = false;
     private float plaguePeriod = 0;
     private float travelAngle = 0;
@@ -54,15 +53,6 @@ public class PlagueSkeleton : Enemy {
         {
             return 0;
         }
-    }
-
-    bool isCollision(Vector3 pos)
-    {
-        if(Physics2D.OverlapCircle(pos, .5f) == true)
-        {
-            return true;
-        }
-        return false;
     }
 
     Vector3 pickRandPos()
@@ -138,7 +128,7 @@ public class PlagueSkeleton : Enemy {
         {
             float whatAngle = Mathf.Atan2(rigidBody2D.velocity.y, rigidBody2D.velocity.x) * Mathf.Rad2Deg;
             foamTimer += Time.deltaTime;
-            if (foamTimer >= 0.05f * travelSpeed / 3f)
+            if (foamTimer >= 0.05f * speed / 3f)
             {
                 foamTimer = 0;
                 Instantiate(waterFoam, transform.position, Quaternion.Euler(0, 0, whatAngle + 90));
@@ -199,7 +189,6 @@ public class PlagueSkeleton : Enemy {
         randomPos = pickRandPos();
         animator.enabled = false;
         playerShip = GameObject.Find("PlayerShip");
-        updateSpeed(travelSpeed);
 	}
 
 	void Update() {
@@ -256,9 +245,7 @@ public class PlagueSkeleton : Enemy {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
             int damageDealt = collision.gameObject.GetComponent<DamageAmount>().damage;
-            health -= damageDealt;
-            this.GetComponents<AudioSource>()[0].Play();
-            StartCoroutine(hitFrame());
+            dealDamage(damageDealt);
         }
     }
 
@@ -274,6 +261,7 @@ public class PlagueSkeleton : Enemy {
 
     public override void damageProcedure(int damage)
     {
-        
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 }

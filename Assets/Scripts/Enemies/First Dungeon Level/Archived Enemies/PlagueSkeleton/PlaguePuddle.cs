@@ -39,7 +39,7 @@ public class PlaguePuddle : MonoBehaviour {
             if(smokeSpawnPeriod >= 0.1f)
             {
                 smokeSpawnPeriod = 0;
-                Instantiate(smokeParticles, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(0f, 0.3f), 0), Quaternion.identity);
+                Instantiate(smokeParticles, transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(0f, 0.5f), 0), Quaternion.identity);
             }
         }
 	}
@@ -48,7 +48,7 @@ public class PlaguePuddle : MonoBehaviour {
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            playerShip.GetComponent<PlayerScript>().amountDamage += 300;
+            playerShip.GetComponent<PlayerScript>().amountDamage += 500;
         }
     }
 }

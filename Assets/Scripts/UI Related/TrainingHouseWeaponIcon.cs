@@ -9,7 +9,7 @@ public class TrainingHouseWeaponIcon : MonoBehaviour, IPointerEnterHandler, IPoi
     Image image;
     public int whichWeapon = 0;
     public GameObject leftWeapon, rightWeapon, frontWeapon;
-    public GameObject[] templates;
+    public ShipWeaponTemplate[] templates;
     int index = 0;
     public GameObject toolTip;
     public GameObject weaponMenu;
@@ -54,8 +54,8 @@ public class TrainingHouseWeaponIcon : MonoBehaviour, IPointerEnterHandler, IPoi
 
     public void setTemplate(int whichTemplate)
     {
-        ShipWeaponTemplate template = templates[whichTemplate].GetComponent<ShipWeaponTemplate>();
-        if (whichWeaponToEquip == whichWeapon && MiscData.dungeonLevelUnlocked <= template.whichLevelUnlock)
+        ShipWeaponTemplate template = templates[whichTemplate];
+        if (whichWeaponToEquip == whichWeapon && MiscData.dungeonLevelUnlocked >= template.whichLevelUnlock)
         {
             if (whichWeapon == 1)
             {

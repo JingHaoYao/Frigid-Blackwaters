@@ -214,6 +214,7 @@ public class PlayerScript : MonoBehaviour {
                 if (PlayerItems.activeArtifactsIDs[i] == null)
                 {
                     PlayerItems.activeArtifactsIDs[i] = item.name;
+                    break;
                 }
             }
         }

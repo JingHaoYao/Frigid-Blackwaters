@@ -70,6 +70,7 @@ public class DialogueUI : MonoBehaviour
     
     IEnumerator loadDialogue(float waitDuration)
     {
+        playerScript.playerDead = true;
         transform.GetChild(0).gameObject.SetActive(false);
         blackOverlayAnimator.enabled = false;
         if (targetDialogue.originalMusic == "Dungeon Ambiance")
@@ -115,7 +116,6 @@ public class DialogueUI : MonoBehaviour
         dialogueText.color = targetDialogue.textColor;
         dialogueName.color = targetDialogue.textColor;
         dialogueName.text = targetDialogue.dialogueNames[0];
-        playerScript.playerDead = true;
 
         if (dialogueIndex < targetDialogue.panelSprites.Length)
         {

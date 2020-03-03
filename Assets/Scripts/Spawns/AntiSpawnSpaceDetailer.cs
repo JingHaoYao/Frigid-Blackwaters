@@ -236,13 +236,15 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     enemy = Resources.Load<GameObject>("Regular Enemies/First Dungeon Level/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
                     if (enemy != null)
                     {
-                        break;
+                        GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
+                        Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                        EnemyPool.addEnemy(enemyClass);
+                        return enemyClass.dangerValue;
                     }
                 }
-                GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
-                EnemyPool.addEnemy(enemyClass);
-                return enemyClass.dangerValue;
+
+
+                return 0;
             }
             else if (tier == 2)
             {
@@ -253,17 +255,19 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     enemy = Resources.Load<GameObject>("Regular Enemies/First Dungeon Level/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
                     if(enemy != null)
                     {
-                        break;
+                        GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
+                        Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                        EnemyPool.addEnemy(enemyClass);
+                        return enemyClass.dangerValue;
                     }
                 }
                 if(enemy == null)
                 {
                     Debug.LogError(enemy + " " + template.potentialEnemyNames[index]);
                 }
-                GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
-                EnemyPool.addEnemy(enemyClass);
-                return enemyClass.dangerValue;
+
+
+                return 0;
             }
             else if (tier == 3)
             {
@@ -274,13 +278,15 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     enemy = Resources.Load<GameObject>("Regular Enemies/First Dungeon Level/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
                     if (enemy != null)
                     {
-                        break;
+                        GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
+                        Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                        EnemyPool.addEnemy(enemyClass);
+                        return enemyClass.dangerValue;
                     }
                 }
-                GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
-                EnemyPool.addEnemy(enemyClass);
-                return enemyClass.dangerValue;
+
+
+                return 0;
             }
             else if (tier == 4)
             {
@@ -291,13 +297,14 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     enemy = Resources.Load<GameObject>("Regular Enemies/First Dungeon Level/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
                     if (enemy != null)
                     {
-                        break;
+                        GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
+                        Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                        EnemyPool.addEnemy(enemyClass);
+                        return enemyClass.dangerValue;
                     }
                 }
-                GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
-                EnemyPool.addEnemy(enemyClass);
-                return enemyClass.dangerValue;
+
+                return 0;
             }
             else
             {

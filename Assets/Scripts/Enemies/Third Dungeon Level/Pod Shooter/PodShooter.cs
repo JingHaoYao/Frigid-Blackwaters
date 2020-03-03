@@ -86,7 +86,7 @@ public class PodShooter : Enemy
         else
         {
             rigidBody2D.velocity = Vector3.zero;
-            if (isAttacking == false && Vector2.Distance(transform.position, randomPos) < 1f)
+            if (isAttacking == false && Vector2.Distance(transform.position, randomPos) < 1f && stopAttacking == false)
             {
                 StartCoroutine(shootDarts());
             }

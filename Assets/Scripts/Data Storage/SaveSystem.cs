@@ -245,6 +245,10 @@ public static class SaveSystem
                 MiscData.completedHubReturnDialogues.Add(id);
             }
         }
+        else
+        {
+            Debug.Log("Data is null");
+        }
     }
 
     public static void LoadOptions(SaveOptions saveOptions)

@@ -16,7 +16,7 @@ public class AnemoneShot : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         mainCamera = Camera.main;
-        playerShip = GameObject.Find("PlayerShip");
+        playerShip = PlayerProperties.playerShip;
         Invoke("destroyBall", 0.6f);
     }
 
