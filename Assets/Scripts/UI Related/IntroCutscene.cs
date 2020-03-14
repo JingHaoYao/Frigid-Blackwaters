@@ -42,11 +42,16 @@ public class IntroCutscene : MonoBehaviour
             if(i == 8)
             {
                 LeanTween.alpha(runeImages[4].GetComponent<RectTransform>(), 1, 1f).setEaseOutCirc();
-                yield return new WaitForSeconds(4f);
+                yield return new WaitForSeconds(2f);
             }
         }
 
-        if (inFadeAnim == false)
+        while (!Input.GetKeyDown(KeyCode.Space))
+        {
+            yield return null;
+        }
+
+        if (inFadeAnim == false )
         {
             StartCoroutine(cutSceneEnd());
         }

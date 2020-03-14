@@ -34,7 +34,7 @@ public class GlaiveProjectile : PlayerProjectile
     private void Start()
     {
         directionTravelling = pickDirectionTravel();
-        triggerWeaponFireFlag();
+        triggerWeaponFireFlag(transform.position, directionTravelling);
         originalSpawnPosition = transform.position;
         target = transform.position + new Vector3(Mathf.Cos(directionTravelling * Mathf.Deg2Rad), Mathf.Sin(directionTravelling * Mathf.Deg2Rad)) * distanceTravel;
         StartCoroutine(spinDamage());

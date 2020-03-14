@@ -225,170 +225,95 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
 
     int spawnEnemy(int tier, EnemyRoomTemplate template, Vector3 spawnPos)
     {
-        if (dialogueManager.whatDungeonLevel == 1)
+        string dungeonName = "";
+        switch (dialogueManager.whatDungeonLevel)
         {
-            if (tier == 1)
-            {
-                int index = Random.Range(0, template.potentialEnemyNames.Length);
-                GameObject enemy = null;
-                for (int i = 1; i < tier + 1; i++)
-                {
-                    enemy = Resources.Load<GameObject>("Regular Enemies/First Dungeon Level/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
-                    if (enemy != null)
-                    {
-                        GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                        Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
-                        EnemyPool.addEnemy(enemyClass);
-                        return enemyClass.dangerValue;
-                    }
-                }
-
-
-                return 0;
-            }
-            else if (tier == 2)
-            {
-                int index = Random.Range(0, template.potentialEnemyNames.Length);
-                GameObject enemy = null;
-                for (int i = 1; i < tier + 1; i++)
-                {
-                    enemy = Resources.Load<GameObject>("Regular Enemies/First Dungeon Level/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
-                    if(enemy != null)
-                    {
-                        GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                        Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
-                        EnemyPool.addEnemy(enemyClass);
-                        return enemyClass.dangerValue;
-                    }
-                }
-                if(enemy == null)
-                {
-                    Debug.LogError(enemy + " " + template.potentialEnemyNames[index]);
-                }
-
-
-                return 0;
-            }
-            else if (tier == 3)
-            {
-                int index = Random.Range(0, template.potentialEnemyNames.Length);
-                GameObject enemy = null;
-                for (int i = 1; i < tier + 1; i++)
-                {
-                    enemy = Resources.Load<GameObject>("Regular Enemies/First Dungeon Level/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
-                    if (enemy != null)
-                    {
-                        GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                        Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
-                        EnemyPool.addEnemy(enemyClass);
-                        return enemyClass.dangerValue;
-                    }
-                }
-
-
-                return 0;
-            }
-            else if (tier == 4)
-            {
-                int index = Random.Range(0, template.potentialEnemyNames.Length);
-                GameObject enemy = null;
-                for (int i = 1; i < tier + 1; i++)
-                {
-                    enemy = Resources.Load<GameObject>("Regular Enemies/First Dungeon Level/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
-                    if (enemy != null)
-                    {
-                        GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                        Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
-                        EnemyPool.addEnemy(enemyClass);
-                        return enemyClass.dangerValue;
-                    }
-                }
-
-                return 0;
-            }
-            else
-            {
-                return 0;
-            }
+            case 1:
+                dungeonName = "First Dungeon Level";
+                break;
+            case 2:
+                dungeonName = "Second Dungeon Level";
+                break;
+            case 3:
+                dungeonName = "Third Dungeon Level";
+                break;
         }
-        else if(dialogueManager.whatDungeonLevel == 2)
+
+        if (tier == 1)
         {
-            if (tier == 1)
+            int index = Random.Range(0, template.potentialEnemyNames.Length);
+            GameObject enemy = null;
+            for (int i = 1; i < tier + 1; i++)
             {
-                int index = Random.Range(0, template.potentialEnemyNames.Length);
-                GameObject enemy = null;
-                for (int i = 1; i < tier + 1; i++)
+                enemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
+                if (enemy != null)
                 {
-                    enemy = Resources.Load<GameObject>("Regular Enemies/Second Dungeon Level/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
-                    if (enemy != null)
-                    {
-                        break;
-                    }
+                    GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
+                    Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                    EnemyPool.addEnemy(enemyClass);
+                    return enemyClass.dangerValue;
                 }
-                GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
-                EnemyPool.addEnemy(enemyClass);
-                return enemyClass.dangerValue;
             }
-            else if (tier == 2)
+
+            return 0;
+        }
+        else if (tier == 2)
+        {
+            int index = Random.Range(0, template.potentialEnemyNames.Length);
+            GameObject enemy = null;
+            for (int i = 1; i < tier + 1; i++)
             {
-                int index = Random.Range(0, template.potentialEnemyNames.Length);
-                GameObject enemy = null;
-                for (int i = 1; i < tier + 1; i++)
+                enemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
+                if(enemy != null)
                 {
-                    enemy = Resources.Load<GameObject>("Regular Enemies/Second Dungeon Level/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
-                    if (enemy != null)
-                    {
-                        break;
-                    }
+                    GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
+                    Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                    EnemyPool.addEnemy(enemyClass);
+                    return enemyClass.dangerValue;
                 }
-                if (enemy == null)
-                {
-                    Debug.LogError(enemy + " " + template.potentialEnemyNames[index]);
-                }
-                GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
-                EnemyPool.addEnemy(enemyClass);
-                return enemyClass.dangerValue;
             }
-            else if (tier == 3)
+            if(enemy == null)
             {
-                int index = Random.Range(0, template.potentialEnemyNames.Length);
-                GameObject enemy = null;
-                for (int i = 1; i < tier + 1; i++)
-                {
-                    enemy = Resources.Load<GameObject>("Regular Enemies/Second Dungeon Level/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
-                    if (enemy != null)
-                    {
-                        break;
-                    }
-                }
-                GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
-                EnemyPool.addEnemy(enemyClass);
-                return enemyClass.dangerValue;
+                Debug.LogError(enemy + " " + template.potentialEnemyNames[index]);
             }
-            else if (tier == 4)
+
+            return 0;
+        }
+        else if (tier == 3)
+        {
+            int index = Random.Range(0, template.potentialEnemyNames.Length);
+            GameObject enemy = null;
+            for (int i = 1; i < tier + 1; i++)
             {
-                int index = Random.Range(0, template.potentialEnemyNames.Length);
-                GameObject enemy = null;
-                for (int i = 1; i < tier + 1; i++)
+                enemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
+                if (enemy != null)
                 {
-                    enemy = Resources.Load<GameObject>("Regular Enemies/Second Dungeon Level/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
-                    if (enemy != null)
-                    {
-                        break;
-                    }
+                    GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
+                    Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                    EnemyPool.addEnemy(enemyClass);
+                    return enemyClass.dangerValue;
                 }
-                GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-                Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
-                EnemyPool.addEnemy(enemyClass);
-                return enemyClass.dangerValue;
             }
-            else
+
+            return 0;
+        }
+        else if (tier == 4)
+        {
+            int index = Random.Range(0, template.potentialEnemyNames.Length);
+            GameObject enemy = null;
+            for (int i = 1; i < tier + 1; i++)
             {
-                return 0;
+                enemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
+                if (enemy != null)
+                {
+                    GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
+                    Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                    EnemyPool.addEnemy(enemyClass);
+                    return enemyClass.dangerValue;
+                }
             }
+
+            return 0;
         }
         else
         {
@@ -398,53 +323,31 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
 
     GameObject pickEmptyNonTemplateEnemy(bool templateEnemy)
     {
-        if (dialogueManager.whatDungeonLevel == 1)
+        string dungeonName = "";
+        switch (dialogueManager.whatDungeonLevel)
         {
-            if (templateEnemy == true)
-            {
-                string enemy = enemyRoomTemplates.nonRoomTemplateEnemyNames[Random.Range(0, enemyRoomTemplates.nonRoomTemplateEnemyNames.Length)];
-                GameObject pickedEnemy = Resources.Load<GameObject>("Regular Enemies/First Dungeon Level/Non Template Enemies/" + enemy + "/" + enemy);
-                return pickedEnemy;
-            }
-            else
-            {
-                string enemy = enemyRoomTemplates.emptyRoomEnemyNames[Random.Range(0, enemyRoomTemplates.emptyRoomEnemyNames.Length)];
-                GameObject emptyRoomEnemy = Resources.Load<GameObject>("Regular Enemies/First Dungeon Level/Empty Room Enemies/" + enemy + "/" + enemy);
-                return emptyRoomEnemy;
-            }
+            case 1:
+                dungeonName = "First Dungeon Level";
+                break;
+            case 2:
+                dungeonName = "Second Dungeon Level";
+                break;
+            case 3:
+                dungeonName = "Third Dungeon Level";
+                break;
         }
-        else if(dialogueManager.whatDungeonLevel == 2)
+
+        if (templateEnemy == true)
         {
-            if (templateEnemy == true)
-            {
-                if (enemyRoomTemplates.nonRoomTemplateEnemyNames.Length > 0)
-                {
-                    string enemy = enemyRoomTemplates.nonRoomTemplateEnemyNames[Random.Range(0, enemyRoomTemplates.nonRoomTemplateEnemyNames.Length)];
-                    GameObject pickedEnemy = Resources.Load<GameObject>("Regular Enemies/Second Dungeon Level/Non Template Enemies/" + enemy + "/" + enemy);
-                    return pickedEnemy;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            else
-            {
-                if (enemyRoomTemplates.emptyRoomEnemyNames.Length > 0)
-                {
-                    string enemy = enemyRoomTemplates.emptyRoomEnemyNames[Random.Range(0, enemyRoomTemplates.emptyRoomEnemyNames.Length)];
-                    GameObject emptyRoomEnemy = Resources.Load<GameObject>("Regular Enemies/Second Dungeon Level/Empty Room Enemies/" + enemy + "/" + enemy);
-                    return emptyRoomEnemy;
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            string enemy = enemyRoomTemplates.nonRoomTemplateEnemyNames[Random.Range(0, enemyRoomTemplates.nonRoomTemplateEnemyNames.Length)];
+            GameObject pickedEnemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Non Template Enemies/" + enemy + "/" + enemy);
+            return pickedEnemy;
         }
         else
         {
-            return null;
+            string enemy = enemyRoomTemplates.emptyRoomEnemyNames[Random.Range(0, enemyRoomTemplates.emptyRoomEnemyNames.Length)];
+            GameObject emptyRoomEnemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Empty Room Enemies/" + enemy + "/" + enemy);
+            return emptyRoomEnemy;
         }
     }
 

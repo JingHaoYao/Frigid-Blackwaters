@@ -41,14 +41,15 @@ public class ArmouredSkeleton : Enemy {
         {
             animator.SetTrigger("Shatter3");
         }
+        EnemyPool.enemyPool.Add(null);
         yield return new WaitForSeconds(6f / 12f);
         Destroy(this.gameObject);
+        animator.enabled = false;
         GameObject spawnedSpearMan = Instantiate(unarmouredSpearman, transform.position, Quaternion.identity);
         EnemyPool.addEnemy(spawnedSpearMan.GetComponent<Enemy>());
         this.GetComponent<Collider2D>().enabled = false;
         spawnedSpearMan.GetComponent<SkeletalSpearman>().health = 1;
         spawnedSpearMan.GetComponent<SkeletalSpearman>().travelAngle = travelAngle;
-        animator.enabled = false;
     }
 
     void spawnFoam()

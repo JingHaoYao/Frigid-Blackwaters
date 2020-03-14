@@ -7,6 +7,8 @@ public class EnemyShieldEffect : MonoBehaviour
     public GameObject trackObject;
     public Sprite[] views;
     public float trackingAngle = 0;
+    [SerializeField] private float radius = 0.8f;
+    [SerializeField] private float offSet = 0.7f;
 
     int pickView()
     {
@@ -49,7 +51,7 @@ public class EnemyShieldEffect : MonoBehaviour
         {
             trackingAngle = 0;
         }
-        transform.position = trackObject.transform.position + Vector3.up * 0.7f + new Vector3(Mathf.Cos(trackingAngle), Mathf.Sin(trackingAngle)) * 0.8f;
+        transform.position = trackObject.transform.position + Vector3.up * offSet + new Vector3(Mathf.Cos(trackingAngle), Mathf.Sin(trackingAngle)) * radius;
         this.GetComponent<SpriteRenderer>().sprite = views[pickView() - 1];
     }
 }

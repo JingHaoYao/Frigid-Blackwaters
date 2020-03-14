@@ -14,7 +14,6 @@ public class ItemTemplates : MonoBehaviour {
     public string[] tier3Artifacts;
     public string[] tier4Artifacts;
     public string[] consumables;
-    public string[] darkMagics;
     public string[] uniqueConsumables;
     public string[] uniqueArtifacts;
 
@@ -55,11 +54,6 @@ public class ItemTemplates : MonoBehaviour {
         for (int i = 0; i < consumables.Length; i++)
         {
             itemDB.Add(consumables[i], "Items/First Dungeon Stage/Consumables/Regular Consumables/");
-        }
-
-        for (int i = 0; i < darkMagics.Length; i++)
-        {
-            itemDB.Add(darkMagics[i], "Items/First Dungeon Stage/Consumables/Dark Magic Consumables/");
         }
 
         for (int i = 0; i < uniqueArtifacts.Length; i++)
@@ -152,8 +146,8 @@ public class ItemTemplates : MonoBehaviour {
                 case 5:
                     spawnedItem = Resources.Load<GameObject>("Items/First Dungeon Stage/Consumables/Regular Consumables/" + consumables[Random.Range(0, consumables.Length)]);
                     break;
-                case 6:
-                    spawnedItem = Resources.Load<GameObject>("Items/First Dungeon Stage/Consumables/Dark Magic Consumables/" + darkMagics[Random.Range(0, darkMagics.Length)]);
+                default:
+                    spawnedItem = Resources.Load<GameObject>("Items/First Dungeon Stage/Consumables/Regular Consumables/" + consumables[Random.Range(0, consumables.Length)]);
                     break;
             }
             return Instantiate(spawnedItem);
@@ -178,7 +172,7 @@ public class ItemTemplates : MonoBehaviour {
                 case 5:
                     spawnedItem = Resources.Load<GameObject>("Items/Second Dungeon Level/Consumables/Regular Consumables/" + secondLevelConsumables[Random.Range(0, secondLevelConsumables.Length)]);
                     break;
-                case 6:
+                default:
                     spawnedItem = Resources.Load<GameObject>("Items/Second Dungeon Level/Consumables/Regular Consumables/" + secondLevelConsumables[Random.Range(0, secondLevelConsumables.Length)]);
                     break;
             }

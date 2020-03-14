@@ -147,7 +147,7 @@ public class VineWhipper : Enemy
 
     public override void statusUpdated(EnemyStatusEffect newStatus)
     {
-        if (newStatus.name == "Bloom Status Effect" || newStatus.name == "Bloom Status Effect (Clone)")
+        if (newStatus.name == "Bloom Status Effect" || newStatus.name == "Bloom Status Effect(Clone)")
         {
             this.whipHitBox.GetComponent<DamageHitBox>().damageAmount += 150;
         }

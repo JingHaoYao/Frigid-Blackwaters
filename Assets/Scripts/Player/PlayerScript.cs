@@ -494,6 +494,15 @@ public class PlayerScript : MonoBehaviour {
             FindObjectOfType<PlayerHealNumbers>().showHealing(amountHealing, shipHealthMAX);
             trueDamage -= amountHealing;
         }
+
+        foreach(GameObject artifact in artifacts.activeArtifacts)
+        {
+            ArtifactEffect effect = artifact.GetComponent<ArtifactEffect>();
+            if (effect != null)
+            {
+                effect.healed(amountHealing);
+            }
+        }
     }
 	
 	void Update () {
@@ -531,9 +540,12 @@ public class PlayerScript : MonoBehaviour {
                 if (shipRooted == false)
                 {
                     rigidBody2D.velocity = directionMove * Mathf.Clamp((boatSpeed + speedBonus + conSpeedBonus + upgradeSpeedBonus + enemySpeedModifier), 0, int.MaxValue) + momentumVector + enemyMomentumVector; //speed bonus
+                    PlayerProperties.currentPlayerTravelDirection = (Mathf.Atan2(directionMove.y, directionMove.x) * Mathf.Rad2Deg + 360) % 360;
+                    PlayerProperties.shipTravellingVector = rigidBody2D.velocity;
                 }
                 else
                 {
+                    PlayerProperties.shipTravellingVector = Vector3.zero;
                     rigidBody2D.velocity = Vector3.zero;
                 }
                 whatAngleTraveled = Mathf.Atan2(directionMove.y, directionMove.x) * Mathf.Rad2Deg;

@@ -162,7 +162,7 @@ public class SkeletalScytheman : Enemy {
 
         float angleToShip = (360 + Mathf.Atan2(PlayerProperties.playerShipPosition.y - transform.position.y, PlayerProperties.playerShipPosition.x - transform.position.x) * Mathf.Rad2Deg) % 360;
 
-        if (withinRange == false && touchingShip == false)
+        if (withinRange == false && touchingShip == false && attacking == false)
         {
             moveTowards(travelAngle);
             animator.enabled = false;

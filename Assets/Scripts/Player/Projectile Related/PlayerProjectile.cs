@@ -8,14 +8,14 @@ public class PlayerProjectile : MonoBehaviour
     public bool forceShot;
     public List<WeaponProperties.WeaponElement> weaponElements;
 
-    public void triggerWeaponFireFlag()
+    public void triggerWeaponFireFlag(Vector3 initialPosition, float angle)
     {
         if (whichWeaponFrom == 1)
         {
             foreach (ArtifactSlot slot in PlayerProperties.playerArtifacts.artifactSlots)
             {
                 if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                    slot.displayInfo.GetComponent<ArtifactEffect>().firedFrontWeapon(new GameObject[1] { this.gameObject });
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedFrontWeapon(new GameObject[1] { this.gameObject }, initialPosition, angle);
             }
         }
         else if (whichWeaponFrom == 2)
@@ -23,7 +23,7 @@ public class PlayerProjectile : MonoBehaviour
             foreach (ArtifactSlot slot in PlayerProperties.playerArtifacts.artifactSlots)
             {
                 if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                    slot.displayInfo.GetComponent<ArtifactEffect>().firedLeftWeapon(new GameObject[1] { this.gameObject });
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedLeftWeapon(new GameObject[1] { this.gameObject }, initialPosition, angle);
             }
         }
         else
@@ -31,7 +31,7 @@ public class PlayerProjectile : MonoBehaviour
             foreach (ArtifactSlot slot in PlayerProperties.playerArtifacts.artifactSlots)
             {
                 if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                    slot.displayInfo.GetComponent<ArtifactEffect>().firedRightWeapon(new GameObject[1] { this.gameObject });
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedRightWeapon(new GameObject[1] { this.gameObject }, initialPosition, angle);
             }
         }
     }

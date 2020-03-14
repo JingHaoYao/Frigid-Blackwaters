@@ -143,7 +143,7 @@ public class PodSnapper : Enemy
 
     public override void statusUpdated(EnemyStatusEffect newStatus)
     {
-        if (newStatus.name == "Bloom Status Effect" || newStatus.name == "Bloom Status Effect (Clone)")
+        if (newStatus.name == "Bloom Status Effect" || newStatus.name == "Bloom Status Effect(Clone)")
         {
             damageHitBox.damageAmount = Mathf.RoundToInt(damageHitBox.damageAmount * 1.5f);
         }

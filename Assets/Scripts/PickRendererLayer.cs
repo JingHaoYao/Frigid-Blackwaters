@@ -13,7 +13,7 @@ public class PickRendererLayer : MonoBehaviour {
         rend.sortingOrder = (200 - (int)((transform.position.y + offset) * 10)) + rendLayerOffset;
     }
 
-    void Start () {
+    void OnEnable() {
         rend = GetComponent<SpriteRenderer>();
         pickRendererLayer();
         if(updateOnce == false)

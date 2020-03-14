@@ -2,21 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ArtifactEffect : MonoBehaviour
+public class ArtifactEffect : MonoBehaviour
 {
-    public abstract void addedKill(string tag, Vector3 deathPos);
+    public virtual void addedKill(string tag, Vector3 deathPos, Enemy enemy) { }
     // Whenever the player takes damage
-    public abstract void tookDamage(int amountDamage, Enemy enemy);
+    public virtual void tookDamage(int amountDamage, Enemy enemy) { }
     // Whenever the player fires the left weapon, and so on
-    public abstract void firedLeftWeapon(GameObject[] bullet);
-    public abstract void firedFrontWeapon(GameObject[] bullet);
-    public abstract void firedRightWeapon(GameObject[] bullet);
+    public virtual void firedLeftWeapon(GameObject[] bullet, Vector3 spawnPosition, float angleTravel) { }
+    public virtual void firedFrontWeapon(GameObject[] bullet, Vector3 spawnPosition, float angleTravel) { }
+    public virtual void firedRightWeapon(GameObject[] bullet, Vector3 spawnPosition, float angleTravel) { }
     // Whenever the player enters a previously unentered room
-    public abstract void exploredNewRoom(int whatRoomType);
+    public virtual void exploredNewRoom(int whatRoomType) { }
     // Whenever the player picks up an item (updates the inventory)
-    public abstract void updatedInventory();
+    public virtual void updatedInventory() { }
     // whenever the player dashes
-    public abstract void playerDashed();
+    public virtual void playerDashed() { }
 
-    public abstract void dealtDamage(int damageDealt, Enemy enemy);
+    public virtual void dealtDamage(int damageDealt, Enemy enemy) { }
+
+    public virtual void healed(int healingAmount) { }
 }

@@ -32,7 +32,7 @@ public class ShotgunPlume : WeaponFireScript {
                 instant.GetComponent<ShotgunRound>().angleTravel = baseAngle - start + 10 * i;
                 bulletList[i] = instant;
             }
-            triggerWeaponFireFlag(bulletList);
+            triggerWeaponFireFlag(bulletList, transform.position, baseAngle - start + 10);
         }
         else
         {
@@ -42,7 +42,7 @@ public class ShotgunPlume : WeaponFireScript {
                 instant.GetComponent<ShotgunRound>().angleTravel = baseAngle - 2 + 2 * i;
                 bulletList[i] = instant;
             }
-            triggerWeaponFireFlag(bulletList);
+            triggerWeaponFireFlag(bulletList, transform.position, baseAngle);
         }
     }
 

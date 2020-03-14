@@ -22,11 +22,22 @@ public static class EnemyPool
 
     public static void removeEnemy(Enemy enemy)
     {
-        //logEnemyPool();
         if (enemyPool.Contains(enemy))
         {
             enemyPool.Remove(enemy);
         }
+
+        List<Enemy> filteredEnemies = new List<Enemy>();
+        foreach(Enemy enemyElement in enemyPool)
+        {
+            if(enemyElement != null)
+            {
+                filteredEnemies.Add(enemyElement);
+            }
+        }
+
+        enemyPool.Clear();
+        enemyPool.AddRange(filteredEnemies);
     }
 
     public static bool isPoolEmpty()

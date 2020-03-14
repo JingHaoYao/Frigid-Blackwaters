@@ -19,6 +19,7 @@ public class BloomStatusEffect : EnemyStatusEffect
     private void Start()
     {
         buffEnemy();
+        enemySpriteRenderer = targetEnemy.GetComponent<SpriteRenderer>();
         StartCoroutine(followEnemy());
     }
 

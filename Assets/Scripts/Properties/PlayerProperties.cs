@@ -13,6 +13,8 @@ public class PlayerProperties
     public static Artifacts playerArtifacts;
     public static Inventory playerInventory;
     public static SpriteRenderer spriteRenderer;
+    public static float currentPlayerTravelDirection;
+    public static Vector3 shipTravellingVector;
 
     public static PlayerArmorEffect armorIndicator;
     public static DurationUI durationUI;

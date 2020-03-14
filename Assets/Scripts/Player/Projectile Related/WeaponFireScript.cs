@@ -58,17 +58,23 @@ public class WeaponFireScript : MonoBehaviour {
             instant.GetComponent<CannonRound>().forceShot = forceFired;
         }
 
-        triggerWeaponFireFlag(new GameObject[1] { instant });
+        triggerWeaponFireFlag(new GameObject[1] { instant }, transform.position, pickDirectionTravel());
     }
 
-    public void triggerWeaponFireFlag(GameObject[] instants)
+    float pickDirectionTravel()
+    {
+        Vector3 cursorPosition = PlayerProperties.cursorPosition;
+        return (360 + Mathf.Atan2(cursorPosition.y - transform.position.y, cursorPosition.x - transform.position.x) * Mathf.Rad2Deg) % 360;
+    }
+
+    public void triggerWeaponFireFlag(GameObject[] instants, Vector3 whichPositionFiredFrom, float angleTravel)
     {
         if (whichWeapon == 1)
         {
             foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
             {
                 if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                    slot.displayInfo.GetComponent<ArtifactEffect>().firedFrontWeapon(instants);
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedFrontWeapon(instants, whichPositionFiredFrom, angleTravel);
             }
         }
         else if (whichWeapon == 2)
@@ -76,7 +82,7 @@ public class WeaponFireScript : MonoBehaviour {
             foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
             {
                 if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                    slot.displayInfo.GetComponent<ArtifactEffect>().firedLeftWeapon(instants);
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedLeftWeapon(instants, whichPositionFiredFrom, angleTravel);
             }
         }
         else
@@ -84,7 +90,7 @@ public class WeaponFireScript : MonoBehaviour {
             foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
             {
                 if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                    slot.displayInfo.GetComponent<ArtifactEffect>().firedRightWeapon(instants);
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedRightWeapon(instants, whichPositionFiredFrom, angleTravel);
             }
         }
     }

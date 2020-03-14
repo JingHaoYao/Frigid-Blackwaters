@@ -220,7 +220,7 @@ public class NettleBearer : Enemy
 
     public override void statusUpdated(EnemyStatusEffect newStatus)
     {
-        if (newStatus.name == "Bloom Status Effect" || newStatus.name == "Bloom Status Effect (Clone)")
+        if (newStatus.name == "Bloom Status Effect" || newStatus.name == "Bloom Status Effect(Clone)")
         {
             bloomed = true;
         }

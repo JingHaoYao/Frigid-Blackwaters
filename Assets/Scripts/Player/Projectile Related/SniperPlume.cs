@@ -43,7 +43,7 @@ public class SniperPlume : WeaponFireScript {
                 }
             }
 
-            triggerWeaponFireFlag(new GameObject[1] { bulletInstant });
+            triggerWeaponFireFlag(new GameObject[1] { bulletInstant }, transform.position, baseAngle);
         }
         else
         {
@@ -78,7 +78,7 @@ public class SniperPlume : WeaponFireScript {
                     GameObject bulletInstant = Instantiate(bullet, targetEnemy.transform.position + new Vector3(0, 0.4f, 0), Quaternion.Euler(0, 0, baseAngle + 180));
                     firedBullets.Add(bulletInstant);
                     closestDistance = int.MaxValue;
-                    triggerWeaponFireFlag(firedBullets.ToArray());
+                    triggerWeaponFireFlag(firedBullets.ToArray(), transform.position, baseAngle);
                 }
             }
         }

@@ -26,7 +26,7 @@ public abstract class Enemy: MonoBehaviour
         foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
         {
             if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                slot.displayInfo.GetComponent<ArtifactEffect>().addedKill(this.gameObject.tag, transform.position);
+                slot.displayInfo.GetComponent<ArtifactEffect>().addedKill(this.gameObject.tag, transform.position, this);
         }
     }
 
@@ -48,6 +48,18 @@ public abstract class Enemy: MonoBehaviour
         status.duration = duration;
         status.targetEnemy = this;
         statusUpdated(status);
+    }
+
+    public bool containsStatus(string statusName)
+    {
+        foreach(EnemyStatusEffect statusEffect in statuses)
+        {
+            if(statusEffect != null && (statusEffect.name == statusName || statusEffect.name == statusName + "(Clone)"))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public virtual void statusUpdated(EnemyStatusEffect newStatus)
@@ -78,8 +90,8 @@ public abstract class Enemy: MonoBehaviour
                 {
                     slot.displayInfo.GetComponent<ArtifactEffect>().dealtDamage(damageDealt, this);
                 }
-            }
 
+            }
             if (health <= 0)
             {
                 destroyProcedure();

@@ -109,7 +109,7 @@ public class MushroomMan : Enemy
             .setEaseInOutCubic()
             .setOnComplete(() => StartCoroutine(playAttackAnimation(1)))
             .setOnUpdate((float val) => {
-                if (stopAttacking == false) {
+                if (stopAttacking == true) {
                     LeanTween.cancel(this.gameObject);
                 }
             });
@@ -147,7 +147,7 @@ public class MushroomMan : Enemy
 
     public override void statusUpdated(EnemyStatusEffect newStatus)
     {
-        if(newStatus.name == "Bloom Status Effect" || newStatus.name == "Bloom Status Effect (Clone)")
+        if(newStatus.name == "Bloom Status Effect" || newStatus.name == "Bloom Status Effect(Clone)")
         {
             bloomed = true;
         }

@@ -46,7 +46,7 @@ public class DragonBreathFireAttack : PlayerProjectile {
             playerScript.stopRotatePeriod = stopRotatePeriod;
         }
 
-        triggerWeaponFireFlag();
+        triggerWeaponFireFlag(transform.position, pickDirectionTravel());
     }
 
 	void Update () {

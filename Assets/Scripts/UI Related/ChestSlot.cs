@@ -11,10 +11,14 @@ public class ChestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public DisplayItem displayInfo;
     Inventory inventory;
     public GameObject toolTip;
+    ItemTemplates itemTemplates;
+    GameObject presentItems;
 
     private void Start()
     {
-        inventory = GameObject.Find("PlayerShip").GetComponent<Inventory>();
+        inventory = PlayerProperties.playerInventory;
+        itemTemplates = FindObjectOfType<ItemTemplates>();
+        presentItems = GameObject.Find("PresentItems");
         toolTip = inventory.toolTip;
     }
 
@@ -48,6 +52,14 @@ public class ChestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     bool checkExistingGold()
     {
+        while (displayInfo.goldValue > 1000 && inventory.itemList.Count < PlayerItems.maxInventorySize)
+        {
+            displayInfo.goldValue -= 1000;
+            GameObject newGoldItem = Instantiate(itemTemplates.gold);
+            newGoldItem.GetComponent<DisplayItem>().goldValue = 1000;
+            inventory.itemList.Add(newGoldItem);
+        }
+
         for (int i = inventory.itemList.Count - 1; i >= 0; i--)
         {
             if (inventory.itemList[i].GetComponent<DisplayItem>().goldValue < 1000 && inventory.itemList[i].GetComponent<DisplayItem>().goldValue > 0)
@@ -84,7 +96,7 @@ public class ChestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 FindObjectOfType<AudioManager>().PlaySound("Pick Up Gold");
             }
 
-            if (inventory.itemList.Count < inventory.inventorySlots.Length)
+            if (inventory.itemList.Count < PlayerItems.maxInventorySize)
             {
                 int index = 0;
                 for (int i = 0; i < targetChest.chestSlots.Length; i++)
@@ -100,10 +112,10 @@ public class ChestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                     inventory.itemList.Add(displayInfo.gameObject);
                     FindObjectOfType<AudioManager>().PlaySound("Receive Item");
                 }
-                inventory.UpdateUI();
                 targetChest.chestItems[index] = null;
-                targetChest.UpdateUI();
             }
+            inventory.UpdateUI();
+            targetChest.UpdateUI();
         }
     }
 

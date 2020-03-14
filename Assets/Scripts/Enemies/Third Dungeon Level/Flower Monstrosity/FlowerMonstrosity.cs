@@ -30,6 +30,8 @@ public class FlowerMonstrosity : Enemy
     int whatView = 1;
     int mirror = 1;
 
+    private bool bloomed = false;
+
     void spawnFoam()
     {
         if (rigidBody2D.velocity.magnitude != 0)
@@ -108,7 +110,6 @@ public class FlowerMonstrosity : Enemy
 
     IEnumerator spawnSplashes()
     {
-
         waterSound.Play();
         for (int i = 0; i < 6; i++)
         {
@@ -138,7 +139,33 @@ public class FlowerMonstrosity : Enemy
             splashInstant.GetComponent<ProjectileParent>().instantiater = this.gameObject;
         }
 
+        if (bloomed)
+        {
+            yield return new WaitForSeconds(0.3f);
+            waterSound.Play();
+            for (int i = 0; i < 8; i++)
+            {
+                float angleToConsider = i * 45 * Mathf.Deg2Rad;
+                Vector3 spawnLocation = transform.position + new Vector3(Mathf.Cos(angleToConsider), Mathf.Sin(angleToConsider)) * 4.5f;
+                if (Mathf.Abs(spawnLocation.x - mainCamera.transform.position.x) > 8 || Mathf.Abs(spawnLocation.y - mainCamera.transform.position.y) > 8)
+                {
+                    continue;
+                }
+
+                GameObject splashInstant = Instantiate(damagingSplash, spawnLocation, Quaternion.identity);
+                splashInstant.GetComponent<ProjectileParent>().instantiater = this.gameObject;
+            }
+        }
+
         attacking = false;
+    }
+
+    public override void statusUpdated(EnemyStatusEffect newStatus)
+    {
+        if (newStatus.name == "Bloom Status Effect" || newStatus.name == "Bloom Status Effect(Clone)")
+        {
+            bloomed = true;
+        }
     }
 
     void pickView(float angleOrientation)

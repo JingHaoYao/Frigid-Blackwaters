@@ -173,6 +173,18 @@ public class ConsoleCommands : MonoBehaviour
         Instantiate(Resources.Load<GameObject>("Regular Enemies/Dummy Enemy"), Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
     }
 
+    [CommandHandler(Name = "AddGoldItem", Description = "Spawn new gold items in inventory")]
+    private void SpawnGoldItems(int goldAmount, int numberGoldItems)
+    {
+        GameObject goldItem = FindObjectOfType<ItemTemplates>().gold;
+        for(int i = 0; i < numberGoldItems; i++)
+        {
+            GameObject goldItemInstant = Instantiate(goldItem);
+            goldItemInstant.GetComponent<DisplayItem>().goldValue = goldAmount;
+            PlayerProperties.playerInventory.itemList.Add(goldItemInstant);
+        }
+    }
+
     private void AddUpgrades(int tier, string leftUpgradeTree, List<string> upgrades)
     {
         for(int i = 0; i < Mathf.Clamp(tier, 0, 6); i++)

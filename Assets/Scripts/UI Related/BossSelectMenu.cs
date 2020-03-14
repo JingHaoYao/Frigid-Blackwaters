@@ -117,6 +117,7 @@ public class BossSelectMenu : MonoBehaviour
         {
             MiscData.missionID = missionManager.allStoryMissions[missionManager.dungeonLevelThresholds[whatLevel - 1] - 4 + whichButton].missionID;
             MiscData.finishedMission = false;
+            MiscData.numberDungeonRuns++;
             isLoadingLevel = true;
             Time.timeScale = 1;
             FindObjectOfType<AudioManager>().PlaySound("Dungeon Entry");

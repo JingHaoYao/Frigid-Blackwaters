@@ -12,7 +12,7 @@ public class CorrosiveBlast : PlayerProjectile
     private void Start()
     {
         transform.rotation = Quaternion.Euler(0, 0, pickDirectionTravel());
-        triggerWeaponFireFlag();
+        triggerWeaponFireFlag(transform.position, pickDirectionTravel());
         destroy();
     }
 

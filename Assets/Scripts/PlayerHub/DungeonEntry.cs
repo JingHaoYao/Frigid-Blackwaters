@@ -16,7 +16,6 @@ public class DungeonEntry : MonoBehaviour {
     {
         if (collision.gameObject.tag == "playerHitBox" || collision.gameObject.name == "PlayerShip")
         {
-            MiscData.numberDungeonRuns++;
             playerScript.shipRooted = true;
             dungeonSelector.SetActive(true);
             playerScript.windowAlreadyOpen = true;
