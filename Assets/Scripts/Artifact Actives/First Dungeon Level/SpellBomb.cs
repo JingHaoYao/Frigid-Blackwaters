@@ -27,7 +27,10 @@ public class SpellBomb : MonoBehaviour {
         Instantiate(waterSplash, transform.position, Quaternion.identity);
         capsulCol.enabled = false;
         yield return new WaitForSeconds(2 / 12f);
-        this.transform.parent.GetComponent<SpellBombs>().numSpellBombs--;
+        if (this.transform.parent != null)
+        {
+            this.transform.parent.GetComponent<SpellBombs>().numSpellBombs--;
+        }
         Destroy(this.gameObject);
     }
 

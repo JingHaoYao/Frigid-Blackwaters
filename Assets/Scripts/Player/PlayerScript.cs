@@ -55,7 +55,7 @@ public class PlayerScript : MonoBehaviour {
     public int conAttackBonus = 0;
 
     //upgrade bonuses
-    public int upgradeSpeedBonus = 0, upgradeHealthBonus = 0; 
+    public int upgradeSpeedBonus = 0, upgradeHealthBonus = 0;
     public float upgradeDefenseBonus = 0;
 
     //toggles whether the ship can be hit
@@ -189,9 +189,9 @@ public class PlayerScript : MonoBehaviour {
                     {
                         GameObject savedObject = numActiveArtifacts[Random.Range(0, numActiveArtifacts.Count)];
                         numActiveArtifacts.Remove(savedObject);
-                        for(int i = 0; i < PlayerItems.activeArtifactsIDs.Length; i++)
+                        for (int i = 0; i < PlayerItems.activeArtifactsIDs.Length; i++)
                         {
-                            if(PlayerItems.activeArtifactsIDs[i] == null)
+                            if (PlayerItems.activeArtifactsIDs[i] == null)
                             {
                                 PlayerItems.activeArtifactsIDs[i] = savedObject.name;
                             }
@@ -231,7 +231,7 @@ public class PlayerScript : MonoBehaviour {
 
     void applyMomentum()
     {
-        if(momentumVector.magnitude > 0)
+        if (momentumVector.magnitude > 0)
         {
             momentumVector -= (momentumVector.normalized * momentumMagnitude / momentumDuration * Time.deltaTime);
         }
@@ -243,7 +243,7 @@ public class PlayerScript : MonoBehaviour {
 
     void applyEnemyMomentum()
     {
-        if(enemyMomentumVector.magnitude > 0)
+        if (enemyMomentumVector.magnitude > 0)
         {
             enemyMomentumVector -= (enemyMomentumVector.normalized * enemyMomentumMagnitude / enemyMomentumDuration * Time.deltaTime);
         }
@@ -255,7 +255,7 @@ public class PlayerScript : MonoBehaviour {
 
     void skillPointsNotification()
     {
-        if (GameObject.Find("Skill Points Notifier")){
+        if (GameObject.Find("Skill Points Notifier")) {
             if (MiscData.skillPointsNotification == true)
             {
                 MiscData.skillPointsNotification = false;
@@ -325,7 +325,7 @@ public class PlayerScript : MonoBehaviour {
             PlayerItems.playerDamage = 0;
         }
         SaveSystem.SaveGame();
-    }  
+    }
 
     public void periodicHeal()
     {
@@ -385,7 +385,7 @@ public class PlayerScript : MonoBehaviour {
             hasPressedButton = true;
         }
 
-        if(hasPressedButton == true)
+        if (hasPressedButton == true)
         {
             angleEffect = (int)(360 + Mathf.Atan2(directionMove.y, directionMove.x) * Mathf.Rad2Deg) % 360;
             if (foamTimer >= 0.05f)
@@ -400,37 +400,37 @@ public class PlayerScript : MonoBehaviour {
 
     void pickSprite()
     {
-        if(angleOrientation > 15 && angleOrientation <= 75)
+        if (angleOrientation > 15 && angleOrientation <= 75)
         {
             spriteRenderer.sprite = upLeft;
             transform.localScale = new Vector3(-0.15f, 0.15f, 0);
         }
-        else if(angleOrientation > 75 && angleOrientation <= 105)
+        else if (angleOrientation > 75 && angleOrientation <= 105)
         {
             spriteRenderer.sprite = up;
             transform.localScale = new Vector3(0.15f, 0.15f, 0);
         }
-        else if(angleOrientation > 105 && angleOrientation <= 165)
+        else if (angleOrientation > 105 && angleOrientation <= 165)
         {
             spriteRenderer.sprite = upLeft;
             transform.localScale = new Vector3(0.15f, 0.15f, 0);
         }
-        else if(angleOrientation > 165 && angleOrientation <= 195)
+        else if (angleOrientation > 165 && angleOrientation <= 195)
         {
             spriteRenderer.sprite = left;
             transform.localScale = new Vector3(0.15f, 0.15f, 0);
         }
-        else if(angleOrientation > 195 && angleOrientation <= 255)
+        else if (angleOrientation > 195 && angleOrientation <= 255)
         {
             spriteRenderer.sprite = downLeft;
             transform.localScale = new Vector3(0.15f, 0.15f, 0);
         }
-        else if(angleOrientation > 255 && angleOrientation <= 285)
+        else if (angleOrientation > 255 && angleOrientation <= 285)
         {
             spriteRenderer.sprite = down;
             transform.localScale = new Vector3(0.15f, 0.15f, 0);
         }
-        else if(angleOrientation > 285 && angleOrientation <= 345)
+        else if (angleOrientation > 285 && angleOrientation <= 345)
         {
             spriteRenderer.sprite = downLeft;
             transform.localScale = new Vector3(-0.15f, 0.15f, 0);
@@ -444,7 +444,7 @@ public class PlayerScript : MonoBehaviour {
 
     private void loadDebugConsoleIfNotInstantiated()
     {
-        if(Debug.isDebugBuild == true)
+        if (Debug.isDebugBuild == true)
         {
             if (FindObjectOfType<ConsoleCommands>() == null)
             {
@@ -459,7 +459,7 @@ public class PlayerScript : MonoBehaviour {
         loadDebugConsoleIfNotInstantiated();
     }
 
-    void Start () {
+    void Start() {
         itemTemplates = FindObjectOfType<ItemTemplates>();
         inventory = GetComponent<Inventory>();
         artifacts = GetComponent<Artifacts>();
@@ -495,7 +495,7 @@ public class PlayerScript : MonoBehaviour {
             trueDamage -= amountHealing;
         }
 
-        foreach(GameObject artifact in artifacts.activeArtifacts)
+        foreach (GameObject artifact in artifacts.activeArtifacts)
         {
             ArtifactEffect effect = artifact.GetComponent<ArtifactEffect>();
             if (effect != null)
@@ -504,8 +504,8 @@ public class PlayerScript : MonoBehaviour {
             }
         }
     }
-	
-	void Update () {
+
+    void Update() {
         if (playerDead == false)
         {
             PlayerProperties.playerShipPosition = transform.position;
@@ -617,7 +617,7 @@ public class PlayerScript : MonoBehaviour {
                     amountDamage = 0;
                 }
 
-                if(damagingObject != null)
+                if (damagingObject != null)
                 {
                     foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
                     {
@@ -652,7 +652,7 @@ public class PlayerScript : MonoBehaviour {
 
             shipHealth = Mathf.RoundToInt(shipHealthMAX - trueDamage);
 
-            if(shipHealth <= 0 && playerDead == false)
+            if (shipHealth <= 0 && playerDead == false)
             {
                 shipHealth = 0;
                 playerDead = true;
@@ -687,9 +687,24 @@ public class PlayerScript : MonoBehaviour {
             momentumVector = Vector3.zero;
             enemyMomentumVector = Vector3.zero;
         }
-        
+
         updateHealthBar();
         PlayerProperties.armorIndicator.updateShieldEffect();
+    }
+
+    public void dealTrueDamageToShip(int damage)
+    {
+        trueDamage += damage;
+        StartCoroutine(hitFrame(spriteRenderer));
+        FindObjectOfType<DamageNumbers>().showDamage(damage, shipHealthMAX, transform.position + new Vector3(0, 1.5f, 0));
+        numberHits++;
+    }
+
+    public float totalShipSpeed {
+        get
+        {
+            return boatSpeed + speedBonus + conSpeedBonus + upgradeSpeedBonus + enemySpeedModifier;
+        }
     }
 
     IEnumerator respawnShip()
@@ -742,6 +757,7 @@ public class PlayerScript : MonoBehaviour {
             && collision.gameObject.name != "AntiSpawnSpaceDetailer"
             && collision.gameObject.tag != "RoomSpawn"
             && playerDead == false
+            && damageImmunity == false
            )
         {
             StartCoroutine(hitFrame(spriteRenderer));

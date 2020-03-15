@@ -34,7 +34,7 @@ public class AnnihilationFigure : MonoBehaviour {
             }
             else
             {
-               Destroy(targetDestroy, 19f / 12f);
+                targetDestroy.GetComponent<Enemy>().dealDamage(9999);
             }
         }
         Invoke("removeFromList", 2.483f);
