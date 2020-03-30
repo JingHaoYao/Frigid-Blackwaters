@@ -42,7 +42,7 @@ public class SporeBall : MonoBehaviour
 
             currentTime += Time.deltaTime;
 
-            circCol.enabled = currProgress <= 0.2f;
+            circCol.enabled = currProgress <= 0.3f;
 
             if (currentTime >= totalTime && splashed == false)
             {

@@ -299,9 +299,13 @@ public class PlayerScript : MonoBehaviour {
         {
             if (item != null && itemTemplates.dbContainsID(item))
             {
-                GameObject newItem = Instantiate(itemTemplates.loadItem(item));
-                newItem.transform.parent = GameObject.Find("PresentItems").transform; //bookkeeping
-                inventory.itemList.Add(newItem);
+                GameObject loadedItem = itemTemplates.loadItem(item);
+                if (loadedItem != null)
+                {
+                    GameObject newItem = Instantiate(loadedItem);
+                    newItem.transform.parent = GameObject.Find("PresentItems").transform; //bookkeeping
+                    inventory.itemList.Add(newItem);
+                }
             }
         }
 
@@ -309,10 +313,14 @@ public class PlayerScript : MonoBehaviour {
         {
             if (item != null)
             {
-                GameObject newItem = Instantiate(itemTemplates.loadItem(item));
-                newItem.transform.parent = GameObject.Find("PresentItems").transform;
-                newItem.GetComponent<DisplayItem>().isEquipped = true;
-                artifacts.activeArtifacts.Add(newItem);
+                GameObject loadedItem = itemTemplates.loadItem(item);
+                if (loadedItem != null)
+                {
+                    GameObject newItem = Instantiate(loadedItem);
+                    newItem.transform.parent = GameObject.Find("PresentItems").transform;
+                    newItem.GetComponent<DisplayItem>().isEquipped = true;
+                    artifacts.activeArtifacts.Add(newItem);
+                }
             }
         }
 

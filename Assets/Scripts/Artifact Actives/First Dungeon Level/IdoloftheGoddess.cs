@@ -75,8 +75,8 @@ public class IdoloftheGoddess : MonoBehaviour
             completedTrial = true;
             startedTrial = false;
             artifactBonus.healthBonus = 1000;
-            artifactBonus.attackBonus = 4;
-            artifactBonus.speedBonus = 4;
+            artifactBonus.attackBonus = 2;
+            artifactBonus.speedBonus = 2;
             artifactBonus.defenseBonus = 0.35f;
             artifacts.UpdateUI();
             setDamagedHealth = false;

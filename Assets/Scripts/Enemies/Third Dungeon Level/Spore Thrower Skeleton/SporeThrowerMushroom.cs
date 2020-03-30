@@ -7,6 +7,7 @@ public class SporeThrowerMushroom : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Collider2D collider;
     bool isEnding = false;
+    [SerializeField] private float durationUntilEnd = 3.5f;
 
     private void Start()
     {
@@ -15,7 +16,7 @@ public class SporeThrowerMushroom : MonoBehaviour
 
     IEnumerator waitUntilEndProcedure()
     {
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(durationUntilEnd);
         endProcedure();
     }
 

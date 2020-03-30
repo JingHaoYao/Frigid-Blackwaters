@@ -10,6 +10,9 @@ public class AvailableShopItems : MonoBehaviour
     public string[] secondLevelConsumables;
     public string[] secondLevelArtifacts;
 
+    public string[] thirdLevelConsumables;
+    public string[] thirdLevelArtifacts;
+
     public DialogueSet[] shopDialogues;
     NotificationBell shopNotifications;
     string shopNotification = "New Dialogue Available at the Shops";
@@ -19,19 +22,6 @@ public class AvailableShopItems : MonoBehaviour
     {
         shopNotifications = GameObject.Find("Dialogue Notifications").GetComponent<NotificationBell>();
         hubShops = FindObjectsOfType<HubShop>();
-
-        /*firstLevelConsumables = new string[firstDungeonLevelConsumables.Length];
-        firstLevelArtifacts = new string[firstDungeonLevelArtifacts.Length];
-
-        for(int i = 0; i < firstLevelConsumables.Length; i++)
-        {
-            firstLevelConsumables[i] = firstDungeonLevelConsumables[i].name;
-        }
-
-        for(int i = 0; i < firstLevelArtifacts.Length; i++)
-        {
-            firstLevelArtifacts[i] = firstDungeonLevelArtifacts[i].name;
-        }*/
 
         loadDialogue(); 
     }

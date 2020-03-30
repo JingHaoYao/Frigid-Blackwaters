@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SemiDimensionalFlower : MonoBehaviour
+public class SemiDimensionalFlower : ArtifactEffect
 {
     [SerializeField] DisplayItem displayItem;
     public int numberHits = 0;
@@ -34,6 +34,14 @@ public class SemiDimensionalFlower : MonoBehaviour
                 ghostShipInstant.SetActive(false);
                 PlayerProperties.playerScript.damageImmunity = false;
             }
+        }
+    }
+
+    public override void cameraMovedPosition(Vector3 currentPosition)
+    {
+        if (ghostShip != null)
+        {
+            ghostShip.transform.position = PlayerProperties.playerShipPosition;
         }
     }
 }

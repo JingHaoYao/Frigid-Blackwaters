@@ -49,7 +49,35 @@ public class HubShop : MonoBehaviour {
         AvailableShopItems shopItems = FindObjectOfType<AvailableShopItems>();
         numberItems = Random.Range(startingChance, endingChance);
 
-        if (MiscData.dungeonLevelUnlocked == 2)
+        if (MiscData.dungeonLevelUnlocked == 3)
+        {
+            for (int i = 0; i < numberItems; i++)
+            {
+                if (artifactShop == true)
+                {
+                    if (Random.Range(0, 10) < 7)
+                    {
+                        sellingItemsList.Add(itemTemplates.loadItem(shopItems.thirdLevelArtifacts[Random.Range(0, shopItems.thirdLevelArtifacts.Length)]));
+                    }
+                    else
+                    {
+                        sellingItemsList.Add(itemTemplates.loadItem(shopItems.secondLevelArtifacts[Random.Range(0, shopItems.secondLevelArtifacts.Length)]));
+                    }
+                }
+                else
+                {
+                    if (Random.Range(0, 10) < 7)
+                    {
+                        sellingItemsList.Add(itemTemplates.loadItem(shopItems.thirdLevelConsumables[Random.Range(0, shopItems.thirdLevelConsumables.Length)]));
+                    }
+                    else
+                    {
+                        sellingItemsList.Add(itemTemplates.loadItem(shopItems.secondLevelConsumables[Random.Range(0, shopItems.secondLevelConsumables.Length)]));
+                    }
+                }
+            }
+        }
+        else if (MiscData.dungeonLevelUnlocked == 2)
         {
             for (int i = 0; i < numberItems; i++)
             {

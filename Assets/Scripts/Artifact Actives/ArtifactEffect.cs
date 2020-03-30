@@ -21,4 +21,6 @@ public class ArtifactEffect : MonoBehaviour
     public virtual void dealtDamage(int damageDealt, Enemy enemy) { }
 
     public virtual void healed(int healingAmount) { }
+
+    public virtual void cameraMovedPosition(Vector3 currentPosition) { }
 }

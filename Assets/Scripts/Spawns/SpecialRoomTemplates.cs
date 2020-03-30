@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class SpecialRoomTemplates : MonoBehaviour {
     public string[] miniBosses = new string[3];
+    DungeonEntryDialogueManager dialogueManager;
+
+    private void Start()
+    {
+        dialogueManager = FindObjectOfType<DungeonEntryDialogueManager>();
+    }
 
     public GameObject loadUniqueRoom(int whatTier, int whichUnique)
     {
@@ -14,7 +20,7 @@ public class SpecialRoomTemplates : MonoBehaviour {
         // 5 - trove
         // 6 - treasure
         // 7 - altar
-        if (FindObjectOfType<DungeonEntryDialogueManager>().whatDungeonLevel == 1) {
+        if (dialogueManager.whatDungeonLevel == 1) {
             switch (whichUnique) {
                 case 1:
                     return Resources.Load<GameObject>("Unique Rooms/First Dungeon Level/Shop Rooms/First Dungeon Shop Tier " + whatTier.ToString());
@@ -35,7 +41,7 @@ public class SpecialRoomTemplates : MonoBehaviour {
                     return null;
             }
         }
-        else if(FindObjectOfType<DungeonEntryDialogueManager>().whatDungeonLevel == 2)
+        else if(dialogueManager.whatDungeonLevel == 2)
         {
             switch (whichUnique)
             {
@@ -54,6 +60,29 @@ public class SpecialRoomTemplates : MonoBehaviour {
                     return Resources.Load<GameObject>("Unique Rooms/Second Dungeon Level/Treasure Rooms/Second Dungeon Level Treasure Room Tier " + whatTier.ToString());
                 case 7:
                     return Resources.Load<GameObject>("Unique Rooms/Second Dungeon Level/Altar Rooms/Second Dungeon Tier " + whatTier.ToString() + " Altar");
+                default:
+                    return null;
+            }
+        }
+        else if(dialogueManager.whatDungeonLevel == 3)
+        {
+            switch (whichUnique)
+            {
+                case 1:
+                    return Resources.Load<GameObject>("Unique Rooms/Third Dungeon Level/Shop Rooms/Third Dungeon Shop Tier " + whatTier.ToString());
+                case 2:
+                    return Resources.Load<GameObject>("Unique Rooms/Third Dungeon Level/Gamble Rooms/Third Dungeon Gamble Tier " + whatTier.ToString());
+                case 3:
+                    return Resources.Load<GameObject>("Unique Rooms/Third Dungeon Level/Challenge Rooms/Third Dungeon Challenge Room Tier " + whatTier.ToString());
+                case 4:
+                    string whichCombat = miniBosses[Random.Range(0, miniBosses.Length)];
+                    return Resources.Load<GameObject>("Unique Rooms/Third Dungeon Level/Special Combat Rooms/" + whichCombat + "/" + whichCombat);
+                case 5:
+                    return Resources.Load<GameObject>("Unique Rooms/Third Dungeon Level/Trove Rooms/Third Dungeon Trove Tier " + whatTier.ToString());
+                case 6:
+                    return Resources.Load<GameObject>("Unique Rooms/Third Dungeon Level/Treasure Rooms/Third Dungeon Level Treasure Room Tier " + whatTier.ToString());
+                case 7:
+                    return Resources.Load<GameObject>("Unique Rooms/Third Dungeon Level/Altar Rooms/Third Dungeon Tier " + whatTier.ToString() + " Altar");
                 default:
                     return null;
             }

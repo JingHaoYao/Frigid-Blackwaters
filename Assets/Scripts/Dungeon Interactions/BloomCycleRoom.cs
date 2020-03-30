@@ -30,7 +30,10 @@ public class BloomCycleRoom : RoomInteraction
     {
         foreach(GameObject solidObstacle in this.allSpawnedObstacles)
         {
-            solidObstacle.GetComponent<BloomObstacle>().MoveToNextBloomState(bloomProgress);
+            foreach(BloomObstacle bloomObstacle in solidObstacle.GetComponentsInChildren<BloomObstacle>())
+            {
+                bloomObstacle.MoveToNextBloomState(bloomProgress);
+            }
         }
     }
 

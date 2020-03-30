@@ -33,6 +33,11 @@ public class MoveCameraNextRoom : MonoBehaviour {
         {
             transform.position += new Vector3(0, -20, 0);
         }
+
+        foreach(GameObject artifact in PlayerProperties.playerArtifacts.activeArtifacts)
+        {
+            artifact.GetComponent<ArtifactEffect>()?.cameraMovedPosition(this.transform.position);
+        }
     }
 
     void hasPlayerMovedRooms()

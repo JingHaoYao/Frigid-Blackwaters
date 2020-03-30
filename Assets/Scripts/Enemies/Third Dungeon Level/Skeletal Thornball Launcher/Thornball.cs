@@ -34,7 +34,7 @@ public class Thornball : MonoBehaviour
 
         currentTime += Time.deltaTime;
 
-        circCol.enabled = currProgress <= 0.2f;
+        circCol.enabled = currProgress <= 0.3f;
 
         if (currentTime >= totalTime)
         {
@@ -42,6 +42,6 @@ public class Thornball : MonoBehaviour
             Instantiate(waterSplash, transform.position, Quaternion.identity);
         }
 
-        spriteRenderer.sortingOrder = (200 - (int)((transform.position.y - 5 * currProgress)));
+        spriteRenderer.sortingOrder = (200 - (int)((transform.position.y - 5 * currProgress) * 10));
     }
 }
