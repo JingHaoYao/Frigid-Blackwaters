@@ -25,7 +25,7 @@ public class SolarGolemBeam : MonoBehaviour
         damageCollider.enabled = true;
         LeanTween.value(originalAngle, toAngle, time).setEaseInOutCirc().setOnUpdate((float val) => { transform.rotation = Quaternion.Euler(0, 0, val); });
         yield return new WaitForSeconds(time);
-        animator.Play("WindDown");
+        animator.SetTrigger("Winddown");
         damageCollider.enabled = false;
         LeanTween.value(0.5f, 0f, 0.583f).setOnUpdate((float val) => { pulseAudio.volume = val; });
         yield return new WaitForSeconds(0.583f);
@@ -48,7 +48,7 @@ public class SolarGolemBeam : MonoBehaviour
     {
         StopAllCoroutines();
         damageCollider.enabled = false;
-        animator.Play("WindDown");
+        animator.SetTrigger("Winddown");
         LeanTween.value(0.5f, 0f, 0.583f).setOnUpdate((float val) => { pulseAudio.volume = val; }).setOnComplete(() => Destroy(this.gameObject));
     }
 }

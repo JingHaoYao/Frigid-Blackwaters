@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6036193724770646302}
   - component: {fileID: 6036193724770646288}
   - component: {fileID: 6036193724770646303}
+  - component: {fileID: -8252164443235572620}
   m_Layer: 13
   m_Name: Solar Golem Beam Projectile
   m_TagString: EnemyProjectile
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 6036193724770646297}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.03, y: 0.5, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 12, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -256,3 +257,16 @@ MonoBehaviour:
   pulseAudio: {fileID: 6036193724770646288}
   damageCollider: {fileID: 6036193724770646301}
   spriteRenderer: {fileID: 6036193724770646299}
+--- !u!114 &-8252164443235572620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6036193724770646297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13e5a2f66618c3c43a18f51c9d0fb0e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instantiater: {fileID: 0}

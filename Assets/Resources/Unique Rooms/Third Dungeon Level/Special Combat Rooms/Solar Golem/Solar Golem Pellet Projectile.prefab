@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4575903395874570167}
   - component: {fileID: 4575903395874570166}
   - component: {fileID: 3549623418125105283}
+  - component: {fileID: 6223704634088406842}
   m_Layer: 13
   m_Name: Solar Golem Pellet Projectile
   m_TagString: EnemyProjectile
@@ -248,7 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: 0
-  rendLayerOffset: 5
+  rendLayerOffset: 30
   updateOnce: 0
 --- !u!114 &4575903395874570166
 MonoBehaviour:
@@ -360,3 +361,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6223704634088406842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4575903395874570158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 905f99799bc131040a11b6b1fc07dbb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 300

@@ -25,14 +25,28 @@ public class SolarGolemTop : MonoBehaviour
     IEnumerator spawnPellets()
     {
         animator.SetTrigger("Attack");
-        float initialAngle = angleToShip + 90;
-        for (int i = 0; i < 36; i++)
+        float initialAngle = angleToShip + Random.Range(0, 2) == 1 ? 90 : -90;
+        
+        if(Random.Range(0,2) == 1) {
+            for (int i = 0; i < 36; i++)
+            {
+                float angleToConsider = initialAngle + i * 10;
+                GameObject pelletInstant = Instantiate(pellet, transform.position + Vector3.up * 0.4f, Quaternion.identity);
+                pelletInstant.GetComponent<BasicProjectile>().angleTravel = angleToConsider;
+                pelletInstant.GetComponent<ProjectileParent>().instantiater = baseOfGolem;
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+        else
         {
-            float angleToConsider = initialAngle + i * 10;
-            GameObject pelletInstant = Instantiate(pellet, transform.position + Vector3.up * 0.4f, Quaternion.identity);
-            pelletInstant.GetComponent<BasicProjectile>().angleTravel = angleToConsider;
-            pelletInstant.GetComponent<ProjectileParent>().instantiater = baseOfGolem;
-            yield return new WaitForSeconds(0.1f);
+            for (int i = 35; i >= 0; i--)
+            {
+                float angleToConsider = initialAngle + i * 10;
+                GameObject pelletInstant = Instantiate(pellet, transform.position + Vector3.up * 0.4f, Quaternion.identity);
+                pelletInstant.GetComponent<BasicProjectile>().angleTravel = angleToConsider;
+                pelletInstant.GetComponent<ProjectileParent>().instantiater = baseOfGolem;
+                yield return new WaitForSeconds(0.1f);
+            }
         }
 
         animator.SetTrigger("Idle");
@@ -47,13 +61,16 @@ public class SolarGolemTop : MonoBehaviour
     {
         StopAllCoroutines();
         animator.SetTrigger("Death");
-        LeanTween.moveLocalY(this.gameObject, transform.position.y - 1f, 1f);
+        spriteRenderer.color = Color.white;
+        float yPosition = transform.position.y - 1f;
+        LeanTween.moveY(this.gameObject, yPosition, 1f);
     }
 
     public void startUp()
     {
         animator.SetTrigger("Startup");
-        LeanTween.moveLocalY(this.gameObject, transform.position.y + 1f, 1f);
+        float yPosition = transform.position.y + 1f;
+        LeanTween.moveY(this.gameObject, yPosition, 1f);
     }
 
     IEnumerator hitFrame()
