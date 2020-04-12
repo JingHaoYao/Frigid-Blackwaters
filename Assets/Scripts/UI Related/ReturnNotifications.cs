@@ -68,8 +68,6 @@ public class ReturnNotifications : MonoBehaviour
         {
             playerScript.windowAlreadyOpen = true;
             playerScript.playerDead = true;
-            MiscData.finishedMission = false;
-            MiscData.missionID = null;
         }
     }
 

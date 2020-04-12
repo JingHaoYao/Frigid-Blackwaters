@@ -134,6 +134,10 @@ public static class SaveSystem
             {
                 PlayerUpgrades.glaiveLauncherUpgrades.Add(id);
             }
+            foreach(string id in data.plantMortarUpgrades)
+            {
+                PlayerUpgrades.plantMortarUpgrades.Add(id);
+            }
 
             PlayerUpgrades.numberSkillPoints = data.numberSkillPoints;
             PlayerUpgrades.numberMaxSkillPoints = data.numberMaxSkillPoints;

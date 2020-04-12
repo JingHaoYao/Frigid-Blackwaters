@@ -50,7 +50,7 @@ public class ShipWeaponScript : MonoBehaviour {
     {
         if (whichSide == 1)
         {
-            spriteRenderer.sortingOrder = playerShip.GetComponent<SpriteRenderer>().sortingOrder + 3;
+            spriteRenderer.sortingOrder = playerShip.GetComponent<SpriteRenderer>().sortingOrder + 4;
             if (angleOrientation > 15 && angleOrientation <= 75)
             {
                 transform.position = playerShip.transform.position + new Vector3(0.9f, 1.4f, 0) * 0.65f;

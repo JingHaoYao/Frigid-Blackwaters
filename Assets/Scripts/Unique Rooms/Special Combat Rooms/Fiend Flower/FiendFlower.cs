@@ -36,27 +36,30 @@ public class FiendFlower : Enemy
     {
         while (true)
         {
-            if(vineWhipPeriod > 0)
+            if (stopAttacking == false)
             {
-                vineWhipPeriod -= Time.deltaTime;
-            }
-            else
-            {
-                summonVine();
-                vineWhipPeriod = 4;
-            }
-
-            if(turretPeriod > 0)
-            {
-                turretPeriod -= Time.deltaTime;
-            }
-            else
-            {
-                for (int i = 0; i < 3; i++)
+                if (vineWhipPeriod > 0)
                 {
-                    summonTurret();
+                    vineWhipPeriod -= Time.deltaTime;
                 }
-                turretPeriod = 6;
+                else
+                {
+                    summonVine();
+                    vineWhipPeriod = 4;
+                }
+
+                if (turretPeriod > 0)
+                {
+                    turretPeriod -= Time.deltaTime;
+                }
+                else
+                {
+                    for (int i = 0; i < 3; i++)
+                    {
+                        summonTurret();
+                    }
+                    turretPeriod = 6;
+                }
             }
 
             yield return null;
@@ -139,7 +142,7 @@ public class FiendFlower : Enemy
     {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
-            if (dormant == true)
+            if (dormant == true && Vector2.Distance(mainCamera.transform.position, transform.position) < 4)
             {
                 StartCoroutine(awakenRoutine());
                 return;

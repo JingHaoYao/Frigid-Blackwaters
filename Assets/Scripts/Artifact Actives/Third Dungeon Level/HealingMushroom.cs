@@ -18,7 +18,7 @@ public class HealingMushroom : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == 9)
+        if(collision.gameObject.layer == 9 && collision.gameObject.tag == "playerHitBox")
         {
             StartCoroutine(heal());
         }

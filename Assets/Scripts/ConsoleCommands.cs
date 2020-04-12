@@ -80,6 +80,10 @@ public class ConsoleCommands : MonoBehaviour
             case WeaponChoices.GlaiveLauncher:
                 AddUpgrades(whatTier, isLeftUpgradeTree ? "unlock_bouncing_glaives" : "", PlayerUpgrades.glaiveLauncherUpgrades);
                 break;
+            case WeaponChoices.PlantMortar:
+                AddUpgrades(whatTier, isLeftUpgradeTree ? "unlock_aila_upgrade" : "", PlayerUpgrades.plantMortarUpgrades);
+                break;
+
         }
     }
 
@@ -209,7 +213,8 @@ public class ConsoleCommands : MonoBehaviour
         DragonsBreath,
         Sniper,
         ChemicalSprayer,
-        GlaiveLauncher
+        GlaiveLauncher,
+        PlantMortar
     }
 
     enum WhichWeaponSide

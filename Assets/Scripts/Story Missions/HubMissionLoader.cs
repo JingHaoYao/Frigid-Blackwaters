@@ -19,6 +19,8 @@ public class HubMissionLoader : MonoBehaviour
             storyMissionDatabase.Add(mission.missionID, mission);
         }
         addRewards();
+        MiscData.finishedMission = false;
+        MiscData.missionID = null;
     }
 
     void addRewards()
@@ -31,6 +33,7 @@ public class HubMissionLoader : MonoBehaviour
             }
             else
             {
+
                 if (!MiscData.completedMissions.Contains(MiscData.missionID))
                 {
                     MiscData.completedMissions.Add(MiscData.missionID);
@@ -61,6 +64,7 @@ public class HubMissionLoader : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("ok");
                     returnNotifications.updateRewards(0, 0, null, false, true);
                 }
                 SaveSystem.SaveGame();

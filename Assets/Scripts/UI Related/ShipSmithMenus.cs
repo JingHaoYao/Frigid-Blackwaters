@@ -16,6 +16,7 @@ public class ShipSmithMenus : MonoBehaviour {
     [SerializeField] private SniperUpgradeTilesUI sniperUpgradesMenu;
     [SerializeField] private ChemicalSprayerUpgradeTilesUI chemicalSprayerUpgradesMenu;
     [SerializeField] private GlaiveLauncherUpgradeTileUI glaiveLauncherUpgradesMenu;
+    [SerializeField] private PlantMortarUpgradeTilesUI plantMortarUpgradesMenu;
     [SerializeField] private GameObject weaponSelectorMenu, returnButton;
     int skillPointPrice = 0;
 
@@ -53,9 +54,6 @@ public class ShipSmithMenus : MonoBehaviour {
 
             if (!PlayerUpgrades.dragonBreathUpgrades.Contains("dragon_breath_weapon_unlocked"))
                 PlayerUpgrades.dragonBreathUpgrades.Add("dragon_breath_weapon_unlocked");
-
-            if (!PlayerUpgrades.dragonBreathUpgrades.Contains("unlock_sniper"))
-                PlayerUpgrades.dragonBreathUpgrades.Add("unlock_sniper");
         }
 
         if (MiscData.dungeonLevelUnlocked >= 2)
@@ -76,6 +74,16 @@ public class ShipSmithMenus : MonoBehaviour {
             sniperUpgradesMenu.SniperUpgradeTiles[0].noLongerUnlockable = true;
             chemicalSprayerUpgradesMenu.ChemicalSprayerUpgradeTiles[0].noLongerUnlockable = true;
             glaiveLauncherUpgradesMenu.GlaiveLauncherUpgradeTiles[0].noLongerUnlockable = true;
+        }
+
+        if(MiscData.dungeonLevelUnlocked >= 3)
+        {
+            if (!PlayerUpgrades.plantMortarUpgrades.Contains("unlock_the_plant_mortar"))
+                PlayerUpgrades.plantMortarUpgrades.Add("unlock_the_plant_mortar");
+        }
+        else
+        {
+            plantMortarUpgradesMenu.PlantMortarUpgradeTiles[0].noLongerUnlockable = true;
         }
 
         foreach (GameObject menu in menusList)
@@ -138,6 +146,7 @@ public class ShipSmithMenus : MonoBehaviour {
         PlayerUpgrades.hullUpgrades.Clear();
         PlayerUpgrades.safeUpgrades.Clear();
         PlayerUpgrades.inventoryUpgrades.Clear();
+        PlayerUpgrades.plantMortarUpgrades.Clear();
         checkWeaponsUnlocked();
 
         PlayerUpgrades.numberSkillPoints = PlayerUpgrades.numberMaxSkillPoints;
@@ -184,6 +193,11 @@ public class ShipSmithMenus : MonoBehaviour {
         }
 
         foreach(GlaiveLauncherUpgradeTile tile in glaiveLauncherUpgradesMenu.GlaiveLauncherUpgradeTiles)
+        {
+            tile.noLongerUnlockable = false;
+        }
+
+        foreach(PlantMortarUpgradeTile tile in plantMortarUpgradesMenu.PlantMortarUpgradeTiles)
         {
             tile.noLongerUnlockable = false;
         }

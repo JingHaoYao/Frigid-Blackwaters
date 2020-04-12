@@ -70,23 +70,20 @@ public class DungeonEntryDialogueManager : MonoBehaviour
 
     void loadDungeonDialogue()
     {
-        if (whatDungeonLevel == 1)
+        if (!MiscData.completedEntryDungeonDialogues.Contains(entryDialogueDict[MiscData.missionID]))
         {
-            if (!MiscData.completedEntryDungeonDialogues.Contains(entryDialogueDict[MiscData.missionID]))
+            dialogueUI.targetDialogue = loadDialogue(entryDialogueDict[MiscData.missionID], true);
+            dialogueUI.gameObject.SetActive(true);
+            dialogueBlackOverlay.SetActive(true);
+        }
+        else
+        {
+            if (Random.Range(1, 5) == 1 && MiscData.enoughRoomsTraversed == true)
             {
-                dialogueUI.targetDialogue = loadDialogue(entryDialogueDict[MiscData.missionID], true);
+                MiscData.enoughRoomsTraversed = false;
+                dialogueUI.targetDialogue = loadDialogue(randomEntryDialogues[Random.Range(0, randomEntryDialogues.Length)]);
                 dialogueUI.gameObject.SetActive(true);
                 dialogueBlackOverlay.SetActive(true);
-            }
-            else
-            {
-                if (Random.Range(1, 5) == 1 && MiscData.enoughRoomsTraversed == true)
-                {
-                    MiscData.enoughRoomsTraversed = false;
-                    dialogueUI.targetDialogue = loadDialogue(randomEntryDialogues[Random.Range(0, randomEntryDialogues.Length)]);
-                    dialogueUI.gameObject.SetActive(true);
-                    dialogueBlackOverlay.SetActive(true);
-                }
             }
         }
     }

@@ -89,7 +89,6 @@ public class DialogueUI : MonoBehaviour
         panelImageFront.enabled = false;
         dialogueBackground.enabled = false;
 
-        blackOverlayAnimator.enabled = true;
         character1.enabled = false;
         character2.enabled = false;
         character3.enabled = false;
@@ -105,6 +104,7 @@ public class DialogueUI : MonoBehaviour
         else
         {
             blackOverlayAnimator.gameObject.GetComponent<Image>().color = new Color(0, 0, 0, 0);
+            blackOverlayAnimator.enabled = true;
             blackOverlayAnimator.SetTrigger("FadeOut");
             yield return new WaitForSeconds(1f);
         }
@@ -168,6 +168,7 @@ public class DialogueUI : MonoBehaviour
             character4.enabled = false;
         }
 
+        blackOverlayAnimator.enabled = true;
         blackOverlayAnimator.SetTrigger("FadeIn");
         yield return new WaitForSeconds(1f);
         FindObjectOfType<AudioManager>().PlaySound(targetDialogue.substituteMusic);
@@ -268,14 +269,14 @@ public class DialogueUI : MonoBehaviour
         {
             foreach (GameObject item in targetDialogue.addedItems)
             {
-                if (GameObject.Find("PlayerShip").GetComponent<Inventory>().itemList.Count < PlayerItems.maxInventorySize)
+                if (PlayerProperties.playerInventory.itemList.Count < PlayerItems.maxInventorySize)
                 {
                     if (GameObject.Find("PresentItems"))
                     {
                         GameObject instant = Instantiate(item);
                         instant.transform.SetParent(GameObject.Find("PresentItems").transform);
-                        GameObject.Find("PlayerShip").GetComponent<Inventory>().itemList.Add(item);
-                        PlayerItems.inventoryItemsIDs.Add(item.name);
+                        PlayerProperties.playerInventory.itemList.Add(instant);
+                        PlayerItems.inventoryItemsIDs.Add(instant.name);
                     }
                 }
             }

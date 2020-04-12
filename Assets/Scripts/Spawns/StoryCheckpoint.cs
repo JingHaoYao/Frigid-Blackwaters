@@ -24,7 +24,7 @@ public class StoryCheckpoint : MonoBehaviour
         dialogueUI.waitReveal = waitReveal;
         dialogueUI.gameObject.SetActive(true);
         dialogueBlackOverlay.SetActive(true);
-        dialogueBlackOverlay.GetComponent<Image>().color = new Color(0, 0, 0, 1);
+        dialogueBlackOverlay.GetComponent<Image>().color = Color.black;
     }
 
     public void Update()

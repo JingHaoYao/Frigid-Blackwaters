@@ -8,6 +8,7 @@ public static class WeaponProperties
     {
         SteelElement,
         FireElement,
-        ChemicalElement
+        ChemicalElement,
+        PlantElement
     }
 }

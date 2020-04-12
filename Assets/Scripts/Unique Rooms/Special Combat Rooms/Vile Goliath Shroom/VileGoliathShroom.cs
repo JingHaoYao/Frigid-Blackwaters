@@ -139,7 +139,7 @@ public class VileGoliathShroom : Enemy
     {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
-            if(dormant == true)
+            if(dormant == true && Vector2.Distance(mainCamera.transform.position, transform.position) < 4)
             {
                 StartCoroutine(awakenRoutine());
                 return;

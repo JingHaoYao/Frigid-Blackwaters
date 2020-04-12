@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1310215862748659057
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1310215862748659069}
+  - component: {fileID: 1310215862748659059}
+  - component: {fileID: 1310215862748659068}
+  - component: {fileID: 1310215862748659058}
+  - component: {fileID: 6219880962333647073}
+  m_Layer: 0
+  m_Name: Plant Mortar Weapon Template
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1310215862748659069
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310215862748659057}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -88.009575}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 19.377611, y: 1.5455068}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1310215862748659059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310215862748659057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2093946c6e21b9c43b76288f452bba8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: {fileID: -2103549387529871475, guid: 70bac9093262afb43aa59d5ca1009698, type: 3}
+  upleft: {fileID: 264950109647671474, guid: 70bac9093262afb43aa59d5ca1009698, type: 3}
+  left: {fileID: 3005519287601406902, guid: 70bac9093262afb43aa59d5ca1009698, type: 3}
+  downleft: {fileID: -7721149248613347973, guid: 70bac9093262afb43aa59d5ca1009698,
+    type: 3}
+  down: {fileID: -9045356027418639795, guid: 70bac9093262afb43aa59d5ca1009698, type: 3}
+  weaponFlare: {fileID: 0}
+  coolDownIcon: {fileID: 8704036783043345064, guid: c8ba3a225a5e33244be31134d32cb523,
+    type: 3}
+  coolDownTime: 3
+  shipWeaponEquipped: {fileID: 0}
+  whichLevelUnlock: 3
+--- !u!222 &1310215862748659068
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310215862748659057}
+  m_CullTransparentMesh: 0
+--- !u!114 &1310215862748659058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310215862748659057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Plant Mortar: Arching over obstacles, this
+
+    weapon fires a plant ball from your ship,
+
+    dealing 2 damage on impact.'
+--- !u!114 &6219880962333647073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310215862748659057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1108367186f6a1f4c80465777a74be82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  regularAirBlast1: {fileID: 3635654932108913671, guid: a932c1e2ca97032468ace276ac7897df,
+    type: 3}
+  regularAirBlast2: {fileID: 5318075667212087662, guid: a603d16ba4646194fb528ea3d50d7cb6,
+    type: 3}
+  ailaBlast1: {fileID: 5084529598631913022, guid: 2e8b9842f9c8c4c4dbfb238cf0042262,
+    type: 3}
+  ailaBlast2: {fileID: 5720143827216329297, guid: 65bbcbfac66d3be49852461f694c4b99,
+    type: 3}
+  ailaBlast3: {fileID: 2122230045863825513, guid: 9837650b47d270b47899325b9bd1994a,
+    type: 3}
+  spreadBlast1: {fileID: 7760754006295459711, guid: b20d162a5dc6fd94599ffeae449b3267,
+    type: 3}
+  spreadblast2: {fileID: 7819379427381909280, guid: 8254bdedf244dff48bcd52595f48a33b,
+    type: 3}
+  spreadBlast3: {fileID: 6070981832547858794, guid: 6bfeda9ce085c2241b4d0b0f7d932bc0,
+    type: 3}

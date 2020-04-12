@@ -13,6 +13,7 @@ public static class PlayerUpgrades {
     public static List<string> sniperUpgrades = new List<string>();
     public static List<string> chemicalSprayerUpgrades = new List<string>();
     public static List<string> glaiveLauncherUpgrades = new List<string>();
+    public static List<string> plantMortarUpgrades = new List<string>();
         
     public static List<string> hullUpgrades = new List<string>();
     public static List<string> inventoryUpgrades = new List<string>();

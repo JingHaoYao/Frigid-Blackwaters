@@ -1,0 +1,158 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4586300946612847347
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4586300946612847350}
+  - component: {fileID: 4586300946612847351}
+  - component: {fileID: 4586300946612847344}
+  - component: {fileID: 4586300946612847345}
+  - component: {fileID: 4586300946612847346}
+  - component: {fileID: 4586300946612847349}
+  m_Layer: 0
+  m_Name: Carnivorous Tangle Fiend Seedling
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4586300946612847350
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4586300946612847347}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -15.171284}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1002.91907, y: 13.237842}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4586300946612847351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4586300946612847347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40477e35b1e5e674e980ee948692d1a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayIcon: {fileID: 4483207463621081454, guid: 9402c5d198261604ba7e85fa4f188df6,
+    type: 3}
+  goldValue: 0
+  isArtifact: 1
+  isConsumable: 0
+  hasActive: 1
+  isEquipped: 0
+  questItem: 0
+  whichSlot: 0
+  soulBound: 1
+--- !u!222 &4586300946612847344
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4586300946612847347}
+  m_CullTransparentMesh: 0
+--- !u!114 &4586300946612847345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4586300946612847347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Tangle Fiend Seedling [Rare] [Soulbound]
+
+    A seedling of a plant that spreads its vines across
+
+    rocks and walls, devouring nearby animals and plants
+
+    it crawls over.
+
+    8 Kill Active: For the next 3 seconds, Vine Spikes will spawn
+
+    from your ship towards your cursor.'
+--- !u!114 &4586300946612847346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4586300946612847347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatDungeonArtifact: 3
+  speedBonus: 0
+  defenseBonus: 0
+  attackBonus: 0
+  healthBonus: 0
+  periodicHealing: 0
+  artifactChanceBonus: 0
+  goldBonus: 0
+  killRequirement: 8
+--- !u!114 &4586300946612847349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4586300946612847347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e768560a6686724b998b2fe7a4f0b8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  artifactBonus: {fileID: 4586300946612847346}
+  displayItem: {fileID: 4586300946612847351}
+  layerFilter:
+    serializedVersion: 2
+    m_Bits: 4096
+  vineSpike1: {fileID: 4898602182612550314, guid: 74b1b824cc2772d48b8183081ca8bdb4,
+    type: 3}
+  vineSpike2: {fileID: 4226274663294353929, guid: 80c7e1ce8c5c29441a65ca13493d4a58,
+    type: 3}

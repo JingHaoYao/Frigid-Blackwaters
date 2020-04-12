@@ -62,6 +62,7 @@ public class ActiveSlot : MonoBehaviour {
         activeItem = _displayInfo;
         activeIcon.SetActive(true);
         activeIcon.GetComponent<Image>().sprite = _displayInfo.displayIcon;
+        activeIcon.GetComponent<Image>().preserveAspect = true;
     }
     
     public void deleteSlot()
