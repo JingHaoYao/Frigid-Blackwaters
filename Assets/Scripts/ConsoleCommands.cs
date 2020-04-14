@@ -83,6 +83,9 @@ public class ConsoleCommands : MonoBehaviour
             case WeaponChoices.PlantMortar:
                 AddUpgrades(whatTier, isLeftUpgradeTree ? "unlock_aila_upgrade" : "", PlayerUpgrades.plantMortarUpgrades);
                 break;
+            case WeaponChoices.PodFlyers:
+                AddUpgrades(whatTier, isLeftUpgradeTree ? "unlock_spiky_pods" : "", PlayerUpgrades.podFlyersUpgrades);
+                break;
 
         }
     }
@@ -214,7 +217,8 @@ public class ConsoleCommands : MonoBehaviour
         Sniper,
         ChemicalSprayer,
         GlaiveLauncher,
-        PlantMortar
+        PlantMortar,
+        PodFlyers
     }
 
     enum WhichWeaponSide

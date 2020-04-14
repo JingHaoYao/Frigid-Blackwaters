@@ -45,7 +45,7 @@ public class PlantMortarAirBlast : WeaponFireScript
             for(int i = 0; i < numberSpreads; i++)
             {
                 GameObject spreadMortarInstant = Instantiate(spreadMortarProjectile, transform.position, Quaternion.identity);
-                spreadMortarInstant.GetComponent<PlantMortarProjectile>().targetLocation = basePos + new Vector3(Mathf.Cos(i * angleIncrement * Mathf.Deg2Rad), Mathf.Sin(i * angleIncrement * Mathf.Deg2Rad)) * 2;
+                spreadMortarInstant.GetComponent<PlantMortarProjectile>().targetLocation = basePos + (new Vector3(Mathf.Cos(i * angleIncrement * Mathf.Deg2Rad), Mathf.Sin(i * angleIncrement * Mathf.Deg2Rad)) * 2);
                 mortarBullets.Add(spreadMortarInstant);
 
             }

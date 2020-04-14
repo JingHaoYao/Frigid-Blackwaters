@@ -138,6 +138,10 @@ public static class SaveSystem
             {
                 PlayerUpgrades.plantMortarUpgrades.Add(id);
             }
+            foreach(string id in data.podFlyersUpgrades)
+            {
+                PlayerUpgrades.podFlyersUpgrades.Add(id);
+            }
 
             PlayerUpgrades.numberSkillPoints = data.numberSkillPoints;
             PlayerUpgrades.numberMaxSkillPoints = data.numberMaxSkillPoints;

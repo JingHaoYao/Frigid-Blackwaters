@@ -200,7 +200,7 @@ public class ShipWeaponScript : MonoBehaviour {
             else
             {
                 transform.position = playerShip.transform.position + new Vector3(0.4f, 0.5f, 0) * 0.65f;
-                spriteRenderer.sortingOrder = playerShip.GetComponent<SpriteRenderer>().sortingOrder + 3;
+                spriteRenderer.sortingOrder = playerShip.GetComponent<SpriteRenderer>().sortingOrder + 2;
                 spriteRenderer.sprite = up;
                 transform.localScale = new Vector3(0.7f, 0.7f, 0);
             }

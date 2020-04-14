@@ -17,6 +17,7 @@ public class ShipSmithMenus : MonoBehaviour {
     [SerializeField] private ChemicalSprayerUpgradeTilesUI chemicalSprayerUpgradesMenu;
     [SerializeField] private GlaiveLauncherUpgradeTileUI glaiveLauncherUpgradesMenu;
     [SerializeField] private PlantMortarUpgradeTilesUI plantMortarUpgradesMenu;
+    [SerializeField] private PodFlyersUpgradeTilesUI podFlyersUpgradesMenu;
     [SerializeField] private GameObject weaponSelectorMenu, returnButton;
     int skillPointPrice = 0;
 
@@ -80,10 +81,15 @@ public class ShipSmithMenus : MonoBehaviour {
         {
             if (!PlayerUpgrades.plantMortarUpgrades.Contains("unlock_the_plant_mortar"))
                 PlayerUpgrades.plantMortarUpgrades.Add("unlock_the_plant_mortar");
+            if (!PlayerUpgrades.podFlyersUpgrades.Contains("unlock_the_pod_flyers"))
+            {
+                PlayerUpgrades.podFlyersUpgrades.Add("unlock_the_pod_flyers");
+            }
         }
         else
         {
             plantMortarUpgradesMenu.PlantMortarUpgradeTiles[0].noLongerUnlockable = true;
+            podFlyersUpgradesMenu.PodFlyersUpgradeTiles[0].noLongerUnlockable = true;
         }
 
         foreach (GameObject menu in menusList)
@@ -147,6 +153,7 @@ public class ShipSmithMenus : MonoBehaviour {
         PlayerUpgrades.safeUpgrades.Clear();
         PlayerUpgrades.inventoryUpgrades.Clear();
         PlayerUpgrades.plantMortarUpgrades.Clear();
+        PlayerUpgrades.podFlyersUpgrades.Clear();
         checkWeaponsUnlocked();
 
         PlayerUpgrades.numberSkillPoints = PlayerUpgrades.numberMaxSkillPoints;
@@ -198,6 +205,11 @@ public class ShipSmithMenus : MonoBehaviour {
         }
 
         foreach(PlantMortarUpgradeTile tile in plantMortarUpgradesMenu.PlantMortarUpgradeTiles)
+        {
+            tile.noLongerUnlockable = false;
+        }
+
+        foreach(PodFlyersUpgradeTile tile in podFlyersUpgradesMenu.PodFlyersUpgradeTiles)
         {
             tile.noLongerUnlockable = false;
         }
