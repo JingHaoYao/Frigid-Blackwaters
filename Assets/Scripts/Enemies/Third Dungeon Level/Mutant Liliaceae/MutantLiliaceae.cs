@@ -18,6 +18,11 @@ public class MutantLiliaceae : Enemy {
     [SerializeField] GameObject podProjectile;
     [SerializeField] GameObject waveWall;
     BossHealthBar bossHealthBar;
+    [SerializeField] DialogueSet mutantLiliaceaeInterstitialDialogue;
+    public DialogueUI dialogueUI;
+    public GameObject dialogueBlackOverlay;
+    public MutantLiliaceaeBossManager bossManager;
+    public AudioManager audioManager;
 
     private int bossPhase = 0;
     // 0 - player moving back to boss
@@ -37,8 +42,6 @@ public class MutantLiliaceae : Enemy {
 
     void InitializeBoss()
     {
-        bossHealthBar.bossStartUp("Mutant Liliaceae");
-        bossHealthBar.targetEnemy = this;
         StartCoroutine(openingAnimationSequence());
         PlayerProperties.playerScript.enemiesDefeated = false;
     }
@@ -51,19 +54,24 @@ public class MutantLiliaceae : Enemy {
         yield return new WaitForSeconds(2f);
         animator.SetTrigger("Awaken");
         flowerAwakenAudio.Play();
-        // also need to play the boss song here
+        audioManager.PlaySound("Final Boss Music");
+        audioManager.FadeIn("Final Boss Music", 0.2f, 1f);
         yield return new WaitForSeconds(1.333f);
         LeanTween.move(cameraScript.gameObject, new Vector3(1600, 0), 1f).setEaseOutQuad();
         yield return new WaitForSeconds(1f);
         cameraScript.freeCam = false;
         cameraScript.trackPlayer = true;
         PlayerProperties.playerScript.playerDead = false;
-
-        StartCoroutine(mainEnemyLoop());
+        dialogueUI.targetDialogue = mutantLiliaceaeInterstitialDialogue;
+        dialogueUI.setEndAction(() => StartCoroutine(mainEnemyLoop()));
+        dialogueBlackOverlay.SetActive(true);
+        dialogueUI.gameObject.SetActive(true);
     }
 
     IEnumerator mainEnemyLoop()
     {
+        bossHealthBar.bossStartUp("Mutant Liliaceae");
+        bossHealthBar.targetEnemy = this;
         while (true)
         {
             if (bossPhase == 0)
@@ -259,15 +267,20 @@ public class MutantLiliaceae : Enemy {
 
     private void finishedThirdLevelProcedure()
     {
+        audioManager.FadeOut("Final Boss Music", 0.2f);
         bossHealthBar.bossEnd();
         StopAllCoroutines();
         animator.SetTrigger("Death");
         flowerDeathAudio.Play();
         PlayerProperties.playerScript.playerDead = true;
-        MiscData.dungeonLevelUnlocked = 4;
+        if (MiscData.dungeonLevelUnlocked == 3)
+        {
+            MiscData.dungeonLevelUnlocked = 4;
+        }
         cameraScript.freeCam = true;
         cameraScript.trackPlayer = false;
-        // we go into the checkpoint dialogue here
+        bossManager.bossBeaten(this.nameID, 2f);
+     
     }
 
     public override void damageProcedure(int damage)

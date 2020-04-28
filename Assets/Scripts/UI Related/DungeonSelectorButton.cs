@@ -27,13 +27,21 @@ public class DungeonSelectorButton : MonoBehaviour {
             lockedImage.SetActive(false);
     }
 
-    IEnumerator fadeLoadScene()
+    IEnumerator fadeLoadScene(int whichScene = -1)
     {
         blackWindow.SetActive(true);
         blackWindow.GetComponent<Animator>().SetTrigger("FadeOut");
         yield return new WaitForSeconds(1f);
 
-        AsyncOperation openScene = SceneManager.LoadSceneAsync(whichSceneLoad);
+        AsyncOperation openScene;
+        if (whichScene != -1)
+        {
+            openScene = SceneManager.LoadSceneAsync(whichScene);
+        }
+        else
+        {
+            openScene = SceneManager.LoadSceneAsync(whichSceneLoad);
+        }
         Image loadingCircle = blackWindow.transform.GetChild(0).GetComponent<Image>();
         loadingCircle.gameObject.SetActive(true);
         loadingCircle.fillAmount = 0;
@@ -52,13 +60,32 @@ public class DungeonSelectorButton : MonoBehaviour {
         }
     }
 
+    void pickPlayerHubToLoad()
+    {
+        if(whichSceneLoad == "Player Hub")
+        {
+            if (MiscData.dungeonLevelUnlocked == 3)
+            {
+                StartCoroutine(fadeLoadScene(5));
+            }
+            else
+            {
+                StartCoroutine(fadeLoadScene(1));
+            }
+        }
+        else
+        {
+            StartCoroutine(fadeLoadScene());
+        }
+    }
+
     public void loadScene()
     {
         if (locked == false && alreadyLoadedScene == false)
         {
             Time.timeScale = 1;
             alreadyLoadedScene = true;
-            StartCoroutine(fadeLoadScene());
+            pickPlayerHubToLoad();
             FindObjectOfType<AudioManager>().PlaySound("Dungeon Entry");
         }
     }

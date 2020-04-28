@@ -18,6 +18,7 @@ public class ShipSmithMenus : MonoBehaviour {
     [SerializeField] private GlaiveLauncherUpgradeTileUI glaiveLauncherUpgradesMenu;
     [SerializeField] private PlantMortarUpgradeTilesUI plantMortarUpgradesMenu;
     [SerializeField] private PodFlyersUpgradeTilesUI podFlyersUpgradesMenu;
+    [SerializeField] private PolluxShrineUpgradeTilesUI polluxShrineUpgradesMenu;
     [SerializeField] private GameObject weaponSelectorMenu, returnButton;
     int skillPointPrice = 0;
 
@@ -85,11 +86,16 @@ public class ShipSmithMenus : MonoBehaviour {
             {
                 PlayerUpgrades.podFlyersUpgrades.Add("unlock_the_pod_flyers");
             }
+            if (!PlayerUpgrades.polluxShrineUpgrades.Contains("unlock_the_pollux_shrine"))
+            {
+                PlayerUpgrades.polluxShrineUpgrades.Add("unlock_the_pollux_shrine");
+            }
         }
         else
         {
             plantMortarUpgradesMenu.PlantMortarUpgradeTiles[0].noLongerUnlockable = true;
             podFlyersUpgradesMenu.PodFlyersUpgradeTiles[0].noLongerUnlockable = true;
+            polluxShrineUpgradesMenu.PolluxShrineUpgradeTiles[0].noLongerUnlockable = true;
         }
 
         foreach (GameObject menu in menusList)
@@ -154,6 +160,7 @@ public class ShipSmithMenus : MonoBehaviour {
         PlayerUpgrades.inventoryUpgrades.Clear();
         PlayerUpgrades.plantMortarUpgrades.Clear();
         PlayerUpgrades.podFlyersUpgrades.Clear();
+        PlayerUpgrades.polluxShrineUpgrades.Clear();
         checkWeaponsUnlocked();
 
         PlayerUpgrades.numberSkillPoints = PlayerUpgrades.numberMaxSkillPoints;
@@ -210,6 +217,11 @@ public class ShipSmithMenus : MonoBehaviour {
         }
 
         foreach(PodFlyersUpgradeTile tile in podFlyersUpgradesMenu.PodFlyersUpgradeTiles)
+        {
+            tile.noLongerUnlockable = false;
+        }
+
+        foreach(PolluxShrineUpgradeTile tile in polluxShrineUpgradesMenu.PolluxShrineUpgradeTiles)
         {
             tile.noLongerUnlockable = false;
         }

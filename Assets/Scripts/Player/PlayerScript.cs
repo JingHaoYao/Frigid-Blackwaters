@@ -270,7 +270,7 @@ public class PlayerScript : MonoBehaviour {
 
     void loadPrevItems()
     {
-        if (SceneManager.GetActiveScene().name == "Player Hub")
+        if (SceneManager.GetActiveScene().name == "Player Hub" || SceneManager.GetActiveScene().name == "Willow's Hideout")
         {
             HubProperties.storeGold += PlayerItems.totalGoldAmount;
             if (GameObject.Find("Gold Deposit Notifier"))

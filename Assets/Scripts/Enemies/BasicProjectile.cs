@@ -31,7 +31,7 @@ public class BasicProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (impacted == false && collision.gameObject.layer != 15 && collision.gameObject.layer != 10)
+        if (impacted == false && collision.gameObject.layer != 15)
         {
             impacted = true;
             animator.SetTrigger(breakString);

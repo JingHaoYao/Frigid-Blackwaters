@@ -67,22 +67,26 @@ public class DialogueUI : MonoBehaviour
             frontPanel.enabled = false;
         }
     }
-    
+
     IEnumerator loadDialogue(float waitDuration)
     {
         playerScript.playerDead = true;
         transform.GetChild(0).gameObject.SetActive(false);
         blackOverlayAnimator.enabled = false;
-        if (targetDialogue.originalMusic == "Dungeon Ambiance")
+
+        if (targetDialogue.originalMusic != "")
         {
-            // check whether the sound to fade out is the dungeon ambiance
-            // since dungeon ambiance is faded in by other sources, just muted it to prevent music overlap
-            FindObjectOfType<AudioManager>().MuteSound(targetDialogue.originalMusic);
-        }
-        else
-        {
-            FindObjectOfType<AudioManager>().PlaySound(targetDialogue.originalMusic);
-            FindObjectOfType<AudioManager>().FadeOut(targetDialogue.originalMusic, 0.2f);
+            if (targetDialogue.originalMusic == "Dungeon Ambiance")
+            {
+                // check whether the sound to fade out is the dungeon ambiance
+                // since dungeon ambiance is faded in by other sources, just muted it to prevent music overlap
+                FindObjectOfType<AudioManager>().MuteSound(targetDialogue.originalMusic);
+            }
+            else
+            {
+                FindObjectOfType<AudioManager>().PlaySound(targetDialogue.originalMusic);
+                FindObjectOfType<AudioManager>().FadeOut(targetDialogue.originalMusic, 0.2f);
+            }
         }
 
         panelImageBack.enabled = false;
@@ -119,6 +123,8 @@ public class DialogueUI : MonoBehaviour
 
         if (dialogueIndex < targetDialogue.panelSprites.Length)
         {
+            this.panelImageFront.GetComponent<Animator>().SetTrigger("FadeOut");
+            this.panelImageBack.GetComponent<Animator>().SetTrigger("FadeOut");
             loadDialoguePanel(panelImageBack, panelImageFront, null, targetDialogue.panelSprites[0]);
         }
 
@@ -171,8 +177,11 @@ public class DialogueUI : MonoBehaviour
         blackOverlayAnimator.enabled = true;
         blackOverlayAnimator.SetTrigger("FadeIn");
         yield return new WaitForSeconds(1f);
-        FindObjectOfType<AudioManager>().PlaySound(targetDialogue.substituteMusic);
-        FindObjectOfType<AudioManager>().FadeIn(targetDialogue.substituteMusic, 0.2f, 0.6f);
+        if (targetDialogue.substituteMusic != "")
+        {
+            FindObjectOfType<AudioManager>().PlaySound(targetDialogue.substituteMusic);
+            FindObjectOfType<AudioManager>().FadeIn(targetDialogue.substituteMusic, 0.2f, 0.6f);
+        }
         waitReveal = 0;
         blackOverlayAnimator.enabled = false;
         loaded = true;
@@ -222,7 +231,6 @@ public class DialogueUI : MonoBehaviour
         }
 
         FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
-
         dialogueText.text = targetDialogue.dialogues[index];
         dialogueName.text = targetDialogue.dialogueNames[index];
     }
@@ -326,16 +334,22 @@ public class DialogueUI : MonoBehaviour
     {
         blackOverlayAnimator.enabled = true;
         blackOverlayAnimator.SetTrigger("FadeOut");
-        FindObjectOfType<AudioManager>().FadeOut(targetDialogue.substituteMusic, 0.2f);
+        if (targetDialogue.substituteMusic != "")
+        {
+            FindObjectOfType<AudioManager>().FadeOut(targetDialogue.substituteMusic, 0.2f);
+        }
         yield return new WaitForSeconds(1f);
         blackOverlayAnimator.SetTrigger("FadeIn");
-        if (targetDialogue.originalMusic == "Dungeon Ambiance")
+        if (targetDialogue.originalMusic != "")
         {
-            FindObjectOfType<AudioManager>().UnMuteSound(targetDialogue.originalMusic);
-        }
-        else
-        {
-            FindObjectOfType<AudioManager>().FadeIn(targetDialogue.originalMusic, 0.2f, .5f);
+            if (targetDialogue.originalMusic == "Dungeon Ambiance")
+            {
+                FindObjectOfType<AudioManager>().UnMuteSound(targetDialogue.originalMusic);
+            }
+            else
+            {
+                FindObjectOfType<AudioManager>().FadeIn(targetDialogue.originalMusic, 0.2f, .5f);
+            }
         }
         this.gameObject.SetActive(false);
         targetDialogue = null;

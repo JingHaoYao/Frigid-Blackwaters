@@ -9,6 +9,7 @@ public class SupplementaryReturnDialogueManager : MonoBehaviour
 
     public string[] weaponUnlockDialogues;
     public ReturnNotifications returnNotifications;
+    [SerializeField] DialogueSet[] firstTimeLevelDialogues;
 
     private void initializeUnlockWeaponDialogues()
     {
@@ -22,13 +23,30 @@ public class SupplementaryReturnDialogueManager : MonoBehaviour
                 }
                 break;
             case 3:
+                DialogueSet set = loadDialogue(weaponUnlockDialogues[1]);
+                if (!MiscData.completedHubReturnDialogues.Contains(set.gameObject.name))
+                {
+                    returnNotifications.dialoguesToDisplay.Add(set);
+                }
                 break;
             // more dungeon levels later here
         } 
     }
 
+    private void initializeFirstTimeLevelDialogues()
+    {
+        for(int i = 0; i < firstTimeLevelDialogues.Length; i++)
+        {
+            if (!MiscData.completedHubReturnDialogues.Contains(firstTimeLevelDialogues[i].name))
+            {
+                returnNotifications.dialoguesToDisplay.Add(firstTimeLevelDialogues[i]);
+            }
+        }
+    }
+
     void Start()
     {
+        initializeFirstTimeLevelDialogues();
         initializeUnlockWeaponDialogues();
     }
 

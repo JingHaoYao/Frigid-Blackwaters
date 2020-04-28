@@ -8,6 +8,11 @@ public class MutantLiliaceaeBossManager : BossManager
     public Camera camera;
     public GameObject mutantLiliaceaeBoss;
 
+    public void InitiateBossFromCheckpoint()
+    {
+        StartCoroutine(movePlayerToBossArea());
+    }
+
     IEnumerator movePlayerToBossArea()
     {
         fadeWindow.transition();

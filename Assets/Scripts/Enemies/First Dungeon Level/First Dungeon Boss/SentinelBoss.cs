@@ -227,7 +227,10 @@ public class SentinelBoss : Enemy
     public override void deathProcedure()
     {
         Instantiate(deadBoss, transform.position, Quaternion.identity);
-        MiscData.dungeonLevelUnlocked = 2;
+        if (MiscData.dungeonLevelUnlocked == 1)
+        {
+            MiscData.dungeonLevelUnlocked = 2;
+        }
 
         FindObjectOfType<BossHealthBar>().bossEnd();
         SaveSystem.SaveGame();

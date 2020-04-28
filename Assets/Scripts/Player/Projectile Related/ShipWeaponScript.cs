@@ -43,7 +43,12 @@ public class ShipWeaponScript : MonoBehaviour {
         down = trueTemplate.down;
         coolDownThreshold = trueTemplate.coolDownTime;
         weaponPlume = trueTemplate.weaponFlare;
-        weaponIcon.sprite = trueTemplate.coolDownIcon;
+        weaponIcon.sprite = trueTemplate.coolDownIcon;   
+    }
+
+    public bool isOnCooldown()
+    {
+        return onCooldown;
     }
 
     void setPosition()

@@ -8,6 +8,7 @@ public class ActivateDeathDialogue : MonoBehaviour
     public GameObject dialogueBlackOverlay;
     ReturnNotifications returnNotifications;
     GameObject playerShip;
+    [SerializeField] string whichDeathDialogue;
 
     void Start()
     {
@@ -20,7 +21,7 @@ public class ActivateDeathDialogue : MonoBehaviour
     {
         if (MiscData.playerDied)
         {
-            returnNotifications.dialoguesToDisplay.Add(Resources.Load<DialogueSet>("Dialogues/Death Dialogue"));
+            returnNotifications.dialoguesToDisplay.Add(Resources.Load<DialogueSet>("Dialogues/" + whichDeathDialogue));
             MiscData.playerDied = false;
             SaveSystem.SaveGame();
         }

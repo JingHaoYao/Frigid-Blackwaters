@@ -22,7 +22,21 @@ public class SpawnRoom : MonoBehaviour {
         blackWindow.SetActive(true);
         blackWindow.GetComponent<Animator>().GetComponent<Animator>().SetTrigger("FadeOut");
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene(whichSceneLoad);
+        if (whichSceneLoad != 1)
+        {
+            SceneManager.LoadScene(whichSceneLoad);
+        }
+        else
+        {
+            if (MiscData.dungeonLevelUnlocked == 3)
+            {
+                SceneManager.LoadScene(5);
+            }
+            else
+            {
+                SceneManager.LoadScene(1);
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -143,7 +143,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         if(playerScript.enemiesDefeated == true)
         {
-            StartCoroutine(fadeLoadScene(1));
+            choosePlayerHubToLoad();
             SaveSystem.SaveGame();
         }
         else
@@ -151,10 +151,22 @@ public class PauseMenu : MonoBehaviour
             MiscData.playerDied = true;
             playerScript.playerDead = true;
             playerScript.applyInventoryLoss();
-            StartCoroutine(fadeLoadScene(1));
+            choosePlayerHubToLoad();
             SaveSystem.SaveGame();
         }
         FindObjectOfType<AudioManager>().PlaySound("Pause Menu Button");
+    }
+
+    void choosePlayerHubToLoad()
+    {
+        if (MiscData.dungeonLevelUnlocked == 3)
+        {
+            StartCoroutine(fadeLoadScene(5));
+        }
+        else
+        {
+            StartCoroutine(fadeLoadScene(1));
+        }
     }
 
     public void goBack(GameObject areYouSureButton)
@@ -194,7 +206,14 @@ public class PauseMenu : MonoBehaviour
 
     public void loadHub()
     {
-        StartCoroutine(fadeLoadScene(1));
+        if (MiscData.dungeonLevelUnlocked == 3)
+        {
+            StartCoroutine(fadeLoadScene(5));
+        }
+        else
+        {
+            StartCoroutine(fadeLoadScene(1));
+        }
         SaveSystem.SaveGame();
     }
     

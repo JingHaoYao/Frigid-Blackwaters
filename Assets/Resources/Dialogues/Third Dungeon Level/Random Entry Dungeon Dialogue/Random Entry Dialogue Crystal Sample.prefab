@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1102295018621706055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1102295018621706054}
+  - component: {fileID: 1102295018621706053}
+  m_Layer: 0
+  m_Name: Random Entry Dialogue Crystal Sample
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1102295018621706054
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102295018621706055}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.6086845, y: -1.0575097, z: -2144.4844}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1102295018621706053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102295018621706055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatDialogueType: 0
+  checkPointDialogue: 0
+  dialogues:
+  - Hey Navigator. I took a sample of blue crystal I found and bottled it.
+  - It seems that it has the ability to charge any artifacts that you have with you.
+  - 'This might come in handy if you need a few extra charges to fire off a powerful
+    ability. '
+  dialogueNames:
+  - Julius
+  - Julius
+  - Julius
+  background: {fileID: 7046828484021919189, guid: 6594cebc2fb5ac14badb09c54d39f1e9,
+    type: 3}
+  character1Sprites: []
+  character2Sprites: []
+  character3Sprites:
+  - {fileID: 8698682193245118057, guid: f10bb179d722c21438611fc43d72be82, type: 3}
+  - {fileID: 1638094003813458572, guid: f10bb179d722c21438611fc43d72be82, type: 3}
+  - {fileID: -4508414568873849944, guid: 33c868809e6f4ce49a70362ab63f8aa3, type: 3}
+  character4Sprites: []
+  panelSprites: []
+  substituteMusic: Blacksmith Scene
+  originalMusic: Dungeon Ambiance
+  addedItems:
+  - {fileID: 3343568544069052821, guid: 51b99a8fc5d16104cbc49d14a9e5b05a, type: 3}
+  textColor: {r: 1, g: 1, b: 1, a: 1}

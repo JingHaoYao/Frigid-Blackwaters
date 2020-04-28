@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3889593523066213511
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3889593523066213510}
+  - component: {fileID: 3889593523066213529}
+  m_Layer: 0
+  m_Name: Random Dungeon Dialogue Healing Tonic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3889593523066213510
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3889593523066213511}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.748794, y: 3.0108976, z: -760.36566}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3889593523066213529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3889593523066213511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatDialogueType: 0
+  checkPointDialogue: 0
+  dialogues:
+  - Hey Navigator! Geordi and I were on a little trek in town and managed to find
+    something interesting.
+  - We managed to come across a supply of healing tonics.
+  - If any of us are hurt, apparently this stuff really helps to speed up our bodies'
+    natural healing.
+  dialogueNames:
+  - Tabitha
+  - Geordi
+  - Geordi
+  background: {fileID: 0}
+  character1Sprites: []
+  character2Sprites:
+  - {fileID: 7304365837249909450, guid: 27753bed57998614c88dfd6cb698ece8, type: 3}
+  - {fileID: -7545076890469037121, guid: 27753bed57998614c88dfd6cb698ece8, type: 3}
+  - {fileID: -6788922758620529358, guid: 27753bed57998614c88dfd6cb698ece8, type: 3}
+  character3Sprites:
+  - {fileID: -6633466376003217947, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: -589896756908973102, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  - {fileID: 1423390269769719171, guid: 8dd5846fd7cfa8841bf401f9b1a02f4b, type: 3}
+  character4Sprites: []
+  panelSprites: []
+  substituteMusic: 
+  originalMusic: 
+  addedItems:
+  - {fileID: 7560227534575075756, guid: 6e291b9dfa16abe42a9cae720faebec8, type: 3}
+  textColor: {r: 1, g: 1, b: 1, a: 1}

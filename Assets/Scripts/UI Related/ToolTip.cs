@@ -17,6 +17,8 @@ public class ToolTip : MonoBehaviour {
             this.gameObject.SetActive(false);
         }*/
         if (Input.GetKeyDown(KeyCode.Escape) || playerScript.windowAlreadyOpen == false)
+        {
             this.gameObject.SetActive(false);
+        }
 	}
 }

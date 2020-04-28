@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2750474669640543959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2750474669640543952}
+  - component: {fileID: 2750474669640543953}
+  m_Layer: 0
+  m_Name: Random Entry Dialogue Mushroom Variety
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2750474669640543952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2750474669640543959}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.0077853, y: -5.8318973, z: -2142.5781}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2750474669640543953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2750474669640543959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatDialogueType: 0
+  checkPointDialogue: 0
+  dialogues:
+  - Hi Navigator. I grew some mushrooms yesterday that have some interesting properties.
+  - One mushroom heightens the combat sense of its user, and the other breaks down
+    cells in its user's body only to repair them twice as fast.
+  - Let's see if you can make use for these.
+  dialogueNames:
+  - Willow
+  - Willow
+  - Willow
+  background: {fileID: -4734107139493109682, guid: 6594cebc2fb5ac14badb09c54d39f1e9,
+    type: 3}
+  character1Sprites: []
+  character2Sprites:
+  - {fileID: 7740539382899121777, guid: 6b10d54631daa2a489fc861592c2101d, type: 3}
+  - {fileID: -2041939148476325391, guid: 6b10d54631daa2a489fc861592c2101d, type: 3}
+  - {fileID: -7808369290961937003, guid: 6b10d54631daa2a489fc861592c2101d, type: 3}
+  character3Sprites: []
+  character4Sprites: []
+  panelSprites: []
+  substituteMusic: Willow's Theme
+  originalMusic: Dungeon Ambiance
+  addedItems:
+  - {fileID: 6290492609746924665, guid: e15b632e2d12cbc44b1bca7c6f1e14bc, type: 3}
+  - {fileID: 7866942864058610885, guid: a9340bbea2838974382d42885851fce1, type: 3}
+  textColor: {r: 1, g: 1, b: 1, a: 1}

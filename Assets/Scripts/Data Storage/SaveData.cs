@@ -21,6 +21,7 @@ public class SaveData
     public string[] glaiveLauncherUpgrades;
     public string[] plantMortarUpgrades;
     public string[] podFlyersUpgrades;
+    public string[] polluxShrineUpgrades;
     public string[] hullUpgrades;
     public string[] inventoryUpgrades;
     public string[] safeUpgrades;
@@ -148,6 +149,11 @@ public class SaveData
         for(int i = 0; i < podFlyersUpgrades.Length; i++)
         {
             podFlyersUpgrades[i] = PlayerUpgrades.podFlyersUpgrades[i];
+        }
+        polluxShrineUpgrades = new string[PlayerUpgrades.polluxShrineUpgrades.Count];
+        for(int i = 0; i < polluxShrineUpgrades.Length; i++)
+        {
+            polluxShrineUpgrades[i] = PlayerUpgrades.polluxShrineUpgrades[i];
         }
 
         hullUpgrades = new string[PlayerUpgrades.hullUpgrades.Count];

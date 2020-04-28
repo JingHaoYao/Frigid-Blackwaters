@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4870839244686386914
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4870839244686386917}
+  - component: {fileID: 4870839244686386916}
+  m_Layer: 0
+  m_Name: Random Dungeon Dialogue Explosives
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4870839244686386917
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4870839244686386914}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.494459, y: 1.0378364, z: -759.3619}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4870839244686386916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4870839244686386914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatDialogueType: 0
+  checkPointDialogue: 0
+  dialogues:
+  - Navigator, a new weapon shipment came to the town.
+  - It seems that the town found itself with an excess of explosive weaponry.
+  - I managed to buy a few explosives for a cheaper price.
+  - You can find them in the inventory.
+  dialogueNames:
+  - Geordi
+  - Geordi
+  - Geordi
+  - Geordi
+  background: {fileID: 0}
+  character1Sprites: []
+  character2Sprites: []
+  character3Sprites:
+  - {fileID: -6616470820165601713, guid: 2b215b8eb00fcb94d839d7b04f657930, type: 3}
+  - {fileID: -6616470820165601713, guid: 2b215b8eb00fcb94d839d7b04f657930, type: 3}
+  - {fileID: -6287513786982850881, guid: 2b215b8eb00fcb94d839d7b04f657930, type: 3}
+  - {fileID: -6287513786982850881, guid: 2b215b8eb00fcb94d839d7b04f657930, type: 3}
+  character4Sprites: []
+  panelSprites: []
+  substituteMusic: 
+  originalMusic: 
+  addedItems:
+  - {fileID: 4086429271581964838, guid: 5bb5ea0a3a4c2394fa92eb5bb3bcd138, type: 3}
+  - {fileID: 7820138605938230441, guid: 3d242ab90619b0c44b4b9af118972a01, type: 3}
+  textColor: {r: 1, g: 1, b: 1, a: 1}

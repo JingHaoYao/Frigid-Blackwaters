@@ -22,7 +22,7 @@ public class HubLoader : MonoBehaviour
         if(collision.gameObject.name == "PlayerShip")
         {
             playerScript.playerDead = true;
-            StartCoroutine(fadeLoadScene(1));
+            choosePlayerHubToLoad();
         }
     }
 
@@ -55,4 +55,18 @@ public class HubLoader : MonoBehaviour
             }
         }
     }
+
+    void choosePlayerHubToLoad()
+    {
+        if (MiscData.dungeonLevelUnlocked == 3)
+        {
+            StartCoroutine(fadeLoadScene(5));
+        }
+        else
+        {
+            StartCoroutine(fadeLoadScene(1));
+        }
+    }
+
+
 }

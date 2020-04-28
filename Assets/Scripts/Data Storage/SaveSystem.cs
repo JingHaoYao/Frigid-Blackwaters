@@ -142,6 +142,10 @@ public static class SaveSystem
             {
                 PlayerUpgrades.podFlyersUpgrades.Add(id);
             }
+            foreach(string id in data.polluxShrineUpgrades)
+            {
+                PlayerUpgrades.polluxShrineUpgrades.Add(id);
+            }
 
             PlayerUpgrades.numberSkillPoints = data.numberSkillPoints;
             PlayerUpgrades.numberMaxSkillPoints = data.numberMaxSkillPoints;

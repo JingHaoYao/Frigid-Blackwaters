@@ -86,6 +86,9 @@ public class ConsoleCommands : MonoBehaviour
             case WeaponChoices.PodFlyers:
                 AddUpgrades(whatTier, isLeftUpgradeTree ? "unlock_spiky_pods" : "", PlayerUpgrades.podFlyersUpgrades);
                 break;
+            case WeaponChoices.PolluxShrine:
+                AddUpgrades(whatTier, isLeftUpgradeTree ? "unlock_waves_light_balls" : "", PlayerUpgrades.polluxShrineUpgrades);
+                break;
 
         }
     }
@@ -192,6 +195,16 @@ public class ConsoleCommands : MonoBehaviour
         }
     }
 
+    [CommandHandler(Name = "UnlockAllBuildings", Description = "Unlock all buildings in the player hub")]
+    private void UnlockAllBuildings()
+    {
+        MiscData.unlockedBuildings.Add("provisions");
+        MiscData.unlockedBuildings.Add("artifact_shop");
+        MiscData.unlockedBuildings.Add("golden_vault");
+        MiscData.unlockedBuildings.Add("shipsmith");
+        MiscData.unlockedBuildings.Add("weapon_outfitter");
+    }
+
     private void AddUpgrades(int tier, string leftUpgradeTree, List<string> upgrades)
     {
         for(int i = 0; i < Mathf.Clamp(tier, 0, 6); i++)
@@ -218,7 +231,8 @@ public class ConsoleCommands : MonoBehaviour
         ChemicalSprayer,
         GlaiveLauncher,
         PlantMortar,
-        PodFlyers
+        PodFlyers,
+        PolluxShrine
     }
 
     enum WhichWeaponSide

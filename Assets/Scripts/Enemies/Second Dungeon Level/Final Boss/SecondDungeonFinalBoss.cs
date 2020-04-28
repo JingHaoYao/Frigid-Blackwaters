@@ -339,7 +339,10 @@ public class SecondDungeonFinalBoss : Enemy
         animator.SetTrigger("Death");
         death.Play();
         playerScript.playerDead = true;
-        MiscData.dungeonLevelUnlocked = 3;
+        if (MiscData.dungeonLevelUnlocked == 2)
+        {
+            MiscData.dungeonLevelUnlocked = 3;
+        }
         playerScript.playerDead = true;
         bossManager.cameraScript.freeCam = true;
         bossManager.cameraScript.trackPlayer = false;

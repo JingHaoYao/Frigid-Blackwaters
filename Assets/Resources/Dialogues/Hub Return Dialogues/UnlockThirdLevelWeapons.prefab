@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6711917877910664738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6711917877910664739}
+  - component: {fileID: 6711917877910664740}
+  m_Layer: 0
+  m_Name: Third Level Unlocking New Weapons Dialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6711917877910664739
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6711917877910664738}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.6531706, y: -6.464319, z: -20.012562}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6711917877910664740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6711917877910664738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatDialogueType: 6
+  checkPointDialogue: 0
+  dialogues:
+  - 'Hey, Geordi told me that you were the one in charge of navigation on the ship. '
+  - "I\u2019ve got some new weapons made from the plants found here on the third level.
+    They should come in handy against the numerous monsters here."
+  - "I\u2019ve made use of some explosive plants as well as ancient components found
+    from various automatons laid around here and there. "
+  - Try them out at the weapon outfitter!
+  dialogueNames:
+  - Julius
+  - Julius
+  - Julius
+  - Julius
+  background: {fileID: 0}
+  character1Sprites: []
+  character2Sprites: []
+  character3Sprites:
+  - {fileID: 1638094003813458572, guid: f10bb179d722c21438611fc43d72be82, type: 3}
+  - {fileID: -3099394416245420277, guid: f10bb179d722c21438611fc43d72be82, type: 3}
+  - {fileID: 1638094003813458572, guid: f10bb179d722c21438611fc43d72be82, type: 3}
+  - {fileID: -4508414568873849944, guid: 33c868809e6f4ce49a70362ab63f8aa3, type: 3}
+  character4Sprites: []
+  panelSprites: []
+  substituteMusic: 
+  originalMusic: 
+  addedItems: []
+  textColor: {r: 1, g: 1, b: 1, a: 1}

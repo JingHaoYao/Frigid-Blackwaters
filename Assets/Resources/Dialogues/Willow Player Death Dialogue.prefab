@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2453169629932003742
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2453169629932003737}
+  - component: {fileID: 2453169629932003736}
+  m_Layer: 0
+  m_Name: Willow Player Death Dialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2453169629932003737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2453169629932003742}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.4513528, y: 4.894943, z: -1820.8962}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2453169629932003736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2453169629932003742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatDialogueType: 0
+  checkPointDialogue: 0
+  dialogues:
+  - 'Navigator? '
+  - "Oh, you\u2019re awake. Thank god."
+  - "Your crew hadn\u2019t returned for a long time, so me and Willow set out on an
+    expedition to try and find you all. Luckily we did. Rowan managed to drag you
+    all onto a nearby rock. "
+  - "We couldn\u2019t retrieve all of the gold or artifacts that you may have had
+    though. "
+  - "Try to be a bit more cautious with where you\u2019re sailing. Formidable foes
+    lie everywhere on the third level. "
+  dialogueNames: []
+  background: {fileID: -4734107139493109682, guid: 6594cebc2fb5ac14badb09c54d39f1e9,
+    type: 3}
+  character1Sprites: []
+  character2Sprites:
+  - {fileID: 5993336053440829814, guid: d79725d565118bc42b110f8d43665017, type: 3}
+  - {fileID: 7740539382899121777, guid: 6b10d54631daa2a489fc861592c2101d, type: 3}
+  - {fileID: -2041939148476325391, guid: 6b10d54631daa2a489fc861592c2101d, type: 3}
+  - {fileID: -2041939148476325391, guid: 6b10d54631daa2a489fc861592c2101d, type: 3}
+  - {fileID: 7740539382899121777, guid: 6b10d54631daa2a489fc861592c2101d, type: 3}
+  character3Sprites:
+  - {fileID: 2477103318815753926, guid: 33c868809e6f4ce49a70362ab63f8aa3, type: 3}
+  - {fileID: -3099394416245420277, guid: f10bb179d722c21438611fc43d72be82, type: 3}
+  - {fileID: -3099394416245420277, guid: f10bb179d722c21438611fc43d72be82, type: 3}
+  - {fileID: 1638094003813458572, guid: f10bb179d722c21438611fc43d72be82, type: 3}
+  - {fileID: 1638094003813458572, guid: f10bb179d722c21438611fc43d72be82, type: 3}
+  character4Sprites: []
+  panelSprites: []
+  substituteMusic: Willow's Theme
+  originalMusic: Background Music
+  addedItems: []
+  textColor: {r: 1, g: 1, b: 1, a: 1}

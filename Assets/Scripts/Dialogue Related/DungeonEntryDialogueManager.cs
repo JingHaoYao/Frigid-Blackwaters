@@ -47,6 +47,17 @@ public class DungeonEntryDialogueManager : MonoBehaviour
                 return Resources.Load<DialogueSet>("Dialogues/Second Dungeon Level/Random Entry Dungeon Dialogue/" + name);
             }
         }
+        else if(whatDungeonLevel == 3)
+        {
+            if(storyDialogue == true)
+            {
+                return Resources.Load<DialogueSet>("Dialogues/Third Dungeon Level/Story Dialogues/" + name);
+            }
+            else
+            {
+                return Resources.Load<DialogueSet>("Dialogues/Third Dungeon Level/Random Entry Dungeon Dialogue/" + name);
+            }
+        }
         return null;
     }
 
@@ -62,7 +73,10 @@ public class DungeonEntryDialogueManager : MonoBehaviour
         if(MiscData.completedEntryDungeonDialogues.Count == 1 && dialogueUI.gameObject.activeSelf == false && loadedDialogue == true && MiscData.dungeonMapSymbolShown == false)
         {
             mapSymbol.SetActive(true);
-            infoPointer.SetActive(true);
+            if (infoPointer != null)
+            {
+                infoPointer.SetActive(true);
+            }
             MiscData.dungeonMapSymbolShown = true;
             SaveSystem.SaveGame();
         }
