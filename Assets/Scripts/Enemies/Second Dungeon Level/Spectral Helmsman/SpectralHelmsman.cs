@@ -30,6 +30,7 @@ public class SpectralHelmsman : Enemy
     {
         bossHealthBar.bossStartUp("Spectral Helmsman");
         bossHealthBar.targetEnemy = this;
+        StartCoroutine(mainGameLoop());
     }
 
     IEnumerator summonShips()
@@ -123,36 +124,43 @@ public class SpectralHelmsman : Enemy
         }
     }
 
-    void Update()
+    IEnumerator mainGameLoop()
     {
-        if (health > 0)
+        yield return new WaitForSeconds(6 / 12f);
+        audioSources[3].Play();
+        yield return new WaitForSeconds(13 / 12f);
+        while (true)
         {
-            angleToShip = (360 + Mathf.Atan2(playerScript.transform.position.y - transform.position.y, playerScript.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
-            if (attackDuration > 0)
+            if (health > 0)
             {
-                if (attacking == false)
+                angleToShip = (360 + Mathf.Atan2(playerScript.transform.position.y - transform.position.y, playerScript.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
+                if (attackDuration > 0)
                 {
-                    attackDuration -= Time.deltaTime;
-                    pickView(angleToShip);
-                    pickIdleAnim();
-                }
-            }
-            else
-            {
-                if (stopAttacking == false)
-                {
-                    if (numberDashes < 2)
+                    if (attacking == false)
                     {
-                        StartCoroutine(swordDash(angleToShip));
-                        numberDashes++;
-                    }
-                    else
-                    {
-                        StartCoroutine(summonShips());
-                        numberDashes = 0;
+                        attackDuration -= Time.deltaTime;
+                        pickView(angleToShip);
+                        pickIdleAnim();
                     }
                 }
+                else
+                {
+                    if (stopAttacking == false)
+                    {
+                        if (numberDashes < 2)
+                        {
+                            StartCoroutine(swordDash(angleToShip));
+                            numberDashes++;
+                        }
+                        else
+                        {
+                            StartCoroutine(summonShips());
+                            numberDashes = 0;
+                        }
+                    }
+                }
             }
+            yield return null;
         }
     }
 

@@ -36,7 +36,7 @@ public class HubLoader : MonoBehaviour
             FindObjectOfType<AudioManager>().FadeOut("Tutorial Background Music", 0.2f);
             FindObjectOfType<AudioManager>().FadeOut("Storm Background Noise", 0.2f);
             yield return new WaitForSeconds(1f);
-            AsyncOperation openScene = SceneManager.LoadSceneAsync(1);
+            AsyncOperation openScene = SceneManager.LoadSceneAsync(whichScene);
             Image loadingCircle = blackWindow.transform.GetChild(0).GetComponent<Image>();
             loadingCircle.gameObject.SetActive(true);
             loadingCircle.fillAmount = 0;
@@ -61,6 +61,10 @@ public class HubLoader : MonoBehaviour
         if (MiscData.dungeonLevelUnlocked == 3)
         {
             StartCoroutine(fadeLoadScene(5));
+        }
+        else if(MiscData.dungeonLevelUnlocked == 2)
+        {
+            StartCoroutine(fadeLoadScene(7));
         }
         else
         {

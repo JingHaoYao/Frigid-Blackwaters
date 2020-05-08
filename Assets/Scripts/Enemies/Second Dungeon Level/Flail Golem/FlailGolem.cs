@@ -21,6 +21,8 @@ public class FlailGolem : Enemy
     Vector3 targetTravel;
     float flailSpeed = 12;
 
+    [SerializeField] AudioSource golemStartUpSound;
+
     public GameObject deadFlailGolem;
 
     int pickView(float angle)
@@ -62,6 +64,7 @@ public class FlailGolem : Enemy
         flail.SetActive(true);
         FindObjectOfType<BossHealthBar>().bossStartUp("Tome Guardian");
         FindObjectOfType<BossHealthBar>().targetEnemy = this;
+        StartCoroutine(MainGameLoop());
     }
 
     IEnumerator throwFlail()
@@ -107,55 +110,62 @@ public class FlailGolem : Enemy
 
 
 
-    void Update()
+    IEnumerator MainGameLoop()
     {
-        angleToShip = (360 + Mathf.Atan2(playerScript.transform.position.y - transform.position.y, playerScript.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
-        if(health > 0)
+        yield return new WaitForSeconds(14 / 12f);
+        golemStartUpSound.Play();
+        yield return new WaitForSeconds(6 / 12f);
+        while (true)
         {
-            throwPeriod += Time.deltaTime;
-            if (throwPeriod > 8)
+            angleToShip = (360 + Mathf.Atan2(playerScript.transform.position.y - transform.position.y, playerScript.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
+            if (health > 0)
             {
-                throwPeriod = 0;
-                if (GetComponents<AudioSource>()[1].isPlaying == true)
+                throwPeriod += Time.deltaTime;
+                if (throwPeriod > 8)
                 {
-                    GetComponents<AudioSource>()[1].Stop();
+                    throwPeriod = 0;
+                    if (GetComponents<AudioSource>()[1].isPlaying == true)
+                    {
+                        GetComponents<AudioSource>()[1].Stop();
+                    }
+                    StartCoroutine(throwFlail());
                 }
-                StartCoroutine(throwFlail());
-            }
-            else
-            {
-                if (isThrowing == false)
+                else
                 {
-                    flailPeriod += Time.deltaTime * 2;
-                    if (flailPeriod > Mathf.PI * 2)
+                    if (isThrowing == false)
                     {
-                        flailPeriod = 0;
-                    }
+                        flailPeriod += Time.deltaTime * 2;
+                        if (flailPeriod > Mathf.PI * 2)
+                        {
+                            flailPeriod = 0;
+                        }
 
-                    if (pickView(angleToShip) != whatView)
-                    {
-                        animator.SetTrigger("Swing" + pickView(angleToShip).ToString());
-                        whatView = pickView(angleToShip);
-                    }
+                        if (pickView(angleToShip) != whatView)
+                        {
+                            animator.SetTrigger("Swing" + pickView(angleToShip).ToString());
+                            whatView = pickView(angleToShip);
+                        }
 
-                    flail.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                    flail.transform.position = transform.position + new Vector3(Mathf.Cos(flailPeriod), Mathf.Sin(flailPeriod)) * flailRadius + Vector3.up * 1.5f;
-                    if (GetComponents<AudioSource>()[1].isPlaying == false)
-                    {
-                        GetComponents<AudioSource>()[1].Play();
-                    }
+                        flail.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                        flail.transform.position = transform.position + new Vector3(Mathf.Cos(flailPeriod), Mathf.Sin(flailPeriod)) * flailRadius + Vector3.up * 1.5f;
+                        if (GetComponents<AudioSource>()[1].isPlaying == false)
+                        {
+                            GetComponents<AudioSource>()[1].Play();
+                        }
 
-                    if (Vector2.Distance(transform.position, targetTravel) > 0.2f)
-                    {
-                        rigidBody2D.velocity = new Vector3(targetTravel.x - transform.position.x, targetTravel.y - transform.position.y).normalized * speed;
-                    }
-                    else
-                    {
-                        rigidBody2D.velocity = Vector3.zero;
-                        targetTravel = playerScript.transform.position + new Vector3(Mathf.Cos((angleToShip + 180) * Mathf.Deg2Rad), Mathf.Sin((angleToShip + 180) * Mathf.Deg2Rad)) * flailRadius;
+                        if (Vector2.Distance(transform.position, targetTravel) > 0.2f)
+                        {
+                            rigidBody2D.velocity = new Vector3(targetTravel.x - transform.position.x, targetTravel.y - transform.position.y).normalized * speed;
+                        }
+                        else
+                        {
+                            rigidBody2D.velocity = Vector3.zero;
+                            targetTravel = playerScript.transform.position + new Vector3(Mathf.Cos((angleToShip + 180) * Mathf.Deg2Rad), Mathf.Sin((angleToShip + 180) * Mathf.Deg2Rad)) * flailRadius;
+                        }
                     }
                 }
             }
+            yield return null;
         }
     }
 
@@ -183,7 +193,7 @@ public class FlailGolem : Enemy
         SaveSystem.SaveGame();
         bossManager.bossBeaten(nameID, 1.083f);
         Instantiate(deadFlailGolem, transform.position, Quaternion.identity);
-        flail.GetComponent<Animator>().enabled = true;
+        flail.GetComponent<Animator>().SetTrigger("Fall");
         flail.GetComponent<CircleCollider2D>().enabled = false;
         StopAllCoroutines();
         flail.GetComponent<Rigidbody2D>().velocity = Vector3.zero;

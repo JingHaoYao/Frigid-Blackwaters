@@ -62,4 +62,9 @@ public class RoomTemplates : MonoBehaviour {
             antiList[index].setRoomType();
         }
     }
+
+    public bool areRoomsSpawned()
+    {
+        return spawned & antiList.Count > 0;
+    }
 }

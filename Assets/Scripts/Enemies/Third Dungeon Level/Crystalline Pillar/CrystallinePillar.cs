@@ -135,6 +135,8 @@ public class CrystallinePillar : Enemy
 
     IEnumerator attackProcedure()
     {
+        yield return new WaitForSeconds(14 / 12f);
+        animator.enabled = false;
         while (true)
         {
             if(isAttacking == false)
@@ -167,7 +169,6 @@ public class CrystallinePillar : Enemy
     private void Start()
     {
         mainCamera = Camera.main;
-        animator.enabled = false;
         StartCoroutine(attackProcedure());
         healthBar = FindObjectOfType<BossHealthBar>();
         healthBar.bossStartUp("Crystalline Pillar");

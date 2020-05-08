@@ -164,32 +164,43 @@ public class ElderFrostMage : Enemy
     {
         animator = GetComponent<Animator>();
         rigidBody2D = GetComponent<Rigidbody2D>();
-        animator.enabled = false;
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerShip = GameObject.Find("PlayerShip");
         initPlayerPos = playerShip.transform.position;
         FindObjectOfType<BossHealthBar>().targetEnemy = GetComponent<Enemy>();
         FindObjectOfType<BossHealthBar>().bossStartUp("Elder Frost Mage");
+        StartCoroutine(mainGameloop());
     }
 
-    void Update()
+    IEnumerator mainGameloop()
     {
-        if (health > 0)
+        yield return new WaitForSeconds(8 / 12f);
+        this.GetComponents<AudioSource>()[1].Play();
+        yield return new WaitForSeconds(16 / 12f);
+        animator.enabled = false;
+        while (true)
         {
-            spawnFoam();
-            angleToShip = (360 + (Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg)) % 360;
-            pickView(angleToShip);
-            if (attackPeriod > 0)
+            if (health > 0)
             {
-                attackPeriod -= Time.deltaTime;
-                if (isAttacking == false)
+                spawnFoam();
+                angleToShip = (360 + (Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg)) % 360;
+                pickView(angleToShip);
+                if (attackPeriod > 0)
                 {
-                    pickSprite();
-                    if (Vector2.Distance(initPlayerPos, playerShip.transform.position) > 4 || Vector2.Distance(targetTravel, transform.position) > 0.2f)
+                    attackPeriod -= Time.deltaTime;
+                    if (isAttacking == false)
                     {
-                        targetTravel = Camera.main.transform.position + new Vector3(Camera.main.transform.position.x - playerShip.transform.position.x, Camera.main.transform.position.y - playerShip.transform.position.y).normalized * 6f;
-                        rigidBody2D.velocity = new Vector3(targetTravel.x - transform.position.x, targetTravel.y - transform.position.y).normalized * speed;
-                        initPlayerPos = playerShip.transform.position;
+                        pickSprite();
+                        if (Vector2.Distance(initPlayerPos, playerShip.transform.position) > 4 || Vector2.Distance(targetTravel, transform.position) > 0.2f)
+                        {
+                            targetTravel = Camera.main.transform.position + new Vector3(Camera.main.transform.position.x - playerShip.transform.position.x, Camera.main.transform.position.y - playerShip.transform.position.y).normalized * 6f;
+                            rigidBody2D.velocity = new Vector3(targetTravel.x - transform.position.x, targetTravel.y - transform.position.y).normalized * speed;
+                            initPlayerPos = playerShip.transform.position;
+                        }
+                        else
+                        {
+                            rigidBody2D.velocity = Vector3.zero;
+                        }
                     }
                     else
                     {
@@ -198,37 +209,34 @@ public class ElderFrostMage : Enemy
                 }
                 else
                 {
-                    rigidBody2D.velocity = Vector3.zero;
+                    if (summonMissile == true || numberPillars >= numberPillarsBeforeExplode)
+                    {
+                        if (summonMissile == false && numberPillars >= numberPillarsBeforeExplode)
+                        {
+                            numberPillars = 0;
+                            numberPillarsBeforeExplode = Random.Range(3, 6);
+                            StartCoroutine(shootActivate());
+                        }
+                        else
+                        {
+                            StartCoroutine(shootMissile());
+                            summonMissile = false;
+                        }
+                    }
+                    else
+                    {
+                        StartCoroutine(summonPillar());
+                        summonMissile = true;
+                        numberPillars++;
+                    }
                 }
             }
             else
             {
-                if (summonMissile == true || numberPillars >= numberPillarsBeforeExplode)
-                {
-                    if (summonMissile == false && numberPillars >= numberPillarsBeforeExplode)
-                    {
-                        numberPillars = 0;
-                        numberPillarsBeforeExplode = Random.Range(3, 6);
-                        StartCoroutine(shootActivate());
-                    }
-                    else
-                    {
-                        StartCoroutine(shootMissile());
-                        summonMissile = false;
-                    }
-                }
-                else
-                {
-                    StartCoroutine(summonPillar());
-                    summonMissile = true;
-                    numberPillars++;
-                }
+                animator.enabled = true;
+                rigidBody2D.velocity = Vector3.zero;
             }
-        }
-        else
-        {
-            animator.enabled = true;
-            rigidBody2D.velocity = Vector3.zero;
+            yield return null;
         }
     }
 

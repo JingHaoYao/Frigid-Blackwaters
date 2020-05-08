@@ -33,6 +33,8 @@ public class CrustaceaKing : Enemy
     private float foamTimer = 0;
     public GameObject waterFoam;
 
+    [SerializeField] AudioSource riseAudio;
+
     void spawnFoam()
     {
         if (rigidBody2D.velocity.magnitude != 0)
@@ -54,28 +56,40 @@ public class CrustaceaKing : Enemy
         rigidBody2D = GetComponent<Rigidbody2D>();
         damageHitBox = GetComponent<BoxCollider2D>();
         playerScript = FindObjectOfType<PlayerScript>();
-        animator.enabled = false;
         damageBox.SetActive(false);
         FindObjectOfType<BossHealthBar>().bossStartUp("Crustacea King");
         FindObjectOfType<BossHealthBar>().targetEnemy = this;
+        StartCoroutine(MainGameLoop());
     }
 
-    void Update()
+    IEnumerator MainGameLoop()
     {
-        angleToShip = (360 + Mathf.Atan2(playerScript.transform.position.y - transform.position.y, playerScript.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
-        spawnFoam();
+        yield return new WaitForSeconds(9 / 12f);
+        riseAudio.Play();
+        yield return new WaitForSeconds(15 / 12f);
+        GetComponents<AudioSource>()[2].Play();
+        GetComponents<AudioSource>()[3].Play();
+        yield return new WaitForSeconds(6 / 12f);
 
-        if(attacking == false)
+        animator.enabled = false;
+        while (true)
         {
-            pickView(angleToShip);
-            spriteRenderer.sprite = closedViews[whatView - 1];
-            transform.localScale = new Vector3(6 * mirror, 6, 0);
+            angleToShip = (360 + Mathf.Atan2(playerScript.transform.position.y - transform.position.y, playerScript.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
+            spawnFoam();
 
-            dashPeriod += Time.deltaTime;
-            if(dashPeriod > 1)
+            if (attacking == false)
             {
-                StartCoroutine(waveDash());
+                pickView(angleToShip);
+                spriteRenderer.sprite = closedViews[whatView - 1];
+                transform.localScale = new Vector3(6 * mirror, 6, 0);
+
+                dashPeriod += Time.deltaTime;
+                if (dashPeriod > 1)
+                {
+                    StartCoroutine(waveDash());
+                }
             }
+            yield return null;
         }
     }
 

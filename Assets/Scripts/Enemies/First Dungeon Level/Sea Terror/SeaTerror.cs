@@ -29,6 +29,8 @@ public class SeaTerror : Enemy
 
     public GameObject waterSplash;
 
+    [SerializeField] AudioSource waterAudio;
+
     int pickView(float angle)
     {
         if (angle > 22.5f && angle <= 67.5f)
@@ -83,7 +85,7 @@ public class SeaTerror : Enemy
         targetTravel = Camera.main.transform.position + new Vector3(Camera.main.transform.position.x - playerShip.transform.position.x, Camera.main.transform.position.y - playerShip.transform.position.y).normalized * 4.5f;
         FindObjectOfType<BossHealthBar>().targetEnemy = GetComponent<Enemy>();
         FindObjectOfType<BossHealthBar>().bossStartUp("Sea Terror");
-        animator.enabled = false;
+        StartCoroutine(mainGameLoop());
     }
 
     void summonSwiper()
@@ -130,28 +132,36 @@ public class SeaTerror : Enemy
         tentacleList.Add(tentacleInstant.GetComponent<SeaTerrorTentacle>());
     }
 
-    void Update()
+    IEnumerator mainGameLoop()
     {
-        if (health > 0)
+        yield return new WaitForSeconds(10 / 12f);
+        waterAudio.Play();
+        yield return new WaitForSeconds(7 / 12f);
+        animator.enabled = false;
+        while (true)
         {
-            float angleToShip = (360 + Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
-            spriteRenderer.sprite = views[pickView(angleToShip)];
-            transform.localScale = new Vector3(6 * mirror, 6);
-
-            summonSwipeTentacle += Time.deltaTime;
-            summonSlamTentacle += Time.deltaTime;
-
-            if (summonSwipeTentacle > 4)
+            if (health > 0)
             {
-                summonSwipeTentacle = 0;
-                summonSwiper();
-            }
+                float angleToShip = (360 + Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
+                spriteRenderer.sprite = views[pickView(angleToShip)];
+                transform.localScale = new Vector3(6 * mirror, 6);
 
-            if (summonSlamTentacle > 8)
-            {
-                summonSlamTentacle = Random.Range(0.0f, 3.0f);
-                summonSlammer();
+                summonSwipeTentacle += Time.deltaTime;
+                summonSlamTentacle += Time.deltaTime;
+
+                if (summonSwipeTentacle > 4)
+                {
+                    summonSwipeTentacle = 0;
+                    summonSwiper();
+                }
+
+                if (summonSlamTentacle > 8)
+                {
+                    summonSlamTentacle = Random.Range(0.0f, 3.0f);
+                    summonSlammer();
+                }
             }
+            yield return null;
         }
     }
 

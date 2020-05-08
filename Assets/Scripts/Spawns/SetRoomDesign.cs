@@ -8,7 +8,7 @@ public class SetRoomDesign : MonoBehaviour {
     public int[] memoryDoorsOpen = new int[4] { 0, 0, 0, 0 }; //top, bottom, right, left
                                                               //1 means door is closed at the end of spawning
     bool memoryStored = false;
-    int xPos = 0; //AAAAAAHHHH transformed both into int
+    int xPos = 0; //transformed both into int
     int yPos = 0;
     RoomMemory roomMemory;
     int roomKey;

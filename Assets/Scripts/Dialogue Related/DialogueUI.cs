@@ -127,6 +127,10 @@ public class DialogueUI : MonoBehaviour
             this.panelImageBack.GetComponent<Animator>().SetTrigger("FadeOut");
             loadDialoguePanel(panelImageBack, panelImageFront, null, targetDialogue.panelSprites[0]);
         }
+        else
+        {
+            loadDialoguePanel(panelImageBack, panelImageFront, null, null);
+        }
 
         if (targetDialogue.background != null)
         {

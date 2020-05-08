@@ -68,6 +68,10 @@ public class DungeonSelectorButton : MonoBehaviour {
             {
                 StartCoroutine(fadeLoadScene(5));
             }
+            else if(MiscData.dungeonLevelUnlocked == 2)
+            {
+                StartCoroutine(fadeLoadScene(7));
+            }
             else
             {
                 StartCoroutine(fadeLoadScene(1));

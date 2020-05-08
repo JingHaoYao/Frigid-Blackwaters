@@ -24,17 +24,30 @@ public class LoadGameFromTitleScreen : MonoBehaviour {
     {
         if (clicked == false)
         {
-            // This line only for the demo - just to clear any artifacts that the player has left over
-            PlayerItems.inventoryItemsIDs.Clear();
-
-            StartCoroutine(fadeLoadScene());
-            //loading save upon player clicking play
             SaveData data = SaveSystem.GetSave();
             SaveSystem.loadData(data);
+
+            StartCoroutine(fadeLoadScene());
 
             FindObjectOfType<AudioManager>().PlaySound("Play Button");
 
             clicked = true;
+        }
+    }
+
+    int whichPlayerHubToLoad()
+    {
+        if (MiscData.dungeonLevelUnlocked == 3)
+        {
+            return 5;
+        }
+        else if (MiscData.dungeonLevelUnlocked == 2)
+        {
+            return 7;
+        }
+        else
+        {
+            return 1;
         }
     }
 
@@ -65,7 +78,7 @@ public class LoadGameFromTitleScreen : MonoBehaviour {
         }
         else
         {
-            AsyncOperation openScene = SceneManager.LoadSceneAsync(1);
+            AsyncOperation openScene = SceneManager.LoadSceneAsync(whichPlayerHubToLoad());
             Image loadingCircle = blackWindow.transform.GetChild(0).GetComponent<Image>();
             loadingCircle.gameObject.SetActive(true);
             loadingCircle.fillAmount = 0;

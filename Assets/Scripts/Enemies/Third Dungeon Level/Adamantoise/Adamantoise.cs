@@ -30,6 +30,7 @@ public class Adamantoise : Enemy
 
     IEnumerator attackProcedure()
     {
+        yield return new WaitForSeconds(2f);
         while (true)
         {
             if(isAttacking == false)

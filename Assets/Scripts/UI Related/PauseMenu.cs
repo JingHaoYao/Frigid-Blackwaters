@@ -163,6 +163,10 @@ public class PauseMenu : MonoBehaviour
         {
             StartCoroutine(fadeLoadScene(5));
         }
+        else if(MiscData.dungeonLevelUnlocked == 2)
+        {
+            StartCoroutine(fadeLoadScene(7));
+        }
         else
         {
             StartCoroutine(fadeLoadScene(1));
@@ -206,14 +210,7 @@ public class PauseMenu : MonoBehaviour
 
     public void loadHub()
     {
-        if (MiscData.dungeonLevelUnlocked == 3)
-        {
-            StartCoroutine(fadeLoadScene(5));
-        }
-        else
-        {
-            StartCoroutine(fadeLoadScene(1));
-        }
+        choosePlayerHubToLoad();
         SaveSystem.SaveGame();
     }
     

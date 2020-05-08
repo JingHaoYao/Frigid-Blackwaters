@@ -10,6 +10,7 @@ public class CarnivorousTangleFiend : Enemy
     private float attackPeriod = 2;
     public BossManager bossManager;
     public Animator roomAnimator;
+    [SerializeField] AudioSource bushCut;
 
     int numberTurretAttacks = 0;
 
@@ -23,6 +24,9 @@ public class CarnivorousTangleFiend : Enemy
 
     IEnumerator attackCycle()
     {
+        yield return new WaitForSeconds(1f);
+        bushCut.Play();
+        yield return new WaitForSeconds(0.5f);
         while (true)
         {
             if(attackPeriod > 0)

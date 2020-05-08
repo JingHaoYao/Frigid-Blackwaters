@@ -273,78 +273,86 @@ public class UndeadMariner : Enemy
         targetTravel = Camera.main.transform.position + new Vector3(Camera.main.transform.position.x - playerShip.transform.position.x, Camera.main.transform.position.y - playerShip.transform.position.y).normalized * 4.5f;
         FindObjectOfType<BossHealthBar>().targetEnemy = GetComponent<Enemy>();
         FindObjectOfType<BossHealthBar>().bossStartUp("Undead Mariner");
+        StartCoroutine(mainGameLoop());
     }
 
-    void Update()
+    IEnumerator mainGameLoop()
     {
-        angleToShip = (360 + (Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg)) % 360;
-        if (health > 0)
+        yield return new WaitForSeconds(10 / 12f);
+        this.GetComponents<AudioSource>()[1].Play();
+        yield return new WaitForSeconds(1f);
+        while (true)
         {
-            spawnFoam();
-            if (attackingPeriod > 0)
+            angleToShip = (360 + (Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg)) % 360;
+            if (health > 0)
             {
-                if (anchorInstant)
+                spawnFoam();
+                if (attackingPeriod > 0)
                 {
-                    if (anchorInstant.GetComponent<UndeadMarinerAnchor>().returnToSender == true && thrownBackAnim == false)
+                    if (anchorInstant)
                     {
-                        thrownBackAnim = true;
-                        currView = 0;
-                        animator.SetTrigger("ThrowBack");
-                        this.GetComponents<AudioSource>()[2].Play();
-                    }
-                }
-                else if (thrownBackAnim == true)
-                {
-                    if (Vector2.Distance(transform.position, playerShip.transform.position) < 3)
-                    {
-                        if (swordAttacking == false)
+                        if (anchorInstant.GetComponent<UndeadMarinerAnchor>().returnToSender == true && thrownBackAnim == false)
                         {
-                            StartCoroutine(swordAttack());
+                            thrownBackAnim = true;
+                            currView = 0;
+                            animator.SetTrigger("ThrowBack");
+                            this.GetComponents<AudioSource>()[2].Play();
                         }
                     }
-                    else
+                    else if (thrownBackAnim == true)
                     {
-                        if (firingCannon == false)
+                        if (Vector2.Distance(transform.position, playerShip.transform.position) < 3)
                         {
-                            attackingPeriod -= Time.deltaTime;
-                            if (Vector2.Distance(transform.position, targetTravel) > 0.2f)
+                            if (swordAttacking == false)
                             {
-                                rigidBody2D.velocity = new Vector3(targetTravel.x - transform.position.x, targetTravel.y - transform.position.y).normalized * speed;
+                                StartCoroutine(swordAttack());
                             }
-                            else
-                            {
-                                rigidBody2D.velocity = Vector3.zero;
-                                targetTravel = Camera.main.transform.position + new Vector3(Camera.main.transform.position.x - playerShip.transform.position.x, Camera.main.transform.position.y - playerShip.transform.position.y).normalized * 4.5f;
-                            }
-                            pickIdleAnim(pickView(angleToShip));
                         }
-                    }
-                }
-            }
-            else
-            {
-                rigidBody2D.velocity = Vector3.zero;
-                if (numberCannonsFired < 4)
-                {
-                    numberCannonsFired++;
-                    attackingPeriod = .6f;
-                    if (Random.Range(0, 2) == 1)
-                    {
-                        StartCoroutine(fireLeftCannon(pickView(angleToShip), angleToShip));
-                    }
-                    else
-                    {
-                        StartCoroutine(fireRightCannon(pickView(angleToShip), angleToShip));
+                        else
+                        {
+                            if (firingCannon == false)
+                            {
+                                attackingPeriod -= Time.deltaTime;
+                                if (Vector2.Distance(transform.position, targetTravel) > 0.2f)
+                                {
+                                    rigidBody2D.velocity = new Vector3(targetTravel.x - transform.position.x, targetTravel.y - transform.position.y).normalized * speed;
+                                }
+                                else
+                                {
+                                    rigidBody2D.velocity = Vector3.zero;
+                                    targetTravel = Camera.main.transform.position + new Vector3(Camera.main.transform.position.x - playerShip.transform.position.x, Camera.main.transform.position.y - playerShip.transform.position.y).normalized * 4.5f;
+                                }
+                                pickIdleAnim(pickView(angleToShip));
+                            }
+                        }
                     }
                 }
                 else
                 {
-                    numberCannonsFired = 0;
-                    attackingPeriod = 3;
-                    thrownBackAnim = false;
-                    StartCoroutine(anchorAttack());
+                    rigidBody2D.velocity = Vector3.zero;
+                    if (numberCannonsFired < 4)
+                    {
+                        numberCannonsFired++;
+                        attackingPeriod = .6f;
+                        if (Random.Range(0, 2) == 1)
+                        {
+                            StartCoroutine(fireLeftCannon(pickView(angleToShip), angleToShip));
+                        }
+                        else
+                        {
+                            StartCoroutine(fireRightCannon(pickView(angleToShip), angleToShip));
+                        }
+                    }
+                    else
+                    {
+                        numberCannonsFired = 0;
+                        attackingPeriod = 3;
+                        thrownBackAnim = false;
+                        StartCoroutine(anchorAttack());
+                    }
                 }
             }
+            yield return null;
         }
     }
 
