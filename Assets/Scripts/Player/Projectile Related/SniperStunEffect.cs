@@ -13,6 +13,7 @@ public class SniperStunEffect : EnemyStatusEffect
         {
             LeanTween.alpha(star, 0, 0.5f);
         }
+        targetEnemy.removeStatus(this);
         Destroy(this.gameObject, 0.5f);
     }
 

@@ -17,6 +17,8 @@ public class FogCycleRoom : RoomInteraction
 
     FourthLevelFogController fogController;
 
+    [SerializeField] GameObject invisibilityStatusEffect;
+
     public void SetFogController(FourthLevelFogController fogController)
     {
         this.fogController = fogController;
@@ -54,6 +56,7 @@ public class FogCycleRoom : RoomInteraction
 
             fogCyclePeriod = 0;
             fogController.ActivateFog();
+            applyInvisStatusEffects(fogCycleDuration);
             glowRunes();
 
             while(fogCyclePeriod < fogCycleDuration)
@@ -86,5 +89,14 @@ public class FogCycleRoom : RoomInteraction
     private void unGlowRunes()
     {
         LeanTween.value(1, 0, 0.75f).setOnUpdate((float val) => runesSpriteRenderer.color = new Color(r, g, b, val));
+    }
+
+    public void applyInvisStatusEffects(float duration)
+    {
+        foreach (Enemy enemy in EnemyPool.enemyPool)
+        {
+            GameObject effectInstant = Instantiate(invisibilityStatusEffect, enemy.transform.position, Quaternion.identity);
+            enemy.addStatus(effectInstant.GetComponent<InvisibilityStatusEffect>(), duration);
+        }
     }
 }

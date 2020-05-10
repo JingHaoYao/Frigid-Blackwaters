@@ -11,6 +11,7 @@ public class SlowEffect : EnemyStatusEffect
     {
         targetEnemy.updateSpeed(targetEnemy.speed + slowAmount);
         StopAllCoroutines();
+        targetEnemy.removeStatus(this);
         Destroy(this.gameObject);
     }
 

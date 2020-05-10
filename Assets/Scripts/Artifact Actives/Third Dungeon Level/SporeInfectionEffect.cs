@@ -10,6 +10,7 @@ public class SporeInfectionEffect : EnemyStatusEffect
     public override void durationFinishedProcedure()
     {
         StopAllCoroutines();
+        targetEnemy.removeStatus(this);
         Destroy(this.gameObject);
     }
 

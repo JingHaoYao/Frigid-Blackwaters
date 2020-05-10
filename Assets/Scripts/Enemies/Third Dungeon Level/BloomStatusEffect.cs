@@ -13,6 +13,7 @@ public class BloomStatusEffect : EnemyStatusEffect
     {
         StopCoroutine(followEnemy());
         particleSystem.loop = false;
+        targetEnemy.removeStatus(this);
         Destroy(this.gameObject, 0.5f);
     }
 
@@ -25,7 +26,7 @@ public class BloomStatusEffect : EnemyStatusEffect
 
     void buffEnemy()
     {
-        targetEnemy.updateSpeed(targetEnemy.originalSpeed() + 2);
+        targetEnemy.updateSpeed(targetEnemy.speed + 2);
         targetEnemy.heal(targetEnemy.maxHealth / 2);
         GameObject healParticlesInstant = Instantiate(healParticles, targetEnemy.transform.position, Quaternion.identity);
         healParticlesInstant.GetComponent<FollowObject>().objectToFollow = targetEnemy.gameObject;

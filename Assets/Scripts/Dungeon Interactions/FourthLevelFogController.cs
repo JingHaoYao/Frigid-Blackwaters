@@ -35,7 +35,7 @@ public class FourthLevelFogController : MonoBehaviour
         LeanTween.cancelAll(this.gameObject);
         foreach(ParticleSystemRenderer renderer in renderers)
         {
-            LeanTween.value(0.05882353f, 0.05882353f * 3, 1f).setOnUpdate((float val) => renderer.sharedMaterial.color = new Color(0.6226415f, 0.8121411f, 0.8301887f, val));
+            LeanTween.value(0.05882353f, 0.05882353f * 2, 1f).setOnUpdate((float val) => renderer.sharedMaterial.color = new Color(0.6226415f, 0.8121411f, 0.8301887f, val));
         }
     }
 
@@ -44,7 +44,7 @@ public class FourthLevelFogController : MonoBehaviour
         LeanTween.cancelAll(this.gameObject);
         foreach (ParticleSystemRenderer renderer in renderers)
         {
-            LeanTween.value(0.05882353f * 3, 0.05882353f, 1f).setOnUpdate((float val) => renderer.sharedMaterial.color = new Color(0.6226415f, 0.8121411f, 0.8301887f, val));
+            LeanTween.value(0.05882353f * 2, 0.05882353f, 1f).setOnUpdate((float val) => renderer.sharedMaterial.color = new Color(0.6226415f, 0.8121411f, 0.8301887f, val));
         }
     }
 }

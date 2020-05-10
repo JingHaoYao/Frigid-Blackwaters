@@ -205,6 +205,20 @@ public class ConsoleCommands : MonoBehaviour
         MiscData.unlockedBuildings.Add("weapon_outfitter");
     }
 
+    [CommandHandler(Name = "ActivateFogEffect", Description = "Activate fog invisibility effect for the fourth level")]
+    private void ActivateFogEffect(float duration)
+    {
+        FindObjectOfType<FourthLevelFogController>().ActivateFog();
+        FindObjectOfType<FogCycleRoom>().applyInvisStatusEffects(duration);
+        StartCoroutine(WaitForFogDuration(duration));
+    }
+
+    IEnumerator WaitForFogDuration(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        FindObjectOfType<FourthLevelFogController>().DeActivateFog();
+    }
+
     private void AddUpgrades(int tier, string leftUpgradeTree, List<string> upgrades)
     {
         for(int i = 0; i < Mathf.Clamp(tier, 0, 6); i++)

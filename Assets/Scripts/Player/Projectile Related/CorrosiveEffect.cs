@@ -30,7 +30,7 @@ public class CorrosiveEffect : EnemyStatusEffect
     public override void durationFinishedProcedure()
     {
         StopAllCoroutines();
-        LeanTween.alpha(this.gameObject, 0, 0.5f).setOnComplete(() => { Destroy(this.gameObject); });
+        LeanTween.alpha(this.gameObject, 0, 0.5f).setOnComplete(() => { targetEnemy.removeStatus(this); Destroy(this.gameObject); });
     }
 
     void Start()

@@ -766,6 +766,7 @@ public class PlayerScript : MonoBehaviour {
             && collision.gameObject.tag != "RoomSpawn"
             && playerDead == false
             && damageImmunity == false
+            && collision.gameObject.layer != 21
            )
         {
             StartCoroutine(hitFrame(spriteRenderer));

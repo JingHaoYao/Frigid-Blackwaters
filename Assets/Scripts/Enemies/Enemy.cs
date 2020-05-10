@@ -13,7 +13,6 @@ public abstract class Enemy: MonoBehaviour
     public int percentSpawnChance = 33;
     public int armorMitigation;
     public float speed;
-    public float slowAmount;
 
     private float currentStunDuration = 0;
 
@@ -65,6 +64,17 @@ public abstract class Enemy: MonoBehaviour
     public virtual void statusUpdated(EnemyStatusEffect newStatus)
     {
 
+    }
+
+    public virtual void statusRemoved(EnemyStatusEffect removedStatus)
+    {
+
+    }
+
+    public void removeStatus(EnemyStatusEffect status)
+    {
+        this.statuses.Remove(status);
+        statusRemoved(status);
     }
 
     public void dealDamage(int damageAmount)
@@ -161,11 +171,6 @@ public abstract class Enemy: MonoBehaviour
 
     public void updateSpeed(float speedUpdate)
     {
-        this.speed = Mathf.Clamp(speedUpdate - slowAmount, 0, int.MaxValue);
-    }
-
-    public float originalSpeed()
-    {
-        return speed + slowAmount;
+        this.speed = Mathf.Clamp(speedUpdate, 0, int.MaxValue);
     }
 }
