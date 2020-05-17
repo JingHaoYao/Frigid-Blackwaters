@@ -10,7 +10,6 @@ public class SkeletalMissileCaster : Enemy
     public Sprite[] viewSprites;
     [SerializeField] private AStarPathfinding aStarPathfinding;
     private float travelAngle;
-    private float pokePeriod = 1.5f;
     public GameObject deadSpearman;
     private float foamTimer = 0;
     public GameObject waterFoam;
@@ -43,7 +42,7 @@ public class SkeletalMissileCaster : Enemy
 
     void spawnFoam()
     {
-        if (rigidBody2D.velocity.magnitude != 0)
+        if (rigidBody2D.velocity.magnitude != 0 && invisController.isUnderLight)
         {
             float whatAngle = Mathf.Atan2(rigidBody2D.velocity.y, rigidBody2D.velocity.x) * Mathf.Rad2Deg;
             foamTimer += Time.deltaTime;
@@ -167,7 +166,8 @@ public class SkeletalMissileCaster : Enemy
         animator.SetTrigger("Summon" + whatView);
         attackAudio.Play();
         yield return new WaitForSeconds(6 / 12f);
-        spawnProjectiles();
+        if(stopAttacking == false)
+            spawnProjectiles();
         yield return new WaitForSeconds(9 / 12f);
         isAttacking = false;
         animator.enabled = false;
@@ -209,7 +209,7 @@ public class SkeletalMissileCaster : Enemy
         else
         {
             rigidBody2D.velocity = Vector3.zero;
-            if (isAttacking == false && Vector2.Distance(transform.position, randomPos) < 1f)
+            if (isAttacking == false && Vector2.Distance(transform.position, randomPos) < 1f && stopAttacking == false)
             {
                 StartCoroutine(launchProjectiles());
             }

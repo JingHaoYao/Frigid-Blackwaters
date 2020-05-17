@@ -43,7 +43,14 @@ public class FogCycleRoom : RoomInteraction
     {
         while (EnemyPool.enemyPool.Count > 0)
         {
-            while(fogCyclePeriod < fogCycleInBetweenDuration)
+            float fogDurationToReduce = 0;
+
+            foreach(Enemy enemy in EnemyPool.enemyPool)
+            {
+                fogDurationToReduce += enemy.fogStats.fogCoolDownDecrease;
+            }
+
+            while(fogCyclePeriod < fogCycleInBetweenDuration - fogDurationToReduce)
             {
                 fogCyclePeriod += Time.deltaTime;
 
@@ -56,10 +63,18 @@ public class FogCycleRoom : RoomInteraction
 
             fogCyclePeriod = 0;
             fogController.ActivateFog();
-            applyInvisStatusEffects(fogCycleDuration);
+
+            float totalDurationToAdd = 0;
+            foreach(Enemy enemy in EnemyPool.enemyPool)
+            {
+                totalDurationToAdd += enemy.fogStats.fogDurationIncrease;
+            }
+            float totalDuration = fogCycleDuration + totalDurationToAdd;
+
+            applyInvisStatusEffects(totalDuration);
             glowRunes();
 
-            while(fogCyclePeriod < fogCycleDuration)
+            while(fogCyclePeriod < totalDuration)
             {
                 fogCyclePeriod += Time.deltaTime;
                 if(EnemyPool.enemyPool.Count == 0)

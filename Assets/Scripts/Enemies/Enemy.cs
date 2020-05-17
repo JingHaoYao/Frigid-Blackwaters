@@ -13,6 +13,15 @@ public abstract class Enemy: MonoBehaviour
     public int percentSpawnChance = 33;
     public int armorMitigation;
     public float speed;
+    public FogInfluenceStats fogStats;
+
+    [System.Serializable]
+    public struct FogInfluenceStats
+    {
+        //used to influence things on the fourth level, we don't need to modify this for any other enemies
+        public float fogDurationIncrease;
+        public float fogCoolDownDecrease;
+    }
 
     private float currentStunDuration = 0;
 

@@ -9,7 +9,6 @@ public class FrogmanBolaThrower : Enemy
     [SerializeField] private Animator animator;
     [SerializeField] private AStarPathfinding aStarPathfinding;
     private float travelAngle;
-    private float speedBonus;
     private float pokePeriod = 1.5f;
     public GameObject deadSpearman;
     private float foamTimer = 0;
@@ -58,7 +57,7 @@ public class FrogmanBolaThrower : Enemy
 
     void moveTowards(float direction)
     {
-        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * (speed + speedBonus);
+        rigidBody2D.velocity = new Vector3(Mathf.Cos(direction * Mathf.Deg2Rad), Mathf.Sin(direction * Mathf.Deg2Rad), 0) * speed;
     }
 
     float cardinalizeDirections(float angle)
