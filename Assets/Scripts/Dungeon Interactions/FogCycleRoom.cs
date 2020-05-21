@@ -35,7 +35,6 @@ public class FogCycleRoom : RoomInteraction
     {
         fogCycleInBetweenDuration = Mathf.Clamp((10 - dangerValue), 2, float.MaxValue);
         fogCycleDuration = Mathf.Clamp(3 + (dangerValue - 1), 1.5f, 8f);
-        Debug.Log(fogCycleDuration);
         StartCoroutine(fogCycle());
     }
 
