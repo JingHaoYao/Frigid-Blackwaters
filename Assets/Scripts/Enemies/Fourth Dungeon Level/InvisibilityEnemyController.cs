@@ -7,7 +7,7 @@ public class InvisibilityEnemyController : MonoBehaviour
     public SpriteRenderer[] renderersToModify;
     List<int> showingRendererTweens = new List<int>();
     List<int> hidingRendererTweens = new List<int>();
-    bool isInLight = false;
+    bool isInLight = true;
     Coroutine isInLightRoutine;
 
     public void FogActivated()

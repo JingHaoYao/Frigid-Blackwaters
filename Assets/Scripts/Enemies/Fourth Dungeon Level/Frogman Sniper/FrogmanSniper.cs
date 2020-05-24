@@ -152,7 +152,6 @@ public class FrogmanSniper : Enemy
         randomPos = pickRandPos();
         animator.enabled = false;
         mainCamera = Camera.main;
-        EnemyPool.addEnemy(this);
         targetInstance = Instantiate(target, transform.position, Quaternion.identity);
         targetInstance.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
     }
