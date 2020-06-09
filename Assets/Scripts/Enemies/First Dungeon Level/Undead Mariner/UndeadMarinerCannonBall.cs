@@ -26,7 +26,7 @@ public class UndeadMarinerCannonBall : MonoBehaviour
         if (collision.gameObject.tag == "playerHitBox")
         {
             PlayerScript playerScript = playerShip.GetComponent<PlayerScript>();
-            playerScript.amountDamage += 350;
+            playerScript.dealDamageToShip(350, this.gameObject);
             playerScript.enemyMomentumVector = new Vector3(Mathf.Cos(angleTravel), Mathf.Sin(angleTravel)) * 8;
             playerScript.enemyMomentumMagnitude = 8;
             playerScript.enemyMomentumDuration = 1f;

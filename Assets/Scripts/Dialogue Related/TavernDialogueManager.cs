@@ -13,7 +13,7 @@ public class TavernDialogueManager : MonoBehaviour
 
     void Awake()
     {
-        notifications = GameObject.Find("Dialogue Notifications").GetComponent<NotificationBell>();
+        notifications = FindObjectOfType<ReturnNotifications>().dialogueNotification;
         loadTavernDialogue();
     }
 

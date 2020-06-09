@@ -21,5 +21,5 @@ public class MaliciousFleshHook : ArtifactEffect
     }
 
     // Whenever the player enters a previously unentered room
-    public override void exploredNewRoom(int whatRoomType) { playerScript.amountDamage += 50; }
+    public override void exploredNewRoom(int whatRoomType) { PlayerProperties.playerScript.dealDamageToShip(50, this.gameObject); }
 }

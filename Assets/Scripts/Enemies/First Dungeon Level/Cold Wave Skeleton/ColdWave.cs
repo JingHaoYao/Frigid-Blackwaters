@@ -29,7 +29,7 @@ public class ColdWave : MonoBehaviour
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            FindObjectOfType<PlayerScript>().amountDamage += 50;
+            PlayerProperties.playerScript.dealDamageToShip(50, this.gameObject);
         }
     }
 }

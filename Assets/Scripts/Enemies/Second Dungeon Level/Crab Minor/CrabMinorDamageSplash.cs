@@ -5,6 +5,7 @@ using UnityEngine;
 public class CrabMinorDamageSplash : MonoBehaviour
 {
     CircleCollider2D damageCollider;
+    [SerializeField] int damageAmount = 300;
 
     IEnumerator damageTick()
     {
@@ -26,7 +27,7 @@ public class CrabMinorDamageSplash : MonoBehaviour
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            FindObjectOfType<PlayerScript>().amountDamage += 300;
+            PlayerProperties.playerScript.dealDamageToShip(damageAmount, this.gameObject);
         }
     }
 }

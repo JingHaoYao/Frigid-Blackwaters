@@ -11,17 +11,24 @@ public class UnactiveSentinel : MonoBehaviour
     bool activatedBoss = false;
     bool moveCameraBack = false;
     public GameObject sentinelBoss;
+    Camera mainCamera;
+    MoveCameraNextRoom cameraScript;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        Camera.main.GetComponent<MoveCameraNextRoom>().freeCam = true;
-        Camera.main.GetComponent<MoveCameraNextRoom>().trackPlayer = true;
+        mainCamera = Camera.main;
+        cameraScript = mainCamera.GetComponent<MoveCameraNextRoom>();
+        cameraScript.freeCam = true;
+        cameraScript.trackPlayer = true;
         Camera.main.orthographicSize = 20;
+
         FindObjectOfType<AudioManager>().PlaySound("First Boss Background Music");
         
         Sound s = Array.Find(FindObjectOfType<AudioManager>().sounds, sound => sound.name == "Dungeon Ambiance");
         s.source.mute = true;
+
+        StartCoroutine(bossWakeUpSequence());
     }
 
     IEnumerator wakeUpBoss()
@@ -31,48 +38,33 @@ public class UnactiveSentinel : MonoBehaviour
         yield return new WaitForSeconds(8 / 12f);
         this.GetComponents<AudioSource>()[1].Play();
         yield return new WaitForSeconds(11f/12f);
-        moveCameraBack = true;
     }
 
-    void Update()
+    IEnumerator bossWakeUpSequence()
     {
-        if (moveCameraBack == false)
+        LeanTween.move(mainCamera.gameObject, bossCamLocation, 2).setEaseOutCirc();
+
+        yield return new WaitForSeconds(2.1f);
+
+        StartCoroutine(wakeUpBoss());
+        foreach (SentinelRotateRock rock in FindObjectsOfType<SentinelRotateRock>())
         {
-            if (Vector2.Distance(Camera.main.transform.position, bossCamLocation) > 0.3f)
-            {
-                Camera.main.transform.position += (bossCamLocation - Camera.main.transform.position).normalized * 15 * Time.deltaTime;
-            }
-            else
-            {
-                if (activatedBoss == false)
-                {
-                    Camera.main.transform.position = bossCamLocation;
-                    StartCoroutine(wakeUpBoss());
-                    foreach(SentinelRotateRock rock in FindObjectsOfType<SentinelRotateRock>())
-                    {
-                        rock.rise();
-                    }
-                    activatedBoss = true;
-                }
-            }
-        }
-        else
-        {
-            if (Vector2.Distance(Camera.main.transform.position, playerLocation) > 0.3f)
-            {
-                Camera.main.transform.position += (playerLocation - Camera.main.transform.position).normalized * 15 * Time.deltaTime;
-            }
-            else
-            {
-                Camera.main.transform.position = playerLocation;
-                Camera.main.GetComponent<MoveCameraNextRoom>().freeCam = false;
-                //summonBoss;
-                FindObjectOfType<BossHealthBar>().targetEnemy = sentinelBoss.GetComponent<Enemy>();
-                FindObjectOfType<BossHealthBar>().bossStartUp("Sentinel");
-                sentinelBoss.SetActive(true);
-                Destroy(this.gameObject);
-            }
+            rock.rise();
         }
 
+        yield return new WaitForSeconds(20 / 12f);
+
+        LeanTween.move(mainCamera.gameObject, playerLocation, 2).setEaseOutCirc();
+
+        yield return new WaitForSeconds(2f);
+
+        mainCamera.transform.position = playerLocation;
+        cameraScript.freeCam = false;
+        //summonBoss;
+        BossHealthBar healthBar = FindObjectOfType<BossHealthBar>();
+        healthBar.targetEnemy = sentinelBoss.GetComponent<Enemy>();
+        healthBar.bossStartUp("Sentinel");
+        sentinelBoss.SetActive(true);
+        Destroy(this.gameObject);
     }
 }

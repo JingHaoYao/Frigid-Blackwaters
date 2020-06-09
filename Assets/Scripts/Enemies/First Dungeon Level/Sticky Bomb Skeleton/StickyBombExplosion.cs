@@ -26,7 +26,7 @@ public class StickyBombExplosion : MonoBehaviour
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            FindObjectOfType<PlayerScript>().amountDamage += 300;
+            PlayerProperties.playerScript.dealDamageToShip(300, this.gameObject);
         }
     }
 }

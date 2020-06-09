@@ -19,6 +19,16 @@ public class BossManager : MonoBehaviour
 
     public void startBossSequence(int whichSide)
     {
+        if (prelimRoom != null)
+        {
+            prelimRoom.SetActive(true);
+        }
+
+        if (prelimRoom != null)
+        {
+            centerRoom.SetActive(true);
+        }
+
         if (beginningCheckPoint != null)
         {
             Camera.main.transform.position = beginningCheckPoint.cameraPosition;

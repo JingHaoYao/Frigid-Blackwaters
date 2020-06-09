@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlaisesTome : MonoBehaviour
+public class BlaisesTome : ArtifactEffect
 {
     DisplayItem displayItem;
     Artifacts artifacts;
@@ -35,6 +35,14 @@ public class BlaisesTome : MonoBehaviour
             {
                 Destroy(fireBallInstant);
             }
+        }
+    }
+
+    public override void cameraMovedPosition(Vector3 currentPosition)
+    {
+        if(fireBallInstant != null)
+        {
+            fireBallInstant.transform.position = PlayerProperties.cursorPosition;
         }
     }
 }

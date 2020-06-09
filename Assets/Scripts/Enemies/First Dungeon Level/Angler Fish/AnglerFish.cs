@@ -161,7 +161,7 @@ public class AnglerFish : Enemy
         }
 
         Vector3 randPos = new Vector3(Mathf.Clamp(randX, Camera.main.transform.position.x - 7, Camera.main.transform.position.x + 7), Mathf.Clamp(randY, Camera.main.transform.position.y - 7, Camera.main.transform.position.y + 7), 0);
-        while (Physics2D.OverlapCircle(randPos, .5f) || Vector2.Distance(randPos, transform.position) < 2)
+        while (Physics2D.OverlapCircle(randPos, .5f, 12) || Vector2.Distance(randPos, transform.position) < 2)
         {
             if (Random.Range(0, 2) == 1)
             {

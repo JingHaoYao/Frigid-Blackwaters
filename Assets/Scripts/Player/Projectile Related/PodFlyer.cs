@@ -18,11 +18,8 @@ public class PodFlyer : PlayerProjectile
         StartCoroutine(podExplosionSequence());
     }
 
-    IEnumerator podExplosionSequence()
+    void explode()
     {
-        yield return new WaitForSeconds(timeUntilExplode * 0.8f);
-        animator.SetTrigger("AboutToExplode");
-        yield return new WaitForSeconds(timeUntilExplode * 0.2f);
         Instantiate(explosion, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
         if (numberSmallerPods > 0)
         {
@@ -31,15 +28,23 @@ public class PodFlyer : PlayerProjectile
                 float angleIncrement = 360 / numberSmallerPods;
                 for (int i = 0; i < numberSmallerPods; i++)
                 {
-                     Instantiate(smallerPod, transform.position + new Vector3(Mathf.Cos(angleIncrement * i * Mathf.Deg2Rad), Mathf.Sin(angleIncrement * i * Mathf.Deg2Rad)) * 0.75f, Quaternion.identity);
+                    Instantiate(smallerPod, transform.position + new Vector3(Mathf.Cos(angleIncrement * i * Mathf.Deg2Rad), Mathf.Sin(angleIncrement * i * Mathf.Deg2Rad)) * 0.75f, Quaternion.identity);
                 }
             }
             else
             {
-               Instantiate(smallerPod, transform.position, Quaternion.identity);
+                Instantiate(smallerPod, transform.position, Quaternion.identity);
             }
         }
         Destroy(this.gameObject);
+    }
+
+    IEnumerator podExplosionSequence()
+    {
+        yield return new WaitForSeconds(timeUntilExplode * 0.8f);
+        animator.SetTrigger("AboutToExplode");
+        yield return new WaitForSeconds(timeUntilExplode * 0.2f);
+        explode();
     }
 
     float angletoCursor()
@@ -52,6 +57,14 @@ public class PodFlyer : PlayerProjectile
         if (Vector2.Distance(transform.position, PlayerProperties.cursorPosition) > 0.5f)
         {
             transform.position += new Vector3(Mathf.Cos(angletoCursor()), Mathf.Sin(angletoCursor())) * speed * Time.deltaTime;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 10) //Enemy layer
+        {
+            explode();
         }
     }
 }

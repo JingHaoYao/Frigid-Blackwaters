@@ -29,7 +29,7 @@ public class GuardianGolemBlast : MonoBehaviour {
         if(collided == false && collision.gameObject.tag == "playerHitBox")
         {
             collided = true;
-            GameObject.Find("PlayerShip").GetComponent<PlayerScript>().amountDamage += 200;
+            PlayerProperties.playerScript.dealDamageToShip(200, this.gameObject);
             this.GetComponent<AudioSource>().Play();
             animator.SetTrigger("Dissipate");
             Destroy(this.gameObject, .5f);

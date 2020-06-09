@@ -6,9 +6,11 @@ using UnityEngine;
 public class EnemyRoomTemplate
 {
     public string[] potentialEnemyNames;
+    public string[] enemiesWithLimits;
 
-    public EnemyRoomTemplate(int length)
+    public EnemyRoomTemplate(int length, int enemiesWithLimitsLength = 0)
     {
         potentialEnemyNames = new string[length];
+        enemiesWithLimits = new string[enemiesWithLimitsLength];
     }
 }

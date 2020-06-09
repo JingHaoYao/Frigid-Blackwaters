@@ -71,7 +71,7 @@ public class FirstBossLaser : MonoBehaviour
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            playerShip.GetComponent<PlayerScript>().amountDamage += 300;
+            PlayerProperties.playerScript.dealDamageToShip(300, this.gameObject);
         }
     }
 }

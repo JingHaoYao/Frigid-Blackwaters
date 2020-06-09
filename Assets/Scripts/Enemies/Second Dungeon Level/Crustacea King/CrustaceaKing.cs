@@ -16,7 +16,7 @@ public class CrustaceaKing : Enemy
     public GameObject damageBox;
     public GameObject waterFoamBurst;
     public GameObject invulnerableIcon;
-    public GameObject crystalObstacle;
+    public GameObject smallCrystal, mediumCrystal, largeCrystal;
     int whatView = 1;
     int mirror = 1;
 
@@ -34,6 +34,12 @@ public class CrustaceaKing : Enemy
     public GameObject waterFoam;
 
     [SerializeField] AudioSource riseAudio;
+
+    Camera mainCamera;
+
+    private float speedMagnitude;
+
+    [SerializeField] LayerMask filterLayer;
 
     void spawnFoam()
     {
@@ -60,6 +66,10 @@ public class CrustaceaKing : Enemy
         FindObjectOfType<BossHealthBar>().bossStartUp("Crustacea King");
         FindObjectOfType<BossHealthBar>().targetEnemy = this;
         StartCoroutine(MainGameLoop());
+
+        mainCamera = Camera.main;
+        float angle = Mathf.RoundToInt((Mathf.Atan2(mainCamera.transform.position.y - PlayerProperties.playerShipPosition.y, mainCamera.transform.position.x - PlayerProperties.playerShipPosition.x) + 2 * Mathf.PI) / (Mathf.PI / 2)) * Mathf.PI / 2;
+        transform.position += new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * 5;
     }
 
     IEnumerator MainGameLoop()
@@ -100,29 +110,59 @@ public class CrustaceaKing : Enemy
         animator.SetInteger("WhatView", whatView);
         animator.SetTrigger("CrystalSummon");
         GetComponents<AudioSource>()[1].Play();
-        yield return new WaitForSeconds(10f/12f);
-        attacking = false;
+        yield return new WaitForSeconds((5f / 12f) / 0.8f);
         animator.enabled = false;
-        List<Vector3> crystalPositionList = new List<Vector3>();
-        for(int i = 0; i < 5; i++)
+        pickView(angleToShip);
+        spriteRenderer.sprite = closedViews[whatView - 1];
+        float angleAttack = angleToShip;
+
+        float offSet = Random.Range(0, 90);
+
+        for(int i = 0; i < 6; i++)
         {
-            Vector3 posToSpawn = new Vector3(Camera.main.transform.position.x + Random.Range(-7.0f, 7.0f), Camera.main.transform.position.y + Random.Range(-7.0f, 7.0f));
-            while(isPositionNear(crystalPositionList, posToSpawn) == true)
-            {
-                posToSpawn = new Vector3(Camera.main.transform.position.x + Random.Range(-7.0f, 7.0f), Camera.main.transform.position.y + Random.Range(-7.0f, 7.0f));
-            }
+            float angleToConsider = i * 60 + offSet;
+            Vector3 newPos = transform.position + new Vector3(Mathf.Cos(angleToConsider * Mathf.Deg2Rad), Mathf.Sin(angleToConsider * Mathf.Deg2Rad)) * 4;
+            Vector3 spawningPosition = new Vector3(Mathf.Clamp(newPos.x, mainCamera.transform.position.x - 7.5f, mainCamera.transform.position.x + 7.5f), Mathf.Clamp(newPos.y, mainCamera.transform.position.y - 7.5f, mainCamera.transform.position.y + 7.5f));
 
-            GameObject crystal = Instantiate(crystalObstacle, posToSpawn, Quaternion.identity);
-            if(Random.Range(0,2) == 1)
+            if (!Physics2D.OverlapCircle(spawningPosition, 0.5f, filterLayer))
             {
-                Vector3 scale = crystal.transform.localScale;
-                crystal.transform.localScale = new Vector3(scale.x * -1, scale.y);
-
+                GameObject crystalInstant = Instantiate(smallCrystal, spawningPosition, Quaternion.identity);
+                crystalInstant.GetComponent<CrustaceaKingCrystal>().initializeCrystal(this);
             }
-            crystal.GetComponent<ProjectileParent>().instantiater = this.gameObject;
-            
-            crystalPositionList.Add(posToSpawn);
         }
+
+        yield return new WaitForSeconds(0.5f);
+
+        for (int i = 0; i < 6; i++)
+        {
+            float angleToConsider = i * 60 + offSet;
+            Vector3 newPos = transform.position + new Vector3(Mathf.Cos(angleToConsider * Mathf.Deg2Rad), Mathf.Sin(angleToConsider * Mathf.Deg2Rad)) * 6;
+            Vector3 spawningPosition = new Vector3(Mathf.Clamp(newPos.x, mainCamera.transform.position.x - 7.5f, mainCamera.transform.position.x + 7.5f), Mathf.Clamp(newPos.y, mainCamera.transform.position.y - 7.5f, mainCamera.transform.position.y + 7.5f));
+
+            if (!Physics2D.OverlapCircle(spawningPosition, 0.5f, filterLayer))
+            {
+                GameObject crystalInstant = Instantiate(mediumCrystal, spawningPosition, Quaternion.identity);
+                crystalInstant.GetComponent<CrustaceaKingCrystal>().initializeCrystal(this);
+            }
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+
+        for (int i = 0; i < 6; i++)
+        {
+            float angleToConsider = i * 60 + offSet;
+            Vector3 newPos = transform.position + new Vector3(Mathf.Cos(angleToConsider * Mathf.Deg2Rad), Mathf.Sin(angleToConsider * Mathf.Deg2Rad)) * 8;
+            Vector3 spawningPosition = new Vector3(Mathf.Clamp(newPos.x, mainCamera.transform.position.x - 7.5f, mainCamera.transform.position.x + 7.5f), Mathf.Clamp(newPos.y, mainCamera.transform.position.y - 7.5f, mainCamera.transform.position.y + 7.5f));
+
+            if (!Physics2D.OverlapCircle(spawningPosition, 0.5f, filterLayer))
+            {
+                GameObject crystalInstant = Instantiate(largeCrystal, spawningPosition, Quaternion.identity);
+                crystalInstant.GetComponent<CrustaceaKingCrystal>().initializeCrystal(this);
+            }
+        }
+
+        attacking = false;
     }
 
     bool isPositionNear(List<Vector3> list, Vector3 pos)
@@ -156,18 +196,21 @@ public class CrustaceaKing : Enemy
         //allow buffer period for player to hit boss
         animator.enabled = false;
         float waitTimer = 0;
-        while(waitTimer < 1.5f)
+        float angleToAttack = angleToShip;
+        while (waitTimer < 1.5f)
         {
             waitTimer += Time.deltaTime;
             pickView(angleToShip);
             spriteRenderer.sprite = openViews[whatView - 1];
+            angleToAttack = angleToShip;
             transform.localScale = new Vector3(6 * mirror, 6, 0);
             yield return null;
         }
 
+        yield return new WaitForSeconds(0.2f);
+
         invulnerableHitBox.SetActive(true);
         invulnerableIcon.SetActive(true);
-        float angleToAttack = angleToShip;
         pickView(angleToAttack);
         animator.enabled = true;
         animator.SetInteger("WhatView", whatView);
@@ -188,20 +231,25 @@ public class CrustaceaKing : Enemy
 
         Instantiate(waterFoamBurst, transform.position, Quaternion.Euler(0, 0, angleToAttack + 90));
         float attackPeriod = 0;
-        rigidBody2D.velocity = new Vector2(Mathf.Cos(angleToAttack * Mathf.Deg2Rad), Mathf.Sin(angleToAttack * Mathf.Deg2Rad)) * (speed + 7);
-        float speedMagnitude = speed + 8;
+        rigidBody2D.velocity = new Vector2(Mathf.Cos(angleToAttack * Mathf.Deg2Rad), Mathf.Sin(angleToAttack * Mathf.Deg2Rad)) * (speed + 10);
+
+        speedMagnitude = speed + 10;
+
         while (attackPeriod <= 1f)
         {
             attackPeriod += Time.deltaTime;
             speedMagnitude -= Time.deltaTime * 10;
-            rigidBody2D.velocity = new Vector2(Mathf.Cos(angleToAttack * Mathf.Deg2Rad), Mathf.Sin(angleToAttack * Mathf.Deg2Rad)) * speedMagnitude;
+            rigidBody2D.velocity = new Vector2(Mathf.Cos(angleToAttack * Mathf.Deg2Rad), Mathf.Sin(angleToAttack * Mathf.Deg2Rad)) * Mathf.Clamp(speedMagnitude, 0, float.MaxValue);
             yield return null;
         }
+
+
         rigidBody2D.velocity = Vector3.zero;
         damageBox.SetActive(false);
         animator.enabled = false;
         numberDashes++;
         dashPeriod = 0;
+
         if(numberDashes == 2)
         {
             StartCoroutine(summonCrystals());
@@ -260,6 +308,7 @@ public class CrustaceaKing : Enemy
         if (playerScript.playerDead == false)
         {
             dealDamage(4);
+            speedMagnitude -= 2;
         }
     }
 

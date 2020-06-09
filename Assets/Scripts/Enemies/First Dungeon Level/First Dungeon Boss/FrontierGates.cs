@@ -8,6 +8,7 @@ public class FrontierGates : MonoBehaviour
     public bool goBack = false;
     public Vector3 bossRoomLocation;
     public GameObject unactivatedBoss;
+    public GameObject bossRoom;
 
 
     IEnumerator moveShip(PlayerScript playerScript)
@@ -16,6 +17,7 @@ public class FrontierGates : MonoBehaviour
         s.source.mute = true;
         FindObjectOfType<BlackOverlay>().transition();
         yield return new WaitForSeconds(1f);
+        bossRoom.SetActive(true);
         playerScript.gameObject.transform.position = bossRoomLocation;
         Camera.main.transform.position = new Vector3(-780, -10, 0);
         unactivatedBoss.SetActive(true);

@@ -40,7 +40,7 @@ public class StoneGiantFistAttack : MonoBehaviour {
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            playerShip.GetComponent<PlayerScript>().amountDamage += 800;
+            PlayerProperties.playerScript.dealDamageToShip(800, this.gameObject);
         }
     }
 }

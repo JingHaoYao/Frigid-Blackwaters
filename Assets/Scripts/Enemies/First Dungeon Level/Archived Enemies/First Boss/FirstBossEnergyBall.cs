@@ -94,11 +94,11 @@ public class FirstBossEnergyBall : MonoBehaviour
         {
             if (isSmallBall == false)
             {
-                playerShip.GetComponent<PlayerScript>().amountDamage += 400;
+                PlayerProperties.playerScript.dealDamageToShip(400, this.gameObject);
             }
             else
             {
-                playerShip.GetComponent<PlayerScript>().amountDamage += 200;
+                PlayerProperties.playerScript.dealDamageToShip(200, this.gameObject);
             }
         }
     }

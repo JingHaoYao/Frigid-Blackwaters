@@ -13,14 +13,16 @@ public class InvisibilityEnemyController : MonoBehaviour
     public void FogActivated()
     {
         StopCoroutine(isInLightRoutine);
-        hideRenderers();
-        isInLight = false;
+        StartCoroutine(waitUntilEndOfFrame());
     }
 
     public void FogDeActivated()
     {
-        showRenderers();
-        isInLightRoutine = StartCoroutine(isInLightActive());
+        if (!isInLight)
+        {
+            showRenderers();
+            isInLightRoutine = StartCoroutine(isInLightActive());
+        }
     }
 
     private void Start()
@@ -119,8 +121,7 @@ public class InvisibilityEnemyController : MonoBehaviour
     IEnumerator waitUntilEndOfFrame()
     {
         isInLight = false;
-        yield return new WaitForEndOfFrame();
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.1f);
         if (isInLight == false)
         {
             hideRenderers();

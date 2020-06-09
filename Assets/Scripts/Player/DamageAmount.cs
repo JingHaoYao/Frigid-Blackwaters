@@ -6,18 +6,19 @@ public class DamageAmount : MonoBehaviour {
     public int damage = 0;
     public int originDamage = 0;
     public bool addBonuses = true;
+    private int miscBonusDamage = 0;
     PlayerScript playerScript;
 
-    private void Awake()
+    private void Start()
     {
-        playerScript = GameObject.Find("PlayerShip").GetComponent<PlayerScript>();
+        playerScript = PlayerProperties.playerScript;
         if (addBonuses == true)
         {
-            damage += Mathf.Clamp(originDamage + playerScript.attackBonus + playerScript.conAttackBonus, 1, int.MaxValue);
+            damage = Mathf.Clamp(originDamage + playerScript.attackBonus + playerScript.conAttackBonus + miscBonusDamage, 1, int.MaxValue);
         }
         else
         {
-            damage += originDamage;
+            damage = originDamage;
         }
     }
 
@@ -25,11 +26,17 @@ public class DamageAmount : MonoBehaviour {
     {
         if (addBonuses == true)
         {
-            damage = originDamage + playerScript.attackBonus + playerScript.conAttackBonus;
+            damage = Mathf.Clamp(originDamage + playerScript.attackBonus + playerScript.conAttackBonus + miscBonusDamage, 1, int.MaxValue);
         }
         else
         {
             damage = originDamage;
         }
+    }
+
+    public void addDamage(int addedDamage)
+    {
+        miscBonusDamage += addedDamage;
+        updateDamage();
     }
 }

@@ -9,7 +9,7 @@ public class DamageHitBox : MonoBehaviour
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            GameObject.Find("PlayerShip").GetComponent<PlayerScript>().amountDamage += damageAmount;
+            PlayerProperties.playerScript.dealDamageToShip(damageAmount, this.gameObject);
         }
     }
 }

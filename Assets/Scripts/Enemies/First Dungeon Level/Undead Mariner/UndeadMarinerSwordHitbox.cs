@@ -8,7 +8,7 @@ public class UndeadMarinerSwordHitbox : MonoBehaviour
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            GameObject.Find("PlayerShip").GetComponent<PlayerScript>().amountDamage += 800;
+            PlayerProperties.playerScript.dealDamageToShip(800, this.gameObject);
         }
     }
 }

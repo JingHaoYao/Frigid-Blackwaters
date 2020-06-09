@@ -10,12 +10,13 @@ public class DeadSentinel : MonoBehaviour
     StoryCheckpoint returnFrontier;
 
     DialogueUI dialogueUI;
+    public BossManager bossManager;
 
     //set for beating the boss initially
 
     private void Start()
     {
-        returnFrontier = GameObject.Find("Return From Boss Frontier").GetComponent<StoryCheckpoint>();
+        returnFrontier = bossManager.finishedBossCheckPoint;
         dialogueUI = FindObjectOfType<DungeonEntryDialogueManager>().dialogueUI;
         StartCoroutine(startUpDialogue());
     }

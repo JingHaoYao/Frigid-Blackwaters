@@ -32,7 +32,7 @@ public class FirstBossSwordSlash : MonoBehaviour {
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            GameObject.Find("PlayerShip").GetComponent<PlayerScript>().amountDamage += 750;
+            PlayerProperties.playerScript.dealDamageToShip(750, this.gameObject);
         }
     }
 }

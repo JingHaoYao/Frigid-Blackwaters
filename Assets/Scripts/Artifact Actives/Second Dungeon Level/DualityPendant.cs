@@ -36,11 +36,11 @@ public class DualityPendant : ArtifactEffect
     {
         if (playerScript.shipHealth > 50)
         {
-            playerScript.amountDamage += damageDealt * 50;
+            playerScript.dealDamageToShip(50, this.gameObject);
         }
         else
         {
-            playerScript.amountDamage += (playerScript.shipHealth - 1);
+            playerScript.dealDamageToShip(playerScript.shipHealth - 1, this.gameObject);
         }
     }
 }

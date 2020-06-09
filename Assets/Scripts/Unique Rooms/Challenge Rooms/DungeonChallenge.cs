@@ -63,6 +63,9 @@ public class DungeonChallenge : MonoBehaviour
             case 3:
                 dungeonName = "Third Dungeon Level";
                 break;
+            case 4:
+                dungeonName = "Fourth Dungeon Level";
+                break;
         }
 
         if (manager.whatDungeonLevel == 1)

@@ -45,7 +45,7 @@ public class PistolShrimpShot : MonoBehaviour {
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            playerShip.GetComponent<PlayerScript>().amountDamage += 150;
+            PlayerProperties.playerScript.dealDamageToShip(150, this.gameObject);
         }
     }
 }

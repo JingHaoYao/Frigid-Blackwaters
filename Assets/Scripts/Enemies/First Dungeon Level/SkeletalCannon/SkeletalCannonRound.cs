@@ -24,7 +24,7 @@ public class SkeletalCannonRound : MonoBehaviour {
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            playerShip.GetComponent<PlayerScript>().amountDamage += 500;
+            PlayerProperties.playerScript.dealDamageToShip(500, this.gameObject);
         }
 
         if (collision.gameObject.tag == "RoomHitbox" || collision.gameObject.tag == "RoomWall")

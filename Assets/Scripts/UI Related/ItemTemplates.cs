@@ -30,6 +30,7 @@ public class ItemTemplates : MonoBehaviour {
     public string[] thirdLevelTier4Artifacts;
     public string[] thirdLevelConsumables;
     public string[] thirdLevelUniqueArtifacts;
+    public string[] thirdLevelUniqueConsumables;
 
     public Dictionary<string, string> itemDB = new Dictionary<string, string>();
 
@@ -134,6 +135,11 @@ public class ItemTemplates : MonoBehaviour {
         foreach (string id in thirdLevelUniqueArtifacts)
         {
             itemDB.Add(id, "Items/Third Dungeon Level/Artifacts/Unique Artifacts/");
+        }
+
+        foreach(string id in thirdLevelUniqueConsumables)
+        {
+            itemDB.Add(id, "Items/Third Dungeon Level/Artifacts/Special Consumables/");
         }
     }
 

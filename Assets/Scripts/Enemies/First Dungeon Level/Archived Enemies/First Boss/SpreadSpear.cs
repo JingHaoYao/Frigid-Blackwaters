@@ -20,7 +20,7 @@ public class SpreadSpear : MonoBehaviour {
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            GameObject.Find("PlayerShip").GetComponent<PlayerScript>().amountDamage += 400;
+            PlayerProperties.playerScript.dealDamageToShip(400, this.gameObject);
         }
     }
 }

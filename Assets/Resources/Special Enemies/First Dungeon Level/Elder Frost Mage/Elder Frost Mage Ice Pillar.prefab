@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 3427024100869489854}
   - component: {fileID: 5915012547537987284}
   - component: {fileID: 1103599397615731414}
+  - component: {fileID: -6651009411920372838}
   m_Layer: 12
   m_Name: Elder Frost Mage Ice Pillar
   m_TagString: RoomHitbox
@@ -146,6 +147,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -157,6 +159,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -277,6 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!50 &5915012547537987284
 Rigidbody2D:
   serializedVersion: 4
@@ -307,7 +311,8 @@ AudioSource:
   m_GameObject: {fileID: 3427024100869489828}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -5410304103004225776, guid: 0004d31a11605944da0e0192771234e9,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 96d222134f01a174aa348011c4a4f314, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -394,6 +399,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-6651009411920372838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3427024100869489828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13e5a2f66618c3c43a18f51c9d0fb0e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instantiater: {fileID: 0}
 --- !u!1 &3427024101540987675
 GameObject:
   m_ObjectHideFlags: 0

@@ -49,7 +49,7 @@ public class OctoCrabSlash : MonoBehaviour
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            FindObjectOfType<PlayerScript>().amountDamage += Mathf.RoundToInt((currDuration/maxDuration) * 500);
+            PlayerProperties.playerScript.dealDamageToShip(Mathf.RoundToInt((currDuration / maxDuration) * 500), this.gameObject);
         }
     }
 }

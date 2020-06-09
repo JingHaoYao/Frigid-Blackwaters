@@ -61,7 +61,7 @@ public class UndeadMarinerAnchor : MonoBehaviour
         {
             PlayerScript playerScript = GameObject.Find("PlayerShip").GetComponent<PlayerScript>();
             this.GetComponent<AudioSource>().Play();
-            playerScript.amountDamage += 100;
+            playerScript.dealDamageToShip(100, this.gameObject);
             playerScript.shipRooted = true;
             hitShip = true;
             returnToSender = true;

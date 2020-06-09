@@ -20,6 +20,7 @@ public class StoryCheckpoint : MonoBehaviour
 
     public void startUpDialogue(float waitReveal = 2)
     {
+        this.gameObject.SetActive(true);
         dialogueUI.targetDialogue = FindObjectOfType<DungeonEntryDialogueManager>().loadDialogue(dialogueName, true);
         dialogueUI.waitReveal = waitReveal;
         dialogueUI.gameObject.SetActive(true);

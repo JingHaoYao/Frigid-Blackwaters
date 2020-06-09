@@ -32,23 +32,17 @@ public class TreasureMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         if (displayInfo != null)
         {
-            if (checkExistingGold() != 2)
-            {
-                if (inventory.itemList.Count < PlayerItems.maxInventorySize)
-                {
-                    inventory.itemList.Add(displayInfo.gameObject);
-                }
-                FindObjectOfType<AudioManager>().PlaySound("Pick Up Gold");
-                transform.parent.gameObject.SetActive(false);
-                playerScript.windowAlreadyOpen = false;
-                treasure.setUnActive();
-                Time.timeScale = 1;
-                playerScript.shipRooted = false;
-            }
+            transferGold();
+            transform.parent.gameObject.SetActive(false);
+            playerScript.windowAlreadyOpen = false;
+            Time.timeScale = 1;
+            playerScript.shipRooted = false;
         }
     }
 
-    int checkExistingGold()
+
+
+    void transferGold()
     {
         for (int i = inventory.itemList.Count - 1; i >= 0; i--)
         {
@@ -58,23 +52,40 @@ public class TreasureMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 {
                     displayInfo.goldValue -= 1000 - inventory.itemList[i].GetComponent<DisplayItem>().goldValue;
                     inventory.itemList[i].GetComponent<DisplayItem>().goldValue = 1000;
-                    return 0;
                 }
                 else
                 {
                     inventory.itemList[i].GetComponent<DisplayItem>().goldValue += displayInfo.goldValue;
-                    return 1;
+                    displayInfo.goldValue = 0;
+                    break;
                 }
             }
         }
-        //did nothing
-        if (inventory.itemList.Count < PlayerItems.maxInventorySize)
+
+        if(displayInfo.goldValue <= 0)
         {
-            return 0;
+            Destroy(displayInfo.gameObject);
+            treasure.setUnActive();
+            FindObjectOfType<AudioManager>().PlaySound("Pick Up Gold");
         }
         else
         {
-            return 2;
+            if(inventory.itemList.Count < PlayerItems.maxInventorySize)
+            {
+                while(displayInfo.goldValue > 1000 && inventory.itemList.Count < PlayerItems.maxInventorySize)
+                {
+                    GameObject newGoldItem = treasure.instantiateNewGoldItem(1000);
+                    inventory.itemList.Add(newGoldItem);
+                    displayInfo.goldValue -= 1000;
+                }
+
+                if (inventory.itemList.Count < PlayerItems.maxInventorySize)
+                {
+                    inventory.itemList.Add(displayInfo.gameObject);
+                    FindObjectOfType<AudioManager>().PlaySound("Pick Up Gold");
+                    treasure.setUnActive();
+                }
+            }
         }
     }
 

@@ -333,7 +333,7 @@ public class UndeadMariner : Enemy
                     if (numberCannonsFired < 4)
                     {
                         numberCannonsFired++;
-                        attackingPeriod = .6f;
+                        attackingPeriod = 1.2f;
                         if (Random.Range(0, 2) == 1)
                         {
                             StartCoroutine(fireLeftCannon(pickView(angleToShip), angleToShip));

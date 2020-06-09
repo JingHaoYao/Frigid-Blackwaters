@@ -140,7 +140,7 @@ public class OniDemonHorn : ArtifactEffect
             else
             {
                 damagePeriod = 0;
-                playerScript.amountDamage += 50;
+                PlayerProperties.playerScript.dealDamageToShip(50, this.gameObject);
                 GetComponents<AudioSource>()[1].Play();
             }
         }

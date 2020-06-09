@@ -66,6 +66,42 @@ public class Inventory : MonoBehaviour {
     {
         PlayerItems.inventoryItemsIDs.Clear();
         PlayerItems.totalGoldAmount = tallyGold();
+        int totalGoldAmount = PlayerItems.totalGoldAmount;
+
+        List<GameObject> itemsToRemove = new List<GameObject>();
+
+        foreach(GameObject item in itemList)
+        {
+            DisplayItem itemDisplay = item.GetComponent<DisplayItem>();
+            if (itemDisplay.goldValue > 0)
+            {
+                if (totalGoldAmount > 0)
+                {
+                    if (totalGoldAmount > 1000)
+                    {
+                        totalGoldAmount -= 1000;
+                        itemDisplay.goldValue = 1000;
+
+                    }
+                    else
+                    {
+                        itemDisplay.goldValue = totalGoldAmount;
+                        totalGoldAmount = 0;
+                    }
+                }
+                else
+                {
+                    itemsToRemove.Add(item);
+                }
+            }
+        }
+
+        foreach(GameObject item in itemsToRemove)
+        {
+            itemList.Remove(item);
+            Destroy(item);
+        }
+
         if (itemList.Count > 0)
         {
             for (int i = 0; i < inventorySize; i++)

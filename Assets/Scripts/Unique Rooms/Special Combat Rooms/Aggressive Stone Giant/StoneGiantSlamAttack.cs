@@ -47,11 +47,11 @@ public class StoneGiantSlamAttack : MonoBehaviour {
         {
             if (rising == true)
             {
-                playerShip.GetComponent<PlayerScript>().amountDamage += 800;
+                PlayerProperties.playerScript.dealDamageToShip(800,this.gameObject);
             }
             else
             {
-                playerShip.GetComponent<PlayerScript>().amountDamage += 1000;
+                PlayerProperties.playerScript.dealDamageToShip(1000, this.gameObject);
             }
         }
     }

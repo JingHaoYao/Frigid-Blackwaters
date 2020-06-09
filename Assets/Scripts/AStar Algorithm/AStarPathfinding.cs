@@ -5,80 +5,80 @@ using UnityEngine;
 public class AStarPathfinding : MonoBehaviour {
     public AStarGrid grid;
     public Vector3 seeker, target;
-    public List<AStarNode> seekPath;
+    public List<AStarNode> seekPath = new List<AStarNode>();
 
-    private void Update()
+    private IEnumerator mainLoop()
     {
-        seeker = this.gameObject.transform.position;
-        findPath(seeker + new Vector3(0, 0.4f, 0), target);
+        while (true)
+        {
+            seeker = this.gameObject.transform.position;
+            findPath(seeker + new Vector3(0, 0.4f, 0), target);
+            yield return null;
+        }
+    }
+
+    private IEnumerator searchForGrid()
+    {
+        while (grid == null)
+        {
+            grid = FindObjectOfType<AStarGrid>();
+            yield return null;
+        }
+        StartCoroutine(mainLoop());
     }
 
     void Awake () {
-        if (GameObject.Find("AStarGrid"))
-        {
-            grid = GameObject.Find("AStarGrid").GetComponent<AStarGrid>();
-        }
-        else if (GameObject.Find("AStarGrid(Clone"))
-        {
-            grid = GameObject.Find("AStarGrid(Clone)").GetComponent<AStarGrid>();
-        }
+        StartCoroutine(searchForGrid());
 	}
 
     void findPath(Vector3 startPos, Vector3 endPos)
     {
-        if (grid)
+        AStarNode startNode = grid.nodeFromWorldPoint(startPos);
+        AStarNode endNode = grid.nodeFromWorldPoint(endPos);
+        List<AStarNode> openSet = new List<AStarNode>();
+        HashSet<AStarNode> closedSet = new HashSet<AStarNode>();
+        openSet.Add(startNode);
+
+        while (openSet.Count > 0)
         {
-            AStarNode startNode = grid.nodeFromWorldPoint(startPos);
-            AStarNode endNode = grid.nodeFromWorldPoint(endPos);
-            List<AStarNode> openSet = new List<AStarNode>();
-            HashSet<AStarNode> closedSet = new HashSet<AStarNode>();
-            openSet.Add(startNode);
-
-            while (openSet.Count > 0)
+            AStarNode currentNode = openSet[0];
+            for (int i = 1; i < openSet.Count; i++)
             {
-                AStarNode currentNode = openSet[0];
-                for (int i = 1; i < openSet.Count; i++)
+                if (openSet[i].fCost < currentNode.fCost || openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost)
                 {
-                    if (openSet[i].fCost < currentNode.fCost || openSet[i].fCost == currentNode.fCost && openSet[i].hCost < currentNode.hCost)
-                    {
-                        currentNode = openSet[i];
-                    }
+                    currentNode = openSet[i];
+                }
+            }
+
+            openSet.Remove(currentNode);
+            closedSet.Add(currentNode);
+
+            if (currentNode == endNode)
+            {
+                retracePath(startNode, endNode);
+                return;
+            }
+
+            foreach (AStarNode neighbour in grid.GetNeighbours(currentNode))
+            {
+                if (!neighbour.traversable || closedSet.Contains(neighbour))
+                {
+                    continue;
                 }
 
-                openSet.Remove(currentNode);
-                closedSet.Add(currentNode);
-
-                if (currentNode == endNode)
+                int newMovementCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
+                if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
                 {
-                    retracePath(startNode, endNode);
-                    return;
-                }
+                    neighbour.gCost = newMovementCostToNeighbour;
+                    neighbour.hCost = GetDistance(neighbour, endNode);
+                    neighbour.parent = currentNode;
 
-                foreach (AStarNode neighbour in grid.GetNeighbours(currentNode))
-                {
-                    if (!neighbour.traversable || closedSet.Contains(neighbour))
+                    if (!openSet.Contains(neighbour))
                     {
-                        continue;
-                    }
-
-                    int newMovementCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
-                    if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
-                    {
-                        neighbour.gCost = newMovementCostToNeighbour;
-                        neighbour.hCost = GetDistance(neighbour, endNode);
-                        neighbour.parent = currentNode;
-
-                        if (!openSet.Contains(neighbour))
-                        {
-                            openSet.Add(neighbour);
-                        }
+                        openSet.Add(neighbour);
                     }
                 }
             }
-        }
-        else
-        {
-            grid = FindObjectOfType<AStarGrid>();
         }
     }
 

@@ -20,7 +20,6 @@ public class PlayerScript : MonoBehaviour {
     public int shipHealth = 1000;
     public int trueDamage = 0;
     public int shipHealthMAX = 1000;
-    public int amountDamage = 0;
     public bool shipRooted = false;
     public int whichWeapon = 1;
     public float defenseModifier = 1;
@@ -31,7 +30,6 @@ public class PlayerScript : MonoBehaviour {
     public int attackBonus = 0;
     public int healthBonus = 0;
     public int periodicHealing = 0;
-    int oldShipHealthMAX = 1000;
 
     //spawning help
     public int numRoomsSinceLastArtifact = 0;
@@ -41,7 +39,6 @@ public class PlayerScript : MonoBehaviour {
     //restricts to using one active at a time
     public bool activeEnabled = false;
     public int angleEffect = 0;
-    public GameObject damagingObject;
     Vector3 damageColLocation;
     public int numberHits = 0;
 
@@ -100,10 +97,22 @@ public class PlayerScript : MonoBehaviour {
 
     public bool reApplyHealth = false;
 
+    private AudioManager audioManager;
+    private DamageNumbers damageNumbers;
+    private CameraShake cameraShake;
+    private PlayerHealNumbers healNumbers;
+
+    private int healthBarTweenID;
+
+    List<string> playerHubNames = new List<string>() { "Player Hub", "Willow's Hideout", "Ylva's Hideout" };
+
+    private Text healthBarText;
+
     public void applyInventoryLoss()
     {
         float goldLoss = 0.25f;
         int numArtifactsSave = 0;
+
         if (PlayerUpgrades.safeUpgrades.Count == 1)
         {
             numArtifactsSave = 1;
@@ -162,41 +171,44 @@ public class PlayerScript : MonoBehaviour {
         int artifactsNeededSaving = numArtifactsSave;
         if (artifactsNeededSaving > 0)
         {
-            if (numActiveArtifacts.Count == 0 && numInventoryArtifacts.Count == 0)
+            if (numActiveArtifacts.Count != 0 && numInventoryArtifacts.Count != 0)
             {
-
-            }
-            else if (numActiveArtifacts.Count == 0 && numInventoryArtifacts.Count == 1)
-            {
-                PlayerItems.inventoryItemsIDs.Add(numInventoryArtifacts[0].name);
-            }
-            else if (numActiveArtifacts.Count == 1 && numInventoryArtifacts.Count == 0)
-            {
-                PlayerItems.activeArtifactsIDs[0] = numActiveArtifacts[0].name;
-            }
-            else
-            {
-                while (artifactsNeededSaving > 0)
+                if (numActiveArtifacts.Count == 0 && numInventoryArtifacts.Count == 1)
                 {
-                    if (Random.Range(1, 11) > 7 && numInventoryArtifacts.Count != 0)
+                    PlayerItems.inventoryItemsIDs.Add(numInventoryArtifacts[0].name);
+                }
+                else if (numActiveArtifacts.Count == 1 && numInventoryArtifacts.Count == 0)
+                {
+                    PlayerItems.activeArtifactsIDs[0] = numActiveArtifacts[0].name;
+                }
+                else
+                {
+                    while (artifactsNeededSaving > 0)
                     {
-                        GameObject savedObject = numInventoryArtifacts[Random.Range(0, numInventoryArtifacts.Count)];
-                        numInventoryArtifacts.Remove(savedObject);
-                        PlayerItems.inventoryItemsIDs.Add(savedObject.name);
-                        artifactsNeededSaving--;
-                    }
-                    else if (numActiveArtifacts.Count != 0)
-                    {
-                        GameObject savedObject = numActiveArtifacts[Random.Range(0, numActiveArtifacts.Count)];
-                        numActiveArtifacts.Remove(savedObject);
-                        for (int i = 0; i < PlayerItems.activeArtifactsIDs.Length; i++)
+                        if (Random.Range(1, 11) > 7 && numInventoryArtifacts.Count != 0)
                         {
-                            if (PlayerItems.activeArtifactsIDs[i] == null)
+                            GameObject savedObject = numInventoryArtifacts[Random.Range(0, numInventoryArtifacts.Count)];
+                            numInventoryArtifacts.Remove(savedObject);
+                            PlayerItems.inventoryItemsIDs.Add(savedObject.name);
+                            artifactsNeededSaving--;
+                        }
+                        else
+                        {
+                            if (numActiveArtifacts.Count != 0)
                             {
-                                PlayerItems.activeArtifactsIDs[i] = savedObject.name;
+                                GameObject savedObject = numActiveArtifacts[Random.Range(0, numActiveArtifacts.Count)];
+                                numActiveArtifacts.Remove(savedObject);
+                                for (int i = 0; i < 3; i++)
+                                {
+                                    if (PlayerItems.activeArtifactsIDs[i] == null)
+                                    {
+                                        PlayerItems.activeArtifactsIDs[i] = savedObject.name;
+                                        break;
+                                    }
+                                }
+                                artifactsNeededSaving--;
                             }
                         }
-                        artifactsNeededSaving--;
                     }
                 }
             }
@@ -209,7 +221,7 @@ public class PlayerScript : MonoBehaviour {
 
         foreach (GameObject item in numActiveSoulBoundArtifacts)
         {
-            for (int i = 0; i < PlayerItems.activeArtifactsIDs.Length; i++)
+            for (int i = 0; i < 3; i++)
             {
                 if (PlayerItems.activeArtifactsIDs[i] == null)
                 {
@@ -253,24 +265,9 @@ public class PlayerScript : MonoBehaviour {
         }
     }
 
-    void skillPointsNotification()
-    {
-        if (GameObject.Find("Skill Points Notifier")) {
-            if (MiscData.skillPointsNotification == true)
-            {
-                MiscData.skillPointsNotification = false;
-                GameObject.Find("Skill Points Notifier").GetComponent<NotificationBell>().startNotification("Dungeon Boss Defeated: Next Tier of Upgrades Unlocked");
-            }
-            else
-            {
-                GameObject.Find("Skill Points Notifier").SetActive(false);
-            }
-        }
-    }
-
     void loadPrevItems()
     {
-        if (SceneManager.GetActiveScene().name == "Player Hub" || SceneManager.GetActiveScene().name == "Willow's Hideout")
+        if (playerHubNames.Contains(SceneManager.GetActiveScene().name))
         {
             HubProperties.storeGold += PlayerItems.totalGoldAmount;
             if (GameObject.Find("Gold Deposit Notifier"))
@@ -350,7 +347,7 @@ public class PlayerScript : MonoBehaviour {
 
     IEnumerator hitFrame(SpriteRenderer spriteRenderer)
     {
-        FindObjectOfType<AudioManager>().PlaySound("Player Hit");
+        audioManager.PlaySound("Player Hit");
         for (int i = 0; i < 2; i++)
         {
             spriteRenderer.color = Color.red;
@@ -465,6 +462,8 @@ public class PlayerScript : MonoBehaviour {
     private void Awake()
     {
         loadDebugConsoleIfNotInstantiated();
+        PlayerProperties.playerScript = this;
+        PlayerProperties.playerShip = this.gameObject;
     }
 
     void Start() {
@@ -475,8 +474,6 @@ public class PlayerScript : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         hullUpgradeManager = GetComponent<HullUpgradeManager>();
 
-        PlayerProperties.playerScript = this;
-        PlayerProperties.playerShip = this.gameObject;
         PlayerProperties.playerArtifacts = artifacts;
         PlayerProperties.playerInventory = inventory;
         PlayerProperties.spriteRenderer = this.spriteRenderer;
@@ -486,22 +483,33 @@ public class PlayerScript : MonoBehaviour {
             loadPrevItems();
         }
 
-        skillPointsNotification();
+        healthBarText = healthBarFill.transform.parent.GetComponentInChildren<Text>().GetComponentsInChildren<Text>()[1];
+
+        damageNumbers = FindObjectOfType<DamageNumbers>();
+        audioManager = FindObjectOfType<AudioManager>();
+        healNumbers = FindObjectOfType<PlayerHealNumbers>();
+        cameraShake = FindObjectOfType<CameraShake>();
 
         inventory.UpdateUI();
         inventory.inventory.SetActive(false);
 
         artifacts.UpdateUI();
         artifacts.artifactsUI.SetActive(false);
+
+        shipHealth = Mathf.RoundToInt(shipHealthMAX - trueDamage);
+
+        updateHealthBarText();
     }
 
     public void healPlayer(int amountHealing)
     {
         if (amountHealing > 0)
         {
-            FindObjectOfType<PlayerHealNumbers>().showHealing(amountHealing, shipHealthMAX);
-            trueDamage -= amountHealing;
+            healNumbers.showHealing(amountHealing, shipHealthMAX);
+            Mathf.Clamp(trueDamage -= amountHealing, 0, int.MaxValue);
         }
+
+        shipHealth = Mathf.RoundToInt(shipHealthMAX - trueDamage);
 
         foreach (GameObject artifact in artifacts.activeArtifacts)
         {
@@ -510,6 +518,16 @@ public class PlayerScript : MonoBehaviour {
             {
                 effect.healed(amountHealing);
             }
+        }
+
+        updateHealthBar();
+    }
+
+    void OnGUI()
+    {
+        if (Time.timeScale > 0)
+        {
+            GUI.Label(new Rect(0, 0, 100, 100), ((int)(1.0f / Time.smoothDeltaTime)).ToString() + "FPS");
         }
     }
 
@@ -561,134 +579,19 @@ public class PlayerScript : MonoBehaviour {
 
             if (rigidBody2D.velocity.magnitude > 1.5f)
             {
-                FindObjectOfType<AudioManager>().UnMuteSound("Idle Ship Movement");
+                audioManager.UnMuteSound("Idle Ship Movement");
             }
             else
             {
-                FindObjectOfType<AudioManager>().MuteSound("Idle Ship Movement");
+                audioManager.MuteSound("Idle Ship Movement");
             }
 
             shipHealthMAX = 1000 + healthBonus + upgradeHealthBonus;
-            pickRendererLayer();
-            defenseModifier = 1 - defenseBonus - conDefenseBonus - upgradeDefenseBonus;
-
-            if (defenseModifier <= 0)
-            {
-                defenseModifier = 0;
-            }
-
-            if (amountDamage > 0)
-            {
-                if (damageImmunity == false)
-                {
-                    trueDamage += (int)(amountDamage * defenseModifier);
-                }
-                else
-                {
-                    amountDamage = 0;
-                }
-
-                if (damageAbsorb == true)
-                {
-                    healPlayer(Mathf.RoundToInt(amountDamage * defenseModifier));
-                    amountDamage = 0;
-                }
-
-                if (trueDamage < 0)
-                {
-                    trueDamage = 0;
-                }
-
-                if (hitBufferPeriod == false)
-                {
-                    if (damagingObject != null)
-                    {
-                        float angle = Mathf.Atan2(damagingObject.transform.position.y - transform.position.y, damagingObject.transform.position.x - transform.position.x);
-                        if (Vector2.Distance(transform.position, damagingObject.transform.position) < 1f)
-                        {
-                            FindObjectOfType<DamageNumbers>().showDamage((int)(amountDamage * defenseModifier), shipHealthMAX, damagingObject.transform.position);
-                        }
-                        else
-                        {
-                            FindObjectOfType<DamageNumbers>().showDamage((int)(amountDamage * defenseModifier), shipHealthMAX, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)));
-                        }
-                    }
-                    else
-                    {
-                        FindObjectOfType<DamageNumbers>().showDamage((int)(amountDamage * defenseModifier), shipHealthMAX, transform.position + new Vector3(0, 1.5f, 0));
-                    }
-
-                    FindObjectOfType<CameraShake>().shakeCamFunction(0.1f, 0.3f * ((amountDamage * defenseModifier) / shipHealthMAX));
-                }
-                else
-                {
-                    amountDamage = 0;
-                }
-
-                if (damagingObject != null)
-                {
-                    foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
-                    {
-                        if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                        {
-                            if (damagingObject.GetComponent<ProjectileParent>())
-                            {
-                                slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.GetComponent<ProjectileParent>().instantiater.GetComponent<Enemy>());
-                            }
-                            else if (damagingObject.transform.parent != null)
-                            {
-                                slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.transform.parent.GetComponent<Enemy>());
-                            }
-                            else
-                            {
-                                slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.GetComponent<Enemy>());
-                            }
-                        }
-                    }
-                }
-
-                amountDamage = 0;
-                StartCoroutine(bufferHit(0.5f));
-                PlayerItems.playerDamage = trueDamage;
-                damagingObject = null;
-            }
-
-            if (trueDamage < 0)
-            {
-                trueDamage = 0;
-            }
 
             shipHealth = Mathf.RoundToInt(shipHealthMAX - trueDamage);
 
-            if (shipHealth <= 0 && playerDead == false)
-            {
-                shipHealth = 0;
-                playerDead = true;
-                rigidBody2D.velocity = Vector3.zero;
-                foreach (Transform child in transform)
-                {
-                    child.gameObject.SetActive(false);
-                }
-                spriteRenderer.enabled = false;
-                Instantiate(deathSplash, transform.position, Quaternion.identity);
-
-                if (numberLives > 0)
-                {
-                    numberLives--;
-                    FindObjectOfType<AudioManager>().PlaySound("Player Death");
-                    StartCoroutine(respawnShip());
-                }
-                else
-                {
-                    applyInventoryLoss();
-                    blackFadeOut.GetComponent<Animator>().SetTrigger("FadeOut");
-                    FindObjectOfType<AudioManager>().PlaySound("Player Death");
-                    MiscData.playerDied = true;
-                    windowAlreadyOpen = true;
-                    StartCoroutine(setDeathGraphicActive(1f));
-                    SaveSystem.SaveGame();
-                }
-            }
+            pickRendererLayer();
+            defenseModifier = Mathf.Clamp(1 - defenseBonus - conDefenseBonus - upgradeDefenseBonus, 0.05f, float.MaxValue);
         }
         else
         {
@@ -697,15 +600,127 @@ public class PlayerScript : MonoBehaviour {
         }
 
         updateHealthBar();
+        updateHealthBarText();
         PlayerProperties.armorIndicator.updateShieldEffect();
+    }
+
+    public void dealDamageToShip(int amountDamage, GameObject damagingObject)
+    {
+        int amountBeingDamaged = amountDamage;
+
+        if (damagingObject.GetComponent<DisplayItem>())
+        {
+            dealTrueDamageToShip(amountDamage);
+            return;
+        }
+
+        if (damageImmunity == true)
+        {
+            amountBeingDamaged = 0;
+        }
+
+        if (damageAbsorb == true)
+        {
+            healPlayer(Mathf.RoundToInt(amountDamage * defenseModifier));
+            amountBeingDamaged = 0;
+        }
+
+        foreach (ArtifactSlot slot in PlayerProperties.playerArtifacts.artifactSlots)
+        {
+            if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+            {
+                if (damagingObject.GetComponent<ProjectileParent>())
+                {
+                    slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.GetComponent<ProjectileParent>().instantiater.GetComponent<Enemy>());
+                }
+                else if (damagingObject.transform.parent != null)
+                {
+                    slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.transform.parent.GetComponent<Enemy>());
+                }
+                else
+                {
+                    slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.GetComponent<Enemy>());
+                }
+            }
+        }
+
+        if (hitBufferPeriod == false)
+        {
+            float angle = Mathf.Atan2(damagingObject.transform.position.y - transform.position.y, damagingObject.transform.position.x - transform.position.x);
+            if (Vector2.Distance(transform.position, damagingObject.transform.position) < 1f)
+            {
+                damageNumbers.showDamage((int)(amountBeingDamaged* defenseModifier), shipHealthMAX, damagingObject.transform.position);
+            }
+            else
+            {
+                damageNumbers.showDamage((int)(amountBeingDamaged * defenseModifier), shipHealthMAX, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)));
+            }
+
+            cameraShake.shakeCamFunction(0.1f, 0.3f * ((amountDamage * defenseModifier) / shipHealthMAX));
+        }
+        else
+        {
+            return;
+        }
+
+
+        StartCoroutine(bufferHit(0.5f));
+
+        if (amountBeingDamaged == 0)
+        {
+            return;
+        }
+
+        trueDamage += (int)(amountDamage * defenseModifier);
+        PlayerItems.playerDamage = trueDamage;
+        damagingObject = null;
+
+        shipHealth = Mathf.RoundToInt(shipHealthMAX - trueDamage);
+
+        if (shipHealth <= 0 && playerDead == false)
+        {
+            shipHealth = 0;
+            playerDead = true;
+            rigidBody2D.velocity = Vector3.zero;
+
+            LeanTween.cancel(healthBarTweenID);
+
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+            spriteRenderer.enabled = false;
+            Instantiate(deathSplash, transform.position, Quaternion.identity);
+
+            if (numberLives > 0)
+            {
+                numberLives--;
+                audioManager.PlaySound("Player Death");
+                StartCoroutine(respawnShip());
+            }
+            else
+            {
+                applyInventoryLoss();
+                blackFadeOut.GetComponent<Animator>().SetTrigger("FadeOut");
+                audioManager.PlaySound("Player Death");
+                MiscData.playerDied = true;
+                windowAlreadyOpen = true;
+                StartCoroutine(setDeathGraphicActive(1f));
+                SaveSystem.SaveGame();
+            }
+        }
+
+        updateHealthBar();
     }
 
     public void dealTrueDamageToShip(int damage)
     {
         trueDamage += damage;
         StartCoroutine(hitFrame(spriteRenderer));
-        FindObjectOfType<DamageNumbers>().showDamage(damage, shipHealthMAX, transform.position + new Vector3(0, 1.5f, 0));
+        damageNumbers.showDamage(damage, shipHealthMAX, transform.position + new Vector3(0, 1.5f, 0));
         numberHits++;
+
+        updateHealthBar();
     }
 
     public float totalShipSpeed {
@@ -718,7 +733,7 @@ public class PlayerScript : MonoBehaviour {
     IEnumerator respawnShip()
     {
         yield return new WaitForSeconds(1f);
-        FindObjectOfType<AudioManager>().PlaySound("Respawn Sound");
+        audioManager.PlaySound("Respawn Sound");
         Instantiate(respawnEffect, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(6f / 12f);
         spriteRenderer.sprite = left;
@@ -736,23 +751,19 @@ public class PlayerScript : MonoBehaviour {
 
     void updateHealthBar()
     {
-        if (shipHealthMAX != oldShipHealthMAX)
+        if (Mathf.Abs((float)shipHealth / shipHealthMAX - healthBarFill.fillAmount) > 0.01)
         {
-            healthBarFill.fillAmount = (float)shipHealth / shipHealthMAX;
+            LeanTween.cancel(healthBarTweenID);
+            healthBarTweenID = LeanTween.value(healthBarFill.fillAmount, (float)shipHealth / shipHealthMAX, 0.4f).setOnUpdate((float val) => { healthBarFill.fillAmount = val; }).id;
+            updateHealthBarText();
         }
-
-        if ((healthBarFill.fillAmount - (float)shipHealth / shipHealthMAX) > 0.00001f)
-        {
-            healthBarFill.fillAmount -= Time.deltaTime * 2;
-        }
-        else
-        {
-            healthBarFill.fillAmount = (float)shipHealth / shipHealthMAX;
-        }
-
-        healthBarFill.transform.parent.GetComponentInChildren<Text>().GetComponentsInChildren<Text>()[1].text = (shipHealthMAX - trueDamage).ToString() + "/" + shipHealthMAX.ToString();
-        oldShipHealthMAX = shipHealthMAX;
     }
+
+    void updateHealthBarText()
+    {
+        healthBarText.text = (shipHealthMAX - trueDamage).ToString() + "/" + shipHealthMAX.ToString();
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -770,7 +781,6 @@ public class PlayerScript : MonoBehaviour {
            )
         {
             StartCoroutine(hitFrame(spriteRenderer));
-            damagingObject = collision.gameObject;
             damageColLocation = collision.transform.position;
             numberHits++;
 

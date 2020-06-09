@@ -40,7 +40,7 @@ public class CrabBetaSlash : MonoBehaviour
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            FindObjectOfType<PlayerScript>().amountDamage += 400;
+            PlayerProperties.playerScript.dealDamageToShip(400, this.gameObject);
         }
     }
 }

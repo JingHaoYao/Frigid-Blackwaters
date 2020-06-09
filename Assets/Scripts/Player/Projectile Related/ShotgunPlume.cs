@@ -24,15 +24,15 @@ public class ShotgunPlume : WeaponFireScript {
         GameObject[] bulletList = new GameObject[numberBullets];
         if (concentrated == false)
         {
-            int start = (numberBullets / 2) * 10;
+            int start = (numberBullets / 2) * 6;
             for (int i = 0; i < numberBullets; i++)
             {
 
                 GameObject instant = Instantiate(bullet, transform.position, Quaternion.identity);
-                instant.GetComponent<ShotgunRound>().angleTravel = baseAngle - start + 10 * i;
+                instant.GetComponent<ShotgunRound>().angleTravel = baseAngle - start + 6 * i;
                 bulletList[i] = instant;
             }
-            triggerWeaponFireFlag(bulletList, transform.position, baseAngle - start + 10);
+            triggerWeaponFireFlag(bulletList, transform.position, baseAngle - start + 6);
         }
         else
         {

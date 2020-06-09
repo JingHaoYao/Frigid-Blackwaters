@@ -13,7 +13,9 @@ public class SpectralHelmsman : Enemy
     public PlayerScript playerScript;
     public GameObject swordSlashEffect;
     public LayerMask filter;
-    public GameObject leftShip, rightShip;
+    [SerializeField] GameObject spectralShip;
+    SpectralShip spectralShipInstant;
+    Camera mainCamera;
 
     int mirror = 1;
     int whatView = 1;
@@ -31,6 +33,8 @@ public class SpectralHelmsman : Enemy
         bossHealthBar.bossStartUp("Spectral Helmsman");
         bossHealthBar.targetEnemy = this;
         StartCoroutine(mainGameLoop());
+        mainCamera = Camera.main;
+        numberDashes = 2;
     }
 
     IEnumerator summonShips()
@@ -38,13 +42,17 @@ public class SpectralHelmsman : Enemy
         attackDuration = 2;
         attacking = true;
         animator.SetTrigger("Summon");
-        audioSources[3].Play();
-        yield return new WaitForSeconds(10f / 12f);
         audioSources[2].Play();
-        GameObject ship = Instantiate(leftShip, new Vector3(1407.8f - Random.Range(0, 7), 31f, 0), Quaternion.identity);
-        ship.GetComponent<SpectralHelmsmanGhostShip>().spectralHelmsman = gameObject;
-        ship = Instantiate(rightShip, new Vector3(1392.2f + Random.Range(0, 7), 31f, 0), Quaternion.identity);
-        ship.GetComponent<SpectralHelmsmanGhostShip>().spectralHelmsman = gameObject;
+        yield return new WaitForSeconds(10f / 12f);
+
+        GameObject instant = Instantiate(spectralShip, new Vector3(1400, 26.2f), Quaternion.identity);
+        if(Random.Range(0, 2) == 1)
+        {
+            instant.transform.localScale = new Vector3(-8f, 8f);
+        }
+        spectralShipInstant =  instant.GetComponent<SpectralShip>();
+        spectralShipInstant.spectralHelmsman = this;
+
         yield return new WaitForSeconds(8f / 12f);
         pickView(angleToShip);
         animator.SetTrigger("Idle");
@@ -147,7 +155,7 @@ public class SpectralHelmsman : Enemy
                 {
                     if (stopAttacking == false)
                     {
-                        if (numberDashes < 2)
+                        if (numberDashes < 3)
                         {
                             StartCoroutine(swordDash(angleToShip));
                             numberDashes++;
@@ -183,12 +191,13 @@ public class SpectralHelmsman : Enemy
     {
         StopAllCoroutines();
         animator.SetTrigger("Death");
-        audioSources[4].Play();
+        audioSources[3].Play();
         bossHealthBar.bossEnd();
         bossManager.bossBeaten(nameID, 11f / 12f);
         playerScript.enemiesDefeated = true;
+        spectralShipInstant.sink();
         SaveSystem.SaveGame();
-        Destroy(this.gameObject);
+        Destroy(this.gameObject, 1.083f);
     }
 
     public override void damageProcedure(int damage)

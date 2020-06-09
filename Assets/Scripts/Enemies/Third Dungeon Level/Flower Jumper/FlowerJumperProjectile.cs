@@ -41,7 +41,7 @@ public class FlowerJumperProjectile : MonoBehaviour
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            PlayerProperties.playerScript.amountDamage += amountDamage;
+            PlayerProperties.playerScript.dealDamageToShip(amountDamage, this.gameObject);
         }
 
         if (wallCol == false)

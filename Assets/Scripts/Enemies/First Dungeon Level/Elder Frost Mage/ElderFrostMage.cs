@@ -31,6 +31,8 @@ public class ElderFrostMage : Enemy
 
     Vector3 targetTravel;
 
+    Camera mainCamera;
+
     void spawnFoam()
     {
         if (rigidBody2D.velocity.magnitude != 0)
@@ -111,6 +113,7 @@ public class ElderFrostMage : Enemy
         Vector3 spawnPos = playerShip.transform.position;
         yield return new WaitForSeconds(4f / 12f);
         GameObject pillar = Instantiate(icePillar, spawnPos, Quaternion.identity);
+        pillar.GetComponent<ProjectileParent>().instantiater = this.gameObject;
         if(Random.Range(0,2) == 1)
         {
             Vector3 scale = pillar.transform.localScale;
@@ -130,7 +133,13 @@ public class ElderFrostMage : Enemy
         animator.SetTrigger("Missile" + whatView.ToString());
         this.GetComponents<AudioSource>()[2].Play();
         yield return new WaitForSeconds(6f / 12f);
-        GameObject missileInstant = Instantiate(iceMissle, transform.position + new Vector3(Mathf.Cos(angleToShip * Mathf.Deg2Rad), Mathf.Sin(angleToShip * Mathf.Deg2Rad)) * 0.5f + new Vector3(0, 1.5f, 0), Quaternion.identity);
+
+        float angleFromShipToBoss = Mathf.Atan2(mainCamera.transform.position.y - PlayerProperties.playerShipPosition.y, mainCamera.transform.position.x - PlayerProperties.playerShipPosition.x);
+        for(int i = 0; i < 3; i++)
+        {
+            GameObject missileInstant = Instantiate(iceMissle, PlayerProperties.playerShipPosition + new Vector3(Mathf.Cos(angleFromShipToBoss + (-15 + (15 * i)) * Mathf.Deg2Rad), Mathf.Sin(angleFromShipToBoss + (-15 + (15 * i)) * Mathf.Deg2Rad)) * (Vector2.Distance(transform.position, PlayerProperties.playerShipPosition) - 1.5f), Quaternion.identity);
+            missileInstant.GetComponent<ProjectileParent>().instantiater = this.gameObject;
+        }
         yield return new WaitForSeconds(7f / 12f);
         animator.enabled = false;
         isAttacking = false;
@@ -170,6 +179,7 @@ public class ElderFrostMage : Enemy
         FindObjectOfType<BossHealthBar>().targetEnemy = GetComponent<Enemy>();
         FindObjectOfType<BossHealthBar>().bossStartUp("Elder Frost Mage");
         StartCoroutine(mainGameloop());
+        mainCamera = Camera.main;
     }
 
     IEnumerator mainGameloop()

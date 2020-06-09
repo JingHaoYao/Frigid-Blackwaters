@@ -76,7 +76,7 @@ public class FishmanShamanArms : MonoBehaviour {
         if (collision.gameObject.tag == "playerHitBox" && hasHit == false)
         {
             collidedwithShip = true;
-            playerShip.GetComponent<PlayerScript>().amountDamage += 150;
+            PlayerProperties.playerScript.dealDamageToShip(150, this.gameObject);
             circCol.enabled = false;
             hasHit = true;
         }

@@ -40,7 +40,7 @@ public class AnemoneShot : MonoBehaviour
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            playerShip.GetComponent<PlayerScript>().amountDamage += amountDamage;
+            PlayerProperties.playerScript.dealDamageToShip(amountDamage, this.gameObject);
         }
 
         if (wallCol == false)

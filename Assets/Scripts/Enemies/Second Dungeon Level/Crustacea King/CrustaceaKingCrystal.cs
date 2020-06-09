@@ -4,49 +4,60 @@ using UnityEngine;
 
 public class CrustaceaKingCrystal : MonoBehaviour
 {
-    PolygonCollider2D polyCol;
+    [SerializeField] PolygonCollider2D polyCol;
+    [SerializeField] Animator animator;
+    [SerializeField] ProjectileParent projectileParent;
+    [SerializeField] GameObject damageHitbox;
     bool destroyed = false;
+    private CrustaceaKing boss;
+
+    public void initializeCrystal(CrustaceaKing boss)
+    {
+        this.boss = boss;
+        projectileParent.instantiater = boss.gameObject;
+    }
+
     void Start()
     {
         polyCol = GetComponent<PolygonCollider2D>();
         StartCoroutine(crystalShardRoutine());
+        transform.localScale = new Vector3(Random.Range(0, 2) * -10 + 5, 5);
     }
 
     IEnumerator crystalShardRoutine()
     {
-        yield return new WaitForSeconds(0.667f);
+        yield return new WaitForSeconds(2 / 12f);
+        damageHitbox.SetActive(true);
+        yield return new WaitForSeconds(2 / 12f);
+        damageHitbox.SetActive(false);
+        yield return new WaitForSeconds(3/12);
         polyCol.enabled = true;
-        yield return new WaitForSeconds(12f);
+        yield return new WaitForSeconds(10f);
+
         if (destroyed == false)
         {
-            GetComponent<Animator>().SetTrigger("Shatter");
-            GetComponent<AudioSource>().Play();
-            polyCol.enabled = false;
-            destroyed = true;
-            yield return new WaitForSeconds(0.417f);
-            Destroy(this.gameObject);
+            StartCoroutine(destroy());
         }
     }
 
     IEnumerator destroy()
     {
-        GetComponent<Animator>().SetTrigger("Shatter");
-        GetComponent<AudioSource>().Play();
+        destroyed = true;
+        animator.SetTrigger("Sink");
         polyCol.enabled = false;
-        yield return new WaitForSeconds(0.417f);
+        yield return new WaitForSeconds(6/12f);
         Destroy(this.gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (destroyed == false)
         {
-            destroyed = true;
             StartCoroutine(destroy());
 
-            if (collision.gameObject.GetComponent<CrustaceaKing>() || collision.gameObject.transform.parent.GetComponent<CrustaceaKing>())
+            if (collision.gameObject == this.projectileParent.instantiater)
             {
-                FindObjectOfType<CrustaceaKing>().crystalDamage();
+                this.boss.crystalDamage();
             }
         }
     }

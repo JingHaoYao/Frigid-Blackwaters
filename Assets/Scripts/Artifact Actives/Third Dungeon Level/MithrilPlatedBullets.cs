@@ -11,8 +11,7 @@ public class MithrilPlatedBullets : ArtifactEffect
             DamageAmount damageAmount = shot.GetComponent<DamageAmount>();
             if (damageAmount != null)
             {
-                damageAmount.originDamage += 3;
-                damageAmount.updateDamage();
+                damageAmount.addDamage(3);
             }
         }
     }

@@ -106,7 +106,7 @@ public class ShipSmithMenus : MonoBehaviour {
 
     private void Update()
     {
-        skillPointPrice = 1500 + PlayerUpgrades.numberMaxSkillPoints * 1250 + 500 * Mathf.FloorToInt(PlayerUpgrades.numberMaxSkillPoints / 2) * 500;
+        skillPointPrice = 1500 + PlayerUpgrades.numberMaxSkillPoints * (750 + 300 * Mathf.FloorToInt(PlayerUpgrades.numberMaxSkillPoints / 4));
         skillPointsText.text = PlayerUpgrades.numberSkillPoints.ToString();
         storeGold.text = HubProperties.storeGold.ToString();
         skillPointsPrice.text = skillPointPrice.ToString();

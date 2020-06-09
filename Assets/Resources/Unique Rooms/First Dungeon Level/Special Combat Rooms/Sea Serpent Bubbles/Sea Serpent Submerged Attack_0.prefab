@@ -138,6 +138,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -149,6 +150,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -256,6 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!114 &114584642578477990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,7 +381,8 @@ AudioSource:
   m_GameObject: {fileID: 1522095377479958}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -5410304103004225776, guid: 0004d31a11605944da0e0192771234e9,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: ee488e48dde33bd429c5b8f9249bb92e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1

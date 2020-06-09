@@ -55,21 +55,26 @@ public class SoundOptions : MonoBehaviour
         }
     }
 
+    float conversionFunction(float sliderValue)
+    {
+        return Mathf.Log10(Mathf.Clamp(1 - Mathf.Abs(sliderValue / 80), 0.0001f, 1)) * 20;
+    }
+
     public void setGeneralVolume(float volume)
     {
-        generalMixer.SetFloat("masterVolume", volume);
+        generalMixer.SetFloat("masterVolume", conversionFunction(volume));
         MiscData.masterVolume = volume;
     }
 
     public void setEffectsVolume(float volume)
     {
-        generalMixer.SetFloat("effectsVolume", volume);
+        generalMixer.SetFloat("effectsVolume", conversionFunction(volume));
         MiscData.effectsVolume = volume;
     }
 
     public void setMusicVolume(float volume)
     {
-        generalMixer.SetFloat("musicVolume", volume);
+        generalMixer.SetFloat("musicVolume", conversionFunction(volume));
         MiscData.musicVolume = volume;
     }
 

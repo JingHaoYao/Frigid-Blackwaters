@@ -50,8 +50,26 @@ public class ChestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         }
     }
 
-    bool checkExistingGold()
+    void addGold(int index)
     {
+        for(int i = 0; i < inventory.itemList.Count; i++)
+        {
+            if (inventory.itemList[i].GetComponent<DisplayItem>().goldValue < 1000 && inventory.itemList[i].GetComponent<DisplayItem>().goldValue > 0)
+            {
+                if (inventory.itemList[i].GetComponent<DisplayItem>().goldValue + displayInfo.goldValue > 1000)
+                {
+                    displayInfo.goldValue -= 1000 - inventory.itemList[i].GetComponent<DisplayItem>().goldValue;
+                    inventory.itemList[i].GetComponent<DisplayItem>().goldValue = 1000;
+                }
+                else
+                {
+                    inventory.itemList[i].GetComponent<DisplayItem>().goldValue += displayInfo.goldValue;
+                    displayInfo.goldValue = 0;
+                    break;
+                }
+            }
+        }
+
         while (displayInfo.goldValue > 1000 && inventory.itemList.Count < PlayerItems.maxInventorySize)
         {
             displayInfo.goldValue -= 1000;
@@ -60,60 +78,49 @@ public class ChestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             inventory.itemList.Add(newGoldItem);
         }
 
-        for (int i = inventory.itemList.Count - 1; i >= 0; i--)
+        if(inventory.itemList.Count < PlayerItems.maxInventorySize && displayInfo.goldValue > 0)
         {
-            if (inventory.itemList[i].GetComponent<DisplayItem>().goldValue < 1000 && inventory.itemList[i].GetComponent<DisplayItem>().goldValue > 0)
-            {
-                if (inventory.itemList[i].GetComponent<DisplayItem>().goldValue + displayInfo.goldValue > 1000)
-                {
-                    displayInfo.goldValue -= 1000 - inventory.itemList[i].GetComponent<DisplayItem>().goldValue;
-                    inventory.itemList[i].GetComponent<DisplayItem>().goldValue = 1000;
-                    return false;
-                }
-                else
-                {
-                    inventory.itemList[i].GetComponent<DisplayItem>().goldValue += displayInfo.goldValue;
-                    return true;
-                }
-            }
+            GameObject newGoldItem = Instantiate(itemTemplates.gold);
+            newGoldItem.GetComponent<DisplayItem>().goldValue = displayInfo.goldValue;
+            inventory.itemList.Add(newGoldItem);
+            displayInfo.goldValue = 0;
         }
-        return false;
+
+        if(displayInfo.goldValue <= 0)
+        {
+            Destroy(displayInfo.gameObject);
+            targetChest.chestItems[index] = null;
+        }
     }
 
     public void transferItem()
     {
+        int index = 0;
+        for (int i = 0; i < targetChest.chestSlots.Length; i++)
+        {
+            if (targetChest.chestSlots[i] == this)
+            {
+                index = i;
+            }
+        }
+
         if (displayInfo != null)
         {
             if (displayInfo.goldValue > 0)
             {
-                if (checkExistingGold() != true)
-                {
-                    if (inventory.itemList.Count < PlayerItems.maxInventorySize)
-                    {
-                        inventory.itemList.Add(displayInfo.gameObject);
-                    }
-                }
+                addGold(index);
                 FindObjectOfType<AudioManager>().PlaySound("Pick Up Gold");
             }
-
-            if (inventory.itemList.Count < PlayerItems.maxInventorySize)
+            else
             {
-                int index = 0;
-                for (int i = 0; i < targetChest.chestSlots.Length; i++)
-                {
-                    if (targetChest.chestSlots[i] == this)
-                    {
-                        index = i;
-                    }
-                }
-                
-                if(displayInfo.goldValue <= 0)
+                if (inventory.itemList.Count < PlayerItems.maxInventorySize)
                 {
                     inventory.itemList.Add(displayInfo.gameObject);
                     FindObjectOfType<AudioManager>().PlaySound("Receive Item");
+                    targetChest.chestItems[index] = null;
                 }
-                targetChest.chestItems[index] = null;
             }
+
             inventory.UpdateUI();
             targetChest.UpdateUI();
         }

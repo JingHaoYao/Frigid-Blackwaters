@@ -52,7 +52,7 @@ public class IceSpikeScript : MonoBehaviour {
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            playerShip.GetComponent<PlayerScript>().amountDamage += 400;
+            PlayerProperties.playerScript.dealDamageToShip(400, this.gameObject);
         }
     }
 }

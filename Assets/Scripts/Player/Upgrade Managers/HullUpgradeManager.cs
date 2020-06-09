@@ -200,7 +200,7 @@ public class HullUpgradeManager : MonoBehaviour {
             {
                 dashIcon.GetComponent<Image>().color = new Color(1, 1, 1, 1f);
                 dashCooldownPeriod = 0;
-                if (Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.dash)) && playerScript.shipRooted == false && playerScript.playerDead == false)
+                if (Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.dash)) && playerScript.shipRooted == false && playerScript.playerDead == false && playerScript.windowAlreadyOpen == false)
                 {
                     dashCooldownPeriod = dashCooldown;
                     foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)

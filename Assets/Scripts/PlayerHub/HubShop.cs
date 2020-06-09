@@ -172,7 +172,7 @@ public class HubShop : MonoBehaviour {
 
             if (shopDisplay.activeSelf == true)
             {
-                if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.I))
                 {
                     shopDisplay.SetActive(false);
                     inventoryDisplay.SetActive(false);

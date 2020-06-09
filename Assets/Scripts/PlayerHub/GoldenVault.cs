@@ -82,7 +82,7 @@ public class GoldenVault : MonoBehaviour {
 
             if (vaultDisplay.activeSelf == true)
             {
-                if (Input.GetKeyDown(KeyCode.Escape))
+                if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.I))
                 {
                     inventoryDisplay.SetActive(false);
                     playerShip.GetComponent<PlayerScript>().shipRooted = false;

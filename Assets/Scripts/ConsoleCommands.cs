@@ -213,6 +213,15 @@ public class ConsoleCommands : MonoBehaviour
         StartCoroutine(WaitForFogDuration(duration));
     }
 
+    [CommandHandler(Name = "AddAllEnemiesToPool", Description = "Add all existing enemies in the scene to EnemyPool")]
+    private void AddAllEnemiesToPool()
+    {
+        foreach(Enemy enemy in FindObjectsOfType<Enemy>())
+        {
+            EnemyPool.addEnemy(enemy);
+        }
+    }
+
     IEnumerator WaitForFogDuration(float duration)
     {
         yield return new WaitForSeconds(duration);

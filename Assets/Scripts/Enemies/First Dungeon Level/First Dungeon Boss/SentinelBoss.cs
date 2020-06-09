@@ -24,7 +24,7 @@ public class SentinelBoss : Enemy
 
     public GameObject scatterRock;
 
-    BossManager bossManager;
+    [SerializeField] BossManager bossManager;
 
     void pickView(float direction)
     {
@@ -122,7 +122,7 @@ public class SentinelBoss : Enemy
         {
             foreach (SentinelRotateRock rock in FindObjectsOfType<SentinelRotateRock>())
             {
-                rock.targetSpeed = 90;
+                rock.targetSpeed = 60;
             }
         }
     }
@@ -226,7 +226,9 @@ public class SentinelBoss : Enemy
 
     public override void deathProcedure()
     {
-        Instantiate(deadBoss, transform.position, Quaternion.identity);
+        GameObject deadBossInstant = Instantiate(deadBoss, transform.position, Quaternion.identity);
+        deadBossInstant.GetComponent<DeadSentinel>().bossManager = this.bossManager;
+
         if (MiscData.dungeonLevelUnlocked == 1)
         {
             MiscData.dungeonLevelUnlocked = 2;

@@ -17,7 +17,7 @@ public class SharkmanDamageHitBox : MonoBehaviour {
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            playerShip.GetComponent<PlayerScript>().amountDamage += 200;
+            PlayerProperties.playerScript.dealDamageToShip(200, this.gameObject);
         }
     }
 }

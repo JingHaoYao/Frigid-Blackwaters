@@ -31,7 +31,7 @@ public class ElectricPulse : MonoBehaviour {
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            playerShip.GetComponent<PlayerScript>().amountDamage += 50;
+            PlayerProperties.playerScript.dealDamageToShip(50, this.gameObject);
         }
     }
 }

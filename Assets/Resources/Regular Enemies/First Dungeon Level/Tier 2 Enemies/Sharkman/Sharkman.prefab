@@ -53,6 +53,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -64,6 +65,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -155,8 +157,9 @@ MonoBehaviour:
   percentSpawnChance: 33
   armorMitigation: 0
   speed: 4
-  slowAmount: 0
-  spawner: {fileID: 0}
+  fogStats:
+    fogDurationIncrease: 0
+    fogCoolDownDecrease: 0
   statuses: []
   facingLeft: {fileID: 21300000, guid: 19d5e21d8d9b00346bad691e33a3e26b, type: 3}
   facingRight: {fileID: 21300004, guid: 19d5e21d8d9b00346bad691e33a3e26b, type: 3}
@@ -299,7 +302,8 @@ AudioSource:
   m_GameObject: {fileID: 1311737683379452}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -5410304103004225776, guid: 0004d31a11605944da0e0192771234e9,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: b8063af42cf916848ad5f93b3331c1a7, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -431,6 +435,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -442,6 +447,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

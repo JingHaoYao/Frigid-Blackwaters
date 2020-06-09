@@ -97,7 +97,7 @@ public class SpiritHowlBell : ArtifactEffect {
     // Whenever the player takes damage
     public override void tookDamage(int amountDamage, Enemy enemy)
     {
-        summonedDoggies[numHits].GetComponent<SpiritHowl>().targetAttack = playerScript.damagingObject;
+        summonedDoggies[numHits].GetComponent<SpiritHowl>().targetAttack = enemy.gameObject;
         numHits++;
     }
 }

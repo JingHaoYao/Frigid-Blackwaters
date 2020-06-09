@@ -56,7 +56,7 @@ public class SeaSerpentWave : MonoBehaviour {
     {
         if(collision.gameObject.tag == "playerHitBox" && animationStarted == false)
         {
-            playerScript.amountDamage += 200;
+            PlayerProperties.playerScript.dealDamageToShip(200, this.gameObject);
             animationStarted = true;
             animator.SetTrigger("Submerge");
             Destroy(this.gameObject, 0.5f);

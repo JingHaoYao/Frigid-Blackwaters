@@ -9,6 +9,7 @@ public class SkeletalMusketRound : MonoBehaviour {
     public float angleTravel;
     public GameObject bulletTrail;
     GameObject playerShip;
+    [SerializeField] float bulletImpactOffset = 90;
 
     void Start()
     {
@@ -25,12 +26,12 @@ public class SkeletalMusketRound : MonoBehaviour {
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            playerShip.GetComponent<PlayerScript>().amountDamage += damage;
+            PlayerProperties.playerScript.dealDamageToShip(damage, this.gameObject);
         }
 
         if (collision.gameObject.tag == "RoomHitbox" || collision.gameObject.tag == "RoomWall")
         {
-            Instantiate(bulletSparks, transform.position, Quaternion.Euler(0, 0, (angleTravel * Mathf.Rad2Deg) + 90));
+            Instantiate(bulletSparks, transform.position, Quaternion.Euler(0, 0, (angleTravel * Mathf.Rad2Deg) + bulletImpactOffset));
             Destroy(this.gameObject);
         }
     }

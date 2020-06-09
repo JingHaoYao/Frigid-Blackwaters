@@ -21,6 +21,8 @@ public class ReturnNotifications : MonoBehaviour
     public GameObject rewards;
     public GameObject itemRewardsUI;
 
+    private NotificationBell dialogueNotifications;
+
     public void updateRewards(int goldAmount, int skillPointAmount, GameObject[] itemRewards, bool failedMission = false, bool missionIsCompleted = false)
     {
         if(failedMission == true)
@@ -52,23 +54,36 @@ public class ReturnNotifications : MonoBehaviour
         }
     }
 
-    void Awake()
+    void Start()
     {
-        playerScript = FindObjectOfType<PlayerScript>();
-        if (MiscData.finishedTutorial == false || MiscData.missionID == null)
-        {
-            foreach (Transform child in transform)
-            {
-                child.gameObject.SetActive(false);
-            }
-            this.GetComponent<Image>().enabled = false;
-            notificationsClosed = true;
+        playerScript = PlayerProperties.playerScript;
+        NotificationBell[] notifications = notificationBar.GetComponentsInChildren<NotificationBell>();
+        dialogueNotifications = notifications[0];
+    }
+
+    public NotificationBell dialogueNotification
+    {
+        get {
+            return this.dialogueNotifications;
         }
-        else
+    }
+
+    public void closeNotifications()
+    {
+        foreach (Transform child in transform)
         {
-            playerScript.windowAlreadyOpen = true;
-            playerScript.playerDead = true;
+            child.gameObject.SetActive(false);
         }
+
+        this.GetComponent<Image>().enabled = false;
+
+        notificationsClosed = true;
+    }
+
+    public void activateNotifications()
+    {
+        PlayerProperties.playerScript.windowAlreadyOpen = true;
+        PlayerProperties.playerScript.playerDead = true;
     }
 
     void LateUpdate()

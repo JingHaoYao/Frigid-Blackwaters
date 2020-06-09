@@ -65,7 +65,7 @@ public class SkeletonEngineer : Enemy
         pickView(angleToShip());
         transform.localScale = new Vector3(4 * mirror, 4);
         animator.SetTrigger("Place" + whatView);
-        yield return new WaitForSeconds(8 / 12f);
+        yield return new WaitForSeconds(5 / 12f);
         attackAudio.Play();
         if (stopAttacking == false)
         {
@@ -74,7 +74,7 @@ public class SkeletonEngineer : Enemy
             mineInstant.GetComponent<SkeletonEngineerMine>().skeletonEngineer = this;
             mineList.Add(mineInstant);
         }
-        yield return new WaitForSeconds(1 / 12f);
+        yield return new WaitForSeconds(3 / 12f);
         isAttacking = false;
         animator.enabled = false;
         randomPos = pickRandPos();
@@ -184,7 +184,7 @@ public class SkeletonEngineer : Enemy
     {
         foreach (GameObject mine_ in mineList)
         {
-            LeanTween.alpha(mine_, 0, 0.5f);
+            LeanTween.alpha(mine_, 1, 0.5f);
         }
     }
 

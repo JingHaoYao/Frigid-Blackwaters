@@ -192,7 +192,7 @@ public class CrystallinePillar : Enemy
         StopAllCoroutines();
         takeDamageHitBox.enabled = false;
         StopAllCoroutines();
-        bossManager.bossBeaten(nameID, 1.083f);
+        bossManager.bossBeaten(nameID, 0.667f);
         PlayerProperties.playerScript.enemiesDefeated = true;
         healthBar.bossEnd();
         deathAudio.Play();

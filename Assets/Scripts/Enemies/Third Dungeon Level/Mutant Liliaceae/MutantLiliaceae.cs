@@ -280,7 +280,6 @@ public class MutantLiliaceae : Enemy {
         cameraScript.freeCam = true;
         cameraScript.trackPlayer = false;
         bossManager.bossBeaten(this.nameID, 2f);
-     
     }
 
     public override void damageProcedure(int damage)

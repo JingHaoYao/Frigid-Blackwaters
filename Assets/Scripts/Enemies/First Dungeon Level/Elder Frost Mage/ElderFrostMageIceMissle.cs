@@ -74,7 +74,7 @@ public class ElderFrostMageIceMissle : MonoBehaviour
 
         if (collision.gameObject.tag == "playerHitBox")
         {
-            playerShip.GetComponent<PlayerScript>().amountDamage += 250;
+            PlayerProperties.playerScript.dealDamageToShip(250, this.gameObject);
         }
     }
 }

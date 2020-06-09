@@ -180,9 +180,10 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
 
         if (enemyRoomTemplates.emptyRoomEnemyNames.Length > 0)
         {
-            if (emptyRoom == true && Random.Range(0, 2) == 0)
+            GameObject emptyRoomEnemy = pickEmptyNonTemplateEnemy(false);
+
+            if (emptyRoom == true && Random.Range(1, 101) <= emptyRoomEnemy.GetComponent<Enemy>().percentSpawnChance)
             {
-                GameObject emptyRoomEnemy = pickEmptyNonTemplateEnemy(false);
                 Vector3 spawnPosition = pickRandEnemySpawn();
                 while (Physics2D.OverlapCircle(spawnPosition, 0.5f))
                 {
@@ -237,6 +238,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
             case 3:
                 dungeonName = "Third Dungeon Level";
                 break;
+            case 4:
+                dungeonName = "Fourth Dungeon Level";
+                break;
         }
 
         if (tier == 1)
@@ -253,6 +257,12 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     EnemyPool.addEnemy(enemyClass);
                     return enemyClass.dangerValue;
                 }
+            }
+
+
+            if (enemy == null)
+            {
+                Debug.LogError(enemy + " " + template.potentialEnemyNames[index]);
             }
 
             return 0;
@@ -272,6 +282,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     return enemyClass.dangerValue;
                 }
             }
+
             if(enemy == null)
             {
                 Debug.LogError(enemy + " " + template.potentialEnemyNames[index]);
@@ -295,6 +306,12 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                 }
             }
 
+
+            if (enemy == null)
+            {
+                Debug.LogError(enemy + " " + template.potentialEnemyNames[index]);
+            }
+
             return 0;
         }
         else if (tier == 4)
@@ -311,6 +328,11 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     EnemyPool.addEnemy(enemyClass);
                     return enemyClass.dangerValue;
                 }
+            }
+
+            if (enemy == null)
+            {
+                Debug.LogError(enemy + " " + template.potentialEnemyNames[index]);
             }
 
             return 0;
@@ -335,6 +357,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
             case 3:
                 dungeonName = "Third Dungeon Level";
                 break;
+            case 4:
+                dungeonName = "Fourth Dungeon Level";
+                break;
         }
 
         if (templateEnemy == true)
@@ -349,6 +374,45 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
             GameObject emptyRoomEnemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Empty Room Enemies/" + enemy + "/" + enemy);
             return emptyRoomEnemy;
         }
+    }
+
+    int spawnLimitEnemies(EnemyRoomTemplate template, Vector3 spawnPos)
+    {
+        if (Random.Range(0, 2) == 1 && template.enemiesWithLimits.Length > 0)
+        {
+            string dungeonName = "";
+            switch (dialogueManager.whatDungeonLevel)
+            {
+                case 1:
+                    dungeonName = "First Dungeon Level";
+                    break;
+                case 2:
+                    dungeonName = "Second Dungeon Level";
+                    break;
+                case 3:
+                    dungeonName = "Third Dungeon Level";
+                    break;
+                case 4:
+                    dungeonName = "Fourth Dungeon Level";
+                    break;
+            }
+
+            int index = Random.Range(0, template.enemiesWithLimits.Length);
+            GameObject enemy = null;
+            for (int i = 1; i < 5; i++)
+            {
+                enemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Tier " + i.ToString() + " Enemies/" + template.enemiesWithLimits[index] + "/" + template.enemiesWithLimits[index]);
+                if (enemy != null)
+                {
+                    GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
+                    Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
+                    EnemyPool.addEnemy(enemyClass);
+                    return enemyClass.dangerValue;
+                }
+            }
+        }
+
+        return 0;
     }
 
     void spawnEnemies()
@@ -373,6 +437,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                 dangerValueSum += spawnEnemy(1, template, spawnPosition);
                 posArray.Add(spawnPosition);
             }
+
+            spawnPosition = pickRandEnemySpawn();
+            spawnLimitEnemies(template, spawnPosition);
         }
         else if(dangerValueCap >= 2 && dangerValueCap < 4)
         {
@@ -391,6 +458,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     dangerValueSum += spawnEnemy(2, template, spawnPosition);
                     posArray.Add(spawnPosition);
                 }
+
+                spawnPosition = pickRandEnemySpawn();
+                spawnLimitEnemies(template, spawnPosition);
             }
             else
             {
@@ -407,6 +477,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     dangerValueSum += spawnEnemy(1, template, spawnPosition);
                     posArray.Add(spawnPosition);
                 }
+
+                spawnPosition = pickRandEnemySpawn();
+                spawnLimitEnemies(template, spawnPosition);
             }
         }
         else if(dangerValueCap >= 4 && dangerValueCap < 6)
@@ -427,6 +500,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     dangerValueSum += spawnEnemy(3, template, spawnPosition);
                     posArray.Add(spawnPosition);
                 }
+
+                spawnPosition = pickRandEnemySpawn();
+                spawnLimitEnemies(template, spawnPosition);
 
                 //spawn non template enemy
                 if (enemyRoomTemplates.nonRoomTemplateEnemyNames.Length > 0)
@@ -465,6 +541,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     dangerValueSum += spawnEnemy(2, template, spawnPosition);
                     posArray.Add(spawnPosition);
                 }
+
+                spawnPosition = pickRandEnemySpawn();
+                spawnLimitEnemies(template, spawnPosition);
             }
             else
             {
@@ -481,6 +560,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     dangerValueSum += spawnEnemy(1, template, spawnPosition);
                     posArray.Add(spawnPosition);
                 }
+
+                spawnPosition = pickRandEnemySpawn();
+                spawnLimitEnemies(template, spawnPosition);
             }
         }
         else if(dangerValueCap >= 6 && dangerValueCap < 8)
@@ -501,6 +583,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     dangerValueSum += spawnEnemy(3, template, spawnPosition);
                     posArray.Add(spawnPosition);
                 }
+
+                spawnPosition = pickRandEnemySpawn();
+                spawnLimitEnemies(template, spawnPosition);
 
                 if (enemyRoomTemplates.nonRoomTemplateEnemyNames.Length > 0)
                 {
@@ -539,6 +624,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     dangerValueSum += spawnEnemy(2, template, spawnPosition);
                     posArray.Add(spawnPosition);
                 }
+
+                spawnPosition = pickRandEnemySpawn();
+                spawnLimitEnemies(template, spawnPosition);
             }
             else
             {
@@ -555,6 +643,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     dangerValueSum += spawnEnemy(1, template, spawnPosition);
                     posArray.Add(spawnPosition);
                 }
+
+                spawnPosition = pickRandEnemySpawn();
+                spawnLimitEnemies(template, spawnPosition);
             }
          
         }
@@ -576,6 +667,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     dangerValueSum += spawnEnemy(4, template, spawnPosition);
                     posArray.Add(spawnPosition);
                 }
+
+                spawnPosition = pickRandEnemySpawn();
+                spawnLimitEnemies(template, spawnPosition);
 
                 if (enemyRoomTemplates.nonRoomTemplateEnemyNames.Length > 0)
                 {
@@ -613,6 +707,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     dangerValueSum += spawnEnemy(3, template, spawnPosition);
                     posArray.Add(spawnPosition);
                 }
+
+                spawnPosition = pickRandEnemySpawn();
+                spawnLimitEnemies(template, spawnPosition);
             }
             else
             {
@@ -629,6 +726,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     dangerValueSum += spawnEnemy(2, template, spawnPosition);
                     posArray.Add(spawnPosition);
                 }
+
+                spawnPosition = pickRandEnemySpawn();
+                spawnLimitEnemies(template, spawnPosition);
             }
         }
         else
@@ -646,6 +746,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                 dangerValueSum += spawnEnemy(4, template, spawnPosition);
                 posArray.Add(spawnPosition);
             }
+
+            spawnPosition = pickRandEnemySpawn();
+            spawnLimitEnemies(template, spawnPosition);
 
             if (enemyRoomTemplates.nonRoomTemplateEnemyNames.Length > 0)
             {

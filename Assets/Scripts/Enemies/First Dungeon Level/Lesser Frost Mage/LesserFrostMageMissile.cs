@@ -75,7 +75,7 @@ public class LesserFrostMageMissile : MonoBehaviour
             this.GetComponent<AudioSource>().Play();
             if (collision.gameObject.tag == "playerHitBox")
             {
-                FindObjectOfType<PlayerScript>().amountDamage += 250;
+                PlayerProperties.playerScript.dealDamageToShip(100, this.gameObject);
             }
             this.GetComponent<AudioSource>().Play();
             collided = true;

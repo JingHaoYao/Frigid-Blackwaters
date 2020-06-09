@@ -58,7 +58,7 @@ public class FishmanHeavySpear : MonoBehaviour
 
         if (collision.gameObject.tag == "playerHitBox" && hitShip == false)
         {
-            playerShip.GetComponent<PlayerScript>().amountDamage += 150;
+            PlayerProperties.playerScript.dealDamageToShip(150, this.gameObject);
             hitShip = true;
             spearSpeed = 0;
             polyCol.enabled = false;

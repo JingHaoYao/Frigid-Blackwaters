@@ -53,6 +53,14 @@ public class DungeonTreasure : MonoBehaviour
         targetArtifact = newItem;
     }
 
+    public GameObject instantiateNewGoldItem(int goldAmount)
+    {
+        GameObject newGoldItem = Instantiate(itemTemplates.gold);
+        newGoldItem.GetComponent<DisplayItem>().goldValue = goldAmount;
+        newGoldItem.transform.parent = GameObject.Find("PresentItems").transform;
+        return newGoldItem;
+    }
+
     void updateDisplay()
     {
         TreasureMenu menu = treasureDisplay.GetComponentInChildren<TreasureMenu>();

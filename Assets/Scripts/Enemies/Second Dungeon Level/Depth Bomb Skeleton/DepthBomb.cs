@@ -34,7 +34,7 @@ public class DepthBomb : MonoBehaviour
         {
             if (collision.gameObject.tag == "playerHitBox")
             {
-                playerShip.GetComponent<PlayerScript>().amountDamage += damageDealing;
+                PlayerProperties.playerScript.dealDamageToShip(damageDealing, this.gameObject);
             }
         }
     }

@@ -16,6 +16,9 @@ public class DialogueUI : MonoBehaviour
     private UnityAction endAction;
     bool loaded = false;
 
+    Animator backPanelAnimator;
+    Animator frontPanelAnimator;
+
     PlayerScript playerScript;
 
     void loadCharacterSprite(Image whichCharacter, Sprite characterArt)
@@ -38,33 +41,39 @@ public class DialogueUI : MonoBehaviour
 
     void loadDialoguePanel(Image backPanel, Image frontPanel, Sprite prevPanel, Sprite newPanel)
     {
-        if (prevPanel == null && newPanel != null)
+        if (prevPanel != newPanel)
         {
-            backPanel.enabled = false;
-            frontPanel.enabled = true;
-            frontPanel.sprite = newPanel;
-            frontPanel.GetComponent<Animator>().SetTrigger("FadeOut");
-        }
-        else if (prevPanel != null && newPanel == null)
-        {
-            backPanel.enabled = true;
-            frontPanel.enabled = false;
-            frontPanel.sprite = null;
-            backPanel.sprite = prevPanel;
-            backPanel.GetComponent<Animator>().SetTrigger("FadeIn");
-        }
-        else if(prevPanel != null && newPanel != null)
-        {
-            backPanel.enabled = true;
-            frontPanel.enabled = true;
-            backPanel.sprite = prevPanel;
-            frontPanel.sprite = newPanel;
-            frontPanel.GetComponent<Animator>().SetTrigger("FadeOut");
-        }
-        else
-        {
-            backPanel.enabled = false;
-            frontPanel.enabled = false;
+            if (prevPanel == null && newPanel != null)
+            {
+                backPanel.enabled = false;
+                frontPanel.enabled = true;
+                frontPanel.sprite = newPanel;
+                frontPanelAnimator.SetTrigger("FadeOut");
+            }
+            else if (prevPanel != null && newPanel == null)
+            {
+                backPanel.enabled = true;
+                frontPanel.enabled = false;
+                frontPanel.sprite = null;
+                backPanel.sprite = prevPanel;
+                backPanelAnimator.enabled = true;
+                backPanelAnimator.SetTrigger("FadeIn");
+            }
+            else if (prevPanel != null && newPanel != null)
+            {
+                backPanelAnimator.enabled = false;
+                backPanel.color = Color.white;
+                backPanel.enabled = true;
+                frontPanel.enabled = true;
+                backPanel.sprite = prevPanel;
+                frontPanel.sprite = newPanel;
+                frontPanelAnimator.SetTrigger("FadeOut");
+            }
+            else
+            {
+                backPanel.enabled = false;
+                frontPanel.enabled = false;
+            }
         }
     }
 
@@ -243,6 +252,8 @@ public class DialogueUI : MonoBehaviour
     {
         playerScript = GameObject.Find("PlayerShip").GetComponent<PlayerScript>();
         StartCoroutine(loadDialogue(waitReveal));
+        backPanelAnimator = panelImageBack.GetComponent<Animator>();
+        frontPanelAnimator = panelImageFront.GetComponent<Animator>();
     }
 
     void Update()

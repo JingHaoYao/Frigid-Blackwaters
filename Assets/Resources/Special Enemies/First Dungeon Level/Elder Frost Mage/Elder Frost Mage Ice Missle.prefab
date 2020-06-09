@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 2176987820595203776}
   - component: {fileID: -1406863630661710010}
   - component: {fileID: -7143565003754534134}
+  - component: {fileID: 1281377516269596001}
   m_Layer: 13
   m_Name: Elder Frost Mage Ice Missle
-  m_TagString: RoomHitbox
+  m_TagString: EnemyProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,6 +51,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -61,6 +63,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -203,6 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 15
+  updateOnce: 0
 --- !u!82 &-7143565003754534134
 AudioSource:
   m_ObjectHideFlags: 0
@@ -300,3 +304,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1281377516269596001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2176987820595203806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13e5a2f66618c3c43a18f51c9d0fb0e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instantiater: {fileID: 0}

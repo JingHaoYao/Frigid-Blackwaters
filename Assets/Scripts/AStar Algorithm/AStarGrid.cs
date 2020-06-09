@@ -18,7 +18,7 @@ public class AStarGrid : MonoBehaviour {
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
         CreateGrid();
-        playerShip = GameObject.Find("PlayerShip");
+        playerShip = PlayerProperties.playerShip;
     }
 
     public List<AStarNode> GetNeighbours(AStarNode node)

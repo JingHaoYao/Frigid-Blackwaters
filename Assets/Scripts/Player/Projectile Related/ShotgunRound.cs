@@ -20,7 +20,7 @@ public class ShotgunRound : PlayerProjectile {
         {
             this.GetComponent<DamageAmount>().damage += 1;
         }
-        Destroy(this.gameObject, 0.3f);
+        Destroy(this.gameObject, 0.4f);
     }
 
     void Update()

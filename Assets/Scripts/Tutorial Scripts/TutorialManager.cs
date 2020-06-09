@@ -39,6 +39,7 @@ public class TutorialManager : MonoBehaviour
         playerShip = GameObject.Find("PlayerShip");
         playerScript = playerShip.GetComponent<PlayerScript>();
         playerScript.playerDead = true;
+        playerScript.windowAlreadyOpen = true;
         openingText.text = openingDialogue[0];
         dialogueText.text = firstTutorialDialogue[0];
         dialogueText.transform.parent.gameObject.SetActive(false);
@@ -49,6 +50,7 @@ public class TutorialManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         playerScript.playerDead = false;
+        playerScript.windowAlreadyOpen = false;
     }
 
     void Update()

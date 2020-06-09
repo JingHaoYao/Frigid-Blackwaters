@@ -19,6 +19,16 @@ public class HubMissionLoader : MonoBehaviour
             storyMissionDatabase.Add(mission.missionID, mission);
         }
         addRewards();
+
+        if(MiscData.missionID != null && MiscData.finishedTutorial == true)
+        {
+            returnNotifications.activateNotifications();
+        }
+        else
+        {
+            returnNotifications.closeNotifications();
+        }
+
         MiscData.finishedMission = false;
         MiscData.missionID = null;
     }

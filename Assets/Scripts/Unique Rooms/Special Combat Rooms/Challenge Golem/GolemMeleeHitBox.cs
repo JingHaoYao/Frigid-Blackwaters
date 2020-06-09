@@ -21,7 +21,7 @@ public class GolemMeleeHitBox : MonoBehaviour {
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            playerShip.GetComponent<PlayerScript>().amountDamage += 600;
+            PlayerProperties.playerScript.dealDamageToShip(600, this.gameObject);
         }
     }
 }

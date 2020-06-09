@@ -69,7 +69,7 @@ public class SkeletalBoltMageBolt : MonoBehaviour
                 this.GetComponent<AudioSource>().Play();
                 if (collision.gameObject.tag == "playerHitBox")
                 {
-                    playerShip.GetComponent<PlayerScript>().amountDamage += damageDealing;
+                    PlayerProperties.playerScript.dealDamageToShip(damageDealing, this.gameObject);
                 }
                 wallCol = true;
                 animator.SetTrigger("Dissipate");

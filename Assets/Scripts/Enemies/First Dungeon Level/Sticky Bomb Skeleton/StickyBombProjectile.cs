@@ -56,7 +56,7 @@ public class StickyBombProjectile : MonoBehaviour
         this.GetComponent<Collider2D>().enabled = false;
         if (collision.gameObject.tag == "playerHitBox")
         {
-            playerShip.GetComponent<PlayerScript>().amountDamage += 50;
+            PlayerProperties.playerScript.dealDamageToShip(50, this.gameObject);
         }
 
         if (wallCol == false)

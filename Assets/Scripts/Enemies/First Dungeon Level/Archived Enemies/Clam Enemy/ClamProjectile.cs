@@ -38,7 +38,7 @@ public class ClamProjectile : MonoBehaviour
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            playerShip.GetComponent<PlayerScript>().amountDamage += 200;
+            playerShip.GetComponent<PlayerScript>().dealDamageToShip(200, this.gameObject);
         }
 
         if (wallCol == false)

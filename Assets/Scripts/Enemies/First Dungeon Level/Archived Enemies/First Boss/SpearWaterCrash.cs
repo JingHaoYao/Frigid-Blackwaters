@@ -21,7 +21,7 @@ public class SpearWaterCrash : MonoBehaviour {
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            GameObject.Find("PlayerShip").GetComponent<PlayerScript>().amountDamage += 250;
+            PlayerProperties.playerScript.dealDamageToShip(250, this.gameObject);
         }
     }
 }
