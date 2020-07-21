@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ConsumableBonus : MonoBehaviour {
     public int restoredHealth;
@@ -9,15 +10,20 @@ public class ConsumableBonus : MonoBehaviour {
     public int speedBonus;
     public int duration;
     public int priceBase;
-    public bool consumableActivated = false;
 
     public bool destroyConsumable = true;
+    UnityAction consumableAction;
 
     PlayerScript playerScript;
 
     private void Start()
     {
         playerScript = GameObject.Find("PlayerShip").GetComponent<PlayerScript>();
+    }
+
+    public void SetAction(UnityAction consumableAction)
+    {
+        this.consumableAction = consumableAction;
     }
 
     public void consumeItem()
@@ -27,7 +33,7 @@ public class ConsumableBonus : MonoBehaviour {
         {
             playerScript.trueDamage = 0;
         }
-        consumableActivated = true;
+        consumableAction();
         StartCoroutine(activateConsumable());
     }
 

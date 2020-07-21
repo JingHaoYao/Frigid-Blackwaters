@@ -84,6 +84,7 @@ public class PlaguesScythe : ArtifactEffect
             Instantiate(plagueParticles, deathPos + new Vector3(0, 0.7f, 0), Quaternion.identity);
             artifactBonus.healthBonus += 100;
             artifactBonus.speedBonus += 0.1f;
+            PlayerProperties.playerArtifacts.UpdateStats();
         }
     }
 }

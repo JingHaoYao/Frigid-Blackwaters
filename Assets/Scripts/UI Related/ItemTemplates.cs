@@ -32,6 +32,13 @@ public class ItemTemplates : MonoBehaviour {
     public string[] thirdLevelUniqueArtifacts;
     public string[] thirdLevelUniqueConsumables;
 
+    public string[] fourthLevelTier1Artifacts;
+    public string[] fourthLevelTier2Artifacts;
+    public string[] fourthLevelTier3Artifacts;
+    public string[] fourthLevelTier4Artifacts;
+    public string[] fourthLevelUniqueArtifacts;
+    public string[] fourthLevelConsumables;
+
     public Dictionary<string, string> itemDB = new Dictionary<string, string>();
 
     DungeonEntryDialogueManager dungeonEntryDialogueManager;
@@ -139,7 +146,37 @@ public class ItemTemplates : MonoBehaviour {
 
         foreach(string id in thirdLevelUniqueConsumables)
         {
-            itemDB.Add(id, "Items/Third Dungeon Level/Artifacts/Special Consumables/");
+            itemDB.Add(id, "Items/Third Dungeon Level/Consumables/Special Consumables/");
+        }
+
+        foreach(string id in fourthLevelTier1Artifacts)
+        {
+            itemDB.Add(id, "Items/Fourth Dungeon Level/Artifacts/Common Artifacts/");
+        }
+
+        foreach (string id in fourthLevelTier2Artifacts)
+        {
+            itemDB.Add(id, "Items/Fourth Dungeon Level/Artifacts/Uncommon Artifacts/");
+        }
+
+        foreach (string id in fourthLevelTier3Artifacts)
+        {
+            itemDB.Add(id, "Items/Fourth Dungeon Level/Artifacts/Rare Artifacts/");
+        }
+
+        foreach (string id in fourthLevelTier4Artifacts)
+        {
+            itemDB.Add(id, "Items/Fourth Dungeon Level/Artifacts/Legendary Artifacts/");
+        }
+
+        foreach(string id in fourthLevelConsumables)
+        {
+            itemDB.Add(id, "Items/Fourth Dungeon Level/Consumables/Regular Consumables");
+        }
+
+        foreach (string id in fourthLevelUniqueArtifacts)
+        {
+            itemDB.Add(id, "Items/Fourth Dungeon Level/Artifacts/Unique Artifacts");
         }
     }
 
@@ -246,6 +283,32 @@ public class ItemTemplates : MonoBehaviour {
                     break;
                 default:
                     spawnedItem = Resources.Load<GameObject>("Items/Third Dungeon Level/Consumables/Regular Consumables/" + thirdLevelConsumables[Random.Range(0, thirdLevelConsumables.Length)]);
+                    break;
+            }
+            return Instantiate(spawnedItem);
+        }
+        else if (dungeonEntryDialogueManager.whatDungeonLevel == 4)
+        {
+            GameObject spawnedItem = null;
+            switch (whatTier)
+            {
+                case 1:
+                    spawnedItem = Resources.Load<GameObject>("Items/Fourth Dungeon Level/Artifacts/Common Artifacts/" + fourthLevelTier1Artifacts[Random.Range(0, thirdLevelTier1Artifacts.Length)]);
+                    break;
+                case 2:
+                    spawnedItem = Resources.Load<GameObject>("Items/Fourth Dungeon Level/Artifacts/Uncommon Artifacts/" + fourthLevelTier2Artifacts[Random.Range(0, thirdLevelTier2Artifacts.Length)]);
+                    break;
+                case 3:
+                    spawnedItem = Resources.Load<GameObject>("Items/Fourth Dungeon Level/Artifacts/Rare Artifacts/" + fourthLevelTier3Artifacts[Random.Range(0, thirdLevelTier3Artifacts.Length)]);
+                    break;
+                case 4:
+                    spawnedItem = Resources.Load<GameObject>("Items/Fourth Dungeon Level/Artifacts/Legendary Artifacts/" + fourthLevelTier4Artifacts[Random.Range(0, thirdLevelTier4Artifacts.Length)]);
+                    break;
+                case 5:
+                    spawnedItem = Resources.Load<GameObject>("Items/Fourth Dungeon Level/Consumables/Regular Consumables/" + fourthLevelConsumables[Random.Range(0, thirdLevelConsumables.Length)]);
+                    break;
+                default:
+                    spawnedItem = Resources.Load<GameObject>("Items/Fourth Dungeon Level/Consumables/Regular Consumables/" + fourthLevelConsumables[Random.Range(0, thirdLevelConsumables.Length)]);
                     break;
             }
             return Instantiate(spawnedItem);

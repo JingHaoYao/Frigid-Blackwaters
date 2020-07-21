@@ -158,7 +158,7 @@ public class DungeonShop : MonoBehaviour
                 {
                     shopDisplay.SetActive(false);
                     inventoryDisplay.SetActive(false);
-                    playerShip.GetComponent<PlayerScript>().shipRooted = false;
+                    playerShip.GetComponent<PlayerScript>().removeRootingObject();
                     Time.timeScale = 1;
                     playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false;
                 }
@@ -173,7 +173,7 @@ public class DungeonShop : MonoBehaviour
                         shopDisplay.SetActive(true);
                         inventoryDisplay.SetActive(true);
                         playerShip.GetComponent<Inventory>().UpdateUI();
-                        playerShip.GetComponent<PlayerScript>().shipRooted = true;
+                        playerShip.GetComponent<PlayerScript>().addRootingObject();
                         setShopDisplay();
                         playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
                     }

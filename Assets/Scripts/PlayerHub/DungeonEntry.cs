@@ -16,7 +16,7 @@ public class DungeonEntry : MonoBehaviour {
     {
         if (collision.gameObject.tag == "playerHitBox" || collision.gameObject.name == "PlayerShip")
         {
-            playerScript.shipRooted = true;
+            PlayerProperties.playerScript.addRootingObject();
             dungeonSelector.SetActive(true);
             playerScript.windowAlreadyOpen = true;
             FindObjectOfType<AudioManager>().FadeOut("Background Music", 0.2f);

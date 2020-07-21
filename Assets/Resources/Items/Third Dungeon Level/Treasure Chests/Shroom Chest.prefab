@@ -50,6 +50,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -61,6 +62,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -189,9 +191,10 @@ MonoBehaviour:
   uniqueChest: 1
   uniqueItems:
   - {fileID: 3523576173749773059, guid: 6b1784867da6b6d44a6d2fed3be2a936, type: 3}
-  numUniqueItems: 1
+  - {fileID: 1915093631038624, guid: ab30f5dee0fa175458b14fdbe476083e, type: 3}
+  - {fileID: 1915093631038624, guid: ab30f5dee0fa175458b14fdbe476083e, type: 3}
   extraArtifactChance: 0
   betterArtifactChance: 0
   dontRunAnim: 0
-  customGoldBase: 0
-  customGoldMultiplier: 0
+  customGoldBase: 850
+  customGoldMultiplier: 100

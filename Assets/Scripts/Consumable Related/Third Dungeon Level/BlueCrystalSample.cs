@@ -9,9 +9,14 @@ public class BlueCrystalSample : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     bool activated = false;
 
-    void Update()
+    private void Start()
     {
-        if (consumableBonus.consumableActivated == true && activated == false)
+        consumableBonus.SetAction(addKills);
+    }
+
+    void addKills()
+    {
+        if (activated == false)
         {
             activated = true;
             PlayerProperties.playerArtifacts.numKills = Mathf.Clamp(PlayerProperties.playerArtifacts.numKills + 6, 0, 20);

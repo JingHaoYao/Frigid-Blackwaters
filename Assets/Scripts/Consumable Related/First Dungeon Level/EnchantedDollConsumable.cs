@@ -9,13 +9,15 @@ public class EnchantedDollConsumable : MonoBehaviour {
 
 	void Start () {
         consumableBonus = GetComponent<ConsumableBonus>();
+        consumableBonus.SetAction(action);
 	}
 
-	void Update () {
-		if(consumableBonus.consumableActivated == true && activated == false)
+    void action()
+    {
+        if (activated == false)
         {
             activated = true;
             Instantiate(doll, GameObject.Find("PlayerShip").transform.position, Quaternion.identity);
         }
-	}
+    }
 }

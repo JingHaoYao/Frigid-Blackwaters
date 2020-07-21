@@ -13,6 +13,7 @@ public class StickOfDynamite : MonoBehaviour
     {
         consumableBonus = GetComponent<ConsumableBonus>();
         playerScript = FindObjectOfType<PlayerScript>();
+        consumableBonus.SetAction(throwDynamite);
     }
 
     void summonDynamite()
@@ -41,9 +42,9 @@ public class StickOfDynamite : MonoBehaviour
         stick.GetComponent<StickOfDynamiteProjectile>().targetPosition = targetEnemy.transform.position;
     }
 
-    void Update()
+    void throwDynamite()
     {
-        if (consumableBonus.consumableActivated == true && activated == false)
+        if (activated == false)
         {
             activated = true;
             summonDynamite();

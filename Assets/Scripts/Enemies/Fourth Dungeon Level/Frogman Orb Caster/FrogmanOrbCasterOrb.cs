@@ -29,7 +29,7 @@ public class FrogmanOrbCasterOrb : MonoBehaviour
                 float angle = i * 45;
                 GameObject projectileInstant = Instantiate(projectile, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
                 projectileInstant.GetComponent<FrogmanOrbCasterProjectile>().angleTravel = angle;
-                projectileInstant.GetComponent<ProjectileParent>().instantiater = this.projectileParent.gameObject;
+                projectileInstant.GetComponent<ProjectileParent>().instantiater = this.projectileParent.instantiater;
             }
         }
         else if(whatOrb == 1)
@@ -39,10 +39,10 @@ public class FrogmanOrbCasterOrb : MonoBehaviour
                 float angle = i * 90;
                 GameObject projectileInstant = Instantiate(projectile, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
                 projectileInstant.GetComponent<FrogmanOrbCasterProjectile>().angleTravel = angle - 5;
-                projectileInstant.GetComponent<ProjectileParent>().instantiater = this.projectileParent.gameObject;
+                projectileInstant.GetComponent<ProjectileParent>().instantiater = this.projectileParent.instantiater;
                 projectileInstant = Instantiate(projectile, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
                 projectileInstant.GetComponent<FrogmanOrbCasterProjectile>().angleTravel = angle + 5;
-                projectileInstant.GetComponent<ProjectileParent>().instantiater = this.projectileParent.gameObject;
+                projectileInstant.GetComponent<ProjectileParent>().instantiater = this.projectileParent.instantiater;
             }
         }
         else
@@ -52,10 +52,10 @@ public class FrogmanOrbCasterOrb : MonoBehaviour
                 float angle = i * 90 + 45;
                 GameObject projectileInstant = Instantiate(projectile, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
                 projectileInstant.GetComponent<FrogmanOrbCasterProjectile>().angleTravel = angle - 5;
-                projectileInstant.GetComponent<ProjectileParent>().instantiater = this.projectileParent.gameObject;
+                projectileInstant.GetComponent<ProjectileParent>().instantiater = this.projectileParent.instantiater;
                 projectileInstant = Instantiate(projectile, transform.position, Quaternion.Euler(0, 0, Random.Range(0, 360)));
                 projectileInstant.GetComponent<FrogmanOrbCasterProjectile>().angleTravel = angle + 5;
-                projectileInstant.GetComponent<ProjectileParent>().instantiater = this.projectileParent.gameObject;
+                projectileInstant.GetComponent<ProjectileParent>().instantiater = this.projectileParent.instantiater;
             }
         }
         yield return new WaitForSeconds(0.5f);

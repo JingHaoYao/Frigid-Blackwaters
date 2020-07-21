@@ -42,7 +42,7 @@ public class UndeadMarinerAnchor : MonoBehaviour
             {
                 if (hitShip == true)
                 {
-                    playerShip.GetComponent<PlayerScript>().shipRooted = false;
+                    PlayerProperties.playerScript.removeRootingObject();
                 }
                 Destroy(this.gameObject);
             }
@@ -62,7 +62,7 @@ public class UndeadMarinerAnchor : MonoBehaviour
             PlayerScript playerScript = GameObject.Find("PlayerShip").GetComponent<PlayerScript>();
             this.GetComponent<AudioSource>().Play();
             playerScript.dealDamageToShip(100, this.gameObject);
-            playerScript.shipRooted = true;
+            PlayerProperties.playerScript.addRootingObject();
             hitShip = true;
             returnToSender = true;
             speed = 0;

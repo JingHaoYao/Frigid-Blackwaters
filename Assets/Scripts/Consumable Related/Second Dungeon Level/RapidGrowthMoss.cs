@@ -13,6 +13,7 @@ public class RapidGrowthMoss : MonoBehaviour
     {
         consumableBonus = GetComponent<ConsumableBonus>();
         playerScript = FindObjectOfType<PlayerScript>();
+        consumableBonus.SetAction(healPlayer);
     }
 
     IEnumerator heal()
@@ -26,12 +27,12 @@ public class RapidGrowthMoss : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    void Update()
+    void healPlayer()
     {
-        if(consumableBonus.consumableActivated == true && activated == false)
+        if(activated == false)
         {
             activated = true;
             StartCoroutine(heal());
-        }        
+        }
     }
 }

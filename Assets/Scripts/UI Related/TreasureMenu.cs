@@ -36,7 +36,7 @@ public class TreasureMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             transform.parent.gameObject.SetActive(false);
             playerScript.windowAlreadyOpen = false;
             Time.timeScale = 1;
-            playerScript.shipRooted = false;
+            PlayerProperties.playerScript.removeRootingObject();
         }
     }
 

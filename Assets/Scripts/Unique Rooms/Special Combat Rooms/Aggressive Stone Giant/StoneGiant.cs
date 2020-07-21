@@ -80,6 +80,7 @@ public class StoneGiant : Enemy {
         playerShip = GameObject.Find("PlayerShip");
         FindObjectOfType<BossHealthBar>().bossStartUp("Awakened Stone Giant");
         FindObjectOfType<BossHealthBar>().targetEnemy = this;
+        EnemyPool.addEnemy(this);
     }
 
     void pickAttack()

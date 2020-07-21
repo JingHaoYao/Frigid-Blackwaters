@@ -39,6 +39,7 @@ public class GiganticPodling : Enemy
         bossHealthBar.bossStartUp("Gigantic Podling");
         bossHealthBar.targetEnemy = this;
         animator.SetTrigger("Awaken");
+        EnemyPool.addEnemy(this);
         roomManager.antiSpawnSpaceDetailer.spawnDoorSeals();
         PlayerProperties.playerScript.enemiesDefeated = false;
         sleepyZParticleEffects.SetActive(false);

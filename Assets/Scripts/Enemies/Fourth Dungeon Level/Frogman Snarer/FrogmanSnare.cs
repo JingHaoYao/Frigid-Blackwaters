@@ -9,6 +9,7 @@ public class FrogmanSnare : MonoBehaviour
     [SerializeField] GameObject damageBox;
     [SerializeField] AudioSource snapAudio;
     public FrogmanSnarer snarer;
+    bool snaredAlready = false;
     // need reference to enemy
 
     private void Start()
@@ -31,8 +32,9 @@ public class FrogmanSnare : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject == PlayerProperties.playerShip && shouldSnare)
+        if (collision.gameObject == PlayerProperties.playerShip && shouldSnare && snaredAlready == false)
         {
+            snaredAlready = true;
             StartCoroutine(snapAndOpen());
         }
     }
@@ -41,12 +43,12 @@ public class FrogmanSnare : MonoBehaviour
     {
         snapAudio.Play();
         animator.SetTrigger("Snap");
-        PlayerProperties.playerScript.shipRooted = true;
+        PlayerProperties.playerScript.addRootingObject();
         damageBox.SetActive(true);
         yield return new WaitForSeconds(1 / 12f);
         damageBox.SetActive(false);
         yield return new WaitForSeconds(1.5f);
-        PlayerProperties.playerScript.shipRooted = false;
+        PlayerProperties.playerScript.removeRootingObject();
         animator.SetTrigger("Open");
         yield return new WaitForSeconds(8 / 12f);
         Destroy(this.gameObject);

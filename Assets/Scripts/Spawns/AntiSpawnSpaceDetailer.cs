@@ -378,6 +378,11 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
 
     int spawnLimitEnemies(EnemyRoomTemplate template, Vector3 spawnPos)
     {
+        if(template == null)
+        {
+            return 0;
+        }
+
         if (Random.Range(0, 2) == 1 && template.enemiesWithLimits.Length > 0)
         {
             string dungeonName = "";
@@ -796,9 +801,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
         {
             playerShip.transform.position += new Vector3(0, 2f, 0);
         }
-        playerScript.shipRooted = true;
+        playerShip.GetComponent<PlayerScript>().addRootingObject();
         yield return new WaitForSeconds(0.2f);
-        playerScript.shipRooted = false;
+        playerShip.GetComponent<PlayerScript>().removeRootingObject();
     }
 
     void openDoorSeals()

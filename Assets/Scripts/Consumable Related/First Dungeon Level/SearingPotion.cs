@@ -23,14 +23,15 @@ public class SearingPotion : MonoBehaviour {
 	void Start () {
         consumableBonus = GetComponent<ConsumableBonus>();
         shipWeaponScripts = GameObject.Find("PlayerShip").GetComponentsInChildren<ShipWeaponScript>();
-
+        consumableBonus.SetAction(coolDownReduceAction);
 	}
 
-	void Update () {
-		if(activated == false && consumableBonus.consumableActivated == true)
+    void coolDownReduceAction()
+    {
+        if (activated == false)
         {
             activated = true;
             StartCoroutine(cooldownReduce());
         }
-	}
+    }
 }

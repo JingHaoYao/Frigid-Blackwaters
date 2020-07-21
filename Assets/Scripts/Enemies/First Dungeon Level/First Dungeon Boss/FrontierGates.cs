@@ -30,13 +30,13 @@ public class FrontierGates : MonoBehaviour
         if (goBack == true)
         {
             FindObjectOfType<PauseMenu>().loadHub();
-            FindObjectOfType<PlayerScript>().shipRooted = true;
+            PlayerProperties.playerScript.removeRootingObject();
         }
         else
         {
             PlayerScript playerScript = FindObjectOfType<PlayerScript>();
             playerScript.enemiesDefeated = false;
-            playerScript.shipRooted = true;
+            PlayerProperties.playerScript.addRootingObject();
             StartCoroutine(moveShip(playerScript));
         }
     }

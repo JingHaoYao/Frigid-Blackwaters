@@ -15,6 +15,7 @@ public class CarnivorousTangleFiendFlowerTurret : Enemy
     void Start()
     {
         mainCamera = Camera.main;
+        EnemyPool.addEnemy(this);
     }
 
     private void Update()

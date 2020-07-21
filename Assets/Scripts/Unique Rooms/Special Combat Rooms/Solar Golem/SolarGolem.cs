@@ -63,6 +63,7 @@ public class SolarGolem : Enemy
         solarGolemMiddle.startUp();
         solarGolemTop.startUp();
         startUpAudio.Play();
+        EnemyPool.addEnemy(this);
         roomManager.antiSpawnSpaceDetailer.spawnDoorSeals();
         PlayerProperties.playerScript.enemiesDefeated = false;
         yield return new WaitForSeconds(7 / 12f);

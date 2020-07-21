@@ -155,6 +155,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             {
                 FindObjectOfType<AudioManager>().PlaySound("Equip Artifact");
                 displayInfo.isEquipped = true;
+                displayInfo.GetComponent<ArtifactEffect>()?.artifactEquipped();
                 artifacts.activeArtifacts.Add(displayInfo.gameObject);
                 inventory.itemList.Remove(displayInfo.gameObject);
             }

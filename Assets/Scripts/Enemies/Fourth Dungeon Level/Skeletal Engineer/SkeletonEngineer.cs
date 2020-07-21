@@ -323,7 +323,7 @@ public class SkeletonEngineer : Enemy
     {
         GameObject deadPirate = Instantiate(deadSpearman, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
-        foreach (GameObject mine in mineList)
+        while(mineList.Count > 0)
         {
             mine.GetComponent<SkeletonEngineerMine>().goAway();
         }

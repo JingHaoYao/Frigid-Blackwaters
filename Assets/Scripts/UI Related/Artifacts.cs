@@ -59,6 +59,37 @@ public class Artifacts : MonoBehaviour {
         PlayerItems.numberArtifactKills = numKills;
     }
 
+    public void UpdateStats()
+    {
+        float speedBonus = 0;
+        float defenseBonus = 0;
+        int attackBonus = 0;
+        int healthBonus = 0;
+        int periodicHealing = 0;
+        int bonusArtifactChance = 0;
+        int bonusGold = 0;
+        for (int i = 0; i < activeArtifacts.Count; i++)
+        {
+            ArtifactBonus artifactBonus = activeArtifacts[i].GetComponent<ArtifactBonus>();
+            speedBonus += artifactBonus.speedBonus;
+            defenseBonus += artifactBonus.defenseBonus;
+            attackBonus += artifactBonus.attackBonus;
+            healthBonus += artifactBonus.healthBonus;
+            periodicHealing += artifactBonus.periodicHealing;
+            bonusArtifactChance += artifactBonus.artifactChanceBonus;
+            bonusGold += bonusArtifactChance += artifactBonus.goldBonus;
+        }
+
+        PlayerScript playerScript = PlayerProperties.playerScript;
+        playerScript.healthBonus = healthBonus;
+        playerScript.defenseBonus = defenseBonus;
+        playerScript.attackBonus = attackBonus;
+        playerScript.speedBonus = speedBonus;
+        playerScript.periodicHealing = periodicHealing;
+        Chest.bonusArtifactChance = bonusArtifactChance;
+        Chest.bonusGold = bonusGold;
+    }
+
     public void UpdateUI()
     {
         for (int i = 0; i < artifactSlots.Length; i++)
@@ -94,31 +125,6 @@ public class Artifacts : MonoBehaviour {
             count++;
         }
 
-        float speedBonus = 0;
-        float defenseBonus = 0;
-        int attackBonus = 0;
-        int healthBonus = 0;
-        int periodicHealing = 0;
-        int bonusArtifactChance = 0;
-        int bonusGold = 0;
-        for(int i = 0; i < activeArtifacts.Count; i++)
-        {
-                speedBonus += activeArtifacts[i].GetComponent<ArtifactBonus>().speedBonus;
-                defenseBonus += activeArtifacts[i].GetComponent<ArtifactBonus>().defenseBonus;
-                attackBonus += activeArtifacts[i].GetComponent<ArtifactBonus>().attackBonus;
-                healthBonus += activeArtifacts[i].GetComponent<ArtifactBonus>().healthBonus;
-                periodicHealing += activeArtifacts[i].GetComponent<ArtifactBonus>().periodicHealing;
-                bonusArtifactChance += activeArtifacts[i].GetComponent<ArtifactBonus>().artifactChanceBonus;
-                bonusGold += bonusArtifactChance += activeArtifacts[i].GetComponent<ArtifactBonus>().goldBonus;
-        }
-
-        PlayerScript playerScript = this.gameObject.GetComponent<PlayerScript>();
-        playerScript.healthBonus = healthBonus;
-        playerScript.defenseBonus = defenseBonus;
-        playerScript.attackBonus = attackBonus;
-        playerScript.speedBonus = speedBonus;
-        playerScript.periodicHealing = periodicHealing;
-        Chest.bonusArtifactChance = bonusArtifactChance;
-        Chest.bonusGold = bonusGold;
+        UpdateStats();
     }
 }

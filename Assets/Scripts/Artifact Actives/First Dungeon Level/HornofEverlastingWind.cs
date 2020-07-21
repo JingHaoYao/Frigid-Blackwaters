@@ -8,13 +8,14 @@ public class HornofEverlastingWind : MonoBehaviour {
     Artifacts artifacts;
     public GameObject windEffect;
     public GameObject windBurst;
+    bool windActivated = false;
 
     IEnumerator speedBoost()
     {
+        windActivated = true;
         GameObject windEff = Instantiate(windEffect, GameObject.Find("PlayerShip").transform.position, Quaternion.Euler(0,0,playerScript.angleEffect));
         Instantiate(windBurst, GameObject.Find("PlayerShip").transform.position, Quaternion.Euler(0, 0, playerScript.angleEffect + 90));
         artifacts.numKills -= 2;
-        playerScript.activeEnabled = true;
         float tempSpeed = playerScript.boatSpeed;
         playerScript.boatSpeed += 3;
         FindObjectOfType<DurationUI>().addTile(this.GetComponent<DisplayItem>().displayIcon, 3);
@@ -23,7 +24,7 @@ public class HornofEverlastingWind : MonoBehaviour {
         Destroy(windEff, 0.333f);
         playerScript.boatSpeed = tempSpeed;
         yield return new WaitForSeconds(0.333f);
-        playerScript.activeEnabled = false;
+        windActivated = false;
     }
 
 	void Start () {
@@ -33,7 +34,7 @@ public class HornofEverlastingWind : MonoBehaviour {
 	}
 
 	void Update () {
-		if(displayItem.isEquipped == true && playerScript.activeEnabled == false && artifacts.numKills >= 2)
+		if(displayItem.isEquipped == true && windActivated == false && artifacts.numKills >= 2)
         {
             if (displayItem.whichSlot == 0)
             {

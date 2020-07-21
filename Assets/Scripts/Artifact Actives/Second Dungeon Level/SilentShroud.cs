@@ -13,11 +13,11 @@ public class SilentShroud : ArtifactBonus
         float immunueDuration = duration;
         while (duration > 0)
         {
-            PlayerProperties.playerScript.damageImmunity = true;
+            PlayerProperties.playerScript.addImmunityItem(this.gameObject);
             duration -= Time.deltaTime;
             yield return null;
         }
-        PlayerProperties.playerScript.damageImmunity = false;
+        PlayerProperties.playerScript.removeImmunityItem(this.gameObject);
         shroudInstant.GetComponent<SilentShroudShroud>().fadeOut();
     }
 

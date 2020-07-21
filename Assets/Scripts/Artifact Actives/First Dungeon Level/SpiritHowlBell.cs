@@ -29,7 +29,6 @@ public class SpiritHowlBell : ArtifactEffect {
         summonedDogs = true;
         numDoggiesLeft = 3;
         prevNumHits = playerScript.numberHits;
-        playerScript.activeEnabled = true;
         numHits = 0;
         Vector3 spawnLocation;
         for (int i = 0; i < 3; i++)
@@ -47,7 +46,7 @@ public class SpiritHowlBell : ArtifactEffect {
     }
 
 	void Update () {
-        if (displayItem.isEquipped == true && playerScript.activeEnabled == false && artifacts.numKills >= 6)
+        if (displayItem.isEquipped == true && summonedDogs == false && artifacts.numKills >= 6)
         {
             if (displayItem.whichSlot == 0)
             {
@@ -79,13 +78,11 @@ public class SpiritHowlBell : ArtifactEffect {
         {
             if (numDoggiesLeft == 0)
             {
-                playerScript.activeEnabled = false;
                 summonedDogs = false;
             }
 
             if(this.GetComponent<DisplayItem>().isEquipped == false)
             {
-                playerScript.activeEnabled = false;
                 summonedDogs = false;
                 foreach(GameObject doggy in summonedDoggies)
                 {
@@ -97,7 +94,11 @@ public class SpiritHowlBell : ArtifactEffect {
     // Whenever the player takes damage
     public override void tookDamage(int amountDamage, Enemy enemy)
     {
-        summonedDoggies[numHits].GetComponent<SpiritHowl>().targetAttack = enemy.gameObject;
-        numHits++;
+        if (summonedDogs)
+        {
+            summonedDoggies[numHits].GetComponent<SpiritHowl>().targetAttack = enemy.gameObject;
+            numHits++;
+            numDoggiesLeft--;
+        }
     }
 }

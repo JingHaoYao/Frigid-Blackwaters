@@ -26,7 +26,7 @@ public class IdoloftheGoddess : MonoBehaviour
 
     void Update()
     {
-        if (displayItem.isEquipped == true && playerScript.activeEnabled == false && completedTrial == false && startedTrial == false)
+        if (displayItem.isEquipped == true && completedTrial == false && startedTrial == false)
         {
             if (displayItem.whichSlot == 0)
             {

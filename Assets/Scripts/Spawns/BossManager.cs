@@ -89,9 +89,9 @@ public class BossManager : MonoBehaviour
 
     IEnumerator adjustPlayer()
     {
-        FindObjectOfType<PlayerScript>().shipRooted = true;
+        PlayerProperties.playerScript.addRootingObject();
         yield return new WaitForSeconds(0.2f);
-        FindObjectOfType<PlayerScript>().shipRooted = false;
+        PlayerProperties.playerScript.removeRootingObject();
     }
 
     public void bossBeaten(string nameID, float delay, bool saveBossID = true)

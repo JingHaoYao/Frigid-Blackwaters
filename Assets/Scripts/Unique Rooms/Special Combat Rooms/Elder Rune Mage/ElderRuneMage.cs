@@ -74,6 +74,7 @@ public class ElderRuneMage : Enemy
         rigidBody2D = GetComponent<Rigidbody2D>();
         FindObjectOfType<BossHealthBar>().bossStartUp("Elder Rune Mage");
         FindObjectOfType<BossHealthBar>().targetEnemy = this;
+        EnemyPool.addEnemy(this);
         StartCoroutine(startUp());
     }
 

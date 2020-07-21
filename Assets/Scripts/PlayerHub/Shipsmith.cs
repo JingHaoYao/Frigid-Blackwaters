@@ -37,7 +37,7 @@ public class Shipsmith : MonoBehaviour {
                 if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
                 {
                     shipSmithDisplay.SetActive(false);
-                    playerShip.GetComponent<PlayerScript>().shipRooted = false;
+                    PlayerProperties.playerScript.removeRootingObject();
                     playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false;
                 }
             }
@@ -46,7 +46,7 @@ public class Shipsmith : MonoBehaviour {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     shipSmithDisplay.SetActive(true);
-                    playerShip.GetComponent<PlayerScript>().shipRooted = true;
+                    PlayerProperties.playerScript.addRootingObject();
                     playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
                 }
             }

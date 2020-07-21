@@ -9,6 +9,11 @@ public class RestructiveMushroom : MonoBehaviour
     [SerializeField] DisplayItem displayItem;
     bool activated = false;
 
+    private void Start()
+    {
+        consumableBonus.SetAction(damageAndHeal);
+    }
+
     IEnumerator heal()
     {
         yield return new WaitForSeconds(5f);
@@ -16,12 +21,9 @@ public class RestructiveMushroom : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    void Update()
+    void damageAndHeal()
     {
-        if (consumableBonus.consumableActivated == true && activated == false)
-        {
-            PlayerProperties.playerScript.dealTrueDamageToShip(500);
-            StartCoroutine(heal());
-        }
+        PlayerProperties.playerScript.dealTrueDamageToShip(500);
+        StartCoroutine(heal());
     }
 }

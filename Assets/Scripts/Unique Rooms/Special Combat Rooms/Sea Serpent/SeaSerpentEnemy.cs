@@ -35,6 +35,7 @@ public class SeaSerpentEnemy : Enemy {
         GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated = false;
         FindObjectOfType<BossHealthBar>().bossStartUp("Serpent Colossus");
         FindObjectOfType<BossHealthBar>().targetEnemy = this;
+        EnemyPool.addEnemy(this);
     }
 
     void pickEmergeAttack()

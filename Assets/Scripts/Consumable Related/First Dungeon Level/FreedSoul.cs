@@ -28,11 +28,12 @@ public class FreedSoul : MonoBehaviour {
 	void Start () {
         consumableBonus = GetComponent<ConsumableBonus>();
         decideWhich();
+        consumableBonus.SetAction(activateConsumable);
 	}
 
-    private void Update()
+    void activateConsumable()
     {
-        if (consumableBonus.consumableActivated == true && activated == false)
+        if (activated == false)
         {
             float randNum = Random.Range(1.0f, 2.0f);
             Instantiate(particles, GameObject.Find("PlayerShip").transform.position + new Vector3(Mathf.Cos(randNum * Mathf.PI), Mathf.Sin(randNum * Mathf.PI), 0) * 2, Quaternion.identity);

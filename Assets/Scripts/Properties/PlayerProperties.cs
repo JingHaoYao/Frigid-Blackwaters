@@ -19,4 +19,10 @@ public class PlayerProperties
     public static PlayerArmorEffect armorIndicator;
     public static DurationUI durationUI;
 
+    public static ShipWeaponScript leftWeapon;
+    public static ShipWeaponScript rightWeapon;
+    public static ShipWeaponScript frontWeapon;
+
+    public static Vector3 mainCameraPosition;
+
 }

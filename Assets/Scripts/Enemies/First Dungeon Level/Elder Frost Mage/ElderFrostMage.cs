@@ -180,6 +180,7 @@ public class ElderFrostMage : Enemy
         FindObjectOfType<BossHealthBar>().bossStartUp("Elder Frost Mage");
         StartCoroutine(mainGameloop());
         mainCamera = Camera.main;
+        EnemyPool.addEnemy(this);
     }
 
     IEnumerator mainGameloop()

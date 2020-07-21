@@ -40,6 +40,11 @@ public class ArtifactSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             if (inventory.itemList.Count < inventory.inventorySize)
             {
                 displayInfo.isEquipped = false;
+                ArtifactEffect artifactEffect = displayInfo.GetComponent<ArtifactEffect>();
+                if(artifactEffect != null)
+                {
+                    artifactEffect.artifactUnequipped();
+                }
                 artifacts.activeArtifacts.Remove(displayInfo.gameObject);
                 inventory.itemList.Add(displayInfo.gameObject);
                 inventory.UpdateUI();

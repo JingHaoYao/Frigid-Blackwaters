@@ -274,6 +274,7 @@ public class UndeadMariner : Enemy
         FindObjectOfType<BossHealthBar>().targetEnemy = GetComponent<Enemy>();
         FindObjectOfType<BossHealthBar>().bossStartUp("Undead Mariner");
         StartCoroutine(mainGameLoop());
+        EnemyPool.addEnemy(this);
     }
 
     IEnumerator mainGameLoop()

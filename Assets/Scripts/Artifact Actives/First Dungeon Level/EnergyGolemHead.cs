@@ -23,15 +23,21 @@ public class EnergyGolemHead : MonoBehaviour {
         playerScript = GameObject.Find("PlayerShip").GetComponent<PlayerScript>();
     }
 
+    void GolemAttack()
+    {
+        float angleToCursor = Mathf.Atan2(PlayerProperties.cursorPosition.y - PlayerProperties.playerShipPosition.y, PlayerProperties.cursorPosition.x - PlayerProperties.playerShipPosition.x) * Mathf.Rad2Deg;
+        Instantiate(leviathanBlast, PlayerProperties.playerShipPosition, Quaternion.Euler(0, 0, angleToCursor));
+    }
+
     void LateUpdate()
     {
-        if (displayItem.isEquipped == true && playerScript.activeEnabled == false && artifacts.numKills >= 4)
+        if (displayItem.isEquipped == true && artifacts.numKills >= 4)
         {
             if (displayItem.whichSlot == 0)
             {
                 if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.firstArtifact)))
                 {
-                    leviathanLoaded = true;
+                    GolemAttack();
                     artifacts.numKills -= 4;
                     FindObjectOfType<AudioManager>().PlaySound("Golem Head Charge");
                 }
@@ -40,7 +46,7 @@ public class EnergyGolemHead : MonoBehaviour {
             {
                 if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.secondArtifact)))
                 {
-                    leviathanLoaded = true;
+                    GolemAttack();
                     artifacts.numKills -= 4;
                     FindObjectOfType<AudioManager>().PlaySound("Golem Head Charge");
                 }
@@ -49,51 +55,10 @@ public class EnergyGolemHead : MonoBehaviour {
             {
                 if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.thirdArtifact)))
                 {
-                    leviathanLoaded = true;
+                    GolemAttack();
                     artifacts.numKills -= 4;
                     FindObjectOfType<AudioManager>().PlaySound("Golem Head Charge");
                 }
-            }
-        }
-
-        if (leviathanLoaded == true)
-        {
-            if (playerScript.activeEnabled == false)
-            {
-                leftFire = leftWeapon.GetComponent<ShipWeaponScript>().weaponPlume;
-                rightFire = rightWeapon.GetComponent<ShipWeaponScript>().weaponPlume;
-                frontFire = frontWeapon.GetComponent<ShipWeaponScript>().weaponPlume;
-                playerScript.activeEnabled = true;
-                instant = Instantiate(energyGolemPulse, GameObject.Find("PlayerShip").transform.position, Quaternion.identity);
-            }
-
-            /*if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.frontWeapon)))
-            {
-                frontWeapon.GetComponent<ShipWeaponScript>().weaponPlume = leviathanBlast;
-                leviathanLoaded = false;
-            }
-            if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.leftWeapon)))
-            {
-                leftWeapon.GetComponent<ShipWeaponScript>().weaponPlume = leviathanBlast;
-                leviathanLoaded = false;
-            }
-            if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.rightWeapon)))
-            {
-                rightWeapon.GetComponent<ShipWeaponScript>().weaponPlume = leviathanBlast;
-                leviathanLoaded = false;
-            }*/
-
-            leftWeapon.GetComponent<ShipWeaponScript>().weaponPlume = leviathanBlast;
-            rightWeapon.GetComponent<ShipWeaponScript>().weaponPlume = leviathanBlast;
-            frontWeapon.GetComponent<ShipWeaponScript>().weaponPlume = leviathanBlast;
-            if (Input.GetMouseButtonDown(0) && GameObject.Find("Golem Head Laser Circle(Clone)"))
-            {
-                leviathanLoaded = false;
-                playerScript.activeEnabled = false;
-                leftWeapon.GetComponent<ShipWeaponScript>().weaponPlume = leftFire;
-                rightWeapon.GetComponent<ShipWeaponScript>().weaponPlume = rightFire;
-                frontWeapon.GetComponent<ShipWeaponScript>().weaponPlume = frontFire;
-                Destroy(instant);
             }
         }
     }

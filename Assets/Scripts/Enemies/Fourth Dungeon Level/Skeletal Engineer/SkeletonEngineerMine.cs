@@ -23,7 +23,7 @@ public class SkeletonEngineerMine : MonoBehaviour
     public void goAway()
     {
         shouldExplode = false;
-        skeletonEngineer.removeMine(this.gameObject);
+        skeletonEngineer?.removeMine(this.gameObject);
         LeanTween.alpha(this.gameObject, 0, 0.5f).setOnComplete(() => Destroy(this.gameObject));
     }
 
@@ -33,6 +33,7 @@ public class SkeletonEngineerMine : MonoBehaviour
         {
             GameObject explosionInstant = Instantiate(explosion, transform.position, Quaternion.identity);
             explosionInstant.GetComponent<ProjectileParent>().instantiater = projectileParent.instantiater;
+            skeletonEngineer.removeMine(this.gameObject);
             Destroy(this.gameObject);
         }
     }

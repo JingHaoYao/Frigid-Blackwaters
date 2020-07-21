@@ -71,7 +71,8 @@ public class SentinelBoss : Enemy
         rigidBody2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerShip = FindObjectOfType<PlayerScript>().gameObject;
-        FindObjectOfType<PlayerScript>().shipRooted = false;
+        PlayerProperties.playerScript.removeRootingObject();
+        EnemyPool.addEnemy(this);
     }
 
     void Update()

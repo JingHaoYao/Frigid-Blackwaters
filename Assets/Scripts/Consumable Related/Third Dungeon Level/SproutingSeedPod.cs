@@ -20,9 +20,14 @@ public class SproutingSeedPod : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    void Update()
+    private void Start()
     {
-        if (consumableBonus.consumableActivated == true && activated == false)
+        consumableBonus.SetAction(activateHeal);
+    }
+
+    void activateHeal()
+    {
+        if (activated == false)
         {
             activated = true;
             StartCoroutine(heal());

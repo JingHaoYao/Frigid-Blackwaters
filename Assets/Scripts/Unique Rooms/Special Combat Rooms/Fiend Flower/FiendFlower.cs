@@ -25,6 +25,7 @@ public class FiendFlower : Enemy
         bossHealthBar.bossStartUp("Fiend Flower");
         bossHealthBar.targetEnemy = this;
         animator.SetTrigger("WakeUp");
+        EnemyPool.addEnemy(this);
         roomManager.antiSpawnSpaceDetailer.spawnDoorSeals();
         PlayerProperties.playerScript.enemiesDefeated = false;
         yield return new WaitForSeconds(11 / 12f);

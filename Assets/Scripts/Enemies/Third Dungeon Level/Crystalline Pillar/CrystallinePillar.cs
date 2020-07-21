@@ -173,6 +173,7 @@ public class CrystallinePillar : Enemy
         healthBar = FindObjectOfType<BossHealthBar>();
         healthBar.bossStartUp("Crystalline Pillar");
         healthBar.targetEnemy = this;
+        EnemyPool.addEnemy(this);
     }
 
 

@@ -50,7 +50,6 @@ public class Vengeance : MonoBehaviour {
     void annilihation()
     {
         vengeanceEnabled = true;
-        playerScript.activeEnabled = true;
         Camera.main.gameObject.GetComponent<CameraShake>().shakeCamFunction(2, 0.1f);
         FindObjectOfType<AudioManager>().PlaySound("Vengeance Eerie Sound");
         playerScript.trueDamage = ((playerScript.shipHealthMAX - playerScript.trueDamage) / 2) + playerScript.trueDamage;
@@ -85,7 +84,7 @@ public class Vengeance : MonoBehaviour {
     }
 
 	void Update () {
-        if (displayItem.isEquipped == true && playerScript.activeEnabled == false && artifacts.numKills >= 20 && (GameObject.FindGameObjectWithTag("RangedEnemy") || GameObject.FindGameObjectWithTag("MeleeEnemy") || GameObject.FindGameObjectWithTag("EnemyShield")))
+        if (displayItem.isEquipped == true && vengeanceEnabled == false &&  artifacts.numKills >= 20 && (GameObject.FindGameObjectWithTag("RangedEnemy") || GameObject.FindGameObjectWithTag("MeleeEnemy") || GameObject.FindGameObjectWithTag("EnemyShield")))
         {
             if (displayItem.whichSlot == 0)
             {
@@ -118,7 +117,6 @@ public class Vengeance : MonoBehaviour {
             spawnedTint.GetComponent<Animator>().SetTrigger("FadeOut");
             Destroy(spawnedTint, 0.833f);
             vengeanceEnabled = false;
-            playerScript.activeEnabled = false;
         }
     }
 }

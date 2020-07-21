@@ -36,7 +36,7 @@ public class MutantLiliaceae : Enemy {
     void Start()
     {
         bossHealthBar = FindObjectOfType<BossHealthBar>();
-        //temporary for testing purposes
+        EnemyPool.addEnemy(this);
         InitializeBoss();
     }
 

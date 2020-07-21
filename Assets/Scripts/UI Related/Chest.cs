@@ -18,7 +18,6 @@ public class Chest : MonoBehaviour {
     public static int bonusArtifactChance, bonusGold;
     public bool uniqueChest = false;
     public GameObject[] uniqueItems;
-    public int numUniqueItems;
     public int extraArtifactChance = 0;
     public int betterArtifactChance = 0;
     int chestVariation = 0;
@@ -188,16 +187,17 @@ public class Chest : MonoBehaviour {
         }
         else
         {
-            GameObject newItem;
-            for (int i = 0; i < numUniqueItems; i++)
+            int currentIndex = 0;
+            foreach (GameObject item in uniqueItems)
             {
-                newItem = Instantiate(uniqueItems[Random.Range(0, uniqueItems.Length)]);
-                if(newItem.GetComponent<DisplayItem>().goldValue > 0)
+                GameObject newItem = Instantiate(item);
+                if (newItem.GetComponent<DisplayItem>().goldValue > 0)
                 {
-                    newItem.GetComponent<DisplayItem>().goldValue = customGoldBase + Random.Range(0, 4) * customGoldMultiplier ;
+                    newItem.GetComponent<DisplayItem>().goldValue = customGoldBase + Random.Range(0, 4) * customGoldMultiplier;
                 }
                 newItem.transform.parent = presentItems.transform;
-                items[i] = newItem;
+                items[currentIndex] = newItem;
+                currentIndex++;
             }
         }
     }

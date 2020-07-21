@@ -176,7 +176,10 @@ public class FrogmanSnarer : Enemy
     {
         foreach (GameObject mine_ in snareList)
         {
-            LeanTween.alpha(mine_, 0, 0.5f);
+            if (mine_ != null)
+            {
+                LeanTween.alpha(mine_, 0, 0.5f);
+            }
         }
     }
 
@@ -325,7 +328,7 @@ public class FrogmanSnarer : Enemy
         Destroy(this.gameObject);
         foreach(GameObject snare in snareList)
         {
-            snare.GetComponent<FrogmanSnare>().goAway();
+            snare?.GetComponent<FrogmanSnare>().goAway();
         }
     }
 

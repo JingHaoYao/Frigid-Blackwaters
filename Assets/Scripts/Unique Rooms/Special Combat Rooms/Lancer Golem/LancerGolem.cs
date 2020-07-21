@@ -31,6 +31,7 @@ public class LancerGolem : Enemy
         gridInstant = Instantiate(aStarGrid, Camera.main.transform.position, Quaternion.identity);
         FindObjectOfType<BossHealthBar>().bossStartUp("Lancer Golem");
         FindObjectOfType<BossHealthBar>().targetEnemy = this;
+        EnemyPool.addEnemy(this);
     }
 
     IEnumerator attack()

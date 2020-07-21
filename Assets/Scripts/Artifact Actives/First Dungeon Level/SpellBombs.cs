@@ -16,7 +16,6 @@ public class SpellBombs : MonoBehaviour {
         spawnedSpellBomb = Instantiate(spellBomb, playerShip.transform.position, Quaternion.identity);
         spawnedSpellBomb.transform.parent = this.transform;
         numSpellBombs++;
-        playerScript.activeEnabled = true;
         spawnedBomb = true;
     }
 
@@ -58,7 +57,6 @@ public class SpellBombs : MonoBehaviour {
 
         if(spawnedBomb == true && spawnedSpellBomb == null)
         {
-            playerScript.activeEnabled = false;
             spawnedBomb = false;
         }
     }

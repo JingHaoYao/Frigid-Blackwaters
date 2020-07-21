@@ -268,7 +268,7 @@ public class DungeonGamble : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
                 {
                     gambleDisplay.SetActive(false);
-                    playerShip.GetComponent<PlayerScript>().shipRooted = false;
+                    playerShip.GetComponent<PlayerScript>().removeRootingObject();
                     Time.timeScale = 1;
                     playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false;
                 }
@@ -279,7 +279,7 @@ public class DungeonGamble : MonoBehaviour
                 {
                     gambleDisplay.SetActive(true);
                     updateDisplay(targetItem);
-                    playerShip.GetComponent<PlayerScript>().shipRooted = true;
+                    playerShip.GetComponent<PlayerScript>().addRootingObject();
                     Time.timeScale = 0;
                     playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
                 }

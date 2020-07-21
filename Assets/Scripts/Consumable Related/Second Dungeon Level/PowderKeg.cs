@@ -13,11 +13,12 @@ public class PowderKeg : MonoBehaviour
     {
         consumableBonus = GetComponent<ConsumableBonus>();
         playerScript = FindObjectOfType<PlayerScript>();
+        consumableBonus.SetAction(activate);
     }
 
-    void Update()
+    void activate()
     {
-        if(consumableBonus.consumableActivated && activated == false)
+        if (activated == false)
         {
             activated = true;
             Instantiate(keg, playerScript.transform.position, Quaternion.identity);

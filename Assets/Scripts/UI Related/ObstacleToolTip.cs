@@ -54,14 +54,14 @@ public class ObstacleToolTip : MonoBehaviour {
                     {
                         obstacleToolTip.SetActive(false);
                         toolTipActive = false;
-                        GameObject.Find("PlayerShip").GetComponent<PlayerScript>().shipRooted = false;
+                        PlayerProperties.playerScript.removeRootingObject();
                     }
                     else
                     {
                         toolTipActive = true;
                         obstacleToolTip.GetComponentInChildren<Text>().text = text.text;
                         obstacleToolTip.SetActive(true);
-                        GameObject.Find("PlayerShip").GetComponent<PlayerScript>().shipRooted = true;
+                        PlayerProperties.playerScript.addRootingObject();
                     }
                 }
             }
@@ -72,7 +72,7 @@ public class ObstacleToolTip : MonoBehaviour {
                 {
                     obstacleToolTip.SetActive(false);
                     toolTipActive = false;
-                    GameObject.Find("PlayerShip").GetComponent<PlayerScript>().shipRooted = false;
+                    PlayerProperties.playerScript.removeRootingObject();
                 }
             }
         }

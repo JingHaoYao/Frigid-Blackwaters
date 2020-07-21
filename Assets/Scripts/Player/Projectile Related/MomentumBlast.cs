@@ -12,9 +12,6 @@ public class MomentumBlast : MonoBehaviour {
         playerScript = GameObject.Find("PlayerShip").GetComponent<PlayerScript>();
         cannonRound = GetComponent<CannonRound>();
         float momentumAngle = cannonRound.angleTravel + 180;
-
-        playerScript.momentumVector = new Vector3(Mathf.Cos(momentumAngle * Mathf.Deg2Rad), Mathf.Sin(momentumAngle * Mathf.Deg2Rad), 0) * mag;
-        playerScript.momentumMagnitude = mag;
-        playerScript.momentumDuration = duration;
+        playerScript.setPlayerMomentum(new Vector3(Mathf.Cos(momentumAngle * Mathf.Deg2Rad), Mathf.Sin(momentumAngle * Mathf.Deg2Rad), 0) * mag, duration);
 	}
 }

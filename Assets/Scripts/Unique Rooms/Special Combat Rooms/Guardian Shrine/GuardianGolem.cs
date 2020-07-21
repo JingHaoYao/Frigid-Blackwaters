@@ -50,6 +50,7 @@ public class GuardianGolem : Enemy {
     {
         animator.enabled = true;
         animator.SetTrigger("WakeUp");
+        EnemyPool.addEnemy(this);
         this.GetComponents<AudioSource>()[1].Play();
         yield return new WaitForSeconds(0.75f);
         activatedRoom = true;

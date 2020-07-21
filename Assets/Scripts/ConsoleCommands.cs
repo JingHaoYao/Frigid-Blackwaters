@@ -222,6 +222,12 @@ public class ConsoleCommands : MonoBehaviour
         }
     }
 
+    [CommandHandler(Name = "GrantHealthBonus", Description = "Add a temporary health bonus")]
+    private void GrantHealthBonus(int healthBonus)
+    {
+        PlayerProperties.playerScript.healthBonus = healthBonus;
+    }
+
     IEnumerator WaitForFogDuration(float duration)
     {
         yield return new WaitForSeconds(duration);

@@ -64,6 +64,7 @@ public class OysterBoss : Enemy
         FindObjectOfType<BossHealthBar>().targetEnemy = this;
         travelAngle = cardinalAngles[Random.Range(0, cardinalAngles.Length)];
         Invoke("turnOffAnimator", 0.45f);
+        EnemyPool.addEnemy(this);
     }
 
     void moveTowards(float direction)

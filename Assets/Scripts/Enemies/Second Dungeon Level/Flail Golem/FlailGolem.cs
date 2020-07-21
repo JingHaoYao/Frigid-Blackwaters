@@ -65,6 +65,7 @@ public class FlailGolem : Enemy
         FindObjectOfType<BossHealthBar>().bossStartUp("Tome Guardian");
         FindObjectOfType<BossHealthBar>().targetEnemy = this;
         StartCoroutine(MainGameLoop());
+        EnemyPool.addEnemy(this);
     }
 
     IEnumerator throwFlail()

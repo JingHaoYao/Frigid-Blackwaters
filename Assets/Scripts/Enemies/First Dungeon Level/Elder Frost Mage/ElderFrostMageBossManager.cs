@@ -47,8 +47,8 @@ public class ElderFrostMageBossManager : BossManager
         {
             playerShip.transform.position += new Vector3(0, 2f, 0);
         }
-        playerShip.GetComponent<PlayerScript>().shipRooted = true;
+        PlayerProperties.playerScript.addRootingObject();
         yield return new WaitForSeconds(0.2f);
-        playerShip.GetComponent<PlayerScript>().shipRooted = false;
+        PlayerProperties.playerScript.removeRootingObject();
     }
 }

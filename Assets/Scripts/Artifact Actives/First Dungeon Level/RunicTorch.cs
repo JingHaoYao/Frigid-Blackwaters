@@ -20,7 +20,6 @@ public class RunicTorch : MonoBehaviour {
     void summonFire()
     {
         spawnedFire = true;
-        playerScript.activeEnabled = true;
         spawnedRunicFire = Instantiate(runicFireCircle, playerShip.transform.position, Quaternion.Euler(0,0,Random.Range(0,360)));
         if(Random.Range(0,2) == 1)
         {
@@ -31,7 +30,7 @@ public class RunicTorch : MonoBehaviour {
     }
 
 	void Update () {
-        if (displayItem.isEquipped == true && playerScript.activeEnabled == false && artifacts.numKills >= 3)
+        if (displayItem.isEquipped == true && artifacts.numKills >= 3)
         {
             if (displayItem.whichSlot == 0)
             {
@@ -62,7 +61,6 @@ public class RunicTorch : MonoBehaviour {
         if(spawnedFire == true && spawnedRunicFire == null)
         {
             spawnedFire = false;
-            playerScript.activeEnabled = false;
         }
     }
 }

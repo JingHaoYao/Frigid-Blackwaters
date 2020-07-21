@@ -20,7 +20,6 @@ public class PlayerScript : MonoBehaviour {
     public int shipHealth = 1000;
     public int trueDamage = 0;
     public int shipHealthMAX = 1000;
-    public bool shipRooted = false;
     public int whichWeapon = 1;
     public float defenseModifier = 1;
 
@@ -37,13 +36,13 @@ public class PlayerScript : MonoBehaviour {
     public bool enemiesDefeated = true;
 
     //restricts to using one active at a time
-    public bool activeEnabled = false;
     public int angleEffect = 0;
     Vector3 damageColLocation;
     public int numberHits = 0;
 
     //some toggles for certain mechanics
-    public bool damageImmunity = false;
+    List<GameObject> itemsGrantingDamageImmunity = new List<GameObject>();
+    private bool shipRooted = false;
     public bool damageAbsorb = false;
 
     //consumable bonuses
@@ -75,12 +74,12 @@ public class PlayerScript : MonoBehaviour {
 
     //when you want to apply a force to the ship
     //eg. the cannon's momentum blast
-    public Vector3 momentumVector = Vector3.zero;
-    public Vector3 enemyMomentumVector = Vector3.zero;
-    public float momentumMagnitude = 0;
-    public float momentumDuration = 0;
-    public float enemyMomentumMagnitude = 0;
-    public float enemyMomentumDuration = 0;
+    Vector3 momentumVector = Vector3.zero;
+    Vector3 enemyMomentumVector = Vector3.zero;
+    float momentumMagnitude = 0;
+    float momentumDuration = 0;
+    float enemyMomentumMagnitude = 0;
+    float enemyMomentumDuration = 0;
 
     //debuffs
     public float enemySpeedModifier = 0;
@@ -107,6 +106,51 @@ public class PlayerScript : MonoBehaviour {
     List<string> playerHubNames = new List<string>() { "Player Hub", "Willow's Hideout", "Ylva's Hideout" };
 
     private Text healthBarText;
+
+    public void setPlayerMomentum(Vector3 momentumVector, float duration)
+    {
+        this.momentumVector = momentumVector;
+        momentumMagnitude = momentumVector.magnitude;
+        this.momentumDuration = duration;
+    }
+
+    public void setPlayerEnemyMomentum(Vector3 momentumVector, float duration)
+    {
+        this.enemyMomentumDuration = duration;
+        this.enemyMomentumVector = momentumVector;
+        this.enemyMomentumMagnitude = momentumVector.magnitude;
+    }
+
+    public bool isShipRooted()
+    {
+        return shipRooted;
+    }
+
+    public void addRootingObject()
+    {
+        shipRooted = true;
+    }
+
+    public void removeRootingObject()
+    {
+        shipRooted = false;
+    }
+
+    public void addImmunityItem(GameObject item)
+    {
+        if (!itemsGrantingDamageImmunity.Contains(item))
+        {
+            itemsGrantingDamageImmunity.Add(item);
+        }
+    }
+
+    public void removeImmunityItem(GameObject item)
+    {
+        if (itemsGrantingDamageImmunity.Contains(item))
+        {
+            itemsGrantingDamageImmunity.Remove(item);
+        }
+    }
 
     public void applyInventoryLoss()
     {
@@ -316,6 +360,7 @@ public class PlayerScript : MonoBehaviour {
                     GameObject newItem = Instantiate(loadedItem);
                     newItem.transform.parent = GameObject.Find("PresentItems").transform;
                     newItem.GetComponent<DisplayItem>().isEquipped = true;
+                    newItem.GetComponent<ArtifactEffect>()?.artifactEquipped();
                     artifacts.activeArtifacts.Add(newItem);
                 }
             }
@@ -506,7 +551,12 @@ public class PlayerScript : MonoBehaviour {
         if (amountHealing > 0)
         {
             healNumbers.showHealing(amountHealing, shipHealthMAX);
-            Mathf.Clamp(trueDamage -= amountHealing, 0, int.MaxValue);
+            trueDamage -= amountHealing;
+
+            if(trueDamage < 0)
+            {
+                trueDamage = 0;
+            }
         }
 
         shipHealth = Mathf.RoundToInt(shipHealthMAX - trueDamage);
@@ -606,7 +656,7 @@ public class PlayerScript : MonoBehaviour {
 
     public void dealDamageToShip(int amountDamage, GameObject damagingObject)
     {
-        int amountBeingDamaged = amountDamage;
+        int amountBeingDamaged = Mathf.RoundToInt(amountDamage * defenseModifier);
 
         if (damagingObject.GetComponent<DisplayItem>())
         {
@@ -614,14 +664,14 @@ public class PlayerScript : MonoBehaviour {
             return;
         }
 
-        if (damageImmunity == true)
+        if (itemsGrantingDamageImmunity.Count > 0)
         {
             amountBeingDamaged = 0;
         }
 
         if (damageAbsorb == true)
         {
-            healPlayer(Mathf.RoundToInt(amountDamage * defenseModifier));
+            healPlayer(Mathf.RoundToInt(amountBeingDamaged));
             amountBeingDamaged = 0;
         }
 
@@ -631,7 +681,7 @@ public class PlayerScript : MonoBehaviour {
             {
                 if (damagingObject.GetComponent<ProjectileParent>())
                 {
-                    slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.GetComponent<ProjectileParent>().instantiater.GetComponent<Enemy>());
+                    slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.GetComponent<ProjectileParent>().instantiater?.GetComponent<Enemy>());
                 }
                 else if (damagingObject.transform.parent != null)
                 {
@@ -649,20 +699,19 @@ public class PlayerScript : MonoBehaviour {
             float angle = Mathf.Atan2(damagingObject.transform.position.y - transform.position.y, damagingObject.transform.position.x - transform.position.x);
             if (Vector2.Distance(transform.position, damagingObject.transform.position) < 1f)
             {
-                damageNumbers.showDamage((int)(amountBeingDamaged* defenseModifier), shipHealthMAX, damagingObject.transform.position);
+                damageNumbers.showDamage((int)(amountBeingDamaged), shipHealthMAX, damagingObject.transform.position);
             }
             else
             {
-                damageNumbers.showDamage((int)(amountBeingDamaged * defenseModifier), shipHealthMAX, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)));
+                damageNumbers.showDamage((int)(amountBeingDamaged), shipHealthMAX, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)));
             }
 
-            cameraShake.shakeCamFunction(0.1f, 0.3f * ((amountDamage * defenseModifier) / shipHealthMAX));
+            cameraShake.shakeCamFunction(0.1f, 0.3f * (amountBeingDamaged / shipHealthMAX));
         }
         else
         {
             return;
         }
-
 
         StartCoroutine(bufferHit(0.5f));
 
@@ -671,7 +720,7 @@ public class PlayerScript : MonoBehaviour {
             return;
         }
 
-        trueDamage += (int)(amountDamage * defenseModifier);
+        trueDamage += amountBeingDamaged;
         PlayerItems.playerDamage = trueDamage;
         damagingObject = null;
 
@@ -691,6 +740,14 @@ public class PlayerScript : MonoBehaviour {
             }
             spriteRenderer.enabled = false;
             Instantiate(deathSplash, transform.position, Quaternion.identity);
+
+            foreach (ArtifactSlot slot in PlayerProperties.playerArtifacts.artifactSlots)
+            {
+                if (slot.displayInfo != null)
+                {
+                    slot.displayInfo.GetComponent<ArtifactEffect>()?.playerDied();
+                }
+            }
 
             if (numberLives > 0)
             {
@@ -776,7 +833,7 @@ public class PlayerScript : MonoBehaviour {
             && collision.gameObject.name != "AntiSpawnSpaceDetailer"
             && collision.gameObject.tag != "RoomSpawn"
             && playerDead == false
-            && damageImmunity == false
+            && itemsGrantingDamageImmunity.Count == 0
             && collision.gameObject.layer != 21
            )
         {

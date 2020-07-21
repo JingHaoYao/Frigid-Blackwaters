@@ -21,6 +21,7 @@ public class StasisStopwatch : MonoBehaviour
     {
         playerScript = FindObjectOfType<PlayerScript>();
         consumableBonus = GetComponent<ConsumableBonus>();
+        consumableBonus.SetAction(startStopWatch);
     }
 
     void Update()
@@ -30,8 +31,11 @@ public class StasisStopwatch : MonoBehaviour
             prevTrueDamage = playerScript.trueDamage;
             StartCoroutine(delayStasisPeriod(playerScript.trueDamage));
         }
+    }
 
-        if(consumableBonus.consumableActivated == true && activated == false)
+    void startStopWatch()
+    {
+        if (activated == false)
         {
             activated = true;
             GameObject instant = Instantiate(stopWatchEffect, playerScript.transform.position, Quaternion.identity);

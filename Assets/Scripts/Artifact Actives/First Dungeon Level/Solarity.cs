@@ -22,7 +22,7 @@ public class Solarity : MonoBehaviour {
     }
 	
 	void Update () {
-        if (displayItem.isEquipped == true && playerScript.activeEnabled == false && artifacts.numKills >= 20)
+        if (displayItem.isEquipped == true && solarityActive == false && artifacts.numKills >= 20)
         {
             if (displayItem.whichSlot == 0)
             {
@@ -31,8 +31,7 @@ public class Solarity : MonoBehaviour {
                     solarityActive = true;
                     artifacts.numKills -= 20;
                     solarityTimer = 0;
-                    playerScript.activeEnabled = true;
-                    playerScript.damageImmunity = true;
+                    playerScript.addImmunityItem(this.gameObject);
                     playerScript.damageAbsorb = true;
                     numHitsShip = playerScript.numberHits;
                     set1 = false;
@@ -48,8 +47,7 @@ public class Solarity : MonoBehaviour {
                     solarityActive = true;
                     artifacts.numKills -= 20;
                     solarityTimer = 0;
-                    playerScript.activeEnabled = true;
-                    playerScript.damageImmunity = true;
+                    playerScript.addImmunityItem(this.gameObject);
                     playerScript.damageAbsorb = true;
                     numHitsShip = playerScript.numberHits;
                     set1 = false;
@@ -65,8 +63,7 @@ public class Solarity : MonoBehaviour {
                     solarityActive = true;
                     artifacts.numKills -= 20;
                     solarityTimer = 0;
-                    playerScript.activeEnabled = true;
-                    playerScript.damageImmunity = true;
+                    playerScript.addImmunityItem(this.gameObject);
                     playerScript.damageAbsorb = true;
                     numHitsShip = playerScript.numberHits;
                     set1 = false;
@@ -98,7 +95,7 @@ public class Solarity : MonoBehaviour {
 
             if(solarityTimer >= 10 && set1 == false)
             {
-                playerScript.damageImmunity = false;
+                playerScript.removeImmunityItem(this.gameObject);
                 playerScript.damageAbsorb = false;
                 playerScript.boatSpeed -= 3;
                 FindObjectOfType<AudioManager>().StopSound("Solarity Chimes");
@@ -108,7 +105,6 @@ public class Solarity : MonoBehaviour {
 
             if (solarityTimer >= 15 && set2 == false)
             {
-                playerScript.activeEnabled = false;
                 solarityActive = false;
                 playerScript.boatSpeed += 3;
                 set2 = true;

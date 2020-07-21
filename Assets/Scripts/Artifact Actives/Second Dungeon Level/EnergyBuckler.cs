@@ -40,7 +40,7 @@ public class EnergyBuckler : ArtifactEffect
     {
         if (energyShieldInstant.GetComponent<EnergyBucklerShield>().respawnPeriod <= 0)
         {
-            energyShieldInstant.GetComponent<EnergyBucklerShield>().respawnPeriod = 20;
+            energyShieldInstant.GetComponent<EnergyBucklerShield>().breakShield(20);
             FindObjectOfType<DurationUI>().addTile(this.GetComponent<DisplayItem>().displayIcon, 20);
         }   
     }

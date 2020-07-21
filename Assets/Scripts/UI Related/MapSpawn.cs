@@ -10,7 +10,7 @@ public class MapSpawn : MonoBehaviour{
     public RoomMemory roomMemory;
     public MapExploration mapExploration;
     public Vector2 tileSize;
-    List<MapExploration> tileList = new List<MapExploration>();
+    public List<MapExploration> tileList = new List<MapExploration>();
 
     void Awake(){
         mapUI = GameObject.Find("PlayerShip").GetComponent<MapUI>();

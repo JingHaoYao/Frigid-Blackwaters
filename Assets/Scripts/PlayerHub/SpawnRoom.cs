@@ -43,7 +43,7 @@ public class SpawnRoom : MonoBehaviour {
     {
         if (collision.gameObject.name == "PlayerShip" && ifLoadedSceneAlready == false)
         {
-            GameObject.Find("PlayerShip").GetComponent<PlayerScript>().shipRooted = true;
+            PlayerProperties.playerScript.addRootingObject();
             GameObject.Find("PlayerShip").GetComponent<PlayerScript>().playerDead = true;
             ifLoadedSceneAlready = true;
             StartCoroutine(fadeLoadScene());

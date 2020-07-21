@@ -35,10 +35,7 @@ public class ChargedSprout : ArtifactEffect
 
             PlayerScript playerScript = PlayerProperties.playerScript;
             float angleTravel = Mathf.Atan2(PlayerProperties.cursorPosition.y - PlayerProperties.playerShipPosition.y, PlayerProperties.cursorPosition.x - PlayerProperties.playerShipPosition.x) + Mathf.PI;
-
-            playerScript.momentumVector = new Vector3(Mathf.Cos(angleTravel), Mathf.Sin(angleTravel)) * 8;
-            playerScript.momentumMagnitude = 8;
-            playerScript.momentumDuration = 0.75f;
+            playerScript.setPlayerMomentum(new Vector3(Mathf.Cos(angleTravel), Mathf.Sin(angleTravel)) * 8, 0.75f);
             numberBulletsFired = 0;
         }
     }

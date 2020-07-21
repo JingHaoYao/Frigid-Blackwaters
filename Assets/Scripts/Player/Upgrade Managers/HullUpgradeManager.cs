@@ -200,7 +200,7 @@ public class HullUpgradeManager : MonoBehaviour {
             {
                 dashIcon.GetComponent<Image>().color = new Color(1, 1, 1, 1f);
                 dashCooldownPeriod = 0;
-                if (Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.dash)) && playerScript.shipRooted == false && playerScript.playerDead == false && playerScript.windowAlreadyOpen == false)
+                if (Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.dash)) && !playerScript.isShipRooted() && playerScript.playerDead == false && playerScript.windowAlreadyOpen == false)
                 {
                     dashCooldownPeriod = dashCooldown;
                     foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
@@ -209,9 +209,7 @@ public class HullUpgradeManager : MonoBehaviour {
                             slot.displayInfo.GetComponent<ArtifactEffect>().playerDashed();
                     }
                     Vector3 momentumVector = new Vector3(Mathf.Cos(playerScript.angleOrientation * Mathf.Deg2Rad), Mathf.Sin(playerScript.angleOrientation * Mathf.Deg2Rad), 0) * dashMomentum;
-                    playerScript.momentumVector = momentumVector;
-                    playerScript.momentumMagnitude = dashMomentum;
-                    playerScript.momentumDuration = 1f;
+                    playerScript.setPlayerMomentum(momentumVector, 1f);
                     float moveAngle = (360 + (Mathf.Atan2(momentumVector.y, momentumVector.x) * Mathf.Rad2Deg)) % 360;
                     Instantiate(waterFoamBurst, this.gameObject.transform.position, Quaternion.Euler(0, 0, moveAngle + 90));
                 }

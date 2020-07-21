@@ -14,6 +14,13 @@ public class EnergyBucklerShield : MonoBehaviour
         playerScript = FindObjectOfType<PlayerScript>();
     }
 
+    public void breakShield(float duration)
+    {
+        respawnPeriod = duration;
+        animator.SetTrigger("Break");
+        playerScript.removeImmunityItem(this.gameObject);
+    }
+
     void Update()
     {
 
@@ -21,15 +28,10 @@ public class EnergyBucklerShield : MonoBehaviour
 
         if (respawnPeriod <= 0)
         {
-            playerScript.damageImmunity = true;
+            playerScript.addImmunityItem(this.gameObject);
         }
         else
         {
-            if (playerScript.damageImmunity == true)
-            {
-                playerScript.damageImmunity = false;
-                animator.SetTrigger("Break");
-            }
             respawnPeriod -= Time.deltaTime;
 
             if(respawnPeriod <= 0)
@@ -38,5 +40,10 @@ public class EnergyBucklerShield : MonoBehaviour
                 animator.SetTrigger("Reform");
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        playerScript.removeImmunityItem(this.gameObject);
     }
 }

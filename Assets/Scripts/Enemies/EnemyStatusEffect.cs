@@ -6,7 +6,7 @@ public abstract class EnemyStatusEffect : MonoBehaviour
 {
     public float duration;
     public Enemy targetEnemy;
-    [SerializeField] private Animator animator;
+    [SerializeField] public Animator animator;
 
     public abstract void durationFinishedProcedure();
 }

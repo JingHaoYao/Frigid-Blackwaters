@@ -37,7 +37,7 @@ public class StoryCheckpoint : MonoBehaviour
                 portHub = true;
                 FindObjectOfType<PauseMenu>().loadHub();
             }
-            FindObjectOfType<PlayerScript>().shipRooted = true;
+            PlayerProperties.playerScript.addRootingObject();
         }
     }
 }

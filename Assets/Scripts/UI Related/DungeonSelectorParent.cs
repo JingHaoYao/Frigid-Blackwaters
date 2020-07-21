@@ -24,7 +24,7 @@ public class DungeonSelectorParent : MonoBehaviour
         backGroundImage.enabled = true;
         this.levelSelector.SetActive(true);
         blackFadeOutAnimator.gameObject.SetActive(false);
-        PlayerProperties.playerScript.shipRooted = false;
+        PlayerProperties.playerScript.removeRootingObject();
         PlayerProperties.playerScript.windowAlreadyOpen = false;
         this.gameObject.SetActive(false);
     }

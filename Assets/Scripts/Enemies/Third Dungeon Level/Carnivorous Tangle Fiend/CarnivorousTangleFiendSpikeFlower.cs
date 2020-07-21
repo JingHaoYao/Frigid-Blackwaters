@@ -86,6 +86,7 @@ public class CarnivorousTangleFiendSpikeFlower : Enemy
     {
         mainCamera = Camera.main;
         takeDamageHitBox.enabled = false;
+        EnemyPool.addEnemy(this);
     }
 
     public override void deathProcedure()

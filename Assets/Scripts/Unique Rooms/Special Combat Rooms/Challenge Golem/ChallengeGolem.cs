@@ -289,6 +289,7 @@ public class ChallengeGolem : Enemy {
         rigidBody2D = GetComponent<Rigidbody2D>();
         playerShip = GameObject.Find("PlayerShip");
         FindObjectOfType<BossHealthBar>().bossStartUp("Surge Golem");
+        EnemyPool.addEnemy(this);
         FindObjectOfType<BossHealthBar>().targetEnemy = this;
         updateSpeed(3.5f);
     }

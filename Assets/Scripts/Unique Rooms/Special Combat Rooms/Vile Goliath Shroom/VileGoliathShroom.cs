@@ -35,6 +35,7 @@ public class VileGoliathShroom : Enemy
         bossHealthBar.targetEnemy = this;
         startUpAudio.Play();
         animator.SetTrigger("Awaken");
+        EnemyPool.addEnemy(this);
         roomManager.antiSpawnSpaceDetailer.spawnDoorSeals();
         PlayerProperties.playerScript.enemiesDefeated = false;
         yield return new WaitForSeconds(9 / 12f);

@@ -86,6 +86,7 @@ public class SeaTerror : Enemy
         FindObjectOfType<BossHealthBar>().targetEnemy = GetComponent<Enemy>();
         FindObjectOfType<BossHealthBar>().bossStartUp("Sea Terror");
         StartCoroutine(mainGameLoop());
+        EnemyPool.addEnemy(this);
     }
 
     void summonSwiper()

@@ -39,7 +39,7 @@ public class TroveMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 transform.parent.gameObject.SetActive(false);
                 playerScript.windowAlreadyOpen = false;
                 Time.timeScale = 1;
-                playerScript.shipRooted = false;
+                PlayerProperties.playerScript.removeRootingObject();
             }
         }
     }

@@ -20,7 +20,6 @@ public class ArtifactActiveStatBoost : MonoBehaviour
 
     IEnumerator activateArtifact(float duration)
     {
-        playerScript.activeEnabled = true;
         if (spawnObject != null)
         {
             instant = Instantiate(spawnObject, playerScript.gameObject.transform.position, Quaternion.identity);
@@ -39,7 +38,6 @@ public class ArtifactActiveStatBoost : MonoBehaviour
         playerScript.conDefenseBonus -= defenseAmount;
         playerScript.conSpeedBonus -= speedAmount;
         appliedBonuses = false;
-        playerScript.activeEnabled = false;
     }
 
     void Start()
@@ -52,7 +50,7 @@ public class ArtifactActiveStatBoost : MonoBehaviour
 
     void Update()
     {
-        if (displayItem.isEquipped == true && playerScript.activeEnabled == false && artifacts.numKills >= artifactBonus.killRequirement)
+        if (displayItem.isEquipped == true && artifacts.numKills >= artifactBonus.killRequirement)
         {
             if (displayItem.whichSlot == 0)
             {

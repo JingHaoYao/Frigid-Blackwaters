@@ -35,6 +35,7 @@ public class SpectralHelmsman : Enemy
         StartCoroutine(mainGameLoop());
         mainCamera = Camera.main;
         numberDashes = 2;
+        EnemyPool.addEnemy(this);
     }
 
     IEnumerator summonShips()

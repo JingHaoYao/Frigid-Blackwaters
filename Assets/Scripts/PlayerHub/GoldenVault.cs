@@ -85,7 +85,7 @@ public class GoldenVault : MonoBehaviour {
                 if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.I))
                 {
                     inventoryDisplay.SetActive(false);
-                    playerShip.GetComponent<PlayerScript>().shipRooted = false;
+                    PlayerProperties.playerScript.removeRootingObject();
                     playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false;
                     vaultDisplay.SetActive(false);
                 }
@@ -98,7 +98,7 @@ public class GoldenVault : MonoBehaviour {
                     UpdateUI();
                     inventoryDisplay.SetActive(true);
                     playerShip.GetComponent<Inventory>().UpdateUI();
-                    playerShip.GetComponent<PlayerScript>().shipRooted = true;
+                    PlayerProperties.playerScript.addRootingObject();
                     playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
                 }
             }

@@ -46,6 +46,11 @@ public class ShipWeaponScript : MonoBehaviour {
         weaponIcon.sprite = trueTemplate.coolDownIcon;   
     }
 
+    public void setCoolDownPeriod(float coolDown)
+    {
+        this.coolDownPeriod = coolDown;
+    }
+
     public bool isOnCooldown()
     {
         return onCooldown;
@@ -276,9 +281,9 @@ public class ShipWeaponScript : MonoBehaviour {
         GameObject instant;
         if (whichSide == 1)
         {
-            instant = weaponTemplate.GetComponent<WeaponFireTemplate>().fireWeapon(whichSide, angleOrientation, weaponPlume);
             coolDownPeriod = coolDownThreshold;
             onCooldown = true;
+            instant = weaponTemplate.GetComponent<WeaponFireTemplate>().fireWeapon(whichSide, angleOrientation, weaponPlume);
             numberShots += 1;
             if (instant.GetComponent<WeaponFireScript>())
             {
@@ -293,9 +298,9 @@ public class ShipWeaponScript : MonoBehaviour {
         }
         else if (whichSide == 2)
         {
-            instant = weaponTemplate.GetComponent<WeaponFireTemplate>().fireWeapon(whichSide, angleOrientation, weaponPlume);
             coolDownPeriod = coolDownThreshold;
             onCooldown = true;
+            instant = weaponTemplate.GetComponent<WeaponFireTemplate>().fireWeapon(whichSide, angleOrientation, weaponPlume);
             numberShots += 1;
             if (instant.GetComponent<WeaponFireScript>())
             {
@@ -310,9 +315,9 @@ public class ShipWeaponScript : MonoBehaviour {
         }
         else if (whichSide == 3)
         {
-            instant = weaponTemplate.GetComponent<WeaponFireTemplate>().fireWeapon(whichSide, angleOrientation, weaponPlume);
             coolDownPeriod = coolDownThreshold;
             onCooldown = true;
+            instant = weaponTemplate.GetComponent<WeaponFireTemplate>().fireWeapon(whichSide, angleOrientation, weaponPlume);
             numberShots += 1;
             if (instant.GetComponent<WeaponFireScript>())
             {
@@ -330,10 +335,27 @@ public class ShipWeaponScript : MonoBehaviour {
 
 	void Start () {
         playerShip = GameObject.Find("PlayerShip");
-        playerScript = playerShip.GetComponent<PlayerScript>();
+        playerScript = PlayerProperties.playerScript;
         spriteRenderer = GetComponent<SpriteRenderer>();
         template = shipWeaponTemplate.GetComponent<ShipWeaponTemplate>();
         cursorTarget = FindObjectOfType<CursorTarget>();
+        setShipWeaponScript();
+    }
+
+    void setShipWeaponScript()
+    {
+        switch (whichSide)
+        {
+            case 1:
+                PlayerProperties.frontWeapon = this;
+                break;
+            case 2:
+                PlayerProperties.leftWeapon = this;
+                break;
+            case 3:
+                PlayerProperties.rightWeapon = this;
+                break;
+        }
     }
 
 	void Update () {

@@ -25,6 +25,7 @@ public class Adamantoise : Enemy
         healthBar = FindObjectOfType<BossHealthBar>();
         healthBar.bossStartUp("Adamantoise");
         healthBar.targetEnemy = this;
+        EnemyPool.addEnemy(this);
     }
 
 

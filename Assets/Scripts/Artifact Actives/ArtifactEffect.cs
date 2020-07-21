@@ -23,4 +23,10 @@ public class ArtifactEffect : MonoBehaviour
     public virtual void healed(int healingAmount) { }
 
     public virtual void cameraMovedPosition(Vector3 currentPosition) { }
+
+    public virtual void artifactUnequipped() { }
+
+    public virtual void artifactEquipped() { }
+
+    public virtual void playerDied() { }
 }

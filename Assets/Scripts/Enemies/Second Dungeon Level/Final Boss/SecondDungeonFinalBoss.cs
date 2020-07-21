@@ -301,6 +301,7 @@ public class SecondDungeonFinalBoss : Enemy
     private void Start()
     {
         targetLocation = playerScript.transform.position;
+        EnemyPool.addEnemy(this);
         rampSpeed();
     }
 

@@ -52,7 +52,7 @@ public class GambleMenuGoldSlot : MonoBehaviour, IPointerEnterHandler, IPointerE
             transform.parent.gameObject.SetActive(false);
             playerScript.windowAlreadyOpen = false;
             Time.timeScale = 1;
-            playerScript.shipRooted = false;
+            PlayerProperties.playerScript.removeRootingObject();
             FindObjectOfType<AudioManager>().PlaySound("Pick Up Gold");
             gamble.gamble();
         }

@@ -70,6 +70,7 @@ public class CrustaceaKing : Enemy
         mainCamera = Camera.main;
         float angle = Mathf.RoundToInt((Mathf.Atan2(mainCamera.transform.position.y - PlayerProperties.playerShipPosition.y, mainCamera.transform.position.x - PlayerProperties.playerShipPosition.x) + 2 * Mathf.PI) / (Mathf.PI / 2)) * Mathf.PI / 2;
         transform.position += new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * 5;
+        EnemyPool.addEnemy(this);
     }
 
     IEnumerator MainGameLoop()

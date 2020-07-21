@@ -11,10 +11,8 @@ public class StoneGiantsHeart : MonoBehaviour {
 
     IEnumerator spawnFist()
     {
-        playerScript.activeEnabled = true;
         Instantiate(fist, playerShip.transform.position, Quaternion.identity);
         yield return new WaitForSeconds(1.4f + 2f/12f);
-        playerScript.activeEnabled = false;
     }
 
     void Start()
@@ -27,7 +25,7 @@ public class StoneGiantsHeart : MonoBehaviour {
 
     void Update()
     {
-        if (displayItem.isEquipped == true && playerScript.activeEnabled == false && artifacts.numKills >= 6)
+        if (displayItem.isEquipped == true && artifacts.numKills >= 6)
         {
             if (displayItem.whichSlot == 0)
             {

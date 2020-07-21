@@ -18,11 +18,8 @@ public class InvisibilityEnemyController : MonoBehaviour
 
     public void FogDeActivated()
     {
-        if (!isInLight)
-        {
-            showRenderers();
-            isInLightRoutine = StartCoroutine(isInLightActive());
-        }
+        showRenderers();
+        isInLightRoutine = StartCoroutine(isInLightActive());
     }
 
     private void Start()
@@ -63,7 +60,6 @@ public class InvisibilityEnemyController : MonoBehaviour
         cancelAllCurrentTweens();
         foreach (SpriteRenderer spriteRenderer in renderersToModify)
         {
-            spriteRenderer.color = new Color(1, 1, 1, 0);
             int tween = LeanTween.color(spriteRenderer.gameObject, new Color(1, 1, 1, 1), 0.75f).setOnComplete(removeShowRendererTweens).id;
             showingRendererTweens.Add(tween);
         }

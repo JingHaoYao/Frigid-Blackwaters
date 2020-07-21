@@ -25,14 +25,14 @@ public class SemiDimensionalFlower : ArtifactEffect
                 ghostShipInstant.transform.position = PlayerProperties.playerShipPosition;
                 ghostShipInstant.SetActive(true);
             }
-            PlayerProperties.playerScript.damageImmunity = true;
+            PlayerProperties.playerScript.addImmunityItem(this.gameObject);
         }
         else
         {
             if(ghostShipInstant.activeSelf == true)
             {
                 ghostShipInstant.SetActive(false);
-                PlayerProperties.playerScript.damageImmunity = false;
+                PlayerProperties.playerScript.removeImmunityItem(this.gameObject);
             }
         }
     }

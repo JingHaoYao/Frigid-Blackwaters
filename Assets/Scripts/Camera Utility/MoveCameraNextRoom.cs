@@ -34,6 +34,8 @@ public class MoveCameraNextRoom : MonoBehaviour {
             transform.position += new Vector3(0, -20, 0);
         }
 
+        PlayerProperties.mainCameraPosition = transform.position;
+
         foreach(GameObject artifact in PlayerProperties.playerArtifacts.activeArtifacts)
         {
             artifact.GetComponent<ArtifactEffect>()?.cameraMovedPosition(this.transform.position);
@@ -120,6 +122,7 @@ public class MoveCameraNextRoom : MonoBehaviour {
             else
             {
                 transform.position = returnTrackCamPosition();
+                PlayerProperties.mainCameraPosition = transform.position;
             }
         }
 	}
