@@ -89,6 +89,15 @@ public class ConsoleCommands : MonoBehaviour
             case WeaponChoices.PolluxShrine:
                 AddUpgrades(whatTier, isLeftUpgradeTree ? "unlock_waves_light_balls" : "", PlayerUpgrades.polluxShrineUpgrades);
                 break;
+            case WeaponChoices.LoneSpark:
+                AddUpgrades(whatTier, isLeftUpgradeTree ? "static_field_upgrade" : "", PlayerUpgrades.loneSparkUpgrades);
+                break;
+            case WeaponChoices.GadgetShot:
+                AddUpgrades(whatTier, isLeftUpgradeTree ? "bounce_explosions_upgrade" : "", PlayerUpgrades.gadgetShotUpgrades);
+                break;
+            case WeaponChoices.FinBlade:
+                AddUpgrades(whatTier, isLeftUpgradeTree ? "soul_reaver_upgrade" : "", PlayerUpgrades.finBladeUpgrades);
+                break;
 
         }
     }
@@ -228,6 +237,13 @@ public class ConsoleCommands : MonoBehaviour
         PlayerProperties.playerScript.healthBonus = healthBonus;
     }
 
+    [CommandHandler(Name = "TeleportPlayerAndCamera", Description = "Teleports the player to a specific location")]
+    private void TelportPlayerAndCamera(int xPosition, int yPosition)
+    {
+        PlayerProperties.playerShip.transform.position = new Vector3(xPosition, yPosition);
+        Camera.main.transform.position = new Vector3(xPosition, yPosition);
+    }
+
     IEnumerator WaitForFogDuration(float duration)
     {
         yield return new WaitForSeconds(duration);
@@ -261,7 +277,10 @@ public class ConsoleCommands : MonoBehaviour
         GlaiveLauncher,
         PlantMortar,
         PodFlyers,
-        PolluxShrine
+        PolluxShrine,
+        LoneSpark,
+        GadgetShot,
+        FinBlade
     }
 
     enum WhichWeaponSide

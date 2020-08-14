@@ -325,7 +325,7 @@ public class SkeletonEngineer : Enemy
         Destroy(this.gameObject);
         while(mineList.Count > 0)
         {
-            mine.GetComponent<SkeletonEngineerMine>().goAway();
+            mineList[0].GetComponent<SkeletonEngineerMine>().goAway();
         }
     }
 

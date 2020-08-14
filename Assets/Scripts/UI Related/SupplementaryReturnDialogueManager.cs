@@ -11,6 +11,11 @@ public class SupplementaryReturnDialogueManager : MonoBehaviour
     public ReturnNotifications returnNotifications;
     [SerializeField] DialogueSet[] firstTimeLevelDialogues;
 
+    [Header("Moving Locations")]
+    [SerializeField] GameObject initialLocation;
+    [SerializeField] int whatDialogueShift;
+    // Used to put the ship in a different setting before moving them to the main player hub
+
     private void initializeUnlockWeaponDialogues()
     {
         switch (MiscData.dungeonLevelUnlocked)
@@ -33,13 +38,33 @@ public class SupplementaryReturnDialogueManager : MonoBehaviour
         } 
     }
 
+    void movePlayerToHub(int count)
+    {
+        if(count == whatDialogueShift)
+        {
+            PlayerProperties.playerShip.transform.position = Vector3.zero;
+            initialLocation.SetActive(false);
+        }
+    }
+
     private void initializeFirstTimeLevelDialogues()
     {
-        for(int i = 0; i < firstTimeLevelDialogues.Length; i++)
+        if (firstTimeLevelDialogues.Length > 0)
         {
-            if (!MiscData.completedHubReturnDialogues.Contains(firstTimeLevelDialogues[i].name))
+
+            if (!MiscData.completedHubReturnDialogues.Contains(firstTimeLevelDialogues[0].name))
             {
-                returnNotifications.dialoguesToDisplay.Add(firstTimeLevelDialogues[i]);
+                initialLocation.SetActive(true);
+                PlayerProperties.playerShip.transform.position = initialLocation.transform.position;
+                returnNotifications.setMidDialogueAction(movePlayerToHub);
+            }
+
+            for (int i = 0; i < firstTimeLevelDialogues.Length; i++)
+            {
+                if (!MiscData.completedHubReturnDialogues.Contains(firstTimeLevelDialogues[i].name))
+                {
+                    returnNotifications.dialoguesToDisplay.Add(firstTimeLevelDialogues[i]);
+                }
             }
         }
     }

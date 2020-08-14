@@ -17,17 +17,19 @@ public class HoverToolTip : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         if (findToolTip)
         {
-            toolTip = FindObjectOfType<Inventory>().toolTip;
+            toolTip = PlayerProperties.playerInventory.toolTip;
         }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        toolTip = PlayerProperties.playerInventory.toolTip;
         toolTip.SetActive(false);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        toolTip = PlayerProperties.playerInventory.toolTip;
         toolTip.SetActive(true);
         toolTip.transform.position = this.transform.position;
         if (useAlternateMessage == false)

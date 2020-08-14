@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LoadWeaponChoices : MonoBehaviour {
     // Names of all weapon templates to load in
-    string[] weaponTemplateNames = new string[11] {
+    string[] weaponTemplateNames = new string[14] {
         "Musket Weapon Template",
         "Cannon Weapon Template",
         "Shotgun Weapon Template",
@@ -15,7 +15,10 @@ public class LoadWeaponChoices : MonoBehaviour {
         "Glaive Launcher Weapon Template",
         "Plant Mortar Weapon Template",
         "Pod Flyers Weapon Template",
-        "Pollux Shrine Weapon Template"
+        "Pollux Shrine Weapon Template",
+        "Lone Spark Weapon Template",
+        "Gadget Shot Weapon Template",
+        "Fin Blade Weapon Template"
     };
     public GameObject leftWeapon, rightWeapon, frontWeapon;
 

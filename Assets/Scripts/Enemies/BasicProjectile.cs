@@ -8,6 +8,9 @@ public class BasicProjectile : MonoBehaviour
     public string breakString;
     public float speed;
 
+    [SerializeField] bool rotateProjectile = true;
+    [SerializeField] bool playSound = true;
+
     Animator animator;
     bool impacted = false;
     GameObject playerShip;
@@ -24,7 +27,10 @@ public class BasicProjectile : MonoBehaviour
     {
         if (impacted == false)
         {
-            transform.rotation = Quaternion.Euler(0, 0, angleTravel);
+            if (rotateProjectile)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, angleTravel);
+            }
             transform.position += new Vector3(Mathf.Cos(angleTravel * Mathf.Deg2Rad), Mathf.Sin(angleTravel * Mathf.Deg2Rad)) * Time.deltaTime * speed;
         }
     }
@@ -35,7 +41,10 @@ public class BasicProjectile : MonoBehaviour
         {
             impacted = true;
             animator.SetTrigger(breakString);
-            this.GetComponent<AudioSource>().Play();
+            if (playSound)
+            {
+                this.GetComponent<AudioSource>().Play();
+            }
             Destroy(this.gameObject, destroyTime);
             this.GetComponent<Collider2D>().enabled = false;
         }

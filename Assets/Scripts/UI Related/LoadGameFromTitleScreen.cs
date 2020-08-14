@@ -37,18 +37,21 @@ public class LoadGameFromTitleScreen : MonoBehaviour {
 
     int whichPlayerHubToLoad()
     {
-        if (MiscData.dungeonLevelUnlocked == 3)
+        switch (MiscData.dungeonLevelUnlocked)
         {
-            return 5;
+            case 1:
+                return 1;
+            case 2:
+                return 7;
+            case 3:
+                return 5;
+                break;
+            case 4:
+                return 8;
+                break;
         }
-        else if (MiscData.dungeonLevelUnlocked == 2)
-        {
-            return 7;
-        }
-        else
-        {
-            return 1;
-        }
+
+        return 1;
     }
 
     IEnumerator fadeLoadScene()

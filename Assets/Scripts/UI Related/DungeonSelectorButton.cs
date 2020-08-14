@@ -64,17 +64,20 @@ public class DungeonSelectorButton : MonoBehaviour {
     {
         if(whichSceneLoad == "Player Hub")
         {
-            if (MiscData.dungeonLevelUnlocked == 3)
+            switch (MiscData.dungeonLevelUnlocked)
             {
-                StartCoroutine(fadeLoadScene(5));
-            }
-            else if(MiscData.dungeonLevelUnlocked == 2)
-            {
-                StartCoroutine(fadeLoadScene(7));
-            }
-            else
-            {
-                StartCoroutine(fadeLoadScene(1));
+                case 1:
+                    StartCoroutine(fadeLoadScene(1));
+                    break;
+                case 2:
+                    StartCoroutine(fadeLoadScene(7));
+                    break;
+                case 3:
+                    StartCoroutine(fadeLoadScene(5));
+                    break;
+                case 4:
+                    StartCoroutine(fadeLoadScene(8));
+                    break;
             }
         }
         else

@@ -54,6 +54,8 @@ public class PlayerScript : MonoBehaviour {
     public int upgradeSpeedBonus = 0, upgradeHealthBonus = 0;
     public float upgradeDefenseBonus = 0;
 
+    private bool shipMoving = false;
+
     //toggles whether the ship can be hit
     bool hitBufferPeriod = false;
 
@@ -103,7 +105,7 @@ public class PlayerScript : MonoBehaviour {
 
     private int healthBarTweenID;
 
-    List<string> playerHubNames = new List<string>() { "Player Hub", "Willow's Hideout", "Ylva's Hideout" };
+    List<string> playerHubNames = new List<string>() { "Player Hub", "Willow's Hideout", "Ylva's Hideout", "Nymph Village" };
 
     private Text healthBarText;
 
@@ -119,6 +121,11 @@ public class PlayerScript : MonoBehaviour {
         this.enemyMomentumDuration = duration;
         this.enemyMomentumVector = momentumVector;
         this.enemyMomentumMagnitude = momentumVector.magnitude;
+    }
+
+    public bool isShipMoving()
+    {
+        return shipMoving;
     }
 
     public bool isShipRooted()
@@ -609,10 +616,12 @@ public class PlayerScript : MonoBehaviour {
 
             if (moveShip() == false)
             {
+                shipMoving = false;
                 rigidBody2D.velocity = Vector3.zero + momentumVector + enemyMomentumVector;
             }
             else
             {
+                shipMoving = true;
                 if (shipRooted == false)
                 {
                     rigidBody2D.velocity = directionMove * Mathf.Clamp((boatSpeed + speedBonus + conSpeedBonus + upgradeSpeedBonus + enemySpeedModifier), 0, int.MaxValue) + momentumVector + enemyMomentumVector; //speed bonus

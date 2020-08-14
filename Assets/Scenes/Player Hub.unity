@@ -889,6 +889,8 @@ MonoBehaviour:
   - The Arrow
   - Crystal Heart Pendant
   - Leviathan Idol
+  fourthLevelConsumables: []
+  fourthLevelArtifacts: []
   shopDialogues: []
 --- !u!4 &15957211
 Transform:
@@ -9589,7 +9591,6 @@ MonoBehaviour:
   shipHealth: 1000
   trueDamage: 0
   shipHealthMAX: 1000
-  shipRooted: 0
   whichWeapon: 1
   defenseModifier: 1
   speedBonus: 0
@@ -9600,10 +9601,8 @@ MonoBehaviour:
   numRoomsSinceLastArtifact: 0
   numRoomsVisited: 0
   enemiesDefeated: 1
-  activeEnabled: 0
   angleEffect: 0
   numberHits: 0
-  damageImmunity: 0
   damageAbsorb: 0
   conSpeedBonus: 0
   conDefenseBonus: 0
@@ -9614,12 +9613,6 @@ MonoBehaviour:
   windowAlreadyOpen: 0
   obstacleToolTip: {fileID: 738398127969479588}
   stopRotatePeriod: 0
-  momentumVector: {x: 0, y: 0, z: 0}
-  enemyMomentumVector: {x: 0, y: 0, z: 0}
-  momentumMagnitude: 0
-  momentumDuration: 0
-  enemyMomentumMagnitude: 0
-  enemyMomentumDuration: 0
   enemySpeedModifier: 0
   spikeHitBox: {fileID: 648854844}
   playerDead: 0
@@ -11765,6 +11758,8 @@ MonoBehaviour:
   - UnlockSecondLevelWeapons
   returnNotifications: {fileID: 1511688423}
   firstTimeLevelDialogues: []
+  initialLocation: {fileID: 0}
+  whatDialogueShift: 0
 --- !u!1 &456800065
 GameObject:
   m_ObjectHideFlags: 0
@@ -24820,8 +24815,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 897361179}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20, y: -5.6, z: 20}
-  m_LocalScale: {x: 0.29999998, y: 0.29999998, z: 1}
+  m_LocalPosition: {x: 20, y: -3.48, z: 20}
+  m_LocalScale: {x: 2.3, y: 2.3, z: 1}
   m_Children: []
   m_Father: {fileID: 519420032}
   m_RootOrder: 1

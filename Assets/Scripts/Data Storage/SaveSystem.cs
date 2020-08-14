@@ -146,6 +146,14 @@ public static class SaveSystem
             {
                 PlayerUpgrades.polluxShrineUpgrades.Add(id);
             }
+            foreach(string id in data.loneSparkUpgrades)
+            {
+                PlayerUpgrades.loneSparkUpgrades.Add(id);
+            }
+            foreach(string id in data.gadgetShotUpgrades)
+            {
+                PlayerUpgrades.gadgetShotUpgrades.Add(id);
+            }
 
             PlayerUpgrades.numberSkillPoints = data.numberSkillPoints;
             PlayerUpgrades.numberMaxSkillPoints = data.numberMaxSkillPoints;

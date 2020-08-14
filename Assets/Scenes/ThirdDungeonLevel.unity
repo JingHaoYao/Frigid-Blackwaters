@@ -3219,6 +3219,91 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 196049232}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &209201830
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 747483957}
+    m_Modifications:
+    - target: {fileID: 721042825889738140, guid: 50011e59cf6be2f48a9e154d727defcc,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 721042825889738140, guid: 50011e59cf6be2f48a9e154d727defcc,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.53351605
+      objectReference: {fileID: 0}
+    - target: {fileID: 721042825889738140, guid: 50011e59cf6be2f48a9e154d727defcc,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 721042825889738140, guid: 50011e59cf6be2f48a9e154d727defcc,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 721042825889738140, guid: 50011e59cf6be2f48a9e154d727defcc,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 721042825889738140, guid: 50011e59cf6be2f48a9e154d727defcc,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 721042825889738140, guid: 50011e59cf6be2f48a9e154d727defcc,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 721042825889738140, guid: 50011e59cf6be2f48a9e154d727defcc,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 721042825889738140, guid: 50011e59cf6be2f48a9e154d727defcc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 721042825889738140, guid: 50011e59cf6be2f48a9e154d727defcc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 721042825889738140, guid: 50011e59cf6be2f48a9e154d727defcc,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 721042825889738140, guid: 50011e59cf6be2f48a9e154d727defcc,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.02238806
+      objectReference: {fileID: 0}
+    - target: {fileID: 721042825889738140, guid: 50011e59cf6be2f48a9e154d727defcc,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.02238806
+      objectReference: {fileID: 0}
+    - target: {fileID: 721042825889738143, guid: 50011e59cf6be2f48a9e154d727defcc,
+        type: 3}
+      propertyPath: m_Name
+      value: Guidance Arrow
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 50011e59cf6be2f48a9e154d727defcc, type: 3}
+--- !u!4 &209201831 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 721042825889738140, guid: 50011e59cf6be2f48a9e154d727defcc,
+    type: 3}
+  m_PrefabInstance: {fileID: 209201830}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &218310626
 GameObject:
   m_ObjectHideFlags: 0
@@ -15147,6 +15232,7 @@ Transform:
   m_Children:
   - {fileID: 254074675}
   - {fileID: 1199200796}
+  - {fileID: 209201831}
   m_Father: {fileID: 0}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -30760,59 +30846,75 @@ MonoBehaviour:
   tier1EnemyTemplates:
   - potentialEnemyNames:
     - Flower Jumper Blue
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Flower Jumper Green
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Flower Jumper Purple
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Flower Jumper Purple
     - Flower Jumper Green
     - Flower Jumper Blue
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Mushroom Man Blue
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Mushroom Man Green
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Mushroom Man Purple
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Mushroom Man Purple
     - Mushroom Man Green
     - Mushroom Man Blue
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Nettle Bearer
     - Flower Jumper Blue
     - Flower Jumper Green
     - Flower Jumper Purple
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Pod Snapper
     - Pod Shooter
     - Pod Launcher
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Skeletal Bowman
     - Skeletal Plant Spearman
     - Skeletal Scytheman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Pod Jumper
     - Flower Jumper Blue
     - Flower Jumper Green
     - Flower Jumper Purple
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Mushroom Man Purple
     - Skeletal Scytheman
     - Mushroom Man Blue
     - Mushroom Man Green
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Nettle Bearer
     - Skeletal Scytheman
     - Skeletal Plant Spearman
     - Skeletal Bowman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Pod Jumper
     - Pod Launcher
     - Pod Snapper
     - Pod Shooter
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Pod Jumper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Mushroom Man Blue
     - Mushroom Man Green
@@ -30820,266 +30922,338 @@ MonoBehaviour:
     - Flower Jumper Blue
     - Flower Jumper Green
     - Flower Jumper Purple
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Skeletal Plant Spearman
     - Skeletal Scytheman
     - Nettle Bearer
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Skeletal Bowman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Pod Shooter
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Pod Snapper
     - Pod Jumper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Pod Launcher
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Pod Launcher
     - Pod Shooter
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Pod Snapper
     - Skeletal Bowman
     - Nettle Bearer
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - 'Mushroom Man Blue '
     - Flower Jumper Blue
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Mushroom Man Purple
     - Flower Jumper Purple
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Mushroom Man Green
     - Flower Jumper Green
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Pod Snapper
     - Pod Shooter
     - Pod Jumper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Pod Snapper
     - Pod Shooter
+    enemiesWithLimits: []
   tier2EnemyTemplates:
   - potentialEnemyNames:
     - Nettle Layer
     - Nettle Bearer
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Nettle Layer
     - Pod Launcher
     - Pod Jumper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Nettle Layer
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Nettle Layer
     - Plague Skeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Plague Skeleton
     - Skeletal Bowman
     - Skeletal Scytheman
     - Skeletal Plant Spearman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Plague Skeleton
     - Skeletal Thornball Launcher
     - Skeletal Scytheman
     - Skeletal Plant Spearman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Plague Skeleton
     - Skeletal Thornball Launcher
     - Skeletal Bowman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Plague Skeleton
     - Mushroom Man Blue
     - Mushroom Man Green
     - Mushroom Man Purple
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Skeletal Thornball Launcher
     - Seed Spouter
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Skeletal Thornball Launcher
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Skeletal Thornball Launcher
     - Skeletal Plant Spearman
     - Skeletal Scytheman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Skeletal Thornball Launcher
     - Skeletal Bowman
     - Nettle Bearer
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Vine Whipper
     - Flower Jumper Blue
     - Flower Jumper Purple
     - Flower Jumper Green
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Vine Whipper
     - Root Walker
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Vine Whipper
     - Mushroom Man Blue
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Vine Whipper
     - Pod Shooter
     - Pod Snapper
     - Pod Launcher
     - Pod Jumper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Root Walker
     - Nettle Layer
     - Plague Skeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Root Walker
     - Skeletal Thornball Launcher
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Root Walker
     - Pod Jumper
     - Pod Snapper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Root Walker
     - Pod Shooter
     - Pod Launcher
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Root Walker
     - Mushroom Man Blue
     - Mushroom Man Purple
     - Mushroom Man Green
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Seed Spouter
     - Flower Jumper Blue
     - Flower Jumper Green
     - Flower Jumper Purple
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Seed Spouter
     - Pod Launcher
     - Pod Shooter
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Seed Spouter
     - Pod Snapper
     - Pod Jumper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Seed Spouter
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Fruit Spitter
     - Seed Spouter
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Fruit Spitter
     - Nettle Layer
     - Plague Skeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Fruit Spitter
     - Flower Jumper Blue
     - Flower Jumper Green
     - Flower Jumper Purple
     - Fruit Spitter
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Fruit Spitter
     - Pod Snapper
     - Pod Shooter
+    enemiesWithLimits: []
   tier3EnemyTemplates:
   - potentialEnemyNames:
     - Bush Sprite
     - Flower Jumper Blue
     - Flower Jumper Green
     - Flower Jumper Purple
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Bush Sprite
     - Seed Spouter
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Bush Sprite
     - Pod Jumper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Bush Sprite
     - Nettle Layer
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Bush Sprite
     - Gatling Pod
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Gatling Pod
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Gatling Pod
     - Pod Snapper
     - Pod Shooter
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Gatling Pod
     - Seed Spouter
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Gatling Pod
     - Vine Whipper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Gatling Pod
     - Skeletal Scytheman
     - Skeletal Plant Spearman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Flower Monstrosity
     - Flower Jumper Blue
     - Flower Jumper Purple
     - Flower Jumper Green
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Flower Monstrosity
     - Vine Whipper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Flower Monstrosity
     - Nettle Bearer
     - Skeletal Bowman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Flower Monstrosity
     - Shrub Hider
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Flower Monstrosity
     - Skeletal Thornball Launcher
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Leaf Fan Skeleton
     - Skeletal Bowman
     - Skeletal Plant Spearman
     - Skeletal Scytheman
     - Leaf Fan Skeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Leaf Fan Skeleton
     - Skeletal Thornball Launcher
     - Skeletal Bowman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Leaf Fan Skeleton
     - Spore Thrower Skeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Leaf Fan Skeleton
     - Mushroom Man Blue
     - Mushroom Man Green
     - Mushroom Man Purple
     - Leaf Fan Skeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Leaf Fan Skeleton
     - Skeletal Thornball Launcher
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Shrub Hider
     - Mushroom Man Blue
     - Mushroom Man Green
     - Mushroom Man Purple
     - Shrub Hider
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Shrub Hider
     - Flower Monstrosity
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Shrub Hider
     - Spore Thrower Skeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Shrub Hider
     - Nettle Layer
     - Plague Skeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Shrub Hider
     - Pod Shooter
     - Pod Snapper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Spore Thrower Skeleton
     - Skeletal Thornball Thrower
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Spore Thrower Skeleton
     - Seed Spouter
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Spore Thrower Skeleton
     - Gatling Pod
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Spore Thrower Skeleton
     - Mushroom Man Blue
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Spore Thrower Skeleton
     - Mushroom Man Purple
     - Mushroom Man Green
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Leaf Fan Skeleton
     - Skeletal Plant Spearman
@@ -31088,63 +31262,77 @@ MonoBehaviour:
     - Nettle Bearer
     - Skeletal Thornball Launcher
     - Spore Thrower Skeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Shrub Hider
     - Root Walker
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Flower Monstrosity
     - Root Walker
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Spore Thrower Skeleton
     - Nettle Layer
     - Root Walker
     - Shrub Hider
+    enemiesWithLimits: []
   tier4EnemyTemplates:
   - potentialEnemyNames:
     - Giant Pod Carrier
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Giant Pod Carrier
     - Pod Launcher
     - Pod Shooter
     - Pod Snapper
     - Giant Pod Carrier
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Giant Pod Carrier
     - Pod Launcher
     - Pod Shooter
     - Pod Snapper
     - Giant Pod Carrier
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Giant Pod Carrier
     - Gatling Pod
     - Shrub Hider
     - Giant Pod Carrier
     - Flower Monstrosity
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Giant Pod Carrier
     - Skeletal Thornball Launcher
     - Seed Spouter
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Mushroom Goliath
     - Mushroom Man Blue
     - Mushroom Man Green
     - Mushroom Man Purple
     - Mushroom Goliath
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Mushroom Goliath
     - Spore Thrower Skeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Mushroom Goliath
     - Vine Whipper
     - Shrub Hider
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Mushroom Goliath
     - Skeletal Plant Spearman
     - Skeletal Scytheman
     - Skeletal Bowman
     - Mushroom Goliath
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Mushroom Goliath
+    enemiesWithLimits: []
   emptyRoomEnemyNames: []
   nonRoomTemplateEnemyNames: []
 --- !u!1001 &1530929644
@@ -39764,6 +39952,7 @@ MonoBehaviour:
   roomMemory: {fileID: 0}
   mapExploration: {fileID: 0}
   tileSize: {x: 0, y: 0}
+  tileList: []
 --- !u!114 &1951010740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39980,7 +40169,6 @@ MonoBehaviour:
   shipHealth: 800
   trueDamage: 0
   shipHealthMAX: 1000
-  shipRooted: 0
   whichWeapon: 1
   defenseModifier: 1
   speedBonus: 0
@@ -39991,10 +40179,8 @@ MonoBehaviour:
   numRoomsSinceLastArtifact: 0
   numRoomsVisited: 0
   enemiesDefeated: 1
-  activeEnabled: 0
   angleEffect: 0
   numberHits: 0
-  damageImmunity: 0
   damageAbsorb: 0
   conSpeedBonus: 0
   conDefenseBonus: 0
@@ -40005,12 +40191,6 @@ MonoBehaviour:
   windowAlreadyOpen: 0
   obstacleToolTip: {fileID: 20992864}
   stopRotatePeriod: 0
-  momentumVector: {x: 0, y: 0, z: 0}
-  enemyMomentumVector: {x: 0, y: 0, z: 0}
-  momentumMagnitude: 0
-  momentumDuration: 0
-  enemyMomentumMagnitude: 0
-  enemyMomentumDuration: 0
   enemySpeedModifier: 0
   spikeHitBox: {fileID: 1877609323}
   playerDead: 0
@@ -42998,6 +43178,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SpawnRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 760367071009335231, guid: 781be2e9e1a80784e87beb5a23e3f659,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 763903475552729801, guid: 781be2e9e1a80784e87beb5a23e3f659,
         type: 3}

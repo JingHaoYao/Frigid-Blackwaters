@@ -24,6 +24,7 @@ public class DamageAmount : MonoBehaviour {
 
     public void updateDamage()
     {
+        playerScript = PlayerProperties.playerScript;
         if (addBonuses == true)
         {
             damage = Mathf.Clamp(originDamage + playerScript.attackBonus + playerScript.conAttackBonus + miscBonusDamage, 1, int.MaxValue);

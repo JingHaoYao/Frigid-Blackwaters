@@ -13,6 +13,9 @@ public class AvailableShopItems : MonoBehaviour
     public string[] thirdLevelConsumables;
     public string[] thirdLevelArtifacts;
 
+    public string[] fourthLevelConsumables;
+    public string[] fourthLevelArtifacts;
+
     public DialogueSet[] shopDialogues;
     NotificationBell shopNotifications;
 

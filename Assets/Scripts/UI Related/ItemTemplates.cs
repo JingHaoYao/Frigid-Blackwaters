@@ -171,12 +171,12 @@ public class ItemTemplates : MonoBehaviour {
 
         foreach(string id in fourthLevelConsumables)
         {
-            itemDB.Add(id, "Items/Fourth Dungeon Level/Consumables/Regular Consumables");
+            itemDB.Add(id, "Items/Fourth Dungeon Level/Consumables/Regular Consumables/");
         }
 
         foreach (string id in fourthLevelUniqueArtifacts)
         {
-            itemDB.Add(id, "Items/Fourth Dungeon Level/Artifacts/Unique Artifacts");
+            itemDB.Add(id, "Items/Fourth Dungeon Level/Artifacts/Unique Artifacts/");
         }
     }
 

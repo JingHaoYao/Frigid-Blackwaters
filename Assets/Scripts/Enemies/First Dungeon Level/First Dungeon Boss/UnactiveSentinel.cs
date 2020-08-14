@@ -13,6 +13,8 @@ public class UnactiveSentinel : MonoBehaviour
     public GameObject sentinelBoss;
     Camera mainCamera;
     MoveCameraNextRoom cameraScript;
+    [SerializeField] List<SentinelRotateRock> rocks;
+    [SerializeField] GameObject rockStorm;
 
     void Start()
     {
@@ -43,11 +45,12 @@ public class UnactiveSentinel : MonoBehaviour
     IEnumerator bossWakeUpSequence()
     {
         LeanTween.move(mainCamera.gameObject, bossCamLocation, 2).setEaseOutCirc();
+        rockStorm.SetActive(true);
 
         yield return new WaitForSeconds(2.1f);
 
         StartCoroutine(wakeUpBoss());
-        foreach (SentinelRotateRock rock in FindObjectsOfType<SentinelRotateRock>())
+        foreach (SentinelRotateRock rock in rocks)
         {
             rock.rise();
         }

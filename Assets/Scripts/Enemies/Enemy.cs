@@ -95,7 +95,7 @@ public abstract class Enemy: MonoBehaviour
             {
                 damageDealt = 1;
             }
-            EnemyPool.showDamageNumbers(damageAmount, this);
+            EnemyPool.showDamageNumbers(damageDealt, this);
             health -= damageDealt;
             FindObjectOfType<CameraShake>().shakeCamFunction(0.1f, 0.3f * Mathf.Clamp(((float)damageDealt / maxHealth), 0.1f, 5f));
 

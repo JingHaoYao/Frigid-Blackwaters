@@ -225,9 +225,16 @@ public class ShipWeaponScript : MonoBehaviour {
             if (whichSide == 1)
             {
                 instant = weaponTemplate.GetComponent<WeaponFireTemplate>().fireWeapon(whichSide, angleOrientation, weaponPlume);
+
+                if (instant == null)
+                {
+                    return;
+                }
+
                 coolDownPeriod = coolDownThreshold;
                 onCooldown = true;
                 numberShots += 1;
+
                 if (instant.GetComponent<WeaponFireScript>())
                 {
                     instant.GetComponent<WeaponFireScript>().whichWeapon = 1;
@@ -237,11 +244,18 @@ public class ShipWeaponScript : MonoBehaviour {
                 {
                     instant.GetComponent<PlayerProjectile>().whichWeaponFrom = 1;
                     instant.GetComponent<PlayerProjectile>().forceShot = false;
+                    triggerArtifactFlags(instant);
                 }
             }
             else if (whichSide == 2)
             {
                 instant = weaponTemplate.GetComponent<WeaponFireTemplate>().fireWeapon(whichSide, angleOrientation, weaponPlume);
+
+                if (instant == null)
+                {
+                    return;
+                }
+
                 coolDownPeriod = coolDownThreshold;
                 onCooldown = true;
                 numberShots += 1;
@@ -254,14 +268,22 @@ public class ShipWeaponScript : MonoBehaviour {
                 {
                     instant.GetComponent<PlayerProjectile>().whichWeaponFrom = 2;
                     instant.GetComponent<PlayerProjectile>().forceShot = false;
+                    triggerArtifactFlags(instant);
                 }
             }
             else if (whichSide == 3)
             {
                 instant = weaponTemplate.GetComponent<WeaponFireTemplate>().fireWeapon(whichSide, angleOrientation, weaponPlume);
+
+                if (instant == null)
+                {
+                    return;
+                }
+
                 coolDownPeriod = coolDownThreshold;
                 onCooldown = true;
                 numberShots += 1;
+
                 if (instant.GetComponent<WeaponFireScript>())
                 {
                     instant.GetComponent<WeaponFireScript>().whichWeapon = 3;
@@ -271,6 +293,7 @@ public class ShipWeaponScript : MonoBehaviour {
                 {
                     instant.GetComponent<PlayerProjectile>().whichWeaponFrom = 3;
                     instant.GetComponent<PlayerProjectile>().forceShot = false;
+                    triggerArtifactFlags(instant);
                 }
             }
         }
@@ -294,6 +317,7 @@ public class ShipWeaponScript : MonoBehaviour {
             {
                 instant.GetComponent<PlayerProjectile>().whichWeaponFrom = 1;
                 instant.GetComponent<PlayerProjectile>().forceShot = true;
+                triggerArtifactFlags(instant);
             }
         }
         else if (whichSide == 2)
@@ -311,6 +335,7 @@ public class ShipWeaponScript : MonoBehaviour {
             {
                 instant.GetComponent<PlayerProjectile>().whichWeaponFrom = 2;
                 instant.GetComponent<PlayerProjectile>().forceShot = true;
+                triggerArtifactFlags(instant);
             }
         }
         else if (whichSide == 3)
@@ -328,10 +353,41 @@ public class ShipWeaponScript : MonoBehaviour {
             {
                 instant.GetComponent<PlayerProjectile>().whichWeaponFrom = 3;
                 instant.GetComponent<PlayerProjectile>().forceShot = true;
+                triggerArtifactFlags(instant);
             }
         }
     }
 
+    void triggerArtifactFlags(GameObject instant)
+    {
+        Vector3 cursorPosition = PlayerProperties.cursorPosition;
+        float angle = (360 + Mathf.Atan2(cursorPosition.y - transform.position.y, cursorPosition.x - transform.position.x) * Mathf.Rad2Deg) % 360;
+
+        if (whichSide == 1)
+        {
+            foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+            {
+                if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedFrontWeapon(new GameObject[] { instant }, instant.transform.position, angle);
+            }
+        }
+        else if (whichSide == 2)
+        {
+            foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+            {
+                if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedLeftWeapon(new GameObject[] { instant }, instant.transform.position, angle);
+            }
+        }
+        else
+        {
+            foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+            {
+                if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                    slot.displayInfo.GetComponent<ArtifactEffect>().firedRightWeapon(new GameObject[] { instant }, instant.transform.position, angle);
+            }
+        }
+    }
 
 	void Start () {
         playerShip = GameObject.Find("PlayerShip");

@@ -813,6 +813,8 @@ MonoBehaviour:
   - The Arrow
   - Crystal Heart Pendant
   - Leviathan Idol
+  fourthLevelConsumables: []
+  fourthLevelArtifacts: []
   shopDialogues: []
 --- !u!4 &15957211
 Transform:
@@ -9308,7 +9310,6 @@ MonoBehaviour:
   shipHealth: 1000
   trueDamage: 0
   shipHealthMAX: 1000
-  shipRooted: 0
   whichWeapon: 1
   defenseModifier: 1
   speedBonus: 0
@@ -9319,10 +9320,8 @@ MonoBehaviour:
   numRoomsSinceLastArtifact: 0
   numRoomsVisited: 0
   enemiesDefeated: 1
-  activeEnabled: 0
   angleEffect: 0
   numberHits: 0
-  damageImmunity: 0
   damageAbsorb: 0
   conSpeedBonus: 0
   conDefenseBonus: 0
@@ -9333,12 +9332,6 @@ MonoBehaviour:
   windowAlreadyOpen: 0
   obstacleToolTip: {fileID: 738398127969479588}
   stopRotatePeriod: 0
-  momentumVector: {x: 0, y: 0, z: 0}
-  enemyMomentumVector: {x: 0, y: 0, z: 0}
-  momentumMagnitude: 0
-  momentumDuration: 0
-  enemyMomentumMagnitude: 0
-  enemyMomentumDuration: 0
   enemySpeedModifier: 0
   spikeHitBox: {fileID: 648854844}
   playerDead: 0
@@ -47036,6 +47029,12 @@ PrefabInstance:
       propertyPath: toolTip
       value: 
       objectReference: {fileID: 2012675348}
+    - target: {fileID: 3508635302022590454, guid: f3a871308f67be44e8e95645bc7e56f0,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 435fd8499ac8faa4cb954ee780cd8885,
+        type: 3}
     - target: {fileID: 3617459091991415064, guid: f3a871308f67be44e8e95645bc7e56f0,
         type: 3}
       propertyPath: toolTip
@@ -47875,6 +47874,12 @@ PrefabInstance:
       propertyPath: toolTip
       value: 
       objectReference: {fileID: 2012675348}
+    - target: {fileID: 4563701610023028695, guid: f3a871308f67be44e8e95645bc7e56f0,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 435fd8499ac8faa4cb954ee780cd8885,
+        type: 3}
     - target: {fileID: 4988369330357419705, guid: f3a871308f67be44e8e95645bc7e56f0,
         type: 3}
       propertyPath: toolTip
@@ -47926,6 +47931,12 @@ PrefabInstance:
       propertyPath: toolTip
       value: 
       objectReference: {fileID: 2012675348}
+    - target: {fileID: 8474767761478995059, guid: f3a871308f67be44e8e95645bc7e56f0,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 435fd8499ac8faa4cb954ee780cd8885,
+        type: 3}
     - target: {fileID: 8880142997376947107, guid: f3a871308f67be44e8e95645bc7e56f0,
         type: 3}
       propertyPath: toolTip

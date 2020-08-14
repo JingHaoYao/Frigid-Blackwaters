@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9111692480693175924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9111692480693175931}
+  - component: {fileID: 9111692480693175930}
+  m_Layer: 0
+  m_Name: Random Dungeon Entry Dialogue Gilded Compass
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9111692480693175931
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9111692480693175924}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 50173.324, y: -14904.181, z: -18384}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9111692480693175930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9111692480693175924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatDialogueType: 0
+  checkPointDialogue: 0
+  dialogues:
+  - Navigator, Malfar wanted to tell you about something.
+  - It's this compass, apparently it points to treasure located here in this labyrinth.
+  - 'We can probably use this to help pinpoint rooms that are useful. '
+  - We left in the back, so use it when you wish.
+  dialogueNames:
+  - Tabitha
+  - Malfar
+  - Tabitha
+  - Tabitha
+  background: {fileID: 0}
+  character1Sprites: []
+  character2Sprites:
+  - {fileID: 185324497904224002, guid: 0748015fc8ba1a5469775b8e4121c7d2, type: 3}
+  - {fileID: -531093000682355785, guid: 0748015fc8ba1a5469775b8e4121c7d2, type: 3}
+  - {fileID: 2654507085778357654, guid: 0748015fc8ba1a5469775b8e4121c7d2, type: 3}
+  - {fileID: 2654507085778357654, guid: 0748015fc8ba1a5469775b8e4121c7d2, type: 3}
+  character3Sprites:
+  - {fileID: 303092764633297369, guid: eecfabd264775f845919159680a8332d, type: 3}
+  - {fileID: 4335361411578615110, guid: eecfabd264775f845919159680a8332d, type: 3}
+  - {fileID: 4335361411578615110, guid: eecfabd264775f845919159680a8332d, type: 3}
+  - {fileID: 303092764633297369, guid: eecfabd264775f845919159680a8332d, type: 3}
+  character4Sprites: []
+  panelSprites: []
+  substituteMusic: 
+  originalMusic: 
+  addedItems:
+  - {fileID: 3352371956621272980, guid: 170ed991adb86c941a76ce5b0a9ad770, type: 3}
+  textColor: {r: 1, g: 1, b: 1, a: 1}

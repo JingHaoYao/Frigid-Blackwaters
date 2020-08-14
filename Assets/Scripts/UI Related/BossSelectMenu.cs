@@ -42,7 +42,7 @@ public class BossSelectMenu : MonoBehaviour
             minorBossButtons[i].GetComponent<Image>().sprite = mission.missionIcon;
 
             // Adjusting the star display
-            for (int k = 0; k < 5; k++)
+            for (int k = 0; k < 14; k++)
             {
                 // Accesses image objects and sets them to active depending on the difficulty level
                 if (k < mission.difficulty)
@@ -73,7 +73,7 @@ public class BossSelectMenu : MonoBehaviour
         StoryMission bossMission = missionManager.allStoryMissions[missionManager.dungeonLevelThresholds[whatLevel - 1] - 1];
 
         finalBossButton.GetComponent<Image>().sprite = bossMission.missionIcon;
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 14; i++)
         {
             if (i < bossMission.difficulty)
             {

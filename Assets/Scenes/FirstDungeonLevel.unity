@@ -1803,6 +1803,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sentinelBoss: {fileID: 467420330}
+  rocks:
+  - {fileID: 454908216}
+  - {fileID: 2091330651}
+  - {fileID: 890196347}
+  - {fileID: 1581099585}
+  - {fileID: 661487489}
+  - {fileID: 1632672040}
+  - {fileID: 900247556}
+  - {fileID: 11115132}
+  - {fileID: 742826401}
+  - {fileID: 1901799043}
+  rockStorm: {fileID: 1282415127}
 --- !u!114 &59287478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21045,6 +21057,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnRoom
       objectReference: {fileID: 0}
+    - target: {fileID: 1582935762785900, guid: ef3331502189efa4cbd0770f38403d74, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4833799309101850, guid: ef3331502189efa4cbd0770f38403d74, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -31901,17 +31917,22 @@ MonoBehaviour:
   tier1EnemyTemplates:
   - potentialEnemyNames:
     - Blue Anemone Enemy
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Green Anemone Enemy
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Purple Anemone Enemy
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Purple Anemone Enemy
     - Green Anemone Enemy
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Purple Anemone Enemy
     - Green Anemone Enemy
     - Blue Anemone Enemy
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - 2 - SkeletalPirate
     - 3 - SkeletalPirate
@@ -31919,6 +31940,7 @@ MonoBehaviour:
     - 3 - SkeletalSpearman
     - 2 - SkeletalSpearman
     - 1 - SkeletalSpearman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - 2 - SkeletalPirate
     - 3 - SkeletalPirate
@@ -31929,68 +31951,86 @@ MonoBehaviour:
     - 2 - SkeletalMusketeer
     - 1 - SkeletalMusketeer
     - 3 - SkeletalMusketeer
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - 2 - SkeletalMusketeer
     - 1 - SkeletalMusketeer
     - 3 - SkeletalMusketeer
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - ArmouredSkeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - ArmouredSkeleton
     - 1 - SkeletalMusketeer
     - 2 - SkeletalMusketeer
     - 3 - SkeletalMusketeer
     - ArmouredSkeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Starfish Enemy Parent
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Starfish Enemy Parent
     - Blue Anemone Enemy
     - Green Anemone Enemy
     - Purple Anemone Enemy
     - Blue Starfish Enemy Parent
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Starfish Enemy Parent
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Blue Starfish Enemy Parent
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Blue Starfish Enemy Parent
     - Starfish Enemy Parent
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Sea Urchin Blue Enemy Parent
     - Sea Urchin Enemy Parent
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Sea Urchin Blue Enemy Parent
     - Sea Urchin Enemy Parent
     - Blue Starfish Enemy Parent
     - Starfish Enemy Parent
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Sea Urchin Blue Enemy Parent
     - Sea Urchin Enemy Parent
     - Blue Anemone Enemy
     - Green Anemone Enemy
     - Purple Anemone Enemy
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Fishman Slapper
     - Urchin Fishman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Fishman Slapper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Urchin Fishman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Urchin Fishman
     - Sea Urchin Blue Enemy Parent
     - Sea Urchin Enemy Parent
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Urchin Fishman
     - Starfish Enemy Parent
     - Blue Starfish Enemy Parent
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Fishman Slapper
     - 3 - SkeletalPirate
     - SkeletalPirate
     - 2 - SkeletalPirate
     - Fishman Slapper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Fishman Slapper
     - 1 - SkeletalMusketeer
@@ -31998,33 +32038,42 @@ MonoBehaviour:
     - 2 - SkeletalMusketeer
     - Fishman Slapper
     - Fishman Slapper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Fishman Slapper
     - Blue Anemone Enemy
     - Green Anemone Enemy
     - Purple Anemone Enemy
     - Fishman Slapper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Urchin Fishman
     - 1 - SkeletalMusketeer
     - 2 - SkeletalMusketeer
     - 3 - SkeletalMusketeer
     - Urchin Fishman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Sea Urchin Blue Enemy Parent
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Sea Urchin Enemy Parent
+    enemiesWithLimits: []
   tier2EnemyTemplates:
   - potentialEnemyNames:
     - Sharkman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Sharkman
     - Eelman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Eelman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Sticky Bomb Skeleton Type 2
     - Sticky Bomb Skeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Eelman
     - Sharkman
@@ -32037,11 +32086,13 @@ MonoBehaviour:
     - 1 - SkeletalSpearman
     - 2 - SkeletalSpearman
     - 3 - SkeletalSpearman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - SkeletalCannon
     - 1 - SkeletalMusketeer
     - 2 - SkeletalMusketeer
     - 3 - SkeletalMusketeer
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - SkeletalCannon
     - SkeletalCannon
@@ -32055,37 +32106,44 @@ MonoBehaviour:
     - 2 - SkeletalPirate
     - 3 - SkeletalPirate
     - SkeletalPirate
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - SkeletalCannon
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Sticky Bomb Skeleton Type 2
     - Sticky Bomb Skeleton Type 2
     - Purple Anemone Enemy
     - Purple Anemone Enemy
     - Purple Anemone Enemy
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Sticky Bomb Skeleton
     - Sticky Bomb Skeleton
     - Green Anemone Enemy
     - Green Anemone Enemy
     - Green Anemone Enemy
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Sharkman
     - Sharkman
     - Blue Anemone Enemy
     - Blue Anemone Enemy
     - Starfish Enemy Parent
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Eelman
     - Eelman
     - Blue Anemone Enemy
     - Blue Anemone Enemy
     - Starfish Enemy Parent
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Sticky Bomb Skeleton
     - Sticky Bomb Skeleton Type 2
     - ArmouredSkeleton
     - ArmouredSkeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Blue Starfish Enemy Parent
     - SkeletalCannon
@@ -32093,16 +32151,20 @@ MonoBehaviour:
     - 2 - SkeletalSpearman
     - 2 - SkeletalPirate
     - Starfish Enemy Parent
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Roll Bomb Skeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Roll Bomb Skeleton
     - Sticky Bomb Skeleton
     - Sticky Bomb Skeleton Type 2
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Roll Bomb Skeleton
     - Blue Starfish Enemy Parent
     - Starfish Enemy Parent
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Roll Bomb Skeleton
     - 2 - SkeletalPirate
@@ -32113,6 +32175,7 @@ MonoBehaviour:
     - 3 - SkeletalSpearman
     - Roll Bomb Skeleton
     - Roll Bomb Skeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Heavy Spear Fishman
     - Heavy Spear Fishman
@@ -32120,36 +32183,43 @@ MonoBehaviour:
     - Urchin Fishman
     - Fishman Slapper
     - Fishman Slapper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Heavy Spear Fishman
     - Blue Anemone Enemy
     - Green Anemone Enemy
     - Purple Anemone Enemy
     - Heavy Spear Fishman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Heavy Spear Fishman
     - Urchin Fishman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Heavy Spear Fishman
     - Fishman Slapper
     - Fishman Slapper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Heavy Spear Fishman
     - Heavy Spear Fishman
     - 1 - SkeletalSpearman
     - 2 - SkeletalSpearman
     - 3 - SkeletalSpearman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Sharkman
     - Eelman
     - Urchin Fishman
     - Fishman Slapper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Heavy Spear Fishman
     - Heavy Spear Fishman
     - 2 - SkeletalPirate
     - 3 - SkeletalPirate
     - SkeletalPirate
+    enemiesWithLimits: []
   tier3EnemyTemplates:
   - potentialEnemyNames:
     - FishmanShaman
@@ -32162,34 +32232,42 @@ MonoBehaviour:
     - 3 - SkeletalSpearman
     - FishmanShaman
     - FishmanShaman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - FishmanShaman
     - FishmanShaman
     - Eelman
     - Sharkman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - FishmanShaman
     - FishmanShaman
     - Starfish Enemy Parent
     - Blue Starfish Enemy Parent
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Lesser Frost Mage
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Lesser Frost Mage Type 2
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Lesser Frost Mage Type 2
     - Lesser Frost Mage
     - Sticky Bomb Skeleton
     - Sticky Bomb Skeleton Type 2
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Lesser Frost Mage Type 2
     - Lesser Frost Mage
     - Blue Anemone Enemy
     - Purple Anemone Enemy
     - Green Anemone Enemy
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Lesser Frost Mage Type 2
     - Lesser Frost Mage
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Lesser Frost Mage Type 2
     - Lesser Frost Mage
@@ -32206,16 +32284,19 @@ MonoBehaviour:
     - Lesser Frost Mage Type 2
     - Lesser Frost Mage
     - Lesser Frost Mage Type 2
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Lesser Frost Mage Type 2
     - Lesser Frost Mage
     - Roll Bomb Skeleton
     - Roll Bomb Skeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Cold Wave Skeleton
     - Blue Anemone Enemy
     - Green Anemone Enemy
     - Purple Anemone Enemy
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Cold Wave Skeleton
     - 1 - SkeletalMusketeer
@@ -32230,59 +32311,72 @@ MonoBehaviour:
     - Cold Wave Skeleton
     - Cold Wave Skeleton
     - Cold Wave Skeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Cold Wave Skeleton
     - Sticky Bomb Skeleton
     - Sticky Bomb Skeleton Type 2
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Angler Fish
     - Blue Starfish Enemy Parent
     - Starfish Enemy Parent
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Angler Fish
     - Eelman
     - Sharkman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Angler Fish
     - Urchin Fishman
     - Urchin Fishman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Angler Fish
     - Blue Anemone Enemy
     - Green Anemone Enemy
     - Purple Anemone Enemy
     - Angler Fish
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Angler Fish
     - Heavy Spear Fishman
     - Heavy Spear Fishman
     - Heavy Spear Fishman
     - Angler Fish
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - FishmanShaman
     - Urchin Fishman
     - Fishman Slapper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - FishmanShaman
     - Fishman Slapper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Fishman Tentacle Summoner
     - Fishman Slapper
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Fishman Tentacle Summoner
     - Fishman Slapper
     - Urchin Fishman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - Fishman Tentacle Summoner
     - Fishman Tentacle Summoner
     - Heavy Spear Fishman
     - Heavy Spear Fishman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - 1 - SkeletalMusketeer
     - 2 - SkeletalMusketeer
     - 3 - SkeletalMusketeer
     - Fishman Tentacle Summoner
     - Fishman Tentacle Summoner
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - 2 - SkeletalPirate
     - 3 - SkeletalPirate
@@ -32294,22 +32388,27 @@ MonoBehaviour:
     - 3 - SkeletalSpearman
     - Fishman Tentacle Summoner
     - Fishman Tentacle Summoner
+    enemiesWithLimits: []
   tier4EnemyTemplates:
   - potentialEnemyNames:
     - SkeletalNecromancer
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - SkeletalFrostMage
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - SkeletalFrostMage
     - FishmanShaman
     - Sharkman
     - Eelman
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - SkeletalFrostMage
     - Blue Anemone Enemy
     - Green Anemone Enemy
     - Purple Anemone Enemy
     - SkeletalFrostMage
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - 2 - SkeletalPirate
     - SkeletalFrostMage
@@ -32324,18 +32423,22 @@ MonoBehaviour:
     - ArmouredSkeleton
     - ArmouredSkeleton
     - ArmouredSkeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - SkeletalFrostMage
     - Lesser Frost Mage
     - Lesser Frost Mage Type 2
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - SkeletalNecromancer
     - Roll Bomb Skeleton
     - Cold Wave Skeleton
+    enemiesWithLimits: []
   - potentialEnemyNames:
     - SkeletalFrostMage
     - Roll Bomb Skeleton
     - Cold Wave Skeleton
+    enemiesWithLimits: []
   emptyRoomEnemyNames:
   - FishManIsland
   nonRoomTemplateEnemyNames:
@@ -45251,6 +45354,7 @@ MonoBehaviour:
   roomMemory: {fileID: 0}
   mapExploration: {fileID: 0}
   tileSize: {x: 0, y: 0}
+  tileList: []
 --- !u!114 &1951010740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45466,7 +45570,6 @@ MonoBehaviour:
   shipHealth: 800
   trueDamage: 0
   shipHealthMAX: 1000
-  shipRooted: 0
   whichWeapon: 1
   defenseModifier: 1
   speedBonus: 0
@@ -45477,10 +45580,8 @@ MonoBehaviour:
   numRoomsSinceLastArtifact: 0
   numRoomsVisited: 0
   enemiesDefeated: 1
-  activeEnabled: 0
   angleEffect: 0
   numberHits: 0
-  damageImmunity: 0
   damageAbsorb: 0
   conSpeedBonus: 0
   conDefenseBonus: 0
@@ -45491,12 +45592,6 @@ MonoBehaviour:
   windowAlreadyOpen: 0
   obstacleToolTip: {fileID: 167551662}
   stopRotatePeriod: 0
-  momentumVector: {x: 0, y: 0, z: 0}
-  enemyMomentumVector: {x: 0, y: 0, z: 0}
-  momentumMagnitude: 0
-  momentumDuration: 0
-  enemyMomentumMagnitude: 0
-  enemyMomentumDuration: 0
   enemySpeedModifier: 0
   spikeHitBox: {fileID: 1877609323}
   playerDead: 0

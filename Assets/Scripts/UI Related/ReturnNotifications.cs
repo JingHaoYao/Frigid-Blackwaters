@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class ReturnNotifications : MonoBehaviour
 {
@@ -22,6 +23,13 @@ public class ReturnNotifications : MonoBehaviour
     public GameObject itemRewardsUI;
 
     private NotificationBell dialogueNotifications;
+
+    UnityAction<int> midDialogueAction;
+
+    public void setMidDialogueAction(UnityAction<int> midDialogueAction)
+    {
+        this.midDialogueAction = midDialogueAction;
+    }
 
     public void updateRewards(int goldAmount, int skillPointAmount, GameObject[] itemRewards, bool failedMission = false, bool missionIsCompleted = false)
     {
@@ -108,6 +116,12 @@ public class ReturnNotifications : MonoBehaviour
                 dialogueUI.waitReveal = 0.001f;
                 dialogueUI.gameObject.SetActive(true);
                 dialoguesToDisplay.Remove(dialoguesToDisplay[0]);
+
+                if(midDialogueAction != null)
+                {
+                    midDialogueAction.Invoke(dialoguesToDisplay.Count);
+                }
+
                 blackOverlay.SetActive(true);
                 buildingUnlocked = true;
             }

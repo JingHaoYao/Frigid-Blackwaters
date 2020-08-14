@@ -22,6 +22,8 @@ public class SaveData
     public string[] plantMortarUpgrades;
     public string[] podFlyersUpgrades;
     public string[] polluxShrineUpgrades;
+    public string[] loneSparkUpgrades;
+    public string[] gadgetShotUpgrades;
     public string[] hullUpgrades;
     public string[] inventoryUpgrades;
     public string[] safeUpgrades;
@@ -155,6 +157,16 @@ public class SaveData
         {
             polluxShrineUpgrades[i] = PlayerUpgrades.polluxShrineUpgrades[i];
         }
+        loneSparkUpgrades = new string[PlayerUpgrades.loneSparkUpgrades.Count];
+        for(int i = 0; i < loneSparkUpgrades.Length; i++)
+        {
+            loneSparkUpgrades[i] = PlayerUpgrades.loneSparkUpgrades[i];
+        }
+        gadgetShotUpgrades = new string[PlayerUpgrades.gadgetShotUpgrades.Count];
+        for (int i = 0; i < gadgetShotUpgrades.Length; i++)
+        {
+            gadgetShotUpgrades[i] = PlayerUpgrades.gadgetShotUpgrades[i];
+        }
 
         hullUpgrades = new string[PlayerUpgrades.hullUpgrades.Count];
         for (int i = 0; i < hullUpgrades.Length; i++)
@@ -167,10 +179,11 @@ public class SaveData
             inventoryUpgrades[i] = PlayerUpgrades.inventoryUpgrades[i];
         }
         safeUpgrades = new string[PlayerUpgrades.safeUpgrades.Count];
-        for(int i = 0; i < safeUpgrades.Length; i++)
+        for (int i = 0; i < safeUpgrades.Length; i++)
         {
             safeUpgrades[i] = PlayerUpgrades.safeUpgrades[i];
         }
+
         numberSkillPoints = PlayerUpgrades.numberSkillPoints;
         numberMaxSkillPoints = PlayerUpgrades.numberMaxSkillPoints;
         whichFrontWeaponEquipped = PlayerUpgrades.whichFrontWeaponEquipped;

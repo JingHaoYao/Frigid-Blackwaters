@@ -161,7 +161,7 @@ public class StormSpirit : Enemy
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 12 && (Vector2.Distance(lastPositionHit, transform.position) > 1.5f || lastPositionHit.z == 1))
+        if (collision.gameObject.layer == 12 && (Vector2.Distance(lastPositionHit, transform.position) > 0.5f || lastPositionHit.z == 1))
         {
             Vector3 normalVector = collision.GetContact(0).normal;
             travelVector = Vector3.Reflect(travelVector, normalVector);

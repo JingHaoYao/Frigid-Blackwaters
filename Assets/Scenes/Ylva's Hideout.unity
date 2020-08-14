@@ -613,7 +613,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -243.30078, y: 22.800049}
+  m_AnchoredPosition: {x: -243.25, y: 22.75}
   m_SizeDelta: {x: -488.6, y: -214.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &15786059
@@ -810,6 +810,8 @@ MonoBehaviour:
   - The Arrow
   - Crystal Heart Pendant
   - Leviathan Idol
+  fourthLevelConsumables: []
+  fourthLevelArtifacts: []
   shopDialogues: []
 --- !u!4 &15957211
 Transform:
@@ -940,7 +942,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -243.03906, y: 19.305054}
+  m_AnchoredPosition: {x: -243, y: 19.25}
   m_SizeDelta: {x: -874.4, y: -224.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &25707945
@@ -3738,7 +3740,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -243.03906, y: -6.2299805}
+  m_AnchoredPosition: {x: -243, y: -6.25}
   m_SizeDelta: {x: -557.88, y: -173.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &157712190
@@ -8057,7 +8059,6 @@ MonoBehaviour:
   shipHealth: 1000
   trueDamage: 0
   shipHealthMAX: 1000
-  shipRooted: 0
   whichWeapon: 1
   defenseModifier: 1
   speedBonus: 0
@@ -8068,10 +8069,8 @@ MonoBehaviour:
   numRoomsSinceLastArtifact: 0
   numRoomsVisited: 0
   enemiesDefeated: 1
-  activeEnabled: 0
   angleEffect: 0
   numberHits: 0
-  damageImmunity: 0
   damageAbsorb: 0
   conSpeedBonus: 0
   conDefenseBonus: 0
@@ -8082,12 +8081,6 @@ MonoBehaviour:
   windowAlreadyOpen: 0
   obstacleToolTip: {fileID: 738398127969479588}
   stopRotatePeriod: 0
-  momentumVector: {x: 0, y: 0, z: 0}
-  enemyMomentumVector: {x: 0, y: 0, z: 0}
-  momentumMagnitude: 0
-  momentumDuration: 0
-  enemyMomentumMagnitude: 0
-  enemyMomentumDuration: 0
   enemySpeedModifier: 0
   spikeHitBox: {fileID: 648854844}
   playerDead: 0
@@ -14824,7 +14817,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -243.03906, y: 23}
+  m_AnchoredPosition: {x: -243, y: 23}
   m_SizeDelta: {x: -680.1, y: -235.15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &749289604
@@ -15072,7 +15065,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 229.09961, y: -356.9}
+  m_AnchoredPosition: {x: 229, y: -357}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &759164353
@@ -16186,7 +16179,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 233.80078, y: -367.9}
+  m_AnchoredPosition: {x: 233.75, y: -368}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &846222211
@@ -17434,7 +17427,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -243.03906, y: 23}
+  m_AnchoredPosition: {x: -243, y: 23}
   m_SizeDelta: {x: -610.8, y: -217.08}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &923875287
@@ -24886,7 +24879,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -243.80078, y: 17.850952}
+  m_AnchoredPosition: {x: -243.75, y: 17.75}
   m_SizeDelta: {x: -503.6, y: -224.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1398506379
@@ -27465,7 +27458,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 45.69922, y: -322.41016}
+  m_AnchoredPosition: {x: 45.75, y: -322.5}
   m_SizeDelta: {x: 41.01, y: 44.19}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1544357388
@@ -39227,6 +39220,12 @@ PrefabInstance:
       propertyPath: toolTip
       value: 
       objectReference: {fileID: 2012675348}
+    - target: {fileID: 3508635302022590454, guid: f3a871308f67be44e8e95645bc7e56f0,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 72697633fd8219443a806ad7ddb9e6da,
+        type: 3}
     - target: {fileID: 3617459091991415064, guid: f3a871308f67be44e8e95645bc7e56f0,
         type: 3}
       propertyPath: toolTip
@@ -40066,6 +40065,12 @@ PrefabInstance:
       propertyPath: toolTip
       value: 
       objectReference: {fileID: 2012675348}
+    - target: {fileID: 4563701610023028695, guid: f3a871308f67be44e8e95645bc7e56f0,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 72697633fd8219443a806ad7ddb9e6da,
+        type: 3}
     - target: {fileID: 4988369330357419705, guid: f3a871308f67be44e8e95645bc7e56f0,
         type: 3}
       propertyPath: toolTip
@@ -40117,6 +40122,12 @@ PrefabInstance:
       propertyPath: toolTip
       value: 
       objectReference: {fileID: 2012675348}
+    - target: {fileID: 8474767761478995059, guid: f3a871308f67be44e8e95645bc7e56f0,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 72697633fd8219443a806ad7ddb9e6da,
+        type: 3}
     - target: {fileID: 8880142997376947107, guid: f3a871308f67be44e8e95645bc7e56f0,
         type: 3}
       propertyPath: toolTip

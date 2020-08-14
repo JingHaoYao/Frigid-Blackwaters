@@ -49,7 +49,7 @@ public class LastKnightHelmet : Enemy
     {
         isAttacking = true;
 
-        float offSet = Random.Range(0, 2) * 45;
+        float offSet = 0;
 
         for (int k = 0; k < 3; k++)
         {

@@ -19,6 +19,9 @@ public class ShipSmithMenus : MonoBehaviour {
     [SerializeField] private PlantMortarUpgradeTilesUI plantMortarUpgradesMenu;
     [SerializeField] private PodFlyersUpgradeTilesUI podFlyersUpgradesMenu;
     [SerializeField] private PolluxShrineUpgradeTilesUI polluxShrineUpgradesMenu;
+    [SerializeField] private LoneSparkUpgradeTilesUI loneSparkUpgradeTilesMenu;
+    [SerializeField] private GadgetShotUpgradeTilesUI gadgetShotUpgradeTilesMenu;
+    [SerializeField] private FinBladeUpgradeTilesUI finBladeUpgradeTilesMenu;
     [SerializeField] private GameObject weaponSelectorMenu, returnButton;
     int skillPointPrice = 0;
 
@@ -98,6 +101,30 @@ public class ShipSmithMenus : MonoBehaviour {
             polluxShrineUpgradesMenu.PolluxShrineUpgradeTiles[0].noLongerUnlockable = true;
         }
 
+        if (MiscData.dungeonLevelUnlocked >= 4)
+        {
+            if (!PlayerUpgrades.loneSparkUpgrades.Contains("unlock_the_lone_spark"))
+            {
+                PlayerUpgrades.loneSparkUpgrades.Add("unlock_the_lone_spark");
+            }
+
+            if (!PlayerUpgrades.gadgetShotUpgrades.Contains("unlock_the_gadget_shot"))
+            {
+                PlayerUpgrades.gadgetShotUpgrades.Add("unlock_the_gadget_shot");
+            }
+
+            if (!PlayerUpgrades.finBladeUpgrades.Contains("unlock_the_fin_blade"))
+            {
+                PlayerUpgrades.finBladeUpgrades.Add("unlock_the_fin_blade");
+            }
+        }
+        else
+        {
+            loneSparkUpgradeTilesMenu.LoneSparkUpgradeTiles[0].noLongerUnlockable = true;
+            gadgetShotUpgradeTilesMenu.GadgetShotUpgradeTiles[0].noLongerUnlockable = true;
+            finBladeUpgradeTilesMenu.FinBladeUpgradeTiles[0].noLongerUnlockable = true;
+        }
+
         foreach (GameObject menu in menusList)
         {
             menu.SetActive(false);
@@ -161,6 +188,9 @@ public class ShipSmithMenus : MonoBehaviour {
         PlayerUpgrades.plantMortarUpgrades.Clear();
         PlayerUpgrades.podFlyersUpgrades.Clear();
         PlayerUpgrades.polluxShrineUpgrades.Clear();
+        PlayerUpgrades.loneSparkUpgrades.Clear();
+        PlayerUpgrades.gadgetShotUpgrades.Clear();
+        PlayerUpgrades.finBladeUpgrades.Clear();
         checkWeaponsUnlocked();
 
         PlayerUpgrades.numberSkillPoints = PlayerUpgrades.numberMaxSkillPoints;
@@ -222,6 +252,21 @@ public class ShipSmithMenus : MonoBehaviour {
         }
 
         foreach(PolluxShrineUpgradeTile tile in polluxShrineUpgradesMenu.PolluxShrineUpgradeTiles)
+        {
+            tile.noLongerUnlockable = false;
+        }
+
+        foreach (LoneSparkUpgradeTile tile in loneSparkUpgradeTilesMenu.LoneSparkUpgradeTiles)
+        {
+            tile.noLongerUnlockable = false;
+        }
+
+        foreach(GadgetShotUpgradeTile tile in gadgetShotUpgradeTilesMenu.GadgetShotUpgradeTiles)
+        {
+            tile.noLongerUnlockable = false;
+        }
+
+        foreach(FinBladeUpgradeTile tile in finBladeUpgradeTilesMenu.FinBladeUpgradeTiles)
         {
             tile.noLongerUnlockable = false;
         }

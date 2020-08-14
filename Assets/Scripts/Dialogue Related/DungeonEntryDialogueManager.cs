@@ -25,38 +25,44 @@ public class DungeonEntryDialogueManager : MonoBehaviour
 
     public DialogueSet loadDialogue(string name, bool storyDialogue = false)
     {
-        if (whatDungeonLevel == 1)
+        switch (whatDungeonLevel)
         {
-            if (storyDialogue == true)
-            {
-                return Resources.Load<DialogueSet>("Dialogues/First Dungeon Level/Story Dialogues/" + name);
-            }
-            else
-            {
-                return Resources.Load<DialogueSet>("Dialogues/First Dungeon Level/Random Entry Dungeon Dialogue/" + name);
-            }
-        }
-        else if (whatDungeonLevel == 2)
-        {
-            if (storyDialogue == true)
-            {
-                return Resources.Load<DialogueSet>("Dialogues/Second Dungeon Level/Story Dialogues/" + name);
-            }
-            else
-            {
-                return Resources.Load<DialogueSet>("Dialogues/Second Dungeon Level/Random Entry Dungeon Dialogue/" + name);
-            }
-        }
-        else if(whatDungeonLevel == 3)
-        {
-            if(storyDialogue == true)
-            {
-                return Resources.Load<DialogueSet>("Dialogues/Third Dungeon Level/Story Dialogues/" + name);
-            }
-            else
-            {
-                return Resources.Load<DialogueSet>("Dialogues/Third Dungeon Level/Random Entry Dungeon Dialogue/" + name);
-            }
+            case 1:
+                if (storyDialogue == true)
+                {
+                    return Resources.Load<DialogueSet>("Dialogues/First Dungeon Level/Story Dialogues/" + name);
+                }
+                else
+                {
+                    return Resources.Load<DialogueSet>("Dialogues/First Dungeon Level/Random Entry Dungeon Dialogue/" + name);
+                }
+            case 2:
+                if (storyDialogue == true)
+                {
+                    return Resources.Load<DialogueSet>("Dialogues/Second Dungeon Level/Story Dialogues/" + name);
+                }
+                else
+                {
+                    return Resources.Load<DialogueSet>("Dialogues/Second Dungeon Level/Random Entry Dungeon Dialogue/" + name);
+                }
+            case 3:
+                if (storyDialogue == true)
+                {
+                    return Resources.Load<DialogueSet>("Dialogues/Third Dungeon Level/Story Dialogues/" + name);
+                }
+                else
+                {
+                    return Resources.Load<DialogueSet>("Dialogues/Third Dungeon Level/Random Entry Dungeon Dialogue/" + name);
+                }
+            case 4:
+                if (storyDialogue == true)
+                {
+                    return Resources.Load<DialogueSet>("Dialogues/Fourth Dungeon Level/Story Dialogues/" + name);
+                }
+                else
+                {
+                    return Resources.Load<DialogueSet>("Dialogues/Fourth Dungeon Level/Random Entry Dungeon Dialogue/" + name);
+                }
         }
         return null;
     }
