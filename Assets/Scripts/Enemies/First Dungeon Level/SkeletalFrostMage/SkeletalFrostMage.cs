@@ -18,6 +18,7 @@ public class SkeletalFrostMage : Enemy {
     List<AStarNode> path;
     float pickSpritePeriod = 0;
     private bool nearShip = false;
+    AStarPathfinding aStarPathfinding;
 
     Vector3 pickRandPos()
     {
@@ -136,10 +137,16 @@ public class SkeletalFrostMage : Enemy {
 
     void pickPos()
     {
-        this.GetComponent<AStarPathfinding>().target = selectPos;
-        path = GetComponent<AStarPathfinding>().seekPath;
-        AStarNode pathNode = path[0];
-        Vector3 targetPos = pathNode.nodePosition;
+        this.aStarPathfinding.target = selectPos;
+        path = aStarPathfinding.seekPath;
+
+        Vector3 targetPos = selectPos;
+
+        if(path.Count > 0)
+        {
+            AStarNode pathNode = path[0];
+            targetPos = pathNode.nodePosition;
+        }
         travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
 
         if(Vector2.Distance(playerShip.transform.position, transform.position) < 4 && nearShip == false)
@@ -228,6 +235,7 @@ public class SkeletalFrostMage : Enemy {
         animator.enabled = false;
         camera = Camera.main;
         selectPos = pickRandPos();
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
 	void Update () {

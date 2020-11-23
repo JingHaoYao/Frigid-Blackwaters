@@ -26,10 +26,10 @@ public class StasisStopwatch : MonoBehaviour
 
     void Update()
     {
-        if(prevTrueDamage != playerScript.trueDamage)
+        if(prevTrueDamage != playerScript.shipHealth)
         {
-            prevTrueDamage = playerScript.trueDamage;
-            StartCoroutine(delayStasisPeriod(playerScript.trueDamage));
+            prevTrueDamage = playerScript.shipHealth;
+            StartCoroutine(delayStasisPeriod(playerScript.shipHealth));
         }
     }
 
@@ -40,7 +40,7 @@ public class StasisStopwatch : MonoBehaviour
             activated = true;
             GameObject instant = Instantiate(stopWatchEffect, playerScript.transform.position, Quaternion.identity);
             instant.GetComponent<FollowObject>().objectToFollow = playerScript.gameObject;
-            playerScript.trueDamage = damageToRevert;
+            playerScript.shipHealth = damageToRevert;
             Destroy(this.gameObject);
         }
     }

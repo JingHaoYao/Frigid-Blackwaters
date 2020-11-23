@@ -205,5 +205,6 @@ public class SpectralHelmsman : Enemy
     {
         StartCoroutine(hitFrame());
         audioSources[0].Play();
+        SpawnArtifactKillsAndGoOnCooldown(2.5f);
     }
 }

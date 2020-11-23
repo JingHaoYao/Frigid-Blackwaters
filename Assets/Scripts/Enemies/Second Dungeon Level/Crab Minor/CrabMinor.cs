@@ -28,7 +28,13 @@ public class CrabMinor : Enemy
     BoxCollider2D hitBox;
     bool invulnerable = true;
 
+    AStarPathfinding aStarPathfinding;
+
     public GameObject invulnerabilityIcon;
+
+    [SerializeField] GameObject crabMinorWarning;
+
+    private bool spawnedWarnings = false;
 
     float cardinalizeDirections(float angle)
     {
@@ -133,6 +139,19 @@ public class CrabMinor : Enemy
         }
     }
 
+    void spawnWarnings(float radius)
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            float angleSpawn = i * 45;
+            Vector3 location = transform.position + new Vector3(Mathf.Cos(angleSpawn * Mathf.Deg2Rad), Mathf.Sin(angleSpawn * Mathf.Deg2Rad)) * radius;
+            if (Mathf.Abs(location.x - Camera.main.transform.position.x) <= 8 && Mathf.Abs(location.y - Camera.main.transform.position.y) <= 8)
+            {
+                Instantiate(crabMinorWarning, location, Quaternion.identity);
+            }
+        }
+    }
+
     IEnumerator attack()
     {
         isAttacking = true;
@@ -147,14 +166,20 @@ public class CrabMinor : Enemy
         yield return new WaitForSeconds(3f / 12f);
         animator.enabled = false;
         isAttacking = false;
+        spawnedWarnings = false;
     }
 
     void travelLocation()
     {
-        path = GetComponent<AStarPathfinding>().seekPath;
-        this.GetComponent<AStarPathfinding>().target = playerShip.transform.position;
-        AStarNode pathNode = path[0];
-        Vector3 targetPos = pathNode.nodePosition;
+        path = aStarPathfinding.seekPath;
+        this.aStarPathfinding.target = playerShip.transform.position;
+
+        Vector3 targetPos = PlayerProperties.playerShipPosition;
+        if (path.Count > 0)
+        {
+            AStarNode pathNode = path[0];
+            targetPos = pathNode.nodePosition;
+        }
         travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
 
         if(Vector2.Distance(transform.position, playerShip.transform.position) > 3 && attackPeriod > 1 && isAttacking == false)
@@ -190,6 +215,11 @@ public class CrabMinor : Enemy
             }
             else
             {
+                if(spawnedWarnings == false)
+                {
+                    spawnWarnings(attackRadius);
+                    spawnedWarnings = true;
+                }
                 spriteRenderer.sprite = openViews[whatView - 1];
             }
             pickSpritePeriod = 0;
@@ -220,6 +250,7 @@ public class CrabMinor : Enemy
         animator.enabled = false;
         playerShip = FindObjectOfType<PlayerScript>().gameObject;
         attackPeriod = Random.Range(2f, 6f);
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
     void Update()

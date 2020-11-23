@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905f99799bc131040a11b6b1fc07dbb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 600
+  damageAmount: 3000
 --- !u!1 &134921803485947755
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,6 +252,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -263,6 +264,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -342,6 +344,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -353,6 +356,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -494,7 +498,10 @@ MonoBehaviour:
   percentSpawnChance: 33
   armorMitigation: 0
   speed: 2.5
-  slowAmount: 0
+  fogStats:
+    fogDurationIncrease: 0
+    fogCoolDownDecrease: 0
+  moveable: 1
   statuses: []
   spriteRenderer: {fileID: 134921803761540901}
   rigidBody2D: {fileID: 134921803761540954}
@@ -622,6 +629,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Armor Effect
       objectReference: {fileID: 0}
+    - target: {fileID: 2831970066466968044, guid: 5c4522f4f063ffa4c9b36b3bd92fed93,
+        type: 3}
+      propertyPath: rendLayerOffset
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2831970066466968045, guid: 5c4522f4f063ffa4c9b36b3bd92fed93,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -686,11 +698,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 2831970066466968044, guid: 5c4522f4f063ffa4c9b36b3bd92fed93,
-        type: 3}
-      propertyPath: rendLayerOffset
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2831970066466968047, guid: 5c4522f4f063ffa4c9b36b3bd92fed93,
         type: 3}

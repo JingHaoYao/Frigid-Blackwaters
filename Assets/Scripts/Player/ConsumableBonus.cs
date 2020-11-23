@@ -29,11 +29,9 @@ public class ConsumableBonus : MonoBehaviour {
     public void consumeItem()
     {
         playerScript.healPlayer(restoredHealth);
-        if(playerScript.trueDamage <= 0)
-        {
-            playerScript.trueDamage = 0;
-        }
-        consumableAction();
+
+        consumableAction?.Invoke();
+
         StartCoroutine(activateConsumable());
     }
 

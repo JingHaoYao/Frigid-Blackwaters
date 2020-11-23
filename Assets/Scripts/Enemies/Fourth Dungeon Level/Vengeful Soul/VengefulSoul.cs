@@ -149,7 +149,7 @@ public class VengefulSoul : Enemy
             pickSpriteProcedure(angleToShip());
 
             attackPeriod += Time.deltaTime;
-            if(attackPeriod > 3)
+            if(attackPeriod > 3 && stopAttacking == false)
             {
                 StartCoroutine(dive());
                 attackPeriod = 0;

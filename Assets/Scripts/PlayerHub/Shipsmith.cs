@@ -9,9 +9,18 @@ public class Shipsmith : MonoBehaviour {
     public GameObject icon;
     public bool ignoreUnlockLevel = false;
 
+    MenuSlideAnimation menuSlideAnimation = new MenuSlideAnimation();
+
+    void SetAnimation()
+    {
+        menuSlideAnimation.SetOpenAnimation(new Vector3(0, -585, 0), new Vector3(0, 0, 0), 0.25f);
+        menuSlideAnimation.SetCloseAnimation(new Vector3(0, 0, 0), new Vector3(0, -585, 0), 0.25f);
+    }
+
     private void Start()
     {
         playerShip = GameObject.Find("PlayerShip");
+        SetAnimation();
     }
 
     void LateUpdate () {
@@ -32,22 +41,27 @@ public class Shipsmith : MonoBehaviour {
                     Destroy(spawnedIndicator);
                 }
             }
-            if (shipSmithDisplay.activeSelf == true)
+
+            if (menuSlideAnimation.IsAnimating == false)
             {
-                if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
+                if (shipSmithDisplay.activeSelf == true)
                 {
-                    shipSmithDisplay.SetActive(false);
-                    PlayerProperties.playerScript.removeRootingObject();
-                    playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false;
+                    if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
+                    {
+                        menuSlideAnimation.PlayEndingAnimation(shipSmithDisplay, () => { shipSmithDisplay.SetActive(false); });
+                        PlayerProperties.playerScript.removeRootingObject();
+                        playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false;
+                    }
                 }
-            }
-            else if(playerShip.GetComponent<PlayerScript>().windowAlreadyOpen == false)
-            {
-                if (Input.GetKeyDown(KeyCode.E))
+                else if (playerShip.GetComponent<PlayerScript>().windowAlreadyOpen == false)
                 {
-                    shipSmithDisplay.SetActive(true);
-                    PlayerProperties.playerScript.addRootingObject();
-                    playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        shipSmithDisplay.SetActive(true);
+                        menuSlideAnimation.PlayOpeningAnimation(shipSmithDisplay);
+                        PlayerProperties.playerScript.addRootingObject();
+                        playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
+                    }
                 }
             }
         }

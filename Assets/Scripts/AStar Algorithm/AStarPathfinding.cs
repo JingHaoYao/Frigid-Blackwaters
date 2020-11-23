@@ -12,7 +12,10 @@ public class AStarPathfinding : MonoBehaviour {
         while (true)
         {
             seeker = this.gameObject.transform.position;
-            findPath(seeker + new Vector3(0, 0.4f, 0), target);
+            if (grid.nodeFromWorldPoint(target).traversable)
+            {
+                findPath(seeker + new Vector3(0, 0.4f, 0), target);
+            }
             yield return null;
         }
     }
@@ -27,7 +30,7 @@ public class AStarPathfinding : MonoBehaviour {
         StartCoroutine(mainLoop());
     }
 
-    void Awake () {
+    void Start () {
         StartCoroutine(searchForGrid());
 	}
 

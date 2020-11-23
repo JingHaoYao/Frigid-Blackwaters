@@ -114,6 +114,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -125,6 +126,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -238,6 +240,13 @@ MonoBehaviour:
   killNumber: 1
   stopAttacking: 0
   percentSpawnChance: 33
+  armorMitigation: 0
+  speed: 6
+  fogStats:
+    fogDurationIncrease: 0
+    fogCoolDownDecrease: 0
+  moveable: 0
+  statuses: []
   facingUpLeft: {fileID: 21300008, guid: b061df00ba5bc4948a0b37fc187716a1, type: 3}
   facingUp: {fileID: 21300006, guid: b061df00ba5bc4948a0b37fc187716a1, type: 3}
   facingLeft: {fileID: 21300004, guid: b061df00ba5bc4948a0b37fc187716a1, type: 3}
@@ -245,7 +254,6 @@ MonoBehaviour:
   facingDown: {fileID: 21300000, guid: b061df00ba5bc4948a0b37fc187716a1, type: 3}
   blast: {fileID: 1835034128386664, guid: c8064bd0b8bfcbb448fc74388fa5a71e, type: 3}
   positionAlongRoom: 0
-  speed: 6
   deadGolem: {fileID: 1710715356532396, guid: 888c60828869ead4a8bd43d415bd70fc, type: 3}
   targetPos: {x: 0, y: 0, z: 0}
   isMoving: 0
@@ -495,6 +503,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -506,6 +515,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -595,12 +605,12 @@ MonoBehaviour:
   - {fileID: 1882639475590808, guid: 3e55ed77ecd9175479f1e7c35585161f, type: 3}
   - {fileID: 1099582984741218, guid: 4c29f62b9a58c8449a0f2af6a73ab9f8, type: 3}
   - {fileID: 1690653585293434, guid: a21e463941381b940b3b341308163819, type: 3}
-  numUniqueItems: 1
   extraArtifactChance: 0
   betterArtifactChance: 0
   dontRunAnim: 0
   customGoldBase: 0
   customGoldMultiplier: 0
+  pickRandomUniqueItems: 1
 --- !u!60 &60010424497034840
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -696,6 +706,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: 0
   rendLayerOffset: 0
+  updateOnce: 0
 --- !u!1 &1420124957197022
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,6 +759,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -759,6 +771,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -872,6 +885,13 @@ MonoBehaviour:
   killNumber: 1
   stopAttacking: 0
   percentSpawnChance: 33
+  armorMitigation: 0
+  speed: 6
+  fogStats:
+    fogDurationIncrease: 0
+    fogCoolDownDecrease: 0
+  moveable: 0
+  statuses: []
   facingUpLeft: {fileID: 21300008, guid: b061df00ba5bc4948a0b37fc187716a1, type: 3}
   facingUp: {fileID: 21300006, guid: b061df00ba5bc4948a0b37fc187716a1, type: 3}
   facingLeft: {fileID: 21300004, guid: b061df00ba5bc4948a0b37fc187716a1, type: 3}
@@ -879,7 +899,6 @@ MonoBehaviour:
   facingDown: {fileID: 21300000, guid: b061df00ba5bc4948a0b37fc187716a1, type: 3}
   blast: {fileID: 1835034128386664, guid: c8064bd0b8bfcbb448fc74388fa5a71e, type: 3}
   positionAlongRoom: 2
-  speed: 6
   deadGolem: {fileID: 1710715356532396, guid: 888c60828869ead4a8bd43d415bd70fc, type: 3}
   targetPos: {x: 0, y: 0, z: 0}
   isMoving: 0
@@ -1192,6 +1211,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -1203,6 +1223,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1316,6 +1337,13 @@ MonoBehaviour:
   killNumber: 1
   stopAttacking: 0
   percentSpawnChance: 33
+  armorMitigation: 0
+  speed: 6
+  fogStats:
+    fogDurationIncrease: 0
+    fogCoolDownDecrease: 0
+  moveable: 0
+  statuses: []
   facingUpLeft: {fileID: 21300008, guid: b061df00ba5bc4948a0b37fc187716a1, type: 3}
   facingUp: {fileID: 21300006, guid: b061df00ba5bc4948a0b37fc187716a1, type: 3}
   facingLeft: {fileID: 21300004, guid: b061df00ba5bc4948a0b37fc187716a1, type: 3}
@@ -1323,7 +1351,6 @@ MonoBehaviour:
   facingDown: {fileID: 21300000, guid: b061df00ba5bc4948a0b37fc187716a1, type: 3}
   blast: {fileID: 1835034128386664, guid: c8064bd0b8bfcbb448fc74388fa5a71e, type: 3}
   positionAlongRoom: 6
-  speed: 6
   deadGolem: {fileID: 1710715356532396, guid: 888c60828869ead4a8bd43d415bd70fc, type: 3}
   targetPos: {x: 0, y: 0, z: 0}
   isMoving: 0
@@ -1574,6 +1601,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -1585,6 +1613,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1698,6 +1727,13 @@ MonoBehaviour:
   killNumber: 1
   stopAttacking: 0
   percentSpawnChance: 33
+  armorMitigation: 0
+  speed: 6
+  fogStats:
+    fogDurationIncrease: 0
+    fogCoolDownDecrease: 0
+  moveable: 0
+  statuses: []
   facingUpLeft: {fileID: 21300008, guid: b061df00ba5bc4948a0b37fc187716a1, type: 3}
   facingUp: {fileID: 21300006, guid: b061df00ba5bc4948a0b37fc187716a1, type: 3}
   facingLeft: {fileID: 21300004, guid: b061df00ba5bc4948a0b37fc187716a1, type: 3}
@@ -1705,7 +1741,6 @@ MonoBehaviour:
   facingDown: {fileID: 21300000, guid: b061df00ba5bc4948a0b37fc187716a1, type: 3}
   blast: {fileID: 1835034128386664, guid: c8064bd0b8bfcbb448fc74388fa5a71e, type: 3}
   positionAlongRoom: 4
-  speed: 6
   deadGolem: {fileID: 1710715356532396, guid: 888c60828869ead4a8bd43d415bd70fc, type: 3}
   targetPos: {x: 0, y: 0, z: 0}
   isMoving: 0

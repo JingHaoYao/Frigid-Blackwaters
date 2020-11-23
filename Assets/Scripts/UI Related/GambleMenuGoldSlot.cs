@@ -49,7 +49,7 @@ public class GambleMenuGoldSlot : MonoBehaviour, IPointerEnterHandler, IPointerE
                     remainder = 0;
                 }
             }
-            transform.parent.gameObject.SetActive(false);
+            gamble.PlayEndingAnimation();
             playerScript.windowAlreadyOpen = false;
             Time.timeScale = 1;
             PlayerProperties.playerScript.removeRootingObject();

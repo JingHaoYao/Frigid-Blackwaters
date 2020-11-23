@@ -19,7 +19,7 @@ public class LightningEffect : MonoBehaviour {
     {
         this.GetComponent<SpriteRenderer>().sortingOrder = playerShip.GetComponent<SpriteRenderer>().sortingOrder + 3;
 
-        if ((playerScript.angleEffect >= 67.5f && playerScript.angleEffect < 112.5f) || (playerScript.angleEffect >= 247.5f && playerScript.angleEffect < 292.5f))
+        if ((playerScript.whatAngleTraveled >= 67.5f && playerScript.whatAngleTraveled < 112.5f) || (playerScript.whatAngleTraveled >= 247.5f && playerScript.whatAngleTraveled < 292.5f))
         {
             if (triggerName != "Lightning3")
             {
@@ -28,7 +28,7 @@ public class LightningEffect : MonoBehaviour {
                 transform.localScale = new Vector3(0.35f, 0.35f, 0);
             }
         }
-        else if ((playerScript.angleEffect >= 22.5f && playerScript.angleEffect < 67.5f) || (playerScript.angleEffect > 202.5f && playerScript.angleEffect <= 247.5f))
+        else if ((playerScript.whatAngleTraveled >= 22.5f && playerScript.whatAngleTraveled < 67.5f) || (playerScript.whatAngleTraveled > 202.5f && playerScript.whatAngleTraveled <= 247.5f))
         {
             if(triggerName != "Lightning2"){
                 triggerName = "Lightning2";
@@ -36,7 +36,7 @@ public class LightningEffect : MonoBehaviour {
                 transform.localScale = new Vector3(-0.35f, 0.35f, 0);
             }
         }
-        else if ((playerScript.angleEffect >= 112.5f && playerScript.angleEffect < 157.5f) || (playerScript.angleEffect >= 292.5f && playerScript.angleEffect < 337.5f))
+        else if ((playerScript.whatAngleTraveled >= 112.5f && playerScript.whatAngleTraveled < 157.5f) || (playerScript.whatAngleTraveled >= 292.5f && playerScript.whatAngleTraveled < 337.5f))
         {
             if (triggerName != "Lightning2")
             {
@@ -55,15 +55,15 @@ public class LightningEffect : MonoBehaviour {
             }
         }
 
-        if(playerScript.angleEffect >= 157.5f && playerScript.angleEffect < 202.5f)
+        if(playerScript.whatAngleTraveled >= 157.5f && playerScript.whatAngleTraveled < 202.5f)
         {
             transform.position = playerShip.transform.position + new Vector3(-0.4f, 0, 0);
         }
-        else if(playerScript.angleEffect >= 22.5f && playerScript.angleEffect < 67.5f)
+        else if(playerScript.whatAngleTraveled >= 22.5f && playerScript.whatAngleTraveled < 67.5f)
         {
             transform.position = playerShip.transform.position + new Vector3(0.2f, 0.3f, 0);
         }
-        else if (playerScript.angleEffect < 157.5 && playerScript.angleEffect >= 112.5f)
+        else if (playerScript.whatAngleTraveled < 157.5 && playerScript.whatAngleTraveled >= 112.5f)
         {
             transform.position = playerShip.transform.position + new Vector3(-0.2f, 0.3f, 0);
         }

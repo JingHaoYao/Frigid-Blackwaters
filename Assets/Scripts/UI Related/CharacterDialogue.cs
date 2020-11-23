@@ -100,17 +100,17 @@ public class CharacterDialogue : MonoBehaviour
         {
             toggleLeft = false;
             toggleRight = false;
+        }
+    }
 
-            if(inPresentScene == true)
+    public void updateSprite()
+    {
+        if (inPresentScene == true)
+        {
+            if (spriteIndex < characterSpriteList.Length - 1)
             {
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    if(spriteIndex < characterSpriteList.Length - 1)
-                    {
-                        spriteIndex++;
-                        spriteRenderer.sprite = characterSpriteList[spriteIndex];
-                    }
-                }
+                spriteIndex++;
+                spriteRenderer.sprite = characterSpriteList[spriteIndex];
             }
         }
     }

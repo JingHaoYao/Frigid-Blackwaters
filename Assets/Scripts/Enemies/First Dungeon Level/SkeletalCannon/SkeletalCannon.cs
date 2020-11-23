@@ -20,6 +20,7 @@ public class SkeletalCannon : Enemy {
     public float waitToFire = 0.5f;
     List<AStarNode> path;
     float pickSpritePeriod = 0;
+    AStarPathfinding aStarPathfinding;
 
     void spawnFoam()
     {
@@ -196,6 +197,7 @@ public class SkeletalCannon : Enemy {
         rigidBody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         playerShip = GameObject.Find("PlayerShip");
+        aStarPathfinding = GetComponent<AStarPathfinding>();
 	}
 
     float cardinalizeDirections(float angle)
@@ -247,8 +249,12 @@ public class SkeletalCannon : Enemy {
 
         if (Vector2.Distance(playerShip.transform.position, transform.position) > 5)
         {
-            AStarNode pathNode = path[0];
-            Vector3 targetPos = pathNode.nodePosition;
+            Vector3 targetPos = PlayerProperties.playerShipPosition;
+            if (path.Count > 0)
+            {
+                AStarNode pathNode = path[0];
+                targetPos = pathNode.nodePosition;
+            }
             moveAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
             if (isShooting == false)
             {
@@ -269,8 +275,8 @@ public class SkeletalCannon : Enemy {
     }
 
     void Update () {
-        this.GetComponent<AStarPathfinding>().target = playerShip.transform.position;
-        path = GetComponent<AStarPathfinding>().seekPath;
+        this.aStarPathfinding.target = playerShip.transform.position;
+        path = aStarPathfinding.seekPath;
         pickRendererLayer();
         findPositionShoot();
 

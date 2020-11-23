@@ -25,4 +25,9 @@ public class PlayerProperties
 
     public static Vector3 mainCameraPosition;
 
+    public static SoulTrailSpawner soulTrailSpawner;
+    public static CameraShake cameraShake;
+
+    public static FlammableController flammableController;
+
 }

@@ -47,12 +47,16 @@ public class BrassGolemBossManager : BossManager
         cameraScript.freeCam = true;
         brassGolem.startOpenAnimation();
         yield return new WaitForSeconds(7.1f);
-        /*dialogueUI.targetDialogue = dialogueManager.loadDialogue(dialogueString, true);
-        dialogueUI.gameObject.SetActive(true);
-        dialogueUI.setEndAction(() => { InitializeBossFight(); });
-        dialogueBlackOverlay.SetActive(true);*/
-        // TODO: Dialogue later
-
-        InitializeBossFight();
+        if (MiscData.completedStoryDialogues.Contains(dialogueString))
+        {
+            InitializeBossFight();
+        }
+        else
+        {
+            dialogueUI.targetDialogue = dialogueManager.loadDialogue(dialogueString, true);
+            dialogueUI.gameObject.SetActive(true);
+            dialogueUI.setEndAction(() => { InitializeBossFight(); });
+            dialogueBlackOverlay.SetActive(true);
+        }
     }
 }

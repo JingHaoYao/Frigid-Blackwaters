@@ -234,6 +234,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -245,6 +246,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -339,7 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905f99799bc131040a11b6b1fc07dbb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 400
+  damageAmount: 900
 --- !u!50 &1529882681286904254
 Rigidbody2D:
   serializedVersion: 4
@@ -417,6 +419,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -428,6 +431,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -651,8 +655,10 @@ MonoBehaviour:
   percentSpawnChance: 33
   armorMitigation: 0
   speed: 4
-  slowAmount: 0
-  spawner: {fileID: 0}
+  fogStats:
+    fogDurationIncrease: 0
+    fogCoolDownDecrease: 0
+  moveable: 1
   statuses: []
   deadCrab: {fileID: 9046940545977242156, guid: b81010bc3e3754f40b07c09a6f7b0ef5,
     type: 3}
@@ -730,11 +736,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1529882681433870818}
     m_Modifications:
-    - target: {fileID: 6726885396206598806, guid: 4b393a5d926723a4e9a83d79ae587842,
+    - target: {fileID: 6726885396206598800, guid: 4b393a5d926723a4e9a83d79ae587842,
         type: 3}
-      propertyPath: m_Name
-      value: Directional Invulnerability Effect
-      objectReference: {fileID: 0}
+      propertyPath: trackObject
+      value: 
+      objectReference: {fileID: 1529882681433870821}
     - target: {fileID: 6726885396206598801, guid: 4b393a5d926723a4e9a83d79ae587842,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -790,11 +796,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6726885396206598800, guid: 4b393a5d926723a4e9a83d79ae587842,
+    - target: {fileID: 6726885396206598806, guid: 4b393a5d926723a4e9a83d79ae587842,
         type: 3}
-      propertyPath: trackObject
-      value: 
-      objectReference: {fileID: 1529882681433870821}
+      propertyPath: m_Name
+      value: Directional Invulnerability Effect
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b393a5d926723a4e9a83d79ae587842, type: 3}
 --- !u!1 &319060752280893718 stripped

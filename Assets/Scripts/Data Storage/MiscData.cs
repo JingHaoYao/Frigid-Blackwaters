@@ -10,6 +10,9 @@ public static class MiscData
     public static float masterVolume = 0;
     public static float effectsVolume = 0;
     public static float musicVolume = 0;
+    public static bool fullScreen = true;
+    public static int qualityIndex = 5;
+    public static int resolutionIndex = 0;
     public static bool muted = false;
     public static bool playerDied = false;
     public static int numberDungeonRuns = 0;

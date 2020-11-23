@@ -16,6 +16,9 @@ public class HubDialogueManager : MonoBehaviour
     bool runTutorialHubText = false;
     public GameObject mapSymbol;
 
+    Coroutine textTypingAnimation;
+    CharacterDialogue tabithaDialogue;
+
     void Start()
     {
         playerShip = GameObject.Find("PlayerShip");
@@ -29,7 +32,7 @@ public class HubDialogueManager : MonoBehaviour
             dialogueText.transform.parent.gameObject.SetActive(true);
             dialogueText.text = introductionDialogue[dialogueIndex];
             nameText.text = introductionNames[dialogueIndex];
-            CharacterDialogue tabithaDialogue = openingTabithaCharacter.GetComponent<CharacterDialogue>();
+            tabithaDialogue = openingTabithaCharacter.GetComponent<CharacterDialogue>();
             tabithaDialogue.toggleLeft = true;
             tabithaDialogue.toggleRight = false;
         }
@@ -56,22 +59,48 @@ public class HubDialogueManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                dialogueIndex++;
-                if (dialogueIndex == dialogue.Length)
+                if(textTypingAnimation != null)
                 {
-                    FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
-                    FindObjectOfType<Tavern>().turnOnDialogueUI();
-                    StartCoroutine(turnOnMapSymbol());
-                    dialogueText.transform.parent.gameObject.SetActive(false);
+                    dialogueText.text = dialogue[dialogueIndex];
+                    StopCoroutine(textTypingAnimation);
+                    textTypingAnimation = null;
                 }
                 else
                 {
-                    FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
-                    dialogueText.text = dialogue[dialogueIndex];
-                    nameText.text = nameList[dialogueIndex];
+                    dialogueIndex++;
+                    if (dialogueIndex == dialogue.Length)
+                    {
+                        FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
+                        FindObjectOfType<Tavern>().turnOnDialogueUI();
+                        StartCoroutine(turnOnMapSymbol());
+                        dialogueText.transform.parent.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
+                        nameText.text = nameList[dialogueIndex];
+                        textTypingAnimation = StartCoroutine(animateText(dialogue[dialogueIndex]));
+                        tabithaDialogue.updateSprite();
+                    }
                 }
+               
             }
         }
+    }
+
+    IEnumerator animateText(string dialogueToWrite)
+    {
+        int charIndex = 0;
+        foreach (char c in dialogueToWrite)
+        {
+            charIndex++;
+            dialogueText.text= dialogueToWrite.Substring(0, charIndex);
+            if (c != ' ')
+            {
+                yield return new WaitForSeconds(0.05f);
+            }
+        }
+        textTypingAnimation = null;
     }
 
     IEnumerator turnOnMapSymbol()
@@ -83,7 +112,7 @@ public class HubDialogueManager : MonoBehaviour
     public void turnOnDialogueText(string[] dialogue, string[] nameList)
     {
         dialogueText.transform.parent.gameObject.SetActive(true);
-        dialogueText.text = introductionDialogue[0];
+        textTypingAnimation = StartCoroutine(animateText(dialogue[0]));
         nameText.text = introductionNames[0];
         playerScript.playerDead = true;
     }

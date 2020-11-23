@@ -30,6 +30,8 @@ public class CrabSpitter : Enemy
     public GameObject invulnerableIcon;
     public GameObject invulnerableHitBox;
 
+    AStarPathfinding aStarPathfinding;
+
     float cardinalizeDirections(float angle)
     {
         if (angle > 22.5f && angle <= 67.5f)
@@ -204,10 +206,14 @@ public class CrabSpitter : Enemy
 
     void travelLocation()
     {
-        path = GetComponent<AStarPathfinding>().seekPath;
-        this.GetComponent<AStarPathfinding>().target = targetPosition;
-        AStarNode pathNode = path[0];
-        Vector3 targetPos = pathNode.nodePosition;
+        path = aStarPathfinding.seekPath;
+        this.aStarPathfinding.target = targetPosition;
+        Vector3 targetPos = targetPosition;
+        if (path.Count > 0)
+        {
+            AStarNode pathNode = path[0];
+            targetPos = pathNode.nodePosition;
+        }
         travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
 
         if (isAttacking == false)
@@ -220,7 +226,7 @@ public class CrabSpitter : Enemy
             rigidBody2D.velocity = Vector3.zero;
         }
 
-        if (Vector2.Distance(transform.position, path[path.Count - 1].nodePosition) < 0.6f && isAttacking == false && stopAttacking == false)
+        if (Vector2.Distance(transform.position, path.Count > 0 ? path[path.Count - 1].nodePosition : targetPos) < 0.6f && isAttacking == false && stopAttacking == false)
         {
             isAttacking = true;
             StartCoroutine(attack());
@@ -252,6 +258,7 @@ public class CrabSpitter : Enemy
         playerShip = FindObjectOfType<PlayerScript>().gameObject;
         attackPeriod = Random.Range(2f, 6f);
         targetPosition = pickRandPos();
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
     void Update()

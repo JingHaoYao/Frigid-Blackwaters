@@ -43,7 +43,7 @@ public class DungeonEntryDialogueManager : MonoBehaviour
                 }
                 else
                 {
-                    return Resources.Load<DialogueSet>("Dialogues/Second Dungeon Level/Random Entry Dungeon Dialogue/" + name);
+                    return Resources.Load<DialogueSet>("Dialogues/Second Dungeon Level/Random Dungeon Entry Dialogue/" + name);
                 }
             case 3:
                 if (storyDialogue == true)
@@ -61,21 +61,28 @@ public class DungeonEntryDialogueManager : MonoBehaviour
                 }
                 else
                 {
-                    return Resources.Load<DialogueSet>("Dialogues/Fourth Dungeon Level/Random Entry Dungeon Dialogue/" + name);
+                    return Resources.Load<DialogueSet>("Dialogues/Fourth Dungeon Level/Random Dungeon Entry Dialogue/" + name);
                 }
         }
         return null;
     }
 
-    void Update()
+    public void Initialize()
     {
-        if(GameObject.Find("RoomTemplates").GetComponent<RoomTemplates>().spawnPeriod >= 5.4f && loadedDialogue == false)
+        try
         {
             loadDungeonDialogue();
-            loadedDialogue = true;
-            SaveSystem.SaveGame();
         }
+        catch
+        {
+            //Just so the rest of the code runs
+        }
+        loadedDialogue = true;
+        SaveSystem.SaveGame();
+    }
 
+    void Update()
+    {
         if(MiscData.completedEntryDungeonDialogues.Count == 1 && dialogueUI.gameObject.activeSelf == false && loadedDialogue == true && MiscData.dungeonMapSymbolShown == false)
         {
             mapSymbol.SetActive(true);

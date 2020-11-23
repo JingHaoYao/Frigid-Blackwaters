@@ -46,7 +46,7 @@ public class CorrosiveEffect : EnemyStatusEffect
     {
         while (true)
         {
-            spriteRenderer.sortingOrder = enemySpriteRenderer.sortingOrder;
+            spriteRenderer.sortingOrder = enemySpriteRenderer.sortingOrder + 1;
             transform.position = targetEnemy.transform.position + Vector3.up * 0.4f;
             yield return null;
         }

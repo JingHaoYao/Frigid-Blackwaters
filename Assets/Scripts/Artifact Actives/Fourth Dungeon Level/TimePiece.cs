@@ -12,7 +12,7 @@ public class TimePiece : ArtifactEffect
     IEnumerator delayStasisPeriod()
     {
         yield return new WaitForEndOfFrame();
-        int damage = PlayerProperties.playerScript.trueDamage;
+        int damage = PlayerProperties.playerScript.shipHealth;
         yield return new WaitForSeconds(3f);
         damageToRevert = damage;
     }
@@ -22,7 +22,7 @@ public class TimePiece : ArtifactEffect
         PlayerProperties.playerArtifacts.numKills -= artifactBonus.killRequirement;
         GameObject instant = Instantiate(stopWatchEffect, PlayerProperties.playerShipPosition, Quaternion.identity);
         instant.GetComponent<FollowObject>().objectToFollow = PlayerProperties.playerShip;
-        PlayerProperties.playerScript.trueDamage = damageToRevert;
+        PlayerProperties.playerScript.shipHealth = damageToRevert;
     }
 
     public override void tookDamage(int amountDamage, Enemy enemy)

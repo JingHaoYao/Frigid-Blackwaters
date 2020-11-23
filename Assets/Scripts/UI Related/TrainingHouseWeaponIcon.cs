@@ -15,6 +15,14 @@ public class TrainingHouseWeaponIcon : MonoBehaviour, IPointerEnterHandler, IPoi
     public GameObject weaponMenu;
     public static int whichWeaponToEquip = 0;
 
+    MenuSlideAnimation menuSlideAnimation = new MenuSlideAnimation();
+
+    void SetAnimation()
+    {
+        menuSlideAnimation.SetOpenAnimation(new Vector3(0, -585, 0), new Vector3(0, 0, 0), 0.25f);
+        menuSlideAnimation.SetCloseAnimation(new Vector3(0, 0, 0), new Vector3(0, -585, 0), 0.25f);
+    }
+
     void OnEnable()
     {
         weaponMenu.SetActive(false);
@@ -54,36 +62,43 @@ public class TrainingHouseWeaponIcon : MonoBehaviour, IPointerEnterHandler, IPoi
 
     public void setTemplate(int whichTemplate)
     {
-        ShipWeaponTemplate template = templates[whichTemplate];
-        if (whichWeaponToEquip == whichWeapon && MiscData.dungeonLevelUnlocked >= template.whichLevelUnlock)
+        if (menuSlideAnimation.IsAnimating == false)
         {
-            if (whichWeapon == 1)
+            ShipWeaponTemplate template = templates[whichTemplate];
+            if (whichWeaponToEquip == whichWeapon && MiscData.dungeonLevelUnlocked >= template.whichLevelUnlock)
             {
-                frontWeapon.GetComponent<ShipWeaponScript>().swapTemplate(template);
-                PlayerUpgrades.whichFrontWeaponEquipped = whichTemplate;
+                if (whichWeapon == 1)
+                {
+                    frontWeapon.GetComponent<ShipWeaponScript>().swapTemplate(template);
+                    PlayerUpgrades.whichFrontWeaponEquipped = whichTemplate;
+                }
+                else if (whichWeapon == 2)
+                {
+                    leftWeapon.GetComponent<ShipWeaponScript>().swapTemplate(template);
+                    PlayerUpgrades.whichLeftWeaponEquipped = whichTemplate;
+                }
+                else if (whichWeapon == 3)
+                {
+                    rightWeapon.GetComponent<ShipWeaponScript>().swapTemplate(template);
+                    PlayerUpgrades.whichRightWeaponEquipped = whichTemplate;
+                }
+                setPicture();
+                FindObjectOfType<AudioManager>().PlaySound("Change Weapon");
+                SaveSystem.SaveGame();
+                menuSlideAnimation.PlayEndingAnimation(weaponMenu, () => { weaponMenu.SetActive(false); });
             }
-            else if (whichWeapon == 2)
-            {
-                leftWeapon.GetComponent<ShipWeaponScript>().swapTemplate(template);
-                PlayerUpgrades.whichLeftWeaponEquipped = whichTemplate;
-            }
-            else if (whichWeapon == 3)
-            {
-                rightWeapon.GetComponent<ShipWeaponScript>().swapTemplate(template);
-                PlayerUpgrades.whichRightWeaponEquipped = whichTemplate;
-            }
-            setPicture();
-            FindObjectOfType<AudioManager>().PlaySound("Change Weapon");
-            SaveSystem.SaveGame();
-            weaponMenu.SetActive(false);
         }
     }
 
     public void turnOnMenu()
     {
-        whichWeaponToEquip = whichWeapon;
-        FindObjectOfType<AudioManager>().PlaySound("Generic Button Click");
-        weaponMenu.SetActive(true);
+        if (menuSlideAnimation.IsAnimating == false)
+        {
+            whichWeaponToEquip = whichWeapon;
+            FindObjectOfType<AudioManager>().PlaySound("Generic Button Click");
+            weaponMenu.SetActive(true);
+            menuSlideAnimation.PlayOpeningAnimation(weaponMenu);
+        }
     }
 
 	void Start () {
@@ -102,6 +117,7 @@ public class TrainingHouseWeaponIcon : MonoBehaviour, IPointerEnterHandler, IPoi
 
         image = GetComponent<Image>();
         setPicture();
+        SetAnimation();
 	}
 
     public void OnPointerExit(PointerEventData eventData)

@@ -21,6 +21,7 @@ public class SkeletalHeavyBlademan : Enemy
     public float withinRangeRadius = 1.9f;
     public float relativeScale = 0.2f;
     bool attacking = false;
+    AStarPathfinding aStarPathfinding;
 
     void spawnFoam()
     {
@@ -195,15 +196,16 @@ public class SkeletalHeavyBlademan : Enemy
         playerShip = GameObject.Find("PlayerShip");
         animator.enabled = false;
         pickSprite(travelAngle);
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
     void Update()
     {
         pickRendererLayer();
-        path = GetComponent<AStarPathfinding>().seekPath;
-        this.GetComponent<AStarPathfinding>().target = playerShip.transform.position;
-        Vector3 targetPos = Vector3.zero;
-        if (path[0] != null)
+        path = aStarPathfinding.seekPath;
+        this.aStarPathfinding.target = playerShip.transform.position;
+        Vector3 targetPos = PlayerProperties.playerShipPosition;
+        if (path.Count > 0)
         {
             AStarNode pathNode = path[0];
             targetPos = pathNode.nodePosition;

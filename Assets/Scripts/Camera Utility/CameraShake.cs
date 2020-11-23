@@ -5,6 +5,12 @@ using UnityEngine.Events;
 
 public class CameraShake : MonoBehaviour {
     private MoveCameraNextRoom cameraScript;
+    Coroutine previousShakeRoutine;
+
+    private void Awake()
+    {
+        PlayerProperties.cameraShake = this;
+    }
 
     private void Start()
     {
@@ -13,7 +19,11 @@ public class CameraShake : MonoBehaviour {
 
     public void shakeCamFunction(float duration, float magnitude, UnityAction endAction = null)
     {
-        StartCoroutine(shakeCam(duration, magnitude, endAction));
+        if (previousShakeRoutine != null)
+        {
+            StopCoroutine(previousShakeRoutine);
+        }
+        previousShakeRoutine = StartCoroutine(shakeCam(duration, magnitude, endAction));
     }
 
     IEnumerator shakeCam(float duration, float magnitude, UnityAction endAction = null)

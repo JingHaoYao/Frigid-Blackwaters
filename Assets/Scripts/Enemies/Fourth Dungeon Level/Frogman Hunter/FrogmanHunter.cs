@@ -260,7 +260,7 @@ public class FrogmanHunter : Enemy
     {
         path = aStarPathfinding.seekPath;
         aStarPathfinding.target = equipped ? targetPosition : (supplierDefeated ? Vector3.zero : frogmanSupplier.transform.position);
-        Vector3 targetPos = Vector3.zero;
+        Vector3 targetPos = aStarPathfinding.target;
 
         if (path.Count > 0)
         {

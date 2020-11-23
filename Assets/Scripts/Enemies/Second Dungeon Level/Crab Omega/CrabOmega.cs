@@ -37,6 +37,8 @@ public class CrabOmega : Enemy
 
     public GameObject waterFoamBurst;
 
+    AStarPathfinding aStarPathFinding;
+
     float cardinalizeDirections(float angle)
     {
         if (angle > 22.5f && angle <= 67.5f)
@@ -152,10 +154,15 @@ public class CrabOmega : Enemy
 
     void travelLocation()
     {
-        path = GetComponent<AStarPathfinding>().seekPath;
-        this.GetComponent<AStarPathfinding>().target = playerShip.transform.position;
-        AStarNode pathNode = path[0];
-        Vector3 targetPos = pathNode.nodePosition;
+        path = this.aStarPathFinding.seekPath;
+        this.aStarPathFinding.target = playerShip.transform.position;
+
+        Vector3 targetPos = PlayerProperties.playerShipPosition;
+        if (path.Count > 0)
+        {
+            AStarNode pathNode = path[0];
+            targetPos = pathNode.nodePosition;
+        }
         travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
 
         if (bufferPeriod > 0)
@@ -168,13 +175,16 @@ public class CrabOmega : Enemy
             moveTowards(travelAngle);
         }
 
-        float angle = (Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg + 360f) % 360f;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0) + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)), new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)), 20, mask);
-
-        if (Vector2.Distance(transform.position, playerShip.transform.position) < 3 && hit.transform.gameObject == playerShip && hit == isAttacking == false && stopAttacking == false)
+        if (Vector2.Distance(transform.position, playerShip.transform.position) < 3 && isAttacking == false && stopAttacking == false)
         {
-            isAttacking = true;
-            StartCoroutine(attack());
+            float angle = (Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg + 360f) % 360f;
+            RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 0.5f, 0) + new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)), new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)), 20, mask);
+
+            if (hit && hit.transform.gameObject == PlayerProperties.playerShip)
+            {
+                isAttacking = true;
+                StartCoroutine(attack());
+            }
         }
 
         transform.localScale = new Vector3(2 * mirror, 2);
@@ -216,8 +226,9 @@ public class CrabOmega : Enemy
         animator = GetComponent<Animator>();
         rigidBody2D = GetComponent<Rigidbody2D>();
         animator.enabled = false;
-        playerShip = FindObjectOfType<PlayerScript>().gameObject;
+        playerShip = PlayerProperties.playerShip;
         damageHitBox.SetActive(false);
+        aStarPathFinding = GetComponent<AStarPathfinding>();
     }
 
     void Update()

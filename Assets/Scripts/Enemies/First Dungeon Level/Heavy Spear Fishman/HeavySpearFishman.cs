@@ -17,6 +17,7 @@ public class HeavySpearFishman : Enemy
     public GameObject waterFoam, heavySpear, deadShaman, bloodSplatter;
     List<AStarNode> path;
     float angleToShip = 0;
+    AStarPathfinding aStarPathfinding;
 
     void spawnFoam()
     {
@@ -158,13 +159,15 @@ public class HeavySpearFishman : Enemy
         camera = Camera.main;
         animator = GetComponent<Animator>();
         animator.enabled = false;
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
     private void Update()
     {
-        this.GetComponent<AStarPathfinding>().target = playerShip.transform.position;
-        path = GetComponent<AStarPathfinding>().seekPath;
-        AStarNode pathNode = path[0];
+        this.aStarPathfinding.target = playerShip.transform.position;
+
+        path = aStarPathfinding.seekPath;
+
         angleToShip = (360 + Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
         if ((crossedLocation == false || strideEnded == false) && firingAnimation == false)
         {
@@ -177,7 +180,12 @@ public class HeavySpearFishman : Enemy
                 if (pickedAngle == false)
                 {
                     pickedAngle = true;
-                    Vector3 targetPos = pathNode.nodePosition;
+                    Vector3 targetPos = PlayerProperties.playerShipPosition;
+                    if(path.Count > 0)
+                    {
+                        AStarNode pathNode = path[0];
+                        targetPos = pathNode.nodePosition;
+                    }
                     travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
                     pickSprite(travelAngle);
                 }

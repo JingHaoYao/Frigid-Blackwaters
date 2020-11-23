@@ -33,14 +33,12 @@ public class TreasureMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (displayInfo != null)
         {
             transferGold();
-            transform.parent.gameObject.SetActive(false);
+            treasure.PlayEndingAnimation();
             playerScript.windowAlreadyOpen = false;
             Time.timeScale = 1;
             PlayerProperties.playerScript.removeRootingObject();
         }
     }
-
-
 
     void transferGold()
     {

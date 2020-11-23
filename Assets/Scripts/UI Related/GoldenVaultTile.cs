@@ -38,6 +38,7 @@ public class GoldenVaultTile : MonoBehaviour, IPointerEnterHandler, IPointerExit
         if(displayInfo != null && inventory.itemList.Count < inventory.inventorySize)
         {
             goldenVault.vaultItems.Remove(displayInfo.gameObject);
+            HubProperties.vaultItems.Remove(displayInfo.gameObject.name);
             inventory.itemList.Add(displayInfo.gameObject);
             inventory.UpdateUI();
             goldenVault.UpdateUI();

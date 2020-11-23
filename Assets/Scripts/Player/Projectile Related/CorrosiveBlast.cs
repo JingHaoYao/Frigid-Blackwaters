@@ -9,6 +9,8 @@ public class CorrosiveBlast : PlayerProjectile
     public bool explosiveGas = false;
     public GameObject corrosiveExplosion;
 
+    List<Enemy> enemiesHit = new List<Enemy>();
+   
     private void Start()
     {
         transform.rotation = Quaternion.Euler(0, 0, pickDirectionTravel());
@@ -34,18 +36,18 @@ public class CorrosiveBlast : PlayerProjectile
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == 16 /* is player projectile*/)
+        if (collision.gameObject.layer == 16 /* is player projectile*/)
         {
             PlayerProjectile projectileObject = collision.gameObject.GetComponent<PlayerProjectile>();
             if (projectileObject != null)
             {
                 if (explosiveGas == true && projectileObject.weaponElements.Contains(WeaponProperties.WeaponElement.FireElement))
                 {
-                    Instantiate(corrosiveExplosion, transform.position 
+                    Instantiate(corrosiveExplosion, transform.position
                         + new Vector3(
-                            Mathf.Cos(transform.rotation.eulerAngles.z * Mathf.Deg2Rad), 
-                            Mathf.Sin(transform.rotation.eulerAngles.z * Mathf.Deg2Rad)) * 
-                            (Mathf.Sqrt(Mathf.Pow(damageCollider.offset.x, 2) + Mathf.Pow(damageCollider.offset.y, 2)) * 
+                            Mathf.Cos(transform.rotation.eulerAngles.z * Mathf.Deg2Rad),
+                            Mathf.Sin(transform.rotation.eulerAngles.z * Mathf.Deg2Rad)) *
+                            (Mathf.Sqrt(Mathf.Pow(damageCollider.offset.x, 2) + Mathf.Pow(damageCollider.offset.y, 2)) *
                             transform.localScale.x), Quaternion.identity);
                     Destroy(this.gameObject);
                 }
@@ -53,8 +55,24 @@ public class CorrosiveBlast : PlayerProjectile
         }
         else if (collision.gameObject.GetComponent<Enemy>())
         {
-            GameObject chemicalDecay = Instantiate(corrosiveEffect, collision.gameObject.transform.position, Quaternion.identity);
-            collision.gameObject.GetComponent<Enemy>().addStatus(chemicalDecay.GetComponent<EnemyStatusEffect>());
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            if (!enemiesHit.Contains(enemy))
+            {
+                GameObject chemicalDecay = Instantiate(corrosiveEffect, collision.gameObject.transform.position, Quaternion.identity);
+                enemy.addStatus(chemicalDecay.GetComponent<EnemyStatusEffect>());
+                enemiesHit.Add(enemy);
+            }
+        }
+        else if (collision.transform.parent && collision.transform.parent.GetComponent<Enemy>())
+        {
+            Enemy enemy = collision.transform.parent.GetComponent<Enemy>();
+            if (!enemiesHit.Contains(enemy))
+            {
+                GameObject chemicalDecay = Instantiate(corrosiveEffect, collision.gameObject.transform.position, Quaternion.identity);
+                enemy.addStatus(chemicalDecay.GetComponent<EnemyStatusEffect>());
+                enemiesHit.Add(enemy);
+            }
+            
         }
     }
 }

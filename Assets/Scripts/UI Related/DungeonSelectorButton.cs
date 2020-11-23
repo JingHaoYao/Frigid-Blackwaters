@@ -78,6 +78,9 @@ public class DungeonSelectorButton : MonoBehaviour {
                 case 4:
                     StartCoroutine(fadeLoadScene(8));
                     break;
+                case 5:
+                    StartCoroutine(fadeLoadScene(11));
+                    break;
             }
         }
         else

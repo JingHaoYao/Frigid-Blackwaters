@@ -31,6 +31,8 @@ public class SkeletalBoltMage : Enemy
     float pickSpritePeriod = 0;
     public float boltOffset = 0;
 
+    AStarPathfinding aStarPathfinding;
+
     void spawnFoam()
     {
         if (rigidBody2D.velocity.magnitude != 0)
@@ -88,10 +90,15 @@ public class SkeletalBoltMage : Enemy
 
     void travelLocation()
     {
-        path = GetComponent<AStarPathfinding>().seekPath;
-        this.GetComponent<AStarPathfinding>().target = randomPos;
-        AStarNode pathNode = path[0];
-        Vector3 targetPos = pathNode.nodePosition;
+        path = aStarPathfinding.seekPath;
+        this.aStarPathfinding.target = randomPos;
+
+        Vector3 targetPos = randomPos;
+        if (path.Count > 0)
+        {
+            AStarNode pathNode = path[0];
+            targetPos = pathNode.nodePosition;
+        }
         travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
         moveTowards(travelAngle);
 
@@ -236,6 +243,7 @@ public class SkeletalBoltMage : Enemy
         playerShip = GameObject.Find("PlayerShip");
         animator.enabled = false;
         randomPos = pickRandPos();
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
     void Update()

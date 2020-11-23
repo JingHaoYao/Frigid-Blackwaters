@@ -369,13 +369,14 @@ public class UndeadMariner : Enemy
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
-
+            
         }
     }
 
     public override void damageProcedure(int damage)
     {
         this.GetComponents<AudioSource>()[4].Play();
+        SpawnArtifactKillsAndGoOnCooldown(1.5f);
         StartCoroutine(hitFrame());
     }
 

@@ -9,6 +9,7 @@ public class FrontierGates : MonoBehaviour
     public Vector3 bossRoomLocation;
     public GameObject unactivatedBoss;
     public GameObject bossRoom;
+    private bool loadingBoss = false;
 
 
     IEnumerator moveShip(PlayerScript playerScript)
@@ -34,10 +35,14 @@ public class FrontierGates : MonoBehaviour
         }
         else
         {
-            PlayerScript playerScript = FindObjectOfType<PlayerScript>();
-            playerScript.enemiesDefeated = false;
-            PlayerProperties.playerScript.addRootingObject();
-            StartCoroutine(moveShip(playerScript));
+            if (loadingBoss == false)
+            {
+                loadingBoss = true;
+                PlayerScript playerScript = FindObjectOfType<PlayerScript>();
+                playerScript.enemiesDefeated = false;
+                PlayerProperties.playerScript.addRootingObject();
+                StartCoroutine(moveShip(playerScript));
+            }
         }
     }
 }

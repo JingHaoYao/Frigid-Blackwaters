@@ -22,10 +22,9 @@ public class SniperPlume : WeaponFireScript {
 
     void summonBullet()
     {
-
         if (extremeFocus == false)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector3(Mathf.Cos(baseAngle * Mathf.Deg2Rad), Mathf.Sin(baseAngle * Mathf.Deg2Rad)).normalized, 60, bulletImpactLayerMask);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, (PlayerProperties.cursorPosition - transform.position).normalized, 60, bulletImpactLayerMask);
             GameObject bulletInstant = null;
 
             if (hit.collider != null)
@@ -35,9 +34,9 @@ public class SniperPlume : WeaponFireScript {
                 {
                     if (hit.collider.GetComponent<Enemy>())
                     {
-                        if (hit.collider.GetComponent<Enemy>().stopAttacking == true)
+                        if (hit.collider.GetComponent<Enemy>().EnemyStunned)
                         {
-                            bulletInstant.GetComponent<DamageAmount>().damage += 5;
+                            bulletInstant.GetComponent<DamageAmount>().addDamage(5);
                         }
                     }
                 }

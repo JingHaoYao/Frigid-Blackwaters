@@ -30,13 +30,22 @@ public class FishmanShamanArms : MonoBehaviour {
         yield return new WaitForSeconds(4f / 12f);
         circCol.enabled = true;
         yield return new WaitForSeconds(1f/12f);
-        if(collidedwithShip == true)
+        if (collidedwithShip == true)
         {
+            bool removeRoot = true;
+            if (!PlayerProperties.playerScript.isShipRooted())
+            {
+                PlayerProperties.playerScript.addRootingObject();
+                removeRoot = false;
+            }
             isRooted = true;
             yield return new WaitForSeconds(2f);
             animator.SetTrigger("ArmsOut");
             isRooted = false;
-            PlayerProperties.playerScript.removeRootingObject();
+            if (removeRoot)
+            {
+                PlayerProperties.playerScript.removeRootingObject();
+            }
             yield return new WaitForSeconds(6f / 12f);
             GameObject splashCirc = Instantiate(splashCircles, transform.position, Quaternion.identity);
             splashCirc.GetComponent<SpriteRenderer>().sortingOrder = spriteRenderer.sortingOrder = 200 - (int)(transform.position.y * 10) - 2;
@@ -64,10 +73,6 @@ public class FishmanShamanArms : MonoBehaviour {
 	}
 
 	void Update () {
-		if(isRooted == true)
-        {
-            PlayerProperties.playerScript.addRootingObject();
-        }
         pickRendererLayer();
 	}
 

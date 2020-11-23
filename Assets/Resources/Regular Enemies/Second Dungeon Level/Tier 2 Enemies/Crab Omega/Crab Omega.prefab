@@ -115,6 +115,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -126,6 +127,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -248,8 +250,10 @@ MonoBehaviour:
   percentSpawnChance: 33
   armorMitigation: 0
   speed: 2.5
-  slowAmount: 0
-  spawner: {fileID: 0}
+  fogStats:
+    fogDurationIncrease: 0
+    fogCoolDownDecrease: 0
+  moveable: 1
   statuses: []
   closedViews:
   - {fileID: 6394104391649624893, guid: 9300e7a14fde0e8499f6941f79ced723, type: 3}
@@ -263,7 +267,6 @@ MonoBehaviour:
   - {fileID: -5872019006826810993, guid: a07bbb3a97c6ee4419f189c95198db4b, type: 3}
   deadCrab: {fileID: 549363072645554159, guid: 212413975f0d5d8469527efa3faa8d57, type: 3}
   waterFoam: {fileID: 1105302273420430, guid: fdc8b3ce0fabb4742ad1a9051be902bf, type: 3}
-  travelSpeed: 2.5
   invulnerableHitBox: {fileID: 2468209444362711142}
   damageHitBox: {fileID: 2468209445701026740}
   dash: {fileID: 1079485810447748386, guid: d586332e7a2ca4b4b917b19efbebbb19, type: 3}
@@ -531,6 +534,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -542,6 +546,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -692,7 +697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905f99799bc131040a11b6b1fc07dbb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 400
+  damageAmount: 1400
 --- !u!1001 &6063331366106334458
 PrefabInstance:
   m_ObjectHideFlags: 0

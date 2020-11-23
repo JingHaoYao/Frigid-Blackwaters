@@ -49,6 +49,7 @@ public class ArtifactSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                 inventory.itemList.Add(displayInfo.gameObject);
                 inventory.UpdateUI();
                 artifacts.UpdateUI();
+                PlayerProperties.playerScript.CheckAndUpdateHealth();
             }
         }
     }

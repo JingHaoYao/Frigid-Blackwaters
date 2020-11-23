@@ -15,14 +15,12 @@ public class FrogmanPelletCasterPellet : MonoBehaviour
     void Start()
     {
         StartCoroutine(mainRoutine());
+        rotate();
     }
 
-    void Update()
+    void rotate()
     {
-        if (impacted == false)
-        {
-            LeanTween.rotateZ(this.gameObject, transform.rotation.eulerAngles.z + 270, 0.2f);
-        }
+        LeanTween.rotateZ(this.gameObject, transform.rotation.eulerAngles.z + 270, 0.2f).setOnComplete(rotate);
     }
 
     IEnumerator mainRoutine()

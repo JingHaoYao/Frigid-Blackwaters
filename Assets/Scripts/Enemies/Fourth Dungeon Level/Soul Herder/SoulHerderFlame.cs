@@ -24,6 +24,7 @@ public class SoulHerderFlame : MonoBehaviour
             spriteRenderer.color = new Color(1, 1, 1, alpha);
             yield return null;
         }
+        Destroy(this.gameObject);
     }
     
 }

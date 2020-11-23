@@ -36,7 +36,7 @@ public class PaddleBoat : MonoBehaviour
         if(movingUp == false)
         {
             rigidBody2D.velocity = Vector2.down;
-            if(Vector2.Distance(end, transform.position) < 0.2f)
+            if(Vector2.Distance(end, transform.position) < 0.5f)
             {
                 movingUp = true;
             }
@@ -44,7 +44,7 @@ public class PaddleBoat : MonoBehaviour
         else
         {
             rigidBody2D.velocity = Vector2.up;
-            if (Vector2.Distance(start, transform.position) < 0.2f)
+            if (Vector2.Distance(start, transform.position) < 0.5f)
             {
                 movingUp = false;
             }

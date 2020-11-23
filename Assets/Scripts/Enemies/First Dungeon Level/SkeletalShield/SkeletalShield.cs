@@ -18,18 +18,20 @@ public class SkeletalShield : Enemy {
     public GameObject deadShield;
     public bool actualHit = false;
     List<AStarNode> path;
+    AStarPathfinding aStarPathfinding;
 
     void pickRangedEnemy()
     {
-        if (protectedEnemy == null)
+        foreach(Enemy enemy in EnemyPool.enemyPool)
         {
-            GameObject[] rangeEnemyList = GameObject.FindGameObjectsWithTag("RangedEnemy");
-            if(rangeEnemyList.Length == 0)
+            if(enemy.gameObject.tag == "RangedEnemy")
             {
-                noMoreEnemies = true;
+                protectedEnemy = enemy.gameObject;
+                return;
             }
-            protectedEnemy = rangeEnemyList[Random.Range(0, rangeEnemyList.Length)];
         }
+
+        noMoreEnemies = true;
     }
 
     float cardinalizeDirections(float angle)
@@ -70,12 +72,17 @@ public class SkeletalShield : Enemy {
 
     void protectEnemy()
     {
-        path = GetComponent<AStarPathfinding>().seekPath;
-        AStarNode pathNode = path[0];
-        Vector3 targetPospath = pathNode.nodePosition;
+        path = aStarPathfinding.seekPath;
+        Vector3 targetPospath = protectedEnemy.transform.position;
+        if (path.Count > 0)
+        {
+            AStarNode pathNode = path[0];
+            targetPospath = pathNode.nodePosition;
+        }
         float travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPospath.y - (transform.position.y + 0.4f), targetPospath.x - transform.position.x) * Mathf.Rad2Deg) % 360);
         float angleProtect = Mathf.Atan2(playerShip.transform.position.y - protectedEnemy.transform.position.y, playerShip.transform.position.x - protectedEnemy.transform.position.x);
         targetPos = protectedEnemy.transform.position + new Vector3(Mathf.Cos(angleProtect), Mathf.Sin(angleProtect), 0) * 2;
+
         if(Vector2.Distance(transform.position, targetPos) <= 0.1f)
         {
             pickSprite(angleToShip);
@@ -85,7 +92,7 @@ public class SkeletalShield : Enemy {
         {
             if (Vector2.Distance(transform.position, protectedEnemy.transform.position) > 3)
             {
-                this.GetComponent<AStarPathfinding>().target = protectedEnemy.transform.position;
+                this.aStarPathfinding.target = protectedEnemy.transform.position;
                 pickSprite(travelAngle);
                 moveTowards(travelAngle);
             }
@@ -209,6 +216,8 @@ public class SkeletalShield : Enemy {
         rigidBody2D = GetComponent<Rigidbody2D>();
         playerShip = GameObject.Find("PlayerShip");
         pickRangedEnemy();
+
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
 	void Update () {

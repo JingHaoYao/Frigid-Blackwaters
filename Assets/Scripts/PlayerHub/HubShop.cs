@@ -25,6 +25,14 @@ public class HubShop : MonoBehaviour {
     public GameObject icon;
     ItemTemplates itemTemplates;
 
+    MenuSlideAnimation menuSlideAnimation = new MenuSlideAnimation();
+
+    void SetAnimation()
+    {
+        menuSlideAnimation.SetOpenAnimation(new Vector3(-243, -585, 0), new Vector3(-243, 22, 0), 0.25f);
+        menuSlideAnimation.SetCloseAnimation(new Vector3(-243, 22, 0), new Vector3(-243, -585, 0), 0.25f);
+    }
+
     void Start()
     {
         itemTemplates = FindObjectOfType<ItemTemplates>();
@@ -41,6 +49,7 @@ public class HubShop : MonoBehaviour {
         }
         toolTip = inventory.toolTip;
         spawnSellingItems();
+        SetAnimation();
     }
 
     void setSellingItemsList(bool artifactShop)
@@ -145,6 +154,33 @@ public class HubShop : MonoBehaviour {
                     }
                 }
                 break;
+            case 5:
+                for (int i = 0; i < numberItems; i++)
+                {
+                    if (artifactShop == true)
+                    {
+                        if (Random.Range(0, 10) < 7)
+                        {
+                            sellingItemsList.Add(itemTemplates.loadItem(shopItems.fifthLevelArtifacts[Random.Range(0, shopItems.fifthLevelArtifacts.Length)]));
+                        }
+                        else
+                        {
+                            sellingItemsList.Add(itemTemplates.loadItem(shopItems.fourthLevelArtifacts[Random.Range(0, shopItems.fourthLevelArtifacts.Length)]));
+                        }
+                    }
+                    else
+                    {
+                        if (Random.Range(0, 10) < 7)
+                        {
+                            sellingItemsList.Add(itemTemplates.loadItem(shopItems.fifthLevelConsumables[Random.Range(0, shopItems.fifthLevelConsumables.Length)]));
+                        }
+                        else
+                        {
+                            sellingItemsList.Add(itemTemplates.loadItem(shopItems.fourthLevelConsumables[Random.Range(0, shopItems.fourthLevelConsumables.Length)]));
+                        }
+                    }
+                }
+                break;
         }
     }
 
@@ -173,6 +209,7 @@ public class HubShop : MonoBehaviour {
         shopTilesUI.prices = sellingItemsPrices;
         shopTilesUI.updateUI();
         inventory.inventory.SetActive(true);
+        inventory.PlayInventoryEnterAnimation();
         Time.timeScale = 0;
         inventory.UpdateUI();
     }
@@ -197,41 +234,44 @@ public class HubShop : MonoBehaviour {
                 }
             }
 
-            if (shopDisplay.activeSelf == true)
+            if (menuSlideAnimation.IsAnimating == false)
             {
-                if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.I))
+                if (shopDisplay.activeSelf == true)
                 {
-                    shopDisplay.SetActive(false);
-                    inventoryDisplay.SetActive(false);
-                    PlayerProperties.playerScript.removeRootingObject();
-                    Time.timeScale = 1;
-                    playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false;
-                }
-            }
-            else if(playerShip.GetComponent<PlayerScript>().windowAlreadyOpen == false)
-            {
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    if (loadedDialogue == null)
+                    if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.I))
                     {
-                        shopDisplay.SetActive(true);
-                        inventoryDisplay.SetActive(true);
-                        playerShip.GetComponent<Inventory>().UpdateUI();
-                        PlayerProperties.playerScript.addRootingObject();
-                        setShopDisplay();
-                        playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
+                        inventory.PlayInventoryExitAnimation();
+                        menuSlideAnimation.PlayEndingAnimation(shopDisplay, () => { shopDisplay.SetActive(false); PlayerProperties.playerScript.windowAlreadyOpen = false; });
+                        PlayerProperties.playerScript.removeRootingObject();
+                        Time.timeScale = 1;
                     }
-                    else
+                }
+                else if (playerShip.GetComponent<PlayerScript>().windowAlreadyOpen == false)
+                {
+                    if (Input.GetKeyDown(KeyCode.E))
                     {
-                        dialogueIndicator.SetActive(false);
-                        dialogueUI.targetDialogue = loadedDialogue;
-                        dialogueUI.gameObject.SetActive(true);
-                        dialogueBlackOverlay.SetActive(true);
-                        HubShop[] hubShops = FindObjectsOfType<HubShop>();
-                        loadedDialogue = null;
-                        foreach(HubShop shop in hubShops)
+                        if (loadedDialogue == null)
                         {
-                            shop.loadedDialogue = null;
+                            shopDisplay.SetActive(true);
+                            menuSlideAnimation.PlayOpeningAnimation(shopDisplay);
+                            inventoryDisplay.SetActive(true);
+                            playerShip.GetComponent<Inventory>().UpdateUI();
+                            PlayerProperties.playerScript.addRootingObject();
+                            setShopDisplay();
+                            playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
+                        }
+                        else
+                        {
+                            dialogueIndicator.SetActive(false);
+                            dialogueUI.targetDialogue = loadedDialogue;
+                            dialogueUI.gameObject.SetActive(true);
+                            dialogueBlackOverlay.SetActive(true);
+                            HubShop[] hubShops = FindObjectsOfType<HubShop>();
+                            loadedDialogue = null;
+                            foreach (HubShop shop in hubShops)
+                            {
+                                shop.loadedDialogue = null;
+                            }
                         }
                     }
                 }

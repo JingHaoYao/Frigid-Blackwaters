@@ -54,7 +54,10 @@ MonoBehaviour:
   percentSpawnChance: 33
   armorMitigation: 0
   speed: 0
-  slowAmount: 0
+  fogStats:
+    fogDurationIncrease: 0
+    fogCoolDownDecrease: 0
+  moveable: 1
   statuses: []
   enemy: {fileID: 286530962331683822}
 --- !u!1 &286530961900922448
@@ -102,6 +105,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -113,6 +117,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -187,6 +192,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -198,6 +204,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -209,7 +216,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 9950
   m_Sprite: {fileID: -8975796620085314088, guid: c9650b112dc28744e9409e91b2481459,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -503,7 +510,10 @@ MonoBehaviour:
   percentSpawnChance: 33
   armorMitigation: 0
   speed: 0
-  slowAmount: 0
+  fogStats:
+    fogDurationIncrease: 0
+    fogCoolDownDecrease: 0
+  moveable: 0
   statuses: []
   urchinShot: {fileID: 8124250373183124032, guid: de18ed9172322a8428f12092a4ba46d8,
     type: 3}

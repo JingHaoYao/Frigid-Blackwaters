@@ -66,52 +66,83 @@ public class DungeonChallenge : MonoBehaviour
             case 4:
                 dungeonName = "Fourth Dungeon Level";
                 break;
+            case 5:
+                dungeonName = "Fifth Dungeon Level";
+                break;
         }
 
-        if (manager.whatDungeonLevel == 1)
+        if (tier == 1)
         {
-            if (tier == 1)
+            List<GameObject> enemyList = new List<GameObject>();
+            foreach (string name in template.potentialEnemyNames)
             {
-                List<GameObject> enemyList = new List<GameObject>();
-                foreach (string name in template.potentialEnemyNames)
+                if (enemyTemplates.filteredEnemyNamesForDungeonTrials.Contains(name))
                 {
-                    GameObject enemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Tier 1 Enemies/" + name + "/" + name);
+                    continue;
+                }
+
+                GameObject enemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Tier 1 Enemies/" + name + "/" + name);
+                if (enemy != null)
+                {
                     enemyList.Add(enemy);
                 }
-                return enemyList.ToArray();
             }
-            else if (tier == 2)
-            {
-                List<GameObject> enemyList = new List<GameObject>();
-                foreach (string name in template.potentialEnemyNames)
-                {
-                    GameObject enemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Tier 2 Enemies/" + name + "/" + name);
-                    enemyList.Add(enemy);
-                }
-                return enemyList.ToArray();
-            }
-            else if (tier == 3)
-            {
-                List<GameObject> enemyList = new List<GameObject>();
-                foreach (string name in template.potentialEnemyNames)
-                {
-                    GameObject enemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Tier 3 Enemies/" + name + "/" + name);
-                    enemyList.Add(enemy);
-                }
-                return enemyList.ToArray();
-            }
-            else
-            {
-                List<GameObject> enemyList = new List<GameObject>();
-                foreach (string name in template.potentialEnemyNames)
-                {
-                    GameObject enemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Tier 4 Enemies/" + name + "/" + name);
-                    enemyList.Add(enemy);
-                }
-                return enemyList.ToArray();
-            }
+            return enemyList.ToArray();
         }
-        return null;
+        else if (tier == 2)
+        {
+            List<GameObject> enemyList = new List<GameObject>();
+            foreach (string name in template.potentialEnemyNames)
+            {
+                if (enemyTemplates.filteredEnemyNamesForDungeonTrials.Contains(name))
+                {
+                    continue;
+                }
+
+                GameObject enemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Tier 2 Enemies/" + name + "/" + name);
+                if (enemy != null)
+                {
+                    enemyList.Add(enemy);
+                }
+            }
+            return enemyList.ToArray();
+        }
+        else if (tier == 3)
+        {
+            List<GameObject> enemyList = new List<GameObject>();
+            foreach (string name in template.potentialEnemyNames)
+            {
+                if (enemyTemplates.filteredEnemyNamesForDungeonTrials.Contains(name))
+                {
+                    continue;
+                }
+
+                GameObject enemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Tier 3 Enemies/" + name + "/" + name);
+                if (enemy != null)
+                {
+                    enemyList.Add(enemy);
+                }
+            }
+            return enemyList.ToArray();
+        }
+        else
+        {
+            List<GameObject> enemyList = new List<GameObject>();
+            foreach (string name in template.potentialEnemyNames)
+            {
+                if (enemyTemplates.filteredEnemyNamesForDungeonTrials.Contains(name))
+                {
+                    continue;
+                }
+
+                GameObject enemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Tier 4 Enemies/" + name + "/" + name);
+                if (enemy != null)
+                {
+                    enemyList.Add(enemy);
+                }
+            }
+            return enemyList.ToArray();
+        }
     }
 
     IEnumerator generateEnemies()

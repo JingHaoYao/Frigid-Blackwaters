@@ -22,17 +22,14 @@ public class RoomSpawn : MonoBehaviour
         templates = FindObjectOfType<RoomTemplates>();
         Invoke("Spawn", delayInvoke);
     }
-
-    private void Update()
+   
+    public void EndRoomSpawn()
     {
-        if (templates.GetComponent<RoomTemplates>().spawnPeriod >= 6.2f)
+        if (collisionNumber > 1)
         {
-            if(collisionNumber > 1)
-            {
-                spawnDoorBlock();
-            }
-            Destroy(this.gameObject);
+            spawnDoorBlock();
         }
+        Destroy(this.gameObject);
     }
 
     private void Spawn()
@@ -133,29 +130,31 @@ public class RoomSpawn : MonoBehaviour
     {
         if (spawnedDoorBlock == false)
         {
+            GameObject doorBlockInstant = null;
             switch (openDirection)
             {
                 case 1:
                     //spawn block facing down
-                    Instantiate(templates.doorBlock, transform.position + new Vector3(0, 11.1f, 0), Quaternion.Euler(0, 0, 90));
+                    doorBlockInstant = Instantiate(templates.doorBlock, transform.position + new Vector3(0, 11.1f, 0), Quaternion.Euler(0, 0, 90));
                     transform.parent.gameObject.GetComponent<SetRoomDesign>().memoryDoorsOpen[1] = 1;
                     break;
                 case 2:
                     //spawn door facing up
-                    Instantiate(templates.doorBlock, transform.position + new Vector3(0, -11.1f, 0), Quaternion.Euler(0, 0, 270));
+                    doorBlockInstant = Instantiate(templates.doorBlock, transform.position + new Vector3(0, -11.1f, 0), Quaternion.Euler(0, 0, 270));
                     transform.parent.gameObject.GetComponent<SetRoomDesign>().memoryDoorsOpen[0] = 1;
                     break;
                 case 3:
                     //spawn door facing right
-                    Instantiate(templates.doorBlock, transform.position + new Vector3(11.1f, 0, 0), Quaternion.Euler(0, 0, 0));
+                    doorBlockInstant = Instantiate(templates.doorBlock, transform.position + new Vector3(11.1f, 0, 0), Quaternion.Euler(0, 0, 0));
                     transform.parent.gameObject.GetComponent<SetRoomDesign>().memoryDoorsOpen[3] = 1;
                     break;
                 case 4:
                     //spawn door facing left
-                    Instantiate(templates.doorBlock, transform.position + new Vector3(-11.1f, 0, 0), Quaternion.Euler(0, 0, 180));
+                    doorBlockInstant = Instantiate(templates.doorBlock, transform.position + new Vector3(-11.1f, 0, 0), Quaternion.Euler(0, 0, 180));
                     transform.parent.gameObject.GetComponent<SetRoomDesign>().memoryDoorsOpen[2] = 1;
                     break;
             }
+            doorBlockInstant.transform.SetParent(this.transform.parent);
             spawnedDoorBlock = true;
             Destroy(this.gameObject);
         }
@@ -206,7 +205,7 @@ public class RoomSpawn : MonoBehaviour
         }
         dontSpawn = true;
 
-        if (templates.spawnPeriod >= 6.2f)
+        if (templates.areRoomsSpawned())
         {
             if (collision.gameObject.name != "AntiSpawnSpaceSpawner")
             {

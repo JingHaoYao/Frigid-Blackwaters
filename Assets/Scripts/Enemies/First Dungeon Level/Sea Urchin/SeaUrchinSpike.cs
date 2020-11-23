@@ -5,7 +5,7 @@ using UnityEngine;
 public class SeaUrchinSpike : MonoBehaviour
 {
     Animator animator;
-    float speed = 9;
+    float speed = 6;
     public float angleTravel;
     GameObject playerShip;
     Camera mainCamera;

@@ -45,6 +45,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -56,6 +57,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -133,7 +135,10 @@ MonoBehaviour:
   percentSpawnChance: 33
   armorMitigation: 0
   speed: 0
-  slowAmount: 0
+  fogStats:
+    fogDurationIncrease: 0
+    fogCoolDownDecrease: 0
+  moveable: 1
   statuses: []
   enemy: {fileID: 2313704358264716668}
 --- !u!1 &2313704358264716646
@@ -187,6 +192,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -198,6 +204,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -209,7 +216,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 9950
   m_Sprite: {fileID: -3817370510544331055, guid: 0135f2bed27fd5a4a98059bc94a56136,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -309,7 +316,10 @@ MonoBehaviour:
   percentSpawnChance: 33
   armorMitigation: 0
   speed: 0
-  slowAmount: 0
+  fogStats:
+    fogDurationIncrease: 0
+    fogCoolDownDecrease: 0
+  moveable: 0
   statuses: []
   starFishShot: {fileID: 7369987532760665160, guid: 9ac0b42407d8d664199dd8f3b7c19062,
     type: 3}

@@ -283,5 +283,6 @@ public class ElderRuneMage : Enemy
     {
         GetComponents<AudioSource>()[0].Play();
         StartCoroutine(hitFrame());
+        SpawnArtifactKillsAndGoOnCooldown(2f);
     }
 }

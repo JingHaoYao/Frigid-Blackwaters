@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour {
     //General stats/assets required for the ship
-    public Sprite downLeft, left, down, up, upLeft;
     private Rigidbody2D rigidBody2D;
     private SpriteRenderer spriteRenderer;
     public float boatSpeed = 4;
@@ -17,11 +16,17 @@ public class PlayerScript : MonoBehaviour {
     public bool stopRotate = false;
     public float whatAngleTraveled;
     public Image healthBarFill;
+    private Image redBarImage;
     public int shipHealth = 1000;
-    public int trueDamage = 0;
     public int shipHealthMAX = 1000;
     public int whichWeapon = 1;
     public float defenseModifier = 1;
+
+    [SerializeField] Animator animator;
+    [SerializeField] Animator shadowAnimator;
+    private int previousAnimationOrientation = -1;
+
+    List<ShipWeaponScript> allShipWeaponScripts = new List<ShipWeaponScript>();
 
     //artifact bonuses
     public float speedBonus = 0;
@@ -36,7 +41,6 @@ public class PlayerScript : MonoBehaviour {
     public bool enemiesDefeated = true;
 
     //restricts to using one active at a time
-    public int angleEffect = 0;
     Vector3 damageColLocation;
     public int numberHits = 0;
 
@@ -49,6 +53,7 @@ public class PlayerScript : MonoBehaviour {
     public float conSpeedBonus = 0;
     public float conDefenseBonus = 0;
     public int conAttackBonus = 0;
+    public int conHealthBonus = 0;
 
     //upgrade bonuses
     public int upgradeSpeedBonus = 0, upgradeHealthBonus = 0;
@@ -103,11 +108,30 @@ public class PlayerScript : MonoBehaviour {
     private CameraShake cameraShake;
     private PlayerHealNumbers healNumbers;
 
-    private int healthBarTweenID;
+    Coroutine healthBarTweenInstance;
+    float targetHealthBarFill = 1;
+    Coroutine flashWhiteRoutine;
 
-    List<string> playerHubNames = new List<string>() { "Player Hub", "Willow's Hideout", "Ylva's Hideout", "Nymph Village" };
+    List<string> playerHubNames = new List<string>() { "Player Hub", "Willow's Hideout", "Ylva's Hideout", "Nymph Village", "Surtr's Springs" };
 
     private Text healthBarText;
+
+    public List<ShipWeaponScript> GetShipWeaponScripts()
+    {
+        return allShipWeaponScripts;
+    }
+
+    public void RegisterWeaponScript(ShipWeaponScript script)
+    {
+        allShipWeaponScripts.Add(script);
+    }
+
+    public void SetAnimationShipType(int whatShipType)
+    {
+        animator.SetInteger("ShipType", whatShipType);
+        animator.SetTrigger("Left");
+        transform.localScale = new Vector3(-2.6f, 2.6f);
+    }
 
     public void setPlayerMomentum(Vector3 momentumVector, float duration)
     {
@@ -170,7 +194,7 @@ public class PlayerScript : MonoBehaviour {
         }
         else if (PlayerUpgrades.safeUpgrades.Count == 2)
         {
-            goldLoss += 0.15f;
+            goldLoss += 2.6f;
             numArtifactsSave = 1;
         }
         else if (PlayerUpgrades.safeUpgrades.Count == 3)
@@ -316,22 +340,13 @@ public class PlayerScript : MonoBehaviour {
         }
     }
 
-    void loadPrevItems()
+    public void loadPrevItems()
     {
-        if (playerHubNames.Contains(SceneManager.GetActiveScene().name))
-        {
+        if (playerHubNames.Contains(SceneManager.GetActiveScene().name)) {
             HubProperties.storeGold += PlayerItems.totalGoldAmount;
-            if (GameObject.Find("Gold Deposit Notifier"))
-            {
-                if (PlayerItems.totalGoldAmount > 0)
-                {
-                    GameObject.Find("Gold Deposit Notifier").GetComponent<NotificationBell>().startNotification(PlayerItems.totalGoldAmount.ToString() + " gold deposited.");
-                }
-                else
-                {
-                    GameObject.Find("Gold Deposit Notifier").SetActive(false);
-                }
-            }
+
+            FindObjectOfType<ReturnNotifications>().updateGoldDeposited(PlayerItems.totalGoldAmount);
+
             PlayerItems.totalGoldAmount = 0;
 
             foreach (string id in PlayerItems.inventoryItemsIDs.ToArray())
@@ -373,14 +388,10 @@ public class PlayerScript : MonoBehaviour {
             }
         }
 
-        if (reApplyHealth == true)
-        {
-            trueDamage = PlayerItems.playerDamage;
-        }
-        else
-        {
-            PlayerItems.playerDamage = 0;
-        }
+        inventory.UpdateUI();
+
+        artifacts.UpdateUI();
+
         SaveSystem.SaveGame();
     }
 
@@ -400,11 +411,13 @@ public class PlayerScript : MonoBehaviour {
     IEnumerator hitFrame(SpriteRenderer spriteRenderer)
     {
         audioManager.PlaySound("Player Hit");
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {
-            spriteRenderer.color = Color.red;
+            redBarImage.enabled = true;
+            spriteRenderer.material.color = Color.red;
             yield return new WaitForSeconds(0.05f);
-            spriteRenderer.color = Color.white;
+            redBarImage.enabled = false;
+            spriteRenderer.material.color = Color.white;
             yield return new WaitForSeconds(0.05f);
         }
     }
@@ -444,11 +457,31 @@ public class PlayerScript : MonoBehaviour {
 
         if (hasPressedButton == true)
         {
-            angleEffect = (int)(360 + Mathf.Atan2(directionMove.y, directionMove.x) * Mathf.Rad2Deg) % 360;
             if (foamTimer >= 0.05f)
             {
                 foamTimer = 0;
-                Instantiate(waterFoam, transform.position, Quaternion.Euler(0, 0, whatAngleTraveled + 90));
+                float angle = Mathf.Atan2(directionMove.y, directionMove.x);
+                float yOffset = 0;
+                float magnitude = 1.25f;
+
+                if(directionMove.y > 0)
+                {   
+                    yOffset = -0.5f;   
+                }
+                else if (directionMove.y < 0)
+                {
+                    if (Mathf.Abs(directionMove.x) > 0)
+                    {
+                        yOffset = -0.5f;
+                        magnitude = 1;
+                    }
+                }
+                else
+                {
+                    yOffset = -0.25f;
+                }
+
+                Instantiate(waterFoam, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle) + yOffset) * magnitude, Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg + 90));
             }
             return true;
         }
@@ -459,44 +492,127 @@ public class PlayerScript : MonoBehaviour {
     {
         if (angleOrientation > 15 && angleOrientation <= 75)
         {
-            spriteRenderer.sprite = upLeft;
-            transform.localScale = new Vector3(-0.15f, 0.15f, 0);
+            if (previousAnimationOrientation != 1)
+            {
+                previousAnimationOrientation = 1;
+                shadowAnimator.SetTrigger("UpLeft");
+                animator.SetTrigger("UpLeft");
+                transform.localScale = new Vector3(-2.6f, 2.6f, 0);
+            }
         }
         else if (angleOrientation > 75 && angleOrientation <= 105)
         {
-            spriteRenderer.sprite = up;
-            transform.localScale = new Vector3(0.15f, 0.15f, 0);
+            if (previousAnimationOrientation != 2)
+            {
+                previousAnimationOrientation = 2;
+                shadowAnimator.SetTrigger("Up");
+                animator.SetTrigger("Up");
+                transform.localScale = new Vector3(2.6f, 2.6f, 0);
+            }
         }
         else if (angleOrientation > 105 && angleOrientation <= 165)
         {
-            spriteRenderer.sprite = upLeft;
-            transform.localScale = new Vector3(0.15f, 0.15f, 0);
+            if (previousAnimationOrientation != 3)
+            {
+                previousAnimationOrientation = 3;
+                shadowAnimator.SetTrigger("UpLeft");
+                animator.SetTrigger("UpLeft");
+                transform.localScale = new Vector3(2.6f, 2.6f, 0);
+            }
         }
         else if (angleOrientation > 165 && angleOrientation <= 195)
         {
-            spriteRenderer.sprite = left;
-            transform.localScale = new Vector3(0.15f, 0.15f, 0);
+            if (previousAnimationOrientation != 4)
+            {
+                previousAnimationOrientation = 4;
+                shadowAnimator.SetTrigger("Left");
+                animator.SetTrigger("Left");
+                transform.localScale = new Vector3(2.6f, 2.6f, 0);
+            }
         }
         else if (angleOrientation > 195 && angleOrientation <= 255)
         {
-            spriteRenderer.sprite = downLeft;
-            transform.localScale = new Vector3(0.15f, 0.15f, 0);
+            if (previousAnimationOrientation != 5)
+            {
+                previousAnimationOrientation = 5;
+                shadowAnimator.SetTrigger("DownLeft");
+                animator.SetTrigger("DownLeft");
+                transform.localScale = new Vector3(2.6f, 2.6f, 0);
+            }
         }
         else if (angleOrientation > 255 && angleOrientation <= 285)
         {
-            spriteRenderer.sprite = down;
-            transform.localScale = new Vector3(0.15f, 0.15f, 0);
+            if (previousAnimationOrientation != 6)
+            {
+                previousAnimationOrientation = 6;
+                shadowAnimator.SetTrigger("Down");
+                animator.SetTrigger("Down");
+                transform.localScale = new Vector3(2.6f, 2.6f, 0);
+            }
         }
         else if (angleOrientation > 285 && angleOrientation <= 345)
         {
-            spriteRenderer.sprite = downLeft;
-            transform.localScale = new Vector3(-0.15f, 0.15f, 0);
+            if (previousAnimationOrientation != 7)
+            {
+                previousAnimationOrientation = 7;
+                shadowAnimator.SetTrigger("DownLeft");
+                animator.SetTrigger("DownLeft");
+                transform.localScale = new Vector3(-2.6f, 2.6f, 0);
+            }
         }
         else
         {
-            spriteRenderer.sprite = left;
-            transform.localScale = new Vector3(-0.15f, 0.15f, 0);
+            if (previousAnimationOrientation != 8)
+            {
+                previousAnimationOrientation = 8;
+                shadowAnimator.SetTrigger("Left");
+                animator.SetTrigger("Left");
+                transform.localScale = new Vector3(-2.6f, 2.6f, 0);
+            }
         }
+    }
+
+    IEnumerator SleepHit(float duration)
+    {
+        Time.timeScale = 0.001f;
+
+        yield return new WaitForSeconds(duration * Time.timeScale);
+
+        Time.timeScale = 1;
+    }
+
+
+    IEnumerator flashWhite(float duration)
+    {
+        float timer = 0;
+
+        float increment = 1 / (duration / 2);
+
+        while(timer < duration / 2)
+        {
+            timer += Time.deltaTime;
+            spriteRenderer.material.SetFloat("_FlashAmount", timer * increment);
+            yield return null;
+        }
+
+        timer = duration / 2;
+
+        while(timer > 0)
+        {
+            timer -= Time.deltaTime;
+            spriteRenderer.material.SetFloat("_FlashAmount", timer * increment);
+            yield return null;
+        }
+    }
+
+    public void FlashWhitePickup()
+    {
+        if(flashWhiteRoutine != null)
+        {
+            StopCoroutine(flashWhiteRoutine);
+        }
+
+        flashWhiteRoutine = StartCoroutine(flashWhite(0.5f));
     }
 
     private void loadDebugConsoleIfNotInstantiated()
@@ -516,9 +632,12 @@ public class PlayerScript : MonoBehaviour {
         loadDebugConsoleIfNotInstantiated();
         PlayerProperties.playerScript = this;
         PlayerProperties.playerShip = this.gameObject;
+
+        healthBarText = healthBarFill.transform.parent.GetComponentInChildren<Text>().GetComponentsInChildren<Text>()[1];
     }
 
     void Start() {
+        LeanTween.init(1000);
         itemTemplates = FindObjectOfType<ItemTemplates>();
         inventory = GetComponent<Inventory>();
         artifacts = GetComponent<Artifacts>();
@@ -526,31 +645,40 @@ public class PlayerScript : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         hullUpgradeManager = GetComponent<HullUpgradeManager>();
 
-        PlayerProperties.playerArtifacts = artifacts;
-        PlayerProperties.playerInventory = inventory;
+        
+        redBarImage = healthBarFill.GetComponentsInChildren<Image>()[1];
+       
+        redBarImage.enabled = false;
+        
         PlayerProperties.spriteRenderer = this.spriteRenderer;
 
         if (SceneManager.GetActiveScene().name != "Tutorial" && SceneManager.GetActiveScene().name != "Demo Level")
         {
-            loadPrevItems();
+            if (!playerHubNames.Contains(SceneManager.GetActiveScene().name))
+            {
+                loadPrevItems();
+            }
         }
-
-        healthBarText = healthBarFill.transform.parent.GetComponentInChildren<Text>().GetComponentsInChildren<Text>()[1];
 
         damageNumbers = FindObjectOfType<DamageNumbers>();
         audioManager = FindObjectOfType<AudioManager>();
         healNumbers = FindObjectOfType<PlayerHealNumbers>();
         cameraShake = FindObjectOfType<CameraShake>();
 
-        inventory.UpdateUI();
+        artifacts.artifactsUI.SetActive(false);
         inventory.inventory.SetActive(false);
 
-        artifacts.UpdateUI();
-        artifacts.artifactsUI.SetActive(false);
+        if (SceneManager.GetActiveScene().name != "Tutorial")
+        {
+            shipHealth = shipHealthMAX;
+        }
 
-        shipHealth = Mathf.RoundToInt(shipHealthMAX - trueDamage);
+        CheckAndUpdateHealth();
+    }
 
-        updateHealthBarText();
+    void updateShipHealthMAX()
+    {
+        shipHealthMAX = 1000 + healthBonus + upgradeHealthBonus + conHealthBonus;
     }
 
     public void healPlayer(int amountHealing)
@@ -558,15 +686,13 @@ public class PlayerScript : MonoBehaviour {
         if (amountHealing > 0)
         {
             healNumbers.showHealing(amountHealing, shipHealthMAX);
-            trueDamage -= amountHealing;
+            shipHealth += amountHealing;
 
-            if(trueDamage < 0)
+            if(shipHealth > shipHealthMAX)
             {
-                trueDamage = 0;
+                shipHealth = shipHealthMAX;
             }
         }
-
-        shipHealth = Mathf.RoundToInt(shipHealthMAX - trueDamage);
 
         foreach (GameObject artifact in artifacts.activeArtifacts)
         {
@@ -589,10 +715,10 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void Update() {
+        PlayerProperties.playerShipPosition = transform.position;
+
         if (playerDead == false)
         {
-            PlayerProperties.playerShipPosition = transform.position;
-
             applyMomentum();
             applyEnemyMomentum();
             foamTimer += Time.deltaTime;
@@ -624,7 +750,7 @@ public class PlayerScript : MonoBehaviour {
                 shipMoving = true;
                 if (shipRooted == false)
                 {
-                    rigidBody2D.velocity = directionMove * Mathf.Clamp((boatSpeed + speedBonus + conSpeedBonus + upgradeSpeedBonus + enemySpeedModifier), 0, int.MaxValue) + momentumVector + enemyMomentumVector; //speed bonus
+                    rigidBody2D.velocity = directionMove * Mathf.Clamp((boatSpeed + speedBonus + conSpeedBonus + upgradeSpeedBonus + enemySpeedModifier), 1, int.MaxValue) + momentumVector + enemyMomentumVector; //speed bonus
                     PlayerProperties.currentPlayerTravelDirection = (Mathf.Atan2(directionMove.y, directionMove.x) * Mathf.Rad2Deg + 360) % 360;
                     PlayerProperties.shipTravellingVector = rigidBody2D.velocity;
                 }
@@ -645,9 +771,7 @@ public class PlayerScript : MonoBehaviour {
                 audioManager.MuteSound("Idle Ship Movement");
             }
 
-            shipHealthMAX = 1000 + healthBonus + upgradeHealthBonus;
-
-            shipHealth = Mathf.RoundToInt(shipHealthMAX - trueDamage);
+            updateShipHealthMAX();
 
             pickRendererLayer();
             defenseModifier = Mathf.Clamp(1 - defenseBonus - conDefenseBonus - upgradeDefenseBonus, 0.05f, float.MaxValue);
@@ -658,31 +782,90 @@ public class PlayerScript : MonoBehaviour {
             enemyMomentumVector = Vector3.zero;
         }
 
+#if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if(Time.timeScale == 0)
+            {
+                Time.timeScale = 1;
+            }
+            else
+            {
+                Time.timeScale = 0;
+            }
+        }
+#endif
+
         updateHealthBar();
         updateHealthBarText();
         PlayerProperties.armorIndicator.updateShieldEffect();
+    }
+
+    public void CheckAndUpdateHealth()
+    {
+        updateShipHealthMAX();
+        if(shipHealth > shipHealthMAX)
+        {
+            shipHealth = shipHealthMAX;
+        }
+        updateHealthBar();
     }
 
     public void dealDamageToShip(int amountDamage, GameObject damagingObject)
     {
         int amountBeingDamaged = Mathf.RoundToInt(amountDamage * defenseModifier);
 
-        if (damagingObject.GetComponent<DisplayItem>())
+        if (damagingObject != null)
         {
-            dealTrueDamageToShip(amountDamage);
+            if (damagingObject.GetComponent<DisplayItem>())
+            {
+                dealTrueDamageToShip(amountDamage);
+                return;
+            }
+
+            if (itemsGrantingDamageImmunity.Count > 0)
+            {
+                amountBeingDamaged = 0;
+            }
+
+            if (damageAbsorb == true)
+            {
+                healPlayer(Mathf.RoundToInt(amountBeingDamaged));
+                amountBeingDamaged = 0;
+            }
+            // need to correct here
+
+            if (hitBufferPeriod == false)
+            {
+                float angle = Mathf.Atan2(damagingObject.transform.position.y - transform.position.y, damagingObject.transform.position.x - transform.position.x);
+                if (Vector2.Distance(transform.position, damagingObject.transform.position) < 1f)
+                {
+                    damageNumbers.showDamage((int)(amountBeingDamaged), shipHealthMAX, damagingObject.transform.position);
+                }
+                else
+                {
+                    damageNumbers.showDamage((int)(amountBeingDamaged), shipHealthMAX, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)));
+                }
+
+                cameraShake.shakeCamFunction(0.2f, 0.1f + ((float)amountBeingDamaged / shipHealthMAX) * 0.2f);
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        StartCoroutine(SleepHit(0.07f));
+
+        if (amountBeingDamaged == 0)
+        {
             return;
         }
 
-        if (itemsGrantingDamageImmunity.Count > 0)
-        {
-            amountBeingDamaged = 0;
-        }
+        StartCoroutine(bufferHit(0.5f));
 
-        if (damageAbsorb == true)
-        {
-            healPlayer(Mathf.RoundToInt(amountBeingDamaged));
-            amountBeingDamaged = 0;
-        }
+
+        shipHealth -= amountBeingDamaged;
 
         foreach (ArtifactSlot slot in PlayerProperties.playerArtifacts.artifactSlots)
         {
@@ -690,58 +873,54 @@ public class PlayerScript : MonoBehaviour {
             {
                 if (damagingObject.GetComponent<ProjectileParent>())
                 {
-                    slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.GetComponent<ProjectileParent>().instantiater?.GetComponent<Enemy>());
+                    slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountBeingDamaged, damagingObject.GetComponent<ProjectileParent>().instantiater?.GetComponent<Enemy>());
                 }
                 else if (damagingObject.transform.parent != null)
                 {
-                    slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.transform.parent.GetComponent<Enemy>());
+                    slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountBeingDamaged, damagingObject.transform.parent.GetComponent<Enemy>());
                 }
                 else
                 {
-                    slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountDamage, damagingObject.GetComponent<Enemy>());
+                    slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountBeingDamaged, damagingObject.GetComponent<Enemy>());
                 }
             }
         }
 
-        if (hitBufferPeriod == false)
+        foreach(ShipWeaponScript script in allShipWeaponScripts)
         {
-            float angle = Mathf.Atan2(damagingObject.transform.position.y - transform.position.y, damagingObject.transform.position.x - transform.position.x);
-            if (Vector2.Distance(transform.position, damagingObject.transform.position) < 1f)
+            if (damagingObject.GetComponent<ProjectileParent>())
             {
-                damageNumbers.showDamage((int)(amountBeingDamaged), shipHealthMAX, damagingObject.transform.position);
+                script.shipWeaponTemplate.GetComponent<WeaponFireTemplate>().TookDamage(amountBeingDamaged, damagingObject.GetComponent<ProjectileParent>().instantiater?.GetComponent<Enemy>());
+            }
+            else if (damagingObject.transform.parent != null)
+            {
+                script.shipWeaponTemplate.GetComponent<WeaponFireTemplate>().TookDamage(amountBeingDamaged, damagingObject.transform.parent.GetComponent<Enemy>());
             }
             else
             {
-                damageNumbers.showDamage((int)(amountBeingDamaged), shipHealthMAX, transform.position + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)));
+                script.shipWeaponTemplate.GetComponent<WeaponFireTemplate>().TookDamage(amountBeingDamaged, damagingObject.GetComponent<Enemy>());
             }
-
-            cameraShake.shakeCamFunction(0.1f, 0.3f * (amountBeingDamaged / shipHealthMAX));
-        }
-        else
-        {
-            return;
         }
 
-        StartCoroutine(bufferHit(0.5f));
-
-        if (amountBeingDamaged == 0)
-        {
-            return;
-        }
-
-        trueDamage += amountBeingDamaged;
-        PlayerItems.playerDamage = trueDamage;
         damagingObject = null;
 
-        shipHealth = Mathf.RoundToInt(shipHealthMAX - trueDamage);
+        CheckPlayerDeath();
 
+        updateHealthBar();
+    }
+
+    void CheckPlayerDeath()
+    {
         if (shipHealth <= 0 && playerDead == false)
         {
             shipHealth = 0;
             playerDead = true;
             rigidBody2D.velocity = Vector3.zero;
 
-            LeanTween.cancel(healthBarTweenID);
+            if (healthBarTweenInstance != null)
+            {
+                StopCoroutine(healthBarTweenInstance);
+            }
 
             foreach (Transform child in transform)
             {
@@ -775,18 +954,18 @@ public class PlayerScript : MonoBehaviour {
                 SaveSystem.SaveGame();
             }
         }
-
-        updateHealthBar();
     }
 
     public void dealTrueDamageToShip(int damage)
     {
-        trueDamage += damage;
+        shipHealth -= damage;
         StartCoroutine(hitFrame(spriteRenderer));
         damageNumbers.showDamage(damage, shipHealthMAX, transform.position + new Vector3(0, 1.5f, 0));
         numberHits++;
 
         updateHealthBar();
+
+        CheckPlayerDeath();
     }
 
     public float totalShipSpeed {
@@ -802,32 +981,62 @@ public class PlayerScript : MonoBehaviour {
         audioManager.PlaySound("Respawn Sound");
         Instantiate(respawnEffect, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(6f / 12f);
-        spriteRenderer.sprite = left;
-        transform.localScale = new Vector3(0.15f, 0.15f, 0);
+        animator.SetTrigger("Left");
+        shadowAnimator.SetTrigger("Left");
+        transform.localScale = new Vector3(2.6f, 2.6f, 0);
         StartCoroutine(bufferHit(1f));
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(true);
         }
         yield return new WaitForSeconds(1 / 12f);
-        trueDamage = 0;
+        shipHealth = shipHealthMAX;
         playerDead = false;
         spriteRenderer.enabled = true;
     }
 
     void updateHealthBar()
     {
-        if (Mathf.Abs((float)shipHealth / shipHealthMAX - healthBarFill.fillAmount) > 0.01)
+        if (Mathf.Abs(((float)shipHealth / shipHealthMAX) - targetHealthBarFill) > 0.0001f)
         {
-            LeanTween.cancel(healthBarTweenID);
-            healthBarTweenID = LeanTween.value(healthBarFill.fillAmount, (float)shipHealth / shipHealthMAX, 0.4f).setOnUpdate((float val) => { healthBarFill.fillAmount = val; }).id;
+            if (playerHubNames.Contains(SceneManager.GetActiveScene().name))
+            {
+                shipHealth = shipHealthMAX;
+            }
+            targetHealthBarFill = (float)shipHealth / shipHealthMAX;
+            if (healthBarTweenInstance != null)
+            {
+                StopCoroutine(healthBarTweenInstance);
+            }
+
+            healthBarTweenInstance = StartCoroutine(healthBarTween(healthBarFill.fillAmount, targetHealthBarFill, 0.4f));
             updateHealthBarText();
+        }
+    }
+
+    IEnumerator healthBarTween(float currentHealthBarFillAmount, float newHealthBarFillAmount, float time)
+    {
+        float increment = (newHealthBarFillAmount - currentHealthBarFillAmount) / time;
+
+        float timer = 0;
+
+        bool adjustFlammableUI = PlayerProperties.flammableController != null;
+
+        while (timer < time)
+        {
+            timer += Time.unscaledDeltaTime;
+            healthBarFill.fillAmount = currentHealthBarFillAmount + timer * increment;
+            if (adjustFlammableUI)
+            {
+                PlayerProperties.flammableController.UpdateFireyBar();
+            }
+            yield return null;
         }
     }
 
     void updateHealthBarText()
     {
-        healthBarText.text = (shipHealthMAX - trueDamage).ToString() + "/" + shipHealthMAX.ToString();
+        healthBarText.text = shipHealth.ToString() + "/" + shipHealthMAX.ToString();
     }
 
 
@@ -861,19 +1070,19 @@ public class PlayerScript : MonoBehaviour {
     {
         Collider2D[] cols = spikeHitBox.GetComponents<Collider2D>();
 
-        if (spriteRenderer.sprite == downLeft)
+        if (previousAnimationOrientation == 5 || previousAnimationOrientation == 7)
         {
             cols[0].enabled = true;
         }
-        else if (spriteRenderer.sprite == left)
+        else if (previousAnimationOrientation == 4 || previousAnimationOrientation == 8)
         {
             cols[1].enabled = true;
         }
-        else if (spriteRenderer.sprite == down)
+        else if (previousAnimationOrientation == 6)
         {
             cols[2].enabled = true;
         }
-        else if (spriteRenderer.sprite == up)
+        else if (previousAnimationOrientation == 2)
         {
             cols[3].enabled = true;
         }

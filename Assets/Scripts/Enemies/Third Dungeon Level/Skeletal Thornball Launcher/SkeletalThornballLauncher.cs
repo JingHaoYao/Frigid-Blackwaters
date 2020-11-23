@@ -138,7 +138,7 @@ public class SkeletalThornballLauncher : Enemy
     {
         path = aStarPathfinding.seekPath;
         aStarPathfinding.target = randomPos;
-        Vector3 targetPos = Vector3.zero;
+        Vector3 targetPos = randomPos;
 
         if (path.Count > 0)
         {

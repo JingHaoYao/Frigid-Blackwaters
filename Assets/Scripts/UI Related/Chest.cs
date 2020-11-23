@@ -26,6 +26,15 @@ public class Chest : MonoBehaviour {
     public int customGoldMultiplier = 0;
     GameObject toolTip;
     DungeonEntryDialogueManager dungeonDialogueManager;
+    [SerializeField] bool pickRandomUniqueItems;
+
+    MenuSlideAnimation menuSlideAnimation = new MenuSlideAnimation();
+
+    void SetAnimation()
+    {
+        menuSlideAnimation.SetOpenAnimation(new Vector3(-243, -585, 0), new Vector3(-243, 0, 0), 0.25f);
+        menuSlideAnimation.SetCloseAnimation(new Vector3(-243, 0, 0), new Vector3(-243, -585, 0), 0.25f);
+    }
 
     void selectAnim(int typeChest)
     {
@@ -187,6 +196,19 @@ public class Chest : MonoBehaviour {
         }
         else
         {
+            if (pickRandomUniqueItems)
+            {
+                GameObject itemToKeep = uniqueItems[Random.Range(0, uniqueItems.Length)];
+                GameObject newItem = Instantiate(itemToKeep);
+                if (newItem.GetComponent<DisplayItem>().goldValue > 0)
+                {
+                    newItem.GetComponent<DisplayItem>().goldValue = customGoldBase + Random.Range(0, 4) * customGoldMultiplier;
+                }
+                newItem.transform.parent = presentItems.transform;
+                items[0] = newItem;
+                return;
+            }
+
             int currentIndex = 0;
             foreach (GameObject item in uniqueItems)
             {
@@ -220,6 +242,7 @@ public class Chest : MonoBehaviour {
         presentItems = GameObject.Find("PresentItems");
         dungeonDialogueManager = FindObjectOfType<DungeonEntryDialogueManager>();
         generateItems(chestItems);
+        SetAnimation();
     }
 
     private void LateUpdate()
@@ -232,34 +255,38 @@ public class Chest : MonoBehaviour {
                 spawnedIndicator.GetComponent<ChestIndicator>().parentChest = this.gameObject;
             }
 
-            if (displayOn == false)
+            if (menuSlideAnimation.IsAnimating == false)
             {
-                if (Input.GetKeyDown(KeyCode.F) && playerShip.GetComponent<PlayerScript>().windowAlreadyOpen == false)
+                if (displayOn == false)
                 {
-                    playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
-                    beenOpened = true;
-                    selectAnim(typeChest);
-                    displayOn = true;
-                    UpdateUI();
-                    Time.timeScale = 0;
-                    chestDisplay.SetActive(true);
-                    inventoryDisplay.SetActive(true);
-                    playerShip.GetComponent<Inventory>().UpdateUI();
-                }
-            }
-            else
-            {
-                if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.F))
-                {
-                    if(toolTip.activeSelf == true)
+                    if (Input.GetKeyDown(KeyCode.F) && playerShip.GetComponent<PlayerScript>().windowAlreadyOpen == false)
                     {
-                        toolTip.SetActive(false);
+                        playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
+                        beenOpened = true;
+                        selectAnim(typeChest);
+                        displayOn = true;
+                        UpdateUI();
+                        Time.timeScale = 0;
+                        chestDisplay.SetActive(true);
+                        menuSlideAnimation.PlayOpeningAnimation(chestDisplay);
+                        inventoryDisplay.SetActive(true);
+                        PlayerProperties.playerInventory.PlayInventoryEnterAnimation();
+                        playerShip.GetComponent<Inventory>().UpdateUI();
                     }
-                    playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false;
-                    Time.timeScale = 1;
-                    displayOn = false;
-                    chestDisplay.SetActive(false);
-                    inventoryDisplay.SetActive(false);
+                }
+                else
+                {
+                    if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.F))
+                    {
+                        if (toolTip.activeSelf == true)
+                        {
+                            toolTip.SetActive(false);
+                        }
+                        Time.timeScale = 1;
+                        displayOn = false;
+                        menuSlideAnimation.PlayEndingAnimation(chestDisplay, () => { chestDisplay.SetActive(false); playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false; });
+                        PlayerProperties.playerInventory.PlayInventoryExitAnimation();
+                    }
                 }
             }
         }

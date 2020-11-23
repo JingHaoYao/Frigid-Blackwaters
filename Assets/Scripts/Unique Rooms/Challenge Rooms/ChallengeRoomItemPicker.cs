@@ -8,10 +8,12 @@ public class ChallengeRoomItemPicker : MonoBehaviour
     public string[] pickedItems;
     public int whatTier = 1;
     public int goldAmount = 0;
+    int whatDungeonLevel = 0;
 
     void Start()
     {
         itemTemplates = FindObjectOfType<ItemTemplates>();
+        whatDungeonLevel = FindObjectOfType<DungeonEntryDialogueManager>().whatDungeonLevel;
         pickItems();
     }
     
@@ -61,5 +63,7 @@ public class ChallengeRoomItemPicker : MonoBehaviour
             }
             goldAmount = 600 + Random.Range(0, 4) * 50;
         }
+
+        goldAmount += 1250 * (whatDungeonLevel - 1);
     }
 }

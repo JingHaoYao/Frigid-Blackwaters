@@ -45,10 +45,10 @@ public class LoadGameFromTitleScreen : MonoBehaviour {
                 return 7;
             case 3:
                 return 5;
-                break;
             case 4:
                 return 8;
-                break;
+            case 5:
+                return 11;
         }
 
         return 1;

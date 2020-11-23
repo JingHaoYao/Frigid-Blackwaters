@@ -24,10 +24,6 @@ public class FairyInABottle : ArtifactEffect
         {
             playerScript.healPlayer(500);
             numberUsesLeft--;
-            if (playerScript.trueDamage < 0)
-            {
-                playerScript.trueDamage = 0;
-            }
             GameObject particles = Instantiate(healParticles, playerScript.transform.position, Quaternion.identity);
             particles.GetComponent<FollowObject>().objectToFollow = playerScript.gameObject;
             this.GetComponent<AudioSource>().Play();

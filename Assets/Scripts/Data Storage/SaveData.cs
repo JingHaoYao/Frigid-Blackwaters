@@ -24,6 +24,9 @@ public class SaveData
     public string[] polluxShrineUpgrades;
     public string[] loneSparkUpgrades;
     public string[] gadgetShotUpgrades;
+    public string[] revolvingCannonUpgrades;
+    public string[] smeltingLaserUpgrades;
+    public string[] tremorMakerUpgrades;
     public string[] hullUpgrades;
     public string[] inventoryUpgrades;
     public string[] safeUpgrades;
@@ -42,6 +45,7 @@ public class SaveData
     public string[] equippedArtifactIds;
     public int totalGoldAmount;
     public int maxInventorySize;
+    public int maxNumberVaultItems;
 
     //misc data
     public bool finishedTutorial;
@@ -167,6 +171,21 @@ public class SaveData
         {
             gadgetShotUpgrades[i] = PlayerUpgrades.gadgetShotUpgrades[i];
         }
+        revolvingCannonUpgrades = new string[PlayerUpgrades.revolvingCannonUpgrades.Count];
+        for (int i = 0; i < revolvingCannonUpgrades.Length; i++)
+        {
+            revolvingCannonUpgrades[i] = PlayerUpgrades.revolvingCannonUpgrades[i];
+        }
+        smeltingLaserUpgrades = new string[PlayerUpgrades.smeltingLaserUpgrades.Count];
+        for(int i = 0; i < smeltingLaserUpgrades.Length; i++)
+        {
+            smeltingLaserUpgrades[i] = PlayerUpgrades.smeltingLaserUpgrades[i];
+        }
+        tremorMakerUpgrades = new string[PlayerUpgrades.tremorMakerUpgrades.Count];
+        for(int i = 0; i < tremorMakerUpgrades.Length; i++)
+        {
+            tremorMakerUpgrades[i] = PlayerUpgrades.tremorMakerUpgrades[i];
+        }
 
         hullUpgrades = new string[PlayerUpgrades.hullUpgrades.Count];
         for (int i = 0; i < hullUpgrades.Length; i++)
@@ -189,6 +208,8 @@ public class SaveData
         whichFrontWeaponEquipped = PlayerUpgrades.whichFrontWeaponEquipped;
         whichLeftWeaponEquipped = PlayerUpgrades.whichLeftWeaponEquipped;
         whichRightWeaponEquipped = PlayerUpgrades.whichRightWeaponEquipped;
+
+        maxNumberVaultItems = HubProperties.maxNumberVaultItems;
 
         inventoryItemIds = new string[PlayerItems.inventoryItemsIDs.Count];
         for(int i = 0; i < inventoryItemIds.Length; i++)

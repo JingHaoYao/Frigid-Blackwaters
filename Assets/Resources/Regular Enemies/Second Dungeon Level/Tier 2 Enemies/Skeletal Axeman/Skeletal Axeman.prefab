@@ -57,6 +57,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -68,6 +69,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -403,8 +405,10 @@ MonoBehaviour:
   percentSpawnChance: 33
   armorMitigation: 0
   speed: 2
-  slowAmount: 0
-  spawner: {fileID: 0}
+  fogStats:
+    fogDurationIncrease: 0
+    fogCoolDownDecrease: 0
+  moveable: 1
   statuses: []
   facingLeft: {fileID: -2535160837411482331, guid: 34c6bf06640599947bdda93d32786415,
     type: 3}
@@ -415,7 +419,6 @@ MonoBehaviour:
   facingRight: {fileID: -1726414971142793923, guid: 34c6bf06640599947bdda93d32786415,
     type: 3}
   damageHitBox: {fileID: 7789914013536170961}
-  travelSpeed: 2
   travelAngle: 0
   deadSpearman: {fileID: 4858579566582724464, guid: 5bf5a3ee4ec734d49ad7c052ebadf694,
     type: 3}
@@ -564,6 +567,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -575,6 +579,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -658,7 +663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905f99799bc131040a11b6b1fc07dbb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 100
+  damageAmount: 250
 --- !u!1 &7789914014380931602
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,11 +11,18 @@ public class SaveOptions
     public float musicVolume;
     public bool muted;
 
+    public bool fullScreen;
+    public int resolutionIndex;
+    public int qualityIndex;
+
     public SaveOptions()
     {
         masterVolume = MiscData.masterVolume;
         effectsVolume = MiscData.effectsVolume;
         musicVolume = MiscData.musicVolume;
         muted = MiscData.muted;
+        fullScreen = MiscData.fullScreen;
+        qualityIndex = MiscData.qualityIndex;
+        resolutionIndex = MiscData.resolutionIndex;
     }
 }

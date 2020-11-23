@@ -335,5 +335,6 @@ public class CrustaceaKing : Enemy
     {
         this.GetComponents<AudioSource>()[0].Play();
         StartCoroutine(hitFrame());
+        SpawnArtifactKillsAndGoOnCooldown(1.5f);
     }
 }

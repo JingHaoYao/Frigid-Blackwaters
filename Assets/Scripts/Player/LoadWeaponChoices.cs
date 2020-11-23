@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LoadWeaponChoices : MonoBehaviour {
     // Names of all weapon templates to load in
-    string[] weaponTemplateNames = new string[14] {
+    string[] weaponTemplateNames = new string[17] {
         "Musket Weapon Template",
         "Cannon Weapon Template",
         "Shotgun Weapon Template",
@@ -18,18 +18,21 @@ public class LoadWeaponChoices : MonoBehaviour {
         "Pollux Shrine Weapon Template",
         "Lone Spark Weapon Template",
         "Gadget Shot Weapon Template",
-        "Fin Blade Weapon Template"
+        "Fin Blade Weapon Template",
+        "Revolving Cannon Weapon Template",
+        "Smelting Laser Weapon Template",
+        "Tremor Maker Weapon Template"
     };
     public GameObject leftWeapon, rightWeapon, frontWeapon;
 
-    public void loadWeapon()
+    public void loadWeapon(bool destroy = true)
     {
-        leftWeapon.GetComponent<ShipWeaponScript>().swapTemplate(Resources.Load<ShipWeaponTemplate>("Player/Weapon Templates/" + weaponTemplateNames[PlayerUpgrades.whichLeftWeaponEquipped]).GetComponent<ShipWeaponTemplate>());
-        rightWeapon.GetComponent<ShipWeaponScript>().swapTemplate(Resources.Load<ShipWeaponTemplate>("Player/Weapon Templates/" + weaponTemplateNames[PlayerUpgrades.whichRightWeaponEquipped]).GetComponent<ShipWeaponTemplate>());
-        frontWeapon.GetComponent<ShipWeaponScript>().swapTemplate(Resources.Load<ShipWeaponTemplate>("Player/Weapon Templates/" + weaponTemplateNames[PlayerUpgrades.whichFrontWeaponEquipped]).GetComponent<ShipWeaponTemplate>());
+        leftWeapon.GetComponent<ShipWeaponScript>().swapTemplate(Resources.Load<ShipWeaponTemplate>("Player/Weapon Templates/" + weaponTemplateNames[PlayerUpgrades.whichLeftWeaponEquipped]).GetComponent<ShipWeaponTemplate>(), destroy);
+        rightWeapon.GetComponent<ShipWeaponScript>().swapTemplate(Resources.Load<ShipWeaponTemplate>("Player/Weapon Templates/" + weaponTemplateNames[PlayerUpgrades.whichRightWeaponEquipped]).GetComponent<ShipWeaponTemplate>(), destroy);
+        frontWeapon.GetComponent<ShipWeaponScript>().swapTemplate(Resources.Load<ShipWeaponTemplate>("Player/Weapon Templates/" + weaponTemplateNames[PlayerUpgrades.whichFrontWeaponEquipped]).GetComponent<ShipWeaponTemplate>(), destroy);
     }
 
 	void Start () {
-        loadWeapon();
+        loadWeapon(false);
 	}
 }

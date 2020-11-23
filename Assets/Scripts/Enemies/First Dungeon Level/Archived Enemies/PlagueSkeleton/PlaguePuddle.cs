@@ -48,7 +48,7 @@ public class PlaguePuddle : MonoBehaviour {
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            PlayerProperties.playerScript.dealDamageToShip(500, this.gameObject);
+            PlayerProperties.playerScript.dealDamageToShip(1600, this.gameObject);
         }
     }
 }

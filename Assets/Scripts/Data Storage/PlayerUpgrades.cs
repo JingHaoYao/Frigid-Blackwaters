@@ -19,6 +19,9 @@ public static class PlayerUpgrades {
     public static List<string> loneSparkUpgrades = new List<string>();
     public static List<string> gadgetShotUpgrades = new List<string>();
     public static List<string> finBladeUpgrades = new List<string>();
+    public static List<string> revolvingCannonUpgrades = new List<string>();
+    public static List<string> smeltingLaserUpgrades = new List<string>();
+    public static List<string> tremorMakerUpgrades = new List<string>();
         
     public static List<string> hullUpgrades = new List<string>();
     public static List<string> inventoryUpgrades = new List<string>();

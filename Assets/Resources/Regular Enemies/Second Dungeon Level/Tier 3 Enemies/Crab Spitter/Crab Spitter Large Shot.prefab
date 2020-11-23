@@ -51,6 +51,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -62,6 +63,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -244,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   angleTravel: 0
-  damageDealing: 400
+  damageDealing: 800
   smallSpitterShot: {fileID: 6595712387103867287, guid: c387d00c982059e42a157df75fd73384,
     type: 3}
 --- !u!114 &-9195388532450600292
@@ -261,3 +263,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: -0.4
   rendLayerOffset: 0
+  updateOnce: 0

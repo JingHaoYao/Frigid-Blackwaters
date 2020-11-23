@@ -7,34 +7,78 @@ public class HullUpgradeManager : MonoBehaviour {
     PlayerScript playerScript;
     int prevNumberUpgrades;
     bool dashEnabled = true;
-    float dashCooldown = 2.5f;
+    float dashCooldown = 1;
     public bool spikesEnabled = false;
     public int spikeDamage = 2;
-    public Sprite[] regularShipSprites;
-    public Sprite[] shipHealthUpgrade1;
-    public Sprite[] shipHealthUpgrade2;
-    public Sprite[] shipSpeedHull1;
-    public Sprite[] shipSpeedHull2;
-    public Sprite[] shipSpeedHull3;
-    public Sprite[] shipSpikeHull1;
-    public Sprite[] shipSpikeHull2;
-    public Sprite[] shipSpikeHull3;
-    public Sprite[] shipDefenseHull1;
-    public Sprite[] shipDefenseHull2;
-    public Sprite[] shipDefenseHull3;
     public GameObject dashIcon;
     public GameObject spikeHitBox, waterFoamBurst;
     float dashMomentum = 8f;
+    [SerializeField] GameObject dashEffectClone;
+    [SerializeField] GameObject smallDashEffect;
+    List<DashCloneEffect> dashClones = new List<DashCloneEffect>();
+    [SerializeField] GameObject dashParticles;
+    
 
-    float dashCooldownPeriod = 0;
+    private float dashCooldownPeriod = 0;
 
-    void applySprites(Sprite[] sprites)
+     // Ship Types and what they mean
+     // 0 - base
+     // 1  - health upgrade 1
+     // 2 - health upgrade 2
+     // 3 - defense 1
+     // 4 - defense 2
+     // 5 - defense 3
+     // 6 - speed 1
+     // 7 - speed 2
+     // 8 - speed 3
+     // 9 - spikes 1
+     // 10 - spikes 2
+     // 11 - spikes 3
+
+    void StartDashEffect()
     {
-        playerScript.downLeft = sprites[0];
-        playerScript.left = sprites[1];
-        playerScript.down = sprites[2];
-        playerScript.up = sprites[3];
-        playerScript.upLeft = sprites[4];
+        foreach(DashCloneEffect effect in dashClones)
+        {
+            if(effect.gameObject.activeSelf == false)
+            {
+                effect.Initialize((360 + PlayerProperties.playerScript.whatAngleTraveled) % 360, PlayerProperties.spriteRenderer.sortingOrder);
+                return;
+            }
+        }
+
+        GameObject newInstant = Instantiate(dashEffectClone, PlayerProperties.playerShipPosition, Quaternion.identity);
+        DashCloneEffect newEffect = newInstant.GetComponent<DashCloneEffect>();
+        dashClones.Add(newEffect);
+        newEffect.Initialize((360 + PlayerProperties.playerScript.whatAngleTraveled) % 360, PlayerProperties.spriteRenderer.sortingOrder);
+    }
+
+    IEnumerator DashEffect()
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            StartDashEffect();
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    IEnumerator scaleBounce(float duration, float mag)
+    {
+        float increment = mag / duration;
+        float timer = duration;
+        while(transform.rotation.x > 0)
+        {
+            timer -= Time.deltaTime;
+            transform.rotation = Quaternion.Euler(increment * timer, 0, 0);
+            yield return null;
+        }
+
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    void ShortScaleEffect()
+    {
+        this.transform.rotation = Quaternion.Euler(50, 0, 0);
+        StartCoroutine(scaleBounce(0.4f, 50));
     }
 
     void applyUpgrades()
@@ -42,22 +86,20 @@ public class HullUpgradeManager : MonoBehaviour {
         if (PlayerUpgrades.hullUpgrades.Count == 1)
         {
             playerScript.upgradeHealthBonus = 500;
-            applySprites(regularShipSprites);
+            playerScript.SetAnimationShipType(0);
             playerScript.upgradeSpeedBonus = 0;
             playerScript.upgradeDefenseBonus = 0;
             spikesEnabled = false;
             dashMomentum = 10f;
-            dashCooldown = 2.5f;
         }
         else if(PlayerUpgrades.hullUpgrades.Count == 2)
         {
             playerScript.upgradeHealthBonus = 1500;
-            applySprites(shipHealthUpgrade1);
+            playerScript.SetAnimationShipType(1);
             playerScript.upgradeSpeedBonus = 0;
             playerScript.upgradeDefenseBonus = 0;
             spikesEnabled = false;
             dashMomentum = 10f;
-            dashCooldown = 2.5f;
         }
         else if(PlayerUpgrades.hullUpgrades.Count == 3)
         {
@@ -65,8 +107,7 @@ public class HullUpgradeManager : MonoBehaviour {
             spikesEnabled = false;
             playerScript.upgradeSpeedBonus = 0;
             playerScript.upgradeDefenseBonus = 0;
-            applySprites(shipHealthUpgrade2);
-            dashCooldown = 2.5f;
+            playerScript.SetAnimationShipType(2);
             dashMomentum = 10f;
         }
         else if (PlayerUpgrades.hullUpgrades.Count > 3)
@@ -76,25 +117,22 @@ public class HullUpgradeManager : MonoBehaviour {
                 if (PlayerUpgrades.hullUpgrades.Count == 4)
                 {
                     playerScript.upgradeHealthBonus = 4500;
-                    playerScript.upgradeSpeedBonus = 3;
-                    applySprites(shipSpeedHull1);
-                    dashCooldown = 2.5f;
+                    playerScript.upgradeSpeedBonus = 2;
+                    playerScript.SetAnimationShipType(6);
                     dashMomentum = 10f;
                 }
                 else if (PlayerUpgrades.hullUpgrades.Count == 5)
                 {
                     playerScript.upgradeHealthBonus = 4500;
-                    playerScript.upgradeSpeedBonus = 3;
-                    applySprites(shipSpeedHull2);
-                    dashCooldown = 2.5f;
+                    playerScript.upgradeSpeedBonus = 2;
+                    playerScript.SetAnimationShipType(7);
                     dashMomentum = 13f;
                 }
                 else
                 {
-                    playerScript.upgradeSpeedBonus = 3;
+                    playerScript.upgradeSpeedBonus = 4;
                     playerScript.upgradeHealthBonus = 6500;
-                    applySprites(shipSpeedHull3);
-                    dashCooldown = 1.5f;
+                    playerScript.SetAnimationShipType(8);
                     dashMomentum = 13f;
                 }
             }
@@ -105,10 +143,9 @@ public class HullUpgradeManager : MonoBehaviour {
                     spikesEnabled = true;
                     playerScript.upgradeHealthBonus = 4000;
                     spikeDamage = 2;
-                    applySprites(shipSpikeHull1);
+                    playerScript.SetAnimationShipType(9);
                     spikeHitBox.GetComponent<DamageAmount>().originDamage = spikeDamage;
                     spikeHitBox.GetComponent<DamageAmount>().updateDamage();
-                    dashCooldown = 2.5f;
                     dashMomentum = 10f;
                 }
                 else if (PlayerUpgrades.hullUpgrades.Count == 5)
@@ -116,10 +153,9 @@ public class HullUpgradeManager : MonoBehaviour {
                     spikesEnabled = true;
                     playerScript.upgradeHealthBonus = 6000;
                     spikeDamage = 4;
-                    applySprites(shipSpikeHull2);
+                    playerScript.SetAnimationShipType(10);
                     spikeHitBox.GetComponent<DamageAmount>().originDamage = spikeDamage;
                     spikeHitBox.GetComponent<DamageAmount>().updateDamage();
-                    dashCooldown = 2.5f;
                     dashMomentum = 10f;
                 }
                 else
@@ -127,9 +163,8 @@ public class HullUpgradeManager : MonoBehaviour {
                     spikesEnabled = true;
                     playerScript.upgradeHealthBonus = 6000;
                     spikeDamage = 8;
-                    applySprites(shipSpikeHull3);
+                    playerScript.SetAnimationShipType(11);
                     spikeHitBox.GetComponent<DamageAmount>().originDamage = spikeDamage;
-                    dashCooldown = 2.5f;
                     dashMomentum = 10f;
                     spikeHitBox.GetComponent<DamageAmount>().updateDamage();
                 }
@@ -140,32 +175,36 @@ public class HullUpgradeManager : MonoBehaviour {
                 {
                     playerScript.upgradeHealthBonus = 5000;
                     playerScript.upgradeDefenseBonus = 0f;
-                    applySprites(shipDefenseHull1);
-                    dashCooldown = 2.5f;
+                    playerScript.SetAnimationShipType(3);
                     dashMomentum = 10f;
                 }
                 else if(PlayerUpgrades.hullUpgrades.Count == 5)
                 {
                     playerScript.upgradeHealthBonus = 8000;
                     playerScript.upgradeDefenseBonus = 0.1f;
-                    applySprites(shipDefenseHull2);
-                    dashCooldown = 2.5f;
+                    playerScript.SetAnimationShipType(4);
                     dashMomentum = 10f;
                 }
                 else
                 {
                     playerScript.upgradeHealthBonus = 12000;
                     playerScript.upgradeDefenseBonus = 0.25f;
-                    applySprites(shipDefenseHull3);
-                    dashCooldown = 2.5f;
+                    playerScript.SetAnimationShipType(5);
                     dashMomentum = 10f;
                 }
             }
         }
         else
         {
-            applySprites(regularShipSprites);
+            playerScript.upgradeHealthBonus = 0;
+            playerScript.SetAnimationShipType(0);
+            playerScript.upgradeSpeedBonus = 0;
+            playerScript.upgradeDefenseBonus = 0;
+            spikesEnabled = false;
+            dashMomentum = 10f;
         }
+
+        playerScript.CheckAndUpdateHealth();
     }
 
     void Start()
@@ -186,17 +225,8 @@ public class HullUpgradeManager : MonoBehaviour {
         if(dashEnabled == true)
         {
             dashIcon.SetActive(true);
-            float threshold;
-            if (playerScript.enemiesDefeated == true)
-            {
-                threshold = dashCooldown - 1; 
-            }
-            else
-            {
-                threshold = 0;
-            }
 
-            if(dashCooldownPeriod <= threshold)
+            if(dashCooldownPeriod <= 0)
             {
                 dashIcon.GetComponent<Image>().color = new Color(1, 1, 1, 1f);
                 dashCooldownPeriod = 0;
@@ -212,6 +242,11 @@ public class HullUpgradeManager : MonoBehaviour {
                     playerScript.setPlayerMomentum(momentumVector, 1f);
                     float moveAngle = (360 + (Mathf.Atan2(momentumVector.y, momentumVector.x) * Mathf.Rad2Deg)) % 360;
                     Instantiate(waterFoamBurst, this.gameObject.transform.position, Quaternion.Euler(0, 0, moveAngle + 90));
+                    StartCoroutine(DashEffect());
+                    ShortScaleEffect();
+                    Instantiate(smallDashEffect, transform.position, Quaternion.Euler(0, 0, PlayerProperties.playerScript.whatAngleTraveled + 180));
+                    Instantiate(dashParticles, transform.position, Quaternion.Euler(0, 0, PlayerProperties.playerScript.whatAngleTraveled - 90));
+                    PlayerProperties.playerScript.FlashWhitePickup();
                 }
             }
             else

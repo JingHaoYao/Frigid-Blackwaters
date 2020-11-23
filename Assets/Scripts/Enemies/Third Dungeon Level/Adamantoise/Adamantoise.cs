@@ -156,6 +156,7 @@ public class Adamantoise : Enemy
     {
         StartCoroutine(hitFrame());
         takeDamageAudio.Play();
+        SpawnArtifactKillsAndGoOnCooldown();
     }
 
     IEnumerator hitFrame()

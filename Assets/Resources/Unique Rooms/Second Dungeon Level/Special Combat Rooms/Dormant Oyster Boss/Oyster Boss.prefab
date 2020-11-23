@@ -172,6 +172,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -183,6 +184,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -613,8 +615,10 @@ MonoBehaviour:
   percentSpawnChance: 33
   armorMitigation: 0
   speed: 4
-  slowAmount: 0
-  spawner: {fileID: 0}
+  fogStats:
+    fogDurationIncrease: 0
+    fogCoolDownDecrease: 0
+  moveable: 0
   statuses: []
   oysterChest: {fileID: 4694976189463542148, guid: b1ecde88ccc317b429d39a99cdb7e0aa,
     type: 3}
@@ -737,6 +741,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1943235012434513958}
     m_Modifications:
+    - target: {fileID: 6225652380872605236, guid: af453617e8de020488f098902573caf4,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6225652381652893419, guid: af453617e8de020488f098902573caf4,
         type: 3}
       propertyPath: m_Name
@@ -811,11 +820,6 @@ PrefabInstance:
         type: 3}
       propertyPath: radius
       value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6225652380872605236, guid: af453617e8de020488f098902573caf4,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6225652382150293629, guid: af453617e8de020488f098902573caf4,
         type: 3}

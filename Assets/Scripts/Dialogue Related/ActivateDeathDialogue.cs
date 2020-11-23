@@ -22,8 +22,13 @@ public class ActivateDeathDialogue : MonoBehaviour
         if (MiscData.playerDied)
         {
             returnNotifications.dialoguesToDisplay.Add(Resources.Load<DialogueSet>("Dialogues/" + whichDeathDialogue));
+            returnNotifications.updatePlayerStatus(true);
             MiscData.playerDied = false;
             SaveSystem.SaveGame();
+        }
+        else
+        {
+            returnNotifications.updatePlayerStatus(false);
         }
     }
 }

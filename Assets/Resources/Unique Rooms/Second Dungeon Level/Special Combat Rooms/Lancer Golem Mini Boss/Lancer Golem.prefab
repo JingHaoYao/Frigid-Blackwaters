@@ -57,6 +57,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -68,6 +69,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -199,16 +201,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameID: lancer_golem
-  health: 22
-  maxHealth: 22
+  health: 45
+  maxHealth: 45
   dangerValue: 7
   killNumber: 5
   stopAttacking: 0
   percentSpawnChance: 33
   armorMitigation: 0
   speed: 3.2
-  slowAmount: 0
-  spawner: {fileID: 0}
+  fogStats:
+    fogDurationIncrease: 0
+    fogCoolDownDecrease: 0
+  moveable: 0
   statuses: []
   lanceHitBox: {fileID: 4697648492474300765}
   deadGolem: {fileID: 2622069253960536388, guid: 49b42158023ebf045817a788e6cd67c7,

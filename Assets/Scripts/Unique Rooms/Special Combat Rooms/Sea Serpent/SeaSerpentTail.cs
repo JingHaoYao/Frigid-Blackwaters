@@ -243,7 +243,30 @@ public class SeaSerpentTail : MonoBehaviour {
         {
             this.GetComponents<AudioSource>()[3].Play();
             seaSerpentEnemy.GetComponent<Enemy>().dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
+            SpawnArtifactKillsAndGoOnCooldown(1f);
             StartCoroutine(hitFrame());
         }
+    }
+
+    bool spawnArtifactKills = true;
+
+    public void SpawnArtifactKillsAndGoOnCooldown(float yOffset = 0)
+    {
+        if (spawnArtifactKills)
+        {
+            int numberSouls = Random.Range(1, 4);
+            PlayerProperties.soulTrailSpawner.SpawnEnemyDeathSouls(numberSouls, transform.position + Vector3.up * yOffset);
+            PlayerProperties.playerArtifacts.numKills += numberSouls;
+            StartCoroutine(CooldownDuration(Random.Range(1.0f, 2.0f)));
+        }
+    }
+
+    IEnumerator CooldownDuration(float duration)
+    {
+        spawnArtifactKills = false;
+
+        yield return new WaitForSeconds(duration);
+
+        spawnArtifactKills = true;
     }
 }

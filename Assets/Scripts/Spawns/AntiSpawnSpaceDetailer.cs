@@ -90,7 +90,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
         {
             whatTheme = 1;
         }
-        if (Random.Range(0, 5) == 0)
+        if (Random.Range(0, 8) == 0)
         {
             emptyRoom = true;
         }
@@ -108,6 +108,8 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                     {
                         spawnedObstacle = Instantiate(solidObstacleTemplates.solidObstaclesTemplatesBigTheme1[Random.Range(0, solidObstacleTemplates.solidObstaclesTemplatesBigTheme1.Length)], obstacleLayouts.roomLayouts[whatLayout].getLargeObstaclePositions()[i] + mainCamera.transform.position, Quaternion.identity);
                     }
+
+                    spawnedObstacle.transform.SetParent(this.transform.parent);
 
                     if (Random.Range(0, 2) == 1)
                     {
@@ -132,6 +134,8 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                         spawnedObstacle = Instantiate(solidObstacleTemplates.solidObstaclesTemplatesSmallTheme1[Random.Range(0, solidObstacleTemplates.solidObstaclesTemplatesSmallTheme1.Length)], obstacleLayouts.roomLayouts[whatLayout].getSmallObstaclePositions()[i] + mainCamera.transform.position, Quaternion.identity);
                     }
 
+                    spawnedObstacle.transform.SetParent(this.transform.parent);
+
                     if (Random.Range(0, 2) == 1)
                     {
                         Vector3 localScale = spawnedObstacle.transform.localScale;
@@ -153,6 +157,8 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                         localScale.x *= -1;
                         spawnedObstacle.transform.localScale = localScale;
                     }
+
+                    spawnedObstacle.transform.SetParent(this.transform.parent);
                     uniqueInteraction?.AddObstacle(spawnedObstacle);
                 }
             }
@@ -168,6 +174,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                         localScale.x *= -1;
                         spawnedObstacle.transform.localScale = localScale;
                     }
+
+                    spawnedObstacle.transform.SetParent(this.transform.parent);
+
                     uniqueInteraction?.AddObstacle(spawnedObstacle);
                 }
             }
@@ -207,6 +216,8 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
             whatTheme = 2;
         }
         GameObject specialObstacle = Instantiate(specialObstacleTemplates.loadRandomSpecialObstacle(dialogueManager.whatDungeonLevel, whatTheme), transform.position, Quaternion.identity);
+        specialObstacle.transform.SetParent(this.transform.parent);
+
         uniqueInteraction?.AddObstacle(specialObstacle);
     }
 
@@ -224,6 +235,26 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
         return test;
     }
 
+    // Commented out code for spawning interactable debris, may want to revisit in the future, but for the time being
+    // debris just clutters room and has too much visual feedback when the player should focus on enemies
+    /*void spawnDebris()
+    {
+        int numberDebris = Random.Range(4, 8);
+
+        for(int i = 0; i < numberDebris; i++)
+        {
+            Vector3 spawnPosition = pickRandEnemySpawn();
+
+            GameObject debrisInstant = Instantiate(solidObstacleTemplates.debrisObjects[Random.Range(0, solidObstacleTemplates.debrisObjects.Length)], spawnPosition, Quaternion.identity);
+            debrisInstant.transform.SetParent(transform.parent);
+            if(Random.Range(0, 2) == 1)
+            {
+                Vector3 scale = debrisInstant.transform.localScale;
+                debrisInstant.transform.localScale = new Vector3(-1 * scale.x, scale.y);
+            }
+        }
+    }*/
+
     int spawnEnemy(int tier, EnemyRoomTemplate template, Vector3 spawnPos)
     {
         string dungeonName = "";
@@ -240,6 +271,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                 break;
             case 4:
                 dungeonName = "Fourth Dungeon Level";
+                break;
+            case 5:
+                dungeonName = "Fifth Dungeon Level";
                 break;
         }
 
@@ -360,6 +394,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
             case 4:
                 dungeonName = "Fourth Dungeon Level";
                 break;
+            case 5:
+                dungeonName = "Fifth Dungeon Level";
+                break;
         }
 
         if (templateEnemy == true)
@@ -400,6 +437,9 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                 case 4:
                     dungeonName = "Fourth Dungeon Level";
                     break;
+                case 5:
+                    dungeonName = "Fifth Dungeon Level";
+                    break;
             }
 
             int index = Random.Range(0, template.enemiesWithLimits.Length);
@@ -418,6 +458,16 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
         }
 
         return 0;
+    }
+
+    public void EndRoomSpawn()
+    {
+        foreach(RoomSpawn roomSpawner in transform.parent.GetComponentsInChildren<RoomSpawn>())
+        {
+            roomSpawner.EndRoomSpawn();
+        }
+
+        transform.parent.GetComponent<SetRoomDesign>().Initialize();
     }
 
     void spawnEnemies()
@@ -826,18 +876,22 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
         if(leftOpening)
         {
             doorSeals[0] = Instantiate(doorwaySeal, transform.parent.transform.position + new Vector3(-10.5f, 0, 0), Quaternion.identity);
+            doorSeals[0].transform.SetParent(this.transform.parent);
         }
         if (rightOpening)
         {
             doorSeals[1] = Instantiate(doorwaySeal, transform.parent.transform.position + new Vector3(10.5f, 0, 0), Quaternion.Euler(0, 0, 180));
+            doorSeals[1].transform.SetParent(this.transform.parent);
         }
         if (topOpening)
         {
             doorSeals[2] = Instantiate(doorwaySeal, transform.parent.transform.position + new Vector3(0, 10.5f, 0), Quaternion.Euler(0, 0, 270));
+            doorSeals[2].transform.SetParent(this.transform.parent);
         }
         if (bottomOpening)
         {
             doorSeals[3] = Instantiate(doorwaySeal, transform.parent.transform.position + new Vector3(0, -10.5f, 0), Quaternion.Euler(0, 0, 90));
+            doorSeals[3].transform.SetParent(this.transform.parent);
         }
     }
 
@@ -874,10 +928,11 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
         obstacleLayouts = GameObject.Find("ObstacleLayoutTemplates").GetComponent<ObstacleLayoutTemplates>();
         specialObstacleTemplates = GameObject.Find("SpecialObstacleTemplates").GetComponent<SpecialObstacleTemplates>();
         specialRoomTemplates = GameObject.Find("SpecialRoomTemplates").GetComponent<SpecialRoomTemplates>();
-        playerShip = GameObject.Find("PlayerShip");
+        playerShip = PlayerProperties.playerShip;
         playerScript = playerShip.GetComponent<PlayerScript>();
         doorSeals = new GameObject[4];
-        Instantiate(waterTile, transform.position, Quaternion.identity);
+        GameObject waterTileInstant = Instantiate(waterTile, transform.position, Quaternion.identity);
+        waterTileInstant.transform.SetParent(this.transform.parent);
         GameObject.Find("RoomTemplates").GetComponent<RoomTemplates>().antiList.Add(this);
         mapUI = playerShip.GetComponent<MapUI>();
     }
@@ -968,15 +1023,15 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
     {
         if(dangerValueCap < 4)
         {
-            return 0;
+            return 1;
         }
         else if(dangerValueCap >= 4 && dangerValueCap < 7)
         {
-            return 1;
+            return 2;
         }
         else
         {
-            return 2;
+            return 3;
         }
     }
 
@@ -1027,24 +1082,24 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
         }
     }
 
+    public void Initialize()
+    {
+        if (hasSpawnedWaterTile == false)
+        {
+            boxCol.enabled = false;
+            hasSpawnedWaterTile = true;
+            mapUI.mapLoaded = false;
+            mapUI.loadingMap = true;
+        }
+    }
+
     private void LateUpdate()
     {
-        if(GameObject.Find("RoomTemplates").GetComponent<RoomTemplates>().spawnPeriod >= 6.5f)
-        {
-            if (hasSpawnedWaterTile == false)
-            {
-                boxCol.enabled = false;
-                hasSpawnedWaterTile = true;
-                mapUI.mapLoaded = false;
-                mapUI.loadingMap = true;
-            }
-        }
-
-        if (checkPointRoom == false)
+        if (checkPointRoom == false && roomDone == false)
         {
             if (transform.parent.gameObject.name != "SpawnRoom")
             {
-                if (Mathf.Sqrt(Mathf.Pow(mainCamera.transform.position.y - transform.parent.transform.position.y, 2) + Mathf.Pow(mainCamera.transform.position.x - transform.parent.transform.position.x, 2)) < 0.5f)
+                if (Vector2.Distance(mainCamera.transform.position, transform.parent.position) < 0.5f)
                 {
                     if (specialRoom == false)
                     {
@@ -1066,142 +1121,163 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                             uniqueInteraction?.RoomFinished();
                         }
                     }
-
-                    if (roomInit == false)
-                    {
-                        setDangerValueCap();
-                        playerScript.numRoomsSinceLastArtifact++;
-                        playerScript.numRoomsVisited++;
-                        Instantiate(roomReveal, transform.position, Quaternion.identity);
-
-                        if (playerScript.numRoomsVisited == 5)
-                        {
-                            MiscData.enoughRoomsTraversed = true;
-                            SaveSystem.SaveGame();
-                        }
-
-                        foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
-                        {
-                            if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
-                                slot.displayInfo.GetComponent<ArtifactEffect>().exploredNewRoom(whatRoomType);
-                        }
-
-                        if (whatRoomType == 2)
-                        {
-                            spawnDoorSeals();
-                            spawnObstacles();
-                            spawnEnemies();
-                            playerScript.enemiesDefeated = false;
-                        }
-                        else if (whatRoomType == 3)
-                        {
-                            spawnSpecialObstacles();
-                        }
-                        else if (whatRoomType == 4)
-                        {
-                            GameObject instant = Instantiate(specialRoomTemplates.loadUniqueRoom(whatTier(dangerValueCap), 6), transform.position, Quaternion.identity);
-                            specialRoom = true;
-                            if (instant.GetComponent<WhichRoomManager>())
-                            {
-                                instant.GetComponent<WhichRoomManager>().antiSpawnSpaceDetailer = this;
-                            }
-                        }
-                        else if(whatRoomType == 5)
-                        {
-                            GameObject instant = Instantiate(specialRoomTemplates.loadUniqueRoom(whatTier(dangerValueCap), 4), transform.position, Quaternion.identity);
-                            specialRoom = true;
-                            if (instant.GetComponent<WhichRoomManager>())
-                            {
-                                instant.GetComponent<WhichRoomManager>().antiSpawnSpaceDetailer = this;
-                            }
-                        }
-                        else if(whatRoomType == 6)
-                        {
-                            GameObject instant = Instantiate(specialRoomTemplates.loadUniqueRoom(whatTier(dangerValueCap), 1), transform.position, Quaternion.identity);
-                            specialRoom = true;
-                            if (instant.GetComponent<WhichRoomManager>())
-                            {
-                                instant.GetComponent<WhichRoomManager>().antiSpawnSpaceDetailer = this;
-                            }
-                        }
-                        else if(whatRoomType == 8)
-                        {
-                            GameObject instant = Instantiate(specialRoomTemplates.loadUniqueRoom(whatTier(dangerValueCap), 5), transform.position, Quaternion.identity);
-                            specialRoom = true;
-                            if (instant.GetComponent<WhichRoomManager>())
-                            {
-                                instant.GetComponent<WhichRoomManager>().antiSpawnSpaceDetailer = this;
-                            }
-                        }
-                        else if(whatRoomType == 9)
-                        {
-                            GameObject instant = Instantiate(specialRoomTemplates.loadUniqueRoom(whatTier(dangerValueCap), 2), transform.position, Quaternion.identity);
-                            specialRoom = true;
-                            if (instant.GetComponent<WhichRoomManager>())
-                            {
-                                instant.GetComponent<WhichRoomManager>().antiSpawnSpaceDetailer = this;
-                            }
-                        }
-                        else if(whatRoomType == 10)
-                        {
-                            GameObject instant = Instantiate(specialRoomTemplates.loadUniqueRoom(whatTier(dangerValueCap), 3), transform.position, Quaternion.identity);
-                            specialRoom = true;
-                            if (instant.GetComponent<WhichRoomManager>())
-                            {
-                                instant.GetComponent<WhichRoomManager>().antiSpawnSpaceDetailer = this;
-                            }
-                        }
-                        else if(whatRoomType == 11)
-                        {
-                            GameObject instant = Instantiate(specialRoomTemplates.loadUniqueRoom(whatTier(dangerValueCap), 7), transform.position, Quaternion.identity);
-                            specialRoom = true;
-                            if (instant.GetComponent<WhichRoomManager>())
-                            {
-                                instant.GetComponent<WhichRoomManager>().antiSpawnSpaceDetailer = this;
-                            }
-                        }
-                        triggerDialogue(whatRoomType);
-                        StartCoroutine(adjustPlayer());
-                        roomInit = true;
-                        playerScript.periodicHeal();
-                        uniqueInteraction?.RoomInitialized(dangerValueCap);
-                    }
                 }
             }
         }
-        else
+    }
+
+    public void InitializeRoomEntry()
+    {
+        if(roomInit == true)
         {
-            if (Mathf.Sqrt(Mathf.Pow(mainCamera.transform.position.y - transform.parent.transform.position.y, 2) + Mathf.Pow(mainCamera.transform.position.x - transform.parent.transform.position.x, 2)) < 0.5f)
+            return;
+        }
+
+        if (checkPointRoom == false)
+        {
+            setDangerValueCap();
+            playerScript.numRoomsSinceLastArtifact++;
+            playerScript.numRoomsVisited++;
+            Instantiate(roomReveal, transform.position, Quaternion.identity);
+
+            if (playerScript.numRoomsVisited == 5)
             {
-                if (roomInit == false)
+                MiscData.enoughRoomsTraversed = true;
+                SaveSystem.SaveGame();
+            }
+
+            foreach (ArtifactSlot slot in PlayerProperties.playerArtifacts.artifactSlots)
+            {
+                if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                    slot.displayInfo.GetComponent<ArtifactEffect>().exploredNewRoom(whatRoomType);
+            }
+
+            if(PlayerProperties.flammableController != null)
+            {
+                PlayerProperties.flammableController.RemoveFlammableStack();
+            }
+
+            if (whatRoomType == 2)
+            {
+                spawnDoorSeals();
+                spawnObstacles();
+                //spawnDebris();
+                spawnEnemies();
+                playerScript.enemiesDefeated = false;
+            }
+            else if (whatRoomType == 3)
+            {
+                spawnSpecialObstacles();
+            }
+            else if (whatRoomType == 4)
+            {
+                GameObject instant = Instantiate(specialRoomTemplates.loadUniqueRoom(whatTier(dangerValueCap), 6), transform.position, Quaternion.identity);
+                instant.transform.SetParent(this.transform.parent);
+                specialRoom = true;
+                if (instant.GetComponent<WhichRoomManager>())
                 {
-                    roomInit = true;
-
-                    int whichSide = 0;
-
-                    if (bottomOpening)
-                    {
-                        whichSide = 4;
-                    }
-                    else if (topOpening)
-                    {
-                        whichSide = 2;
-                    }
-                    else if (rightOpening)
-                    {
-                        whichSide = 1;
-                    }
-                    else
-                    {
-                        whichSide = 3;
-                    }
-
-                    FindObjectOfType<MissionManager>().activateBossManager(whichSide);
-                    playerScript.periodicHeal();
-                    playerScript.numRoomsSinceLastArtifact++;
-                    playerScript.numRoomsVisited++;
+                    instant.GetComponent<WhichRoomManager>().antiSpawnSpaceDetailer = this;
                 }
             }
+            else if (whatRoomType == 5)
+            {
+                GameObject instant = Instantiate(specialRoomTemplates.loadUniqueRoom(whatTier(dangerValueCap), 4), transform.position, Quaternion.identity);
+                specialRoom = true;
+                if (instant.GetComponent<WhichRoomManager>())
+                {
+                    instant.GetComponent<WhichRoomManager>().antiSpawnSpaceDetailer = this;
+                }
+            }
+            else if (whatRoomType == 6)
+            {
+                GameObject instant = Instantiate(specialRoomTemplates.loadUniqueRoom(whatTier(dangerValueCap), 1), transform.position, Quaternion.identity);
+                instant.transform.SetParent(this.transform.parent);
+                specialRoom = true;
+                if (instant.GetComponent<WhichRoomManager>())
+                {
+                    instant.GetComponent<WhichRoomManager>().antiSpawnSpaceDetailer = this;
+                }
+            }
+            else if (whatRoomType == 8)
+            {
+                GameObject instant = Instantiate(specialRoomTemplates.loadUniqueRoom(whatTier(dangerValueCap), 5), transform.position, Quaternion.identity);
+                instant.transform.SetParent(this.transform.parent);
+                specialRoom = true;
+                if (instant.GetComponent<WhichRoomManager>())
+                {
+                    instant.GetComponent<WhichRoomManager>().antiSpawnSpaceDetailer = this;
+                }
+            }
+            else if (whatRoomType == 9)
+            {
+                GameObject instant = Instantiate(specialRoomTemplates.loadUniqueRoom(whatTier(dangerValueCap), 2), transform.position, Quaternion.identity);
+                instant.transform.SetParent(this.transform.parent);
+                specialRoom = true;
+                if (instant.GetComponent<WhichRoomManager>())
+                {
+                    instant.GetComponent<WhichRoomManager>().antiSpawnSpaceDetailer = this;
+                }
+            }
+            else if (whatRoomType == 10)
+            {
+                GameObject instant = Instantiate(specialRoomTemplates.loadUniqueRoom(whatTier(dangerValueCap), 3), transform.position, Quaternion.identity);
+                instant.transform.SetParent(this.transform.parent);
+                specialRoom = true;
+                if (instant.GetComponent<WhichRoomManager>())
+                {
+                    instant.GetComponent<WhichRoomManager>().antiSpawnSpaceDetailer = this;
+                }
+            }
+            else if (whatRoomType == 11)
+            {
+                GameObject instant = Instantiate(specialRoomTemplates.loadUniqueRoom(whatTier(dangerValueCap), 7), transform.position, Quaternion.identity);
+                instant.transform.SetParent(this.transform.parent);
+                specialRoom = true;
+                if (instant.GetComponent<WhichRoomManager>())
+                {
+                    instant.GetComponent<WhichRoomManager>().antiSpawnSpaceDetailer = this;
+                }
+            }
+            triggerDialogue(whatRoomType);
+            StartCoroutine(adjustPlayer());
+            roomInit = true;
+            playerScript.periodicHeal();
+            uniqueInteraction?.RoomInitialized(dangerValueCap);
+        }
+        else
+        {
+            roomInit = true;
+
+            int whichSide = 0;
+
+            if (bottomOpening)
+            {
+                whichSide = 4;
+            }
+            else if (topOpening)
+            {
+                whichSide = 2;
+            }
+            else if (rightOpening)
+            {
+                whichSide = 1;
+            }
+            else
+            {
+                whichSide = 3;
+            }
+
+            FindObjectOfType<MissionManager>().activateBossManager(whichSide);
+
+            if (PlayerProperties.flammableController != null)
+            {
+                PlayerProperties.flammableController.RemoveFlammableStack();
+            }
+
+            playerScript.periodicHeal();
+            playerScript.numRoomsSinceLastArtifact++;
+            playerScript.numRoomsVisited++;
+            transform.parent.gameObject.SetActive(false);
         }
     }
 

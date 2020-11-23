@@ -18,6 +18,7 @@ public class PlagueSkeleton : Enemy {
     public GameObject deadPlagueSkeleton;
     List<AStarNode> path;
     float pickSpritePeriod = 0;
+    AStarPathfinding aStarPathfinding;
 
     float cardinalizeDirections(float angle)
     {
@@ -72,8 +73,12 @@ public class PlagueSkeleton : Enemy {
 
     void travelLocation()
     {
-        AStarNode pathNode = path[0];
-        Vector3 targetPos = pathNode.nodePosition;
+        Vector3 targetPos = randomPos;
+        if (path.Count > 0)
+        {
+            AStarNode pathNode = path[0];
+            targetPos = pathNode.nodePosition;
+        }
         travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
         pickSpritePeriod += Time.deltaTime;
 
@@ -189,11 +194,12 @@ public class PlagueSkeleton : Enemy {
         randomPos = pickRandPos();
         animator.enabled = false;
         playerShip = GameObject.Find("PlayerShip");
+        aStarPathfinding = GetComponent<AStarPathfinding>();
 	}
 
 	void Update() {
-        path = GetComponent<AStarPathfinding>().seekPath;
-        this.GetComponent<AStarPathfinding>().target = randomPos;
+        path = aStarPathfinding.seekPath;
+        this.aStarPathfinding.target = randomPos;
         pickRendererLayer();
         spawnFoam();
         plaguePeriod += Time.deltaTime;

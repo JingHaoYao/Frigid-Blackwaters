@@ -329,5 +329,6 @@ public class ChallengeGolem : Enemy {
     public override void damageProcedure(int damage)
     {
         StartCoroutine(hitFrame());
+        SpawnArtifactKillsAndGoOnCooldown(1.5f);
     }
 }

@@ -50,6 +50,7 @@ public class FrogmanSnare : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         PlayerProperties.playerScript.removeRootingObject();
         animator.SetTrigger("Open");
+        snarer.removeMine(this.gameObject);
         yield return new WaitForSeconds(8 / 12f);
         Destroy(this.gameObject);
     }

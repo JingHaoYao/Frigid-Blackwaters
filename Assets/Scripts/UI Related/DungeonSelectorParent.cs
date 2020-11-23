@@ -8,6 +8,7 @@ public class DungeonSelectorParent : MonoBehaviour
     public Animator blackFadeOutAnimator;
     [SerializeField] private Image backGroundImage;
     [SerializeField] private GameObject levelSelector;
+    Coroutine returnRoutine;
 
     IEnumerator fadeInFadeOut()
     {
@@ -26,11 +27,15 @@ public class DungeonSelectorParent : MonoBehaviour
         blackFadeOutAnimator.gameObject.SetActive(false);
         PlayerProperties.playerScript.removeRootingObject();
         PlayerProperties.playerScript.windowAlreadyOpen = false;
+        returnRoutine = null;
         this.gameObject.SetActive(false);
     }
 
     public void returnToHub()
     {
-        StartCoroutine(fadeInFadeOut());
+        if (returnRoutine == null)
+        {
+            returnRoutine = StartCoroutine(fadeInFadeOut());
+        }
     }
 }

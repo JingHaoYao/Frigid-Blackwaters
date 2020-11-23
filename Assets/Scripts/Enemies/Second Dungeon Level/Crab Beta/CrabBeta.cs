@@ -29,6 +29,8 @@ public class CrabBeta : Enemy
 
     public GameObject invulnerabilityIcon;
 
+    AStarPathfinding aStarPathFinding;
+
     float cardinalizeDirections(float angle)
     {
         if (angle > 22.5f && angle <= 67.5f)
@@ -146,10 +148,14 @@ public class CrabBeta : Enemy
 
     void travelLocation()
     {
-        path = GetComponent<AStarPathfinding>().seekPath;
-        this.GetComponent<AStarPathfinding>().target = playerShip.transform.position;
-        AStarNode pathNode = path[0];
-        Vector3 targetPos = pathNode.nodePosition;
+        path = aStarPathFinding.seekPath;
+        this.aStarPathFinding.target = playerShip.transform.position;
+        Vector3 targetPos = PlayerProperties.playerShipPosition;
+        if (path.Count > 0)
+        {
+            AStarNode pathNode = path[0];
+            targetPos = pathNode.nodePosition;
+        }
         travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
 
         if (isAttacking == false)
@@ -206,6 +212,7 @@ public class CrabBeta : Enemy
         animator = GetComponent<Animator>();
         rigidBody2D = GetComponent<Rigidbody2D>();
         animator.enabled = false;
+        aStarPathFinding = GetComponent<AStarPathfinding>();
         playerShip = FindObjectOfType<PlayerScript>().gameObject;
         attackPeriod = Random.Range(2f, 6f);
     }

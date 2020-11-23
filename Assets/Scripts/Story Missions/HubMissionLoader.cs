@@ -7,6 +7,7 @@ public class HubMissionLoader : MonoBehaviour
     public StoryMission[] allStoryMissions;
     Dictionary<string, StoryMission> storyMissionDatabase = new Dictionary<string, StoryMission>();
     ReturnNotifications returnNotifications;
+    public BuildingUnlocker buildingUnlocker;
 
     // Array of how many bosses are in each dungeon level, used by other scripts to filter the ordered mission list
     public int[] dungeonLevelThresholds;
@@ -18,9 +19,10 @@ public class HubMissionLoader : MonoBehaviour
         {
             storyMissionDatabase.Add(mission.missionID, mission);
         }
-        addRewards();
 
-        if(MiscData.missionID != null && MiscData.finishedTutorial == true)
+        StartCoroutine(updateAfterEndOfFrame());
+
+        if (MiscData.missionID != null && (MiscData.finishedTutorial == true || MiscData.dungeonLevelUnlocked > 1))
         {
             returnNotifications.activateNotifications();
         }
@@ -28,6 +30,12 @@ public class HubMissionLoader : MonoBehaviour
         {
             returnNotifications.closeNotifications();
         }
+    }
+
+    IEnumerator updateAfterEndOfFrame()
+    {
+        yield return new WaitForEndOfFrame();
+        addRewards();
 
         MiscData.finishedMission = false;
         MiscData.missionID = null;
@@ -35,15 +43,17 @@ public class HubMissionLoader : MonoBehaviour
 
     void addRewards()
     {
+        PlayerProperties.playerScript.loadPrevItems();
+        buildingUnlocker?.unlockDialogues();
         if (MiscData.missionID != null) 
         {
             if (MiscData.finishedMission == false)
             {
-                returnNotifications.updateRewards(0, 0, null, true, false);
+                StoryMission mission = storyMissionDatabase[MiscData.missionID];
+                returnNotifications.updateRewards(0, 0, null, mission.missionIcon, true, false);
             }
             else
             {
-
                 if (!MiscData.completedMissions.Contains(MiscData.missionID))
                 {
                     MiscData.completedMissions.Add(MiscData.missionID);
@@ -60,22 +70,21 @@ public class HubMissionLoader : MonoBehaviour
                         if (PlayerItems.inventoryItemsIDs.Count < PlayerItems.maxInventorySize)
                         {
                             PlayerItems.inventoryItemsIDs.Add(spawnedItem.name);
+                            PlayerProperties.playerInventory.itemList.Add(spawnedItem);
                         }
                         else
                         {
-                            if (HubProperties.vaultItems.Count < 8)
-                            {
-                                HubProperties.vaultItems.Add(spawnedItem.name);
-                            }
+                            HubProperties.vaultItems.Add(spawnedItem.name);
+                            FindObjectOfType<GoldenVault>().vaultItems.Add(spawnedItem);
                         }
                     }
 
-                    returnNotifications.updateRewards(compMission.goldReward, compMission.skillPointReward, compMission.itemRewards, false, false);
+                    returnNotifications.updateRewards(compMission.goldReward, compMission.skillPointReward, compMission.itemRewards, compMission.missionIcon, false, false);
                 }
                 else
                 {
-                    Debug.Log("ok");
-                    returnNotifications.updateRewards(0, 0, null, false, true);
+                    StoryMission mission = storyMissionDatabase[MiscData.missionID];
+                    returnNotifications.updateRewards(0, 0, null, mission.missionIcon, false, true);
                 }
                 SaveSystem.SaveGame();
             }

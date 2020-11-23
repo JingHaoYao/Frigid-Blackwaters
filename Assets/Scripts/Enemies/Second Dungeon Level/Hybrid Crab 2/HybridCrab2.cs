@@ -25,6 +25,8 @@ public class HybridCrab2 : Enemy
     public GameObject spike;
     GameObject spawnedSpike;
 
+    AStarPathfinding aStarPathfinding;
+
     float cardinalizeDirections(float angle)
     {
         if (angle > 22.5f && angle <= 67.5f)
@@ -139,10 +141,17 @@ public class HybridCrab2 : Enemy
 
     void travelLocation()
     {
-        path = GetComponent<AStarPathfinding>().seekPath;
-        this.GetComponent<AStarPathfinding>().target = playerShip.transform.position;
-        AStarNode pathNode = path[0];
-        Vector3 targetPos = pathNode.nodePosition;
+        path = aStarPathfinding.seekPath;
+        this.aStarPathfinding.target = playerShip.transform.position;
+
+        Vector3 targetPos = PlayerProperties.playerShipPosition;
+
+        if (path.Count > 0)
+        {
+            AStarNode pathNode = path[0];
+            targetPos = pathNode.nodePosition;
+        }
+
         travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
 
         if (Vector2.Distance(transform.position, playerShip.transform.position) > 4 && isAttacking == false)
@@ -182,6 +191,7 @@ public class HybridCrab2 : Enemy
         animator.enabled = false;
         playerShip = FindObjectOfType<PlayerScript>().gameObject;
         initialAttackPeriod = Random.Range(4f, 7f);
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
     void Update()

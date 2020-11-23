@@ -22,7 +22,7 @@ public class CarnivorousTangleFiendFlowerTurret : Enemy
     {
         if (health > 0)
         {
-            transform.rotation = Quaternion.Euler(0, 0, angleToShip);
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 0, angleToShip);
         }
     }
 
@@ -76,6 +76,7 @@ public class CarnivorousTangleFiendFlowerTurret : Enemy
     {
         StartCoroutine(hitFrame());
         takeDamageAudio.Play();
+        SpawnArtifactKillsAndGoOnCooldown();
     }
 
     IEnumerator hitFrame()

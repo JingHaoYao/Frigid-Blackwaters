@@ -7,6 +7,9 @@ public class DamageNumbers : MonoBehaviour
 {
     Text text;
     float alphaVal;
+    private int tweenID;
+    private int previousDamageAmount;
+    Coroutine coolDownRoutine;
 
     void Start()
     {
@@ -15,14 +18,28 @@ public class DamageNumbers : MonoBehaviour
         alphaVal = 0;
     }
 
+    IEnumerator coolDown()
+    {
+        yield return new WaitForSeconds(0.5f);
+        previousDamageAmount = 0;
+    }
+
     public void showDamage(int damageAmount, int shipMaxHealth, Vector3 pos)
     {
+        LeanTween.cancel(this.gameObject);
         transform.position = Camera.main.WorldToScreenPoint(pos);
-        text.text = damageAmount.ToString();
+        text.text = (previousDamageAmount + damageAmount).ToString();
+        previousDamageAmount += damageAmount;
+        if(coolDownRoutine != null)
+        {
+            StopCoroutine(coolDownRoutine);
+        }
+        coolDownRoutine = StartCoroutine(coolDown());
         text.color = new Color(100 + 150 * (damageAmount / shipMaxHealth), 0, 0, 1);
-        text.fontSize = 22 + Mathf.RoundToInt((24 * ((float)damageAmount / shipMaxHealth)));
+        text.fontSize = 30 + Mathf.RoundToInt((24 * ((float)damageAmount / shipMaxHealth)));
+        GetComponent<RectTransform>().localScale = new Vector3(0.5f, 0.5f);
+        tweenID = LeanTween.scale(this.gameObject, new Vector3(1, 1), 0.25f).setEaseInOutBounce().id;
         alphaVal = 1;
-        GetComponent<Animator>().SetTrigger("Popup");
         StartCoroutine(showDamage());
     }
 

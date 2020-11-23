@@ -14,9 +14,29 @@ public class Inventory : MonoBehaviour {
     public GameObject vaultDisplay;
     public ConsumableConfirm consumableConfirmationWindow;
 
+    MenuSlideAnimation menuSlideAnimation = new MenuSlideAnimation();
+
+    void SetInventoryAnimation()
+    {
+        menuSlideAnimation.SetOpenAnimation(new Vector3(97, -585, 0), new Vector3(97, 0, 0), 0.25f);
+        menuSlideAnimation.SetCloseAnimation(new Vector3(97, 0, 0), new Vector3(97, -585, 0), 0.25f);
+    }
+
 	void Awake () {
         inventorySlots = itemSlotParent.GetComponentsInChildren<InventorySlot>();
         inventorySize = PlayerItems.maxInventorySize;
+        PlayerProperties.playerInventory = this;
+        SetInventoryAnimation();
+    }
+
+    public void PlayInventoryEnterAnimation()
+    {
+        menuSlideAnimation.PlayOpeningAnimation(inventory);
+    }
+
+    public void PlayInventoryExitAnimation()
+    {
+        menuSlideAnimation.PlayEndingAnimation(inventory, () => { inventory.SetActive(false); });
     }
 
 	void LateUpdate () {
@@ -24,25 +44,29 @@ public class Inventory : MonoBehaviour {
         {
             if (GetComponent<PlayerScript>().playerDead == false)
             {
-                if (inventory.activeSelf == false)
+                if (menuSlideAnimation.IsAnimating == false)
                 {
-                    if (Input.GetKeyDown(KeyCode.I) && (GetComponent<PlayerScript>().windowAlreadyOpen == false || this.GetComponent<Artifacts>().artifactsUI.activeSelf == true))
+                    if (inventory.activeSelf == false)
                     {
-                        UpdateUI();
-                        inventory.SetActive(true);
-                        Time.timeScale = 0;
-                    }
-                }
-                else
-                {
-                    if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.I))
-                    {
-                        if (toolTip.activeSelf == true)
+                        if (Input.GetKeyDown(KeyCode.I) && (GetComponent<PlayerScript>().windowAlreadyOpen == false || this.GetComponent<Artifacts>().artifactsUI.activeSelf == true))
                         {
-                            toolTip.SetActive(false);
+                            UpdateUI();
+                            inventory.SetActive(true);
+                            PlayInventoryEnterAnimation();
+                            Time.timeScale = 0;
                         }
-                        inventory.SetActive(false);
-                        Time.timeScale = 1;
+                    }
+                    else
+                    {
+                        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.I))
+                        {
+                            if (toolTip.activeSelf == true)
+                            {
+                                toolTip.SetActive(false);
+                            }
+                            PlayInventoryExitAnimation();
+                            Time.timeScale = 1;
+                        }
                     }
                 }
             }
@@ -120,6 +144,7 @@ public class Inventory : MonoBehaviour {
 
             for(int i = inventorySize; i < 25; i++)
             {
+                inventorySlots[i].deleteSlot();
                 inventorySlots[i].lockSlot();
             }
         }

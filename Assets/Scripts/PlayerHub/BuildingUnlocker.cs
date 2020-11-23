@@ -38,9 +38,9 @@ public class BuildingUnlocker : MonoBehaviour
         return Resources.Load<DialogueSet>("Dialogues/Hub Return Dialogues/" + dialogueName);
     }
 
-    private void LateUpdate()
+    public void unlockDialogues()
     {
-        if(appliedUnlocks == false)
+        if (appliedUnlocks == false)
         {
             appliedUnlocks = true;
             if (MiscData.numberDungeonRuns >= 1 && !MiscData.unlockedBuildings.Contains("provisions"))
@@ -70,6 +70,8 @@ public class BuildingUnlocker : MonoBehaviour
                     numberNonGoldItems++;
                 }
             }
+
+            numberNonGoldItems += PlayerProperties.playerArtifacts.activeArtifacts.Count;
 
             if (numberNonGoldItems >= 3 && !MiscData.unlockedBuildings.Contains("golden_vault"))
             {

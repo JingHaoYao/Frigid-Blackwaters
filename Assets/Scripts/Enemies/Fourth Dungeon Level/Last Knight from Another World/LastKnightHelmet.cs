@@ -153,6 +153,7 @@ public class LastKnightHelmet : Enemy
     {
         StartCoroutine(hitFrame());
         takeDamageAudio.Play();
+        SpawnArtifactKillsAndGoOnCooldown();
     }
 
     IEnumerator hitFrame()

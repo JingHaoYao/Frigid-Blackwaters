@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905f99799bc131040a11b6b1fc07dbb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 500
+  damageAmount: 1750
 --- !u!1 &1057555939528043160
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905f99799bc131040a11b6b1fc07dbb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 500
+  damageAmount: 1750
 --- !u!1 &1057555939817424796
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,6 +255,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -266,6 +267,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -348,6 +350,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -359,6 +362,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -694,7 +698,10 @@ MonoBehaviour:
   percentSpawnChance: 33
   armorMitigation: 0
   speed: 2
-  slowAmount: 0
+  fogStats:
+    fogDurationIncrease: 0
+    fogCoolDownDecrease: 0
+  moveable: 1
   statuses: []
   spriteRenderer: {fileID: 1057555940351316912}
   rigidBody2D: {fileID: 1057555940351316926}
@@ -792,7 +799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905f99799bc131040a11b6b1fc07dbb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 500
+  damageAmount: 1750
 --- !u!1 &1057555940988302815
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,4 +877,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905f99799bc131040a11b6b1fc07dbb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 500
+  damageAmount: 1750

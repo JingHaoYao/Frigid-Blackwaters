@@ -206,5 +206,6 @@ public class FlailGolem : Enemy
     {
         this.GetComponents<AudioSource>()[0].Play();
         StartCoroutine(hitFrame());
+        SpawnArtifactKillsAndGoOnCooldown(1);
     }
 }

@@ -14,11 +14,10 @@ public class GassyMushroom : ArtifactEffect
     {
         displayItem = GetComponent<DisplayItem>();
         artifacts = GameObject.Find("PlayerShip").GetComponent<Artifacts>();
-        playerScript = GameObject.Find("PlayerShip").GetComponent<PlayerScript>();
     }
 
     // whenever the player dashes
     public override void playerDashed() {
-        GameObject gas = Instantiate(gasCloud, playerScript.transform.position, Quaternion.Euler(0, 0, playerScript.angleEffect + 90));
+        GameObject gas = Instantiate(gasCloud, PlayerProperties.playerShipPosition, Quaternion.Euler(0, 0, PlayerProperties.playerScript.whatAngleTraveled + 90));
     }
 }

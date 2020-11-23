@@ -107,6 +107,7 @@ public class SolarGolem : Enemy
         solarGolemTop.toggleHitFrame();
         solarGolemMiddle.toggleHitFrame();
         takeDamageAudio.Play();
+        SpawnArtifactKillsAndGoOnCooldown(2f);
     }
 
     IEnumerator hitFrame()

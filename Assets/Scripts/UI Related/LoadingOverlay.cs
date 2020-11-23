@@ -5,19 +5,23 @@ using UnityEngine;
 public class LoadingOverlay : MonoBehaviour {
     Animator animator;
     bool loadIn = false;
+    RoomTemplates templates;
 
 	void Start () {
-        GameObject.Find("PlayerShip").GetComponent<PlayerScript>().playerDead = true;
+        PlayerProperties.playerScript.playerDead = true;
         animator = GetComponent<Animator>();
-	}
+        templates = GameObject.Find("RoomTemplates").GetComponent<RoomTemplates>();
+    }
+
+
 
 	void Update () {
         if (
-            GameObject.Find("RoomTemplates").GetComponent<RoomTemplates>().spawnPeriod >= 6.5f
+            templates.areRoomsSpawned()
             && loadIn == false
             )
         {
-            GameObject.Find("PlayerShip").GetComponent<PlayerScript>().playerDead = false;
+            PlayerProperties.playerScript.playerDead = false;
             loadIn = true;
             animator.SetTrigger("FadeOut");
             Destroy(this.gameObject, 1f);

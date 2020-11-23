@@ -15,6 +15,19 @@ public class DungeonTrove : MonoBehaviour
     SpriteRenderer spriteRenderer;
     public GameObject customArtifact;
 
+    MenuSlideAnimation menuSlideAnimation = new MenuSlideAnimation();
+
+    void SetAnimation()
+    {
+        menuSlideAnimation.SetOpenAnimation(new Vector3(0, -585, 0), new Vector3(0, 0, 0), 0.25f);
+        menuSlideAnimation.SetCloseAnimation(new Vector3(0, 0, 0), new Vector3(0, -585, 0), 0.25f);
+    }
+
+    public void PlayEndingAnimation()
+    {
+        menuSlideAnimation.PlayEndingAnimation(troveDisplay, () => { troveDisplay.SetActive(false); });
+    }
+
     void Start()
     {
         playerShip = GameObject.Find("PlayerShip");
@@ -22,6 +35,7 @@ public class DungeonTrove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         troveDisplay = GameObject.Find("Trove Menu Parent").transform.GetChild(0).gameObject;
         setItem();
+        SetAnimation();
     }
 
     public void setUnActive()
@@ -117,32 +131,36 @@ public class DungeonTrove : MonoBehaviour
                 }
             }
 
-            if (troveDisplay.activeSelf == true)
+            if (menuSlideAnimation.IsAnimating == false)
             {
-                if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
+                if (troveDisplay.activeSelf == true)
                 {
-                    troveDisplay.SetActive(false);
-                    playerShip.GetComponent<PlayerScript>().removeRootingObject();
-                    Time.timeScale = 1;
-                    playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false;
+                    if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
+                    {
+                        menuSlideAnimation.PlayEndingAnimation(troveDisplay, () => { troveDisplay.SetActive(false); });
+                        playerShip.GetComponent<PlayerScript>().removeRootingObject();
+                        Time.timeScale = 1;
+                        playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false;
+                    }
                 }
-            }
-            else if (playerShip.GetComponent<PlayerScript>().windowAlreadyOpen == false)
-            {
-                if (Input.GetKeyDown(KeyCode.E))
+                else if (playerShip.GetComponent<PlayerScript>().windowAlreadyOpen == false)
                 {
-                    troveDisplay.SetActive(true);
-                    playerShip.GetComponent<PlayerScript>().addRootingObject();
-                    updateDisplay();
-                    Time.timeScale = 0;
-                    playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        troveDisplay.SetActive(true);
+                        menuSlideAnimation.PlayOpeningAnimation(troveDisplay);
+                        playerShip.GetComponent<PlayerScript>().addRootingObject();
+                        updateDisplay();
+                        Time.timeScale = 0;
+                        playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
+                    }
                 }
-            }
-            else
-            {
-                if (spawnedIndicator != null)
+                else
                 {
-                    Destroy(spawnedIndicator);
+                    if (spawnedIndicator != null)
+                    {
+                        Destroy(spawnedIndicator);
+                    }
                 }
             }
         }

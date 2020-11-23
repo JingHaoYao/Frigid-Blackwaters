@@ -32,7 +32,7 @@ public class FirstBossSwordSlash : MonoBehaviour {
     {
         if (collision.gameObject.tag == "playerHitBox")
         {
-            PlayerProperties.playerScript.dealDamageToShip(750, this.gameObject);
+            PlayerProperties.playerScript.dealDamageToShip(1100, this.gameObject);
         }
     }
 }

@@ -16,6 +16,7 @@ public class FrogmanOrbCasterProjectile : MonoBehaviour
     void Start()
     {
         playerShip = PlayerProperties.playerShip;
+        rotateProjectile();
     }
 
     void Update()
@@ -24,7 +25,11 @@ public class FrogmanOrbCasterProjectile : MonoBehaviour
         {
             transform.position += new Vector3(Mathf.Cos(angleTravel * Mathf.Deg2Rad), Mathf.Sin(angleTravel * Mathf.Deg2Rad)) * Time.deltaTime * speed;
         }
-        LeanTween.rotateZ(transform.gameObject, transform.rotation.eulerAngles.z + 270, 0.1f);
+    }
+
+    void rotateProjectile()
+    {
+        LeanTween.rotateZ(transform.gameObject, transform.rotation.eulerAngles.z + 270, 0.1f).setOnComplete(rotateProjectile);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

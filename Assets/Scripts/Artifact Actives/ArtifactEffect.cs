@@ -29,4 +29,14 @@ public class ArtifactEffect : MonoBehaviour
     public virtual void artifactEquipped() { }
 
     public virtual void playerDied() { }
+
+    public virtual void updatedArtifactStats() { }
+
+    public virtual void SpawnedEnemy(Enemy enemy) { }
+
+    public virtual void artifactDestroyed() { }
+
+    public virtual void addedFlammableStack(int numberStacks) { }
+    
+    public virtual void ignitedPlayer() { }
 }

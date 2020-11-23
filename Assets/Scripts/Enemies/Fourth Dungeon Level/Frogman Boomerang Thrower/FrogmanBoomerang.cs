@@ -21,9 +21,24 @@ public class FrogmanBoomerang : MonoBehaviour
         this.frogmanBoomeranger = frogmanBoomeranger;
         this.targetLocation = targetLocation;
         float time = Vector2.Distance(targetLocation, transform.position) / speed;
-        LeanTween.move(this.gameObject, targetLocation, time).setEaseInOutQuad().setOnComplete(() => LeanTween.move(this.gameObject, frogmanBoomeranger.transform.position + Vector3.up * 0.5f + (targetLocation - frogmanBoomeranger.transform.position).normalized * 0.25f, time).setEaseInOutQuad().setOnComplete(() => { LeanTween.alpha(this.gameObject, 0, 0.3f).setOnComplete(() => Destroy(this.gameObject)); stopTravelling = true; polyCol.enabled = false; }));
+        LeanTween.move(this.gameObject, targetLocation, time).setEaseInOutQuad().setOnComplete(() => returnProcedure(time));
         return time * 2;
     }
+
+    void returnProcedure(float time)
+    {
+        if (frogmanBoomeranger != null)
+        {
+            LeanTween.move(this.gameObject, frogmanBoomeranger.transform.position + Vector3.up * 0.5f + (targetLocation - frogmanBoomeranger.transform.position).normalized * 0.25f, time).setEaseInOutQuad().setOnComplete(() => { LeanTween.alpha(this.gameObject, 0, 0.3f).setOnComplete(() => Destroy(this.gameObject)); stopTravelling = true; polyCol.enabled = false; });
+        }
+        else
+        {
+            LeanTween.alpha(this.gameObject, 0, 0.3f).setOnComplete(() => Destroy(this.gameObject));
+            stopTravelling = true;
+            polyCol.enabled = false;
+        }
+    }
+
 
     private void Update()
     {

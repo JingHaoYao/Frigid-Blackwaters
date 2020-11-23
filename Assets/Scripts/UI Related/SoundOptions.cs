@@ -12,6 +12,9 @@ public class SoundOptions : MonoBehaviour
     public Sprite muted, unmuted;
     public Slider generalSlider, effectsSlider, musicSlider;
 
+    [Header("Only for Title Screen")]
+    public VisualOptions visualOptions;
+
     private void Start()
     {
         if(SceneManager.GetActiveScene().name == "Title Screen")
@@ -20,6 +23,7 @@ public class SoundOptions : MonoBehaviour
             if (loadedOptions != null)
             {
                 SaveSystem.LoadOptions(loadedOptions);
+                visualOptions.UpdateMenuAndSettings();
             }
         }
 
@@ -80,17 +84,18 @@ public class SoundOptions : MonoBehaviour
 
     public void muteButton()
     {
-        if (FindObjectOfType<AudioListener>().enabled == true)
+        if(MiscData.muted == false)
         {
-            FindObjectOfType<AudioListener>().enabled = false;
             MiscData.muted = true;
             buttonImage.sprite = muted;
+            AudioListener.volume = 0;
+
         }
         else
         {
-            FindObjectOfType<AudioListener>().enabled = true;
             MiscData.muted = false;
             buttonImage.sprite = unmuted;
+            AudioListener.volume = 1;
         }
     }
 

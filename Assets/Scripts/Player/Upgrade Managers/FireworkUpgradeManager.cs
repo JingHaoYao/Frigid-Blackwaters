@@ -195,7 +195,7 @@ public class FireworkUpgradeManager : WeaponFireTemplate {
                 weaponScript.onCooldown = false;
             }
 
-            if(weaponScript.mouseHovering == true && Input.GetMouseButtonDown(0))
+            if(weaponScript.mouseHovering == true && Input.GetMouseButtonDown(0) && PlayerProperties.playerScript.playerDead == false && PlayerProperties.playerScript.windowAlreadyOpen == false)
             {
                 if (numberRocketsStockpiled > 0)
                 {

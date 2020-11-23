@@ -11,5 +11,6 @@ public class EnemyRoomTemplates : MonoBehaviour
     public EnemyRoomTemplate[] tier4EnemyTemplates;
     public string[] emptyRoomEnemyNames;
     public string[] nonRoomTemplateEnemyNames;
+    public List<string> filteredEnemyNamesForDungeonTrials;
 }
 

@@ -16,6 +16,7 @@ public class FishmanShaman : Enemy {
     private float foamTimer = 0;
     public GameObject waterFoam, shamanArms, deadShaman, bloodSplatter;
     List<AStarNode> path;
+    AStarPathfinding aStarPathfinding;
 
     void spawnFoam()
     {
@@ -163,13 +164,13 @@ public class FishmanShaman : Enemy {
         this.GetComponent<AStarPathfinding>().target = randPos;
         animator = GetComponent<Animator>();
         animator.enabled = false;
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
     private void Update()
     {
-        this.GetComponent<AStarPathfinding>().target = randPos;
-        path = GetComponent<AStarPathfinding>().seekPath;
-        AStarNode pathNode = path[0];
+        this.aStarPathfinding.target = randPos;
+        path = aStarPathfinding.seekPath;
         if ((crossedLocation == false || strideEnded == false) && firingAnimation == false)
         {
             periodBetweenMoves += Time.deltaTime;
@@ -181,7 +182,12 @@ public class FishmanShaman : Enemy {
                 if (pickedAngle == false)
                 {
                     pickedAngle = true;
-                    Vector3 targetPos = pathNode.nodePosition;
+                    Vector3 targetPos = randPos;
+                    if (path.Count > 0)
+                    {
+                        AStarNode pathNode = path[0];
+                        targetPos = pathNode.nodePosition;
+                    }
                     travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
                     pickSprite(travelAngle);
                 }
@@ -207,7 +213,7 @@ public class FishmanShaman : Enemy {
             }
             moveDirection(travelAngle, speed);
 
-            if (path != null && Vector2.Distance(transform.position, path[path.Count - 1].nodePosition) < 1.5f)
+            if (path != null && Vector2.Distance(transform.position, path.Count > 0 ? path[path.Count - 1].nodePosition : randPos) < 1.5f)
             {
                 //checks if the guy has swam over the targeted position
                 crossedLocation = true;
@@ -225,12 +231,16 @@ public class FishmanShaman : Enemy {
             }
 
             attackTimer += Time.deltaTime;
-            if (attackTimer > 3.5f && stopAttacking == false)
+            if (attackTimer > 3.5f && stopAttacking == false && PlayerProperties.playerScript.isShipRooted() == false)
             {
                 //cooldown for attacking and starting to spawn attacks
                 firingAnimation = true; //<-- so the enemy doesn't start moving while attacking
                 attackTimer = 0;
                 StartCoroutine(attackAnim());
+            }
+            else
+            {
+                attackTimer = 0;
             }
 
             float angleToShip = (360 + Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;

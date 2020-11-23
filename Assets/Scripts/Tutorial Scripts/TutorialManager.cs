@@ -34,6 +34,11 @@ public class TutorialManager : MonoBehaviour
 
     public GameObject oneSymbol, inventorySymbol, jklsymbols2, rockRubble;
 
+    Coroutine textTypingAnimation;
+
+    public List<GameObject> spawnedSkeletons = new List<GameObject>();
+    [SerializeField] GameObject tutorialSkeleton;
+
     void Start()
     {
         playerShip = GameObject.Find("PlayerShip");
@@ -44,13 +49,33 @@ public class TutorialManager : MonoBehaviour
         dialogueText.text = firstTutorialDialogue[0];
         dialogueText.transform.parent.gameObject.SetActive(false);
         tabithaDialogue = tabitha.GetComponent<CharacterDialogue>();
+
+        foreach(GameObject skeleton in spawnedSkeletons)
+        {
+            skeleton.GetComponent<TutorialSkeleton>().Initialize(this);
+        }
     }
 
     IEnumerator turnPlayerDeadOffAtEndOfFrame()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         playerScript.playerDead = false;
         playerScript.windowAlreadyOpen = false;
+    }
+
+    IEnumerator animateText(string dialogueToWrite)
+    {
+        int charIndex = 0;
+        foreach (char c in dialogueToWrite)
+        {
+            charIndex++;
+            dialogueText.text = dialogueToWrite.Substring(0, charIndex);
+            if (c != ' ')
+            {
+                yield return new WaitForSeconds(0.05f);
+            }
+        }
+        textTypingAnimation = null;
     }
 
     void Update()
@@ -59,8 +84,6 @@ public class TutorialManager : MonoBehaviour
         {
             spaceDelay += Time.deltaTime;
         }
-
-        playerShip.GetComponent<Artifacts>().numKills = 20;
 
         if(openingTextIndex < openingDialogue.Length)
         {
@@ -130,23 +153,33 @@ public class TutorialManager : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.Space) && spaceDelay >= 0.3f)
                     {
                         spaceDelay = 0;
-                        inGameIndex++;
-                        if (inGameIndex == firstTutorialDialogue.Length)
+                        if (textTypingAnimation != null)
                         {
-                            StartCoroutine(turnPlayerDeadOffAtEndOfFrame());
-                            tabithaDialogue.toggleLeft = false;
-                            tabithaDialogue.toggleRight = true;
-                            dialogueText.transform.parent.gameObject.SetActive(false);
-                            wasdSymbols.SetActive(true);
-                            spaceSymbols.SetActive(true);
-                            indicatorArrow1.SetActive(true);
-                            indicatorArrow2.SetActive(true);
-                            FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
+                            StopCoroutine(textTypingAnimation);
+                            textTypingAnimation = null;
+                            dialogueText.text = firstTutorialDialogue[inGameIndex];
                         }
                         else
                         {
-                            dialogueText.text = firstTutorialDialogue[inGameIndex];
-                            FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
+                            inGameIndex++;
+                            if (inGameIndex == firstTutorialDialogue.Length)
+                            {
+                                StartCoroutine(turnPlayerDeadOffAtEndOfFrame());
+                                tabithaDialogue.toggleLeft = false;
+                                tabithaDialogue.toggleRight = true;
+                                dialogueText.transform.parent.gameObject.SetActive(false);
+                                wasdSymbols.SetActive(true);
+                                spaceSymbols.SetActive(true);
+                                indicatorArrow1.SetActive(true);
+                                indicatorArrow2.SetActive(true);
+                                FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
+                            }
+                            else
+                            {
+                                textTypingAnimation = StartCoroutine(animateText(firstTutorialDialogue[inGameIndex]));
+                                tabithaDialogue.updateSprite();
+                                FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
+                            }
                         }
                     }
                 }
@@ -158,21 +191,31 @@ public class TutorialManager : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.Space) && spaceDelay >= 0.3f)
                     {
                         spaceDelay = 0;
-                        inGameIndex++;
-                        if (inGameIndex == secondTutorialDialogue.Length)
+                        if (textTypingAnimation != null)
                         {
-                            StartCoroutine(turnPlayerDeadOffAtEndOfFrame());
-                            tabithaDialogue.toggleLeft = false;
-                            tabithaDialogue.toggleRight = true;
-                            dialogueText.transform.parent.gameObject.SetActive(false);
-                            jklSymbols.SetActive(true);
-                            indicatorArrow3.SetActive(true);
-                            FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
+                            StopCoroutine(textTypingAnimation);
+                            textTypingAnimation = null;
+                            dialogueText.text = secondTutorialDialogue[inGameIndex];
                         }
                         else
                         {
-                            dialogueText.text = secondTutorialDialogue[inGameIndex];
-                            FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
+                            inGameIndex++;
+                            if (inGameIndex == secondTutorialDialogue.Length)
+                            {
+                                StartCoroutine(turnPlayerDeadOffAtEndOfFrame());
+                                tabithaDialogue.toggleLeft = false;
+                                tabithaDialogue.toggleRight = true;
+                                dialogueText.transform.parent.gameObject.SetActive(false);
+                                jklSymbols.SetActive(true);
+                                indicatorArrow3.SetActive(true);
+                                FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
+                            }
+                            else
+                            {
+                                textTypingAnimation = StartCoroutine(animateText(secondTutorialDialogue[inGameIndex]));
+                                tabithaDialogue.updateSprite();
+                                FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
+                            }
                         }
                     }
                 }
@@ -184,20 +227,30 @@ public class TutorialManager : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.Space) && spaceDelay >= 0.3f)
                     {
                         spaceDelay = 0;
-                        inGameIndex++;
-                        if (inGameIndex == thirdTutorialDialogue.Length)
+                        if (textTypingAnimation != null)
                         {
-                            StartCoroutine(turnPlayerDeadOffAtEndOfFrame());
-                            tabithaDialogue.toggleLeft = false;
-                            tabithaDialogue.toggleRight = true;
-                            dialogueText.transform.parent.gameObject.SetActive(false);
-                            inventorySymbol.SetActive(true);
-                            FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
+                            StopCoroutine(textTypingAnimation);
+                            textTypingAnimation = null;
+                            dialogueText.text = thirdTutorialDialogue[inGameIndex];
                         }
                         else
                         {
-                            dialogueText.text = thirdTutorialDialogue[inGameIndex];
-                            FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
+                            inGameIndex++;
+                            if (inGameIndex == thirdTutorialDialogue.Length)
+                            {
+                                StartCoroutine(turnPlayerDeadOffAtEndOfFrame());
+                                tabithaDialogue.toggleLeft = false;
+                                tabithaDialogue.toggleRight = true;
+                                dialogueText.transform.parent.gameObject.SetActive(false);
+                                inventorySymbol.SetActive(true);
+                                FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
+                            }
+                            else
+                            {
+                                textTypingAnimation = StartCoroutine(animateText(thirdTutorialDialogue[inGameIndex]));
+                                tabithaDialogue.updateSprite();
+                                FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
+                            }
                         }
                     }
                 }
@@ -232,23 +285,48 @@ public class TutorialManager : MonoBehaviour
                     if (Input.GetKeyDown(KeyCode.Space) && spaceDelay >= 0.3f)
                     {
                         spaceDelay = 0;
-                        inGameIndex++;
-                        if (inGameIndex == fourthTutorialDialogue.Length)
+                        if (textTypingAnimation != null)
                         {
-                            StartCoroutine(turnPlayerDeadOffAtEndOfFrame());
-                            tabithaDialogue.toggleLeft = false;
-                            tabithaDialogue.toggleRight = true;
-                            dialogueText.transform.parent.gameObject.SetActive(false);
-                            FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
+                            StopCoroutine(textTypingAnimation);
+                            textTypingAnimation = null;
+                            dialogueText.text = fourthTutorialDialogue[inGameIndex];
                         }
                         else
                         {
-                            dialogueText.text = fourthTutorialDialogue[inGameIndex];
-                            FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
+                            inGameIndex++;
+                            if (inGameIndex == fourthTutorialDialogue.Length)
+                            {
+                                StartCoroutine(turnPlayerDeadOffAtEndOfFrame());
+                                tabithaDialogue.toggleLeft = false;
+                                tabithaDialogue.toggleRight = true;
+                                dialogueText.transform.parent.gameObject.SetActive(false);
+                                FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
+                            }
+                            else
+                            {
+                                textTypingAnimation = StartCoroutine(animateText(fourthTutorialDialogue[inGameIndex]));
+                                tabithaDialogue.updateSprite();
+                                FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
+                            }
                         }
                     }
                 }
             }
         }
+
+        if(Vector2.Distance(new Vector3(0, 40), PlayerProperties.mainCameraPosition) < 1 && whichTutorialPhase >= 2) {
+            if(spawnedSkeletons.Count < 3)
+            {
+                for(int i = 0; i < 4; i++)
+                {
+                    float randAngle = Random.Range(0, Mathf.PI * 2);
+                    Vector3 positionToSpawn = new Vector3(0, 33) + new Vector3(Mathf.Cos(randAngle), Mathf.Sin(randAngle)) * Random.Range(1.0f, 3.0f);
+                    GameObject skeletonInstant = Instantiate(tutorialSkeleton, positionToSpawn, Quaternion.identity);
+                    skeletonInstant.GetComponent<TutorialSkeleton>().Initialize(this);
+                    spawnedSkeletons.Add(skeletonInstant);
+                }
+            }
+        }
     }
+
 }

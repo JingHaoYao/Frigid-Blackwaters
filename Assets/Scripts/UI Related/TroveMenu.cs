@@ -35,8 +35,9 @@ public class TroveMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 inventory.itemList.Add(displayInfo.gameObject);
                 FindObjectOfType<AudioManager>().PlaySound("Receive Item");
                 //set trove unactive
+                imageIcon.enabled = false;
                 trove.setUnActive();
-                transform.parent.gameObject.SetActive(false);
+                trove.PlayEndingAnimation();
                 playerScript.windowAlreadyOpen = false;
                 Time.timeScale = 1;
                 PlayerProperties.playerScript.removeRootingObject();

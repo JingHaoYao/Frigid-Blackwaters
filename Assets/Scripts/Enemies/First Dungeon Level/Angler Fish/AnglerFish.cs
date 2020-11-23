@@ -21,6 +21,7 @@ public class AnglerFish : Enemy
     public GameObject obstacleHitBox, deadEelMan, bloodSplatter;
     public GameObject anglerFishShot;
     Vector3 targetPosition;
+    AStarPathfinding aStarPathFinding;
     float offset = 0;
 
     void spawnFoam()
@@ -199,10 +200,17 @@ public class AnglerFish : Enemy
             rigidBody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
             attackPeriod = 0;
             diveInAnim = false;
-            AStarNode pathNode = path[0];
-            Vector3 targetPos = pathNode.nodePosition;
+
+            Vector3 targetPos = targetPosition;
+
+            if(path.Count > 0)
+            {
+                AStarNode pathNode = path[0];
+                targetPos = pathNode.nodePosition;
+            }
+
             moveAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
-            if (Vector2.Distance(transform.position, path.ToArray()[path.Count - 1].nodePosition) > 1f && nearShip == false)
+            if (Vector2.Distance(transform.position, path[path.Count - 1].nodePosition) > 1.5f && nearShip == false)
             {
                 moveTowards(moveAngle);
                 pickRotatePeriod += Time.deltaTime;
@@ -307,6 +315,7 @@ public class AnglerFish : Enemy
         boxCol = GetComponent<BoxCollider2D>();
         playerShip = GameObject.Find("PlayerShip");
         rigidBody2D = GetComponent<Rigidbody2D>();
+        aStarPathFinding = GetComponent<AStarPathfinding>();
         animator.enabled = false;
         targetPosition = pickRandPos();
         offset = Random.Range(0, 2) * 30;
@@ -314,8 +323,8 @@ public class AnglerFish : Enemy
 
     void Update()
     {
-        this.GetComponent<AStarPathfinding>().target = targetPosition;
-        path = GetComponent<AStarPathfinding>().seekPath;
+        this.aStarPathFinding.target = targetPosition;
+        path = aStarPathFinding.seekPath;
         angleToShip = (360 + Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
         swimTowardsShip();
         spawnFoam();

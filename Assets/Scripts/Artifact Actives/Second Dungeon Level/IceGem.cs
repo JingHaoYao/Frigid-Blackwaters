@@ -36,7 +36,7 @@ public class IceGem : MonoBehaviour
                 if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.firstArtifact)))
                 {
                     artifacts.numKills -= 7;
-                    summonIcicles(playerScript.angleEffect);
+                    summonIcicles(playerScript.whatAngleTraveled);
                 }
             }
             else if (displayItem.whichSlot == 1)
@@ -44,7 +44,7 @@ public class IceGem : MonoBehaviour
                 if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.secondArtifact)))
                 {
                     artifacts.numKills -= 7;
-                    summonIcicles(playerScript.angleEffect);
+                    summonIcicles(playerScript.whatAngleTraveled);
                 }
             }
             else
@@ -52,7 +52,7 @@ public class IceGem : MonoBehaviour
                 if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), SavedKeyBindings.thirdArtifact)))
                 {
                     artifacts.numKills -= 7;
-                    summonIcicles(playerScript.angleEffect);
+                    summonIcicles(playerScript.whatAngleTraveled);
                 }
             }
         }

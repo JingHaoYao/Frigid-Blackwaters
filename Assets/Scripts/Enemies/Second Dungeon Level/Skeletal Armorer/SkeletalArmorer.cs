@@ -22,6 +22,7 @@ public class SkeletalArmorer : Enemy
     bool attacking = false;
     public GameObject armorEffect;
     GameObject targetEnemy;
+    AStarPathfinding aStarPathfinding;
 
     void spawnFoam()
     {
@@ -150,83 +151,15 @@ public class SkeletalArmorer : Enemy
 
     GameObject pickEnemyToUpgrade()
     {
-        GameObject[] ActiveRangedEnemies = GameObject.FindGameObjectsWithTag("RangedEnemy");
-        GameObject[] ActiveMeleeEnemies = GameObject.FindGameObjectsWithTag("MeleeEnemy");
-
-        if (ActiveRangedEnemies.Length > 0 || ActiveMeleeEnemies.Length > 0)
+        foreach(Enemy enemy in EnemyPool.enemyPool)
         {
-            if(ActiveRangedEnemies.Length == 0)
+            if(enemy.armorMitigation == 0)
             {
-                foreach (GameObject enemy in ActiveMeleeEnemies)
-                {
-                    if(enemy.GetComponent<Enemy>().armorMitigation == 0 && enemy != this.gameObject)
-                    {
-                        return enemy;
-                    }
-                }
-                return null;
-            }
-            else if(ActiveMeleeEnemies.Length == 0)
-            {
-                foreach (GameObject enemy in ActiveRangedEnemies)
-                {
-                    if (enemy.GetComponent<Enemy>().armorMitigation == 0)
-                    {
-                        return enemy;
-                    }
-                }
-                return null;
-            }
-            else
-            {
-                int whichToUpgrade = Random.Range(0, 2);
-                if (whichToUpgrade == 1)
-                {
-                    foreach (GameObject enemy in ActiveRangedEnemies)
-                    {
-                        if (enemy.GetComponent<Enemy>().armorMitigation == 0)
-                        {
-                            return enemy;
-                        }
-                    }
-
-                    foreach (GameObject enemy in ActiveMeleeEnemies)
-                    {
-                        if (enemy.GetComponent<Enemy>().armorMitigation == 0 && enemy != this.gameObject)
-                        {
-                            return enemy;
-                        }
-                    }
-
-                    return null;
-                }
-                else
-                {
-                    foreach (GameObject enemy in ActiveMeleeEnemies)
-                    {
-                        if (enemy.GetComponent<Enemy>().armorMitigation == 0 && enemy != this.gameObject)
-                        {
-                            return enemy;
-                        }
-                    }
-
-                    foreach (GameObject enemy in ActiveRangedEnemies)
-                    {
-                        if (enemy.GetComponent<Enemy>().armorMitigation == 0)
-                        {
-                            return enemy;
-                        }
-                    }
-
-                    return null;
-                }
+                return enemy.gameObject;
             }
         }
-        else
-        {
-            return null;
-        }   
-
+        
+        return null; 
     }
 
     void Start()
@@ -238,16 +171,17 @@ public class SkeletalArmorer : Enemy
         animator.enabled = false;
         pickSprite(travelAngle);
         targetEnemy = pickEnemyToUpgrade();
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
     void Update()
     {
         if (targetEnemy != null)
         {
-            path = GetComponent<AStarPathfinding>().seekPath;
-            this.GetComponent<AStarPathfinding>().target = targetEnemy.transform.position;
-            Vector3 targetPos = Vector3.zero;
-            if (path[0] != null)
+            path = aStarPathfinding.seekPath;
+            this.aStarPathfinding.target = targetEnemy.transform.position;
+            Vector3 targetPos = targetEnemy.transform.position;
+            if (path.Count > 0)
             {
                 AStarNode pathNode = path[0];
                 targetPos = pathNode.nodePosition;
@@ -289,6 +223,7 @@ public class SkeletalArmorer : Enemy
         }
         else
         {
+            targetEnemy = pickEnemyToUpgrade();
             rigidBody2D.velocity = Vector3.zero;
             float angleToShip = (360 + Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
             pickSpritePeriod += Time.deltaTime;

@@ -88,6 +88,7 @@ public class BossSelectMenu : MonoBehaviour
         if (MiscData.completedMissions.Contains(bossMission.missionID))
         {
             finalBossButton.GetComponentsInChildren<Image>()[1].enabled = true;
+            finalBossButton.GetComponentsInChildren<Image>()[2].enabled = false;
         }
         else
         {

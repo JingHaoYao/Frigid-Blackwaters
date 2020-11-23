@@ -34,7 +34,6 @@ public class SupplementaryReturnDialogueManager : MonoBehaviour
                     returnNotifications.dialoguesToDisplay.Add(set);
                 }
                 break;
-            // more dungeon levels later here
         } 
     }
 
@@ -54,9 +53,12 @@ public class SupplementaryReturnDialogueManager : MonoBehaviour
 
             if (!MiscData.completedHubReturnDialogues.Contains(firstTimeLevelDialogues[0].name))
             {
-                initialLocation.SetActive(true);
-                PlayerProperties.playerShip.transform.position = initialLocation.transform.position;
-                returnNotifications.setMidDialogueAction(movePlayerToHub);
+                if (initialLocation != null)
+                {
+                    initialLocation.SetActive(true);
+                    PlayerProperties.playerShip.transform.position = initialLocation.transform.position;
+                    returnNotifications.setMidDialogueAction(movePlayerToHub);
+                }
             }
 
             for (int i = 0; i < firstTimeLevelDialogues.Length; i++)

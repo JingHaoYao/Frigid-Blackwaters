@@ -18,6 +18,15 @@ public class DungeonShop : MonoBehaviour
     ItemTemplates itemTemplates;
     GameObject toolTip;
     public int shopTier = 1;
+    int whatDungeonLevel = 0;
+
+    MenuSlideAnimation menuSlideAnimation = new MenuSlideAnimation();
+
+    void SetAnimation()
+    {
+        menuSlideAnimation.SetOpenAnimation(new Vector3(-243, -585, 0), new Vector3(-243, 0, 0), 0.25f);
+        menuSlideAnimation.SetCloseAnimation(new Vector3(-243, 0, 0), new Vector3(-243, -585, 0), 0.25f);
+    }
 
     void Start()
     {
@@ -30,7 +39,9 @@ public class DungeonShop : MonoBehaviour
         toolTip = playerShip.GetComponent<PlayerScript>().obstacleToolTip;
         itemTemplates = GameObject.Find("ItemTemplates").GetComponent<ItemTemplates>();
         toolTip = inventory.toolTip;
+        whatDungeonLevel = FindObjectOfType<DungeonEntryDialogueManager>().whatDungeonLevel;
         spawnSellingItems();
+        SetAnimation();
     }
 
     void spawnSellingItems()
@@ -56,14 +67,14 @@ public class DungeonShop : MonoBehaviour
                         GameObject newItem = itemTemplates.loadRandomItem(1);
                         newItem.transform.parent = GameObject.Find("PresentItems").transform;
                         sellingItems.Add(newItem);
-                        sellingItemsPrices.Add(250 + Random.Range(0, 5) * 25);
+                        sellingItemsPrices.Add(250 + Random.Range(0, 5) * 25 + (whatDungeonLevel - 1) * 750);
                     }
                     else
                     {
                         GameObject newItem = itemTemplates.loadRandomItem(2);
                         newItem.transform.parent = GameObject.Find("PresentItems").transform;
                         sellingItems.Add(newItem);
-                        sellingItemsPrices.Add(350 + Random.Range(0, 5) * 50);
+                        sellingItemsPrices.Add(350 + Random.Range(0, 5) * 50 + (whatDungeonLevel - 1) * 750);
                     }
 
                 }
@@ -75,21 +86,21 @@ public class DungeonShop : MonoBehaviour
                         GameObject newItem = itemTemplates.loadRandomItem(1);
                         newItem.transform.parent = GameObject.Find("PresentItems").transform;
                         sellingItems.Add(newItem);
-                        sellingItemsPrices.Add(150 + Random.Range(0, 5) * 25);
+                        sellingItemsPrices.Add(150 + Random.Range(0, 5) * 25 + (whatDungeonLevel - 1) * 750);
                     }
                     else if(percentItem > 50 && percentItem <= 80)
                     {
                         GameObject newItem = itemTemplates.loadRandomItem(2);
                         newItem.transform.parent = GameObject.Find("PresentItems").transform;
                         sellingItems.Add(newItem);
-                        sellingItemsPrices.Add(250 + Random.Range(0, 5) * 50);
+                        sellingItemsPrices.Add(250 + Random.Range(0, 5) * 50 + (whatDungeonLevel - 1) * 750);
                     }
                     else
                     {
                         GameObject newItem = itemTemplates.loadRandomItem(3);
                         newItem.transform.parent = GameObject.Find("PresentItems").transform;
                         sellingItems.Add(newItem);
-                        sellingItemsPrices.Add(400 + Random.Range(0, 5) * 50);
+                        sellingItemsPrices.Add(400 + Random.Range(0, 5) * 50 + (whatDungeonLevel - 1) * 750);
                     }
                 }
                 else
@@ -100,21 +111,21 @@ public class DungeonShop : MonoBehaviour
                         GameObject newItem = itemTemplates.loadRandomItem(2);
                         newItem.transform.parent = GameObject.Find("PresentItems").transform;
                         sellingItems.Add(newItem);
-                        sellingItemsPrices.Add(250 + Random.Range(0, 5) * 25);
+                        sellingItemsPrices.Add(250 + Random.Range(0, 5) * 25 + (whatDungeonLevel - 1) * 750);
                     }
                     else if (percentItem > 50 && percentItem <= 80)
                     {
                         GameObject newItem = itemTemplates.loadRandomItem(3);
                         newItem.transform.parent = GameObject.Find("PresentItems").transform;
                         sellingItems.Add(newItem);
-                        sellingItemsPrices.Add(300 + Random.Range(0, 5) * 50);
+                        sellingItemsPrices.Add(300 + Random.Range(0, 5) * 50 + (whatDungeonLevel - 1) * 750);
                     }
                     else
                     {
                         GameObject newItem = itemTemplates.loadRandomItem(4);
                         newItem.transform.parent = GameObject.Find("PresentItems").transform;
                         sellingItems.Add(newItem);
-                        sellingItemsPrices.Add(600 + Random.Range(0, 5) * 50);
+                        sellingItemsPrices.Add(600 + Random.Range(0, 5) * 50 + (whatDungeonLevel - 1) * 750);
                     }
                 }
             }
@@ -152,37 +163,41 @@ public class DungeonShop : MonoBehaviour
                 }
             }
 
-            if (shopDisplay.activeSelf == true)
+            if (menuSlideAnimation.IsAnimating == false)
             {
-                if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.I))
+                if (shopDisplay.activeSelf == true)
                 {
-                    shopDisplay.SetActive(false);
-                    inventoryDisplay.SetActive(false);
-                    playerShip.GetComponent<PlayerScript>().removeRootingObject();
-                    Time.timeScale = 1;
-                    playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false;
-                }
-            }
-            else
-            {
-
-                if (playerShip.GetComponent<PlayerScript>().windowAlreadyOpen == false)
-                {
-                    if (Input.GetKeyDown(KeyCode.E))
+                    if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.I))
                     {
-                        shopDisplay.SetActive(true);
-                        inventoryDisplay.SetActive(true);
-                        playerShip.GetComponent<Inventory>().UpdateUI();
-                        playerShip.GetComponent<PlayerScript>().addRootingObject();
-                        setShopDisplay();
-                        playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
+                        menuSlideAnimation.PlayEndingAnimation(shopDisplay, () => { shopDisplay.SetActive(false); playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false; });
+                        PlayerProperties.playerInventory.PlayInventoryExitAnimation();
+                        playerShip.GetComponent<PlayerScript>().removeRootingObject();
+                        Time.timeScale = 1;
                     }
                 }
                 else
                 {
-                    if (spawnedIndicator != null)
+
+                    if (playerShip.GetComponent<PlayerScript>().windowAlreadyOpen == false)
                     {
-                        Destroy(spawnedIndicator);
+                        if (Input.GetKeyDown(KeyCode.E))
+                        {
+                            shopDisplay.SetActive(true);
+                            menuSlideAnimation.PlayOpeningAnimation(shopDisplay);
+                            PlayerProperties.playerInventory.PlayInventoryEnterAnimation();
+                            inventoryDisplay.SetActive(true);
+                            playerShip.GetComponent<Inventory>().UpdateUI();
+                            playerShip.GetComponent<PlayerScript>().addRootingObject();
+                            setShopDisplay();
+                            playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
+                        }
+                    }
+                    else
+                    {
+                        if (spawnedIndicator != null)
+                        {
+                            Destroy(spawnedIndicator);
+                        }
                     }
                 }
             }

@@ -22,14 +22,12 @@ public class FrogMasterProjectile : MonoBehaviour
     {
         playerShip = PlayerProperties.playerShip;
         StartCoroutine(mainRoutine());
+        rotateProcedure();
     }
 
-    void Update()
+    void rotateProcedure()
     {
-        if (impacted == false)
-        {
-            LeanTween.rotateZ(this.gameObject, transform.rotation.eulerAngles.z + 270, 0.2f);
-        }
+        LeanTween.rotateZ(this.gameObject, transform.rotation.eulerAngles.z + 270, 0.2f).setOnComplete(rotateProcedure);
     }
 
     IEnumerator mainRoutine()

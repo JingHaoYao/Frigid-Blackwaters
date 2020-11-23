@@ -185,5 +185,6 @@ public class LancerGolem : Enemy
     {
         GetComponents<AudioSource>()[2].Play();
         StartCoroutine(hitFrame());
+        SpawnArtifactKillsAndGoOnCooldown(1f);
     }
 }

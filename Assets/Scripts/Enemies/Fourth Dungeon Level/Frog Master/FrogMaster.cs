@@ -308,6 +308,7 @@ public class FrogMaster : Enemy
     {
         StartCoroutine(hitFrame());
         damageAudio.Play();
+        SpawnArtifactKillsAndGoOnCooldown(1f);
     }
 
     IEnumerator hitFrame()

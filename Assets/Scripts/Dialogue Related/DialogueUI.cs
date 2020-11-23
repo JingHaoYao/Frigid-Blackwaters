@@ -21,6 +21,9 @@ public class DialogueUI : MonoBehaviour
 
     PlayerScript playerScript;
 
+    Coroutine textTypingAnimation;
+    bool isTypeAnimating = false;
+
     void loadCharacterSprite(Image whichCharacter, Sprite characterArt)
     {
         if(characterArt != null)
@@ -79,6 +82,10 @@ public class DialogueUI : MonoBehaviour
 
     IEnumerator loadDialogue(float waitDuration)
     {
+        if (textTypingAnimation != null)
+        {
+            StopCoroutine(textTypingAnimation);
+        }
         playerScript.playerDead = true;
         transform.GetChild(0).gameObject.SetActive(false);
         blackOverlayAnimator.enabled = false;
@@ -118,6 +125,9 @@ public class DialogueUI : MonoBehaviour
         {
             blackOverlayAnimator.gameObject.GetComponent<Image>().color = new Color(0, 0, 0, 0);
             blackOverlayAnimator.enabled = true;
+            // This line of code is weird, I decided to add a very brief delay that allows the animator to enter it's first state before transitioning to
+            // the next state (This fixed a bug)
+            yield return new WaitForEndOfFrame();
             blackOverlayAnimator.SetTrigger("FadeOut");
             yield return new WaitForSeconds(1f);
         }
@@ -125,10 +135,18 @@ public class DialogueUI : MonoBehaviour
         dialogueText.transform.parent.gameObject.SetActive(true);
 
         dialogueIndex = 0;
-        dialogueText.text = targetDialogue.dialogues[0];
+        textTypingAnimation = StartCoroutine(animateText(0));
         dialogueText.color = targetDialogue.textColor;
         dialogueName.color = targetDialogue.textColor;
         dialogueName.text = targetDialogue.dialogueNames[0];
+        if(dialogueName.text == "")
+        {
+            dialogueName.transform.parent.gameObject.SetActive(false);
+        }
+        else
+        {
+            dialogueName.transform.parent.gameObject.SetActive(true);
+        }
 
         if (dialogueIndex < targetDialogue.panelSprites.Length)
         {
@@ -244,33 +262,60 @@ public class DialogueUI : MonoBehaviour
         }
 
         FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
-        dialogueText.text = targetDialogue.dialogues[index];
         dialogueName.text = targetDialogue.dialogueNames[index];
+
+        if (dialogueName.text == "")
+        {
+            dialogueName.transform.parent.gameObject.SetActive(false);
+        }
+        else
+        {
+            dialogueName.transform.parent.gameObject.SetActive(true);
+        }
+
+        textTypingAnimation = StartCoroutine(animateText(index));
     }
 
-    void Start()
+    IEnumerator animateText(int index)
     {
-        playerScript = GameObject.Find("PlayerShip").GetComponent<PlayerScript>();
-        StartCoroutine(loadDialogue(waitReveal));
-        backPanelAnimator = panelImageBack.GetComponent<Animator>();
-        frontPanelAnimator = panelImageFront.GetComponent<Animator>();
+        isTypeAnimating = true;
+        int charIndex = 0;
+        foreach (char c in targetDialogue.dialogues[index])
+        {
+            charIndex++;
+            dialogueText.text = targetDialogue.dialogues[index].Substring(0, charIndex);
+            if (c != ' ')
+            {
+                yield return new WaitForSeconds(0.05f);
+            }
+        }
+        isTypeAnimating = false;
+        textTypingAnimation = null;
     }
 
     void Update()
     {
         if (dialogueIndex < targetDialogue.dialogues.Length && loaded == true)
         {
-
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                dialogueIndex++;
-                if (dialogueIndex >= targetDialogue.dialogues.Length)
+                if (isTypeAnimating)
                 {
-                    endDialogueProcedure();
+                    StopCoroutine(textTypingAnimation);
+                    isTypeAnimating = false;
+                    dialogueText.text = targetDialogue.dialogues[dialogueIndex];
                 }
                 else
                 {
-                    progressDialogue(dialogueIndex);
+                    dialogueIndex++;
+                    if (dialogueIndex >= targetDialogue.dialogues.Length)
+                    {
+                        endDialogueProcedure();
+                    }
+                    else
+                    {
+                        progressDialogue(dialogueIndex);
+                    }
                 }
             }
             else if (Input.GetKeyDown(KeyCode.Escape))
@@ -380,9 +425,10 @@ public class DialogueUI : MonoBehaviour
         if (playerScript == null)
             playerScript = GameObject.Find("PlayerShip").GetComponent<PlayerScript>();
 
+        backPanelAnimator = panelImageBack.GetComponent<Animator>();
+        frontPanelAnimator = panelImageFront.GetComponent<Animator>();
+
         playerScript.windowAlreadyOpen = true;
         StartCoroutine(loadDialogue(waitReveal));
     }
-
-    
 }

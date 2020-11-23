@@ -14,6 +14,19 @@ public class DungeonTreasure : MonoBehaviour
     SpriteRenderer spriteRenderer;
     DungeonEntryDialogueManager dungeonDialogueManager;
 
+    MenuSlideAnimation menuSlideAnimation = new MenuSlideAnimation();
+
+    void SetAnimation()
+    {
+        menuSlideAnimation.SetOpenAnimation(new Vector3(0, -585, 0), new Vector3(0, 0, 0), 0.25f);
+        menuSlideAnimation.SetCloseAnimation(new Vector3(0, 0, 0), new Vector3(0, -585, 0), 0.25f);
+    }
+
+    public void PlayEndingAnimation()
+    {
+        menuSlideAnimation.PlayEndingAnimation(treasureDisplay, () => { treasureDisplay.SetActive(false); });
+    }
+
     void Start()
     {
         playerShip = GameObject.Find("PlayerShip");
@@ -22,6 +35,7 @@ public class DungeonTreasure : MonoBehaviour
         treasureDisplay = GameObject.Find("Treasure Menu Parent").transform.GetChild(0).gameObject;
         dungeonDialogueManager = FindObjectOfType<DungeonEntryDialogueManager>();
         setItem();
+        SetAnimation();
     }
 
     public void setUnActive()
@@ -35,19 +49,19 @@ public class DungeonTreasure : MonoBehaviour
         if (whatTier == 1)
         {
             newItem = Instantiate(itemTemplates.gold);
-            newItem.GetComponent<DisplayItem>().goldValue = 200 + 50 * Random.Range(1, 4) + 25 * Random.Range(1, 5) + dungeonDialogueManager.whatDungeonLevel * 200;
+            newItem.GetComponent<DisplayItem>().goldValue = 200 + 50 * Random.Range(1, 4) + 25 * Random.Range(1, 5) + (dungeonDialogueManager.whatDungeonLevel - 1) * 400;
             newItem.transform.parent = GameObject.Find("PresentItems").transform;
         }
         else if (whatTier == 2)
         {
             newItem = Instantiate(itemTemplates.gold);
-            newItem.GetComponent<DisplayItem>().goldValue = 400 + 50 * Random.Range(1, 4) + 25 * Random.Range(1, 5) + dungeonDialogueManager.whatDungeonLevel * 225;
+            newItem.GetComponent<DisplayItem>().goldValue = 400 + 50 * Random.Range(1, 4) + 25 * Random.Range(1, 5) + (dungeonDialogueManager.whatDungeonLevel - 1) * 450;
             newItem.transform.parent = GameObject.Find("PresentItems").transform;
         }
         else
         {
             newItem = Instantiate(itemTemplates.gold);
-            newItem.GetComponent<DisplayItem>().goldValue = 600 + 75 * Random.Range(1, 4) + 25 * Random.Range(1, 5) + dungeonDialogueManager.whatDungeonLevel * 250;
+            newItem.GetComponent<DisplayItem>().goldValue = 600 + 75 * Random.Range(1, 4) + 25 * Random.Range(1, 5) + (dungeonDialogueManager.whatDungeonLevel - 1) * 500;
             newItem.transform.parent = GameObject.Find("PresentItems").transform;
         }
         targetArtifact = newItem;
@@ -88,32 +102,36 @@ public class DungeonTreasure : MonoBehaviour
                 }
             }
 
-            if (treasureDisplay.activeSelf == true)
+            if (menuSlideAnimation.IsAnimating == false)
             {
-                if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
+                if (treasureDisplay.activeSelf == true)
                 {
-                    treasureDisplay.SetActive(false);
-                    playerShip.GetComponent<PlayerScript>().removeRootingObject();
-                    Time.timeScale = 1;
-                    playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false;
+                    if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
+                    {
+                        menuSlideAnimation.PlayEndingAnimation(treasureDisplay, () => { treasureDisplay.SetActive(false); });
+                        playerShip.GetComponent<PlayerScript>().removeRootingObject();
+                        Time.timeScale = 1;
+                        playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false;
+                    }
                 }
-            }
-            else if (playerShip.GetComponent<PlayerScript>().windowAlreadyOpen == false)
-            {
-                if (Input.GetKeyDown(KeyCode.E))
+                else if (playerShip.GetComponent<PlayerScript>().windowAlreadyOpen == false)
                 {
-                    treasureDisplay.SetActive(true);
-                    playerShip.GetComponent<PlayerScript>().addRootingObject();
-                    updateDisplay();
-                    Time.timeScale = 0;
-                    playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        treasureDisplay.SetActive(true);
+                        menuSlideAnimation.PlayOpeningAnimation(treasureDisplay);
+                        playerShip.GetComponent<PlayerScript>().addRootingObject();
+                        updateDisplay();
+                        Time.timeScale = 0;
+                        playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
+                    }
                 }
-            }
-            else
-            {
-                if (spawnedIndicator != null)
+                else
                 {
-                    Destroy(spawnedIndicator);
+                    if (spawnedIndicator != null)
+                    {
+                        Destroy(spawnedIndicator);
+                    }
                 }
             }
         }

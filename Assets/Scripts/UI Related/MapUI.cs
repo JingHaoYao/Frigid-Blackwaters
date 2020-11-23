@@ -12,16 +12,31 @@ public class MapUI : MonoBehaviour{
     public bool mapLoaded = false;
     public bool mKey;
 
+    MenuSlideAnimation menuSlideAnimation = new MenuSlideAnimation();
+
+    void SetAnimation()
+    {
+        menuSlideAnimation.SetOpenAnimation(new Vector3(0, -585, 0), new Vector3(0, 0, 0), 0.25f);
+        menuSlideAnimation.SetCloseAnimation(new Vector3(0, 0, 0), new Vector3(0, -585, 0), 0.25f);
+    }
+
+    public void PlayOpenAnimation()
+    {
+        menuSlideAnimation.PlayOpeningAnimation(mapUI);
+    }
+
     void Start(){
         mapUI.transform.localScale = new Vector3(0, 0, 0);
+        SetAnimation();
     }
 
     void LateUpdate(){
-        if (GetComponent<PlayerScript>().playerDead == false){
+        if (PlayerProperties.playerScript.playerDead == false && menuSlideAnimation.IsAnimating == false){
             if (mapUI.transform.localScale == new Vector3 (0, 0, 0)){
                 if (Input.GetKeyDown(KeyCode.M) && GetComponent<PlayerScript>().windowAlreadyOpen == false){
                     GetComponent<PlayerScript>().windowAlreadyOpen = true;
                     mapUI.transform.localScale = new Vector3(1, 1, 1);
+                    menuSlideAnimation.PlayOpeningAnimation(mapUI);
                     Time.timeScale = 0;
                 }
             }
@@ -29,7 +44,7 @@ public class MapUI : MonoBehaviour{
                 if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.M)) {
                     GetComponent<PlayerScript>().windowAlreadyOpen = false;
                     Time.timeScale = 1;
-                    mapUI.transform.localScale = new Vector3(0, 0, 0);
+                    menuSlideAnimation.PlayEndingAnimation(mapUI, () => { mapUI.transform.localScale = Vector3.zero; });
                 }
             }
         }

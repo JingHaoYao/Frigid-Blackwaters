@@ -11,6 +11,19 @@ public class ShipStats : MonoBehaviour {
     public GameObject shipStatsDisplay;
     GameObject toolTip;
 
+    MenuSlideAnimation menuSlideAnimation = new MenuSlideAnimation();
+
+    void SetAnimation()
+    {
+        menuSlideAnimation.SetOpenAnimation(new Vector3(0, -585, 0), new Vector3(0, 0, 0), 0.25f);
+        menuSlideAnimation.SetCloseAnimation(new Vector3(0, 0, 0), new Vector3(0, -585, 0), 0.25f);
+    }
+
+    public void PlayOpeningAnimation()
+    {
+        menuSlideAnimation.PlayOpeningAnimation(shipStatsDisplay);
+    }
+
     public void UpdateUI()
     {
         healthIcon.GetComponentInChildren<Text>().text = playerScript.shipHealth + " / " + playerScript.shipHealthMAX;
@@ -30,29 +43,35 @@ public class ShipStats : MonoBehaviour {
         playerScript = GetComponent<PlayerScript>();
         toolTip = GameObject.Find("PlayerShip").GetComponent<Inventory>().toolTip;
         shipStatsDisplay.SetActive(false);
+        SetAnimation();
 	}
 
 	void LateUpdate () {
-        if (shipStatsDisplay.activeSelf == false)
+        if (menuSlideAnimation.IsAnimating == false)
         {
-            if (Input.GetKeyDown(KeyCode.U) && playerScript.windowAlreadyOpen == false)
+            if (shipStatsDisplay.activeSelf == false)
             {
-                playerScript.windowAlreadyOpen = true;
-                UpdateUI();
-                shipStatsDisplay.SetActive(true);
-                Time.timeScale = 0;
-            }
-        }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.U))
-            {
-                playerScript.windowAlreadyOpen = false;
-                shipStatsDisplay.SetActive(false);
-                Time.timeScale = 1;
-                if(toolTip.activeSelf == true)
+                if (Input.GetKeyDown(KeyCode.U) && playerScript.windowAlreadyOpen == false)
                 {
-                    toolTip.SetActive(false);
+                    playerScript.windowAlreadyOpen = true;
+                    UpdateUI();
+                    shipStatsDisplay.SetActive(true);
+                    PlayOpeningAnimation();
+                    Time.timeScale = 0;
+                }
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.U))
+                {
+                    playerScript.windowAlreadyOpen = false;
+                    menuSlideAnimation.PlayEndingAnimation(shipStatsDisplay, () => { shipStatsDisplay.SetActive(false); });
+                    Time.timeScale = 1;
+
+                    if (toolTip.activeSelf == true)
+                    {
+                        toolTip.SetActive(false);
+                    }
                 }
             }
         }

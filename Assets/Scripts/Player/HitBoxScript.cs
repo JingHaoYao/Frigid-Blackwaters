@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HitBoxScript : MonoBehaviour {
     public static bool playerShielded = false;
@@ -8,71 +8,39 @@ public class HitBoxScript : MonoBehaviour {
     SpriteRenderer playerShipSR;
     PolygonCollider2D polygonCollider;
 
+    UnityAction hitBoxAction;
+
     void pickHitBox()
     {
         if (this.gameObject.name == "DiagonalDownHitBox")
         {
-            if ((playerScript.angleOrientation > 195 && playerScript.angleOrientation <= 255) || (playerScript.angleOrientation > 285 && playerScript.angleOrientation <= 345))
-            {
-                polygonCollider.enabled = true;
-            }
-            else
-            {
-                polygonCollider.enabled = false;
-            }
+            hitBoxAction = () => { polygonCollider.enabled = (playerScript.angleOrientation > 195 && playerScript.angleOrientation <= 255) || (playerScript.angleOrientation > 285 && playerScript.angleOrientation <= 345); };
         }
         else if (this.gameObject.name == "LeftHitBox")
         {
-            if ((playerScript.angleOrientation > 165 && playerScript.angleOrientation <= 195) || (playerScript.angleOrientation > 345) || (playerScript.angleOrientation <= 15))
-            {
-                polygonCollider.enabled = true;
-            }
-            else
-            {
-                polygonCollider.enabled = false;
-            }
+            hitBoxAction = () => { polygonCollider.enabled = (playerScript.angleOrientation > 165 && playerScript.angleOrientation <= 195) || (playerScript.angleOrientation > 345) || (playerScript.angleOrientation <= 15); };
         }
         else if (this.gameObject.name == "DiagonalUpHitBox")
         {
-            if ((playerScript.angleOrientation > 15 && playerScript.angleOrientation <= 75) || (playerScript.angleOrientation > 105 && playerScript.angleOrientation <= 165))
-            {
-                polygonCollider.enabled = true;
-            }
-            else
-            {
-                polygonCollider.enabled = false;
-            }
+            hitBoxAction = () => { polygonCollider.enabled = (playerScript.angleOrientation > 15 && playerScript.angleOrientation <= 75) || (playerScript.angleOrientation > 105 && playerScript.angleOrientation <= 165); };
         }
         else if (this.gameObject.name == "UpHitBox")
         {
-            if (playerScript.angleOrientation > 75 && playerScript.angleOrientation <= 105)
-            {
-                polygonCollider.enabled = true;
-            }
-            else
-            {
-                polygonCollider.enabled = false;
-            }
+            hitBoxAction = () => { polygonCollider.enabled = playerScript.angleOrientation > 75 && playerScript.angleOrientation <= 105; };
         }
         else
         {
-            if (playerScript.angleOrientation > 255 && playerScript.angleOrientation <= 285)
-            {
-                polygonCollider.enabled = true;
-            }
-            else
-            {
-                polygonCollider.enabled = false;
-            }
+            hitBoxAction = () => { polygonCollider.enabled = playerScript.angleOrientation > 255 && playerScript.angleOrientation <= 285; };
         }
     }
 
 	void Start () {
         playerScript = transform.parent.gameObject.GetComponent<PlayerScript>();
         polygonCollider = this.gameObject.GetComponent<PolygonCollider2D>();
+        pickHitBox();
 	}
 	
 	void Update () {
-        pickHitBox();
+        hitBoxAction();
 	}
 }

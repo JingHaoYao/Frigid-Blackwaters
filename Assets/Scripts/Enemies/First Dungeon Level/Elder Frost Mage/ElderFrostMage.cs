@@ -13,6 +13,7 @@ public class ElderFrostMage : Enemy
     GameObject playerShip;
     float attackPeriod = 5;
     public GameObject icePillar, iceMissle;
+    [SerializeField] GameObject summoningCircle;
     bool isAttacking = false;
     bool summonMissile = false;
     int numberPillars = 0;
@@ -105,13 +106,18 @@ public class ElderFrostMage : Enemy
     IEnumerator summonPillar()
     {
         isAttacking = true;
-        attackPeriod = 1.5f;
+        attackPeriod = 2.75f;
         animator.enabled = true;
         animator.SetTrigger("Pillar" + whatView.ToString());
         this.GetComponents<AudioSource>()[3].Play();
         yield return new WaitForSeconds(5f / 12f);
         Vector3 spawnPos = playerShip.transform.position;
         yield return new WaitForSeconds(4f / 12f);
+
+        Instantiate(summoningCircle, spawnPos, Quaternion.identity);
+
+        yield return new WaitForSeconds(15 / 12f);
+
         GameObject pillar = Instantiate(icePillar, spawnPos, Quaternion.identity);
         pillar.GetComponent<ProjectileParent>().instantiater = this.gameObject;
         if(Random.Range(0,2) == 1)
@@ -280,5 +286,6 @@ public class ElderFrostMage : Enemy
     {
         this.GetComponents<AudioSource>()[0].Play();
         StartCoroutine(hitFrame());
+        SpawnArtifactKillsAndGoOnCooldown(1.25f);
     }
 }

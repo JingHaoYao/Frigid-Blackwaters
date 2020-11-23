@@ -26,6 +26,7 @@ public class CrabAlpha : Enemy
     float dashPeriod = 3;
     int mirror = 1;
     public GameObject invulnerableIcon;
+    AStarPathfinding aStarPathfinding;
 
     void spawnFoam()
     {
@@ -236,15 +237,16 @@ public class CrabAlpha : Enemy
         animator.enabled = false;
         damageBox.SetActive(false);
         pickSprite(travelAngle);
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
     void Update()
     {
         pickRendererLayer();
-        path = GetComponent<AStarPathfinding>().seekPath;
-        this.GetComponent<AStarPathfinding>().target = playerShip.transform.position;
-        Vector3 targetPos = Vector3.zero;
-        if (path[0] != null)
+        path = aStarPathfinding.seekPath;
+        this.aStarPathfinding.target = playerShip.transform.position;
+        Vector3 targetPos = PlayerProperties.playerShipPosition;
+        if (path.Count > 0)
         {
             AStarNode pathNode = path[0];
             targetPos = pathNode.nodePosition;

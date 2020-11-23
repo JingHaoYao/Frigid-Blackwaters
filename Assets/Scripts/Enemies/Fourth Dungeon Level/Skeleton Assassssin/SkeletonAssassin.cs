@@ -145,8 +145,9 @@ public class SkeletonAssassin : Enemy
         pickRendererLayer();
         path = aStarPathfinding.seekPath;
         aStarPathfinding.target = PlayerProperties.playerShipPosition;
-        Vector3 targetPos = Vector3.zero;
-        if (path[0] != null)
+        Vector3 targetPos = PlayerProperties.playerShipPosition;
+
+        if (path.Count > 0)
         {
             AStarNode pathNode = path[0];
             targetPos = pathNode.nodePosition;

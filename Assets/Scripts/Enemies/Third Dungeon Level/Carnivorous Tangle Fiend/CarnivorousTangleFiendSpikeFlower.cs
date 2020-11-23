@@ -102,6 +102,7 @@ public class CarnivorousTangleFiendSpikeFlower : Enemy
     {
         StartCoroutine(hitFrame());
         takeDamageAudio.Play();
+        SpawnArtifactKillsAndGoOnCooldown();
     }
 
     IEnumerator hitFrame()

@@ -18,6 +18,7 @@ public class FishmanTentacleSummoner : Enemy
     public GameObject waterFoam, fishmanTentacle, deadShaman, bloodSplatter;
     List<AStarNode> path;
     GameObject[] currTentacles = new GameObject[3];
+    AStarPathfinding aStarPathfinding;
 
     void spawnFoam()
     {
@@ -190,13 +191,13 @@ public class FishmanTentacleSummoner : Enemy
         this.GetComponent<AStarPathfinding>().target = randPos;
         animator = GetComponent<Animator>();
         animator.enabled = false;
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
     private void Update()
     {
-        this.GetComponent<AStarPathfinding>().target = randPos;
-        path = GetComponent<AStarPathfinding>().seekPath;
-        AStarNode pathNode = path[0];
+        this.aStarPathfinding.target = randPos;
+        path = aStarPathfinding.seekPath;
         if ((crossedLocation == false || strideEnded == false) && firingAnimation == false)
         {
             periodBetweenMoves += Time.deltaTime;
@@ -208,7 +209,15 @@ public class FishmanTentacleSummoner : Enemy
                 if (pickedAngle == false)
                 {
                     pickedAngle = true;
-                    Vector3 targetPos = pathNode.nodePosition;
+
+                    Vector3 targetPos = randPos;
+
+                    if(path.Count > 0)
+                    {
+                        AStarNode pathNode = path[0];
+                        targetPos = pathNode.nodePosition;
+                    }
+
                     travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
                     pickSprite(travelAngle);
                 }

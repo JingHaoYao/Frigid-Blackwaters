@@ -39,6 +39,13 @@ public class ItemTemplates : MonoBehaviour {
     public string[] fourthLevelUniqueArtifacts;
     public string[] fourthLevelConsumables;
 
+    public string[] fifthLevelTier1Artifacts;
+    public string[] fifthLevelTier2Artifacts;
+    public string[] fifthLevelTier3Artifacts;
+    public string[] fifthLevelTier4Artifacts;
+    public string[] fifthLevelUniqueArtifacts;
+    public string[] fifthLevelConsumables;
+
     public Dictionary<string, string> itemDB = new Dictionary<string, string>();
 
     DungeonEntryDialogueManager dungeonEntryDialogueManager;
@@ -178,6 +185,36 @@ public class ItemTemplates : MonoBehaviour {
         {
             itemDB.Add(id, "Items/Fourth Dungeon Level/Artifacts/Unique Artifacts/");
         }
+
+        foreach (string id in fifthLevelTier1Artifacts)
+        {
+            itemDB.Add(id, "Items/Fifth Dungeon Level/Artifacts/Common Artifacts/");
+        }
+
+        foreach (string id in fifthLevelTier2Artifacts)
+        {
+            itemDB.Add(id, "Items/Fifth Dungeon Level/Artifacts/Uncommon Artifacts/");
+        }
+
+        foreach (string id in fifthLevelTier3Artifacts)
+        {
+            itemDB.Add(id, "Items/Fifth Dungeon Level/Artifacts/Rare Artifacts/");
+        }
+
+        foreach (string id in fifthLevelTier4Artifacts)
+        {
+            itemDB.Add(id, "Items/Fifth Dungeon Level/Artifacts/Legendary Artifacts/");
+        }
+
+        foreach (string id in fifthLevelConsumables)
+        {
+            itemDB.Add(id, "Items/Fifth Dungeon Level/Consumables/Regular Consumables/");
+        }
+
+        foreach (string id in fifthLevelUniqueArtifacts)
+        {
+            itemDB.Add(id, "Items/Fifth Dungeon Level/Artifacts/Unique Artifacts/");
+        }
     }
 
     public bool dbContainsID(string item_id)
@@ -293,22 +330,48 @@ public class ItemTemplates : MonoBehaviour {
             switch (whatTier)
             {
                 case 1:
-                    spawnedItem = Resources.Load<GameObject>("Items/Fourth Dungeon Level/Artifacts/Common Artifacts/" + fourthLevelTier1Artifacts[Random.Range(0, thirdLevelTier1Artifacts.Length)]);
+                    spawnedItem = Resources.Load<GameObject>("Items/Fourth Dungeon Level/Artifacts/Common Artifacts/" + fourthLevelTier1Artifacts[Random.Range(0, fourthLevelTier1Artifacts.Length)]);
                     break;
                 case 2:
-                    spawnedItem = Resources.Load<GameObject>("Items/Fourth Dungeon Level/Artifacts/Uncommon Artifacts/" + fourthLevelTier2Artifacts[Random.Range(0, thirdLevelTier2Artifacts.Length)]);
+                    spawnedItem = Resources.Load<GameObject>("Items/Fourth Dungeon Level/Artifacts/Uncommon Artifacts/" + fourthLevelTier2Artifacts[Random.Range(0, fourthLevelTier2Artifacts.Length)]);
                     break;
                 case 3:
-                    spawnedItem = Resources.Load<GameObject>("Items/Fourth Dungeon Level/Artifacts/Rare Artifacts/" + fourthLevelTier3Artifacts[Random.Range(0, thirdLevelTier3Artifacts.Length)]);
+                    spawnedItem = Resources.Load<GameObject>("Items/Fourth Dungeon Level/Artifacts/Rare Artifacts/" + fourthLevelTier3Artifacts[Random.Range(0, fourthLevelTier3Artifacts.Length)]);
                     break;
                 case 4:
-                    spawnedItem = Resources.Load<GameObject>("Items/Fourth Dungeon Level/Artifacts/Legendary Artifacts/" + fourthLevelTier4Artifacts[Random.Range(0, thirdLevelTier4Artifacts.Length)]);
+                    spawnedItem = Resources.Load<GameObject>("Items/Fourth Dungeon Level/Artifacts/Legendary Artifacts/" + fourthLevelTier4Artifacts[Random.Range(0, fourthLevelTier4Artifacts.Length)]);
                     break;
                 case 5:
-                    spawnedItem = Resources.Load<GameObject>("Items/Fourth Dungeon Level/Consumables/Regular Consumables/" + fourthLevelConsumables[Random.Range(0, thirdLevelConsumables.Length)]);
+                    spawnedItem = Resources.Load<GameObject>("Items/Fourth Dungeon Level/Consumables/Regular Consumables/" + fourthLevelConsumables[Random.Range(0, fourthLevelConsumables.Length)]);
                     break;
                 default:
-                    spawnedItem = Resources.Load<GameObject>("Items/Fourth Dungeon Level/Consumables/Regular Consumables/" + fourthLevelConsumables[Random.Range(0, thirdLevelConsumables.Length)]);
+                    spawnedItem = Resources.Load<GameObject>("Items/Fourth Dungeon Level/Consumables/Regular Consumables/" + fourthLevelConsumables[Random.Range(0, fourthLevelConsumables.Length)]);
+                    break;
+            }
+            return Instantiate(spawnedItem);
+        }
+        else if(dungeonEntryDialogueManager.whatDungeonLevel == 5)
+        {
+            GameObject spawnedItem = null;
+            switch (whatTier)
+            {
+                case 1:
+                    spawnedItem = Resources.Load<GameObject>("Items/Fifth Dungeon Level/Artifacts/Common Artifacts/" + fifthLevelTier1Artifacts[Random.Range(0, fifthLevelTier1Artifacts.Length)]);
+                    break;
+                case 2:
+                    spawnedItem = Resources.Load<GameObject>("Items/Fifth Dungeon Level/Artifacts/Uncommon Artifacts/" + fifthLevelTier2Artifacts[Random.Range(0, fifthLevelTier2Artifacts.Length)]);
+                    break;
+                case 3:
+                    spawnedItem = Resources.Load<GameObject>("Items/Fifth Dungeon Level/Artifacts/Rare Artifacts/" + fifthLevelTier3Artifacts[Random.Range(0, fifthLevelTier3Artifacts.Length)]);
+                    break;
+                case 4:
+                    spawnedItem = Resources.Load<GameObject>("Items/Fifth Dungeon Level/Artifacts/Legendary Artifacts/" + fifthLevelTier4Artifacts[Random.Range(0, fifthLevelTier4Artifacts.Length)]);
+                    break;
+                case 5:
+                    spawnedItem = Resources.Load<GameObject>("Items/Fifth Dungeon Level/Consumables/Regular Consumables/" + fifthLevelConsumables[Random.Range(0, fifthLevelConsumables.Length)]);
+                    break;
+                default:
+                    spawnedItem = Resources.Load<GameObject>("Items/Fifth Dungeon Level/Consumables/Regular Consumables/" + fifthLevelConsumables[Random.Range(0, fifthLevelConsumables.Length)]);
                     break;
             }
             return Instantiate(spawnedItem);

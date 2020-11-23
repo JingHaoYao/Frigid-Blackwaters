@@ -31,6 +31,8 @@ public class OctoCrab : Enemy
     float angleToShip = 0;
     public float offset = 30;
 
+    AStarPathfinding aStarPathfinding;
+
     float cardinalizeDirections(float angle)
     {
         if (angle > 22.5f && angle <= 67.5f)
@@ -152,10 +154,17 @@ public class OctoCrab : Enemy
 
     void travelLocation()
     {
-        path = GetComponent<AStarPathfinding>().seekPath;
-        this.GetComponent<AStarPathfinding>().target = playerShip.transform.position;
-        AStarNode pathNode = path[0];
-        Vector3 targetPos = pathNode.nodePosition;
+        path = aStarPathfinding.seekPath;
+        this.aStarPathfinding.target = playerShip.transform.position;
+
+        Vector3 targetPos = PlayerProperties.playerShipPosition;
+
+        if (path.Count > 0)
+        {
+            AStarNode pathNode = path[0];
+            targetPos = pathNode.nodePosition;
+        }
+
         travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
 
         if (isAttacking == false)
@@ -215,6 +224,7 @@ public class OctoCrab : Enemy
         playerShip = FindObjectOfType<PlayerScript>().gameObject;
         attackPeriod = Random.Range(2f, 6f);
         offset = Random.Range(0, 2) * 30;
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
     void Update()

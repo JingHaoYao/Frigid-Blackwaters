@@ -32,6 +32,7 @@ public class AnemoneEnemy : Enemy
             float angle = i * 45;
             GameObject shot = Instantiate(anemoneShot, transform.position + new Vector3(0, 1.3f, 0), Quaternion.Euler(0, 0, angle));
             shot.GetComponent<AnemoneShot>().angleTravel = angle * Mathf.Deg2Rad;
+            shot.GetComponent<ProjectileParent>().instantiater = this.gameObject;
         }
     }
 
@@ -42,8 +43,10 @@ public class AnemoneEnemy : Enemy
             float angle = i * 90;
             GameObject shot = Instantiate(anemoneShot, transform.position + new Vector3(0, 1.3f, 0), Quaternion.Euler(0, 0, angle - 5f));
             shot.GetComponent<AnemoneShot>().angleTravel = (angle - 5f) * Mathf.Deg2Rad;
+            shot.GetComponent<ProjectileParent>().instantiater = this.gameObject;
             shot = Instantiate(anemoneShot, transform.position + new Vector3(0, 1.3f, 0), Quaternion.Euler(0, 0, angle + 5f));
             shot.GetComponent<AnemoneShot>().angleTravel = (angle + 5f) * Mathf.Deg2Rad;
+            shot.GetComponent<ProjectileParent>().instantiater = this.gameObject;
         }
     }
     
@@ -54,8 +57,10 @@ public class AnemoneEnemy : Enemy
             float angle = (i * 90) + 45;
             GameObject shot = Instantiate(anemoneShot, transform.position + new Vector3(0, 1.3f, 0), Quaternion.Euler(0, 0, angle - 5f));
             shot.GetComponent<AnemoneShot>().angleTravel = (angle - 5f) * Mathf.Deg2Rad;
+            shot.GetComponent<ProjectileParent>().instantiater = this.gameObject;
             shot = Instantiate(anemoneShot, transform.position + new Vector3(0, 1.3f, 0), Quaternion.Euler(0, 0, angle + 5f));
             shot.GetComponent<AnemoneShot>().angleTravel = (angle + 5f) * Mathf.Deg2Rad;
+            shot.GetComponent<ProjectileParent>().instantiater = this.gameObject;
         }
     }
 

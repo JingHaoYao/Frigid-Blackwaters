@@ -52,7 +52,7 @@ public class Vengeance : MonoBehaviour {
         vengeanceEnabled = true;
         Camera.main.gameObject.GetComponent<CameraShake>().shakeCamFunction(2, 0.1f);
         FindObjectOfType<AudioManager>().PlaySound("Vengeance Eerie Sound");
-        playerScript.trueDamage = ((playerScript.shipHealthMAX - playerScript.trueDamage) / 2) + playerScript.trueDamage;
+        playerScript.shipHealth = Mathf.RoundToInt(playerScript.shipHealth / 2);
         GameObject[] ActiveRangedEnemies = GameObject.FindGameObjectsWithTag("RangedEnemy");
         GameObject[] ActiveMeleeEnemies = GameObject.FindGameObjectsWithTag("MeleeEnemy");
         GameObject[] ActiveShieldEnemies = GameObject.FindGameObjectsWithTag("EnemyShield");

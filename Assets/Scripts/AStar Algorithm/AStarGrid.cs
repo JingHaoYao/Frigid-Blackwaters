@@ -91,10 +91,10 @@ public class AStarGrid : MonoBehaviour {
                         Gizmos.color = Color.blue;
                     }
 
-                    /*if (path.Contains(node))
+                    if (path.Contains(node))
                     {
                         Gizmos.color = Color.black;
-                    }*/
+                    }
                     Gizmos.DrawCube(node.nodePosition, Vector3.one * (nodeDiameter - .1f));
                 }
             }

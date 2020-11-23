@@ -25,6 +25,8 @@ public class SkeletalChargeMage : Enemy
 
     float chargeTimer = 0;
 
+    AStarPathfinding aStarPathfinding;
+
     void spawnFoam()
     {
         if (rigidBody2D.velocity.magnitude != 0)
@@ -166,15 +168,16 @@ public class SkeletalChargeMage : Enemy
         playerShip = GameObject.Find("PlayerShip");
         animator.enabled = false;
         pickSprite(travelAngle);
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
     void Update()
     {
         pickRendererLayer();
-        path = GetComponent<AStarPathfinding>().seekPath;
-        this.GetComponent<AStarPathfinding>().target = playerShip.transform.position;
-        Vector3 targetPos = Vector3.zero;
-        if (path[0] != null)
+        path = aStarPathfinding.seekPath;
+        this.aStarPathfinding.target = playerShip.transform.position;
+        Vector3 targetPos = PlayerProperties.playerShipPosition;
+        if (path.Count > 0)
         {
             AStarNode pathNode = path[0];
             targetPos = pathNode.nodePosition;

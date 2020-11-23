@@ -337,6 +337,7 @@ public class TheBrassGolem : Enemy
         head.startHitFrame();
         gatlingArm.startHitFrame();
         flameThrowerArm.startHitFrame();
+        SpawnArtifactKillsAndGoOnCooldown(8);
         damageAudio.Play();
     }
 

@@ -13,12 +13,14 @@ public class TitleResetSaveButton : MonoBehaviour
 
     public void DeleteSave()
     {
+        FindObjectOfType<AudioManager>().PlaySound("Generic Button Click");
         SaveSystem.DeleteSave();
         areYouSureMenu.SetActive(false);
     }
 
     public void GoBack()
     {
+        FindObjectOfType<AudioManager>().PlaySound("Generic Button Click");
         areYouSureMenu.SetActive(false);
     }
 }

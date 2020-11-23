@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6303514380109232984}
   - component: {fileID: 6303514380109232982}
   - component: {fileID: 3604159861201756575}
+  - component: {fileID: 8721385732698694846}
   m_Layer: 13
   m_Name: Green Anemone Enemy Shot
   m_TagString: EnemyProjectile
@@ -49,6 +50,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -60,6 +62,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -116,6 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 12
   angleTravel: 0
+  amountDamage: 75
 --- !u!58 &6303514380109232982
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -229,3 +233,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8721385732698694846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6303514380109232987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13e5a2f66618c3c43a18f51c9d0fb0e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instantiater: {fileID: 0}

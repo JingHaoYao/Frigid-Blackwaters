@@ -13,8 +13,8 @@ public class HornofEverlastingWind : MonoBehaviour {
     IEnumerator speedBoost()
     {
         windActivated = true;
-        GameObject windEff = Instantiate(windEffect, GameObject.Find("PlayerShip").transform.position, Quaternion.Euler(0,0,playerScript.angleEffect));
-        Instantiate(windBurst, GameObject.Find("PlayerShip").transform.position, Quaternion.Euler(0, 0, playerScript.angleEffect + 90));
+        GameObject windEff = Instantiate(windEffect, GameObject.Find("PlayerShip").transform.position, Quaternion.Euler(0,0,playerScript.whatAngleTraveled));
+        Instantiate(windBurst, GameObject.Find("PlayerShip").transform.position, Quaternion.Euler(0, 0, playerScript.whatAngleTraveled + 90));
         artifacts.numKills -= 2;
         float tempSpeed = playerScript.boatSpeed;
         playerScript.boatSpeed += 3;

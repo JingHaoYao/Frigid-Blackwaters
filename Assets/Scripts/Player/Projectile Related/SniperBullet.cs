@@ -30,7 +30,7 @@ public class SniperBullet : PlayerProjectile
         }
         if (PlayerUpgrades.sniperUpgrades.Count >= 2)
         {
-            this.GetComponent<DamageAmount>().damage += 1;
+            this.GetComponent<DamageAmount>().addDamage(1);
         }
     }
 

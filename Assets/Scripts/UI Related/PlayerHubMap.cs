@@ -9,10 +9,24 @@ public class PlayerHubMap : MonoBehaviour
     public GameObject mapMenu;
     PlayerScript playerScript;
 
+    MenuSlideAnimation menuSlideAnimation = new MenuSlideAnimation();
+
+    void SetAnimation()
+    {
+        menuSlideAnimation.SetOpenAnimation(new Vector3(0, -585, 0), new Vector3(0, 0, 0), 0.25f);
+        menuSlideAnimation.SetCloseAnimation(new Vector3(0, 0, 0), new Vector3(0, -585, 0), 0.25f);
+    }
+
     void Start()
     {
-        playerShip = GameObject.Find("PlayerShip");
+        playerShip = PlayerProperties.playerShip;
         playerScript = playerShip.GetComponent<PlayerScript>();
+        SetAnimation();
+    }
+
+    public void PlayOpeningAnimation()
+    {
+        menuSlideAnimation.PlayOpeningAnimation(mapMenu);
     }
 
     private void LateUpdate()
@@ -23,10 +37,11 @@ public class PlayerHubMap : MonoBehaviour
                 playerScript.windowAlreadyOpen == false && playerScript.playerDead == false
                 )
             {
-                if (Input.GetKeyDown(KeyCode.M))
+                if (Input.GetKeyDown(KeyCode.M) && menuSlideAnimation.IsAnimating == false)
                 {
                     playerScript.windowAlreadyOpen = true;
                     mapMenu.SetActive(true);
+                    menuSlideAnimation.PlayOpeningAnimation(mapMenu);
                     UpdateUI();
                     Time.timeScale = 0;
                 }
@@ -34,10 +49,10 @@ public class PlayerHubMap : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.M))
+            if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.M)) && menuSlideAnimation.IsAnimating == false)
             {
                 playerScript.windowAlreadyOpen = false;
-                mapMenu.SetActive(false);
+                menuSlideAnimation.PlayEndingAnimation(mapMenu, () => { mapMenu.SetActive(false); });
                 Time.timeScale = 1;
             }
         }

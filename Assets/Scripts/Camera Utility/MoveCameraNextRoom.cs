@@ -9,11 +9,15 @@ public class MoveCameraNextRoom : MonoBehaviour {
     public MapSpawn mapSpawn;
     public MapExploration mapExploration;
     MissionManager missionManager;
+    RoomTemplates roomTemplates;
 
     //used for camera to track the player
     public Vector2 topRightBoundary, bottomLeftBoundary;
     public bool trackPlayer = false;
     public bool freeCam = false;
+    bool hubCamera = false;
+
+    [SerializeField] GameObject projectileProtector;
 
     private void moveCamera(int whichDirection)
     {
@@ -32,6 +36,11 @@ public class MoveCameraNextRoom : MonoBehaviour {
         else
         {
             transform.position += new Vector3(0, -20, 0);
+        }
+
+        if (!hubCamera)
+        {
+            roomTemplates.UpdateAndInitializeRoom(transform.position);
         }
 
         PlayerProperties.mainCameraPosition = transform.position;
@@ -105,6 +114,13 @@ public class MoveCameraNextRoom : MonoBehaviour {
         playerShip = GameObject.Find("PlayerShip");
         mapUI = GameObject.Find("PlayerShip").GetComponent<MapUI>();
         missionManager = FindObjectOfType<MissionManager>();
+        roomTemplates = FindObjectOfType<RoomTemplates>();
+
+        if(roomTemplates == null)
+        {
+            hubCamera = true;
+        }
+
         if (FindObjectOfType<RoomMemory>())
         {
             roomMemory = GameObject.Find("RoomMemory").GetComponent<RoomMemory>();
@@ -125,6 +141,8 @@ public class MoveCameraNextRoom : MonoBehaviour {
                 PlayerProperties.mainCameraPosition = transform.position;
             }
         }
+
+        projectileProtector.SetActive(!freeCam && !trackPlayer);
 	}
 
     public Vector3 returnTrackCamPosition()

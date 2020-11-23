@@ -16,6 +16,7 @@ public class BasicProjectile : MonoBehaviour
     GameObject playerShip;
     // In degrees
     public float angleTravel;
+    [SerializeField] float rotationOffset;
 
     void Start()
     {
@@ -29,7 +30,7 @@ public class BasicProjectile : MonoBehaviour
         {
             if (rotateProjectile)
             {
-                transform.rotation = Quaternion.Euler(0, 0, angleTravel);
+                transform.rotation = Quaternion.Euler(0, 0, angleTravel + rotationOffset);
             }
             transform.position += new Vector3(Mathf.Cos(angleTravel * Mathf.Deg2Rad), Mathf.Sin(angleTravel * Mathf.Deg2Rad)) * Time.deltaTime * speed;
         }

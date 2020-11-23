@@ -276,6 +276,7 @@ public class GiganticPodling : Enemy
     {
         StartCoroutine(hitFrame());
         takeDamageAudio.Play();
+        SpawnArtifactKillsAndGoOnCooldown(1f);
     }
 
     IEnumerator hitFrame()

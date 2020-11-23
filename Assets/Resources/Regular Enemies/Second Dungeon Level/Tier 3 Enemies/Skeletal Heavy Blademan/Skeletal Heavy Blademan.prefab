@@ -59,6 +59,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -70,6 +71,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -384,8 +386,10 @@ MonoBehaviour:
   percentSpawnChance: 33
   armorMitigation: 0
   speed: 2
-  slowAmount: 0
-  spawner: {fileID: 0}
+  fogStats:
+    fogDurationIncrease: 0
+    fogCoolDownDecrease: 0
+  moveable: 1
   statuses: []
   facingLeft: {fileID: -794896595068586354, guid: 06399695c87f57d439350e71f7e4c10a,
     type: 3}
@@ -399,7 +403,6 @@ MonoBehaviour:
   downFacingHitbox: {fileID: 1635838485813378606}
   upFacingHitbox: {fileID: 1635838487389738696}
   rightFacingHitbox: {fileID: 1635838486598868171}
-  travelSpeed: 2
   travelAngle: 0
   deadSpearman: {fileID: 5416124868017150470, guid: ca08070de9dea6e4a81e81ce1fbd396e,
     type: 3}
@@ -506,7 +509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905f99799bc131040a11b6b1fc07dbb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 600
+  damageAmount: 1800
 --- !u!1 &1635838486548270558
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +555,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -563,6 +567,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -666,7 +671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905f99799bc131040a11b6b1fc07dbb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 600
+  damageAmount: 1800
 --- !u!1 &1635838486854756877
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,7 +749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905f99799bc131040a11b6b1fc07dbb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 600
+  damageAmount: 1800
 --- !u!1 &1635838487389738696
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,7 +835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 905f99799bc131040a11b6b1fc07dbb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 600
+  damageAmount: 1800
 --- !u!1 &1635838487439131971
 GameObject:
   m_ObjectHideFlags: 0

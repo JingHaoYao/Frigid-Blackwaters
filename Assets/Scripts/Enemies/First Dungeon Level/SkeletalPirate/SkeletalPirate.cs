@@ -188,8 +188,15 @@ public class SkeletalPirate : Enemy
     {
         path = GetComponent<AStarPathfinding>().seekPath;
         this.GetComponent<AStarPathfinding>().target = playerShip.transform.position;
-        AStarNode pathNode = path[0];
-        Vector3 targetPos = pathNode.nodePosition;
+
+        Vector3 targetPos = PlayerProperties.playerShipPosition;
+
+        if (path.Count > 0)
+        {
+            AStarNode pathNode = path[0];
+            targetPos = pathNode.nodePosition;
+        }
+
         pickRendererLayer();
         travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
 

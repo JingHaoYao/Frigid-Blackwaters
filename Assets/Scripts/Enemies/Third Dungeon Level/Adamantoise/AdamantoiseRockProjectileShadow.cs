@@ -22,15 +22,15 @@ public class AdamantoiseRockProjectileShadow : MonoBehaviour
     {
         GameObject rock = Instantiate(rockProjectiles[Random.Range(0, rockProjectiles.Length)], transform.position + Vector3.up * 21, Quaternion.Euler(0, 0, Random.Range(0, 360)));
         pickRendererLayer(rock.GetComponent<SpriteRenderer>());
-        LeanTween.moveY(rock, transform.position.y, 1f).setEaseInQuad();
-        LeanTween.rotateZ(rock, rock.transform.rotation.eulerAngles.z + 270, 1f);
-        LeanTween.scale(this.gameObject, new Vector3(0.22f, 0.22f), 1f).setOnComplete(() => { Destroy(this.gameObject); Destroy(rock); Instantiate(splash, transform.position, Quaternion.identity); });
-        LeanTween.value(0, 1, 1).setOnUpdate((float val) => { turnOnCollider(val); });
+        LeanTween.moveY(rock, transform.position.y, 1.5f).setEaseInQuad();
+        LeanTween.rotateZ(rock, rock.transform.rotation.eulerAngles.z + 270, 1.5f);
+        LeanTween.scale(this.gameObject, new Vector3(0.22f, 0.22f), 1.5f).setOnComplete(() => { Destroy(this.gameObject); Destroy(rock); Instantiate(splash, transform.position, Quaternion.identity); });
+        LeanTween.value(0, 1, 1.5f).setOnUpdate((float val) => { turnOnCollider(val); });
     }
 
     void turnOnCollider(float val)
     {
-        if(val >= 0.8f)
+        if(val >= 0.95f)
         {
             damageCollider.enabled = true;
         }

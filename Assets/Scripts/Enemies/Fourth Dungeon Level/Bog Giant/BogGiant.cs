@@ -259,6 +259,7 @@ public class BogGiant : Enemy
     {
         StartCoroutine(hitFrame());
         takeDamageAudio.Play();
+        SpawnArtifactKillsAndGoOnCooldown();
     }
 
     IEnumerator hitFrame()

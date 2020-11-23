@@ -182,12 +182,14 @@ public class SkeletalSpearman : Enemy {
         pickRendererLayer();
         path = GetComponent<AStarPathfinding>().seekPath;
         this.GetComponent<AStarPathfinding>().target = playerShip.transform.position;
-        Vector3 targetPos = Vector3.zero;
-        if (path[0] != null)
+        Vector3 targetPos = PlayerProperties.playerShipPosition;
+
+        if (path.Count > 0)
         {
             AStarNode pathNode = path[0];
             targetPos = pathNode.nodePosition;
         }
+
         travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
         pickSpritePeriod += Time.deltaTime;
 

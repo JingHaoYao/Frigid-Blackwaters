@@ -127,8 +127,11 @@ public class FogCycleRoom : RoomInteraction
     {
         foreach (Enemy enemy in EnemyPool.enemyPool)
         {
-            GameObject effectInstant = Instantiate(invisibilityStatusEffect, enemy.transform.position, Quaternion.identity);
-            enemy.addStatus(effectInstant.GetComponent<InvisibilityStatusEffect>(), duration);
+            if (enemy != null)
+            {
+                GameObject effectInstant = Instantiate(invisibilityStatusEffect, enemy.transform.position, Quaternion.identity);
+                enemy.addStatus(effectInstant.GetComponent<InvisibilityStatusEffect>(), duration);
+            }
         }
     }
 }

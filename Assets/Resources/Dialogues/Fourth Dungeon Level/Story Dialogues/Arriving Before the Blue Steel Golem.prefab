@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &902279718362225024
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 902279718362225027}
+  - component: {fileID: 902279718362225026}
+  m_Layer: 0
+  m_Name: Arriving Before the Blue Steel Golem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &902279718362225027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902279718362225024}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -417.84576, y: 27.25934, z: -718.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &902279718362225026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902279718362225024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6113c6ca7401378458ab48997af9ed6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whatDialogueType: 7
+  checkPointDialogue: 1
+  dialogues:
+  - "We\u2019ll be arriving soon. The temperature in the water has been getting hotter
+    and hotter. "
+  - 'Before you all go, is there anything else you might need? Any supplies? '
+  - "I think we\u2019ve supplied enough, but it\u2019s up to our navigator whether
+    we continue. "
+  - 'What do you say Navigator, should we press forward? '
+  - "Just sail us forward if you think we\u2019re ready. "
+  dialogueNames:
+  - Usanoo
+  - Usanoo
+  - Tabitha
+  - Tabitha
+  - Tabitha
+  background: {fileID: 0}
+  character1Sprites: []
+  character2Sprites:
+  - {fileID: 3373141782999234435, guid: 81396a23cb414374e847841c1e9d6b43, type: 3}
+  - {fileID: 4856737560776083438, guid: 81396a23cb414374e847841c1e9d6b43, type: 3}
+  - {fileID: -6405395844909739571, guid: 81396a23cb414374e847841c1e9d6b43, type: 3}
+  - {fileID: -6405395844909739571, guid: 81396a23cb414374e847841c1e9d6b43, type: 3}
+  - {fileID: -4999405063952590591, guid: 81396a23cb414374e847841c1e9d6b43, type: 3}
+  character3Sprites:
+  - {fileID: 2664115617698774277, guid: 72d5544c99d0a38429f14f72e9bc15d4, type: 3}
+  - {fileID: 2196341072967759724, guid: 72d5544c99d0a38429f14f72e9bc15d4, type: 3}
+  - {fileID: -5406540382110929996, guid: 72d5544c99d0a38429f14f72e9bc15d4, type: 3}
+  - {fileID: 8008489988295156577, guid: 72d5544c99d0a38429f14f72e9bc15d4, type: 3}
+  - {fileID: 8008489988295156577, guid: 72d5544c99d0a38429f14f72e9bc15d4, type: 3}
+  character4Sprites:
+  - {fileID: -2853537239112050625, guid: eecfabd264775f845919159680a8332d, type: 3}
+  - {fileID: -2853537239112050625, guid: eecfabd264775f845919159680a8332d, type: 3}
+  - {fileID: 4335361411578615110, guid: eecfabd264775f845919159680a8332d, type: 3}
+  - {fileID: 4335361411578615110, guid: eecfabd264775f845919159680a8332d, type: 3}
+  - {fileID: 303092764633297369, guid: eecfabd264775f845919159680a8332d, type: 3}
+  panelSprites: []
+  substituteMusic: 
+  originalMusic: 
+  addedItems: []
+  textColor: {r: 1, g: 1, b: 1, a: 1}

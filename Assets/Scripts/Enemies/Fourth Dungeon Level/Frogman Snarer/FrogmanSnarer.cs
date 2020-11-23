@@ -78,6 +78,8 @@ public class FrogmanSnarer : Enemy
         isAttacking = false;
         animator.enabled = false;
         randomPos = pickRandPos();
+        aStarPathfinding.target = randomPos;
+        path = aStarPathfinding.seekPath;
     }
 
     void pickRendererLayer()
@@ -187,7 +189,10 @@ public class FrogmanSnarer : Enemy
     {
         foreach (GameObject mine_ in snareList)
         {
-            LeanTween.alpha(mine_, 0, 0.5f);
+            if (mine_ != null)
+            {
+                LeanTween.alpha(mine_, 1, 0.5f);
+            }
         }
     }
 
@@ -203,9 +208,9 @@ public class FrogmanSnarer : Enemy
 
     void travelLocation()
     {
-        path = aStarPathfinding.seekPath;
         aStarPathfinding.target = randomPos;
-        Vector3 targetPos = Vector3.zero;
+        path = aStarPathfinding.seekPath;
+        Vector3 targetPos = randomPos;
 
         if (path.Count > 0)
         {
@@ -215,31 +220,34 @@ public class FrogmanSnarer : Enemy
 
         float travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
 
-        if (path != null && path.Count > 0 && Vector2.Distance(path[path.Count - 1].nodePosition, transform.position) > 0.5f)
+        if (isAttacking == false)
         {
-            moveTowards(travelAngle);
+            if (path.Count > 0 && Vector2.Distance(randomPos, transform.position) > 1.5f)
+            {
+                moveTowards(travelAngle);
 
-            pickSpritePeriod += Time.deltaTime;
-            if (pickSpritePeriod >= 0.2f)
-            {
-                pickView(travelAngle);
-                pickSpritePeriod = 0;
-                spriteRenderer.sprite = viewSprites[whatView - 1];
-                transform.localScale = new Vector3(3 * mirror, 3);
-            }
-        }
-        else
-        {
-            rigidBody2D.velocity = Vector3.zero;
-            if (isAttacking == false && Vector2.Distance(transform.position, randomPos) < 1f && stopAttacking == false)
-            {
-                if (invisController.isUnderLight)
+                pickSpritePeriod += Time.deltaTime;
+                if (pickSpritePeriod >= 0.2f)
                 {
-                    StartCoroutine(placeSnare());
+                    pickView(travelAngle);
+                    pickSpritePeriod = 0;
+                    spriteRenderer.sprite = viewSprites[whatView - 1];
+                    transform.localScale = new Vector3(3 * mirror, 3);
                 }
-                else
+            }
+            else
+            {
+                rigidBody2D.velocity = Vector3.zero;
+                if (isAttacking == false && stopAttacking == false)
                 {
-                    randomPos = pickRandPos();
+                    if (invisController.isUnderLight && snareList.Count < 4)
+                    {
+                        StartCoroutine(placeSnare());
+                    }
+                    else
+                    {
+                        randomPos = pickRandPos();
+                    }
                 }
             }
         }

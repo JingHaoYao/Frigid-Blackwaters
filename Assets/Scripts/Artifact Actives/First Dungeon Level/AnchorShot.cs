@@ -56,10 +56,13 @@ public class AnchorShot : MonoBehaviour
                 transform.position += Time.deltaTime * speed * toShipVector;
                 foreach (GameObject enemy in grabbedEnemyList)
                 {
-                    enemy.transform.position += toShipVector * speed * Time.deltaTime;
+                    if (enemy != null)
+                    {
+                        enemy.transform.position += toShipVector * speed * Time.deltaTime;
+                    }
                 }
 
-                if (Vector2.Distance(returnPosition, transform.position) < 0.5f)
+                if (Vector2.Distance(PlayerProperties.playerShipPosition, transform.position) < 0.5f)
                 {
                     this.GetComponent<Collider2D>().enabled = false;
                     this.GetComponent<SpriteRenderer>().enabled = false;

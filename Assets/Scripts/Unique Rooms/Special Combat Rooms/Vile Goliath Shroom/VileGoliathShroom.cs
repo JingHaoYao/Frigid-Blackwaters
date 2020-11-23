@@ -179,6 +179,7 @@ public class VileGoliathShroom : Enemy
     {
         StartCoroutine(hitFrame());
         takeDamageAudio.Play();
+        SpawnArtifactKillsAndGoOnCooldown(1f);
     }
 
     IEnumerator hitFrame()

@@ -30,6 +30,8 @@ public class NettleBearer : Enemy
     private bool bloomed = false;
     private bool isAttacking = false;
 
+    AStarPathfinding aStarPathfinding;
+
     void spawnFoam()
     {
         if (rigidBody2D.velocity.magnitude != 0)
@@ -121,9 +123,9 @@ public class NettleBearer : Enemy
 
     void travelLocation()
     {
-        path = GetComponent<AStarPathfinding>().seekPath;
-        this.GetComponent<AStarPathfinding>().target = PlayerProperties.playerShipPosition;
-        Vector3 targetPos = Vector3.zero;
+        path = aStarPathfinding.seekPath;
+        this.aStarPathfinding.target = PlayerProperties.playerShipPosition;
+        Vector3 targetPos = PlayerProperties.playerShipPosition;
 
         if (path.Count > 0)
         {
@@ -155,6 +157,7 @@ public class NettleBearer : Enemy
     private void Start()
     {
         animator.enabled = false;
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
     void Update()

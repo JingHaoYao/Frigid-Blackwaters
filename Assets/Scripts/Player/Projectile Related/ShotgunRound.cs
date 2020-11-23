@@ -18,7 +18,7 @@ public class ShotgunRound : PlayerProjectile {
         initCameraPos = Camera.main.transform.position;
         if (PlayerUpgrades.spreadshotUpgrades.Count >= 2)
         {
-            this.GetComponent<DamageAmount>().damage += 1;
+            this.GetComponent<DamageAmount>().addDamage(1);
         }
         Destroy(this.gameObject, 0.4f);
     }

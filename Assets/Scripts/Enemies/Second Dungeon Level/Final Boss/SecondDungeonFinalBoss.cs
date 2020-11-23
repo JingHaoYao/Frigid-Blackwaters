@@ -391,5 +391,6 @@ public class SecondDungeonFinalBoss : Enemy
     {
         StartCoroutine(hitFrame());
         damageAudio.Play();
+        SpawnArtifactKillsAndGoOnCooldown(2.5f);
     }
 }

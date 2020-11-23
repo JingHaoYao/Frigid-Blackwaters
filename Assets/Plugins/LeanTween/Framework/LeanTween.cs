@@ -1108,17 +1108,6 @@ public class LeanTween : MonoBehaviour {
         return lt;
     }
 
-    public static LTDescr alpha(SpriteRenderer spriteRenderer, float to, float time)
-    {
-        LTDescr lt = pushNewTween(spriteRenderer.gameObject, new Vector3(to, 0, 0), time, options().setAlpha());
-
-        #if !UNITY_3_5 && !UNITY_4_0 && !UNITY_4_0_1 && !UNITY_4_1 && !UNITY_4_2
-        SpriteRenderer ren = spriteRenderer;
-        lt.spriteRen = ren;
-        #endif
-        return lt;
-    }
-
     /**
     * <summary>Fade a GUI Object</summary>
     * 
@@ -1129,7 +1118,7 @@ public class LeanTween : MonoBehaviour {
     * @return {LTDescr} LTDescr an object that distinguishes the tween
     * @example
     * LeanTween.alpha(ltRect, 1f, 1f) .setEase(LeanTweenType.easeInCirc);
-    */
+    */  
     public static LTDescr alpha(LTRect ltRect, float to, float time){
         ltRect.alphaEnabled = true;
         return pushNewTween( tweenEmpty, new Vector3(to,0f,0f), time, options().setGUIAlpha().setRect( ltRect ) );

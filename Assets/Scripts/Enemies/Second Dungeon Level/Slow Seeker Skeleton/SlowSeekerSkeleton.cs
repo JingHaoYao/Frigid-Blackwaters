@@ -33,6 +33,8 @@ public class SlowSeekerSkeleton : Enemy
     bool isAttacking = false;
     float angleToShip;
 
+    AStarPathfinding aStarPathfinding;
+
     void spawnFoam()
     {
         if (rigidBody2D.velocity.magnitude != 0)
@@ -90,9 +92,9 @@ public class SlowSeekerSkeleton : Enemy
 
     void travelLocation()
     {
-        path = GetComponent<AStarPathfinding>().seekPath;
-        this.GetComponent<AStarPathfinding>().target = randomPos;
-        Vector3 targetPos = Vector3.zero;
+        path = aStarPathfinding.seekPath;
+        this.aStarPathfinding.target = randomPos;
+        Vector3 targetPos = randomPos;
 
         if (path.Count > 0)
         {
@@ -232,6 +234,7 @@ public class SlowSeekerSkeleton : Enemy
         randomPos = transform.position;
         movePeriod = Random.Range(2, 6);
         attackPeriod = Random.Range(4, 7);
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
     IEnumerator summonSeeker(float angle)

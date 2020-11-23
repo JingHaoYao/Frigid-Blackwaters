@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2141398339424146666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2141398339424146710}
+  - component: {fileID: 2141398339424146709}
+  - component: {fileID: 2141398339424146711}
+  - component: {fileID: 2141398339424146708}
+  - component: {fileID: 2141398339424146705}
+  m_Layer: 0
+  m_Name: Revolving Cannon Weapon Template
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2141398339424146710
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141398339424146666}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -91.46154}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 10.9171505, y: -10.238417}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2141398339424146709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141398339424146666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2093946c6e21b9c43b76288f452bba8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  up: {fileID: 8262414121392372392, guid: f4bea32c39c6c7b44980aaedc4dd809f, type: 3}
+  upleft: {fileID: -2769092060022557620, guid: f4bea32c39c6c7b44980aaedc4dd809f, type: 3}
+  left: {fileID: 277023617913052069, guid: f4bea32c39c6c7b44980aaedc4dd809f, type: 3}
+  downleft: {fileID: -415580396371287864, guid: f4bea32c39c6c7b44980aaedc4dd809f,
+    type: 3}
+  down: {fileID: -7452785299700969260, guid: f4bea32c39c6c7b44980aaedc4dd809f, type: 3}
+  weaponFlare: {fileID: 3078989951417345867, guid: 6104be49823afff478d61f44ea914725,
+    type: 3}
+  coolDownIcon: {fileID: 1543092073939811016, guid: 88bfb70b08f23dc419377e89f6e829f6,
+    type: 3}
+  coolDownTime: 1.75
+  shipWeaponEquipped: {fileID: 0}
+  whichLevelUnlock: 5
+--- !u!222 &2141398339424146711
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141398339424146666}
+  m_CullTransparentMesh: 0
+--- !u!114 &2141398339424146708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141398339424146666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Revolving Cannon: Using a new revolving chamber, this
+
+    weapon stores
+    bullets up to 7, allowing you to fire in
+
+    rapid succession, dealing 1 damage
+    per bullet.'
+--- !u!114 &2141398339424146705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141398339424146666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2708037635ca3848b3bffadb9f982da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

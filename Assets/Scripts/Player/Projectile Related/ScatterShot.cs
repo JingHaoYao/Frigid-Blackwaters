@@ -27,7 +27,7 @@ public class ScatterShot : PlayerProjectile {
         initCameraPos = Camera.main.transform.position;
         if (PlayerUpgrades.musketUpgrades.Count >= 2)
         {
-            this.GetComponent<DamageAmount>().damage += 1;
+            this.GetComponent<DamageAmount>().addDamage(1);
         }
     }
 

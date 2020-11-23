@@ -8,7 +8,7 @@ public class SpiritHowlBell : ArtifactEffect {
     PlayerScript playerScript;
     GameObject playerShip;
     public GameObject poof, spiritHowl;
-    GameObject[] summonedDoggies = new GameObject[3];
+    List<GameObject> spawnedHowls = new List<GameObject>();
     bool summonedDogs = false;
     int numHits = 0;
     public int numDoggiesLeft = 3;
@@ -18,9 +18,10 @@ public class SpiritHowlBell : ArtifactEffect {
     {
         Instantiate(poof, spawnLocation, Quaternion.identity);
         yield return new WaitForSeconds(0.1f);
-        summonedDoggies[index] = Instantiate(spiritHowl, spawnLocation, Quaternion.identity);
-        summonedDoggies[index].transform.parent = this.transform;
-        summonedDoggies[index].GetComponent<SpiritHowl>().whatPos = index;
+        GameObject howl = Instantiate(spiritHowl, spawnLocation, Quaternion.identity);
+        howl.transform.parent = this.transform;
+        howl.GetComponent<SpiritHowl>().whatPos = index;
+        spawnedHowls.Add(howl);
     }
 
     void summonDoggies()
@@ -73,32 +74,30 @@ public class SpiritHowlBell : ArtifactEffect {
                 }
             }
         }
-
-        if(summonedDogs == true)
-        {
-            if (numDoggiesLeft == 0)
-            {
-                summonedDogs = false;
-            }
-
-            if(this.GetComponent<DisplayItem>().isEquipped == false)
-            {
-                summonedDogs = false;
-                foreach(GameObject doggy in summonedDoggies)
-                {
-                    Destroy(doggy);
-                }
-            }
-        }
     }
+
+    public override void artifactUnequipped()
+    {
+        foreach (GameObject doggy in spawnedHowls)
+        {
+            Destroy(doggy);
+        }
+        summonedDogs = false;
+    }
+
+
     // Whenever the player takes damage
     public override void tookDamage(int amountDamage, Enemy enemy)
     {
         if (summonedDogs)
         {
-            summonedDoggies[numHits].GetComponent<SpiritHowl>().targetAttack = enemy.gameObject;
-            numHits++;
-            numDoggiesLeft--;
+            spawnedHowls[0].GetComponent<SpiritHowl>().targetAttack = enemy.gameObject;
+            spawnedHowls.Remove(spawnedHowls[0]);
+
+            if(spawnedHowls.Count == 0)
+            {
+                summonedDogs = false;
+            }
         }
     }
 }

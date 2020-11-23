@@ -430,7 +430,7 @@ public class GuardianGolem : Enemy {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<DamageAmount>())
+        if (collision.gameObject.GetComponent<DamageAmount>() && activatedRoom)
         {
             dealDamage(collision.gameObject.GetComponent<DamageAmount>().damage);
         }

@@ -196,6 +196,7 @@ public class StormSpirit : Enemy
     {
         StartCoroutine(hitFrame());
         damageAudio.Play();
+        SpawnArtifactKillsAndGoOnCooldown(1f);
     }
 
     IEnumerator hitFrame()

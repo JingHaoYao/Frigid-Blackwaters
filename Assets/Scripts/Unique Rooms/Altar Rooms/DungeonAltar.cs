@@ -15,14 +15,30 @@ public class DungeonAltar : MonoBehaviour
     SpriteRenderer spriteRenderer;
     public GameObject customArtifact;
     public int customHealthSacrifice;
+    int whatDungeonLevel = 0;
+
+    MenuSlideAnimation menuSlideAnimation = new MenuSlideAnimation();
+
+    void SetAnimation()
+    {
+        menuSlideAnimation.SetOpenAnimation(new Vector3(0, -585, 0), new Vector3(0, 0, 0), 0.25f);
+        menuSlideAnimation.SetCloseAnimation(new Vector3(0, 0, 0), new Vector3(0, -585, 0), 0.25f);
+    }
+
+    public void PlayEndingAnimation()
+    {
+        menuSlideAnimation.PlayEndingAnimation(altarDisplay, () => { altarDisplay.SetActive(false); });
+    }
 
     void Start()
     {
         playerShip = GameObject.Find("PlayerShip");
         itemTemplates = FindObjectOfType<ItemTemplates>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        whatDungeonLevel = FindObjectOfType<DungeonEntryDialogueManager>().whatDungeonLevel;
         setItem();
         altarDisplay = GameObject.Find("Altar Menu Parent").transform.GetChild(0).gameObject;
+        SetAnimation();
     }
 
     public void setUnActive()
@@ -95,6 +111,8 @@ public class DungeonAltar : MonoBehaviour
                     healthSacrifice = 650 + Random.Range(1, 4) * 50;
                 }
             }
+
+            healthSacrifice += 600 * (whatDungeonLevel - 1);
         }
         else
         {
@@ -132,32 +150,36 @@ public class DungeonAltar : MonoBehaviour
                 }
             }
 
-            if (altarDisplay.activeSelf == true)
+            if (menuSlideAnimation.IsAnimating == false)
             {
-                if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
+                if (altarDisplay.activeSelf == true)
                 {
-                    altarDisplay.SetActive(false);
-                    playerShip.GetComponent<PlayerScript>().removeRootingObject();
-                    Time.timeScale = 1;
-                    playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false;
+                    if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
+                    {
+                        menuSlideAnimation.PlayEndingAnimation(altarDisplay, () => { altarDisplay.SetActive(false); });
+                        playerShip.GetComponent<PlayerScript>().removeRootingObject();
+                        Time.timeScale = 1;
+                        playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false;
+                    }
                 }
-            }
-            else if (playerShip.GetComponent<PlayerScript>().windowAlreadyOpen == false)
-            {
-                if (Input.GetKeyDown(KeyCode.E))
+                else if (playerShip.GetComponent<PlayerScript>().windowAlreadyOpen == false)
                 {
-                    altarDisplay.SetActive(true);
-                    playerShip.GetComponent<PlayerScript>().addRootingObject();
-                    updateDisplay();
-                    Time.timeScale = 0;
-                    playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        altarDisplay.SetActive(true);
+                        menuSlideAnimation.PlayOpeningAnimation(altarDisplay);
+                        playerShip.GetComponent<PlayerScript>().addRootingObject();
+                        updateDisplay();
+                        Time.timeScale = 0;
+                        playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
+                    }
                 }
-            }
-            else
-            {
-                if (spawnedIndicator != null)
+                else
                 {
-                    Destroy(spawnedIndicator);
+                    if (spawnedIndicator != null)
+                    {
+                        Destroy(spawnedIndicator);
+                    }
                 }
             }
         }

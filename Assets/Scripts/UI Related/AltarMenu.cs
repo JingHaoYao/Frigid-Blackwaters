@@ -40,10 +40,10 @@ public class AltarMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             {
                 inventory.itemList.Add(displayInfo.gameObject);
                 FindObjectOfType<AudioManager>().PlaySound("Receive Item");
-                playerScript.trueDamage += healthSacrifice; //generate sacrificed health
+                playerScript.dealDamageToShip(healthSacrifice, null); //generate sacrificed health
                 altar.setUnActive();
                 Instantiate(particles, playerScript.gameObject.transform.position, Quaternion.identity);
-                transform.parent.gameObject.SetActive(false);
+                altar.PlayEndingAnimation();
                 playerScript.windowAlreadyOpen = false;
                 Time.timeScale = 1;
                 PlayerProperties.playerScript.removeRootingObject();

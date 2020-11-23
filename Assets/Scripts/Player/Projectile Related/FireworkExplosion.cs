@@ -22,7 +22,7 @@ public class FireworkExplosion : PlayerProjectile {
         StartCoroutine(turnOnCollider());
         if (PlayerUpgrades.fireworkUpgrades.Count >= 2)
         {
-            this.GetComponent<DamageAmount>().damage += 1;
+            this.GetComponent<DamageAmount>().addDamage(1);
         }
     }
 }

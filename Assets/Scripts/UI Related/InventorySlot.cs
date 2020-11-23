@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,13 +19,10 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void Start()
     {
-        inventory = GameObject.Find("PlayerShip").GetComponent<Inventory>();
-        artifacts = GameObject.Find("PlayerShip").GetComponent<Artifacts>();
+        inventory = PlayerProperties.playerInventory;
+        artifacts = PlayerProperties.playerArtifacts;
         toolTip = inventory.toolTip;
-        if(GameObject.Find("Golden Vault"))
-        {
-            goldenVault = GameObject.Find("Golden Vault").GetComponent<GoldenVault>();
-        }
+        goldenVault = FindObjectOfType<GoldenVault>();
     }
 
     public void unlockSlot()
@@ -69,6 +67,10 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             FindObjectOfType<AudioManager>().PlaySound("Destroy Item");
             inventory.itemList.Remove(displayInfo.gameObject);
+            if(displayInfo.GetComponent<ArtifactEffect>())
+            {
+                displayInfo.GetComponent<ArtifactEffect>().artifactDestroyed();
+            }
             Destroy(displayInfo.gameObject);
             displayInfo = null;
         }
@@ -82,7 +84,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             {
                 if (goldenVaultDisplay.activeSelf != true)
                 {
-                    if (FindObjectOfType<PlayerScript>().trueDamage - displayInfo.GetComponent<ConsumableBonus>().restoredHealth < 0)
+                    if (PlayerProperties.playerScript.shipHealth + displayInfo.GetComponent<ConsumableBonus>().restoredHealth > PlayerProperties.playerScript.shipHealthMAX)
                     {
                         inventory.consumableConfirmationWindow.gameObject.SetActive(true);
                         inventory.consumableConfirmationWindow.objectInQuestion = displayInfo.gameObject;
@@ -104,7 +106,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             }
             else
             {
-                if (FindObjectOfType<PlayerScript>().trueDamage - displayInfo.GetComponent<ConsumableBonus>().restoredHealth < 0)
+                if (PlayerProperties.playerScript.shipHealth + displayInfo.GetComponent<ConsumableBonus>().restoredHealth > PlayerProperties.playerScript.shipHealthMAX)
                 {
                     inventory.consumableConfirmationWindow.gameObject.SetActive(true);
                     inventory.consumableConfirmationWindow.objectInQuestion = displayInfo.gameObject;
@@ -128,19 +130,14 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void storeItemVault()
     {
-        if(!Input.GetKeyDown(KeyCode.LeftShift) && displayInfo != null && inventory.vaultDisplay != null && inventory.vaultDisplay.activeSelf == true && HubProperties.vaultItems.Count < 8)
+        if(!Input.GetKeyDown(KeyCode.LeftShift) && displayInfo != null && inventory.vaultDisplay != null && inventory.vaultDisplay.activeSelf == true && HubProperties.vaultItems.Count < HubProperties.maxNumberVaultItems)
         {
             inventory.itemList.Remove(displayInfo.gameObject);
             if (displayInfo.goldValue <= 0)
             {
                 goldenVault.vaultItems.Add(displayInfo.gameObject);
+                HubProperties.vaultItems.Add(displayInfo.gameObject.name);
                 FindObjectOfType<AudioManager>().PlaySound("Store Items Golden Vault");
-            }
-            else
-            {
-                HubProperties.storeGold += displayInfo.goldValue;
-                Destroy(displayInfo.gameObject);
-                FindObjectOfType<AudioManager>().PlaySound("Store Gold Golden Vault");
             }
             inventory.UpdateUI();
             goldenVault.UpdateUI();
@@ -158,6 +155,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 displayInfo.GetComponent<ArtifactEffect>()?.artifactEquipped();
                 artifacts.activeArtifacts.Add(displayInfo.gameObject);
                 inventory.itemList.Remove(displayInfo.gameObject);
+                PlayerProperties.playerScript.CheckAndUpdateHealth();
             }
         }
     }

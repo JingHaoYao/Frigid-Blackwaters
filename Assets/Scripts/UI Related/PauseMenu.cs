@@ -12,7 +12,6 @@ public class PauseMenu : MonoBehaviour
     public GameObject statsDisplay;
     public GameObject artifactsDisplay;
     public GameObject blackWindow;
-    public GameObject questDisplay;
     public GameObject soundOptions;
     public int whichSceneLoad = 0;
     public GameObject quitConfirmationButton, quitConfirmationButtonInCombat, quitToTitleSceneConfirmation;
@@ -24,13 +23,14 @@ public class PauseMenu : MonoBehaviour
     public GameObject controlsMenu;
     public GameObject hubMap;
     public GameObject dungeonMap;
+    public GameObject visualOptions;
 
     private void Start()
     {
-        playerScript = GameObject.Find("PlayerShip").GetComponent<PlayerScript>();
-        artifacts = GameObject.Find("PlayerShip").GetComponent<Artifacts>();
-        inventory = GameObject.Find("PlayerShip").GetComponent<Inventory>();
-        stats = GameObject.Find("PlayerShip").GetComponent<ShipStats>();
+        playerScript = PlayerProperties.playerScript;
+        artifacts = PlayerProperties.playerArtifacts;
+        inventory = PlayerProperties.playerInventory;
+        stats = PlayerProperties.playerShip.GetComponent<ShipStats>();
         mainPauseMenu = transform.GetChild(0).gameObject;
     }
 
@@ -69,6 +69,7 @@ public class PauseMenu : MonoBehaviour
     public void openDungeonMap()
     {
         dungeonMap.transform.localScale = new Vector3(1, 1, 1);
+        PlayerProperties.playerShip.GetComponent<MapUI>().PlayOpenAnimation();
         FindObjectOfType<AudioManager>().PlaySound("Pause Menu Button");
         mainPauseMenu.SetActive(false);
     }
@@ -80,12 +81,21 @@ public class PauseMenu : MonoBehaviour
         FindObjectOfType<AudioManager>().PlaySound("Pause Menu Button");
     }
 
+    public void openVisualOptions()
+    {
+        mainPauseMenu.SetActive(false);
+        visualOptions.SetActive(true);
+        FindObjectOfType<AudioManager>().PlaySound("Pause Menu Button");
+    }
+
     public void openInventory()
     {
         mainPauseMenu.SetActive(false);
         inventoryDisplay.SetActive(true);
+        inventory.PlayInventoryEnterAnimation();
         inventory.UpdateUI();
         artifactsDisplay.SetActive(true);
+        artifacts.PlayEnteringAnimation();
         artifacts.UpdateUI();
         FindObjectOfType<AudioManager>().PlaySound("Pause Menu Button");
     }
@@ -94,6 +104,7 @@ public class PauseMenu : MonoBehaviour
     {
         mainPauseMenu.SetActive(false);
         statsDisplay.SetActive(true);
+        stats.PlayOpeningAnimation();
         stats.UpdateUI();
         FindObjectOfType<AudioManager>().PlaySound("Pause Menu Button");
     }
@@ -102,6 +113,7 @@ public class PauseMenu : MonoBehaviour
     {
         hubMap.transform.GetChild(0).gameObject.SetActive(true);
         hubMap.GetComponent<PlayerHubMap>().UpdateUI();
+        hubMap.GetComponent<PlayerHubMap>().PlayOpeningAnimation();
         mainPauseMenu.SetActive(false);
         FindObjectOfType<AudioManager>().PlaySound("Pause Menu Button");
     }
@@ -118,8 +130,8 @@ public class PauseMenu : MonoBehaviour
             playerScript.applyInventoryLoss();
         }
         alreadyAppliedLossesQuit = true;
-        FindObjectOfType<AudioManager>().PlaySound("Pause Menu Button");
         SaveSystem.SaveGame();
+        FindObjectOfType<AudioManager>().PlaySound("Pause Menu Button");
         Application.Quit();
     }
 
@@ -172,6 +184,9 @@ public class PauseMenu : MonoBehaviour
                 break;
             case 4:
                 StartCoroutine(fadeLoadScene(8));
+                break;
+            case 5:
+                StartCoroutine(fadeLoadScene(11));
                 break;
         }
     }

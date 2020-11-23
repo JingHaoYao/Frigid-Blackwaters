@@ -13,35 +13,54 @@ public class Artifacts : MonoBehaviour {
     public int numKills = 0;
     PlayerScript playerScript;
 
-	void Awake() {
+    MenuSlideAnimation menuSlideAnimation = new MenuSlideAnimation();
+
+    void SetArtifactsAnimation()
+    {
+        menuSlideAnimation.SetOpenAnimation(new Vector3(-243, -585, 0), new Vector3(-243, 0, 0), 0.25f);
+        menuSlideAnimation.SetCloseAnimation(new Vector3(-243, 0, 0), new Vector3(-243, -585, 0), 0.25f);
+    }
+
+    public void PlayEnteringAnimation()
+    {
+        menuSlideAnimation.PlayOpeningAnimation(artifactsUI);
+    }
+
+    void Awake() {
         playerScript = GetComponent<PlayerScript>();
         activeSlots = activeSlotsParent.GetComponentsInChildren<ActiveSlot>();
         artifactSlots = artifactSlotsParent.GetComponentsInChildren<ArtifactSlot>();
+        PlayerProperties.playerArtifacts = this;
+        SetArtifactsAnimation();
 	}
 	
 	void LateUpdate () {
         if (chestUI.activeSelf == false && shopUI.activeSelf == false)
         {
-            if (artifactsUI.activeSelf == false)
+            if (menuSlideAnimation.IsAnimating == false)
             {
-                if (GetComponent<PlayerScript>().playerDead == false)
+                if (artifactsUI.activeSelf == false)
                 {
-                    if (Input.GetKeyDown(KeyCode.I) && playerScript.windowAlreadyOpen == false)
+                    if (GetComponent<PlayerScript>().playerDead == false)
                     {
-                        playerScript.windowAlreadyOpen = true;
-                        UpdateUI();
-                        artifactsUI.SetActive(true);
-                        Time.timeScale = 0;
+                        if (Input.GetKeyDown(KeyCode.I) && playerScript.windowAlreadyOpen == false)
+                        {
+                            playerScript.windowAlreadyOpen = true;
+                            UpdateUI();
+                            artifactsUI.SetActive(true);
+                            PlayEnteringAnimation();
+                            Time.timeScale = 0;
+                        }
                     }
                 }
-            }
-            else
-            {
-                if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.I))
+                else
                 {
-                    playerScript.windowAlreadyOpen = false;
-                    artifactsUI.SetActive(false);
-                    Time.timeScale = 1;
+                    if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.I))
+                    {
+                        playerScript.windowAlreadyOpen = false;
+                        menuSlideAnimation.PlayEndingAnimation(artifactsUI, () => artifactsUI.SetActive(false));
+                        Time.timeScale = 1;
+                    }
                 }
             }
         }
@@ -88,6 +107,13 @@ public class Artifacts : MonoBehaviour {
         playerScript.periodicHealing = periodicHealing;
         Chest.bonusArtifactChance = bonusArtifactChance;
         Chest.bonusGold = bonusGold;
+
+        foreach (GameObject artifact in activeArtifacts)
+        {
+            artifact.GetComponent<ArtifactEffect>()?.updatedArtifactStats();
+        }
+
+        playerScript.CheckAndUpdateHealth();
     }
 
     public void UpdateUI()

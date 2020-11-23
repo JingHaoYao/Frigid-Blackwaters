@@ -51,7 +51,9 @@ public class SetRoomDesign : MonoBehaviour {
         {
             whichDesign = Random.Range(0, designList.Length);
             rend.sprite = designList[whichDesign];
+            GetComponent<SpriteMask>().sprite = designList[whichDesign];
         }
+
         xPos = Mathf.RoundToInt(transform.position.x / 19.98f);
         yPos = Mathf.RoundToInt(transform.position.y / 19.98f);
     }
@@ -174,15 +176,14 @@ public class SetRoomDesign : MonoBehaviour {
         }
     }
 
-    void Update () {
-        if (GameObject.Find("RoomTemplates").GetComponent<RoomTemplates>().spawnPeriod >= 6.5f && gameObject.name != "SpawnRoom" && gameObject.name != "DoorBlock(Clone)")
+    public void Initialize()
+    {
+        if (memoryStored == false && gameObject.name != "SpawnRoom" && gameObject.name != "DoorBlock(Clone)")
         {
-            if(memoryStored == false){
-                updateAntiSpawnSpaceSpawner();
-                IdentifyOffset();
-                storeInMemory();
-                memoryStored = true;
-            }
+            updateAntiSpawnSpaceSpawner();
+            IdentifyOffset();
+            storeInMemory();
+            memoryStored = true;
         }
     }
 }

@@ -45,6 +45,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -56,6 +57,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -154,8 +156,8 @@ GameObject:
   - component: {fileID: 5634051544149164954}
   - component: {fileID: 5634051544149164949}
   - component: {fileID: 5634051544149164948}
-  m_Layer: 0
-  m_Name: Skeleton Engineer
+  m_Layer: 10
+  m_Name: Skeletal Engineer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -192,6 +194,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -203,6 +206,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -538,6 +542,9 @@ MonoBehaviour:
   percentSpawnChance: 33
   armorMitigation: 0
   speed: 2.5
+  fogStats:
+    fogDurationIncrease: 0
+    fogCoolDownDecrease: 0
   statuses: []
   spriteRenderer: {fileID: 5634051544149164956}
   rigidBody2D: {fileID: 5634051544149164953}

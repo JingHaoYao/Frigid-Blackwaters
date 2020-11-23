@@ -13,6 +13,18 @@ public class ConsoleCommands : MonoBehaviour
         CommandHandlers.RegisterCommandHandlers(this);
     }
 
+    [CommandHandler(Name = "AddFlammableStack", Description = "Adds a flammable stack to the player")]
+    private void AddFlammableStack()
+    {
+        FindObjectOfType<FlammableController>().AddFlammableStack(null);
+    }
+
+    [CommandHandler(Name = "IgniteFlammableStacks", Description = "Ignites flammable stacks and deals damage to player")]
+    private void IgniteFlammableStacks()
+    {
+        FindObjectOfType<FlammableController>().IgniteFlammableStacks(null);
+    }
+
     [CommandHandler(Name = "SkipTutorial", Description = "Skip the tutorial from the title screen and go straight to player hub")]
     private void SkipTutorial()
     {
@@ -98,6 +110,15 @@ public class ConsoleCommands : MonoBehaviour
             case WeaponChoices.FinBlade:
                 AddUpgrades(whatTier, isLeftUpgradeTree ? "soul_reaver_upgrade" : "", PlayerUpgrades.finBladeUpgrades);
                 break;
+            case WeaponChoices.RevolvingCannon:
+                AddUpgrades(whatTier, isLeftUpgradeTree ? "bullet_cartridge_upgrade" : "", PlayerUpgrades.revolvingCannonUpgrades);
+                break;
+            case WeaponChoices.SmeltingLaser:
+                AddUpgrades(whatTier, isLeftUpgradeTree ? "focusing_laser_upgrade" : "", PlayerUpgrades.smeltingLaserUpgrades);
+                break;
+            case WeaponChoices.TremorMaker:
+                AddUpgrades(whatTier, isLeftUpgradeTree ? "burn_radius_upgrade" : "", PlayerUpgrades.tremorMakerUpgrades);
+                break;
 
         }
     }
@@ -179,6 +200,17 @@ public class ConsoleCommands : MonoBehaviour
         }
     }
 
+    [CommandHandler(Name = "GivePlayerDebugItem", Description = "Give a player a super powerful artifact")]
+    private void GivePlayerDebugItem()
+    {
+        if (PlayerProperties.playerInventory != null)
+        {
+            GameObject newItem = Instantiate(Resources.Load<GameObject>("Items/Debug Item"));
+            newItem.transform.SetParent(GameObject.Find("PresentItems").transform);
+            PlayerProperties.playerInventory.itemList.Add(newItem);
+        }
+    }
+
     [CommandHandler(Name = "AddArtifactKills", Description = "Give yourself a number of artifact kills")]
     private void AddArtifactKills(int numberKillsToAdd)
     {
@@ -235,6 +267,7 @@ public class ConsoleCommands : MonoBehaviour
     private void GrantHealthBonus(int healthBonus)
     {
         PlayerProperties.playerScript.healthBonus = healthBonus;
+        PlayerProperties.playerScript.shipHealth = PlayerProperties.playerScript.shipHealthMAX + healthBonus;
     }
 
     [CommandHandler(Name = "TeleportPlayerAndCamera", Description = "Teleports the player to a specific location")]
@@ -280,7 +313,10 @@ public class ConsoleCommands : MonoBehaviour
         PolluxShrine,
         LoneSpark,
         GadgetShot,
-        FinBlade
+        FinBlade,
+        RevolvingCannon, 
+        SmeltingLaser, 
+        TremorMaker
     }
 
     enum WhichWeaponSide

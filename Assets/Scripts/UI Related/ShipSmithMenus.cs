@@ -22,8 +22,19 @@ public class ShipSmithMenus : MonoBehaviour {
     [SerializeField] private LoneSparkUpgradeTilesUI loneSparkUpgradeTilesMenu;
     [SerializeField] private GadgetShotUpgradeTilesUI gadgetShotUpgradeTilesMenu;
     [SerializeField] private FinBladeUpgradeTilesUI finBladeUpgradeTilesMenu;
+    [SerializeField] private RevolvingCannonUpgradeTilesUI revolvingCannonUpgradeTilesMenu;
+    [SerializeField] private SmeltingLaserUpgradeTilesUI smeltingLaserUpgradeTilesMenu;
+    [SerializeField] private TremorMakerUpgradeTilesUI tremorMakerUpgradeTilesMenu;
     [SerializeField] private GameObject weaponSelectorMenu, returnButton;
     int skillPointPrice = 0;
+
+    MenuSlideAnimation menuSlideAnimation = new MenuSlideAnimation();
+
+    void SetAnimation()
+    {
+        menuSlideAnimation.SetOpenAnimation(new Vector3(-950, 0, 0), new Vector3(0, 0, 0), 0.25f);
+        menuSlideAnimation.SetCloseAnimation(new Vector3(0, 0, 0), new Vector3(950, 0, 0), 0.25f);
+    }
 
     public void purchaseSkillPoint()
     {
@@ -125,6 +136,30 @@ public class ShipSmithMenus : MonoBehaviour {
             finBladeUpgradeTilesMenu.FinBladeUpgradeTiles[0].noLongerUnlockable = true;
         }
 
+        if (MiscData.dungeonLevelUnlocked >= 5)
+        {
+            if (!PlayerUpgrades.revolvingCannonUpgrades.Contains("unlock_the_revolving_cannon"))
+            {
+                PlayerUpgrades.revolvingCannonUpgrades.Add("unlock_the_revolving_cannon");
+            }
+
+            if (!PlayerUpgrades.smeltingLaserUpgrades.Contains("unlock_the_smelting_laser"))
+            {
+                PlayerUpgrades.smeltingLaserUpgrades.Add("unlock_the_smelting_laser");
+            }
+
+            if (!PlayerUpgrades.tremorMakerUpgrades.Contains("unlock_the_tremor_maker"))
+            {
+                PlayerUpgrades.tremorMakerUpgrades.Add("unlock_the_tremor_maker");
+            }
+        }
+        else
+        {
+            revolvingCannonUpgradeTilesMenu.RevolvingCannonUpgradeTiles[0].noLongerUnlockable = true;
+            smeltingLaserUpgradeTilesMenu.SmeltingLaserUpgradeTiles[0].noLongerUnlockable = true;
+            tremorMakerUpgradeTilesMenu.TremorMakerUpgradeTiles[0].noLongerUnlockable = true;
+        }
+
         foreach (GameObject menu in menusList)
         {
             menu.SetActive(false);
@@ -135,8 +170,36 @@ public class ShipSmithMenus : MonoBehaviour {
     {
         skillPointPrice = 1500 + PlayerUpgrades.numberMaxSkillPoints * (750 + 300 * Mathf.FloorToInt(PlayerUpgrades.numberMaxSkillPoints / 4));
         skillPointsText.text = PlayerUpgrades.numberSkillPoints.ToString();
-        storeGold.text = HubProperties.storeGold.ToString();
-        skillPointsPrice.text = skillPointPrice.ToString();
+        storeGold.text = pickDisplay(HubProperties.storeGold);
+        skillPointsPrice.text = pickDisplay(skillPointPrice);
+    }
+
+    string pickDisplay(int goldAmount)
+    {
+        if (goldAmount < 1000)
+        {
+            return goldAmount.ToString();
+        }
+        else if (goldAmount < 100000)
+        {
+            string goldToDisplay = ((float)goldAmount / 1000).ToString();
+            return goldToDisplay.Substring(0, Mathf.Clamp(goldToDisplay.Length, 0, 4)) + "K";
+        }
+        else if (goldAmount < 1000000)
+        {
+            string goldToDisplay = ((float)goldAmount / 1000).ToString();
+            return goldToDisplay.Substring(0, Mathf.Clamp(goldToDisplay.Length, 0, 3)) + "K";
+        }
+        else if(goldAmount < 10000000)
+        {
+            string goldToDisplay = ((float)goldAmount / 1000000).ToString();
+            return goldToDisplay.Substring(0, Mathf.Clamp(goldToDisplay.Length, 0, 3)) + "M";
+        }
+        else
+        {
+            string goldToDisplay = ((float)goldAmount / 1000000).ToString();
+            return goldToDisplay.Substring(0, Mathf.Clamp(goldToDisplay.Length, 0, 4)) + "M";
+        }
     }
 
     private void Start()
@@ -144,30 +207,40 @@ public class ShipSmithMenus : MonoBehaviour {
         checkWeaponsUnlocked();
         weaponSelectorMenu.SetActive(true);
         returnButton.SetActive(false);
+        SetAnimation();
     }
 
     private void OnEnable()
     {
         checkWeaponsUnlocked();
         weaponSelectorMenu.SetActive(true);
+        weaponSelectorMenu.transform.localPosition = Vector3.zero;
         returnButton.SetActive(false);
     }
 
     public void turnOnMenu(int whatMenu)
     {
-        weaponSelectorMenu.SetActive(false);
-        menusList[whatMenu].SetActive(true);
-        returnButton.SetActive(true);
-        currMenu = whatMenu;
-        FindObjectOfType<AudioManager>().PlaySound("Generic Button Click");
+        if (menuSlideAnimation.IsAnimating == false)
+        {
+            menuSlideAnimation.PlayEndingAnimation(weaponSelectorMenu, () => { weaponSelectorMenu.SetActive(false); });
+            menusList[whatMenu].SetActive(true);
+            menuSlideAnimation.PlayOpeningAnimation(menusList[whatMenu]);
+            returnButton.SetActive(true);
+            currMenu = whatMenu;
+            FindObjectOfType<AudioManager>().PlaySound("Generic Button Click");
+        }
     }
 
     public void returnToMenu()
     {
-        menusList[currMenu].SetActive(false);
-        weaponSelectorMenu.SetActive(true);
-        returnButton.SetActive(false);
-        FindObjectOfType<AudioManager>().PlaySound("Generic Button Click");
+        if (menuSlideAnimation.IsAnimating == false)
+        {
+            menuSlideAnimation.PlayEndingAnimation(menusList[currMenu], () => { menusList[currMenu].SetActive(false); });
+            weaponSelectorMenu.SetActive(true);
+            menuSlideAnimation.PlayOpeningAnimation(weaponSelectorMenu);
+            returnButton.SetActive(false);
+            FindObjectOfType<AudioManager>().PlaySound("Generic Button Click");
+        }
     }
 
     public void resetUpgrades()
@@ -191,7 +264,30 @@ public class ShipSmithMenus : MonoBehaviour {
         PlayerUpgrades.loneSparkUpgrades.Clear();
         PlayerUpgrades.gadgetShotUpgrades.Clear();
         PlayerUpgrades.finBladeUpgrades.Clear();
+        PlayerUpgrades.revolvingCannonUpgrades.Clear();
+        PlayerUpgrades.smeltingLaserUpgrades.Clear();
+        PlayerUpgrades.tremorMakerUpgrades.Clear();
         checkWeaponsUnlocked();
+
+        List<GameObject> objectsToRemove = new List<GameObject>();
+
+        for(int i = 0; i < PlayerProperties.playerInventory.itemList.Count; i++)
+        {
+            if(i >= 10)
+            {
+                objectsToRemove.Add(PlayerProperties.playerInventory.itemList[i]);
+            }
+        }
+
+        GoldenVault vault = FindObjectOfType<GoldenVault>();
+
+        foreach(GameObject item in objectsToRemove)
+        {
+            PlayerProperties.playerInventory.itemList.Remove(item);
+            PlayerProperties.playerInventory.UpdateUI();
+            vault.vaultItems.Add(item);
+            HubProperties.vaultItems.Add(item.name);
+        }
 
         PlayerUpgrades.numberSkillPoints = PlayerUpgrades.numberMaxSkillPoints;
         SaveSystem.SaveGame();
@@ -267,6 +363,21 @@ public class ShipSmithMenus : MonoBehaviour {
         }
 
         foreach(FinBladeUpgradeTile tile in finBladeUpgradeTilesMenu.FinBladeUpgradeTiles)
+        {
+            tile.noLongerUnlockable = false;
+        }
+
+        foreach (RevolvingCannonUpgradeTile tile in revolvingCannonUpgradeTilesMenu.RevolvingCannonUpgradeTiles)
+        {
+            tile.noLongerUnlockable = false;
+        }
+        
+        foreach(SmeltingLaserUpgradeTile tile in smeltingLaserUpgradeTilesMenu.SmeltingLaserUpgradeTiles)
+        {
+            tile.noLongerUnlockable = false;
+        }
+
+        foreach(TremorMakerUpgradeTile tile in tremorMakerUpgradeTilesMenu.TremorMakerUpgradeTiles)
         {
             tile.noLongerUnlockable = false;
         }

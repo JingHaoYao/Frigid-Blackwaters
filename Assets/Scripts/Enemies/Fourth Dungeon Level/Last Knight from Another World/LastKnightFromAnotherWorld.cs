@@ -215,6 +215,7 @@ public class LastKnightFromAnotherWorld : Enemy
     {
         StartCoroutine(hitFrame());
         takeDamageAudio.Play();
+        SpawnArtifactKillsAndGoOnCooldown(2);
     }
 
     IEnumerator hitFrame()

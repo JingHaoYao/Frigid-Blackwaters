@@ -34,6 +34,8 @@ public class DepthBombSkeleton : Enemy
     float angleToShip;
     public float angleAttack = 0;
 
+    AStarPathfinding aStarPathfinding;
+
     void spawnFoam()
     {
         if (rigidBody2D.velocity.magnitude != 0)
@@ -91,9 +93,11 @@ public class DepthBombSkeleton : Enemy
 
     void travelLocation()
     {
-        path = GetComponent<AStarPathfinding>().seekPath;
-        this.GetComponent<AStarPathfinding>().target = randomPos;
-        Vector3 targetPos = Vector3.zero;
+        path = aStarPathfinding.seekPath;
+        this.aStarPathfinding.target = randomPos;
+
+
+        Vector3 targetPos = randomPos;
 
         if (path.Count > 0)
         {
@@ -234,6 +238,7 @@ public class DepthBombSkeleton : Enemy
         movePeriod = Random.Range(2, 6);
         attackPeriod = Random.Range(4, 7);
         angleAttack = Random.Range(0, 8) * 45;
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
     IEnumerator summonDepthBombs(float angle)

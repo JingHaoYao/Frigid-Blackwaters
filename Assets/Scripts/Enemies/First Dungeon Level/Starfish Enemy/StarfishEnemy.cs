@@ -190,7 +190,7 @@ public class StarfishEnemy : Enemy
 
     void Update()
     {
-        transform.rotation = Quaternion.Euler(0, 0, whatSide * 90);
+        transform.rotation = Quaternion.Euler(transform.eulerAngles.x, 0, whatSide * 90);
         enemyMarker.transform.position = transform.position + new Vector3(0, 1, 0);
         moveAlongWall();
 

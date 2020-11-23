@@ -17,6 +17,20 @@ public class DungeonGamble : MonoBehaviour
     public Sprite depleted, replenished, regular;
     public int gamblePrice = 0;
     DisplayItem targetItem;
+    int whatDungeonLevel;
+
+    MenuSlideAnimation menuSlideAnimation = new MenuSlideAnimation();
+
+    void SetAnimation()
+    {
+        menuSlideAnimation.SetOpenAnimation(new Vector3(0, -585, 0), new Vector3(0, 0, 0), 0.25f);
+        menuSlideAnimation.SetCloseAnimation(new Vector3(0, 0, 0), new Vector3(0, -585, 0), 0.25f);
+    }
+
+    public void PlayEndingAnimation()
+    {
+        menuSlideAnimation.PlayEndingAnimation(gambleDisplay, () => { gambleDisplay.SetActive(false); });
+    }
 
     void Start()
     {
@@ -28,22 +42,24 @@ public class DungeonGamble : MonoBehaviour
         goldSlot = gambleDisplay.GetComponentInChildren<GambleMenuGoldSlot>();
         animator = GetComponent<Animator>();
         animator.enabled = false;
+        whatDungeonLevel = FindObjectOfType<DungeonEntryDialogueManager>().whatDungeonLevel;
         setPrice();
+        SetAnimation();
     }
 
     void setPrice()
     {
         if(whatTier == 1)
         {
-            gamblePrice = 50 + Random.Range(1, 3) * 50 + Random.Range(1, 4) * 25;
+            gamblePrice = 50 + Random.Range(1, 3) * 50 + Random.Range(1, 4) * 25 + (whatDungeonLevel - 1) * 300;
         }
         else if(whatTier == 2)
         {
-            gamblePrice = 150 + Random.Range(1, 4) * 50 + Random.Range(1, 4) * 25;
+            gamblePrice = 150 + Random.Range(1, 4) * 50 + Random.Range(1, 4) * 25 + (whatDungeonLevel - 1) * 350;
         }
         else
         {
-            gamblePrice = 300 + Random.Range(1, 4) * 50 + Random.Range(1, 4) * 25;
+            gamblePrice = 300 + Random.Range(1, 4) * 50 + Random.Range(1, 4) * 25 + (whatDungeonLevel - 1) * 400;
         }
     }
 
@@ -263,32 +279,36 @@ public class DungeonGamble : MonoBehaviour
                 }
             }
 
-            if (gambleDisplay.activeSelf == true)
+            if (menuSlideAnimation.IsAnimating == false)
             {
-                if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
+                if (gambleDisplay.activeSelf == true)
                 {
-                    gambleDisplay.SetActive(false);
-                    playerShip.GetComponent<PlayerScript>().removeRootingObject();
-                    Time.timeScale = 1;
-                    playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false;
+                    if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
+                    {
+                        menuSlideAnimation.PlayEndingAnimation(gambleDisplay, () => { gambleDisplay.SetActive(false); });
+                        playerShip.GetComponent<PlayerScript>().removeRootingObject();
+                        Time.timeScale = 1;
+                        playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false;
+                    }
                 }
-            }
-            else if (playerShip.GetComponent<PlayerScript>().windowAlreadyOpen == false)
-            {
-                if (Input.GetKeyDown(KeyCode.E))
+                else if (playerShip.GetComponent<PlayerScript>().windowAlreadyOpen == false)
                 {
-                    gambleDisplay.SetActive(true);
-                    updateDisplay(targetItem);
-                    playerShip.GetComponent<PlayerScript>().addRootingObject();
-                    Time.timeScale = 0;
-                    playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        gambleDisplay.SetActive(true);
+                        menuSlideAnimation.PlayOpeningAnimation(gambleDisplay);
+                        updateDisplay(targetItem);
+                        playerShip.GetComponent<PlayerScript>().addRootingObject();
+                        Time.timeScale = 0;
+                        playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
+                    }
                 }
-            }
-            else
-            {
-                if (spawnedIndicator != null)
+                else
                 {
-                    Destroy(spawnedIndicator);
+                    if (spawnedIndicator != null)
+                    {
+                        Destroy(spawnedIndicator);
+                    }
                 }
             }
         }

@@ -18,6 +18,7 @@ public class UrchinFishman : Enemy
     List<AStarNode> path;
     float angleToShip = 0;
     Vector3 targetPosition;
+    AStarPathfinding aStarPathfinding;
 
     void spawnFoam()
     {
@@ -174,17 +175,14 @@ public class UrchinFishman : Enemy
         crossedLocation = true;
         strideEnded = true;
         attackTimer = Random.Range(0f, 3f);
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
     private void Update()
     {
-        this.GetComponent<AStarPathfinding>().target = targetPosition;
-        path = GetComponent<AStarPathfinding>().seekPath;
-        AStarNode pathNode = null;
-        if (path.Count >= 1)
-        {
-            pathNode = path[0];
-        }
+        this.aStarPathfinding.target = targetPosition;
+        path = aStarPathfinding.seekPath;
+
         angleToShip = (360 + Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
         if ((crossedLocation == false || strideEnded == false) && firingAnimation == false)
         {
@@ -197,7 +195,12 @@ public class UrchinFishman : Enemy
                 if (pickedAngle == false)
                 {
                     pickedAngle = true;
-                    Vector3 targetPos = pathNode.nodePosition;
+                    Vector3 targetPos = targetPosition;
+                    if (path.Count >= 1)
+                    {
+                        AStarNode pathNode = path[0];
+                         targetPosition = pathNode.nodePosition;
+                    }
                     travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
                     pickSprite(travelAngle);
                 }
@@ -223,7 +226,7 @@ public class UrchinFishman : Enemy
             }
             moveDirection(travelAngle, speed);
 
-            if (Vector2.Distance(transform.position, path[path.Count - 1].nodePosition) < 1f)
+            if (Vector2.Distance(transform.position, path.Count > 0 ? path[path.Count - 1].nodePosition : targetPosition) < 1f)
             {
                 //checks if the guy has swam over the targeted position
                 crossedLocation = true;

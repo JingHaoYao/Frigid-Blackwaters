@@ -7,6 +7,9 @@ public static class EnemyPool
     public static List<Enemy> enemyPool = new List<Enemy>();
     public static EnemyDamageNumbersUI enemyDamageNumbers;
 
+    //fifth level
+    public static FloorFireSpawner floorFireSpawner;
+
     public static void showDamageNumbers(int damage, Enemy enemy)
     {
         enemyDamageNumbers.addEnemyDamageUI(damage, enemy.gameObject);
@@ -17,6 +20,15 @@ public static class EnemyPool
         if (enemy != null)
         {
             enemyPool.Add(enemy);
+
+            foreach(GameObject activeArtifact in PlayerProperties.playerArtifacts.activeArtifacts)
+            {
+                ArtifactEffect artifactEffect = activeArtifact.GetComponent<ArtifactEffect>();
+                if(artifactEffect != null)
+                {
+                    artifactEffect.SpawnedEnemy(enemy);
+                }
+            }
         }
     }
 

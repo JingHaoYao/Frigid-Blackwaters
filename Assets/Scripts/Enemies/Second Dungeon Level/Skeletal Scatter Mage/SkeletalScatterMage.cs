@@ -23,6 +23,8 @@ public class SkeletalScatterMage : Enemy
 
     float chargeTimer = 0;
 
+    AStarPathfinding aStarPathfinding;
+
     void spawnFoam()
     {
         if (rigidBody2D.velocity.magnitude != 0)
@@ -227,17 +229,18 @@ public class SkeletalScatterMage : Enemy
         animator.enabled = false;
         pickSprite(travelAngle);
         randPos = pickRandPos();
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
     void Update()
     {
         pickRendererLayer();
-        path = GetComponent<AStarPathfinding>().seekPath;
-        this.GetComponent<AStarPathfinding>().target = randPos;
-        Vector3 targetPos = Vector3.zero;
+        path = aStarPathfinding.seekPath;
+        this.aStarPathfinding.target = randPos;
+        Vector3 targetPos = randPos;
         float angleToShip = (360 + Mathf.Atan2(playerShip.transform.position.y - transform.position.y, playerShip.transform.position.x - transform.position.x) * Mathf.Rad2Deg) % 360;
 
-        if (path[0] != null)
+        if (path.Count > 0)
         {
             AStarNode pathNode = path[0];
             targetPos = pathNode.nodePosition;

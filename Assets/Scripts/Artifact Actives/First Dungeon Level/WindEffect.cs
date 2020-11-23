@@ -16,6 +16,6 @@ public class WindEffect : MonoBehaviour {
 	void Update () {
         transform.position = playerShip.transform.position;
         this.GetComponent<SpriteRenderer>().sortingOrder = playerShip.GetComponent<SpriteRenderer>().sortingOrder + 3;
-        transform.rotation = Quaternion.Euler(0, 0, playerScript.angleEffect);
+        transform.rotation = Quaternion.Euler(0, 0, playerScript.whatAngleTraveled);
 	}
 }

@@ -7,7 +7,6 @@ public class PistolShrimpMan : Enemy {
     Rigidbody2D rigidBody2D;
     public GameObject shrimpShot, deadShrimp;
     SpriteRenderer spriteRenderer;
-    public float travelSpeed = 2;
     GameObject playerShip;
     Animator animator;
     private bool isShooting;
@@ -19,7 +18,7 @@ public class PistolShrimpMan : Enemy {
     public GameObject waterFoam;
     List<AStarNode> path;
     float pickSpritePeriod = 0;
-    public GameObject bloodSplatter;
+    [SerializeField] AStarPathfinding aStarPathfinding;
 
     void spawnFoam()
     {
@@ -27,7 +26,7 @@ public class PistolShrimpMan : Enemy {
         {
             float whatAngle = Mathf.Atan2(rigidBody2D.velocity.y, rigidBody2D.velocity.x) * Mathf.Rad2Deg;
             foamTimer += Time.deltaTime;
-            if (foamTimer >= 0.05f * travelSpeed / 3f)
+            if (foamTimer >= 0.05f * speed / 3f)
             {
                 foamTimer = 0;
                 GameObject foam = Instantiate(waterFoam, transform.position, Quaternion.Euler(0, 0, whatAngle + 90));
@@ -204,8 +203,12 @@ public class PistolShrimpMan : Enemy {
 
         if (Vector2.Distance(playerShip.transform.position, transform.position) > 9)
         {
-            AStarNode pathNode = path[0];
-            Vector3 targetPos = pathNode.nodePosition;
+            Vector3 targetPos = PlayerProperties.playerShipPosition;
+            if (path.Count > 0)
+            {
+                AStarNode pathNode = path[0];
+                targetPos = pathNode.nodePosition;
+            }
             moveAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
             if (isShooting == false)
             {
@@ -244,13 +247,13 @@ public class PistolShrimpMan : Enemy {
         playerShip = GameObject.Find("PlayerShip");
         animator = GetComponent<Animator>();
         animator.enabled = false;
-        updateSpeed(travelSpeed);
+        updateSpeed(speed);
     }
 
     void Update()
     {
-        this.GetComponent<AStarPathfinding>().target = playerShip.transform.position;
-        path = GetComponent<AStarPathfinding>().seekPath;
+        this.aStarPathfinding.target = playerShip.transform.position;
+        path = aStarPathfinding.seekPath;
         pickRendererLayer();
         findPositionShoot();
         pickSpritePeriod += Time.deltaTime;
@@ -306,11 +309,8 @@ public class PistolShrimpMan : Enemy {
     {
         if (collision.gameObject.GetComponent<DamageAmount>())
         {
-            this.GetComponents<AudioSource>()[0].Play();
             int damageDealt = collision.gameObject.GetComponent<DamageAmount>().damage;
-            health -= damageDealt;
-            StartCoroutine(hitFrame());
-            Instantiate(bloodSplatter, collision.transform.position, Quaternion.identity);
+            dealDamage(damageDealt);
         }
     }
 
@@ -326,6 +326,7 @@ public class PistolShrimpMan : Enemy {
 
     public override void damageProcedure(int damage)
     {
-
+        this.GetComponents<AudioSource>()[0].Play();
+        StartCoroutine(hitFrame());
     }
 }

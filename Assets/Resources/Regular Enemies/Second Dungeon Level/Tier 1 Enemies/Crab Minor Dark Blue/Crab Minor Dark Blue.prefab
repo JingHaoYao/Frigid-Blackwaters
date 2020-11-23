@@ -57,6 +57,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -68,6 +69,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -209,8 +211,10 @@ MonoBehaviour:
   percentSpawnChance: 33
   armorMitigation: 0
   speed: 2
-  slowAmount: 0
-  spawner: {fileID: 0}
+  fogStats:
+    fogDurationIncrease: 0
+    fogCoolDownDecrease: 0
+  moveable: 1
   statuses: []
   closedViews:
   - {fileID: 7464834022902600150, guid: a14697b2ab684b547820a1631fef1bbd, type: 3}
@@ -226,10 +230,11 @@ MonoBehaviour:
   damageSplash: {fileID: 7452417838162229298, guid: 09a99f35c01c9a5458da438056d8b2ae,
     type: 3}
   waterFoam: {fileID: 1105302273420430, guid: fdc8b3ce0fabb4742ad1a9051be902bf, type: 3}
-  travelSpeed: 2
   attackRadius: 6
   invulnerableHitBox: {fileID: 2240405741224459554}
   invulnerabilityIcon: {fileID: 3164930794063302472}
+  crabMinorWarning: {fileID: 7701038389152803726, guid: ee70a7ae92bb09a499251de658b8524f,
+    type: 3}
 --- !u!82 &9128391324684533654
 AudioSource:
   m_ObjectHideFlags: 0
@@ -469,6 +474,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -480,6 +486,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

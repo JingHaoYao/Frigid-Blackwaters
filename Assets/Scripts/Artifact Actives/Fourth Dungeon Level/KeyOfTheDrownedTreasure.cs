@@ -21,7 +21,7 @@ public class KeyOfTheDrownedTreasure : ArtifactBonus
 
     void healPlayer()
     {
-        PlayerProperties.playerScript.healPlayer(PlayerProperties.playerScript.trueDamage);
+        PlayerProperties.playerScript.healPlayer(PlayerProperties.playerScript.shipHealthMAX - PlayerProperties.playerScript.shipHealth);
     }
 
     void statBuff()

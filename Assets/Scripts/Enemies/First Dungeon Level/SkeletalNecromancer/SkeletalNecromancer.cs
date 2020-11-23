@@ -19,6 +19,7 @@ public class SkeletalNecromancer : Enemy {
     public GameObject waterFoam;
     List<AStarNode> path;
     float pickSpritePeriod = 0;
+    AStarPathfinding aStarPathfinding;
 
     Vector3 pickRandPos()
     {
@@ -92,10 +93,18 @@ public class SkeletalNecromancer : Enemy {
     {
         if (isSummoning == false)
         {
-            this.GetComponent<AStarPathfinding>().target = newPos;
-            path = GetComponent<AStarPathfinding>().seekPath;
-            AStarNode pathNode = path[0];
-            Vector3 targetPos = pathNode.nodePosition;
+            this.aStarPathfinding.target = newPos;
+            path = aStarPathfinding.seekPath;
+
+            Vector3 targetPos = newPos;
+
+            if (path.Count > 0)
+            {
+
+                AStarNode pathNode = path[0];
+                targetPos = pathNode.nodePosition;
+            }
+
             travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);
 
             if (Vector2.Distance(transform.position, newPos) <= 1.5f)
@@ -158,14 +167,6 @@ public class SkeletalNecromancer : Enemy {
 
     void pickRendererLayer()
     {
-        /*if (transform.position.y < playerShip.transform.position.y)
-        {
-            spriteRenderer.sortingOrder = playerShip.GetComponent<SpriteRenderer>().sortingOrder + 1;
-        }
-        else
-        {
-            spriteRenderer.sortingOrder = playerShip.GetComponent<SpriteRenderer>().sortingOrder - 1;
-        }*/
         spriteRenderer.sortingOrder = 200 - (int)(transform.position.y * 10);
     }
 
@@ -177,6 +178,8 @@ public class SkeletalNecromancer : Enemy {
         playerShip = GameObject.Find("PlayerShip");
         rigidBody2D = GetComponent<Rigidbody2D>();
         newPos = pickRandPos();
+
+        aStarPathfinding = GetComponent<AStarPathfinding>();
     }
 
 	void Update () {

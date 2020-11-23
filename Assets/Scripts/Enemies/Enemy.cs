@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,10 @@ public abstract class Enemy: MonoBehaviour
     public float speed;
     public FogInfluenceStats fogStats;
 
+    private bool isStunned = false;
+
+    [SerializeField] public bool moveable = true;
+
     [System.Serializable]
     public struct FogInfluenceStats
     {
@@ -27,14 +32,47 @@ public abstract class Enemy: MonoBehaviour
 
     public List<EnemyStatusEffect> statuses;
 
-    
+    bool spawnArtifactKills = true;
+
+    public bool EnemyStunned
+    {
+        get {
+            return isStunned;
+        }
+    }
+
+    public void SpawnArtifactKillsAndGoOnCooldown(float yOffset = 0)
+    {
+        if (spawnArtifactKills)
+        {
+            int numberSouls = Random.Range(1, 4);
+            PlayerProperties.soulTrailSpawner.SpawnEnemyDeathSouls(numberSouls, transform.position + Vector3.up * yOffset);
+            PlayerProperties.playerArtifacts.numKills += numberSouls;
+            StartCoroutine(CooldownDuration(Random.Range(3.0f, 4.0f)));
+        }
+    }
+
+    IEnumerator CooldownDuration(float duration)
+    {
+        spawnArtifactKills = false;
+
+        yield return new WaitForSeconds(duration);
+
+        spawnArtifactKills = true;
+    }
+
     public void addKills()
     {
-        GameObject.Find("PlayerShip").GetComponent<Artifacts>().numKills += killNumber;
-        foreach (ArtifactSlot slot in FindObjectOfType<Artifacts>().artifactSlots)
+        PlayerProperties.playerArtifacts.numKills += killNumber;
+        foreach (ArtifactSlot slot in PlayerProperties.playerArtifacts.artifactSlots)
         {
             if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
                 slot.displayInfo.GetComponent<ArtifactEffect>().addedKill(this.gameObject.tag, transform.position, this);
+        }
+
+        foreach(ShipWeaponScript script in PlayerProperties.playerScript.GetShipWeaponScripts())
+        {
+            script.shipWeaponTemplate.GetComponent<WeaponFireTemplate>().KilledEnemy(this);
         }
     }
 
@@ -85,9 +123,21 @@ public abstract class Enemy: MonoBehaviour
         this.statuses.Remove(status);
         statusRemoved(status);
     }
-
-    public void dealDamage(int damageAmount)
+    
+    IEnumerator hitSleep(float damageProportion)
     {
+        Time.timeScale = 0.001f;
+
+        yield return new WaitForSecondsRealtime(0.05f + 0.03f * Mathf.Clamp(damageProportion, 0, 1) * Time.timeScale);
+
+        Time.timeScale = 1;
+    }
+
+    public void dealDamage(int damageAmount, bool trueDeath = true)
+    {
+        // PlayerProperties.soulTrailSpawner.spawnRuneMarks(transform.position);
+        // Commented out due to problems in build
+
         if (health > 0)
         {
             int damageDealt = damageAmount - armorMitigation;
@@ -97,11 +147,13 @@ public abstract class Enemy: MonoBehaviour
             }
             EnemyPool.showDamageNumbers(damageDealt, this);
             health -= damageDealt;
-            FindObjectOfType<CameraShake>().shakeCamFunction(0.1f, 0.3f * Mathf.Clamp(((float)damageDealt / maxHealth), 0.1f, 5f));
+            PlayerProperties.cameraShake.shakeCamFunction(0.2f + Mathf.Clamp(((float)damageDealt / maxHealth), 0.1f, 0.3f) * 0.3f, 0.3f * Mathf.Clamp(((float)damageDealt / maxHealth), 0.1f, 1f));
+
+            StartCoroutine(hitSleep((float)damageDealt / maxHealth));
 
             damageProcedure(damageDealt);
 
-            Artifacts artifacts = FindObjectOfType<Artifacts>();
+            Artifacts artifacts = PlayerProperties.playerArtifacts;
 
             foreach (ArtifactSlot slot in artifacts.artifactSlots)
             {
@@ -111,23 +163,40 @@ public abstract class Enemy: MonoBehaviour
                 }
 
             }
+
+            slightKnockBack();
+
             if (health <= 0)
             {
-                destroyProcedure();
+                destroyProcedure(trueDeath);
             }
         }
     }
 
-    public void destroyProcedure()
+    private void slightKnockBack()
+    {
+        if (moveable)
+        {
+            float angle = Mathf.Atan2(transform.position.y - PlayerProperties.playerShipPosition.y, transform.position.x - PlayerProperties.playerShipPosition.x);
+            transform.position += new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) * 0.25f;
+        }
+    }
+
+    public void destroyProcedure(bool trueDeath = true)
     {
         if (GetComponent<SpriteRenderer>())
         {
             GetComponent<SpriteRenderer>().color = Color.white;
         }
-        EnemyPool.removeEnemy(this);
-        addKills();
-        deathProcedure();
         removeAllStatuses();
+        if (trueDeath)
+        {
+            PlayerProperties.soulTrailSpawner.SpawnEnemyDeathSouls(killNumber, transform.position);
+            EnemyPool.removeEnemy(this);
+            addKills();
+            Time.timeScale = 1;
+        }
+        deathProcedure();
     }
 
     void removeAllStatuses()
@@ -149,16 +218,15 @@ public abstract class Enemy: MonoBehaviour
             currentStunDuration = duration;
         }
 
-        if(currentStunDuration <= 0)
+        if(!isStunned)
         {
             StartCoroutine(stunEnemy());
         }
-        
     }
 
     IEnumerator stunEnemy()
     {
-        float stunTimer = 0;
+        isStunned = true;
         stopAttacking = true;
         Rigidbody2D rigidbody2D = GetComponent<Rigidbody2D>();
         rigidbody2D.constraints = RigidbodyConstraints2D.FreezeAll;
@@ -172,6 +240,7 @@ public abstract class Enemy: MonoBehaviour
         currentStunDuration = 0;
         rigidbody2D.constraints = RigidbodyConstraints2D.FreezeRotation;
         stopAttacking = false;
+        isStunned = false;
     }
 
     public abstract void deathProcedure();

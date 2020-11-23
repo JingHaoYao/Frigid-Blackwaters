@@ -40,12 +40,4 @@ public class PistolShrimpShot : MonoBehaviour {
             }
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "playerHitBox")
-        {
-            PlayerProperties.playerScript.dealDamageToShip(150, this.gameObject);
-        }
-    }
 }

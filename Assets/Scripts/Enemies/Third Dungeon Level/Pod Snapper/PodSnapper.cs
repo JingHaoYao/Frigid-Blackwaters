@@ -70,7 +70,7 @@ public class PodSnapper : Enemy
     {
         path = aStarPathfinding.seekPath;
         aStarPathfinding.target = PlayerProperties.playerShipPosition;
-        Vector3 targetPos = Vector3.zero;
+        Vector3 targetPos = PlayerProperties.playerShipPosition;
 
         if (path.Count > 0)
         {

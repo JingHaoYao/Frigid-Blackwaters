@@ -20,6 +20,7 @@ public class SpecialRoomTemplates : MonoBehaviour {
         // 5 - trove
         // 6 - treasure
         // 7 - altar
+
         switch (dialogueManager.whatDungeonLevel)
         {
             case 1:
@@ -103,6 +104,27 @@ public class SpecialRoomTemplates : MonoBehaviour {
                         return Resources.Load<GameObject>("Unique Rooms/Fourth Dungeon Level/Treasure Rooms/Fourth Dungeon Level Treasure Room Tier " + whatTier.ToString());
                     case 7:
                         return Resources.Load<GameObject>("Unique Rooms/Fourth Dungeon Level/Altar Rooms/Fourth Dungeon Tier " + whatTier.ToString() + " Altar");
+                    default:
+                        return null;
+                }
+            case 5:
+                switch (whichUnique)
+                {
+                    case 1:
+                        return Resources.Load<GameObject>("Unique Rooms/Fifth Dungeon Level/Shop Rooms/Fifth Dungeon Shop Tier " + whatTier.ToString());
+                    case 2:
+                        return Resources.Load<GameObject>("Unique Rooms/Fifth Dungeon Level/Gamble Rooms/Fifth Dungeon Gamble Tier " + whatTier.ToString());
+                    case 3:
+                        return Resources.Load<GameObject>("Unique Rooms/Fifth Dungeon Level/Challenge Rooms/Fifth Dungeon Challenge Room Tier " + whatTier.ToString());
+                    case 4:
+                        string whichCombat = miniBosses[Random.Range(0, miniBosses.Length)];
+                        return Resources.Load<GameObject>("Unique Rooms/Fifth Dungeon Level/Special Combat Rooms/" + whichCombat + "/" + whichCombat);
+                    case 5:
+                        return Resources.Load<GameObject>("Unique Rooms/Fifth Dungeon Level/Trove Rooms/Fifth Dungeon Trove Tier " + whatTier.ToString());
+                    case 6:
+                        return Resources.Load<GameObject>("Unique Rooms/Fifth Dungeon Level/Treasure Rooms/Fifth Dungeon Level Treasure Room Tier " + whatTier.ToString());
+                    case 7:
+                        return Resources.Load<GameObject>("Unique Rooms/Fifth Dungeon Level/Altar Rooms/Fifth Dungeon Tier " + whatTier.ToString() + " Altar");
                     default:
                         return null;
                 }

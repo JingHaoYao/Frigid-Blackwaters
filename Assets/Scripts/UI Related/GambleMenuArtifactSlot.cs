@@ -34,7 +34,7 @@ public class GambleMenuArtifactSlot : MonoBehaviour, IPointerEnterHandler, IPoin
             {
                 inventory.itemList.Add(displayInfo.gameObject);
                 FindObjectOfType<AudioManager>().PlaySound("Receive Item");
-                transform.parent.gameObject.SetActive(false);
+                gamble.PlayEndingAnimation();
                 playerScript.windowAlreadyOpen = false;
                 Time.timeScale = 1;
                 PlayerProperties.playerScript.removeRootingObject();

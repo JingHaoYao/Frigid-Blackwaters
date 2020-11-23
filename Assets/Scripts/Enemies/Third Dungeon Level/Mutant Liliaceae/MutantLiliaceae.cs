@@ -286,6 +286,7 @@ public class MutantLiliaceae : Enemy {
     {
         StartCoroutine(hitFrame());
         takeDamageAudio.Play();
+        SpawnArtifactKillsAndGoOnCooldown();
     }
 
     IEnumerator hitFrame()

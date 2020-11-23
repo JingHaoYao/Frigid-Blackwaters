@@ -154,5 +154,6 @@ public class StoneGiant : Enemy {
     public override void damageProcedure(int damage)
     {
         StartCoroutine(hitFrame());
+        SpawnArtifactKillsAndGoOnCooldown(1);
     }
 }

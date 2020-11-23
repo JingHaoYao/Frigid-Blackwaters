@@ -85,7 +85,7 @@ public class CannonRound : PlayerProjectile
 
         if (PlayerUpgrades.cannonUpgrades.Count >= 2)
         {
-            this.GetComponent<DamageAmount>().damage += 1;
+            this.GetComponent<DamageAmount>().addDamage(1);
         }
     }
 

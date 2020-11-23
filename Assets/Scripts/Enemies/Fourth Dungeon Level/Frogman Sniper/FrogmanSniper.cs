@@ -205,7 +205,7 @@ public class FrogmanSniper : Enemy
             firingPeriod = 0;
             path = aStarPathfinding.seekPath;
             aStarPathfinding.target = randomPos;
-            Vector3 targetPos = Vector3.zero;
+            Vector3 targetPos = randomPos;
 
             if (path.Count > 0)
             {
@@ -397,6 +397,7 @@ public class FrogmanSniper : Enemy
     public override void deathProcedure()
     {
         GameObject deadPirate = Instantiate(deadSpearman, transform.position, Quaternion.identity);
+        Destroy(targetInstance);
         Destroy(this.gameObject);
     }
 

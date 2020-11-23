@@ -60,7 +60,7 @@ MonoBehaviour:
   isEquipped: 0
   questItem: 0
   whichSlot: 0
-  soulBound: 0
+  soulBound: 1
 --- !u!222 &3099512498930660358
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -78,17 +78,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3099512498930660360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -102,17 +101,20 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Tome Guardian''s Mace [Rare]
+  m_Text: 'Tome Guardian''s Mace [Rare] [Soulbound]
 
     This mystical weapon seemingly
 
-    floats on it''s own, being controlled by
+    floats
+    on it''s own, being controlled by
 
     the flow of an ancient magic.
 
-    While this is equipped, a mace will revolve
+    While
+    this is equipped, a mace will revolve
 
-    around your ship, dealing 3 damage to enemies
+    around your ship, dealing 3 damage
+    to enemies
 
     in contact with it.'
 --- !u!114 &3099512498930660355

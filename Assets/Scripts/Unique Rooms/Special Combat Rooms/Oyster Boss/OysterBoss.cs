@@ -268,5 +268,6 @@ public class OysterBoss : Enemy
     {
         GetComponents<AudioSource>()[1].Play();
         StartCoroutine(hitFrame());
+        SpawnArtifactKillsAndGoOnCooldown(1f);
     }
 }

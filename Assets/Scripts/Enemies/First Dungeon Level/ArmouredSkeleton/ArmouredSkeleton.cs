@@ -20,6 +20,8 @@ public class ArmouredSkeleton : Enemy {
     float pickSpritePeriod = 0;
     bool alreadySpawned = false;
 
+    AStarPathfinding aStarPathFinding;
+
     IEnumerator spawnUnArmoured()
     {
         this.GetComponent<AudioSource>().Play();
@@ -207,16 +209,24 @@ public class ArmouredSkeleton : Enemy {
         animator = GetComponent<Animator>();
         playerShip = GameObject.Find("PlayerShip");
         animator.enabled = false;
+        aStarPathFinding = GetComponent<AStarPathfinding>();
     }
 
     void Update()
     {
         pickRendererLayer();
         pickSpritePeriod += Time.deltaTime;
-        this.GetComponent<AStarPathfinding>().target = playerShip.transform.position;
-        path = GetComponent<AStarPathfinding>().seekPath;
-        AStarNode pathNode = path[0];
-        Vector3 targetPos = pathNode.nodePosition;
+        this.aStarPathFinding.target = playerShip.transform.position;
+        path = aStarPathFinding.seekPath;
+
+        Vector3 targetPos = PlayerProperties.playerShipPosition;
+
+        if (path.Count > 0)
+        {
+            AStarNode pathNode = path[0];
+            targetPos = pathNode.nodePosition;
+        }
+
         if (shattering == false)
         {
             travelAngle = cardinalizeDirections((360 + Mathf.Atan2(targetPos.y - (transform.position.y + 0.4f), targetPos.x - transform.position.x) * Mathf.Rad2Deg) % 360);

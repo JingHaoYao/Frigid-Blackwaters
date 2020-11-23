@@ -5,8 +5,8 @@ using UnityEngine;
 public class InvisibilityEnemyController : MonoBehaviour
 {
     public SpriteRenderer[] renderersToModify;
-    List<int> showingRendererTweens = new List<int>();
-    List<int> hidingRendererTweens = new List<int>();
+    List<Coroutine> showingRendererTweens = new List<Coroutine>();
+    List<Coroutine> hidingRendererTweens = new List<Coroutine>();
     bool isInLight = true;
     Coroutine isInLightRoutine;
 
@@ -42,7 +42,7 @@ public class InvisibilityEnemyController : MonoBehaviour
         foreach (SpriteRenderer spriteRenderer in renderersToModify)
         {
             spriteRenderer.color = Color.white;
-            int tween = LeanTween.color(spriteRenderer.gameObject, new Color(1, 1, 1, 0), 0.75f).setOnComplete(removeHidingRendererTweens).id;
+            Coroutine tween = StartCoroutine(fadeInAlpha(0.75f, spriteRenderer));
             hidingRendererTweens.Add(tween);
         }
     }
@@ -55,45 +55,65 @@ public class InvisibilityEnemyController : MonoBehaviour
         }
     }
 
+    IEnumerator fadeOutAlpha(float duration, SpriteRenderer spriteRenderer)
+    {
+        float increment = 1 / duration;
+        float timer = 0;
+
+        spriteRenderer.color = new Color(1, 1, 1, 0);
+
+        while(timer < duration)
+        {
+            timer += Time.deltaTime;
+            spriteRenderer.color = new Color(1, 1, 1, timer * increment);
+            yield return null;
+        }
+
+        spriteRenderer.color = Color.white;
+    }
+
+    IEnumerator fadeInAlpha(float duration, SpriteRenderer spriteRenderer)
+    {
+        float increment = 1 / duration;
+        float timer = duration;
+
+        spriteRenderer.color = new Color(1, 1, 1, 1);
+
+        while (timer > 0)
+        {
+            timer -= Time.deltaTime;
+            spriteRenderer.color = new Color(1, 1, 1, timer * increment);
+            yield return null;
+        }
+
+        spriteRenderer.color = new Color(1, 1, 1, 0);
+    }
+
     public void showRenderers()
     {
         cancelAllCurrentTweens();
         foreach (SpriteRenderer spriteRenderer in renderersToModify)
         {
-            int tween = LeanTween.color(spriteRenderer.gameObject, new Color(1, 1, 1, 1), 0.75f).setOnComplete(removeShowRendererTweens).id;
+            Coroutine tween = StartCoroutine(fadeOutAlpha(0.75f, spriteRenderer));
             showingRendererTweens.Add(tween);
-        }
-    }
-
-    void removeShowRendererTweens()
-    {
-        int[] rendererIds = showingRendererTweens.ToArray();
-        foreach(int showingTween in rendererIds)
-        {
-            showingRendererTweens.Remove(showingTween);
-        }
-    }
-
-    void removeHidingRendererTweens()
-    {
-        int[] rendererIds = hidingRendererTweens.ToArray();
-        foreach (int hidingTweens in rendererIds)
-        {
-            hidingRendererTweens.Remove(hidingTweens);
         }
     }
 
     public void cancelAllCurrentTweens()
     {
-        foreach (int hidingTween in hidingRendererTweens)
+        foreach (Coroutine hidingTween in hidingRendererTweens)
         {
-            LeanTween.cancel(hidingTween);
+            StopCoroutine(hidingTween);
         }
 
-        foreach (int showingTween in showingRendererTweens)
+        hidingRendererTweens.Clear();
+
+        foreach (Coroutine showingTween in showingRendererTweens)
         {
-            LeanTween.cancel(showingTween);
+            StopCoroutine(showingTween);
         }
+
+        showingRendererTweens.Clear();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

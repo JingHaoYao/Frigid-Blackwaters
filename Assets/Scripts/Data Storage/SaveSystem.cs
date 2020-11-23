@@ -7,7 +7,7 @@ public static class SaveSystem
     public static void SaveGame()
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/save_data.save";
+        string path = Path.Combine(Application.persistentDataPath, "save_data.save");
         FileStream stream = new FileStream(path, FileMode.Create);
 
         SaveData data = new SaveData();
@@ -19,7 +19,7 @@ public static class SaveSystem
     public static void SaveOptions()
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/save_options.save";
+        string path = Path.Combine(Application.persistentDataPath, "save_options.save");
         FileStream stream = new FileStream(path, FileMode.Create);
 
         SaveOptions saveOptions = new SaveOptions();
@@ -30,7 +30,7 @@ public static class SaveSystem
 
     public static SaveData GetSave()
     {
-        string path = Application.persistentDataPath + "/save_data.save";
+        string path = Path.Combine(Application.persistentDataPath, "save_data.save");
 
         if (File.Exists(path))
         {
@@ -49,7 +49,7 @@ public static class SaveSystem
 
     public static SaveOptions GetSaveOptions()
     {
-        string path = Application.persistentDataPath + "/save_options.save";
+        string path = Path.Combine(Application.persistentDataPath, "save_options.save");
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -68,7 +68,7 @@ public static class SaveSystem
 
     public static void DeleteSave()
     {
-        string path = Application.persistentDataPath + "/save_data.save";
+        string path = Path.Combine(Application.persistentDataPath, "save_data.save");
         if (File.Exists(path))
         {
             File.Delete(path);
@@ -154,12 +154,22 @@ public static class SaveSystem
             {
                 PlayerUpgrades.gadgetShotUpgrades.Add(id);
             }
+            foreach (string id in data.revolvingCannonUpgrades)
+            {
+                PlayerUpgrades.revolvingCannonUpgrades.Add(id);
+            }
+            foreach(string id in data.smeltingLaserUpgrades)
+            {
+                PlayerUpgrades.smeltingLaserUpgrades.Add(id);
+            }
 
             PlayerUpgrades.numberSkillPoints = data.numberSkillPoints;
             PlayerUpgrades.numberMaxSkillPoints = data.numberMaxSkillPoints;
             PlayerUpgrades.whichFrontWeaponEquipped = data.whichFrontWeaponEquipped;
             PlayerUpgrades.whichLeftWeaponEquipped = data.whichLeftWeaponEquipped;
             PlayerUpgrades.whichRightWeaponEquipped = data.whichRightWeaponEquipped;
+
+            HubProperties.maxNumberVaultItems = data.maxNumberVaultItems;
 
             PlayerItems.inventoryItemsIDs.Clear();
             foreach (string id in data.inventoryItemIds)
@@ -277,5 +287,8 @@ public static class SaveSystem
         MiscData.effectsVolume = saveOptions.effectsVolume;
         MiscData.musicVolume = saveOptions.musicVolume;
         MiscData.muted = saveOptions.muted;
+        MiscData.resolutionIndex = saveOptions.resolutionIndex;
+        MiscData.qualityIndex = saveOptions.qualityIndex;
+        MiscData.fullScreen = saveOptions.fullScreen;
     }
 }

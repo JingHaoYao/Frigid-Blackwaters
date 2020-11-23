@@ -21,8 +21,11 @@ public class BloomCycleRoom : RoomInteraction
     {
         foreach (Enemy enemy in EnemyPool.enemyPool)
         {
-            GameObject effectInstant = Instantiate(bloomStatusEffect, enemy.transform.position, Quaternion.identity);
-            enemy.addStatus(effectInstant.GetComponent<BloomStatusEffect>());
+            if (enemy != null)
+            {
+                GameObject effectInstant = Instantiate(bloomStatusEffect, enemy.transform.position, Quaternion.identity);
+                enemy.addStatus(effectInstant.GetComponent<BloomStatusEffect>());
+            }
         }
     }
 
