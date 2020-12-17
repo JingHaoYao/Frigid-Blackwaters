@@ -16,6 +16,8 @@ public class Inventory : MonoBehaviour {
 
     MenuSlideAnimation menuSlideAnimation = new MenuSlideAnimation();
 
+    private bool inventoryEnabled = true;
+
     void SetInventoryAnimation()
     {
         menuSlideAnimation.SetOpenAnimation(new Vector3(97, -585, 0), new Vector3(97, 0, 0), 0.25f);
@@ -29,6 +31,16 @@ public class Inventory : MonoBehaviour {
         SetInventoryAnimation();
     }
 
+    public void DisableInventory()
+    {
+        inventoryEnabled = false;
+    }
+
+    public void EnableInventory()
+    {
+        inventoryEnabled = true;
+    }
+
     public void PlayInventoryEnterAnimation()
     {
         menuSlideAnimation.PlayOpeningAnimation(inventory);
@@ -36,36 +48,125 @@ public class Inventory : MonoBehaviour {
 
     public void PlayInventoryExitAnimation()
     {
-        menuSlideAnimation.PlayEndingAnimation(inventory, () => { inventory.SetActive(false); });
+        menuSlideAnimation.PlayEndingAnimation(inventory, () => { inventory.SetActive(false); consumableConfirmationWindow.gameObject.SetActive(false); });
+    }
+
+    public void OpenArtifactsAndInventory()
+    {
+        UpdateUI();
+        inventory.SetActive(true);
+        PlayInventoryEnterAnimation();
+        Time.timeScale = 0;
+        PlayerProperties.playerArtifacts.OpenArtifacts();
+    }
+
+    public void OpenDisenchantingAndInventory()
+    {
+        UpdateUI();
+        inventory.SetActive(true);
+        PlayInventoryEnterAnimation();
+        Time.timeScale = 0;
+        PlayerProperties.articraftingDisenchantingMenu.OpenDisenchantingMenu();
+    }
+
+    public void OpenCraftingAndInventory()
+    {
+        UpdateUI();
+        inventory.SetActive(true);
+        PlayInventoryEnterAnimation();
+        Time.timeScale = 0;
+        PlayerProperties.articraftingCraftingMenu.OpenCraftingMenu();
     }
 
 	void LateUpdate () {
         if (chestDisplay.activeSelf == false)
         {
-            if (GetComponent<PlayerScript>().playerDead == false)
+            if (PlayerProperties.playerScript.playerDead == false)
             {
-                if (menuSlideAnimation.IsAnimating == false)
+                if (menuSlideAnimation.IsAnimating == false && inventoryEnabled)
                 {
-                    if (inventory.activeSelf == false)
+                    if (inventory.activeSelf == false && !PlayerProperties.playerScript.windowAlreadyOpen)
                     {
-                        if (Input.GetKeyDown(KeyCode.I) && (GetComponent<PlayerScript>().windowAlreadyOpen == false || this.GetComponent<Artifacts>().artifactsUI.activeSelf == true))
+                        if (Input.GetKeyDown(KeyCode.I))
                         {
-                            UpdateUI();
-                            inventory.SetActive(true);
-                            PlayInventoryEnterAnimation();
-                            Time.timeScale = 0;
+                            OpenArtifactsAndInventory();
+                        }
+                        else if(Input.GetKeyDown(KeyCode.O) && MiscData.unlockedArticrafting)
+                        {
+                            if (PlayerProperties.playerScript.IsInPlayerHub())
+                            {
+                                OpenDisenchantingAndInventory();
+                            }
+                        }
+                        else if(Input.GetKeyDown(KeyCode.P))
+                        {
+                            if (PlayerProperties.playerScript.IsInPlayerHub() && MiscData.unlockedArticrafting)
+                            {
+                                OpenCraftingAndInventory();
+                            }
                         }
                     }
                     else
                     {
-                        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.I))
+                        if (Input.GetKeyDown(KeyCode.Escape))
                         {
                             if (toolTip.activeSelf == true)
                             {
                                 toolTip.SetActive(false);
                             }
                             PlayInventoryExitAnimation();
+                            if (PlayerProperties.playerScript.IsInPlayerHub() && PlayerProperties.articraftingDisenchantingMenu.IsMenuOpened())
+                            {
+                                PlayerProperties.articraftingDisenchantingMenu.CloseDisenchantingMenu();
+                            }
+                            else if (PlayerProperties.playerScript.IsInPlayerHub() && PlayerProperties.articraftingCraftingMenu.IsMenuOpened())
+                            {
+                                PlayerProperties.articraftingCraftingMenu.CloseCraftingMenu();
+                            }
+                            else if (PlayerProperties.playerArtifacts.artifactsUI.activeSelf == true)
+                            {
+                                PlayerProperties.playerArtifacts.CloseArtifacts();
+                            }
                             Time.timeScale = 1;
+                        }
+                        else if(Input.GetKeyDown(KeyCode.I))
+                        {
+                            if (PlayerProperties.playerArtifacts.artifactsUI.activeSelf == true)
+                            {
+                                if (toolTip.activeSelf == true)
+                                {
+                                    toolTip.SetActive(false);
+                                }
+                                PlayInventoryExitAnimation();
+                                PlayerProperties.playerArtifacts.CloseArtifacts();
+                                Time.timeScale = 1;
+                            }
+                        }
+                        else if(Input.GetKeyDown(KeyCode.O))
+                        {
+                            if (PlayerProperties.playerScript.IsInPlayerHub() && PlayerProperties.articraftingDisenchantingMenu.IsMenuOpened())
+                            {
+                                if (toolTip.activeSelf == true)
+                                {
+                                    toolTip.SetActive(false);
+                                }
+                                PlayInventoryExitAnimation();
+                                PlayerProperties.articraftingDisenchantingMenu.CloseDisenchantingMenu();
+                                Time.timeScale = 1;
+                            }
+                        }
+                        else if(Input.GetKeyDown(KeyCode.P))
+                        {
+                            if (PlayerProperties.playerScript.IsInPlayerHub() && PlayerProperties.articraftingCraftingMenu.IsMenuOpened())
+                            {
+                                if (toolTip.activeSelf == true)
+                                {
+                                    toolTip.SetActive(false);
+                                }
+                                PlayInventoryExitAnimation();
+                                PlayerProperties.articraftingCraftingMenu.CloseCraftingMenu();
+                                Time.timeScale = 1;
+                            }
                         }
                     }
                 }
@@ -116,6 +217,20 @@ public class Inventory : MonoBehaviour {
                 else
                 {
                     itemsToRemove.Add(item);
+                }
+            }
+
+            if(itemDisplay.isArtifact)
+            {
+                ArtifactBonus artifactBonus = item.GetComponent<ArtifactBonus>();
+                if(!PlayerItems.pastArtifacts.ContainsKey(artifactBonus.whatDungeonArtifact))
+                {
+                    PlayerItems.pastArtifacts.Add(artifactBonus.whatDungeonArtifact, new List<string>());
+                }
+
+                if (!PlayerItems.pastArtifacts[artifactBonus.whatDungeonArtifact].Contains(item.name.Replace("(Clone)", "").Trim()))
+                {
+                    PlayerItems.pastArtifacts[artifactBonus.whatDungeonArtifact].Add(item.name.Replace("(Clone)", "").Trim());
                 }
             }
         }

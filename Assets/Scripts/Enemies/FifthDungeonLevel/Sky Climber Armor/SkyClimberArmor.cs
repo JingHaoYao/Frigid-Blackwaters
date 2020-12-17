@@ -134,6 +134,8 @@ public class SkyClimberArmor : Enemy
 
         roarAudio.Play();
 
+        PlayerProperties.playerScript.playerDead = false;
+
         yield return new WaitForSeconds(5 / 9f);
 
         animator.Play("Idle View 1");

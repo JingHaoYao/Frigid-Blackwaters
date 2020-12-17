@@ -5,7 +5,6 @@ using UnityEngine;
 public class SecondDungeonFinalBossManager : BossManager
 {
     public DialogueUI dialogueUI;
-    public GameObject dialogueBlackOverlay;
     public MoveCameraNextRoom cameraScript;
     public PlayerScript playerScript;
     public SecondDungeonFinalBoss boss;
@@ -49,10 +48,7 @@ public class SecondDungeonFinalBossManager : BossManager
     IEnumerator delayUntilDialogue()
     {
         yield return new WaitForSeconds(2f);
-        dialogueUI.targetDialogue = dialogueManager.loadDialogue("Ahalfar's Speech", true);
-        dialogueUI.gameObject.SetActive(true);
-        dialogueUI.setEndAction(() => { bossBeaten("ahalfar", 1f); });
-        dialogueBlackOverlay.SetActive(true);
+        dialogueUI.LoadDialogueUI(dialogueManager.loadDialogue("Ahalfar's Speech", true), 0, () => { bossBeaten("ahalfar", 1f); });
     }
 
     IEnumerator openingAnimation()
@@ -60,10 +56,7 @@ public class SecondDungeonFinalBossManager : BossManager
         cameraScript.freeCam = true;
         boss.playOpeningAnimation();
         yield return new WaitForSeconds(3f);
-        dialogueUI.targetDialogue = dialogueManager.loadDialogue(dialogueString, true);
-        dialogueUI.gameObject.SetActive(true);
-        dialogueUI.setEndAction(() => { InitializeBossFight(); });
-        dialogueBlackOverlay.SetActive(true);
+        dialogueUI.LoadDialogueUI(dialogueManager.loadDialogue(dialogueString, true), 0, () => { InitializeBossFight(); });
     }
 
     public void playOpeningAnim()

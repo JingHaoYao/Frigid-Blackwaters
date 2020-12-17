@@ -394,7 +394,12 @@ public class ShipWeaponScript : MonoBehaviour {
         }
     }
 
-	void Start () {
+    private void Awake()
+    {
+        weaponNumberText = weaponIcon.GetComponentInChildren<Text>();
+    }
+
+    void Start () {
 
         playerShip = GameObject.Find("PlayerShip");
         playerScript = PlayerProperties.playerScript;

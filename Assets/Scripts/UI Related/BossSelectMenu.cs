@@ -9,6 +9,7 @@ public class BossSelectMenu : MonoBehaviour
     HubMissionLoader missionManager;
     public Button finalBossButton;
     public Button[] minorBossButtons;
+    [SerializeField] Image[] lockedImageIcons;
     public GameObject blackWindow;
     public LevelSelectorMenu levelSelectMenu;
     bool isLoadingLevel = false;
@@ -59,11 +60,26 @@ public class BossSelectMenu : MonoBehaviour
             if (MiscData.completedMissions.Contains(mission.missionID))
             {
                 minorBossButtons[i].GetComponentsInChildren<Image>()[1].enabled = true;
+                lockedImageIcons[i].enabled = false;
+                minorBossButtons[i].enabled = true;
                 completedAmount++;
             }
             else
             {
                 minorBossButtons[i].GetComponentsInChildren<Image>()[1].enabled = false;
+
+                if(completedAmount >= i)
+                {
+                    minorBossButtons[i].GetComponent<Image>().color = Color.white;
+                    lockedImageIcons[i].enabled = false;
+                    minorBossButtons[i].enabled = true;
+                }
+                else
+                {
+                    minorBossButtons[i].GetComponent<Image>().color = Color.grey;
+                    lockedImageIcons[i].enabled = true;
+                    minorBossButtons[i].enabled = false;
+                }
             }
 
             // Set the title to the name of the boss
@@ -88,7 +104,7 @@ public class BossSelectMenu : MonoBehaviour
         if (MiscData.completedMissions.Contains(bossMission.missionID))
         {
             finalBossButton.GetComponentsInChildren<Image>()[1].enabled = true;
-            finalBossButton.GetComponentsInChildren<Image>()[2].enabled = false;
+            lockedImageIcons[3].enabled = false;
         }
         else
         {
@@ -97,12 +113,12 @@ public class BossSelectMenu : MonoBehaviour
             // If all previous three boss quests are complete, allow the player to challenge the final boss of the level
             if(completedAmount >= 3)
             {
-                finalBossButton.GetComponentsInChildren<Image>()[2].enabled = false;
+                lockedImageIcons[3].enabled = false;
                 finalBossButton.GetComponent<Image>().color = Color.white;
             }
             else
             {
-                finalBossButton.GetComponentsInChildren<Image>()[2].enabled = true;
+                lockedImageIcons[3].enabled = true;
                 finalBossButton.GetComponent<Image>().color = Color.grey;
                 finalBossButton.enabled = false;
             }

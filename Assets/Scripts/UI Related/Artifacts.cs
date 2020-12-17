@@ -33,37 +33,24 @@ public class Artifacts : MonoBehaviour {
         PlayerProperties.playerArtifacts = this;
         SetArtifactsAnimation();
 	}
+
+    public void OpenArtifacts()
+    {
+        playerScript.windowAlreadyOpen = true;
+        UpdateUI();
+        artifactsUI.SetActive(true);
+        PlayEnteringAnimation();
+        Time.timeScale = 0;
+    }
+
+    public void CloseArtifacts()
+    {
+        playerScript.windowAlreadyOpen = false;
+        menuSlideAnimation.PlayEndingAnimation(artifactsUI, () => artifactsUI.SetActive(false));
+        Time.timeScale = 1;
+    }
 	
 	void LateUpdate () {
-        if (chestUI.activeSelf == false && shopUI.activeSelf == false)
-        {
-            if (menuSlideAnimation.IsAnimating == false)
-            {
-                if (artifactsUI.activeSelf == false)
-                {
-                    if (GetComponent<PlayerScript>().playerDead == false)
-                    {
-                        if (Input.GetKeyDown(KeyCode.I) && playerScript.windowAlreadyOpen == false)
-                        {
-                            playerScript.windowAlreadyOpen = true;
-                            UpdateUI();
-                            artifactsUI.SetActive(true);
-                            PlayEnteringAnimation();
-                            Time.timeScale = 0;
-                        }
-                    }
-                }
-                else
-                {
-                    if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.I))
-                    {
-                        playerScript.windowAlreadyOpen = false;
-                        menuSlideAnimation.PlayEndingAnimation(artifactsUI, () => artifactsUI.SetActive(false));
-                        Time.timeScale = 1;
-                    }
-                }
-            }
-        }
 
         if(numKills > 20)
         {

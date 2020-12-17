@@ -6,9 +6,12 @@ public class MagmaFinGroundfire : MonoBehaviour
 {
     [SerializeField] Collider2D damagingCollider;
     Coroutine fireLoopInstant;
+    [SerializeField] SpriteRenderer spriteRenderer;
 
     private void Start()
     {
+        spriteRenderer.color = new Color(1, 1, 1, 0);
+        LeanTween.alpha(this.gameObject, 1, 0.5f).setEaseOutQuad();
         fireLoopInstant = StartCoroutine(FireLoop());
         StartCoroutine(WaitAndFadeOut());
     }

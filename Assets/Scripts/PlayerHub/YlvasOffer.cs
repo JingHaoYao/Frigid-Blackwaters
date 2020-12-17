@@ -6,7 +6,6 @@ public class YlvasOffer : MonoBehaviour
 {
     [SerializeField] DialogueSet dialogueToDisplay;
     [SerializeField] DialogueUI dialogueUI;
-    [SerializeField] GameObject dialogueBlackScreen;
     [SerializeField] GeneralSlots slots;
     [SerializeField] string[] itemsToSpawn;
     [SerializeField] GameObject examineIndicator;
@@ -14,10 +13,7 @@ public class YlvasOffer : MonoBehaviour
 
     void turnOnDialogue()
     {
-        dialogueUI.targetDialogue = dialogueToDisplay;
-        dialogueUI.gameObject.SetActive(true);
-        dialogueBlackScreen.SetActive(true);
-        dialogueUI.setEndAction(() => slots.spawnAllItems(itemsToSpawn));
+        dialogueUI.LoadDialogueUI(dialogueToDisplay, 0f, () => slots.spawnAllItems(itemsToSpawn));
     }
 
     private void Start()

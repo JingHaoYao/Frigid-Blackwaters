@@ -79,17 +79,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1799046435118559576}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -107,13 +106,16 @@ MonoBehaviour:
 
     Made for a long ranged weapon, these
 
-    lens allow its user to focus a projectile
+    lens
+    allow its user to focus a projectile
 
     with extreme precision.
 
-    Your first shot will be empowered by +3 Attack, but
+    Your first
+    shot will be empowered by +3 Attack, but
 
-    for every consecutive shot in the next 8 seconds, they
+    for every consecutive shot in the
+    next 8 seconds, they
 
     will deal 1 less damage than the previous. '
 --- !u!114 &1799046435118560933
@@ -137,6 +139,7 @@ MonoBehaviour:
   artifactChanceBonus: 0
   goldBonus: 0
   killRequirement: 0
+  whatRarity: 2
 --- !u!114 &1799046435118560934
 MonoBehaviour:
   m_ObjectHideFlags: 0

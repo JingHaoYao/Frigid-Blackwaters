@@ -5,7 +5,6 @@ using UnityEngine;
 public class BrassGolemBossManager : BossManager
 {
     public DialogueUI dialogueUI;
-    public GameObject dialogueBlackOverlay;
     public MoveCameraNextRoom cameraScript;
     public PlayerScript playerScript;
     public TheBrassGolem brassGolem;
@@ -17,7 +16,7 @@ public class BrassGolemBossManager : BossManager
 
     void InitializeBossFight()
     {
-        brassGolem.InitializeBoss();
+        brassGolem.InitializeBoss(this);
         cameraScript.trackPlayer = true;
         cameraScript.freeCam = false;
         playerScript.playerDead = false;
@@ -53,10 +52,7 @@ public class BrassGolemBossManager : BossManager
         }
         else
         {
-            dialogueUI.targetDialogue = dialogueManager.loadDialogue(dialogueString, true);
-            dialogueUI.gameObject.SetActive(true);
-            dialogueUI.setEndAction(() => { InitializeBossFight(); });
-            dialogueBlackOverlay.SetActive(true);
+            dialogueUI.LoadDialogueUI(dialogueManager.loadDialogue(dialogueString, true), 0, () => { InitializeBossFight(); });
         }
     }
 }

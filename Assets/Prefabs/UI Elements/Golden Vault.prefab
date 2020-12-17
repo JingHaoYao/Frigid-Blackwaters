@@ -627,84 +627,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!1 &5305153508751851016
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5305153508751851017}
-  - component: {fileID: 5305153508751851031}
-  - component: {fileID: 5305153508751851030}
-  m_Layer: 5
-  m_Name: SpaceToAdvance
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &5305153508751851017
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5305153508751851016}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5305153510017383591}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000090509, y: -236}
-  m_SizeDelta: {x: 269.59, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &5305153508751851031
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5305153508751851016}
-  m_CullTransparentMesh: 0
---- !u!114 &5305153508751851030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5305153508751851016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
-    m_FontSize: 22
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 2
-    m_MaxSize: 40
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Press Space To Advance
 --- !u!1 &5305153508980065230
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,6 +639,7 @@ GameObject:
   - component: {fileID: 5305153508980065226}
   - component: {fileID: 5305153508980065229}
   - component: {fileID: 5305153508980065228}
+  - component: {fileID: 1821848705413828145}
   m_Layer: 5
   m_Name: Info Button
   m_TagString: Untagged
@@ -823,8 +746,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5305153509732189869}
-        m_MethodName: turnOnInfo
+      - m_Target: {fileID: 1821848705413828145}
+        m_MethodName: ShowTutorial
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -834,6 +757,104 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1821848705413828145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5305153508980065230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 170d8b25c5fee814d8f60af98c3c522e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allTutorialEntries:
+  - whichCharacter: 2
+    dialogueText: Taking a look at our stored goods here at the golden vault, Navigator?
+    localPosition: {x: -337.5, y: 179.7, z: 0}
+    highlightBoxDimensions: {x: 0, y: 0}
+    highlightBoxPosition: {x: 0, y: 0, z: 0}
+    hideHighlightBox: 1
+    stepAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - whichCharacter: 2
+    dialogueText: "The golden vault is a rather useful building that allows us to
+      store any items we don\u2019t wish to take with us on expeditions."
+    localPosition: {x: -337.5, y: 179.7, z: 0}
+    highlightBoxDimensions: {x: 0, y: 0}
+    highlightBoxPosition: {x: 0, y: 0, z: 0}
+    hideHighlightBox: 1
+    stepAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - whichCharacter: 2
+    dialogueText: Any extra artifacts or consumables can be stored here, simply by
+      clicking on an inventory tile.
+    localPosition: {x: -7.5, y: 179.7, z: 0}
+    highlightBoxDimensions: {x: 470.9805, y: 470.9805}
+    highlightBoxPosition: {x: 96, y: 0, z: 0}
+    hideHighlightBox: 0
+    stepAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - whichCharacter: 2
+    dialogueText: Each page of the golden vault holds 8 items.
+    localPosition: {x: -337.5, y: 179.7, z: 0}
+    highlightBoxDimensions: {x: 122.8979, y: 245}
+    highlightBoxPosition: {x: -241.41, y: 20.96, z: 0}
+    hideHighlightBox: 0
+    stepAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - whichCharacter: 2
+    dialogueText: To navigate to the next page, you can click here.
+    localPosition: {x: -337.5, y: -23.2, z: 0}
+    highlightBoxDimensions: {x: 57.46762, y: 40.7}
+    highlightBoxPosition: {x: -193.09, y: -111.6, z: 0}
+    hideHighlightBox: 0
+    stepAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - whichCharacter: 2
+    dialogueText: To return to a previous page, you can click this arrow.
+    localPosition: {x: -337.5, y: -23.2, z: 0}
+    highlightBoxDimensions: {x: 57.46762, y: 40.7}
+    highlightBoxPosition: {x: -290.2, y: -111.6, z: 0}
+    hideHighlightBox: 0
+    stepAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - whichCharacter: 2
+    dialogueText: Taking up space is rather costly though, but you can purchase new
+      pages by clicking here.
+    localPosition: {x: -337.5, y: -100.4, z: 0}
+    highlightBoxDimensions: {x: 125.4678, y: 113.01}
+    highlightBoxPosition: {x: -194.07, y: -186.67, z: 0}
+    hideHighlightBox: 0
+    stepAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - whichCharacter: 2
+    dialogueText: 'Your total gold is displayed on the left of it here. '
+    localPosition: {x: -337.5, y: -100.4, z: 0}
+    highlightBoxDimensions: {x: 125.4678, y: 113.01}
+    highlightBoxPosition: {x: -295, y: -186.67, z: 0}
+    hideHighlightBox: 0
+    stepAction:
+      m_PersistentCalls:
+        m_Calls: []
+  - whichCharacter: 2
+    dialogueText: 'Make sure to take advantage of this building! It can come in handy
+      when you want to store important artifacts for later.  '
+    localPosition: {x: -337.5, y: 179.7, z: 0}
+    highlightBoxDimensions: {x: 125.4678, y: 113.01}
+    highlightBoxPosition: {x: -295, y: -186.67, z: 0}
+    hideHighlightBox: 1
+    stepAction:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &5305153509171676885
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,85 +934,6 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "Your stored gold. It \ncan't be withdrawn into \nyour inventory, but you
     \ncan use it for \neverything in town."
---- !u!1 &5305153509175279430
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5305153509175279431}
-  - component: {fileID: 5305153509175279429}
-  - component: {fileID: 5305153509175279428}
-  m_Layer: 5
-  m_Name: Description
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &5305153509175279431
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5305153509175279430}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5305153510017383591}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.000005722}
-  m_SizeDelta: {x: 224, y: 490}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &5305153509175279429
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5305153509175279430}
-  m_CullTransparentMesh: 0
---- !u!114 &5305153509175279428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5305153509175279430}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
-    m_FontSize: 36
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 3
-    m_MaxSize: 44
-    m_Alignment: 1
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: The blacksmith is where you can upgrade your weapons and various other
-    aspects of your ship.
 --- !u!1 &5305153509285575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1416,7 +1358,6 @@ GameObject:
   - component: {fileID: 5305153509732189870}
   - component: {fileID: 5305153509732189868}
   - component: {fileID: 5305153509732189871}
-  - component: {fileID: 5305153509732189869}
   m_Layer: 5
   m_Name: Golden Vault
   m_TagString: Untagged
@@ -1446,7 +1387,6 @@ RectTransform:
   - {fileID: 5305153508688901688}
   - {fileID: 5305153508533668310}
   - {fileID: 5305153508980065231}
-  - {fileID: 5305153510017383591}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1492,23 +1432,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5305153509732189869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5305153509732189857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6d3d11425f404c45a7afb13e270db68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  informationText: {fileID: 5305153509175279428}
-  info:
-  - The golden vault is where you can store consumables, artifacts or any other item.
-  - This is also where you deposit gold that can be used universally across the hub.
-  - There are only a selective number of spots, so choose what you store wisely.
 --- !u!1 &5305153509741348003
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,82 +1583,6 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: -818927717608394113, guid: 0b94c7e5b54ea67449575ef2db131690,
     type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!1 &5305153510017383590
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5305153510017383591}
-  - component: {fileID: 5305153510017383589}
-  - component: {fileID: 5305153510017383588}
-  m_Layer: 5
-  m_Name: HelperText
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &5305153510017383591
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5305153510017383590}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.89999986, y: 0.89999986, z: 1}
-  m_Children:
-  - {fileID: 5305153508751851017}
-  - {fileID: 5305153509175279431}
-  m_Father: {fileID: 5305153509732189870}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2, y: 31.8}
-  m_SizeDelta: {x: 258, y: 516.4}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &5305153510017383589
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5305153510017383590}
-  m_CullTransparentMesh: 0
---- !u!114 &5305153510017383588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5305153510017383590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.7137255}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0c0e88d0a87ca034db8ee069ad2241ba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1977,12 +1824,12 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -1992,7 +1839,7 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2002,7 +1849,7 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2111,12 +1958,12 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2126,7 +1973,7 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2136,7 +1983,7 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2245,12 +2092,12 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2260,7 +2107,7 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2270,7 +2117,7 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2379,12 +2226,12 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2394,7 +2241,7 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2404,7 +2251,7 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2513,12 +2360,12 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2528,7 +2375,7 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2538,7 +2385,7 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2647,12 +2494,12 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2662,7 +2509,7 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2672,7 +2519,7 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2777,12 +2624,12 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2792,7 +2639,7 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2802,7 +2649,7 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2896,12 +2743,12 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2911,7 +2758,7 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
@@ -2921,7 +2768,7 @@ PrefabInstance:
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224001139981029590, guid: 5748780bc8f73634ba585865c76a1197,
         type: 3}

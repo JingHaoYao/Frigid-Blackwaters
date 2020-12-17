@@ -52,7 +52,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40477e35b1e5e674e980ee948692d1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Sun Core
   displayIcon: {fileID: 21300000, guid: 871a0b085bb12664ba2dbf9b2ba892e1, type: 3}
   goldValue: 0
   isArtifact: 1
@@ -79,17 +78,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1099582984741218}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -105,8 +103,8 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "Sun Core [Legendary]\nA powerful vessel spewing rays of light like the
     morning sun.\nIts warmth grants hope and happiness to all around. \n20 Kill Active:
-    For 10 seconds, all damage taken is turned into\nhealing. Afterwards, grants -3
-    Speed for 5 seconds."
+    For 10 seconds, all damage taken is turned into\nhealing. Afterwards, grants
+    -3 Speed for 5 seconds."
 --- !u!114 &114920774729032662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +126,7 @@ MonoBehaviour:
   artifactChanceBonus: 0
   goldBonus: 0
   killRequirement: 20
+  whatRarity: 3
 --- !u!114 &114652844933901602
 MonoBehaviour:
   m_ObjectHideFlags: 0

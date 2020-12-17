@@ -44,6 +44,7 @@ public class ShipStats : MonoBehaviour {
         toolTip = GameObject.Find("PlayerShip").GetComponent<Inventory>().toolTip;
         shipStatsDisplay.SetActive(false);
         SetAnimation();
+        PlayerProperties.shipStats = this;
 	}
 
 	void LateUpdate () {

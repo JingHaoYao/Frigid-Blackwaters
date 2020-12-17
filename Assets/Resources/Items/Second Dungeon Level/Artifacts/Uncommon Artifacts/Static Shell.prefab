@@ -80,17 +80,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 647936031434532251}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -108,17 +107,20 @@ MonoBehaviour:
 
     Supposedly used as a battery for
 
-    steel automatons, the amount of
+    steel
+    automatons, the amount of
 
     energy housed in this steel casing
 
     is immense.
 
-    6 Kill Active: Fire 2 energy blasts
+    6
+    Kill Active: Fire 2 energy blasts
 
     in both vertical directions that deal
 
-    4 damage each.'
+    4
+    damage each.'
 --- !u!114 &647936031434532224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,10 +254,4 @@ MonoBehaviour:
   artifactChanceBonus: 0
   goldBonus: 0
   killRequirement: 6
-  addedKill: 0
-  tookDamage: 0
-  firedLeftWeapon: 0
-  firedFrontWeapon: 0
-  firedRightWeapon: 0
-  exploredNewRoom: 0
-  updatedInventory: 0
+  whatRarity: 1

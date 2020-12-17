@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class PlayerScript : MonoBehaviour {
     //General stats/assets required for the ship
@@ -27,6 +28,9 @@ public class PlayerScript : MonoBehaviour {
     private int previousAnimationOrientation = -1;
 
     List<ShipWeaponScript> allShipWeaponScripts = new List<ShipWeaponScript>();
+
+    UnityAction deathOverrideAction;
+    bool deathOverride = false;
 
     //artifact bonuses
     public float speedBonus = 0;
@@ -115,6 +119,18 @@ public class PlayerScript : MonoBehaviour {
     List<string> playerHubNames = new List<string>() { "Player Hub", "Willow's Hideout", "Ylva's Hideout", "Nymph Village", "Surtr's Springs" };
 
     private Text healthBarText;
+    private bool isInPlayerHub;
+
+    public void OverrideDeathAction(UnityAction unityEvent)
+    {
+        deathOverrideAction = unityEvent;
+        deathOverride = true;
+    }
+
+    public bool IsInPlayerHub()
+    {
+        return playerHubNames.Contains(SceneManager.GetActiveScene().name);
+    }
 
     public List<ShipWeaponScript> GetShipWeaponScripts()
     {
@@ -657,6 +673,11 @@ public class PlayerScript : MonoBehaviour {
             if (!playerHubNames.Contains(SceneManager.GetActiveScene().name))
             {
                 loadPrevItems();
+                isInPlayerHub = false;
+            }
+            else
+            {
+                isInPlayerHub = true;
             }
         }
 
@@ -734,7 +755,7 @@ public class PlayerScript : MonoBehaviour {
                 stopRotate = false;
             }
 
-            if (stopRotate == false && shipRooted == false)
+            if (stopRotate == false)
             {
                 angleOrientation = (360 + whatAngleTraveled) % 360;
                 pickSprite();
@@ -864,41 +885,51 @@ public class PlayerScript : MonoBehaviour {
 
         StartCoroutine(bufferHit(0.5f));
 
-
         shipHealth -= amountBeingDamaged;
 
-        foreach (ArtifactSlot slot in PlayerProperties.playerArtifacts.artifactSlots)
+        if (damagingObject != null)
         {
-            if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+            foreach (ArtifactSlot slot in PlayerProperties.playerArtifacts.artifactSlots)
+            {
+                if (slot.displayInfo != null && slot.displayInfo.GetComponent<ArtifactEffect>())
+                {
+                    if (damagingObject.GetComponent<ProjectileParent>())
+                    {
+                        ProjectileParent projectileParent = damagingObject.GetComponent<ProjectileParent>();
+                        if (projectileParent.instantiater != null)
+                        {
+                            slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountBeingDamaged, damagingObject.GetComponent<ProjectileParent>().instantiater?.GetComponent<Enemy>());
+                        }
+                    }
+                    else if (damagingObject.transform.parent != null)
+                    {
+                        slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountBeingDamaged, damagingObject.transform.parent.GetComponent<Enemy>());
+                    }
+                    else
+                    {
+                        slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountBeingDamaged, damagingObject.GetComponent<Enemy>());
+                    }
+                }
+            }
+
+            foreach (ShipWeaponScript script in allShipWeaponScripts)
             {
                 if (damagingObject.GetComponent<ProjectileParent>())
                 {
-                    slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountBeingDamaged, damagingObject.GetComponent<ProjectileParent>().instantiater?.GetComponent<Enemy>());
+                    ProjectileParent projectileParent = damagingObject.GetComponent<ProjectileParent>();
+                    if (projectileParent.instantiater != null)
+                    {
+                        script.shipWeaponTemplate.GetComponent<WeaponFireTemplate>().TookDamage(amountBeingDamaged, projectileParent.instantiater.GetComponent<Enemy>());
+                    }
                 }
                 else if (damagingObject.transform.parent != null)
                 {
-                    slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountBeingDamaged, damagingObject.transform.parent.GetComponent<Enemy>());
+                    script.shipWeaponTemplate.GetComponent<WeaponFireTemplate>().TookDamage(amountBeingDamaged, damagingObject.transform.parent.GetComponent<Enemy>());
                 }
                 else
                 {
-                    slot.displayInfo.GetComponent<ArtifactEffect>().tookDamage(amountBeingDamaged, damagingObject.GetComponent<Enemy>());
+                    script.shipWeaponTemplate.GetComponent<WeaponFireTemplate>().TookDamage(amountBeingDamaged, damagingObject.GetComponent<Enemy>());
                 }
-            }
-        }
-
-        foreach(ShipWeaponScript script in allShipWeaponScripts)
-        {
-            if (damagingObject.GetComponent<ProjectileParent>())
-            {
-                script.shipWeaponTemplate.GetComponent<WeaponFireTemplate>().TookDamage(amountBeingDamaged, damagingObject.GetComponent<ProjectileParent>().instantiater?.GetComponent<Enemy>());
-            }
-            else if (damagingObject.transform.parent != null)
-            {
-                script.shipWeaponTemplate.GetComponent<WeaponFireTemplate>().TookDamage(amountBeingDamaged, damagingObject.transform.parent.GetComponent<Enemy>());
-            }
-            else
-            {
-                script.shipWeaponTemplate.GetComponent<WeaponFireTemplate>().TookDamage(amountBeingDamaged, damagingObject.GetComponent<Enemy>());
             }
         }
 
@@ -937,21 +968,28 @@ public class PlayerScript : MonoBehaviour {
                 }
             }
 
-            if (numberLives > 0)
+            audioManager.PlaySound("Player Death");
+
+            if (!deathOverride)
             {
-                numberLives--;
-                audioManager.PlaySound("Player Death");
-                StartCoroutine(respawnShip());
+                if (numberLives > 0)
+                {
+                    numberLives--;
+                    StartCoroutine(respawnShip());
+                }
+                else
+                {
+                    applyInventoryLoss();
+                    blackFadeOut.GetComponent<Animator>().SetTrigger("FadeOut");
+                    MiscData.playerDied = true;
+                    windowAlreadyOpen = true;
+                    StartCoroutine(setDeathGraphicActive(1f));
+                    SaveSystem.SaveGame();
+                }
             }
             else
             {
-                applyInventoryLoss();
-                blackFadeOut.GetComponent<Animator>().SetTrigger("FadeOut");
-                audioManager.PlaySound("Player Death");
-                MiscData.playerDied = true;
-                windowAlreadyOpen = true;
-                StartCoroutine(setDeathGraphicActive(1f));
-                SaveSystem.SaveGame();
+                deathOverrideAction.Invoke();
             }
         }
     }
@@ -973,6 +1011,20 @@ public class PlayerScript : MonoBehaviour {
         {
             return boatSpeed + speedBonus + conSpeedBonus + upgradeSpeedBonus + enemySpeedModifier;
         }
+    }
+
+    public void SetShipBackToNormal()
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+        animator.SetTrigger("Left");
+        shadowAnimator.SetTrigger("Left");
+        transform.localScale = new Vector3(2.6f, 2.6f, 0);
+        shipHealth = shipHealthMAX;
+        playerDead = false;
+        spriteRenderer.enabled = true;
     }
 
     IEnumerator respawnShip()

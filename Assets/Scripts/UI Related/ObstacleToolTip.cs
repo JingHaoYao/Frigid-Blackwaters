@@ -11,14 +11,34 @@ public class ObstacleToolTip : MonoBehaviour {
     public DialogueSet examineDialogue;
     DialogueUI dialogueUI;
     GameObject dialogueBlackOverlay;
+    MenuSlideAnimation menuSlideAnimation = new MenuSlideAnimation();
 
-	void Start () {
+    void Start () {
         playerShip = GameObject.Find("PlayerShip");
         dialogueUI = FindObjectOfType<DungeonEntryDialogueManager>().dialogueUI;
         dialogueBlackOverlay = FindObjectOfType<DungeonEntryDialogueManager>().dialogueBlackOverlay;
         text = this.GetComponent<Text>();
         obstacleToolTip = GameObject.Find("PlayerShip").GetComponent<PlayerScript>().obstacleToolTip;
+        SetInventoryAnimation();
 	}
+
+    void SetInventoryAnimation()
+    {
+        menuSlideAnimation.SetOpenAnimation(new Vector3(0, -400, 0), new Vector3(0, -180, 0), 0.25f);
+        menuSlideAnimation.SetCloseAnimation(new Vector3(0, -180, 0), new Vector3(0, -400, 0), 0.25f);
+    }
+
+    public void PlayToolTipCloseAnimation()
+    {
+        menuSlideAnimation.PlayEndingAnimation(obstacleToolTip, () => { obstacleToolTip.SetActive(false); toolTipActive = false; });
+    }
+
+    public void PlayOpenToolTipAnimation()
+    {
+        obstacleToolTip.SetActive(true);
+        toolTipActive = true;
+        menuSlideAnimation.PlayOpeningAnimation(obstacleToolTip);
+    }
 
     void LateUpdate()
     {
@@ -44,34 +64,38 @@ public class ObstacleToolTip : MonoBehaviour {
             {
                 if (examineDialogue != null && !MiscData.completedExamineDialogues.Contains(examineDialogue.gameObject.name))
                 {
-                    dialogueUI.targetDialogue = examineDialogue;
-                    dialogueUI.gameObject.SetActive(true);
-                    dialogueBlackOverlay.SetActive(true);
+                    dialogueUI.LoadDialogueUI(examineDialogue, 0);
                 }
                 else
                 {
                     if (obstacleToolTip.activeSelf == true)
                     {
-                        obstacleToolTip.SetActive(false);
-                        toolTipActive = false;
-                        PlayerProperties.playerScript.removeRootingObject();
+                        if (toolTipActive)
+                        {
+                            PlayToolTipCloseAnimation();
+                            PlayerProperties.playerScript.removeRootingObject();
+                            PlayerProperties.playerScript.windowAlreadyOpen = false;
+                        }
                     }
                     else
                     {
-                        toolTipActive = true;
-                        obstacleToolTip.GetComponentInChildren<Text>().text = text.text;
-                        obstacleToolTip.SetActive(true);
-                        PlayerProperties.playerScript.addRootingObject();
+                        if (!toolTipActive)
+                        {
+                            PlayOpenToolTipAnimation();
+                            obstacleToolTip.GetComponentInChildren<Text>().text = text.text;
+                            PlayerProperties.playerScript.addRootingObject();
+                            PlayerProperties.playerScript.windowAlreadyOpen = true;
+                        }
                     }
                 }
             }
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (obstacleToolTip.activeSelf == true)
+                if (obstacleToolTip.activeSelf == true && toolTipActive)
                 {
-                    obstacleToolTip.SetActive(false);
-                    toolTipActive = false;
+                    PlayToolTipCloseAnimation();
+                    PlayerProperties.playerScript.windowAlreadyOpen = false;
                     PlayerProperties.playerScript.removeRootingObject();
                 }
             }

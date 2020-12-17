@@ -26,6 +26,10 @@ public class FrogmanSnare : MonoBehaviour
 
     public void goAway()
     {
+        if(snaredAlready)
+        {
+            PlayerProperties.playerScript.removeRootingObject();
+        }
         shouldSnare = false;
         LeanTween.alpha(this.gameObject, 0, 0.5f).setOnComplete(() => Destroy(this.gameObject));
     }

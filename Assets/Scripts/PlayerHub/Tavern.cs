@@ -53,9 +53,7 @@ public class Tavern : MonoBehaviour
 
     public void turnOnDialogueUI()
     {
-        dialogueBlackOverlay.SetActive(true);
-        dialogueUI.GetComponent<DialogueUI>().targetDialogue = tavernDialogue;
-        dialogueUI.SetActive(true);
+        dialogueUI.GetComponent<DialogueUI>().LoadDialogueUI(tavernDialogue, 0f);
         Destroy(spawnedIndicator);
         tavernIcon.SetActive(false);
         this.enabled = false;

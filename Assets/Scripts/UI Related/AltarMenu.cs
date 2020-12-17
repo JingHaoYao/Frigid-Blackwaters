@@ -40,7 +40,7 @@ public class AltarMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             {
                 inventory.itemList.Add(displayInfo.gameObject);
                 FindObjectOfType<AudioManager>().PlaySound("Receive Item");
-                playerScript.dealDamageToShip(healthSacrifice, null); //generate sacrificed health
+                playerScript.dealTrueDamageToShip(healthSacrifice); //generate sacrificed health
                 altar.setUnActive();
                 Instantiate(particles, playerScript.gameObject.transform.position, Quaternion.identity);
                 altar.PlayEndingAnimation();
@@ -63,9 +63,7 @@ public class AltarMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         if (displayInfo != null)
         {
-            toolTip.SetActive(true);
-            toolTip.transform.position = this.transform.position;
-            toolTip.GetComponentInChildren<Text>().text = displayInfo.GetComponent<Text>().text;
+            PlayerProperties.toolTip.SetTextAndPosition(displayInfo.GetComponent<Text>().text, transform.position);
         }
     }
 }

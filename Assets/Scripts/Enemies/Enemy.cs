@@ -41,14 +41,17 @@ public abstract class Enemy: MonoBehaviour
         }
     }
 
-    public void SpawnArtifactKillsAndGoOnCooldown(float yOffset = 0)
+    public void SpawnArtifactKillsAndGoOnCooldown(float yOffset = 0, float xOffset = 0, bool goOnCooldown = true)
     {
         if (spawnArtifactKills)
         {
             int numberSouls = Random.Range(1, 4);
-            PlayerProperties.soulTrailSpawner.SpawnEnemyDeathSouls(numberSouls, transform.position + Vector3.up * yOffset);
+            PlayerProperties.soulTrailSpawner.SpawnEnemyDeathSouls(numberSouls, transform.position + Vector3.up * yOffset + Vector3.right * xOffset);
             PlayerProperties.playerArtifacts.numKills += numberSouls;
-            StartCoroutine(CooldownDuration(Random.Range(3.0f, 4.0f)));
+            if (goOnCooldown)
+            {
+                StartCoroutine(CooldownDuration(Random.Range(3.0f, 4.0f)));
+            }
         }
     }
 

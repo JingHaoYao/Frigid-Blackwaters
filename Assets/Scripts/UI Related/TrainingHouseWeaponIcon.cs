@@ -90,6 +90,14 @@ public class TrainingHouseWeaponIcon : MonoBehaviour, IPointerEnterHandler, IPoi
         }
     }
 
+    public void CloseMenuTutorial()
+    {
+        if (weaponMenu.activeSelf == true)
+        {
+            menuSlideAnimation.PlayEndingAnimation(weaponMenu, () => { weaponMenu.SetActive(false); });
+        }
+    }
+
     public void turnOnMenu()
     {
         if (menuSlideAnimation.IsAnimating == false)

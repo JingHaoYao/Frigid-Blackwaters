@@ -6,6 +6,7 @@ public class AStarPathfinding : MonoBehaviour {
     public AStarGrid grid;
     public Vector3 seeker, target;
     public List<AStarNode> seekPath = new List<AStarNode>();
+    Vector3 previousTarget;
 
     private IEnumerator mainLoop()
     {
@@ -15,6 +16,11 @@ public class AStarPathfinding : MonoBehaviour {
             if (grid.nodeFromWorldPoint(target).traversable)
             {
                 findPath(seeker + new Vector3(0, 0.4f, 0), target);
+                previousTarget = target;
+            }
+            else
+            {
+                findPath(seeker + new Vector3(0, 0.4f, 0), previousTarget);
             }
             yield return null;
         }

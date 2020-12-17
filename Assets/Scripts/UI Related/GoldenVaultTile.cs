@@ -59,7 +59,7 @@ public class GoldenVaultTile : MonoBehaviour, IPointerEnterHandler, IPointerExit
         {
             toolTip.SetActive(true);
             toolTip.transform.position = this.transform.position;
-            toolTip.GetComponentInChildren<Text>().text = displayInfo.GetComponent<Text>().text;
+            PlayerProperties.toolTip.SetTextAndPosition(displayInfo.GetComponent<Text>().text, transform.position);
         }
     }
 }

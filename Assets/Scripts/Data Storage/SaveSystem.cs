@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Collections.Generic;
 
 public static class SaveSystem
 {
@@ -165,6 +166,7 @@ public static class SaveSystem
 
             PlayerUpgrades.numberSkillPoints = data.numberSkillPoints;
             PlayerUpgrades.numberMaxSkillPoints = data.numberMaxSkillPoints;
+            PlayerUpgrades.numberArtifragments = data.numberArtifragments;
             PlayerUpgrades.whichFrontWeaponEquipped = data.whichFrontWeaponEquipped;
             PlayerUpgrades.whichLeftWeaponEquipped = data.whichLeftWeaponEquipped;
             PlayerUpgrades.whichRightWeaponEquipped = data.whichRightWeaponEquipped;
@@ -273,6 +275,21 @@ public static class SaveSystem
             foreach(string id in data.completedHubReturnDialogues)
             {
                 MiscData.completedHubReturnDialogues.Add(id);
+            }
+
+            for(int i = 0; i < data.pastArtifactsItemEntries.Length; i++)
+            {
+                List<string> currentLevelPastArtifacts = new List<string>();
+                foreach(string id in data.pastArtifactsItemEntries[i])
+                {
+                    currentLevelPastArtifacts.Add(id);
+                }
+                PlayerItems.pastArtifacts.Add(data.pastArtifactsLevelEntries[i], currentLevelPastArtifacts);
+            }
+
+            foreach(string id in data.firstTimeTutorialsPlayed)
+            {
+                MiscData.firstTimeTutorialsPlayed.Add(id);
             }
         }
         else

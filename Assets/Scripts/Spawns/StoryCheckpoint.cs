@@ -9,7 +9,6 @@ public class StoryCheckpoint : MonoBehaviour
     public Vector3 cameraPosition;
     public string dialogueName;
     public DialogueUI dialogueUI;
-    public GameObject dialogueBlackOverlay;
     bool portHub = false;
     public bool moveable = false;
 
@@ -21,11 +20,7 @@ public class StoryCheckpoint : MonoBehaviour
     public void startUpDialogue(float waitReveal = 2)
     {
         this.gameObject.SetActive(true);
-        dialogueUI.targetDialogue = FindObjectOfType<DungeonEntryDialogueManager>().loadDialogue(dialogueName, true);
-        dialogueUI.waitReveal = waitReveal;
-        dialogueUI.gameObject.SetActive(true);
-        dialogueBlackOverlay.SetActive(true);
-        dialogueBlackOverlay.GetComponent<Image>().color = Color.black;
+        dialogueUI.LoadDialogueUI(FindObjectOfType<DungeonEntryDialogueManager>().loadDialogue(dialogueName, true), waitReveal);
     }
 
     public void Update()
@@ -35,7 +30,7 @@ public class StoryCheckpoint : MonoBehaviour
             if (dialogueUI.gameObject.activeSelf == false && portHub == false)
             {
                 portHub = true;
-                FindObjectOfType<PauseMenu>().loadHub();
+                PlayerProperties.pauseMenu.loadHub();
             }
             PlayerProperties.playerScript.addRootingObject();
         }

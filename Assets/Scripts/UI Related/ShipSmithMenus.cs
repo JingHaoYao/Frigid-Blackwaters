@@ -28,6 +28,13 @@ public class ShipSmithMenus : MonoBehaviour {
     [SerializeField] private GameObject weaponSelectorMenu, returnButton;
     int skillPointPrice = 0;
 
+    [SerializeField] List<TutorialEntry> tutorialEntries;
+
+    public void ShowTutorial()
+    {
+        PlayerProperties.tutorialWidgetMenu.Initialize(tutorialEntries);
+    }
+
     MenuSlideAnimation menuSlideAnimation = new MenuSlideAnimation();
 
     void SetAnimation()
@@ -45,6 +52,11 @@ public class ShipSmithMenus : MonoBehaviour {
             PlayerUpgrades.numberMaxSkillPoints++;
             PlayerUpgrades.numberSkillPoints++;
         }
+    }
+
+    public void OpenMusketMenu()
+    {
+        turnOnMenu(0);
     }
 
     void checkWeaponsUnlocked()
@@ -233,7 +245,7 @@ public class ShipSmithMenus : MonoBehaviour {
 
     public void returnToMenu()
     {
-        if (menuSlideAnimation.IsAnimating == false)
+        if (menuSlideAnimation.IsAnimating == false && weaponSelectorMenu.activeSelf == false)
         {
             menuSlideAnimation.PlayEndingAnimation(menusList[currMenu], () => { menusList[currMenu].SetActive(false); });
             weaponSelectorMenu.SetActive(true);

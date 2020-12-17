@@ -17,6 +17,7 @@ public class TheBrassGolem : Enemy
     [SerializeField] AudioManager audioManager;
     [SerializeField] GameObject staticProjectile;
     [SerializeField] AudioClip intro;
+    BrassGolemBossManager bossManager;
     float attackPeriod = 2;
     private int numberStaticAttacks;
 
@@ -271,13 +272,14 @@ public class TheBrassGolem : Enemy
         animator.SetTrigger("Idle");
     }
 
-    public void InitializeBoss()
+    public void InitializeBoss(BrassGolemBossManager bossManager)
     {
         bossHealthBar.targetEnemy = this;
         bossHealthBar.bossStartUp("The Blue Steel Golem");
         prevCannonIndex = Random.Range(0, cannons.Count);
         StartCoroutine(mainLoop());
         StartCoroutine(procCannons());
+        this.bossManager = bossManager;
     }
 
     public void startOpenAnimation()
@@ -326,9 +328,7 @@ public class TheBrassGolem : Enemy
         }
         cameraScript.freeCam = true;
         cameraScript.trackPlayer = false;
-        // Gotta do something after this
-
-        // TODO: Start up ending dialogue, trigger boss manager
+        bossManager.bossBeaten(nameID, 2f);
     }
 
     public override void damageProcedure(int damage)

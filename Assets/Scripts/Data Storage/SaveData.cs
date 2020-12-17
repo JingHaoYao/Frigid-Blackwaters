@@ -32,6 +32,7 @@ public class SaveData
     public string[] safeUpgrades;
     public int numberSkillPoints;
     public int numberMaxSkillPoints;
+    public int numberArtifragments;
     public int whichFrontWeaponEquipped;
     public int whichLeftWeaponEquipped;
     public int whichRightWeaponEquipped;
@@ -43,6 +44,8 @@ public class SaveData
     //current information
     public string[] inventoryItemIds;
     public string[] equippedArtifactIds;
+    public int[] pastArtifactsLevelEntries;
+    public string[][] pastArtifactsItemEntries;
     public int totalGoldAmount;
     public int maxInventorySize;
     public int maxNumberVaultItems;
@@ -96,6 +99,10 @@ public class SaveData
     public bool missionFinished;
 
     public string[] completedMissions;
+
+    public bool unlockedArticrafting;
+
+    public string[] firstTimeTutorialsPlayed;
 
     public SaveData()
     {
@@ -205,6 +212,7 @@ public class SaveData
 
         numberSkillPoints = PlayerUpgrades.numberSkillPoints;
         numberMaxSkillPoints = PlayerUpgrades.numberMaxSkillPoints;
+        numberArtifragments = PlayerUpgrades.numberArtifragments;
         whichFrontWeaponEquipped = PlayerUpgrades.whichFrontWeaponEquipped;
         whichLeftWeaponEquipped = PlayerUpgrades.whichLeftWeaponEquipped;
         whichRightWeaponEquipped = PlayerUpgrades.whichRightWeaponEquipped;
@@ -309,6 +317,32 @@ public class SaveData
         for(int i = 0; i < completedHubReturnDialogues.Length; i++)
         {
             completedHubReturnDialogues[i] = MiscData.completedHubReturnDialogues[i];
+        }
+
+        pastArtifactsLevelEntries = new int[PlayerItems.pastArtifacts.Count];
+        pastArtifactsItemEntries = new string[PlayerItems.pastArtifacts.Count][];
+
+
+        int currentIndex = 0;
+        foreach(KeyValuePair<int, List<string>> pair in PlayerItems.pastArtifacts)
+        {
+            pastArtifactsLevelEntries[currentIndex] = pair.Key;
+            pastArtifactsItemEntries[currentIndex] = new string[pair.Value.Count];
+            
+            for(int i = 0; i < pair.Value.Count; i++)
+            {
+                pastArtifactsItemEntries[currentIndex][i] = pair.Value[i];
+            }
+
+            currentIndex++;
+        }
+
+        unlockedArticrafting = MiscData.unlockedArticrafting;
+
+        firstTimeTutorialsPlayed = new string[MiscData.firstTimeTutorialsPlayed.Count];
+        for(int i = 0; i < MiscData.firstTimeTutorialsPlayed.Count; i++)
+        {
+            firstTimeTutorialsPlayed[i] = MiscData.firstTimeTutorialsPlayed[i];
         }
     }
 }

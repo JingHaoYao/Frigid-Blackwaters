@@ -78,17 +78,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7915679297470815048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -106,11 +105,13 @@ MonoBehaviour:
 
     This carved stone helmet serves as a vessel
 
-    for powerful animation magic.
+    for
+    powerful animation magic.
 
     8 Kill Active: Summon a golem minion
 
-    that attacks the closest enemy to your ship
+    that
+    attacks the closest enemy to your ship
 
     that lasts 20 seconds.'
 --- !u!114 &7915679297470815093
@@ -134,5 +135,6 @@ MonoBehaviour:
   artifactChanceBonus: 0
   goldBonus: 0
   killRequirement: 8
+  whatRarity: 2
   golemMinion: {fileID: 1204515982589440020, guid: 51c078725ef460c4fbf72e85fc33fb10,
     type: 3}

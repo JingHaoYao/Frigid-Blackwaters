@@ -30,7 +30,7 @@ public class FrontierGates : MonoBehaviour
     {
         if (goBack == true)
         {
-            FindObjectOfType<PauseMenu>().loadHub();
+            PlayerProperties.pauseMenu.loadHub();
             PlayerProperties.playerScript.removeRootingObject();
         }
         else

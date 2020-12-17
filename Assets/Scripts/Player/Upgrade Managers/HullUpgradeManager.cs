@@ -214,6 +214,11 @@ public class HullUpgradeManager : MonoBehaviour {
         applyUpgrades();
     }
 
+    public void SetDashOffCooldown()
+    {
+        dashCooldownPeriod = 0;
+    }
+
     void Update()
     {
         if (prevNumberUpgrades != PlayerUpgrades.hullUpgrades.Count)

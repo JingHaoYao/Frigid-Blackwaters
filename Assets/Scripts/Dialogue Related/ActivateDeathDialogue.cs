@@ -23,6 +23,13 @@ public class ActivateDeathDialogue : MonoBehaviour
         {
             returnNotifications.dialoguesToDisplay.Add(Resources.Load<DialogueSet>("Dialogues/" + whichDeathDialogue));
             returnNotifications.updatePlayerStatus(true);
+            if(MiscData.unlockedArticrafting == false)
+            {
+                MiscData.unlockedArticrafting = true;
+                returnNotifications.dialoguesToDisplay.Add(Resources.Load<DialogueSet>("Dialogues/UnlockedArticraftingDialogue"));
+            }
+
+            PlayerProperties.pauseMenu.UnlockArtifragmentMenus();
             MiscData.playerDied = false;
             SaveSystem.SaveGame();
         }

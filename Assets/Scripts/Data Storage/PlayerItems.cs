@@ -8,4 +8,6 @@ public static class PlayerItems{
     public static int totalGoldAmount;
     public static int maxInventorySize = 10;
     public static int numberArtifactKills = 0;
+
+    public static Dictionary<int, List<string>> pastArtifacts = new Dictionary<int, List<string>>();
 }

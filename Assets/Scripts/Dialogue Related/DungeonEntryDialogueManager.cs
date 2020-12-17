@@ -99,18 +99,13 @@ public class DungeonEntryDialogueManager : MonoBehaviour
     {
         if (!MiscData.completedEntryDungeonDialogues.Contains(entryDialogueDict[MiscData.missionID]))
         {
-            dialogueUI.targetDialogue = loadDialogue(entryDialogueDict[MiscData.missionID], true);
-            dialogueUI.gameObject.SetActive(true);
-            dialogueBlackOverlay.SetActive(true);
+            dialogueUI.LoadDialogueUI(loadDialogue(entryDialogueDict[MiscData.missionID], true), 0);
         }
         else
         {
             if (Random.Range(1, 5) == 1 && MiscData.enoughRoomsTraversed == true)
             {
-                MiscData.enoughRoomsTraversed = false;
-                dialogueUI.targetDialogue = loadDialogue(randomEntryDialogues[Random.Range(0, randomEntryDialogues.Length)]);
-                dialogueUI.gameObject.SetActive(true);
-                dialogueBlackOverlay.SetActive(true);
+                dialogueUI.LoadDialogueUI(loadDialogue(randomEntryDialogues[Random.Range(0, randomEntryDialogues.Length)]), 0);
             }
         }
     }

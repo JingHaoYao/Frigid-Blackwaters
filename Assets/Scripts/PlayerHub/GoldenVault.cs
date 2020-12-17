@@ -195,6 +195,7 @@ public class GoldenVault : MonoBehaviour {
                     {
                         PlayerProperties.playerInventory.PlayInventoryExitAnimation();
                         PlayerProperties.playerScript.removeRootingObject();
+                        PlayerProperties.tutorialWidgetMenu.CloseTutorial();
                         menuSlideAnimation.PlayEndingAnimation(vaultDisplay, () => { vaultDisplay.SetActive(false); playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false; });
                     }
                 }
@@ -203,7 +204,15 @@ public class GoldenVault : MonoBehaviour {
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         vaultDisplay.SetActive(true);
-                        menuSlideAnimation.PlayOpeningAnimation(vaultDisplay);
+                        if(MiscData.firstTimeTutorialsPlayed.Contains("goldenvault"))
+                        {
+                            menuSlideAnimation.PlayOpeningAnimation(vaultDisplay);
+                        }
+                        else
+                        {
+                            MiscData.firstTimeTutorialsPlayed.Add("goldenvault");
+                            menuSlideAnimation.PlayOpeningAnimation(vaultDisplay, () => { vaultDisplay.GetComponentInChildren<TutorialInfoButton>().ShowTutorial(); });
+                        }
                         UpdateUI();
                         inventoryDisplay.SetActive(true);
                         PlayerProperties.playerInventory.PlayInventoryEnterAnimation();

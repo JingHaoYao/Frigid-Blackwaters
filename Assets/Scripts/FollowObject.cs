@@ -5,6 +5,7 @@ using UnityEngine;
 public class FollowObject : MonoBehaviour
 {
     public GameObject objectToFollow;
+    [SerializeField] Vector3 offset;
 
     void Update()
     {
@@ -14,7 +15,7 @@ public class FollowObject : MonoBehaviour
         }
         else
         {
-            transform.position = objectToFollow.transform.position;
+            transform.position = objectToFollow.transform.position + offset;
         }
     }
 }

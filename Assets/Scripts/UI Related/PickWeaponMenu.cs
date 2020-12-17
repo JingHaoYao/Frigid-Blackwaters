@@ -8,6 +8,13 @@ public class PickWeaponMenu : MonoBehaviour
     [SerializeField] private List<TrainingHouseWeaponIcon> trainingHouseWeaponIcons;
     public ShipWeaponTemplate[] allTemplates;
 
+    [SerializeField] List<TutorialEntry> tutorialEntries;
+
+    public void ShowTutorial()
+    {
+        PlayerProperties.tutorialWidgetMenu.Initialize(tutorialEntries);
+    }
+
     private void Start()
     {
         SetTemplatesActive();

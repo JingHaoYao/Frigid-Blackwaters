@@ -25,10 +25,7 @@ public class DeadSentinel : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         dialogueOpened = true;
-        GameObject dialogueBlackOverlay = FindObjectOfType<DungeonEntryDialogueManager>().dialogueBlackOverlay;
-        dialogueUI.targetDialogue = dialogueSet;
-        dialogueUI.gameObject.SetActive(true);
-        dialogueBlackOverlay.SetActive(true);
+        dialogueUI.LoadDialogueUI(dialogueSet, 0);
     }
 
     IEnumerator dieDown()

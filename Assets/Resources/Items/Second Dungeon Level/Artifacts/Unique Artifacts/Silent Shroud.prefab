@@ -78,17 +78,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 790306857768390371}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -104,8 +103,8 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "Silent Shroud [Legendary] [Soulbound]\nIt is said that adventurers before
     death see the\nreaper shroud itself in a violent but silent snow storm, \nakin
-    to the one contained in this artifact.\n10 Kill Active: Shroud yourself in a snow
-    storm that\ndeflects all damage for 6 seconds."
+    to the one contained in this artifact.\n10 Kill Active: Shroud yourself in a
+    snow storm that\ndeflects all damage for 6 seconds."
 --- !u!114 &790306857768390374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,5 +126,6 @@ MonoBehaviour:
   artifactChanceBonus: 0
   goldBonus: 0
   killRequirement: 10
+  whatRarity: 3
   shroud: {fileID: 363382793914481103, guid: 3a296e57cf33f1a47bee39efdbbd0969, type: 3}
   displayItem: {fileID: 790306857768390372}

@@ -52,6 +52,8 @@ public class ItemTemplates : MonoBehaviour {
 
     private void Awake()
     {
+        PlayerProperties.itemTemplates = this;
+
         itemDB.Add("GoldItem", "Items/");
         dungeonEntryDialogueManager = FindObjectOfType<DungeonEntryDialogueManager>();
 

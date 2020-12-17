@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8581500569286428907}
   - component: {fileID: 8581500569286428906}
   - component: {fileID: -8607184507197949529}
+  - component: {fileID: -2600585530978507875}
   m_Layer: 13
   m_Name: Magma Fin Ground Fire
   m_TagString: EnemyProjectile
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 8581500569286428887}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.62, y: -3.63, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -133,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damagingCollider: {fileID: 8581500569286428907}
+  spriteRenderer: {fileID: 8581500569286428905}
 --- !u!114 &-8607184507197949529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,3 +150,16 @@ MonoBehaviour:
   offset: 0
   rendLayerOffset: 0
   updateOnce: 1
+--- !u!114 &-2600585530978507875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8581500569286428887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fea352433772d4fbeb6b6db7679dfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 500

@@ -49,6 +49,7 @@ public class Shipsmith : MonoBehaviour {
                     if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
                     {
                         menuSlideAnimation.PlayEndingAnimation(shipSmithDisplay, () => { shipSmithDisplay.SetActive(false); });
+                        PlayerProperties.tutorialWidgetMenu.CloseTutorial();
                         PlayerProperties.playerScript.removeRootingObject();
                         playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = false;
                     }
@@ -58,7 +59,22 @@ public class Shipsmith : MonoBehaviour {
                     if (Input.GetKeyDown(KeyCode.E))
                     {
                         shipSmithDisplay.SetActive(true);
-                        menuSlideAnimation.PlayOpeningAnimation(shipSmithDisplay);
+                        if(MiscData.firstTimeTutorialsPlayed.Contains(buildingID))
+                        {
+                            menuSlideAnimation.PlayOpeningAnimation(shipSmithDisplay);
+                        }
+                        else
+                        {
+                            if (buildingID == "weapon_outfitter")
+                            {
+                                menuSlideAnimation.PlayOpeningAnimation(shipSmithDisplay, () => { shipSmithDisplay.GetComponent<PickWeaponMenu>().ShowTutorial(); });
+                            }
+                            else if (buildingID == "shipsmith")
+                            {
+                                menuSlideAnimation.PlayOpeningAnimation(shipSmithDisplay, () => { shipSmithDisplay.GetComponent<ShipSmithMenus>().ShowTutorial(); });
+                            }
+                            MiscData.firstTimeTutorialsPlayed.Add(buildingID);
+                        }
                         PlayerProperties.playerScript.addRootingObject();
                         playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
                     }

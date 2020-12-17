@@ -18,6 +18,10 @@ public static class MiscData
     public static int numberDungeonRuns = 0;
     public static bool skillPointsNotification = false;
 
+    public static bool unlockedArticrafting = false;
+
+    public static List<string> firstTimeTutorialsPlayed = new List<string>();
+
     //Dialogues that have been completed
     public static List<string> completedTavernDialogues = new List<string>();
     public static List<string> completedEntryDungeonDialogues = new List<string>();

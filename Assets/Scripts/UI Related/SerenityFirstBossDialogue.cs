@@ -151,16 +151,6 @@ public class SerenityFirstBossDialogue : MonoBehaviour
                     }
                     progressEndDialogue();
                 }
-                else
-                {
-                    if(playCinematic == false)
-                    {
-                        dialogueUI.targetDialogue = firstBossDialogue;
-                        dialogueUI.gameObject.SetActive(true);
-                        dialogueBlackOverlay.SetActive(true);
-                        playCinematic = true;
-                    }
-                }
             }
         }
     }

@@ -146,7 +146,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void transferArtifact()
     {
-        if(!Input.GetKeyDown(KeyCode.LeftShift) && displayInfo != null && displayInfo.isArtifact == true && artifacts.artifactsUI.activeSelf == true && GameObject.Find("PlayerShip").GetComponent<PlayerScript>().enemiesDefeated == true && FindObjectOfType<ConsumableConfirm>() == null)
+        if(!Input.GetKeyDown(KeyCode.LeftShift) && displayInfo != null && displayInfo.isArtifact == true && artifacts.artifactsUI.activeSelf == true && PlayerProperties.playerScript.enemiesDefeated == true && PlayerProperties.playerInventory.consumableConfirmationWindow.gameObject.activeSelf == false)
         {
             if (artifacts.activeArtifacts.Count < 3)
             {
@@ -156,6 +156,31 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 artifacts.activeArtifacts.Add(displayInfo.gameObject);
                 inventory.itemList.Remove(displayInfo.gameObject);
                 PlayerProperties.playerScript.CheckAndUpdateHealth();
+            }
+            else
+            {
+                FindObjectOfType<AudioManager>().PlaySound("Equip Artifact");
+                displayInfo.isEquipped = true;
+                displayInfo.isEquipped = true;
+                displayInfo.GetComponent<ArtifactEffect>()?.artifactEquipped();
+                artifacts.activeArtifacts.Add(displayInfo.gameObject);
+                inventory.itemList.Remove(displayInfo.gameObject);
+                GameObject firstArtifact = artifacts.activeArtifacts[0];
+                artifacts.activeArtifacts.RemoveAt(0);
+                inventory.itemList.Add(firstArtifact);
+            }
+        }
+    }
+
+    public void MoveToDisenchant()
+    {
+        if (PlayerProperties.articraftingDisenchantingMenu != null && PlayerProperties.articraftingDisenchantingMenu.IsMenuOpened())
+        {
+            if (!Input.GetKeyDown(KeyCode.LeftShift) && displayInfo != null && displayInfo.isArtifact == true && PlayerProperties.playerScript.enemiesDefeated == true && PlayerProperties.playerInventory.consumableConfirmationWindow.gameObject.activeSelf == false)
+            {
+                FindObjectOfType<AudioManager>().PlaySound("Equip Artifact");
+                inventory.itemList.Remove(displayInfo.gameObject);
+                PlayerProperties.articraftingDisenchantingMenu.SetTargetArtifact(displayInfo);
             }
         }
     }
@@ -171,10 +196,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (displayInfo != null)
-        {
-            toolTip.SetActive(true);
-            toolTip.transform.position = this.transform.position;
-            toolTip.GetComponentInChildren<Text>().text = displayInfo.GetComponent<Text>().text;
+        {   
+            PlayerProperties.toolTip.SetTextAndPosition(displayInfo.GetComponent<Text>().text, transform.position);
         }
     }
 

@@ -12,7 +12,10 @@ public class SkyClimberFireWave : MonoBehaviour
     {
         ParticleSystem.MainModule mainModule = particleSystem.main;
         transform.rotation = Quaternion.Euler(0, 0, rotation - 90);
-        projectileParent.instantiater = instantiatingObject;
+        if (projectileParent != null)
+        {
+            projectileParent.instantiater = instantiatingObject;
+        }
         LeanTween.move(this.gameObject, moveToPosition, time).setOnComplete(() => { particleSystem.Stop(); collider2D.enabled = false; });
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MoveCameraNextRoom : MonoBehaviour {
     GameObject playerShip;
@@ -18,6 +19,13 @@ public class MoveCameraNextRoom : MonoBehaviour {
     bool hubCamera = false;
 
     [SerializeField] GameObject projectileProtector;
+
+    private List<UnityAction<Vector3>> moveCameraActions = new List<UnityAction<Vector3>>();
+
+    public void AddMoveCameraAction(UnityAction<Vector3> event_)
+    {
+        moveCameraActions.Add(event_);
+    }
 
     private void moveCamera(int whichDirection)
     {
@@ -48,6 +56,11 @@ public class MoveCameraNextRoom : MonoBehaviour {
         foreach(GameObject artifact in PlayerProperties.playerArtifacts.activeArtifacts)
         {
             artifact.GetComponent<ArtifactEffect>()?.cameraMovedPosition(this.transform.position);
+        }
+
+        foreach(UnityAction<Vector3> _event in moveCameraActions)
+        {
+            _event?.Invoke(transform.position);
         }
     }
 

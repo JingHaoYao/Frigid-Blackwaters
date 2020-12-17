@@ -1,14 +1,20 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class IntroCutscene : MonoBehaviour
 {
     public Animator blackScreenAnimator;
+    [SerializeField] Image backgroundImage;
+    [SerializeField] Text cutSceneText;
+
+    [SerializeField] List<Sprite> backgroundSprites;
+    [SerializeField] List<string> dialogues;
+
     bool inFadeAnim = false;
-    int cutSceneIndex = 0;
-    public Text[] texts;
-    public Image[] runeImages;
+    bool isTypeAnimating = false;
+    Coroutine textTypingAnimation;
 
     IEnumerator cutSceneWait(float duration)
     {
@@ -21,40 +27,80 @@ public class IntroCutscene : MonoBehaviour
 
     IEnumerator transitionCutScene()
     {
-        for(int i = 0; i < texts.Length; i++)
+        blackScreenAnimator.SetTrigger("FadeIn");
+
+        int currentDialogueIndex = 0;
+
+        backgroundImage.sprite = backgroundSprites[0];
+        cutSceneText.text = dialogues[0];
+        textTypingAnimation = StartCoroutine(animateText(dialogues[currentDialogueIndex].Replace("NEWLINE", "\n")));
+
+        while(true)
         {
-            if(i == 0)
+            if (Input.GetKeyDown(KeyCode.Space) && inFadeAnim == false)
             {
-                LeanTween.alpha(runeImages[0].GetComponent<RectTransform>(), 1, 1f).setEaseOutCirc();
-                yield return new WaitForSeconds(2f);
+                if (isTypeAnimating)
+                {
+                    StopCoroutine(textTypingAnimation);
+                    cutSceneText.text = dialogues[currentDialogueIndex].Replace("NEWLINE", "\n");
+                    isTypeAnimating = false;
+                }
+                else
+                {
+
+                    currentDialogueIndex++;
+
+                    if (currentDialogueIndex >= backgroundSprites.Count)
+                    {
+                        break;
+                    }
+
+                    if (currentDialogueIndex > 0 && backgroundSprites[currentDialogueIndex] == backgroundSprites[currentDialogueIndex - 1])
+                    {
+                        backgroundImage.sprite = backgroundSprites[currentDialogueIndex];
+                        cutSceneText.text = dialogues[currentDialogueIndex];
+                        textTypingAnimation = StartCoroutine(animateText(dialogues[currentDialogueIndex].Replace("NEWLINE", "\n")));
+                    }
+                    else
+                    {
+                        inFadeAnim = true;
+                        blackScreenAnimator.SetTrigger("FadeOut");
+
+                        yield return new WaitForSeconds(1f);
+
+                        backgroundImage.sprite = backgroundSprites[currentDialogueIndex];
+                        cutSceneText.text = dialogues[currentDialogueIndex];
+                        textTypingAnimation = StartCoroutine(animateText(dialogues[currentDialogueIndex].Replace("NEWLINE", "\n")));
+                        inFadeAnim = false;
+
+                        blackScreenAnimator.SetTrigger("FadeIn");
+                    }
+                }
             }
 
-            LeanTween.alphaText(texts[i].GetComponent<RectTransform>(), 1, 1f).setEaseOutCirc();
-            yield return new WaitForSeconds(2f);
-            if(i == 4)
-            {
-                LeanTween.alpha(runeImages[1].GetComponent<RectTransform>(), 1, 1f).setEaseOutCirc();
-                LeanTween.alpha(runeImages[2].GetComponent<RectTransform>(), 1, 1f).setEaseOutCirc();
-                LeanTween.alpha(runeImages[3].GetComponent<RectTransform>(), 1, 1f).setEaseOutCirc();
-                yield return new WaitForSeconds(2f);
-            }
-
-            if(i == 8)
-            {
-                LeanTween.alpha(runeImages[4].GetComponent<RectTransform>(), 1, 1f).setEaseOutCirc();
-                yield return new WaitForSeconds(2f);
-            }
-        }
-
-        while (!Input.GetKeyDown(KeyCode.Space))
-        {
             yield return null;
         }
 
-        if (inFadeAnim == false )
+        if (inFadeAnim == false)
         {
             StartCoroutine(cutSceneEnd());
         }
+    }
+
+    IEnumerator animateText(string dialogue)
+    {
+        isTypeAnimating = true;
+        int charIndex = 0;
+        foreach (char c in dialogue)
+        {
+            charIndex++;
+            cutSceneText.text = dialogue.Substring(0, charIndex);
+            if (c != ' ')
+            {
+                yield return new WaitForSecondsRealtime(0.05f);
+            }
+        }
+        isTypeAnimating = false;
     }
 
     IEnumerator cutSceneEnd()

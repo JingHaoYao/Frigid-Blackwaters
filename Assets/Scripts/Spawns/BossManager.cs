@@ -117,7 +117,7 @@ public class BossManager : MonoBehaviour
         }
         else
         {
-            FindObjectOfType<PauseMenu>().loadHub();
+            PlayerProperties.pauseMenu.loadHub();
         }
     }
 

@@ -17,7 +17,6 @@ public class HubShop : MonoBehaviour {
     public List<GameObject> sellingItemsList = new List<GameObject>();
     public int startingChance, endingChance;
     public int priceMultiplier = 0;
-    public DialogueSet loadedDialogue;
     public DialogueUI dialogueUI;
     public GameObject dialogueBlackOverlay;
     public GameObject dialogueIndicator;
@@ -197,7 +196,8 @@ public class HubShop : MonoBehaviour {
             }
             else
             {
-                sellingItemsPrices.Add(priceMultiplier * Random.Range(3, 9) + (newItem.GetComponent<ArtifactBonus>().whatDungeonArtifact - 1) * 600);
+                ArtifactBonus artifactBonus = newItem.GetComponent<ArtifactBonus>();
+                sellingItemsPrices.Add(priceMultiplier * Random.Range(3, 9) + artifactBonus.whatRarity * 800 + (artifactBonus.whatDungeonArtifact - 1) * 800);
             }
         }
     }
@@ -243,6 +243,7 @@ public class HubShop : MonoBehaviour {
                         inventory.PlayInventoryExitAnimation();
                         menuSlideAnimation.PlayEndingAnimation(shopDisplay, () => { shopDisplay.SetActive(false); PlayerProperties.playerScript.windowAlreadyOpen = false; });
                         PlayerProperties.playerScript.removeRootingObject();
+                        PlayerProperties.tutorialWidgetMenu.CloseTutorial();
                         Time.timeScale = 1;
                     }
                 }
@@ -250,29 +251,21 @@ public class HubShop : MonoBehaviour {
                 {
                     if (Input.GetKeyDown(KeyCode.E))
                     {
-                        if (loadedDialogue == null)
+                        shopDisplay.SetActive(true);
+                        if (MiscData.firstTimeTutorialsPlayed.Contains(buildingID))
                         {
-                            shopDisplay.SetActive(true);
                             menuSlideAnimation.PlayOpeningAnimation(shopDisplay);
-                            inventoryDisplay.SetActive(true);
-                            playerShip.GetComponent<Inventory>().UpdateUI();
-                            PlayerProperties.playerScript.addRootingObject();
-                            setShopDisplay();
-                            playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
                         }
                         else
                         {
-                            dialogueIndicator.SetActive(false);
-                            dialogueUI.targetDialogue = loadedDialogue;
-                            dialogueUI.gameObject.SetActive(true);
-                            dialogueBlackOverlay.SetActive(true);
-                            HubShop[] hubShops = FindObjectsOfType<HubShop>();
-                            loadedDialogue = null;
-                            foreach (HubShop shop in hubShops)
-                            {
-                                shop.loadedDialogue = null;
-                            }
+                            menuSlideAnimation.PlayOpeningAnimation(shopDisplay, () => { shopDisplay.GetComponentInChildren<TutorialInfoButton>().ShowTutorial(); });
+                            MiscData.firstTimeTutorialsPlayed.Add(buildingID);
                         }
+                        inventoryDisplay.SetActive(true);
+                        playerShip.GetComponent<Inventory>().UpdateUI();
+                        PlayerProperties.playerScript.addRootingObject();
+                        setShopDisplay();
+                        playerShip.GetComponent<PlayerScript>().windowAlreadyOpen = true;
                     }
                 }
             }

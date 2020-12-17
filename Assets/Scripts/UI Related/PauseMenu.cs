@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    PlayerScript playerScript;
     GameObject mainPauseMenu;
     public GameObject inventoryDisplay;
     public GameObject statsDisplay;
@@ -16,8 +15,6 @@ public class PauseMenu : MonoBehaviour
     public int whichSceneLoad = 0;
     public GameObject quitConfirmationButton, quitConfirmationButtonInCombat, quitToTitleSceneConfirmation;
     bool clickedSceneTransition = false;
-    Inventory inventory;
-    Artifacts artifacts;
     ShipStats stats;
     bool alreadyAppliedLossesQuit = false;
     public GameObject controlsMenu;
@@ -25,13 +22,34 @@ public class PauseMenu : MonoBehaviour
     public GameObject dungeonMap;
     public GameObject visualOptions;
 
+    [SerializeField] Button artifragmentButton;
+    [SerializeField] Button articraftButton;
+
     private void Start()
     {
-        playerScript = PlayerProperties.playerScript;
-        artifacts = PlayerProperties.playerArtifacts;
-        inventory = PlayerProperties.playerInventory;
         stats = PlayerProperties.playerShip.GetComponent<ShipStats>();
         mainPauseMenu = transform.GetChild(0).gameObject;
+
+        PlayerProperties.pauseMenu = this;
+
+        if(!PlayerProperties.playerScript.IsInPlayerHub() | !MiscData.unlockedArticrafting)
+        {
+            artifragmentButton.interactable = false;
+            articraftButton.interactable = false;
+            artifragmentButton.GetComponentInChildren<Text>().color = new Color(0, 1, 0.9893312f, 0.5f);
+            articraftButton.GetComponentInChildren<Text>().color = new Color(0, 1, 0.9893312f, 0.5f);
+        }
+    }
+
+    public void UnlockArtifragmentMenus()
+    {
+        if (MiscData.unlockedArticrafting)
+        {
+            artifragmentButton.interactable = true;
+            articraftButton.interactable = true;
+            artifragmentButton.GetComponentInChildren<Text>().color = new Color(0, 1, 0.9893312f, 1f);
+            articraftButton.GetComponentInChildren<Text>().color = new Color(0, 1, 0.9893312f, 1f);
+        }
     }
 
     private void Update()
@@ -39,7 +57,7 @@ public class PauseMenu : MonoBehaviour
         if (mainPauseMenu.activeSelf == false)
         {
             if (
-                playerScript.windowAlreadyOpen == false 
+                PlayerProperties.playerScript.windowAlreadyOpen == false 
                 && quitConfirmationButton.activeSelf == false 
                 && quitConfirmationButtonInCombat.activeSelf == false
                 && quitToTitleSceneConfirmation.activeSelf == false
@@ -47,7 +65,7 @@ public class PauseMenu : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
-                    playerScript.windowAlreadyOpen = true;
+                    PlayerProperties.playerScript.windowAlreadyOpen = true;
                     mainPauseMenu.SetActive(true);
                     Time.timeScale = 0;
                 }
@@ -56,14 +74,28 @@ public class PauseMenu : MonoBehaviour
         else
         {
             Time.timeScale = 0;
-            playerScript.windowAlreadyOpen = true;
+            PlayerProperties.playerScript.windowAlreadyOpen = true;
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                playerScript.windowAlreadyOpen = false;
+                PlayerProperties.playerScript.windowAlreadyOpen = false;
                 mainPauseMenu.SetActive(false);
                 Time.timeScale = 1;
             }
         }
+    }
+
+    public void OpenInventoryAndArticrafting()
+    {
+        mainPauseMenu.SetActive(false);
+        PlayerProperties.playerInventory.OpenCraftingAndInventory();
+        FindObjectOfType<AudioManager>().PlaySound("Pause Menu Button");
+    }
+
+    public void OpenInventoryAndArtifragmenting()
+    {
+        mainPauseMenu.SetActive(false);
+        PlayerProperties.playerInventory.OpenDisenchantingAndInventory();
+        FindObjectOfType<AudioManager>().PlaySound("Pause Menu Button");
     }
 
     public void openDungeonMap()
@@ -91,12 +123,7 @@ public class PauseMenu : MonoBehaviour
     public void openInventory()
     {
         mainPauseMenu.SetActive(false);
-        inventoryDisplay.SetActive(true);
-        inventory.PlayInventoryEnterAnimation();
-        inventory.UpdateUI();
-        artifactsDisplay.SetActive(true);
-        artifacts.PlayEnteringAnimation();
-        artifacts.UpdateUI();
+        PlayerProperties.playerInventory.OpenArtifactsAndInventory();
         FindObjectOfType<AudioManager>().PlaySound("Pause Menu Button");
     }
 
@@ -120,14 +147,14 @@ public class PauseMenu : MonoBehaviour
 
     public void quitGame()
     {
-        if (playerScript.enemiesDefeated == true)
+        if (PlayerProperties.playerScript.enemiesDefeated == true)
         {
             MiscData.playerDied = true;
         }
         else
         {
-            playerScript.playerDead = true;
-            playerScript.applyInventoryLoss();
+            PlayerProperties.playerScript.playerDead = true;
+            PlayerProperties.playerScript.applyInventoryLoss();
         }
         alreadyAppliedLossesQuit = true;
         SaveSystem.SaveGame();
@@ -137,7 +164,7 @@ public class PauseMenu : MonoBehaviour
 
     public void endExpedition()
     {
-        if(playerScript.enemiesDefeated == true)
+        if(PlayerProperties.playerScript.enemiesDefeated == true)
         {
             mainPauseMenu.SetActive(false);
             quitConfirmationButton.SetActive(true);
@@ -153,7 +180,7 @@ public class PauseMenu : MonoBehaviour
     public void endExpeditionLoadHub()
     {
         Time.timeScale = 1;
-        if(playerScript.enemiesDefeated == true)
+        if(PlayerProperties.playerScript.enemiesDefeated == true)
         {
             choosePlayerHubToLoad();
             SaveSystem.SaveGame();
@@ -161,8 +188,8 @@ public class PauseMenu : MonoBehaviour
         else
         {
             MiscData.playerDied = true;
-            playerScript.playerDead = true;
-            playerScript.applyInventoryLoss();
+            PlayerProperties.playerScript.playerDead = true;
+            PlayerProperties.playerScript.applyInventoryLoss();
             choosePlayerHubToLoad();
             SaveSystem.SaveGame();
         }
@@ -234,7 +261,7 @@ public class PauseMenu : MonoBehaviour
     
     public void quitToTitleScreen()
     {
-        if (playerScript.enemiesDefeated == true)
+        if (PlayerProperties.playerScript.enemiesDefeated == true)
         {
             mainPauseMenu.SetActive(false);
             quitToTitleSceneConfirmation.SetActive(true);
@@ -250,16 +277,16 @@ public class PauseMenu : MonoBehaviour
     public void loadTitleScene()
     {
         Time.timeScale = 1;
-        if (playerScript.enemiesDefeated == true)
+        if (PlayerProperties.playerScript.enemiesDefeated == true)
         {
             StartCoroutine(fadeLoadScene(0));
             SaveSystem.SaveGame();
         }
         else
         {
-            playerScript.playerDead = true;
+            PlayerProperties.playerScript.playerDead = true;
             MiscData.playerDied = true;
-            playerScript.applyInventoryLoss();
+            PlayerProperties.playerScript.applyInventoryLoss();
             StartCoroutine(fadeLoadScene(0));
             SaveSystem.SaveGame();
         }
@@ -277,10 +304,10 @@ public class PauseMenu : MonoBehaviour
     {
         if (alreadyAppliedLossesQuit == false)
         {
-            if (playerScript.enemiesDefeated == false)
+            if (PlayerProperties.playerScript.enemiesDefeated == false)
             {
-                playerScript.playerDead = true;
-                playerScript.applyInventoryLoss();
+                PlayerProperties.playerScript.playerDead = true;
+                PlayerProperties.playerScript.applyInventoryLoss();
             }
         }
         SaveSystem.SaveGame();

@@ -25,5 +25,5 @@ public class DialogueSet : MonoBehaviour
     public string substituteMusic;
     public string originalMusic;
     public GameObject[] addedItems;
-    public Color textColor = Color.white;
+    public Color[] textColors;
 }

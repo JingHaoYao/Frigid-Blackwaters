@@ -29,6 +29,8 @@ public static class PlayerUpgrades {
     public static int numberSkillPoints = 0;
     public static int numberMaxSkillPoints = 0;
 
+    public static int numberArtifragments = 0;
+
     // Each weapon is represented by a number - order they're placed in player scripts
     public static int whichFrontWeaponEquipped = 0;
     public static int whichLeftWeaponEquipped = 0;

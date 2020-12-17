@@ -44,17 +44,17 @@ public class MenuSlideAnimation : MonoBehaviour
         }
     }
 
-    public void PlayOpeningAnimation(GameObject objectToAnimate)
+    public void PlayOpeningAnimation(GameObject objectToAnimate, UnityAction onComplete = null)
     {
         isAnimating = true;
         objectToAnimate.transform.localPosition = openAnimation.startingPosition;
-        LeanTween.moveLocal(objectToAnimate, openAnimation.endPosition, openAnimation.animationTime).setEaseOutQuad().setIgnoreTimeScale(true).setOnComplete(() => { isAnimating = false; } );
+        LeanTween.moveLocal(objectToAnimate, openAnimation.endPosition, openAnimation.animationTime).setEaseOutQuad().setIgnoreTimeScale(true).setOnComplete(() => { isAnimating = false; onComplete?.Invoke(); } );
     }
 
     public void PlayEndingAnimation(GameObject objectToAnimate, UnityAction action)
     {
         isAnimating = true;
         objectToAnimate.transform.localPosition = endAnimation.startingPosition;
-        LeanTween.moveLocal(objectToAnimate, endAnimation.endPosition, endAnimation.animationTime).setEaseOutQuad().setIgnoreTimeScale(true).setOnComplete(() => { action.Invoke(); isAnimating = false; } );
+        LeanTween.moveLocal(objectToAnimate, endAnimation.endPosition, endAnimation.animationTime).setEaseOutQuad().setIgnoreTimeScale(true).setOnComplete(() => { action.Invoke(); isAnimating = false; });
     }
 }

@@ -5,14 +5,13 @@ using UnityEngine.Events;
 
 public class DialogueUI : MonoBehaviour
 {
-    public DialogueSet targetDialogue;
+    DialogueSet targetDialogue;
     public Image dialogueBackground;
     public Image character1, character2, character3, character4;
     public Text dialogueText, dialogueName;
     int dialogueIndex = 0;
     public Animator blackOverlayAnimator;
     public Image panelImageBack, panelImageFront;
-    public float waitReveal = 0;
     private UnityAction endAction;
     bool loaded = false;
 
@@ -23,6 +22,20 @@ public class DialogueUI : MonoBehaviour
 
     Coroutine textTypingAnimation;
     bool isTypeAnimating = false;
+
+    bool slideInAnimation = false;
+
+    public void LoadDialogueUI(DialogueSet dialogueSet, float waitReveal, UnityAction endAction = null, bool slideInAnimation = false)
+    {
+        this.slideInAnimation = slideInAnimation;
+        targetDialogue = dialogueSet;
+        this.gameObject.SetActive(true);
+        blackOverlayAnimator.gameObject.SetActive(!slideInAnimation);
+
+        playerScript.windowAlreadyOpen = true;
+        StartCoroutine(loadDialogue(waitReveal));
+        this.endAction = endAction;
+    }
 
     void loadCharacterSprite(Image whichCharacter, Sprite characterArt)
     {
@@ -35,11 +48,6 @@ public class DialogueUI : MonoBehaviour
         {
             whichCharacter.enabled = false;
         }
-    }
-
-    public void setEndAction(UnityAction action)
-    {
-        endAction = action;
     }
 
     void loadDialoguePanel(Image backPanel, Image frontPanel, Sprite prevPanel, Sprite newPanel)
@@ -88,7 +96,6 @@ public class DialogueUI : MonoBehaviour
         }
         playerScript.playerDead = true;
         transform.GetChild(0).gameObject.SetActive(false);
-        blackOverlayAnimator.enabled = false;
 
         if (targetDialogue.originalMusic != "")
         {
@@ -116,28 +123,50 @@ public class DialogueUI : MonoBehaviour
 
         dialogueText.transform.parent.gameObject.SetActive(false);
 
-        if (waitDuration != 0)
+        if (slideInAnimation == false)
         {
-            blackOverlayAnimator.gameObject.GetComponent<Image>().color = new Color(0, 0, 0, 1);
-            yield return new WaitForSeconds(waitDuration);
+            blackOverlayAnimator.enabled = true;
+            dialogueBackground.color = Color.white;
+            if (waitDuration != 0)
+            {
+                blackOverlayAnimator.gameObject.GetComponent<Image>().color = new Color(0, 0, 0, 1);
+                yield return new WaitForSeconds(waitDuration);
+            }
+            else
+            {
+                blackOverlayAnimator.gameObject.GetComponent<Image>().color = new Color(0, 0, 0, 0);
+                // This line of code is weird, I decided to add a very brief delay that allows the animator to enter it's first state before transitioning to
+                // the next state (This fixed a bug)
+                yield return new WaitForEndOfFrame();
+                blackOverlayAnimator.SetTrigger("FadeOut");
+                yield return new WaitForSeconds(1f);
+            }
         }
         else
         {
-            blackOverlayAnimator.gameObject.GetComponent<Image>().color = new Color(0, 0, 0, 0);
-            blackOverlayAnimator.enabled = true;
-            // This line of code is weird, I decided to add a very brief delay that allows the animator to enter it's first state before transitioning to
-            // the next state (This fixed a bug)
-            yield return new WaitForEndOfFrame();
-            blackOverlayAnimator.SetTrigger("FadeOut");
-            yield return new WaitForSeconds(1f);
+            dialogueBackground.color = new Color(1, 1, 1, 0);
+            LeanTween.value(0, 1, 0.5f).setOnUpdate((float val) => dialogueBackground.color = dialogueBackground.color = new Color(1, 1, 1, val));
         }
-        transform.GetChild(0).gameObject.SetActive(true);
+
+        if (slideInAnimation == false)
+        {
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
+
         dialogueText.transform.parent.gameObject.SetActive(true);
 
         dialogueIndex = 0;
         textTypingAnimation = StartCoroutine(animateText(0));
-        dialogueText.color = targetDialogue.textColor;
-        dialogueName.color = targetDialogue.textColor;
+
+        if (targetDialogue.textColors != null && targetDialogue.textColors.Length > 0)
+        {
+            dialogueText.color = targetDialogue.textColors[0];
+        }
+        else
+        {
+            dialogueText.color = Color.white;
+        }
+
         dialogueName.text = targetDialogue.dialogueNames[0];
         if(dialogueName.text == "")
         {
@@ -205,15 +234,32 @@ public class DialogueUI : MonoBehaviour
             character4.enabled = false;
         }
 
-        blackOverlayAnimator.enabled = true;
-        blackOverlayAnimator.SetTrigger("FadeIn");
-        yield return new WaitForSeconds(1f);
+        if (slideInAnimation == false)
+        {
+            blackOverlayAnimator.enabled = true;
+            blackOverlayAnimator.SetTrigger("FadeIn");
+            yield return new WaitForSeconds(1f);
+        }
+        else
+        {
+            character1.transform.position = character1.transform.position + Vector3.left * 600;
+            character2.transform.position = character2.transform.position + Vector3.left * 600;
+            character3.transform.position = character3.transform.position + Vector3.right * 600;
+            character4.transform.position = character4.transform.position + Vector3.right * 600;
+
+            LeanTween.move(character1.gameObject, character1.transform.position + Vector3.right * 600, 0.25f);
+            LeanTween.move(character2.gameObject, character2.transform.position + Vector3.right * 600, 0.25f);
+            LeanTween.move(character3.gameObject, character3.transform.position + Vector3.left * 600, 0.25f);
+            LeanTween.move(character4.gameObject, character4.transform.position + Vector3.left * 600, 0.25f);
+            yield return new WaitForSeconds(0.25f);
+        }
+
+
         if (targetDialogue.substituteMusic != "")
         {
             FindObjectOfType<AudioManager>().PlaySound(targetDialogue.substituteMusic);
             FindObjectOfType<AudioManager>().FadeIn(targetDialogue.substituteMusic, 0.2f, 0.6f);
         }
-        waitReveal = 0;
         blackOverlayAnimator.enabled = false;
         loaded = true;
     }
@@ -261,6 +307,15 @@ public class DialogueUI : MonoBehaviour
             loadDialoguePanel(panelImageBack, panelImageFront, targetDialogue.panelSprites[dialogueIndex - 1], targetDialogue.panelSprites[dialogueIndex]);
         }
 
+        if (targetDialogue.textColors != null && targetDialogue.textColors.Length > dialogueIndex)
+        {
+            dialogueText.color = targetDialogue.textColors[dialogueIndex];
+        }
+        else
+        {
+            dialogueText.color = Color.white;
+        }
+
         FindObjectOfType<AudioManager>().PlaySound("Dialogue Blip");
         dialogueName.text = targetDialogue.dialogueNames[index];
 
@@ -286,7 +341,7 @@ public class DialogueUI : MonoBehaviour
             dialogueText.text = targetDialogue.dialogues[index].Substring(0, charIndex);
             if (c != ' ')
             {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSecondsRealtime(0.05f);
             }
         }
         isTypeAnimating = false;
@@ -392,14 +447,33 @@ public class DialogueUI : MonoBehaviour
 
     IEnumerator turnOffDialoguer()
     {
-        blackOverlayAnimator.enabled = true;
-        blackOverlayAnimator.SetTrigger("FadeOut");
         if (targetDialogue.substituteMusic != "")
         {
             FindObjectOfType<AudioManager>().FadeOut(targetDialogue.substituteMusic, 0.2f);
         }
-        yield return new WaitForSeconds(1f);
-        blackOverlayAnimator.SetTrigger("FadeIn");
+
+        if (slideInAnimation == false)
+        {
+            blackOverlayAnimator.enabled = true;
+            blackOverlayAnimator.SetTrigger("FadeOut");
+            yield return new WaitForSeconds(1f);
+        }
+        else
+        {
+            dialogueText.transform.parent.gameObject.SetActive(false);
+            LeanTween.move(character1.gameObject, character1.transform.position + Vector3.left * 600, 0.25f);
+            LeanTween.move(character2.gameObject, character2.transform.position + Vector3.left * 600, 0.25f);
+            LeanTween.move(character3.gameObject, character3.transform.position + Vector3.right * 600, 0.25f);
+            LeanTween.move(character4.gameObject, character4.transform.position + Vector3.right * 600, 0.25f);
+            LeanTween.value(1, 0, 0.5f).setOnUpdate((float val) => dialogueBackground.color = dialogueBackground.color = new Color(1, 1, 1, val));
+            yield return new WaitForSeconds(0.25f);
+        }
+
+        if (slideInAnimation == false)
+        {
+            blackOverlayAnimator.SetTrigger("FadeIn");
+        }
+
         if (targetDialogue.originalMusic != "")
         {
             if (targetDialogue.originalMusic == "Dungeon Ambiance")
@@ -411,7 +485,17 @@ public class DialogueUI : MonoBehaviour
                 FindObjectOfType<AudioManager>().FadeIn(targetDialogue.originalMusic, 0.2f, .5f);
             }
         }
+
         this.gameObject.SetActive(false);
+
+        if(slideInAnimation)
+        {
+            character1.transform.position += Vector3.right * 600;
+            character2.transform.position += Vector3.right * 600;
+            character3.transform.position += Vector3.left * 600;
+            character4.transform.position += Vector3.left * 600;
+        }
+
         targetDialogue = null;
         endAction?.Invoke();
         endAction = null;
@@ -427,8 +511,5 @@ public class DialogueUI : MonoBehaviour
 
         backPanelAnimator = panelImageBack.GetComponent<Animator>();
         frontPanelAnimator = panelImageFront.GetComponent<Animator>();
-
-        playerScript.windowAlreadyOpen = true;
-        StartCoroutine(loadDialogue(waitReveal));
     }
 }

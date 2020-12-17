@@ -10,14 +10,14 @@ public class PendantDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     Inventory inventory;
     DisplayItem displayInfo;
 
+    Image artifactIcon;
+
 	void Start () {
         inventory = GameObject.Find("PlayerShip").GetComponent<Inventory>();
         toolTip = inventory.toolTip;
         displayInfo = GetComponent<DisplayItem>();
-	}
 
-	void Update () {
-		
+        artifactIcon = GetComponent<Image>();
 	}
 
     public void OnPointerExit(PointerEventData eventData)

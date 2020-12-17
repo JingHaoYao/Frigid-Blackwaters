@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class ConsoleCommands : MonoBehaviour
 {
+    [SerializeField] public DialogueUI dialogueUI;
     private void Awake()
     {
         CommandHandlers.RegisterCommandHandlers(this);
@@ -30,6 +31,18 @@ public class ConsoleCommands : MonoBehaviour
     {
         MiscData.finishedTutorial = true;
         SceneManager.LoadScene("Player Hub");
+    }
+
+    [CommandHandler(Name = "AddArtifragments", Description = "Add a given number of artifragments")]
+    private void AddArtifragments(int artifragments)
+    {
+        PlayerUpgrades.numberArtifragments += artifragments;
+    }
+
+    [CommandHandler(Name = "UnlockArticrafting", Description = "Unlock the articrafting and artifragment menus")]
+    private void UnlockArticrafting()
+    {
+        MiscData.unlockedArticrafting = true;
     }
 
     [CommandHandler(Name = "EquipWeapon", Description = "Equip a weapon on a specific side of your ship")]
@@ -224,6 +237,16 @@ public class ConsoleCommands : MonoBehaviour
         Instantiate(Resources.Load<GameObject>("Regular Enemies/Dummy Enemy"), Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity);
     }
 
+    [CommandHandler(Name = "StartDragonArmorBossFight", Description = "Start the dragon armor boss fight if you're on the fifth level")]
+    private void StartDragonArmorBossFight()
+    {
+        SkyClimberBossManager skyClimberBossManager = FindObjectOfType<SkyClimberBossManager>();
+        if (skyClimberBossManager != null)
+        {
+            skyClimberBossManager.startMovingPlayer();
+        }
+    }
+
     [CommandHandler(Name = "AddGoldItem", Description = "Spawn new gold items in inventory")]
     private void SpawnGoldItems(int goldAmount, int numberGoldItems)
     {
@@ -275,6 +298,13 @@ public class ConsoleCommands : MonoBehaviour
     {
         PlayerProperties.playerShip.transform.position = new Vector3(xPosition, yPosition);
         Camera.main.transform.position = new Vector3(xPosition, yPosition);
+    }
+
+    [CommandHandler(Name = "PlayDialogue", Description = "Play a Dialogue using the Dialogue System")]
+    private void PlayDialogue(string dialogueResourcePath, bool menuSlideAnimation)
+    {
+        DialogueSet dialogueSetToPlay = Resources.Load<DialogueSet>(dialogueResourcePath);
+        FindObjectOfType<DungeonEntryDialogueManager>().dialogueUI.LoadDialogueUI(dialogueSetToPlay, 0f, () => { }, menuSlideAnimation);
     }
 
     IEnumerator WaitForFogDuration(float duration)

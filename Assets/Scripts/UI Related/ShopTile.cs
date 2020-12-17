@@ -41,10 +41,15 @@ public class ShopTile : MonoBehaviour/*, IPointerEnterHandler, IPointerExitHandl
         {
             int gold = tallyGold();
             int remainder = price;
+
+            int goldStacks = Mathf.FloorToInt((float)gold / 1000);
+
+            int goldStacksAfterPriceReduction = Mathf.FloorToInt((float)(gold - price) / 1000);
+
             if
             (
                gold >= price
-               && inventory.itemList.Count < GameObject.Find("PlayerShip").GetComponent<Inventory>().inventorySize
+               && (inventory.itemList.Count < PlayerItems.maxInventorySize || goldStacksAfterPriceReduction < goldStacks)
                && displayInfo != null
             )
             {
@@ -117,24 +122,6 @@ public class ShopTile : MonoBehaviour/*, IPointerEnterHandler, IPointerExitHandl
             toolTip.SetActive(false);
     }
 
-    /*public void OnPointerExit(PointerEventData eventData)
-    {
-        if (displayInfo != null)
-        {
-            toolTip.SetActive(false);
-        }
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if (displayInfo != null)
-        {
-            toolTip.SetActive(true);
-            toolTip.transform.position = this.transform.position;
-            toolTip.GetComponentInChildren<Text>().text = displayInfo.GetComponent<Text>().text;
-        }
-    }*/
-
     public void exitToolTip()
     {
         if (displayInfo != null)
@@ -148,9 +135,7 @@ public class ShopTile : MonoBehaviour/*, IPointerEnterHandler, IPointerExitHandl
 
         if (displayInfo != null)
         {
-            toolTip.SetActive(true);
-            toolTip.transform.position = this.transform.position;
-            toolTip.GetComponentInChildren<Text>().text = displayInfo.GetComponent<Text>().text;
+            PlayerProperties.toolTip.SetTextAndPosition(displayInfo.GetComponent<Text>().text, transform.position);
         }
     }
 }

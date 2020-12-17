@@ -78,17 +78,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3413237697335271828}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -104,11 +103,13 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'War God''s Helmet [Rare]
 
-    The helmet pulses like a heart, shuttering and
+    The helmet pulses like a heart, shuttering
+    and
 
     even making noise. It harnesses a latent destructive
 
-    aura, and it almost feels alive.
+    aura, and
+    it almost feels alive.
 
     Grants +3 Attack and +1 Speed.'
 --- !u!114 &3413237697335271827
@@ -132,3 +133,4 @@ MonoBehaviour:
   artifactChanceBonus: 0
   goldBonus: 0
   killRequirement: 0
+  whatRarity: 2

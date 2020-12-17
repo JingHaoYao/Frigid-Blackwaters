@@ -12,4 +12,5 @@ public class ArtifactBonus : MonoBehaviour{
     public int artifactChanceBonus;
     public int goldBonus;
     public int killRequirement;
+    public int whatRarity;
 }

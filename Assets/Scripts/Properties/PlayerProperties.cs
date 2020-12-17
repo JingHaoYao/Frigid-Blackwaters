@@ -18,6 +18,8 @@ public class PlayerProperties
 
     public static PlayerArmorEffect armorIndicator;
     public static DurationUI durationUI;
+    public static ShipStats shipStats;
+    public static ToolTip toolTip;
 
     public static ShipWeaponScript leftWeapon;
     public static ShipWeaponScript rightWeapon;
@@ -29,5 +31,15 @@ public class PlayerProperties
     public static CameraShake cameraShake;
 
     public static FlammableController flammableController;
+    public static ArticraftingDisenchantingMenu articraftingDisenchantingMenu;
+    public static ArticraftingCraftingMenu articraftingCraftingMenu;
+
+    public static AudioManager audioManager;
+
+    public static ItemTemplates itemTemplates;
+
+    public static TutorialWidgetMenu tutorialWidgetMenu;
+
+    public static PauseMenu pauseMenu;
 
 }

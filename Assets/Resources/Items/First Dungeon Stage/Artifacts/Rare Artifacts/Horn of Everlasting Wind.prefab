@@ -52,7 +52,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40477e35b1e5e674e980ee948692d1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Horn of Everlasting Wind
   displayIcon: {fileID: 21300000, guid: 9f4030375002a484dbeeb8bcdbaeff0e, type: 3}
   goldValue: 0
   isArtifact: 1
@@ -79,17 +78,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1657198373467762}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -103,9 +101,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Horn of Everlasting Wind [Rare]\nA powerful relic from the past, this \nornate
-    horn has the rare ability to\nchannel wind infinitely.\nGrants +1 Speed.\n2 Kill
-    Active: Give +3 Speed to your \nship for 3 seconds. "
+  m_Text: "Horn of Everlasting Wind [Rare]\nA powerful relic from the past, this
+    \nornate horn has the rare ability to\nchannel wind infinitely.\nGrants +1 Speed.\n2
+    Kill Active: Give +3 Speed to your \nship for 3 seconds. "
 --- !u!114 &114412264057502846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,6 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whatDungeonArtifact: 1
   speedBonus: 1
   defenseBonus: 0
   attackBonus: 0
@@ -126,6 +125,7 @@ MonoBehaviour:
   artifactChanceBonus: 0
   goldBonus: 0
   killRequirement: 2
+  whatRarity: 2
 --- !u!114 &114346226997257048
 MonoBehaviour:
   m_ObjectHideFlags: 0

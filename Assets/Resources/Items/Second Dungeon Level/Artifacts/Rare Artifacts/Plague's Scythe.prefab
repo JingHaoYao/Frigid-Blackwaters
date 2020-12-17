@@ -80,17 +80,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1997300466900803080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -108,15 +107,18 @@ MonoBehaviour:
 
     A morbid blade, it emanates a dark
 
-    and ominous energy that feels sinister
+    and
+    ominous energy that feels sinister
 
     to the touch.
 
-    4 Kill Active: For the next 5 seconds, every
+    4 Kill Active: For
+    the next 5 seconds, every
 
     enemy death adds +100 Max Health and
 
-    +0.1 Speed.'
+    +0.1
+    Speed.'
 --- !u!114 &1997300466900803077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,6 +140,7 @@ MonoBehaviour:
   artifactChanceBonus: 0
   goldBonus: 0
   killRequirement: 4
+  whatRarity: 2
 --- !u!114 &1997300466900803074
 MonoBehaviour:
   m_ObjectHideFlags: 0

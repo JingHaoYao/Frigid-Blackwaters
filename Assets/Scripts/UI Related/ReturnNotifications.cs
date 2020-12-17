@@ -10,7 +10,6 @@ public class ReturnNotifications : MonoBehaviour
     public List<DialogueSet> dialoguesToDisplay;
 
     public DialogueUI dialogueUI;
-    public GameObject blackOverlay;
 
     bool notificationsClosed = false;
     bool buildingUnlocked = false;
@@ -333,9 +332,7 @@ public class ReturnNotifications : MonoBehaviour
             {
                 if (dialogueUI.gameObject.activeSelf == false)
                 {
-                    dialogueUI.targetDialogue = dialoguesToDisplay[0];
-                    dialogueUI.waitReveal = 0.001f;
-                    dialogueUI.gameObject.SetActive(true);
+                    dialogueUI.LoadDialogueUI(dialoguesToDisplay[0], 0.001f);
                     dialoguesToDisplay.Remove(dialoguesToDisplay[0]);
 
                     if (midDialogueAction != null)
@@ -343,7 +340,6 @@ public class ReturnNotifications : MonoBehaviour
                         midDialogueAction.Invoke(dialoguesToDisplay.Count);
                     }
 
-                    blackOverlay.SetActive(true);
                     buildingUnlocked = true;
                 }
             }

@@ -17,7 +17,6 @@ public class PyrotheumProjectile : MonoBehaviour
     // In degrees
     public float angleTravel;
     [SerializeField] float rotationOffset;
-    [SerializeField] float radiusBurn = 1;
 
     void Start()
     {
@@ -44,10 +43,7 @@ public class PyrotheumProjectile : MonoBehaviour
             impacted = true;
             animator.SetTrigger(breakString);
 
-            if (collision.gameObject.layer == 12)
-            {
-                EnemyPool.floorFireSpawner.SpawnFloorFires(transform.position, radiusBurn);
-            }
+            EnemyPool.floorFireSpawner.SpawnFloorFires(transform.position, 1f);
 
             if (playSound)
             {

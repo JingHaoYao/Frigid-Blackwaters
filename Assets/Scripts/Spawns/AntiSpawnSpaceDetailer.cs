@@ -1038,7 +1038,6 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
     void triggerDialogue(int whatType)
     {
         DialogueUI dialogueUI = dialogueManager.dialogueUI;
-        GameObject dialogueBlackOverlay = dialogueManager.dialogueBlackOverlay;
         DialogueSet targetDialogue = null;
 
         switch (whatType){
@@ -1074,10 +1073,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
 
         if (targetDialogue != null)
         {
-            dialogueUI.targetDialogue = targetDialogue;
-            dialogueUI.waitReveal = 0.1f;
-            dialogueUI.gameObject.SetActive(true);
-            dialogueBlackOverlay.SetActive(true);
+            dialogueUI.LoadDialogueUI(targetDialogue, 0.1f);
             playerScript.playerDead = true;
         }
     }

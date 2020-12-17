@@ -62,10 +62,8 @@ public class MutantLiliaceae : Enemy {
         cameraScript.freeCam = false;
         cameraScript.trackPlayer = true;
         PlayerProperties.playerScript.playerDead = false;
-        dialogueUI.targetDialogue = mutantLiliaceaeInterstitialDialogue;
-        dialogueUI.setEndAction(() => StartCoroutine(mainEnemyLoop()));
-        dialogueBlackOverlay.SetActive(true);
-        dialogueUI.gameObject.SetActive(true);
+
+        dialogueUI.LoadDialogueUI(mutantLiliaceaeInterstitialDialogue, 0f, () => StartCoroutine(mainEnemyLoop()));
     }
 
     IEnumerator mainEnemyLoop()
