@@ -30,7 +30,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -11.095612}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 7859198837582067230}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -101,18 +102,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Bubble Wand [Uncommon]
+  m_Text: 'An ancient weapon belonging to residents of the sea, it
 
-    An ancient weapon belonging to residents of
-    the sea, it
-
-    can conjure water out of thin air to wipe our opponents.
-
-    1
-    Kill Active: Summon a ball of water that deals 3 damage
-
-    on impact that moves
-    towards your cursor.'
+    can conjure
+    water out of thin air to wipe our opponents.'
 --- !u!114 &1281700862374222692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bf99b6aebf9b6940822855844952755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  artifactName: Bubble Wand
   whatDungeonArtifact: 4
   speedBonus: 0
   defenseBonus: 0
@@ -135,5 +129,88 @@ MonoBehaviour:
   goldBonus: 0
   killRequirement: 1
   whatRarity: 1
+  descriptionText: {fileID: 1281700862374222688}
+  effectText: {fileID: 1178094771966502887}
   displayItem: {fileID: 1281700862374222694}
   bubble: {fileID: 7846007952790727283, guid: eab64a96e89afbb41a0990841112814f, type: 3}
+--- !u!1 &2945612297208740769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7859198837582067230}
+  - component: {fileID: 6531500034091081578}
+  - component: {fileID: 1178094771966502887}
+  m_Layer: 0
+  m_Name: Effect Desc
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7859198837582067230
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2945612297208740769}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -58.695404}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1281700862374222695}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1.583374, y: -4.4385986}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &6531500034091081578
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2945612297208740769}
+  m_CullTransparentMesh: 0
+--- !u!114 &1178094771966502887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2945612297208740769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Summon a ball of water that deals 3 damage
+
+    on impact that moves towards
+    your cursor.'

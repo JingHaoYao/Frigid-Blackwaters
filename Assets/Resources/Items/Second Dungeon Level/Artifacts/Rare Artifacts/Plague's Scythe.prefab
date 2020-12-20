@@ -32,7 +32,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1156.1262}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8095465715239017006}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -103,22 +104,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Plague''s Scythe [Rare]
+  m_Text: 'A morbid blade, it emanates a dark
 
-    A morbid blade, it emanates a dark
+    and ominous energy that feels
+    sinister
 
-    and
-    ominous energy that feels sinister
-
-    to the touch.
-
-    4 Kill Active: For
-    the next 5 seconds, every
-
-    enemy death adds +100 Max Health and
-
-    +0.1
-    Speed.'
+    to the touch.'
 --- !u!114 &1997300466900803077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  artifactName: Plague's Scythe
   whatDungeonArtifact: 2
   speedBonus: 0
   defenseBonus: 0
@@ -141,6 +133,8 @@ MonoBehaviour:
   goldBonus: 0
   killRequirement: 4
   whatRarity: 2
+  descriptionText: {fileID: 1997300466900803081}
+  effectText: {fileID: 1997300466900803081}
 --- !u!114 &1997300466900803074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,3 +248,86 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &8797485268844300363
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8095465715239017006}
+  - component: {fileID: 7306600068405673723}
+  - component: {fileID: 8015619279503124775}
+  m_Layer: 0
+  m_Name: Effect Desc
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8095465715239017006
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8797485268844300363}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 490.62506}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1997300466900803076}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 209.03772, y: -439.95746}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7306600068405673723
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8797485268844300363}
+  m_CullTransparentMesh: 0
+--- !u!114 &8015619279503124775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8797485268844300363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: ' For the next 5 seconds, every
+
+    enemy death adds +100 Max Health and
+
+    +0.1
+    Speed.'

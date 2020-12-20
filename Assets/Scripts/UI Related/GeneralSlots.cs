@@ -59,6 +59,7 @@ public class GeneralSlots : MonoBehaviour
         if (displayInfo != null)
         {
             toolTip.SetActive(false);
+            PlayerProperties.artifactToolTip.gameObject.SetActive(false);
         }
     }
 
@@ -66,9 +67,28 @@ public class GeneralSlots : MonoBehaviour
     {
         if (displayInfo != null)
         {
-            toolTip.SetActive(true);
-            toolTip.transform.position = this.transform.position;
-            toolTip.GetComponentInChildren<Text>().text = displayInfo.GetComponent<Text>().text;
+            if (!displayInfo.isArtifact)
+            {
+                PlayerProperties.toolTip.SetTextAndPosition(displayInfo.GetComponent<Text>().text, transform.position);
+            }
+            else
+            {
+                ArtifactBonus artifactBonus = displayInfo.GetComponent<ArtifactBonus>();
+                PlayerProperties.artifactToolTip.SetTextAndPosition(
+                    artifactBonus.artifactName,
+                    artifactBonus.descriptionText.text,
+                    artifactBonus.effectText == null ? "" : artifactBonus.effectText.text,
+                    artifactBonus.attackBonus,
+                    artifactBonus.speedBonus,
+                    artifactBonus.healthBonus,
+                    artifactBonus.defenseBonus,
+                    artifactBonus.periodicHealing,
+                    displayInfo.hasActive,
+                    displayInfo.soulBound,
+                    artifactBonus.killRequirement,
+                    artifactBonus.whatRarity,
+                    transform.position);
+            }
         }
     }
 }

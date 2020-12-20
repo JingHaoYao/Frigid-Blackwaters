@@ -101,17 +101,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Healing Well Tonic [Consumable]
+  m_Text: 'Poured from the healing well in the middle of the
 
-    Poured from the healing well in the
-    middle of the
+    Nymph village,
+    this tonic tastes oddly sweet, but
 
-    Nymph village, this tonic tastes oddly sweet, but
-
-    restores
-    you from fatigue instantly.
-
-    Grants +2800 Healing.'
+    restores you from fatigue instantly.'
 --- !u!114 &1551803403713528246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,11 +119,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb967d11f454a6d488ef62969b291d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  consumableName: Healing Well Tonic
   restoredHealth: 2800
   attackBonus: 0
   defenseBonus: 0
   speedBonus: 0
   duration: 0
   priceBase: 1400
-  consumableActivated: 0
+  loreText: {fileID: 1551803403713528247}
+  effectText: {fileID: 0}
   destroyConsumable: 1

@@ -59,6 +59,8 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         imageIcon.SetActive(false);
         goldInfo.SetActive(false);
         toolTip.SetActive(false);
+        PlayerProperties.artifactToolTip.gameObject.SetActive(false);
+        PlayerProperties.consumableToolTip.gameObject.SetActive(false);
     }
 
     public void deleteItem()
@@ -190,14 +192,51 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (displayInfo != null)
         {
             toolTip.SetActive(false);
+            PlayerProperties.artifactToolTip.gameObject.SetActive(false);
+            PlayerProperties.consumableToolTip.gameObject.SetActive(false);
         }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (displayInfo != null)
-        {   
-            PlayerProperties.toolTip.SetTextAndPosition(displayInfo.GetComponent<Text>().text, transform.position);
+        {
+            if (displayInfo.isArtifact)
+            {
+                ArtifactBonus artifactBonus = displayInfo.GetComponent<ArtifactBonus>();
+                PlayerProperties.artifactToolTip.SetTextAndPosition(
+                    artifactBonus.artifactName,
+                    artifactBonus.descriptionText.text,
+                    artifactBonus.effectText == null ? "" : artifactBonus.effectText.text,
+                    artifactBonus.attackBonus,
+                    artifactBonus.speedBonus,
+                    artifactBonus.healthBonus,
+                    artifactBonus.defenseBonus,
+                    artifactBonus.periodicHealing,
+                    displayInfo.hasActive,
+                    displayInfo.soulBound,
+                    artifactBonus.killRequirement,
+                    artifactBonus.whatRarity,
+                    transform.position);
+            }
+            else if (displayInfo.isConsumable)
+            {
+                ConsumableBonus consumableBonus = displayInfo.GetComponent<ConsumableBonus>();
+                PlayerProperties.consumableToolTip.SetTextAndPosition(
+                    consumableBonus.consumableName,
+                    consumableBonus.loreText.text,
+                    consumableBonus.effectText == null ? "" : consumableBonus.effectText.text,
+                    consumableBonus.attackBonus,
+                    consumableBonus.speedBonus,
+                    consumableBonus.defenseBonus,
+                    consumableBonus.restoredHealth,
+                    consumableBonus.duration,
+                    transform.position);
+            }
+            else
+            {
+                PlayerProperties.toolTip.SetTextAndPosition(displayInfo.GetComponent<Text>().text, transform.position);
+            }
         }
     }
 

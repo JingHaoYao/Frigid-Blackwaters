@@ -101,9 +101,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Elixir of the Kraken [Uncommon]\nAn ancient brew made from the tentacles
-    of\nan ancient sea creature that once was the king\nof all animals in the sea.
-    \nGrants +800 Healing whenever entering a new room."
+  m_Text: 'An ancient brew made from the tentacles of
+
+    an ancient sea creature
+    that once was the king
+
+    of all animals in the sea. '
 --- !u!114 &4908450580346937018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  artifactName: Elixir of the Kraken
   whatDungeonArtifact: 4
   speedBonus: 0
   defenseBonus: 0
@@ -126,3 +130,5 @@ MonoBehaviour:
   goldBonus: 0
   killRequirement: 0
   whatRarity: 1
+  descriptionText: {fileID: 4908450580346936997}
+  effectText: {fileID: 0}

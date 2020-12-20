@@ -101,9 +101,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Blue Steel Sheet Planks [Consumable]\nPlates of blue steel have been clipped
-    by Nymph \nblacksmiths into planks that can be used to repair \nbroken wooden
-    planks on your ship.\nGrants +2250 Healing and +10% Defense Bonus\nfor 1 Minute."
+  m_Text: "Plates of blue steel have been clipped by Nymph \nblacksmiths into planks
+    that can be used to repair \nbroken wooden planks on your ship."
 --- !u!114 &5835041968728389623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,10 +115,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb967d11f454a6d488ef62969b291d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  consumableName: Blue Steel Sheet Planks
   restoredHealth: 2250
   attackBonus: 0
   defenseBonus: 0.1
   speedBonus: 0
   duration: 60
   priceBase: 1200
+  loreText: {fileID: 5835041968728389611}
+  effectText: {fileID: 0}
   destroyConsumable: 1

@@ -100,8 +100,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Emanating Totem [Uncommon]\nConstructed from stones found\nin the dungeon,
-    the strange \netchings on this totem emit a \nsoothing aura. \nGrants +10% Defense.\n"
+  m_Text: "Constructed from stones found\nin the dungeon, the strange \netchings
+    on this totem emit a \nsoothing aura. "
 --- !u!114 &114900372564398552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  artifactName: Emanating Totem
   whatDungeonArtifact: 1
   speedBonus: 0
   defenseBonus: 0.1
@@ -124,3 +125,5 @@ MonoBehaviour:
   goldBonus: 0
   killRequirement: 0
   whatRarity: 1
+  descriptionText: {fileID: 114490476373359600}
+  effectText: {fileID: 0}

@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class ConsumableBonus : MonoBehaviour {
+    public string consumableName;
     public int restoredHealth;
     public int attackBonus;
     public float defenseBonus;
     public int speedBonus;
     public int duration;
     public int priceBase;
+
+    public Text loreText;
+    public Text effectText;
 
     public bool destroyConsumable = true;
     UnityAction consumableAction;

@@ -101,17 +101,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Brazen Gauntlets [Uncommon]
+  m_Text: 'These gauntlets are fitted with a bright red steel.
 
-    These gauntlets are fitted with a bright
-    red steel.
+    The hefty weight
+    of both of these guantlets
 
-    The hefty weight of both of these guantlets
-
-    indicates the
-    need for true strength to wield them.
-
-    Grants 10% Defense and +1500 Max Health.'
+    indicates the need for true strength to wield
+    them.'
 --- !u!114 &3658826778354565102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  artifactName: Brazen Gauntlets
   whatDungeonArtifact: 4
   speedBonus: 0
   defenseBonus: 0.1
@@ -134,3 +131,5 @@ MonoBehaviour:
   goldBonus: 0
   killRequirement: 0
   whatRarity: 1
+  descriptionText: {fileID: 3658826778354565100}
+  effectText: {fileID: 0}

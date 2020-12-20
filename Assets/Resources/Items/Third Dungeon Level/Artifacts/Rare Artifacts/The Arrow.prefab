@@ -100,20 +100,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'The Arrow [Rare]
+  m_Text: 'An arrow that once was buried below the sands of
 
-    An arrow that once was buried below the sands of
+    a great desert,
+    it is said that stabbing yourself with it
 
-    a
-    great desert, it is said that stabbing yourself with it
-
-    bestows a great
-    evolution of power.
-
-    Grants +2 Attack, +1 Speed, +800 Max Health and
-
-    10%
-    Defense.'
+    bestows a great evolution of power.'
 --- !u!114 &7826692437434205528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  artifactName: The Arrow
   whatDungeonArtifact: 3
   speedBonus: 1
   defenseBonus: 0.1
@@ -136,3 +129,5 @@ MonoBehaviour:
   goldBonus: 0
   killRequirement: 0
   whatRarity: 2
+  descriptionText: {fileID: 7826692437434205524}
+  effectText: {fileID: 0}

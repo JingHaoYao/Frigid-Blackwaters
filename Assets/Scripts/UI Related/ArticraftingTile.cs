@@ -139,13 +139,24 @@ public class ArticraftingTile : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        toolTip.SetActive(false);
+        PlayerProperties.artifactToolTip.gameObject.SetActive(false);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        toolTip.SetActive(true);
-        toolTip.transform.position = this.transform.position;
-        toolTip.GetComponentInChildren<Text>().text = artifactText.text;
+        PlayerProperties.artifactToolTip.SetTextAndPosition(
+            artifactBonus.artifactName,
+            artifactBonus.descriptionText.text,
+            artifactBonus.effectText == null ? "" : artifactBonus.effectText.text,
+            artifactBonus.attackBonus,
+            artifactBonus.speedBonus,
+            artifactBonus.healthBonus,
+            artifactBonus.defenseBonus,
+            artifactBonus.periodicHealing,
+            artifactDisplayItem.hasActive,
+            artifactDisplayItem.soulBound,
+            artifactBonus.killRequirement,
+            artifactBonus.whatRarity,
+            transform.position);
     }
 }

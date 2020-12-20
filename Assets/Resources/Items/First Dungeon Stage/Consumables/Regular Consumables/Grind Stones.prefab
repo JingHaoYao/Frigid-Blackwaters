@@ -100,14 +100,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Grindstones [Consumable]
+  m_Text: 'These stones are used to sharpen
 
-    These stones are used to sharpen
-
-    all
-    sorts of weapons.
-
-    Grants +1 Attack for 1 Minute.'
+    all sorts of weapons.'
 --- !u!114 &114863218528721158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,10 +115,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb967d11f454a6d488ef62969b291d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  consumableName: Grindstones
   restoredHealth: 0
   attackBonus: 1
   defenseBonus: 0
   speedBonus: 0
   duration: 60
   priceBase: 700
+  loreText: {fileID: 114136537450031100}
+  effectText: {fileID: 0}
   destroyConsumable: 1

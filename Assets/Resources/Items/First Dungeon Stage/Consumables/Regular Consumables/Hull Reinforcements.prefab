@@ -100,14 +100,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Hull Reinforcements [Consumable]
+  m_Text: 'These sheets of metal are made from
 
-    These sheets of metal are made from
-
-    sturdy
-    water-resistant alloy.
-
-    Grants +20% Defense for 3 Minutes.'
+    sturdy water-resistant alloy.'
 --- !u!114 &114323373160636620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,10 +115,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb967d11f454a6d488ef62969b291d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  consumableName: Hull Reinforcements
   restoredHealth: 0
   attackBonus: 0
   defenseBonus: 0.2
   speedBonus: 0
   duration: 180
   priceBase: 500
+  loreText: {fileID: 114889319236892614}
+  effectText: {fileID: 0}
   destroyConsumable: 1

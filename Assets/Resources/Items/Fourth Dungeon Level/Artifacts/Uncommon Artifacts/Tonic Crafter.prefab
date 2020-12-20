@@ -31,7 +31,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -119.84375}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6116409374215718817}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -102,23 +103,15 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Tonic Crafter [Uncommon]
+  m_Text: 'Lines of glass vials are placed in slots along the
 
-    Lines of glass vials are placed in slots
-    along the
+    shaft of this
+    mechanism. It seems it''s capable of
 
-    shaft of this mechanism. It seems it''s capable of
+    dispensing vials of healing tonic to
+    those who
 
-    dispensing
-    vials of healing tonic to those who
-
-    use it.
-
-    8 Kill Active: If your
-    inventory is not full, grants you
-
-    a Healing Tonic consumable that heals
-    for 1000 Health.'
+    use it.'
 --- !u!114 &3492893462998704189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8ec027f1b29e942a8be9edb1c1a6a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  artifactName: Tonic Crafter
   whatDungeonArtifact: 4
   speedBonus: 0
   defenseBonus: 0
@@ -141,6 +135,8 @@ MonoBehaviour:
   goldBonus: 0
   killRequirement: 8
   whatRarity: 1
+  descriptionText: {fileID: 3492893462998704186}
+  effectText: {fileID: 191309349764544365}
   displayItem: {fileID: 3492893462998704184}
   healingTonicItem: {fileID: 7560227534575075756, guid: 6e291b9dfa16abe42a9cae720faebec8,
     type: 3}
@@ -242,3 +238,84 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &6896652521947581718
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6116409374215718817}
+  - component: {fileID: 260337618767777463}
+  - component: {fileID: 191309349764544365}
+  m_Layer: 0
+  m_Name: Effect Desc
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &6116409374215718817
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6896652521947581718}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 50.052734}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3492893462998704191}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -81.930786, y: 44.903732}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &260337618767777463
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6896652521947581718}
+  m_CullTransparentMesh: 0
+--- !u!114 &191309349764544365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6896652521947581718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'If your inventory is not full, grants you
+
+    a Healing Tonic consumable
+    that heals for 1000 Health.'

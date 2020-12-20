@@ -100,17 +100,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Invigorating Potions [Consumable]
+  m_Text: 'These potions are made from an old
 
-    These potions are made from an
-    old
-
-    recipe. Drinking these restores vitality.
-
-    Grants +1 Attack and
-    +1 Speed for
-
-    3 Minutes.'
+    recipe. Drinking these restores
+    vitality.'
 --- !u!114 &114282757447250082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,10 +116,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb967d11f454a6d488ef62969b291d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  consumableName: Invigorating Potions
   restoredHealth: 0
   attackBonus: 1
   defenseBonus: 0
   speedBonus: 1
   duration: 180
   priceBase: 800
+  loreText: {fileID: 114415135694759416}
+  effectText: {fileID: 0}
   destroyConsumable: 1

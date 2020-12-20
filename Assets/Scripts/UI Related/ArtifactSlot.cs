@@ -31,6 +31,7 @@ public class ArtifactSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         displayInfo = null;
         imageIcon.SetActive(false);
         toolTip.SetActive(false);
+        PlayerProperties.artifactToolTip.gameObject.SetActive(false);
     }
 
     public void removeArtifact()
@@ -59,6 +60,7 @@ public class ArtifactSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (displayInfo != null)
         {
             toolTip.SetActive(false);
+            PlayerProperties.artifactToolTip.gameObject.SetActive(false);
         }
     }
 
@@ -66,8 +68,21 @@ public class ArtifactSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         if (displayInfo != null)
         {
-            PlayerProperties.toolTip.SetTextAndPosition(displayInfo.GetComponent<Text>().text, transform.position);
+            ArtifactBonus artifactBonus = displayInfo.GetComponent<ArtifactBonus>();
+            PlayerProperties.artifactToolTip.SetTextAndPosition(
+                artifactBonus.artifactName,
+                artifactBonus.descriptionText.text,
+                artifactBonus.effectText == null ? "" : artifactBonus.effectText.text,
+                artifactBonus.attackBonus,
+                artifactBonus.speedBonus,
+                artifactBonus.healthBonus,
+                artifactBonus.defenseBonus,
+                artifactBonus.periodicHealing,
+                displayInfo.hasActive,
+                displayInfo.soulBound,
+                artifactBonus.killRequirement,
+                artifactBonus.whatRarity,
+                transform.position);
         }
     }
-
 }

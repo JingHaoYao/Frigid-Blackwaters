@@ -78,17 +78,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1799394740553410053}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -102,15 +101,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Ornamental Whale [Common]
+  m_Text: 'Forged out of a tempered blue alloy,
 
-    Forged out of a tempered blue alloy,
+    deep green emeralds are used
+    as its
 
-    deep green emeralds are used as its
-
-    eyes, giving a mystical look.
-
-    Grants +1 Speed.'
+    eyes, giving a mystical look.'
 --- !u!114 &1799394740553410050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  artifactName: Ornamental Whale
   whatDungeonArtifact: 2
   speedBonus: 1
   defenseBonus: 0
@@ -132,3 +129,6 @@ MonoBehaviour:
   artifactChanceBonus: 0
   goldBonus: 0
   killRequirement: 0
+  whatRarity: 0
+  descriptionText: {fileID: 1799394740553410054}
+  effectText: {fileID: 0}

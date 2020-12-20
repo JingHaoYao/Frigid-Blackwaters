@@ -101,18 +101,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Spirited Lantern [Common]
+  m_Text: 'The lantern itself is not made up of anything noteworthy,
 
-    The lantern itself is not made up of anything
-    noteworthy,
+    but the
+    spirits lingering around it seem to have a deep
 
-    but the spirits lingering around it seem to have a deep
-
-    attachment
-    to it. They are quite friendly to you.
-
-    Grants +400 Healing whenever entering
-    a new room.'
+    attachment to it. They are
+    quite friendly to you.'
 --- !u!114 &2892344038215607515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  artifactName: Spirited Lantern
   whatDungeonArtifact: 4
   speedBonus: 0
   defenseBonus: 0
@@ -134,3 +130,6 @@ MonoBehaviour:
   artifactChanceBonus: 0
   goldBonus: 0
   killRequirement: 0
+  whatRarity: 0
+  descriptionText: {fileID: 2892344038215607519}
+  effectText: {fileID: 0}

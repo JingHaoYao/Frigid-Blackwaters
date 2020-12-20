@@ -100,21 +100,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Finger Bone Necklace [Uncommon]
+  m_Text: 'A necklace constructed from the
 
-    A necklace constructed from the
+    bones of five severed human
 
-    bones
-    of five severed human
-
-    fingers.
-
-    Grants +250 Healing whenever
-
-    entering
-    a new room, and -200
-
-    Max Health. '
+    fingers.'
 --- !u!114 &114468977052233260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  artifactName: Finger Bone Necklace
   whatDungeonArtifact: 1
   speedBonus: 0
   defenseBonus: 0
@@ -137,3 +128,5 @@ MonoBehaviour:
   goldBonus: 0
   killRequirement: 0
   whatRarity: 1
+  descriptionText: {fileID: 114655894025294698}
+  effectText: {fileID: 0}

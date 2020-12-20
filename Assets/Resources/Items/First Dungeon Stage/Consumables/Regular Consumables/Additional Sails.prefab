@@ -100,8 +100,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Additional Sails [Consumable]\nAdding these extra sails will allow\nyour
-    ship to propel itself faster using\nwind. \nGrants +1 Speed for 3 Minutes."
+  m_Text: 'Adding these extra sails will allow
+
+    your ship to propel itself faster
+    using
+
+    wind. '
 --- !u!114 &114105037385191368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,10 +118,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb967d11f454a6d488ef62969b291d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  consumableName: Additional Sails
   restoredHealth: 0
   attackBonus: 0
   defenseBonus: 0
   speedBonus: 1
   duration: 180
   priceBase: 600
+  loreText: {fileID: 114748846503382556}
+  effectText: {fileID: 0}
   destroyConsumable: 1

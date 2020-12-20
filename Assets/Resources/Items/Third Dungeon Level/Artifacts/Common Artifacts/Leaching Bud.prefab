@@ -78,17 +78,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 9144918685284281577}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -102,17 +101,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Leaching Bud [Common]
+  m_Text: 'A carnivorous plant, it leaches onto its target and initially
 
-    A carnivorous plant, it leaches onto its target and initially
+    pumps
+    nutrients into them to increase their longevity. It
 
-    pumps nutrients into them to increase their longevity. It
-
-    gradually drains blood from its victim over time.
-
-    Grants +1 Attack, +1 Speed, but you lose 250 health
-
-    every time you enter a new room.'
+    gradually drains blood
+    from its victim over time.'
 --- !u!114 &9144918685284281590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  artifactName: Leaching Bud
   whatDungeonArtifact: 3
   speedBonus: 1
   defenseBonus: 0
@@ -134,3 +130,6 @@ MonoBehaviour:
   artifactChanceBonus: 0
   goldBonus: 0
   killRequirement: 0
+  whatRarity: 0
+  descriptionText: {fileID: 9144918685284281578}
+  effectText: {fileID: 0}

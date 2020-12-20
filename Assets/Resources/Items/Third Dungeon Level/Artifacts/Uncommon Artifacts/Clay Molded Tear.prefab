@@ -101,19 +101,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Clay Molded Tear [Uncommon]
+  m_Text: 'A tear shaped pendant is molded out of baked
 
-    A tear shaped pendant is molded out of
-    baked
+    mud taken from the walls
+    of the third layer. It has
 
-    mud taken from the walls of the third layer. It has
-
-    been enchanted
-    with bright red runes.
-
-    Grants +2 Attack, and +200 Max Health.
-
-'
+    been enchanted with bright red runes.'
 --- !u!114 &8821173700302628258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  artifactName: Clay Molded Tear
   whatDungeonArtifact: 3
   speedBonus: 0
   defenseBonus: 0
@@ -136,3 +130,5 @@ MonoBehaviour:
   goldBonus: 0
   killRequirement: 0
   whatRarity: 1
+  descriptionText: {fileID: 8821173700302628262}
+  effectText: {fileID: 0}

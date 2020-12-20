@@ -100,17 +100,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Extra-Strength Gunpowder [Consumable]
+  m_Text: 'This gunpowder was crafted from
 
-    This gunpowder was crafted
-    from
+    special chemistry. It packs quite
+    the
 
-    special chemistry. It packs quite the
-
-    punch.
-
-    Grants +3 Attack
-    for 30 Seconds.'
+    punch.'
 --- !u!114 &114425859556568992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,10 +118,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb967d11f454a6d488ef62969b291d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  consumableName: Extra-Strength Gunpowder
   restoredHealth: 0
   attackBonus: 3
   defenseBonus: 0
   speedBonus: 0
   duration: 30
   priceBase: 800
+  loreText: {fileID: 114530624282476102}
+  effectText: {fileID: 0}
   destroyConsumable: 1

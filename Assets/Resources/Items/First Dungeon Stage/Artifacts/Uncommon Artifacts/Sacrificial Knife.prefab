@@ -100,8 +100,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Sacrificial Knife [Uncommon]\nA strange knife specifically used\nto bleed
-    the victim as much as\npossible. \nGrants +0.5 Speed and +5%\nDefense. "
+  m_Text: 'A strange knife specifically used
+
+    to bleed the victim as much as
+
+    possible. '
 --- !u!114 &114152272289895626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  artifactName: Sacrificial Knife
   whatDungeonArtifact: 1
   speedBonus: 0.5
   defenseBonus: 0.05
@@ -124,3 +128,5 @@ MonoBehaviour:
   goldBonus: 0
   killRequirement: 0
   whatRarity: 1
+  descriptionText: {fileID: 114883230364600398}
+  effectText: {fileID: 0}

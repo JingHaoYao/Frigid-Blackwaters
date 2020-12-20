@@ -100,17 +100,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Earthen Ring [Uncommon]
+  m_Text: 'Carved from rock, this ring imbues its wielder
 
-    Carved from rock, this ring imbues its wielder
+    with vigor. A shiny
+    green emerald is affixed in
 
-    with
-    vigor. A shiny green emerald is affixed in
-
-    its center.
-
-    Grants +750
-    Max Health and +10% Defense.'
+    its center.'
 --- !u!114 &8274673264386557606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,6 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  artifactName: Earthen Ring
   whatDungeonArtifact: 3
   speedBonus: 0
   defenseBonus: 0.1
@@ -133,3 +129,5 @@ MonoBehaviour:
   goldBonus: 0
   killRequirement: 0
   whatRarity: 1
+  descriptionText: {fileID: 8274673264386557602}
+  effectText: {fileID: 0}

@@ -20,6 +20,8 @@ public class PlayerProperties
     public static DurationUI durationUI;
     public static ShipStats shipStats;
     public static ToolTip toolTip;
+    public static ArtifactToolTip artifactToolTip;
+    public static ConsumableToolTip consumableToolTip;
 
     public static ShipWeaponScript leftWeapon;
     public static ShipWeaponScript rightWeapon;

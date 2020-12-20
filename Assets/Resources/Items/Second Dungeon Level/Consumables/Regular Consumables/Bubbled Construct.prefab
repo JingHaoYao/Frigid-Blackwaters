@@ -78,17 +78,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3822119084915345685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
@@ -102,8 +101,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Bubbled Construct [Consumable]\nCompressed in a small bubble of magic,\nwhen
-    popped, it fills up the space around \nit with wooden boards.\nGrants +1300 Health."
+  m_Text: "Compressed in a small bubble of magic,\nwhen popped, it fills up the space
+    around \nit with wooden boards."
 --- !u!114 &3822119084915345688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,10 +115,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb967d11f454a6d488ef62969b291d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  consumableName: Bubbled Construct
   restoredHealth: 1300
   attackBonus: 0
   defenseBonus: 0
   speedBonus: 0
   duration: 0
   priceBase: 500
-  consumableActivated: 0
+  loreText: {fileID: 3822119084915345684}
+  effectText: {fileID: 0}
+  destroyConsumable: 1

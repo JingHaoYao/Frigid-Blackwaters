@@ -101,17 +101,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Blue Steel Shells [Consumable]
+  m_Text: 'Gold casings are fitted around blue steel caps to
 
-    Gold casings are fitted around blue
-    steel caps to
+    be fire in rifles.
+    They pack quite a punch, with a high
 
-    be fire in rifles. They pack quite a punch, with a high
-
-    piercing
-    capability.
-
-    Grants +4 Attack for 2 Minutes.'
+    piercing capability.'
 --- !u!114 &4703799018610745803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,10 +119,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb967d11f454a6d488ef62969b291d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  consumableName: Blue Steel Shells
   restoredHealth: 0
   attackBonus: 4
   defenseBonus: 0
   speedBonus: 0
   duration: 120
   priceBase: 1500
+  loreText: {fileID: 4703799018610745802}
+  effectText: {fileID: 0}
   destroyConsumable: 1

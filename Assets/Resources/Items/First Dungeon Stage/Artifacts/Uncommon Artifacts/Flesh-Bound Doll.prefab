@@ -100,9 +100,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Flesh-Bound Doll [Uncommon]\nA doll constructed out of mixed\npieces of
-    flesh. The doll pulses\nunsettling. \nGrants +200 Max Health and\n+100 Healing
-    whenever entering \na new room. "
+  m_Text: 'A doll constructed out of mixed
+
+    pieces of flesh. The doll pulses
+
+    unsettling. '
 --- !u!114 &114647653230173300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  artifactName: Flesh-Bound Doll
   whatDungeonArtifact: 1
   speedBonus: 0
   defenseBonus: 0
@@ -125,3 +128,5 @@ MonoBehaviour:
   goldBonus: 0
   killRequirement: 0
   whatRarity: 1
+  descriptionText: {fileID: 114535861408379110}
+  effectText: {fileID: 0}

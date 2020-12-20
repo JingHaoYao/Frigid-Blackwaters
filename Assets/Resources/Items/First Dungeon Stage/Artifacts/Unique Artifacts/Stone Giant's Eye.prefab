@@ -100,16 +100,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Stone Giant''s Eye [Uncommon]
+  m_Text: 'This watchful eye once belonged
 
-    This watchful eye once belonged
-
-    to
-    a giant automaton.
-
-    Grants +200 Health and
-
-    +1 Attack.'
+    to a giant automaton.'
 --- !u!114 &114138638849419232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  artifactName: Stone Giant's Eye
   whatDungeonArtifact: 1
   speedBonus: 0
   defenseBonus: 0
@@ -132,3 +126,5 @@ MonoBehaviour:
   goldBonus: 0
   killRequirement: 0
   whatRarity: 1
+  descriptionText: {fileID: 114814600794588404}
+  effectText: {fileID: 0}

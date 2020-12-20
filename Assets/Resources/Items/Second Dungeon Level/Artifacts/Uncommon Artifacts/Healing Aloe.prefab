@@ -101,9 +101,14 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Healing Aloe [Uncommon]\nA rare plant that can't be grown\noutside of
-    the labyrinth, it's healing\nproperties are often described as\nmiraculous.\n+300
-    Healing whenever you enter a \nnew room."
+  m_Text: 'A rare plant that can''t be grown
+
+    outside of the labyrinth, it''s
+    healing
+
+    properties are often described as
+
+    miraculous.'
 --- !u!114 &6341160560225377608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  artifactName: Healing Aloe
   whatDungeonArtifact: 2
   speedBonus: 0
   defenseBonus: 0
@@ -126,3 +132,5 @@ MonoBehaviour:
   goldBonus: 0
   killRequirement: 0
   whatRarity: 1
+  descriptionText: {fileID: 6341160560225377605}
+  effectText: {fileID: 0}

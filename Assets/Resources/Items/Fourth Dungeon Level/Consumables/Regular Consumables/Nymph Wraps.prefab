@@ -101,17 +101,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Nymph Wraps [Consumable]
+  m_Text: 'A tasty treat to nymphs, small blue round fruits are
 
-    A tasty treat to nymphs, small blue round
-    fruits are
+    wrapped in dried
+    seaweed for the perfect combination
 
-    wrapped in dried seaweed for the perfect combination
-
-    of
-    sweetness and saltiness.
-
-    Grants +2000 Healing.'
+    of sweetness and saltiness.'
 --- !u!114 &6088966792172414031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,11 +119,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb967d11f454a6d488ef62969b291d2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  consumableName: Nymph Wraps
   restoredHealth: 2000
   attackBonus: 0
   defenseBonus: 0
   speedBonus: 0
   duration: 0
   priceBase: 900
-  consumableActivated: 0
+  loreText: {fileID: 4918805467975576224}
+  effectText: {fileID: 0}
   destroyConsumable: 1

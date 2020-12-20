@@ -100,16 +100,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Stalwart Shield [Rare]
+  m_Text: 'A powerful shield that can
 
-    A powerful shield that can
+    deflect all attacks. It is made
 
-    deflect all
-    attacks. It is made
-
-    from a lusterous material.
-
-    Grants +25% Defense. '
+    from
+    a lusterous material.'
 --- !u!114 &114380706682964844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,6 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294a17687d4d7d743bc6eca327311280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  artifactName: Stalwart Shield
   whatDungeonArtifact: 1
   speedBonus: 0
   defenseBonus: 0.25
@@ -132,3 +129,5 @@ MonoBehaviour:
   goldBonus: 0
   killRequirement: 0
   whatRarity: 2
+  descriptionText: {fileID: 114630698275297408}
+  effectText: {fileID: 0}
