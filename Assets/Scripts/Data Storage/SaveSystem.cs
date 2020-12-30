@@ -291,6 +291,11 @@ public static class SaveSystem
             {
                 MiscData.firstTimeTutorialsPlayed.Add(id);
             }
+
+            foreach (string enemyName in data.seenEnemies)
+            {
+                MiscData.seenEnemies.Add(enemyName);
+            }
         }
         else
         {

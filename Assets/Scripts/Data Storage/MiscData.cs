@@ -30,16 +30,16 @@ public static class MiscData
     public static List<string> completedStoryDialogues = new List<string>();
     public static List<string> completedHubReturnDialogues = new List<string>();
 
-    //tutorial dialogues
+    //Tutorial dialogues
     public static List<string> completedUniqueRoomsDialogues = new List<string>();
 
-    //check points in the game that have been completed
+    //Check points in the game that have been completed
     public static List<string> completedCheckPoints = new List<string>();
 
-    //which buildings have been unlocked
+    //Which buildings have been unlocked
     public static List<string> unlockedBuildings = new List<string>();
 
-    //tutorial related
+    //Tutorial related
     public static bool finishedTutorial = false;
     public static bool questSymbolShown = false;
     public static bool dungeonMapSymbolShown = false;
@@ -47,11 +47,14 @@ public static class MiscData
     //Check for random dungeon entry chance
     public static bool enoughRoomsTraversed = true;
 
-    //what dungeon stages unlocked
+    //What dungeon stages unlocked
     public static int dungeonLevelUnlocked = 1;
 
-    // Story Mission Related Parameters
+    //Story mission related parameters
     public static string missionID;
     public static bool finishedMission;
     public static List<string> completedMissions = new List<string>();
+
+    //Enemy encyclopedia related
+    public static HashSet<string> seenEnemies = new HashSet<string>();
 }

@@ -19,6 +19,7 @@ public class BossHealthBar : MonoBehaviour
     public void bossStartUp(string bossName)
     {
         text.text = bossName;
+        MiscData.seenEnemies.Add(bossName);
         foreach (Animator animator in GetComponentsInChildren<Animator>())
         {
             animator.SetTrigger("FadeOut");

@@ -34,6 +34,7 @@ public class SpecialRoomTemplates : MonoBehaviour {
                         return Resources.Load<GameObject>("Unique Rooms/First Dungeon Level/Challenge Rooms/First Dungeon Challenge Room Tier " + whatTier.ToString());
                     case 4:
                         string whichCombat = miniBosses[Random.Range(0, miniBosses.Length)];
+                        MiscData.seenEnemies.Add(whichCombat);
                         return Resources.Load<GameObject>("Unique Rooms/First Dungeon Level/Special Combat Rooms/" + whichCombat + "/" + whichCombat);
                     case 5:
                         return Resources.Load<GameObject>("Unique Rooms/First Dungeon Level/Trove Rooms/First Dungeon Trove Tier " + whatTier.ToString());
@@ -55,6 +56,7 @@ public class SpecialRoomTemplates : MonoBehaviour {
                         return Resources.Load<GameObject>("Unique Rooms/Second Dungeon Level/Challenge Rooms/Second Dungeon Challenge Room Tier " + whatTier.ToString());
                     case 4:
                         string whichCombat = miniBosses[Random.Range(0, miniBosses.Length)];
+                        MiscData.seenEnemies.Add(whichCombat);
                         return Resources.Load<GameObject>("Unique Rooms/Second Dungeon Level/Special Combat Rooms/" + whichCombat + "/" + whichCombat);
                     case 5:
                         return Resources.Load<GameObject>("Unique Rooms/Second Dungeon Level/Trove Rooms/Second Dungeon Trove Tier " + whatTier.ToString());
@@ -76,6 +78,7 @@ public class SpecialRoomTemplates : MonoBehaviour {
                         return Resources.Load<GameObject>("Unique Rooms/Third Dungeon Level/Challenge Rooms/Third Dungeon Challenge Room Tier " + whatTier.ToString());
                     case 4:
                         string whichCombat = miniBosses[Random.Range(0, miniBosses.Length)];
+                        MiscData.seenEnemies.Add(whichCombat);
                         return Resources.Load<GameObject>("Unique Rooms/Third Dungeon Level/Special Combat Rooms/" + whichCombat + "/" + whichCombat);
                     case 5:
                         return Resources.Load<GameObject>("Unique Rooms/Third Dungeon Level/Trove Rooms/Third Dungeon Trove Tier " + whatTier.ToString());
@@ -97,6 +100,7 @@ public class SpecialRoomTemplates : MonoBehaviour {
                         return Resources.Load<GameObject>("Unique Rooms/Fourth Dungeon Level/Challenge Rooms/Fourth Dungeon Challenge Room Tier " + whatTier.ToString());
                     case 4:
                         string whichCombat = miniBosses[Random.Range(0, miniBosses.Length)];
+                        MiscData.seenEnemies.Add(whichCombat);
                         return Resources.Load<GameObject>("Unique Rooms/Fourth Dungeon Level/Special Combat Rooms/" + whichCombat + "/" + whichCombat);
                     case 5:
                         return Resources.Load<GameObject>("Unique Rooms/Fourth Dungeon Level/Trove Rooms/Fourth Dungeon Trove Tier " + whatTier.ToString());
@@ -118,6 +122,7 @@ public class SpecialRoomTemplates : MonoBehaviour {
                         return Resources.Load<GameObject>("Unique Rooms/Fifth Dungeon Level/Challenge Rooms/Fifth Dungeon Challenge Room Tier " + whatTier.ToString());
                     case 4:
                         string whichCombat = miniBosses[Random.Range(0, miniBosses.Length)];
+                        MiscData.seenEnemies.Add(whichCombat);
                         return Resources.Load<GameObject>("Unique Rooms/Fifth Dungeon Level/Special Combat Rooms/" + whichCombat + "/" + whichCombat);
                     case 5:
                         return Resources.Load<GameObject>("Unique Rooms/Fifth Dungeon Level/Trove Rooms/Fifth Dungeon Trove Tier " + whatTier.ToString());

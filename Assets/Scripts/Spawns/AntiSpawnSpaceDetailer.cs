@@ -286,6 +286,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                 enemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
                 if (enemy != null)
                 {
+                    MiscData.seenEnemies.Add(enemy.name);
                     GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
                     Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
                     EnemyPool.addEnemy(enemyClass);
@@ -310,6 +311,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                 enemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
                 if(enemy != null)
                 {
+                    MiscData.seenEnemies.Add(enemy.name);
                     GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
                     Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
                     EnemyPool.addEnemy(enemyClass);
@@ -333,6 +335,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                 enemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
                 if (enemy != null)
                 {
+                    MiscData.seenEnemies.Add(enemy.name);
                     GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
                     Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
                     EnemyPool.addEnemy(enemyClass);
@@ -357,6 +360,7 @@ public class AntiSpawnSpaceDetailer : MonoBehaviour {
                 enemy = Resources.Load<GameObject>("Regular Enemies/" + dungeonName + "/Tier " + i.ToString() + " Enemies/" + template.potentialEnemyNames[index] + "/" + template.potentialEnemyNames[index]);
                 if (enemy != null)
                 {
+                    MiscData.seenEnemies.Add(enemy.name);
                     GameObject spawnedEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
                     Enemy enemyClass = spawnedEnemy.GetComponent<Enemy>();
                     EnemyPool.addEnemy(enemyClass);

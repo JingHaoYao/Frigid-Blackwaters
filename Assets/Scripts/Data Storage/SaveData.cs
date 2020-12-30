@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData
 {
+    public string[] seenEnemies;
+
     //members needed to store vital information
     //about the golden vault in hub.
     public string[] storedVaultItems;
@@ -343,6 +345,14 @@ public class SaveData
         for(int i = 0; i < MiscData.firstTimeTutorialsPlayed.Count; i++)
         {
             firstTimeTutorialsPlayed[i] = MiscData.firstTimeTutorialsPlayed[i];
+        }
+
+        seenEnemies = new string[MiscData.seenEnemies.Count];
+        int seenIndex = 0;
+        foreach (string enemyName in MiscData.seenEnemies)
+        {
+            seenEnemies[seenIndex] = enemyName;
+            seenIndex = seenIndex + 1;
         }
     }
 }
