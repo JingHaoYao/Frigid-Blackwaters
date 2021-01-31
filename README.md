@@ -1,3 +1,3 @@
 # Frigid-Blackwaters
 
-C# Dungeon Crawler - Itch.IO Link: https://jinghaoyao.itch.io/frigid-blackwaters
+Top Down Story Driven Dungeon Crawler - Itch.IO Link: https://jinghaoyao.itch.io/frigid-blackwaters
